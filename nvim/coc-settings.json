@@ -1,0 +1,67 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "json",
+    "javascriptreact",
+    "typescript.tsx",
+    "python",
+    "py",
+    "elm"
+  ],
+  "codeLens.enable": true,
+  "languageserver": {
+    "elmLS": {
+      "command": "elm-language-server",
+      "filetypes": ["elm"],
+      "rootPatterns": ["elm.json"],
+      "initializationOptions": {
+        "elmAnalyseTrigger": "change"
+      }
+    },
+    "haskell": {
+      "command": "haskell-language-server-wrapper",
+      "args": ["--lsp"],
+      "rootPatterns": ["stack.yaml", "cabal.config", "package.yaml"],
+      "filetypes": ["hs", "lhs", "haskell", "lhaskell"]
+    },
+    "clojure-lsp": {
+      "command": "bash",
+      "args": ["-c", "clojure-lsp"],
+      "filetypes": ["clojure"],
+      "rootPatterns": ["project.clj"],
+      "additionalSchemes": ["jar", "zipfile"],
+      "trace.server": "verbose",
+      "initializationOptions": {}
+    },
+    "nix": {
+      "command": "rnix-lsp",
+      "filetypes": ["nix"]
+    }
+  },
+
+  // coc-python
+  // unsure how to configure it to work well with nix
+  "python.jediPath": "/home/sherub/.nix-profile/lib/python3.8/site-packages",
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Path": "/home/sherub/.nix-profile/bin/flake8",
+  "python.linting.mypyEnabled": true,
+  "python.linting.mypyPath": "/home/sherub/.nix-profile/bin/mypy",
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "/home/sherub/.nix-profile/bin/black",
+  "python.sortImports.path": "/home/sherub/.nix-profile/bin/isort",
+
+  "yaml.format.enable": true,
+
+  // coc-explorer
+  "explorer.width": 30,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.previewAction.onHover": false,
+  "explorer.icon.enableVimDevicons": true,
+  "explorer.keyMappings": {
+    "<cr>": ["expandable?", "expand", "open"],
+    "v": "open:vsplit"
+  }
+}
