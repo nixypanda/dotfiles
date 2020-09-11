@@ -35,13 +35,10 @@ configuration {
 }
 
 #window {
-  width: 40%;
-  height: 40%;
-  padding: 60px 50px;
-  border: 4px;
+  padding: 30px 25px;
+  border: 3px;
   border-radius: 5px;
   border-color: @accent;
-  /* border-style: "dash"; */
   border-width: 2px;
   box-shadow: 2px;
 }

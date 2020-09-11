@@ -7,7 +7,22 @@ let
     ln -s ${pkgs.coreutils}/bin/ls $out/bin/ls
     ln -s ${pkgs.coreutils}/bin/dircolors $out/bin/dircolors
   '';
+
   colorscheme = (import ./colorschemes/onedark.nix);
+
+  custom-i3-polybar-launch = pkgs.writeScriptBin "custom-i3-polybar-launch" ''
+    #!/${pkgs.stdenv.shell}
+
+    killall -q polybar
+    echo "launching polybar" | systemd-cat
+
+    polybar top &
+  '';
+
+  custom-script-sysmenu = pkgs.writeScriptBin "custom-script-sysmenu" ''
+    #!/${pkgs.stdenv.shell}
+    ${builtins.readFile ./polybar/scripts/sysmenu.sh}
+  '';
 in
 {
   home.packages = with pkgs; [
@@ -37,12 +52,17 @@ in
 
     # system info
     ytop
+    neofetch
 
     # uncatagorised
     ngrok
 
     # Docker
     docker-compose
+
+    # custom scripts
+    custom-script-sysmenu
+    custom-i3-polybar-launch
 
     # Programming
 
@@ -150,6 +170,8 @@ in
     package = pkgs.rofi.override {
       plugins = [ pkgs.rofi-emoji pkgs.rofi-calc pkgs.rofi-file-browser ];
     };
+    lines = 7;
+    width = 40;
     font = "hack 10";
     theme = ./rofi/grid.rasi;
   };

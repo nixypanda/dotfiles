@@ -4,7 +4,7 @@
     modifier = "Mod1";
     startup = [
       {
-        command = "systemctl --user restart polybar";
+        command = "custom-i3-polybar-launch";
         always = true;
         notification = false;
       }

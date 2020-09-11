@@ -2,22 +2,15 @@
   rec {
     "bar/top" = {
       monitor = "HDMI-1";
-      width = "100%";
       height = "1.5%";
-      radius = 0;
-
-      wm-restack = "i3";
 
       background = colors.bg-primary;
       foreground = colors.fg-secondary;
 
-      overline-size = 2;
-      overline-color = colors.accent-primary;
-
+      padding = 1;
       border-size = 4;
       border-color = colors.bg-primary;
 
-      padding = 1;
       modules-left = "i3 separator";
       modules-center = "title";
       modules-right = "separator alsa_i alsa separator network_i network separator date_i date separator powermenu";
@@ -130,7 +123,7 @@
       format-background = colors.bg-secondary;
       format-foreground = colors.fg-secondary;
       format-padding = 1;
-       
+
       label = "%time%";
     };
 
@@ -146,7 +139,7 @@
       format-background = colors.warning;
       format-foreground = colors.fg-secondary;
       format-padding = 1;
-       
+
       label = "%time%";
     };
 
@@ -163,7 +156,7 @@
       format-connected-background = colors.bg-secondary;
       format-connected-foreground = colors.fg-secondary;
       format-connected-padding = 1;
-       
+
       format-disconnected = "<label-disconnected>";
       format-disconnected-background = colors.bg-secondary;
       format-disconnected-foreground = colors.fg-secondary;
@@ -186,7 +179,7 @@
       format-connected-background = colors.accent-tertiary;
       format-connected-foreground = colors.fg-secondary;
       format-connected-padding = 1;
-       
+
       format-disconnected = "<label-disconnected>";
       format-disconnected-background = colors.accent-tertiary;
       format-disconnected-foreground = colors.fg-secondary;
@@ -198,33 +191,12 @@
     };
 
     "module/powermenu" = {
-      type = "custom/menu";
-      expand-right = true;
-      format-spacing = 0;
-
-      label-open = "";
-      label-open-foreground = colors.fg-secondary;
-      label-open-background = colors.alert;
-      label-open-padding = 1;
-
-      label-close = "x";
-      label-close-background = colors.accent-primary;
-      label-close-foreground = colors.fg-secondary;
-      label-close-padding = 1;
-
-      label-separator = "";
-      label-separator-background = colors.bg-secondary;
-      label-separator-foreground = colors.bg-secondary;
-
-      menu-0-0 = "";
-      menu-0-0-background = colors.bg-secondary;
-      menu-0-0-padding = 1;
-      menu-0-0-exec = "systemctl reboot";
-
-      menu-0-1 = "";
-      menu-0-1-background = colors.bg-secondary;
-      menu-0-1-padding = 1;
-      menu-0-1-exec = "systemctl poweroff";
+      type = "custom/text";
+      content = "";
+      content-padding = 2;
+      content-background = colors.alert;
+      content-foreground = colors.fg-secondary;
+      click-left = "custom-script-sysmenu";
     };
 
     "module/separator" = {
