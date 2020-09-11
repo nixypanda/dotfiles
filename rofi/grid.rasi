@@ -1,27 +1,24 @@
 configuration {
     modi: "drun,run,calc,emoji,file-browser";
     drun-display-format: "{icon} {name}";
-    display-drun: "Applications";
+
+    display-ssh:    "";
+    display-run:    "";
+    display-drun:   "";
+    display-window: "";
+    display-combi:  "";
+
 	show-icons: true;
 	icon-theme: "Arc";
-	location: 0;
-	yoffset: 0;
-    xoffset: 0;
-	columns: 2;
-	fake-transparency: false;
 	hide-scrollbar: true;
-	bw: 0;
     fullscreen: false;
-    show-icons: true;
-	terminal: "xterm";
-	sidebar-mode: false;
+	terminal: "alacritty";
 }
 
-
 * {
-  accent:           #95ee8f;
-  background:       #282c34;
-  foreground:       #E4E4E4;
+  accent:           #98c379;
+  background:       #282C34;
+  foreground:       #ABB2BF;
 }
 
 * {
@@ -41,9 +38,10 @@ configuration {
   width: 40%;
   height: 40%;
   padding: 60px 50px;
-  border-radius: 10px;
+  border: 4px;
+  border-radius: 5px;
   border-color: @accent;
-  border-style: "dash";
+  /* border-style: "dash"; */
   border-width: 2px;
   box-shadow: 2px;
 }

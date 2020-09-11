@@ -7,6 +7,7 @@ let
     ln -s ${pkgs.coreutils}/bin/ls $out/bin/ls
     ln -s ${pkgs.coreutils}/bin/dircolors $out/bin/dircolors
   '';
+  colorscheme = (import ./colorschemes/onedark.nix);
 in
 {
   home.packages = with pkgs; [
@@ -128,7 +129,7 @@ in
 
   programs.alacritty = {
     enable = true;
-    settings = (import ./alacrity-config.nix);
+    settings = (import ./alacrity-config.nix) { colors = colorscheme; };
   };
 
   programs.bat = {
@@ -205,9 +206,20 @@ in
       ${builtins.readFile ./nvim/sane_defaults.vim}
       ${builtins.readFile ./nvim/airline.vim}
       ${builtins.readFile ./nvim/navigation.vim}
-      ${builtins.readFile ./nvim/theme.vim}
       ${builtins.readFile ./nvim/coc.vim}
       ${builtins.readFile ./nvim/terminal.vim}
+      ${builtins.readFile ./nvim/theme.vim}
+
+      " Vim theme info
+      colorscheme ${colorscheme.vim-name}
+
+      " Coc highlights
+      " Makes the floating window more readable
+      " NOTE: Really wish the theme could overwrite this
+      highlight CocErrorSign ctermfg=204 guifg=${colorscheme.alert}
+      highlight CocWarningSign ctermfg=173 guifg=${colorscheme.warning}
+      highlight Pmenu ctermbg=237 guibg=${colorscheme.fg-secondary}
+
       ${builtins.readFile ./nvim/which_key.vim}
     '';
 
@@ -257,9 +269,23 @@ in
 
   services.polybar = {
     enable = true;
-    config = (import ./polybar-config.nix);
+    config = (import ./polybar/accented-pills.nix) { colors = colorscheme; };
     package = pkgs.polybar.override { i3GapsSupport = true; };
     script = "polybar top &";
+  };
+
+  services.picom = {
+    enable = true;
+    blur = false;
+    fade = true;
+    fadeDelta = 5;
+    # inactiveDim = "0.1";
+    inactiveOpacity = "0.8";
+    shadow = true;
+    experimentalBackends = true;
+    extraOptions = ''
+      focus-exclude = [ "class_g ?= 'rofi'" ];
+    '';
   };
 
   xsession = {
@@ -268,7 +294,7 @@ in
     windowManager.i3 = rec {
       enable = true;
       package = pkgs.i3-gaps;
-      config = (import ./i3-config.nix);
+      config = (import ./i3/config.nix) { colorscheme = colorscheme; };
     };
   };
 }

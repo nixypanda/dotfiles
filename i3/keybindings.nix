@@ -1,32 +1,14 @@
-rec {
-  fonts = ["Hack Nerd Font 12"];
-  modifier = "Mod1";
-  startup = [
-    {
-      command = "systemctl --user restart polybar";
-      always = true;
-      notification = false;
-    }
-  ];
-  gaps = {
-    outer = 5;
-    inner = 5;
-
-    smartGaps = true;
-    smartBorders = "no_gaps";
-  };
-  bars = [ ];
-
-  keybindings = let mod = modifier; in {
+{mod}:
+  {
     # Programs executions
     "${mod}+Return" = "exec alacritty";
     "${mod}+space" = "exec rofi -show drun";
-    "${mod}+Shift+c" = "exec i3lock-fancy -p -t \"\"";
     "${mod}+w" = "exec google-chrome-stable";
 
     # i3 level ops
     "${mod}+Shift+e" = "exec i3-msg exit";
     "${mod}+Shift+r" = "restart";
+    "${mod}+Shift+q" = "exec i3lock-fancy -p -t \"\"";
 
     # window operations
     "${mod}+q" = "kill";
@@ -59,5 +41,4 @@ rec {
     # Spliting
     "${mod}+c" = "split h";
     "${mod}+v" = "split v";
-  };
-}
+  }
