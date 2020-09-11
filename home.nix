@@ -12,28 +12,34 @@ in
 {
   home.packages = with pkgs; [
     # GUI Apps
-    # _1password # NOTE: GUI apps don't show up in spotlight search
     google-chrome
+    # Just to look at how stuff looks like
     lxappearance
     i3lock-fancy
 
-    # Temp
-    glxinfo
-
+    # CLI tools
     awscli
-    bat
     git
-    fzf
     gitAndTools.gh
-    jump
+
+    # Make that terminal pretty
+    bat
     ls-colors # NOTE: custom
-    ngrok
-    ripgrep
-    starship
-    universal-ctags
     direnv
+    starship
     zsh-syntax-highlighting
+
+    # Searching helpers
+    fzf
+    jump
+    ripgrep
+    universal-ctags
+
+    # system info
     ytop
+
+    # uncatagorised
+    ngrok
 
     # Docker
     docker-compose
@@ -56,7 +62,6 @@ in
     haskellPackages.cabal-install
     haskellPackages.stack
     haskellPackages.haskell-language-server
-    # haskellPackages.taffybar
 
     # JavaScript
     nodejs
@@ -89,9 +94,6 @@ in
     rls
     cargo
     rustfmt
-
-    haskellPackages.xmonad
-    haskellPackages.xmobar
   ];
 
   # Let Home Manager install and manage itself.
