@@ -1,7 +1,7 @@
 {mod}:
   {
     # Programs executions
-    "${mod}+Return" = "exec alacritty";
+    "${mod}+Return" = "exec alacritty --working-directory=`xcwd`";
     "${mod}+space" = "exec rofi -show drun";
     "${mod}+w" = "exec google-chrome-stable";
 

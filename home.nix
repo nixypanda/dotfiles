@@ -49,6 +49,7 @@ in
     jump
     ripgrep
     universal-ctags
+    xcwd
 
     # system info
     ytop
