@@ -57,6 +57,9 @@ in
     # uncatagorised
     ngrok
 
+    # file browsers
+    ranger
+
     # Docker
     docker-compose
 
