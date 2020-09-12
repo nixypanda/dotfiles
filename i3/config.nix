@@ -24,6 +24,11 @@
         "${mod}+space" = "exec rofi -show drun";
         "${mod}+w" = "exec google-chrome-stable";
 
+        # Keyboard Volument controls
+        "XF86AudioRaiseVolume" = "exec amixer sset Master 5%+";
+        "XF86AudioLowerVolume" = "exec amixer sset Master 5%-";
+        "XF86AudioMute" = "exec amixer sset Master toggle";
+
         # i3 level ops
         "${mod}+Shift+e" = "exec i3-msg exit";
         "${mod}+Shift+r" = "restart";
