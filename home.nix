@@ -291,7 +291,7 @@ in
 
   services.random-background = {
     enable = true;
-    imageDirectory = "%h/.config/backgrounds";
+    imageDirectory = "%h/Pictures/backgrounds";
   };
 
   services.polybar = {
