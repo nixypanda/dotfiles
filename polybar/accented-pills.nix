@@ -13,7 +13,7 @@
 
       modules-left = "i3 separator";
       modules-center = "title";
-      modules-right = "separator alsa_i alsa separator network_i network separator date_i date separator powermenu";
+      modules-right = "separator backlight_i backlight separator alsa_i alsa separator network_i network separator date_i date separator powermenu";
 
       font-0 = "Hack Nerd Font:size=9;2";
     };
@@ -188,6 +188,28 @@
       label-disconnected = "";
       ramp-signal-0 = "";
       ramp-signal-1 = "";
+    };
+
+    "module/backlight" = {
+      type = "custom/script";
+      exec = "custom-script-backlight --current";
+      format = "<label>";
+
+      format-padding = 1;
+      format-background = colors.bg-secondary;
+      format-foreground = colors.fg-secondary;
+
+      scroll-up = "custom-script-backlight --increase";
+      scroll-down = "custom-script-backlight --decrease";
+    };
+
+    "module/backlight_i" = {
+      type = "custom/text";
+
+      content = "";
+      content-padding = 1;
+      content-background = colors.accent-primary;
+      content-foreground = colors.fg-secondary;
     };
 
     "module/powermenu" = {

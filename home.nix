@@ -23,6 +23,11 @@ let
     #!/${pkgs.stdenv.shell}
     ${builtins.readFile ./polybar/scripts/sysmenu.sh}
   '';
+
+  custom-script-backlight = pkgs.writeScriptBin "custom-script-backlight" ''
+    ${builtins.readFile ./polybar/scripts/backlight.sh}
+  '';
+
 in
 {
   home.packages = with pkgs; [
@@ -67,6 +72,7 @@ in
     # custom scripts
     custom-script-sysmenu
     custom-i3-polybar-launch
+    custom-script-backlight
 
     # Programming
 
