@@ -310,15 +310,15 @@ in
 
   services.picom = {
     enable = true;
-    blur = false;
+    blur = true;
     fade = true;
     fadeDelta = 5;
-    # inactiveDim = "0.1";
     inactiveOpacity = "0.8";
     shadow = true;
     experimentalBackends = true;
     extraOptions = ''
       focus-exclude = [ "class_g ?= 'rofi'" ];
+      blur-strength = 20;
     '';
   };
 
