@@ -62,6 +62,7 @@ in
 
     # uncatagorised
     ngrok
+    (nerdfonts.override { fonts = [ "Hack" ]; })
 
     # file browsers
     ranger
