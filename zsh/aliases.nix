@@ -5,7 +5,7 @@
   vim="nvim";
   top="ytop";
   htop="ytop";
-  ytop="ytop --per-cpu --battery --statusbar";
+  ytop="ytop --per-cpu --statusbar";
   cat="bat";
 
   # docker-compose;
