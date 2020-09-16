@@ -148,7 +148,7 @@ in
   gtk = {
     enable = true;
     font = {
-      name = "Sans 10";
+      name = "TeX Gyre Heros 10";
     };
     iconTheme = {
       name = "Arc";
