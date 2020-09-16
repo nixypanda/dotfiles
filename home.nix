@@ -332,4 +332,30 @@ in
       config = (import ./i3/config.nix) { colorscheme = colorscheme; };
     };
   };
+
+  xresources = {
+    properties = {
+      "*.foreground" = colorscheme.fg-primary;
+      "*.background" = colorscheme.bg-primary;
+
+      "*.color0" = colorscheme.black;
+      "*.color8" = colorscheme.black;
+      "*.color1" = colorscheme.red;
+      "*.color9" = colorscheme.red;
+      "*.color2" = colorscheme.green;
+      "*.color10" = colorscheme.green;
+      "*.color3" = colorscheme.yellow;
+      "*.color11" = colorscheme.yellow;
+      "*.color4" = colorscheme.blue;
+      "*.color12" = colorscheme.blue;
+      "*.color5" = colorscheme.magenta;
+      "*.color13" = colorscheme.magenta;
+      "*.color6" = colorscheme.cyan;
+      "*.color14" = colorscheme.cyan;
+      "*.color7" = colorscheme.white;
+      "*.color15" = colorscheme.white;
+
+      "XTerm*font" = "xft:Hack Nerd Font Mono:pixelsize=12";
+    };
+  };
 }
