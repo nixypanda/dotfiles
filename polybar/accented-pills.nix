@@ -55,10 +55,10 @@
       label-urgent-padding = 1;
 
       ws-icon-default = "";
-      ws-icon-0 = "1;";
-      ws-icon-1 = "2;";
-      ws-icon-2 = "3;";
-      ws-icon-3 = "4;";
+      ws-icon-0 = "1;";
+      ws-icon-1 = "2;";
+      ws-icon-2 = "3;";
+      ws-icon-3 = "4;";
     };
 
     "module/title" = {
