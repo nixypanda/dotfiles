@@ -11,7 +11,7 @@
       border-size = 4;
       border-color = colors.bg-primary;
 
-      modules-left = "i3 separator";
+      modules-left = "i3 separator browsermediacontrol_play_i browsermediacontrol browsermediacontrol_next_i seprator";
       modules-center = "title";
       modules-right = "separator backlight_i backlight separator alsa_i alsa separator network_i network separator date_i date separator powermenu";
 
@@ -208,6 +208,46 @@
       content-padding = 1;
       content-background = colors.accent-primary;
       content-foreground = colors.fg-secondary;
+    };
+
+    "module/browsermediacontrol_play_i" = {
+      type = "custom/script";
+      exec = "custom-browsermediacontrol --display=play/pause";
+
+      format = "<label>";
+      format-padding = 1;
+      format-background = colors.accent-secondary;
+      format-foreground = colors.fg-secondary;
+
+      interval = "0.1";
+    };
+
+
+    "module/browsermediacontrol" = {
+      type = "custom/script";
+      exec = "custom-browsermediacontrol --display=title";
+
+      format = "<label>";
+      format-padding = 1;
+      format-background = colors.bg-secondary;
+      format-foreground = colors.fg-secondary;
+
+      scroll-up = "custom-browsermediacontrol --volume 1";
+      scroll-down = "custom-browsermediacontrol --volume -1";
+
+      interval = "0.1";
+    };
+
+    "module/browsermediacontrol_next_i" = {
+      type = "custom/script";
+      exec = "custom-browsermediacontrol --display=next";
+
+      format = "<label>";
+      format-padding = 1;
+      format-background = colors.accent-secondary;
+      format-foreground = colors.fg-secondary;
+
+      interval = "0.1";
     };
 
     "module/powermenu" = {

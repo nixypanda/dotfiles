@@ -1,0 +1,43 @@
+[[package]]
+category = "main"
+description = "Python interface for cairo"
+name = "pycairo"
+optional = false
+python-versions = ">=3.5, <4"
+version = "1.19.1"
+
+[[package]]
+category = "main"
+description = "Pythonic DBus library"
+name = "pydbus"
+optional = false
+python-versions = "*"
+version = "0.6.0"
+
+[[package]]
+category = "main"
+description = "Python bindings for GObject Introspection"
+name = "pygobject"
+optional = false
+python-versions = ">=3.5, <4"
+version = "3.38.0"
+
+[package.dependencies]
+pycairo = ">=1.11.1"
+
+[metadata]
+content-hash = "3551378b04fdf3bca19e35e27e961232f6d1da724df163aa011e50a46acdcfa6"
+lock-version = "1.0"
+python-versions = "^3.8"
+
+[metadata.files]
+pycairo = [
+    {file = "pycairo-1.19.1.tar.gz", hash = "sha256:2c143183280feb67f5beb4e543fd49990c28e7df427301ede04fc550d3562e84"},
+]
+pydbus = [
+    {file = "pydbus-0.6.0-py2.py3-none-any.whl", hash = "sha256:66b80106352a718d80d6c681dc2a82588048e30b75aab933e4020eb0660bf85e"},
+    {file = "pydbus-0.6.0.tar.gz", hash = "sha256:4207162eff54223822c185da06c1ba8a34137a9602f3da5a528eedf3f78d0f2c"},
+]
+pygobject = [
+    {file = "PyGObject-3.38.0.tar.gz", hash = "sha256:051b950f509f2e9f125add96c1493bde987c527f7a0c15a1f7b69d6d1c3cd8e6"},
+]

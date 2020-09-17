@@ -28,6 +28,25 @@ let
     ${builtins.readFile ./polybar/scripts/backlight.sh}
   '';
 
+  custom-browsermediacontrol = pkgs.stdenv.mkDerivation {
+    name = "custom-browsermediacontrol";
+    buildInputs = with pkgs; [
+      pkg-config
+      cairo
+      gobject-introspection
+      (python3.withPackages (python3Packages: with python3Packages; [
+        pydbus
+        pygobject3
+      ]))
+    ];
+    unpackPhase = ":";
+    installPhase = ''
+      mkdir -p $out/bin
+      cp ${./bmc/bmc.py} $out/bin/custom-browsermediacontrol
+      chmod +x $out/bin/custom-browsermediacontrol
+    '';
+  };
+
 in
 {
   home.packages = with pkgs; [
@@ -74,6 +93,10 @@ in
     custom-script-sysmenu
     custom-i3-polybar-launch
     custom-script-backlight
+    # Music shit
+    # Note: Turn this into a singular package
+    plasma-browser-integration
+    custom-browsermediacontrol
 
     # Programming
 
