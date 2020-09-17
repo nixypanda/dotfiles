@@ -145,6 +145,13 @@ in
   # changes in each release.
   home.stateVersion = "20.09";
 
+  home.file.".mozilla/native-messaging-hosts".source = pkgs.symlinkJoin {
+    name = "native-messaging-hosts";
+    paths = [
+      "${pkgs.plasma-browser-integration}/lib/mozilla/native-messaging-hosts"
+    ];
+  };
+
   gtk = {
     enable = true;
     font = {
@@ -168,6 +175,14 @@ in
   programs.bat = {
     enable = true;
     config.theme = "OneHalfDark";
+  };
+
+  programs.firefox = {
+    enable = true;
+    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      vimium
+      plasma-integration
+    ];
   };
 
   programs.git = {
