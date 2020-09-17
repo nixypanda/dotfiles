@@ -18,7 +18,7 @@ export BAT_THEME="OneHalfDark"
 export EDITOR="nvim"
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
-export SSL_CERT_FILE=~/.nix-profile/etc/ssl/certs/ca-bundle.crt
+# export SSL_CERT_FILE=~/.nix-profile/etc/ssl/certs/ca-bundle.crt
 
 export PATH="$HOME/.local/bin:$HOME/.nix-profile/bin:$PATH"
 # Add python site-packages to path
