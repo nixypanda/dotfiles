@@ -117,7 +117,6 @@
       interval = "1.0";
 
       time = "%I:%M %p";
-      time-alt = "%Y-%m-%d%";
 
       format = "<label>";
       format-background = colors.bg-secondary;
@@ -133,7 +132,6 @@
       interval = 1;
 
       time = "";
-      time-alt = "";
 
       format = "<label>";
       format-background = colors.warning;
