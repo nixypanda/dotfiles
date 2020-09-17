@@ -20,7 +20,7 @@
       #
       # Blank space added around the window in pixels. This padding is scaled
       # by DPI and the specified value is always added at both opposing sides.
-      padding = {x = 0; y = 1;};
+      padding = {x = 5; y = 5;};
       dynamic_padding = false;
 
       # Window decorations
