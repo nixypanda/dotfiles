@@ -59,6 +59,7 @@ in
     awscli
     git
     gitAndTools.gh
+    less
 
     # Make that terminal pretty
     bat
