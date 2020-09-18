@@ -59,6 +59,7 @@ in
     awscli
     git
     gitAndTools.gh
+    gitAndTools.delta
     less
 
     # Make that terminal pretty
@@ -212,6 +213,14 @@ in
     enable = true;
     userName = "Sherub Thakur";
     userEmail = "sherub.thakur@gmail.com";
+    extraConfig = {
+      core = {
+        pager = "delta";
+      };
+      delta = {
+        side-by-side = true;
+      };
+    };
   };
 
   programs.rofi = {
