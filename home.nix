@@ -51,7 +51,6 @@ in
 {
   home.packages = with pkgs; [
     # GUI Apps
-    google-chrome
     # Just to look at how stuff looks like
     lxappearance
     i3lock-fancy
