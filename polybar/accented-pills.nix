@@ -11,54 +11,51 @@
       border-size = 4;
       border-color = colors.bg-primary;
 
-      modules-left = "i3 separator browsermediacontrol_play_i browsermediacontrol browsermediacontrol_next_i seprator";
+      modules-left = "ewmh separator browsermediacontrol_play_i browsermediacontrol browsermediacontrol_next_i seprator";
       modules-center = "title";
       modules-right = "separator backlight_i backlight separator alsa_i alsa separator network_i network separator date_i date separator powermenu";
 
       font-0 = "Hack Nerd Font:size=9;2";
     };
 
-    "module/i3" = {
-      type = "internal/i3";
+    "module/ewmh" = {
+      type = "internal/xworkspaces";
 
-
-      pin-workspaces = true;
-      strip-wsnumbers = true;
-      index-sort = true;
-
+      pin-workspaces = false;
       enable-click = true;
-      enable-scroll = true;
+      enable-scroll = false;
 
-      wrapping-scroll = false;
-      reverse-scroll = false;
+      icon-0 = "a;";
+      icon-1 = "s;";
+      icon-2 = "d;";
+      icon-3 = "f;";
+      icon-default = "";
 
-      format = "<label-state> <label-mode>";
-      label-focused = "%icon%";
-      label-focused-foreground = colors.fg-secondary;
-      label-focused-background = colors.accent-primary;
-      label-focused-underline = colors.accent-primary;
-      label-focused-padding = 1;
+      format = "<label-state>";
 
-      label-unfocused = "%icon%";
-      label-unfocused-foreground = colors.fg-secondary;
-      label-unfocused-background = colors.bg-secondary;
-      label-unfocused-underline = colors.bg-secondary;
-      label-unfocused-padding = 1;
+      label-active = "%icon%";
+      label-active-foreground = colors.fg-secondary;
+      label-active-underline =  colors.accent-primary;
+      label-active-background = colors.accent-primary;
+      label-active-padding = 1;
 
-      label-visible = "%index%";
-      label-visible-underline = "#555555";
-      label-visible-padding = 1;
+      label-occupied = "%icon%";
+      label-occupied-foreground = colors.fg-secondary;
+      label-occupied-background = colors.bg-secondary;
+      label-occupied-underline = colors.bg-secondary;
+      label-occupied-padding = 1;
 
-      label-urgent = "%index%";
+      label-urgent = "%icon%";
       label-urgent-foreground = colors.fg-secondary;
+      label-urgent-underline =  colors.accent-primary;
       label-urgent-background = colors.alert;
       label-urgent-padding = 1;
 
-      ws-icon-default = "";
-      ws-icon-0 = "1;";
-      ws-icon-1 = "2;";
-      ws-icon-2 = "3;";
-      ws-icon-3 = "4;";
+      label-empty = "%icon%";
+      label-empty-foreground = colors.fg-primary;
+      label-empty-background = colors.bg-primary-bright;
+      label-empty-underline = colors.bg-secondary;
+      label-empty-padding = 1;
     };
 
     "module/title" = {

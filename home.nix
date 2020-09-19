@@ -366,10 +366,12 @@ in
   xsession = {
     enable = true;
     scriptPath = ".hm-xsession";
-    windowManager.i3 = rec {
+    windowManager.xmonad = {
       enable = true;
-      package = pkgs.i3-gaps;
-      config = (import ./i3/config.nix) { colorscheme = colorscheme; };
+      enableContribAndExtras = true;
+      config = pkgs.writeText "xmonad.hs" ''
+        ${builtins.readFile ./xmonad.hs}
+      '';
     };
   };
 
