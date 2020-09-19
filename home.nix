@@ -52,6 +52,7 @@ in
   home.packages = with pkgs; [
     # GUI Apps
     # Just to look at how stuff looks like
+    google-chrome
     lxappearance
     i3lock-fancy
 
@@ -169,10 +170,10 @@ in
   # changes in each release.
   home.stateVersion = "20.09";
 
-  home.file.".mozilla/native-messaging-hosts".source = pkgs.symlinkJoin {
+  home.file.".config/google-chrome/NativeMessagingHosts".source = pkgs.symlinkJoin {
     name = "native-messaging-hosts";
     paths = [
-      "${pkgs.plasma-browser-integration}/lib/mozilla/native-messaging-hosts"
+      "${pkgs.plasma-browser-integration}/etc/var/empty/chrome/native-messaging-hosts"
     ];
   };
 
@@ -199,14 +200,6 @@ in
   programs.bat = {
     enable = true;
     config.theme = "OneHalfDark";
-  };
-
-  programs.firefox = {
-    enable = true;
-    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-      vimium
-      plasma-integration
-    ];
   };
 
   programs.git = {
