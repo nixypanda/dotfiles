@@ -16,7 +16,7 @@ let
     killall -q polybar
     echo "launching polybar" | systemd-cat
 
-    polybar top &
+    polybar main &
   '';
 
   custom-script-sysmenu = pkgs.writeScriptBin "custom-script-sysmenu" ''
