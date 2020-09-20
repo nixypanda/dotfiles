@@ -56,6 +56,12 @@ in
     lxappearance
     i3lock-fancy
 
+    # system tray (Kind of a hack atm)
+    # Need polybar to support this as a first class module
+    trayer
+    gnome3.networkmanagerapplet
+    volumeicon
+
     # CLI tools
     awscli
     git
