@@ -6,6 +6,7 @@
 
   bg-primary = "#282C34";
   bg-primary-bright = "#3e4451";
+  bg-primary-transparent-argb = "#993e4451";
   fg-primary = "#ABB2BF";
   fg-primary-bright = "#e6efff";
 
