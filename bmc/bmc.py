@@ -68,11 +68,13 @@ title = Player.Metadata["xesam:title"]
 
 if args.display is None:
     output = (
-        action("playpause", ICON)
+        action("prev", ICON_PREV)
         + " "
-        + truncate(title, TITLE_LENGTH)
+        + action("playpause", ICON)
         + " "
         + action("next", ICON_NEXT)
+        + " "
+        + truncate(title, TITLE_LENGTH)
     )
 
     print(output)
