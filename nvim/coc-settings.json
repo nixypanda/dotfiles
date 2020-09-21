@@ -55,6 +55,9 @@
 
   "yaml.format.enable": true,
 
+  // coc-rls
+  "rust-client.disableRustup": true,
+
   // coc-explorer
   "explorer.width": 30,
   "explorer.icon.enableNerdfont": true,
