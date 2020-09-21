@@ -108,6 +108,9 @@ in
 
     # Programming
 
+    # C
+    gcc
+
     # Clojure
     clojure
     clojure-lsp
