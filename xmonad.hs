@@ -82,8 +82,8 @@ myConfig =
 
         layoutModifiers = avoidStruts . noBorders . spacingLayoutSetup . gapLayoutSetup
 
-        layouts :: Tall a
-        layouts = tall
+        layouts :: Choose Tall Full a
+        layouts = tall ||| Full
 
         myManageHook :: ManageHook
         myManageHook = composeAll
