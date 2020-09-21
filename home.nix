@@ -306,6 +306,9 @@ in
 
   };
 
+  # coc-config for vim
+  home.file.".config/nvim/coc-settings.json".source = ./nvim/coc-settings.json;
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
