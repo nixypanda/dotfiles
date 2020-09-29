@@ -68,6 +68,7 @@ in
     gitAndTools.gh
     gitAndTools.delta
     less
+    scrot
 
     # Make that terminal pretty
     bat

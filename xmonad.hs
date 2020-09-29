@@ -55,6 +55,9 @@ myConfig =
                     , ( (modMask .|. shiftMask, xK_Return)
                         , spawn "xterm -e \"cd $(xcwd) && ~/.nix-profile/bin/zsh\""
                       )
+                    , ( (modMask .|. shiftMask, xK_4)
+                        , spawn "sleep 0.2 && scrot -s ~/Pictures/screenshots/scrot_%Y-%m-%d-%H%M%S.png"
+                      )
                     ]
                 workspaceSetup = 
                     [ ((m .|. modMask, k), windows $ f i)
@@ -99,8 +102,8 @@ myConfig =
          , workspaces = myWorkspaces
          , handleEventHook = fullscreenEventHook <+> handleEventHook def
          }
-         `additionalKeys` keysToAdd
          `removeKeys` keysToRemove
+         `additionalKeys` keysToAdd
 
 
 myStartupHook :: X ()
