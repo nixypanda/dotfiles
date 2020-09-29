@@ -80,6 +80,7 @@ in
     fzf
     jump
     ripgrep
+    perl
     universal-ctags
     xcwd
 
