@@ -6,7 +6,7 @@ import XMonad.Hooks.ManageDocks (avoidStruts, docks, manageDocks)
 import XMonad.Layout.LayoutModifier (ModifiedLayout)
 import XMonad.Layout.Gaps (Gaps, Direction2D(..), gaps)
 import XMonad.Layout.Spacing (Spacing, Border(..), spacingRaw)
-import XMonad.Layout.NoBorders (noBorders)
+import XMonad.Layout.NoBorders (Ambiguity(..), lessBorders)
 
 import XMonad.Util.EZConfig (additionalKeys, removeKeys)
 
@@ -83,7 +83,7 @@ myConfig =
             where edgeGap = 20
 
 
-        layoutModifiers = avoidStruts . noBorders . spacingLayoutSetup . gapLayoutSetup
+        layoutModifiers = lessBorders OnlyScreenFloat . avoidStruts . spacingLayoutSetup . gapLayoutSetup
 
         layouts :: Choose Tall Full a
         layouts = tall ||| Full
