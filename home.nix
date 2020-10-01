@@ -10,22 +10,18 @@ let
 
   colorscheme = (import ./colorschemes/onedark.nix);
 
-  custom-i3-polybar-launch = pkgs.writeScriptBin "custom-i3-polybar-launch" ''
+  custom-polybar-launch = pkgs.writeScriptBin "custom-polybar-launch" ''
     #!/${pkgs.stdenv.shell}
 
     killall -q polybar
-    echo "launching polybar" | systemd-cat
 
     polybar main &
+    polybar powermenu &
   '';
 
   custom-script-sysmenu = pkgs.writeScriptBin "custom-script-sysmenu" ''
     #!/${pkgs.stdenv.shell}
     ${builtins.readFile ./polybar/scripts/sysmenu.sh}
-  '';
-
-  custom-script-backlight = pkgs.writeScriptBin "custom-script-backlight" ''
-    ${builtins.readFile ./polybar/scripts/backlight.sh}
   '';
 
   custom-browsermediacontrol = pkgs.stdenv.mkDerivation {
@@ -61,6 +57,9 @@ in
     trayer
     gnome3.networkmanagerapplet
     volumeicon
+    solaar
+    caffeine-ng
+    psensor
 
     # CLI tools
     awscli
@@ -101,8 +100,7 @@ in
 
     # custom scripts
     custom-script-sysmenu
-    custom-i3-polybar-launch
-    custom-script-backlight
+    custom-polybar-launch
     # Music shit
     # Note: Turn this into a singular package
     plasma-browser-integration
@@ -364,8 +362,7 @@ in
   services.polybar = {
     enable = true;
     config = (import ./polybar/accented-pills.nix) { colors = colorscheme; };
-    package = pkgs.polybar.override { i3GapsSupport = true; };
-    script = "polybar top &";
+    script = "polybar main &";
   };
 
   services.picom = {
