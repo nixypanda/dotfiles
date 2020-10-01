@@ -222,7 +222,12 @@ in
         pager = "delta";
       };
       delta = {
-        side-by-side = true;
+        features = "side-by-side line-numbers decorations";
+      };
+      "delta \"decorations\"" = {
+        commit-decoration-style = "bold yellow box ul";
+        file-style = "bold yellow";
+        file-decoration-style = "none";
       };
     };
   };
