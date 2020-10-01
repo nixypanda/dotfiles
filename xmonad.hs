@@ -73,7 +73,7 @@ myConfig =
                     ]
 
         spacingLayoutSetup :: l a -> ModifiedLayout Spacing l a
-        spacingLayoutSetup = spacingRaw False screenBorder True windowBorder True
+        spacingLayoutSetup = spacingRaw True screenBorder True windowBorder True
             where
                 screenBorder = Border 5 5 5 5
                 windowBorder = Border 5 5 5 5
@@ -101,6 +101,11 @@ myConfig =
          , layoutHook = layoutModifiers layouts 
          , workspaces = myWorkspaces
          , handleEventHook = fullscreenEventHook <+> handleEventHook def
+
+         -- NOTE: Injected using nix strings.
+         -- Think about parsing colorscheme.nix file in some way
+         , focusedBorderColor = myFocusedBorderColor
+         , borderWidth = 3
          }
          `removeKeys` keysToRemove
          `additionalKeys` keysToAdd

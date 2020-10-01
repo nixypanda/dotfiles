@@ -385,6 +385,8 @@ in
       enableContribAndExtras = true;
       config = pkgs.writeText "xmonad.hs" ''
         ${builtins.readFile ./xmonad.hs}
+
+        myFocusedBorderColor = "${colorscheme.accent-primary}"
       '';
     };
   };
