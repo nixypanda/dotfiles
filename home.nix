@@ -47,57 +47,45 @@ in
 {
   home.packages = with pkgs; [
     # GUI Apps
-    # Just to look at how stuff looks like
     google-chrome
+    # Just to look at how stuff looks like
     lxappearance
     i3lock-fancy
 
     # system tray (Kind of a hack atm)
     # Need polybar to support this as a first class module
-    trayer
     gnome3.networkmanagerapplet
     volumeicon
     solaar
     caffeine-ng
     psensor
 
-    # CLI tools
+    # CLI tools / Terminal facification
     awscli
     git
     gitAndTools.gh
+    ngrok
+    # Moar colors
     gitAndTools.delta
     less
-    scrot
-
-    # Make that terminal pretty
     bat
     ls-colors # NOTE: custom
     direnv
     starship
     zsh-syntax-highlighting
-
-    # Searching helpers
+    # Searching/Movement helpers
     fzf
     jump
     ripgrep
-    perl
     universal-ctags
     xcwd
-
     # system info
     ytop
     neofetch
-
-    # uncatagorised
-    ngrok
-    (nerdfonts.override { fonts = [ "Hack" ]; })
-
-    # file browsers
+    # file browser
     ranger
-
-    # Docker
-    docker-compose
-
+    # screenshot utility
+    scrot
     # custom scripts
     custom-script-sysmenu
     custom-polybar-launch
@@ -105,6 +93,12 @@ in
     # Note: Turn this into a singular package
     plasma-browser-integration
     custom-browsermediacontrol
+
+    # Fonts
+    (nerdfonts.override { fonts = [ "Hack" ]; })
+
+    # Docker
+    docker-compose
 
     # Programming
 
@@ -135,6 +129,9 @@ in
     # Nix
     rnix-lsp
 
+    # perl
+    perl
+
     # python
     python3
     pipenv
@@ -160,9 +157,6 @@ in
     cargo
     rustfmt
   ];
-
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -200,6 +194,9 @@ in
       package = pkgs.arc-theme;
     };
   };
+
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
 
   programs.alacritty = {
     enable = true;
