@@ -203,7 +203,7 @@ in
 
   programs.alacritty = {
     enable = true;
-    settings = (import ./alacrity-config.nix) { colors = colorscheme; };
+    settings = (import ./alacritty/config.nix) { colors = colorscheme; };
   };
 
   programs.bat = {
