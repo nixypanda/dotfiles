@@ -7,6 +7,7 @@ import XMonad.Layout.LayoutModifier (ModifiedLayout)
 import XMonad.Layout.Gaps (Gaps, Direction2D(..), gaps)
 import XMonad.Layout.Spacing (Spacing, Border(..), spacingRaw)
 import XMonad.Layout.NoBorders (Ambiguity(..), lessBorders)
+import XMonad.Layout.ThreeColumns (ThreeCol(..))
 
 import XMonad.Util.EZConfig (additionalKeys, removeKeys)
 
@@ -105,11 +106,14 @@ myLayoutModifiers =
             edgeGap = 20
 
 
-myLayouts :: Choose Tall Full a
-myLayouts = tall ||| Full
+myLayouts :: Choose Tall (Choose ThreeCol Full) a
+myLayouts = tall ||| threeColumn ||| Full
     where
         tall :: Tall a
         tall = Tall 1 (3/100) (1/2)
+
+        threeColumn :: ThreeCol a
+        threeColumn = ThreeCol 1 (3/100) (1/2)
 
 
 myManageHook :: ManageHook
