@@ -39,6 +39,7 @@ myConfig =
          , focusedBorderColor = myFocusedBorderColor
          , borderWidth = 3
          }
+         -- NOTE: Ordering matters here
          `removeKeys` keysToRemove
          `additionalKeys` keysToAdd
 
@@ -61,7 +62,12 @@ keysToRemove = defaultWorkSpaceSwitchBinding ++ defaultWorkSpaceWindowMoveBindin
 
 
 keysToAdd :: [((KeyMask, KeySym), X ())]
-keysToAdd = launchers ++ multimediaKeys ++ workspaceSetup ++ layoutRelated
+keysToAdd =
+      launchers
+    ++ multimediaKeys
+    ++ workspaceSetup
+    ++ workspaceWindowMoveSetup
+    ++ layoutRelated
     where
         launchers =
             [ ( (myModMask, xK_space)
@@ -77,10 +83,18 @@ keysToAdd = launchers ++ multimediaKeys ++ workspaceSetup ++ layoutRelated
                 , spawn "sleep 0.2 && scrot -s ~/Pictures/screenshots/scrot_%Y-%m-%d-%H%M%S.png"
               )
             ]
+
+        workspaceKeyAndIdentifiers = 
+            zip (myWorkspaces) [xK_a, xK_s, xK_d, xK_f]
+
         workspaceSetup = 
-            [ ((m .|. myModMask, k), windows $ f i)
-            | (i, k) <- zip (myWorkspaces) [xK_a, xK_s, xK_d, xK_f]
-            , (f, m) <- [(greedyView, 0), (shift, shiftMask)]]
+            [ ((myModMask, key), windows $ greedyView identifier)
+            | (identifier, key) <- workspaceKeyAndIdentifiers]
+
+        workspaceWindowMoveSetup =
+            [ ((shiftMask .|. myModMask, key), windows $ shift identifier)
+            | (identifier, key) <- workspaceKeyAndIdentifiers]
+
         multimediaKeys =
             [ ((0, xF86XK_AudioLowerVolume), spawn "amixer sset Master 5%-")
             , ((0, xF86XK_AudioRaiseVolume), spawn "amixer sset Master 5%+")
@@ -101,19 +115,20 @@ myLayoutModifiers =
             gapLayoutSetup =
                 gaps [ (U, edgeGap), (R, edgeGap), (D, edgeGap), (L, edgeGap) ]
 
-            screenBorder = Border 5 5 5 5
-            windowBorder = Border 5 5 5 5
+            screenBorder = Border { top = 5, bottom = 5, right = 5, left = 5 }
+            windowBorder = Border { top = 5, bottom = 5, right = 5, left = 5 }
             edgeGap = 20
 
 
 myLayouts :: Choose Tall (Choose ThreeCol Full) a
-myLayouts = tall ||| threeColumn ||| Full
+myLayouts = tall ||| threeCol ||| Full
     where
         tall :: Tall a
-        tall = Tall 1 (3/100) (1/2)
+        tall = Tall { tallNMaster = 1, tallRatioIncrement = 3/100, tallRatio = 1/2 }
 
-        threeColumn :: ThreeCol a
-        threeColumn = ThreeCol 1 (3/100) (1/2)
+        threeCol :: ThreeCol a
+        threeCol = ThreeCol
+            { threeColNMaster = 1, threeColDelta = 3/100, threeColFrac = 1/2 }
 
 
 myManageHook :: ManageHook
