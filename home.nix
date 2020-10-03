@@ -3,13 +3,18 @@
 let
   colorscheme = (import ./colorschemes/onedark.nix);
 
-  custom-polybar-launch = pkgs.writeScriptBin "custom-polybar-launch" ''
+  custom-panel-launch = pkgs.writeScriptBin "custom-panel-launch" ''
     #!/${pkgs.stdenv.shell}
 
     killall -q polybar
+    killall -q volumeicon
 
     polybar main &
     polybar powermenu &
+    nm-applet &
+    volumeicon &
+    solaar -w hide -b symbolic &
+    caffeine &
   '';
 
   custom-script-sysmenu = pkgs.writeScriptBin "custom-script-sysmenu" ''
@@ -80,7 +85,7 @@ in
     scrot
     # custom scripts
     custom-script-sysmenu
-    custom-polybar-launch
+    custom-panel-launch
     # Music shit
     # Note: Turn this into a singular package
     plasma-browser-integration

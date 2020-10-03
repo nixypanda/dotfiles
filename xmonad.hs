@@ -145,8 +145,4 @@ myManageHook = composeAll
 
 myStartupHook :: X ()
 myStartupHook = do
-    spawn "custom-polybar-launch"
-    spawn "nm-applet &"
-    spawn "volumeicon &"
-    spawn "solaar -w hide -b symbolic &"
-    spawn "caffeine &"
+    spawn "custom-panel-launch"
