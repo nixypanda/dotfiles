@@ -233,6 +233,13 @@ in
     width = 40;
     font = "hack 10";
   };
+  home.file.".config/rofi/colors.rasi".text = ''
+    * {
+      accent: ${colorscheme.accent-primary};
+      background: ${colorscheme.bg-primary};
+      foreground: ${colorscheme.fg-primary};
+    }
+  '';
   home.file.".config/rofi/grid.rasi".source = ./rofi/grid.rasi;
   home.file.".config/rofi/sysmenu.rasi".source = ./rofi/sysmenu.rasi;
 

@@ -15,11 +15,9 @@ configuration {
 	terminal: "alacritty";
 }
 
-* {
-  accent:           #98c379;
-  background:       #282C34;
-  foreground:       #ABB2BF;
+@import "colors.rasi"
 
+* {
   text-font:                            "hack 12";
 
   inputbar-margin:                      3px 3px;
