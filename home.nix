@@ -94,6 +94,10 @@ in
     # Fonts
     (nerdfonts.override { fonts = [ "Hack" ]; })
 
+    # Themes (GTK)
+    arc-icon-theme
+    arc-theme
+
     # Docker
     docker-compose
 
@@ -179,17 +183,9 @@ in
 
   gtk = {
     enable = true;
-    font = {
-      name = "TeX Gyre Heros 10";
-    };
-    iconTheme = {
-      name = "Arc";
-      package = pkgs.arc-icon-theme;
-    };
-    theme = {
-      name = "Arc-Dark";
-      package = pkgs.arc-theme;
-    };
+    font = { name = "TeX Gyre Heros 10"; };
+    iconTheme = { name = colorscheme.gtk-icon-name; };
+    theme = { name = colorscheme.gtk-name; };
   };
 
   # Let Home Manager install and manage itself.
@@ -202,7 +198,7 @@ in
 
   programs.bat = {
     enable = true;
-    config.theme = "OneHalfDark";
+    config.theme = colorscheme.bat-theme-name;
   };
 
   programs.git = {
