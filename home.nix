@@ -41,6 +41,8 @@ let
     '';
   };
 
+  color-dim = color: color;
+
 in
 {
   home.packages = with pkgs; [
@@ -404,21 +406,22 @@ in
       "*.foreground" = colorscheme.fg-primary;
       "*.background" = colorscheme.bg-primary;
 
-      "*.color0" = colorscheme.black;
-      "*.color8" = colorscheme.black;
-      "*.color1" = colorscheme.red;
-      "*.color9" = colorscheme.red;
-      "*.color2" = colorscheme.green;
+      "*.color0"  = color-dim(colorscheme.black);
+      "*.color1"  = color-dim(colorscheme.red);
+      "*.color2"  = color-dim(colorscheme.green);
+      "*.color3"  = color-dim(colorscheme.yellow);
+      "*.color4"  = color-dim(colorscheme.blue);
+      "*.color5"  = color-dim(colorscheme.magenta);
+      "*.color6"  = color-dim(colorscheme.cyan);
+      "*.color7"  = color-dim(colorscheme.white);
+
+      "*.color8"  = colorscheme.black;
+      "*.color9"  = colorscheme.red;
       "*.color10" = colorscheme.green;
-      "*.color3" = colorscheme.yellow;
       "*.color11" = colorscheme.yellow;
-      "*.color4" = colorscheme.blue;
       "*.color12" = colorscheme.blue;
-      "*.color5" = colorscheme.magenta;
       "*.color13" = colorscheme.magenta;
-      "*.color6" = colorscheme.cyan;
       "*.color14" = colorscheme.cyan;
-      "*.color7" = colorscheme.white;
       "*.color15" = colorscheme.white;
 
       "XTerm*font" = "xft:Hack Nerd Font Mono:pixelsize=12";
