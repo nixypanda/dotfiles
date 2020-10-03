@@ -132,7 +132,7 @@
       content-background = colors.alert;
       content-foreground = colors.fg-secondary;
       content-underline = colors.bg-primary-transparent-argb;
-      click-left = "custom-script-sysmenu &";
+      click-left = "rofi -modi 'Powermenu:custom-script-sysmenu' -show Powermenu -theme sysmenu -location 3 -yoffset 25 &";
     };
 
     "module/separator" = {

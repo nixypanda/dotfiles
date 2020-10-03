@@ -227,8 +227,9 @@ in
     lines = 7;
     width = 40;
     font = "hack 10";
-    theme = ./rofi/grid.rasi;
   };
+  home.file.".config/rofi/grid.rasi".source = ./rofi/grid.rasi;
+  home.file.".config/rofi/sysmenu.rasi".source = ./rofi/sysmenu.rasi;
 
   programs.neovim = {
     enable = true;
@@ -305,6 +306,14 @@ in
 
   # coc-config for vim
   home.file.".config/nvim/coc-settings.json".source = ./nvim/coc-settings.json;
+
+  programs.nushell = {
+    enable = true;
+    settings = {
+      edit_mode = "vi";
+      prompt = "echo $(starship prompt)";
+    };
+  };
 
   programs.zsh = {
     enable = true;

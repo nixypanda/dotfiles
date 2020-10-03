@@ -71,7 +71,7 @@ keysToAdd =
     where
         launchers =
             [ ( (myModMask, xK_space)
-                , spawn "rofi -show drun"
+                , spawn "rofi -show drun -theme grid"
               )
             , ( (myModMask .|. shiftMask, xK_l)
                 , spawn "i3lock-fancy -p -t \"\""
