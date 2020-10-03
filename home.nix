@@ -1,13 +1,6 @@
 { config, lib, pkgs, ... }:
 
 let
-  # A colorfull ls package
-  ls-colors = pkgs.runCommand "ls-colors" {} ''
-    mkdir -p $out/bin
-    ln -s ${pkgs.coreutils}/bin/ls $out/bin/ls
-    ln -s ${pkgs.coreutils}/bin/dircolors $out/bin/dircolors
-  '';
-
   colorscheme = (import ./colorschemes/onedark.nix);
 
   custom-polybar-launch = pkgs.writeScriptBin "custom-polybar-launch" ''
@@ -69,7 +62,6 @@ in
     gitAndTools.delta
     less
     bat
-    ls-colors # NOTE: custom
     direnv
     starship
     zsh-syntax-highlighting
