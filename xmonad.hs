@@ -10,8 +10,9 @@ import XMonad.Layout.NoBorders (Ambiguity(..), lessBorders)
 import XMonad.Layout.ThreeColumns (ThreeCol(..))
 
 import XMonad.Util.EZConfig (additionalKeys, removeKeys)
+import XMonad.Util.NamedScratchpad (NamedScratchpad(..), namedScratchpadManageHook, namedScratchpadAction, customFloating)
 
-import XMonad.StackSet (greedyView, shift)
+import XMonad.StackSet (RationalRect(..), greedyView, shift)
 import Graphics.X11.ExtraTypes.XF86
     ( xF86XK_AudioLowerVolume
     , xF86XK_AudioRaiseVolume
@@ -27,7 +28,7 @@ main = do
 myConfig =
      def
          { logHook = ewmhDesktopsLogHook
-         , terminal = "xterm"
+         , terminal = myTerminal
          , startupHook = myStartupHook
          , manageHook =  myManageHook
          , layoutHook = myLayoutModifiers myLayouts 
@@ -50,6 +51,10 @@ myWorkspaces = ["a", "s", "d", "f"]
 
 myModMask :: KeyMask
 myModMask = mod1Mask
+
+
+myTerminal :: String
+myTerminal = "xterm"
 
 
 keysToRemove :: [(KeyMask, KeySym)]
@@ -77,10 +82,13 @@ keysToAdd =
                 , spawn "i3lock-fancy -p -t \"\""
               )
             , ( (myModMask .|. shiftMask, xK_Return)
-                , spawn "xterm -e \"cd $(xcwd) && ~/.nix-profile/bin/zsh\""
+                , spawn $ myTerminal ++ " -e \"cd $(xcwd) && ~/.nix-profile/bin/zsh\""
               )
             , ( (myModMask .|. shiftMask, xK_4)
                 , spawn "sleep 0.2 && scrot -s ~/Pictures/screenshots/scrot_%Y-%m-%d-%H%M%S.png"
+              )
+            , ( (myModMask, xK_c)
+                , namedScratchpadAction myScratchPads "terminal"
               )
             ]
 
@@ -131,6 +139,23 @@ myLayouts = tall ||| threeCol ||| Full
             { threeColNMaster = 1, threeColDelta = 3/100, threeColFrac = 1/2 }
 
 
+myScratchPads :: [NamedScratchpad]
+myScratchPads = [ scTerminal ]
+    where
+        scTerminal = NS
+            { name = "terminal"
+            , cmd = myTerminal ++ " -name scratchpad"
+            , query = resource =? "scratchpad"
+            , hook = customFloating largeRect
+            }
+        largeRect = RationalRect l t w h
+            where
+                h = 2/3
+                w = 2/3
+                t = 1/6
+                l = 1/6
+
+
 myManageHook :: ManageHook
 myManageHook = composeAll
     [ manageDocks
@@ -140,6 +165,7 @@ myManageHook = composeAll
     , className =? "Psensor" --> doFloat
     , className =? "Nm-connection-editor" --> doFloat
     , className =? "Gddccontrol" --> doFloat
+    , namedScratchpadManageHook myScratchPads
     ]
 
 

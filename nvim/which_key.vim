@@ -26,7 +26,6 @@ let g:which_key_map['h'] = [ '<C-W>s'                     , 'Split below']
 let g:which_key_map['q'] = [ 'q'                          , 'Quit' ]
 let g:which_key_map['v'] = [ '<C-W>v'                     , 'Split right']
 let g:which_key_map['w'] = [ 'w'                          , 'Write' ]
-let g:which_key_map['c'] = [ ':call FloatTerm()'          , 'Console' ]
 
 " Group mappings
 

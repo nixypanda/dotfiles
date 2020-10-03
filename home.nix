@@ -296,7 +296,6 @@ in
       ${builtins.readFile ./nvim/airline.vim}
       ${builtins.readFile ./nvim/navigation.vim}
       ${builtins.readFile ./nvim/coc.vim}
-      ${builtins.readFile ./nvim/terminal.vim}
       ${builtins.readFile ./nvim/theme.vim}
 
       " Vim theme info
