@@ -1,17 +1,22 @@
 import XMonad
 
 import XMonad.Hooks.EwmhDesktops (ewmh, ewmhDesktopsLogHook, fullscreenEventHook)
-import XMonad.Hooks.ManageDocks (avoidStruts, docks, manageDocks)
+import XMonad.Hooks.ManageDocks (AvoidStruts, avoidStruts, docks, manageDocks)
 import XMonad.Hooks.ManageHelpers (doFullFloat)
 
 import XMonad.Layout.LayoutModifier (ModifiedLayout)
 import XMonad.Layout.Gaps (Gaps, Direction2D(..), gaps)
 import XMonad.Layout.Spacing (Spacing, Border(..), spacingRaw)
-import XMonad.Layout.NoBorders (Ambiguity(..), lessBorders)
+import XMonad.Layout.NoBorders (Ambiguity(..), ConfigurableBorder, lessBorders)
 import XMonad.Layout.ThreeColumns (ThreeCol(..))
 
 import XMonad.Util.EZConfig (additionalKeys, removeKeys)
-import XMonad.Util.NamedScratchpad (NamedScratchpad(..), namedScratchpadManageHook, namedScratchpadAction, customFloating)
+import XMonad.Util.NamedScratchpad
+    ( NamedScratchpad(..)
+    , namedScratchpadManageHook
+    , namedScratchpadAction
+    , customFloating
+    )
 
 import XMonad.StackSet (RationalRect(..), greedyView, shift)
 import Graphics.X11.ExtraTypes.XF86
@@ -26,6 +31,7 @@ main = do
     xmonad . docks . ewmh $ myConfig
 
 
+myConfig :: XConfig (MyLayoutModifiers MyLayouts)
 myConfig =
      def
          { logHook = ewmhDesktopsLogHook
@@ -114,6 +120,35 @@ keysToAdd =
             ]
 
 
+type MyLayouts = Choose Tall (Choose ThreeCol Full)
+
+
+myLayouts :: MyLayouts a
+myLayouts = tall ||| threeCol ||| Full
+    where
+        tall :: Tall a
+        tall = Tall { tallNMaster = 1, tallRatioIncrement = 3/100, tallRatio = 1/2 }
+
+        threeCol :: ThreeCol a
+        threeCol = ThreeCol
+            { threeColNMaster = 1, threeColDelta = 3/100, threeColFrac = 1/2 }
+
+
+type MyLayoutModifiers a =
+    ModifiedLayout
+        (ConfigurableBorder Ambiguity)
+        (ModifiedLayout
+            AvoidStruts
+            (ModifiedLayout Spacing
+                (ModifiedLayout
+                    Gaps
+                    a
+                )
+            )
+        )
+
+
+myLayoutModifiers :: MyLayouts Window -> (MyLayoutModifiers MyLayouts) Window
 myLayoutModifiers =
     lessBorders OnlyScreenFloat . avoidStruts . spacingLayoutSetup . gapLayoutSetup
         where
@@ -127,17 +162,6 @@ myLayoutModifiers =
             screenBorder = Border { top = 5, bottom = 5, right = 5, left = 5 }
             windowBorder = Border { top = 5, bottom = 5, right = 5, left = 5 }
             edgeGap = 20
-
-
-myLayouts :: Choose Tall (Choose ThreeCol Full) a
-myLayouts = tall ||| threeCol ||| Full
-    where
-        tall :: Tall a
-        tall = Tall { tallNMaster = 1, tallRatioIncrement = 3/100, tallRatio = 1/2 }
-
-        threeCol :: ThreeCol a
-        threeCol = ThreeCol
-            { threeColNMaster = 1, threeColDelta = 3/100, threeColFrac = 1/2 }
 
 
 myScratchPads :: [NamedScratchpad]
