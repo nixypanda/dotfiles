@@ -48,10 +48,12 @@ in
   home.packages = with pkgs; [
     # GUI Apps
     google-chrome
-    # Just to look at how stuff looks like
-    lxappearance
+    # Screen Locker
     i3lock-fancy
-
+    # Theming (GTK)
+    lxappearance
+    arc-icon-theme
+    arc-theme
     # system tray (Kind of a hack atm)
     # Need polybar to support this as a first class module
     gnome3.networkmanagerapplet
@@ -95,10 +97,6 @@ in
 
     # Fonts
     (nerdfonts.override { fonts = [ "Hack" ]; })
-
-    # Themes (GTK)
-    arc-icon-theme
-    arc-theme
 
     # Docker
     docker-compose
