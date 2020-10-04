@@ -63,9 +63,9 @@
     #
     # You can set `shell.program` to the path of your favorite shell, e.g. `/bin/fish`.
     # Entries in `shell.args` are passed unmodified as arguments to the shell.
-    # shell = {
-    #   program = "/bin/zsh";
-    # };
+    shell = {
+      program = "/home/sherub/.nix-profile/bin/nu";
+    };
 
     # Colors (One Dark)
     colors = {
