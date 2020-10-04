@@ -94,6 +94,9 @@ keysToAdd =
             , ( (myModMask .|. shiftMask, xK_4)
                 , spawn "sleep 0.2 && scrot -s ~/Pictures/screenshots/scrot_%Y-%m-%d-%H%M%S.png"
               )
+            , ( (myModMask .|. shiftMask, xK_5)
+                , spawn "sleep 0.2 && scrot -d 5 ~/Pictures/screenshots/scrot_%Y-%m-%d-%H%M%S.png"
+              )
             , ( (myModMask, xK_c)
                 , namedScratchpadAction myScratchPads "terminal"
               )
