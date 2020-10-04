@@ -48,6 +48,7 @@ in
   home.packages = with pkgs; [
     # GUI Apps
     google-chrome
+    sxiv
     # Screen Locker
     i3lock-fancy
     # Theming (GTK)

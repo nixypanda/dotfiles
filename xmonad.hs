@@ -2,6 +2,7 @@ import XMonad
 
 import XMonad.Hooks.EwmhDesktops (ewmh, ewmhDesktopsLogHook, fullscreenEventHook)
 import XMonad.Hooks.ManageDocks (avoidStruts, docks, manageDocks)
+import XMonad.Hooks.ManageHelpers (doFullFloat)
 
 import XMonad.Layout.LayoutModifier (ModifiedLayout)
 import XMonad.Layout.Gaps (Gaps, Direction2D(..), gaps)
@@ -165,6 +166,7 @@ myManageHook = composeAll
     , className =? "Psensor" --> doFloat
     , className =? "Nm-connection-editor" --> doFloat
     , className =? "Gddccontrol" --> doFloat
+    , className =? "Sxiv" --> doFullFloat
     , namedScratchpadManageHook myScratchPads
     ]
 
