@@ -1,44 +1,60 @@
 {colors}:
+let
+  separator = color: {
+      type = "custom/text";
+
+      content = " ";
+      content-background = color;
+      content-foreground = color;
+  };
+  filled-half-circle = direction: color: {
+    content = if direction == "left" then "%{T2}%{T-}" else "%{T2}%{T-}";
+    type = "custom/text";	
+    content-foreground = color;	
+  };
+  secondary-bar-width-pct = 7.6;
+in
   rec {
-    "bar/main" = {
+    "bar/base" = {
       monitor = "HDMI-1";
       height = 20;
-      width = "98%";
 
       border-size = 2;
-      border-color = colors.bg-primary;
-      background = colors.bg-primary;
+      border-left-size = 0;
+      border-right-size = 0;
+      border-color = colors.bg-primary-transparent-argb;
+      background = colors.bg-primary-transparent-argb;
       foreground = colors.fg-secondary;
 
-      modules-left = "ewmh separator separator separator browsermediacontrol";
-      modules-center = "title";
-      modules-right = "date";
+      font-0 = "Hack Nerd Font:size=7;2";
+      font-1 = "Hack Nerd Font:size=13;3";
+      font-2 = "Hack Nerd Font:size=13;3";
+    };
+
+    "bar/main" = {
+      "inherit" = "bar/base";
+
+      width = "${builtins.toString(100 - secondary-bar-width-pct)}%";
+
+      modules-left = "ewmh right separator separator separator saparator separator separator separator left-bmc browsermediacontrol right-bmc";
+      modules-center = "left title right";
+      modules-right = "left";
 
       tray-position = "right";
-      tray-padding = 2 ;
+      tray-padding = 7 ;
       tray-transparent = true;
       tray-background = colors.bg-primary;
-      tray-maxsize = 10;
-
-      font-0 = "Hack Nerd Font:size=7;2";
-      font-1 = "Hack Nerd Font:size=13;2";
+      tray-maxsize = 12;
     };
 
     "bar/powermenu" = {
-      monitor = "HDMI-1";
-      height = 20;
-      width = "2%";
-      offset-x = "98%";
+      "inherit" = "bar/base";
 
-      border-size = 2;
-      border-color = colors.alert;
-      background = colors.alert;
-      foreground = colors.fg-secondary;
+      width = "${builtins.toString(secondary-bar-width-pct)}%";
+      offset-x = "${builtins.toString(100 - secondary-bar-width-pct)}%";
 
-      font-0 = "Hack Nerd Font:size=7;2";
-      font-1 = "Hack Nerd Font:size=13;2";
-
-      modules-center = "powermenu";
+      modules-left = "right";
+      modules-right = "left date separator-bg separator-red powermenu separator-red right-red";
     };
 
     "module/ewmh" = {
@@ -102,7 +118,7 @@
       exec = "custom-browsermediacontrol";
 
       format = "<label>";
-      format-background = colors.bg-primary;
+      format-background = colors.bg-secondary-transparent-argb;
       format-foreground = colors.fg-primary;
 
       border-size = 2;
@@ -139,11 +155,14 @@
       click-left = "rofi -modi 'Powermenu:custom-script-sysmenu' -show Powermenu -theme sysmenu -location 3 -yoffset 25 &";
     };
 
-    "module/separator" = {
-      type = "custom/text";
-
-      content = "|";
-      content-background = colors.bg-primary;
-      content-foreground = colors.bg-primary;
-    };
+    "module/separator" = separator colors.bg-primary-transparent-argb;
+    "module/separator-red" = separator colors.alert;
+    "module/separator-bg" = separator colors.bg-primary;
+    "module/left" = filled-half-circle "left" colors.bg-primary;	
+    "module/right" = filled-half-circle "right" colors.bg-primary;	
+    "module/left-red" = filled-half-circle "left" colors.alert;	
+    "module/right-red" = filled-half-circle "right" colors.alert;	
+    # NOTE: Not Working
+    "module/left-bmc" = filled-half-circle "left" colors.bg-secondary-transparent-argb;	
+    "module/right-bmc" = filled-half-circle "right" colors.bg-secondary-transparent-argb;	
   }

@@ -10,10 +10,12 @@
   bg-primary = "#282C34";
   bg-primary-bright = "#3e4451";
   bg-primary-transparent-argb = "#993e4451";
+  bg-primary-bright-transparent-argb = "#993e4451";
   fg-primary = "#ABB2BF";
   fg-primary-bright = "#e6efff";
 
   bg-secondary = "#ABB2BF";
+  bg-secondary-transparent-argb = "#77abb2bf";
   fg-secondary = "#282C34";
   fg-secondary-bright = "#1C1E20";
 
