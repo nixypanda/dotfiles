@@ -5,9 +5,16 @@ import XMonad.Hooks.ManageDocks (AvoidStruts, avoidStruts, docks, manageDocks)
 import XMonad.Hooks.ManageHelpers (doFullFloat)
 import XMonad.Hooks.InsertPosition (Position(..), Focus(..), insertPosition)
 
-import XMonad.Layout.LayoutModifier (ModifiedLayout)
-import XMonad.Layout.Gaps (Gaps, Direction2D(..), gaps)
-import XMonad.Layout.Spacing (Spacing, Border(..), spacingRaw)
+import XMonad.Layout.LayoutModifier (ModifiedLayout(..))
+import XMonad.Layout.Gaps (Gaps, GapSpec, GapMessage(..), Direction2D(..), gaps)
+import XMonad.Layout.Spacing
+    ( Spacing(..)
+    , Border(..)
+    , spacingRaw
+    , toggleWindowSpacingEnabled
+    , incWindowSpacing
+    , decWindowSpacing
+    )
 import XMonad.Layout.NoBorders (Ambiguity(..), ConfigurableBorder, lessBorders)
 import XMonad.Layout.ThreeColumns (ThreeCol(..))
 
@@ -121,7 +128,19 @@ keysToAdd =
             ]
         layoutRelated =
             [ ((myModMask, xK_n), sendMessage NextLayout)
+            , ((myModMask .|. controlMask, xK_g), sendMessage $ ToggleGaps)
+            , ((myModMask .|. controlMask, xK_h), sendMessage $ ModifyGaps incGap)
+            , ((myModMask .|. controlMask, xK_f), sendMessage $ ModifyGaps decGap)
+            , ((myModMask .|. controlMask, xK_s), toggleWindowSpacingEnabled)
+            , ((myModMask .|. controlMask, xK_d), incWindowSpacing 5)
+            , ((myModMask .|. controlMask, xK_a), decWindowSpacing 5)
             ]
+                where
+                    decGap :: GapSpec -> GapSpec
+                    decGap = fmap (fmap (subtract 5))
+
+                    incGap :: GapSpec -> GapSpec
+                    incGap = fmap (fmap (+ 5))
 
 
 type MyLayouts = Choose Tall (Choose ThreeCol Full)
@@ -157,7 +176,14 @@ myLayoutModifiers =
     lessBorders OnlyScreenFloat . avoidStruts . spacingLayoutSetup . gapLayoutSetup
         where
             spacingLayoutSetup :: l a -> ModifiedLayout Spacing l a
-            spacingLayoutSetup = spacingRaw True screenBorder True windowBorder True
+            spacingLayoutSetup = ModifiedLayout $
+                Spacing
+                    { smartBorder = False
+                    , screenBorder = screenBorder
+                    , screenBorderEnabled = False
+                    , windowBorder = windowBorder
+                    , windowBorderEnabled = True
+                    }
 
             gapLayoutSetup :: l a -> ModifiedLayout Gaps l a
             gapLayoutSetup =
