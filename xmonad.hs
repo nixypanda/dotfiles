@@ -61,7 +61,7 @@ myConfig =
 
 
 myWorkspaces :: [String]
-myWorkspaces = ["a", "s", "d", "f"]
+myWorkspaces = ["a", "s", "d", "f", "u", "i", "o", "p"]
 
 
 myModMask :: KeyMask
@@ -111,7 +111,7 @@ keysToAdd =
             ]
 
         workspaceKeyAndIdentifiers = 
-            zip (myWorkspaces) [xK_a, xK_s, xK_d, xK_f]
+            zip (myWorkspaces) [xK_a, xK_s, xK_d, xK_f, xK_u, xK_i, xK_o, xK_p]
 
         workspaceSetup = 
             [ ((myModMask, key), windows $ greedyView identifier)

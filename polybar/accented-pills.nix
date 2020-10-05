@@ -52,6 +52,10 @@
       icon-1 = "s;";
       icon-2 = "d;";
       icon-3 = "f;";
+      icon-4 = "u;u";
+      icon-5 = "i;i";
+      icon-6 = "o;o";
+      icon-7 = "p;p";
       icon-default = "";
 
       format = "<label-state>";
