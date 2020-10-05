@@ -3,6 +3,7 @@ import XMonad
 import XMonad.Hooks.EwmhDesktops (ewmh, ewmhDesktopsLogHook, fullscreenEventHook)
 import XMonad.Hooks.ManageDocks (AvoidStruts, avoidStruts, docks, manageDocks)
 import XMonad.Hooks.ManageHelpers (doFullFloat)
+import XMonad.Hooks.InsertPosition (Position(..), Focus(..), insertPosition)
 
 import XMonad.Layout.LayoutModifier (ModifiedLayout)
 import XMonad.Layout.Gaps (Gaps, Direction2D(..), gaps)
@@ -195,6 +196,7 @@ myManageHook = composeAll
     , className =? "Gddccontrol" --> doFloat
     , className =? "Sxiv" --> doFullFloat
     , namedScratchpadManageHook myScratchPads
+    , insertPosition End Newer
     ]
 
 
