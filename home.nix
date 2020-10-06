@@ -240,6 +240,10 @@ in
   home.file.".config/rofi/grid.rasi".source = ./rofi/grid.rasi;
   home.file.".config/rofi/sysmenu.rasi".source = ./rofi/sysmenu.rasi;
 
+
+  # systray stuff
+  home.file.".config/volumeicon/volumeicon".source = ./systray/volumeicon.cfg;
+
   programs.neovim = {
     enable = true;
     vimAlias = true;
