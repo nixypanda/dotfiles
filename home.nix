@@ -14,7 +14,6 @@ let
     nm-applet &
     volumeicon &
     solaar -w hide &
-    caffeine &
   '';
 
   custom-script-sysmenu = pkgs.writeScriptBin "custom-script-sysmenu" ''
@@ -60,7 +59,6 @@ in
     gnome3.networkmanagerapplet
     volumeicon
     solaar
-    caffeine-ng
     psensor
 
     # CLI tools / Terminal facification
