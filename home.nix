@@ -68,7 +68,6 @@ in
     ngrok
     # Moar colors
     gitAndTools.delta
-    less
     bat
     direnv
     starship
@@ -93,6 +92,10 @@ in
     # Note: Turn this into a singular package
     plasma-browser-integration
     custom-browsermediacontrol
+    # Busybox replacements
+    usbutils
+    pciutils
+    less
 
     # Fonts
     (nerdfonts.override { fonts = [ "Hack" ]; })
