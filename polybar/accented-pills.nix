@@ -136,6 +136,7 @@ in
       interval = "1.0";
 
       time = "%I:%M %p";
+      time-alt = "%d-%m-%y";
 
       format = " <label>";
       format-background = colors.bg-primary;
