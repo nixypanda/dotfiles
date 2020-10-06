@@ -13,7 +13,7 @@ let
     polybar powermenu &
     nm-applet &
     volumeicon &
-    solaar -w hide -b symbolic &
+    solaar -w hide &
     caffeine &
   '';
 
