@@ -103,6 +103,9 @@ in
     # Docker
     docker-compose
 
+    openvpn
+    gnome3.networkmanager-openvpn
+
     # Programming
 
     # C
