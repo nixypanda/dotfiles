@@ -384,7 +384,6 @@ in
     blur = true;
     fade = true;
     fadeDelta = 5;
-    inactiveOpacity = "0.8";
     shadow = true;
     experimentalBackends = true;
     extraOptions = ''
