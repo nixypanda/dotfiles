@@ -3,20 +3,44 @@ import XMonad
 import XMonad.Hooks.EwmhDesktops (ewmh, ewmhDesktopsLogHook, fullscreenEventHook)
 import XMonad.Hooks.ManageDocks (AvoidStruts, avoidStruts, docks, manageDocks)
 import XMonad.Hooks.ManageHelpers (doFullFloat)
-import XMonad.Hooks.InsertPosition (Position(..), Focus(..), insertPosition)
+import XMonad.Hooks.InsertPosition (Position(End), Focus(Newer), insertPosition)
 
-import XMonad.Layout.LayoutModifier (ModifiedLayout(..))
-import XMonad.Layout.Gaps (Gaps, GapSpec, GapMessage(..), Direction2D(..), gaps)
+import XMonad.Layout.LayoutModifier (ModifiedLayout(ModifiedLayout))
+import XMonad.Layout.Gaps
+    ( Gaps
+    , GapSpec
+    , GapMessage(ToggleGaps, ModifyGaps)
+    , Direction2D(U, R, D, L)
+    , gaps
+    )
 import XMonad.Layout.Spacing
-    ( Spacing(..)
-    , Border(..)
+    ( Spacing(Spacing)
+    , smartBorder
+    , screenBorder
+    , screenBorderEnabled
+    , windowBorder
+    , windowBorderEnabled
+    , Border(Border)
+    , top
+    , bottom
+    , right
+    , left
     , spacingRaw
     , toggleWindowSpacingEnabled
     , incWindowSpacing
     , decWindowSpacing
     )
-import XMonad.Layout.NoBorders (Ambiguity(..), ConfigurableBorder, lessBorders)
-import XMonad.Layout.ThreeColumns (ThreeCol(..))
+import XMonad.Layout.NoBorders
+    ( Ambiguity(OnlyScreenFloat)
+    , ConfigurableBorder
+    , lessBorders
+    )
+import XMonad.Layout.ThreeColumns
+    ( ThreeCol(ThreeCol)
+    , threeColNMaster
+    , threeColDelta
+    , threeColFrac
+    )
 import XMonad.Layout.MultiToggle
     ( MultiToggle
     , EOT
@@ -29,13 +53,17 @@ import XMonad.Layout.MultiToggle.Instances (StdTransformers(FULL))
 
 import XMonad.Util.EZConfig (additionalKeys, removeKeys)
 import XMonad.Util.NamedScratchpad
-    ( NamedScratchpad(..)
+    ( NamedScratchpad(NS)
+    , name
+    , cmd
+    , query
+    , hook
     , namedScratchpadManageHook
     , namedScratchpadAction
     , customFloating
     )
 
-import XMonad.StackSet (RationalRect(..), greedyView, focusMaster, shift)
+import XMonad.StackSet (RationalRect(RationalRect), greedyView, focusMaster, shift)
 import Graphics.X11.ExtraTypes.XF86
     ( xF86XK_AudioLowerVolume
     , xF86XK_AudioRaiseVolume
