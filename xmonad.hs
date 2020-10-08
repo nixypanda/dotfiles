@@ -35,7 +35,7 @@ import XMonad.Util.NamedScratchpad
     , customFloating
     )
 
-import XMonad.StackSet (RationalRect(..), greedyView, shift)
+import XMonad.StackSet (RationalRect(..), greedyView, focusMaster, shift)
 import Graphics.X11.ExtraTypes.XF86
     ( xF86XK_AudioLowerVolume
     , xF86XK_AudioRaiseVolume
@@ -138,6 +138,9 @@ keysToAdd =
         layoutRelated =
             [ ((myModMask, xK_n), sendMessage NextLayout)
             , ((myModMask, xK_m), sendMessage $ Toggle FULL)
+
+            , ((myModMask .|. shiftMask, xK_m), windows focusMaster)
+
             , ((myModMask .|. controlMask, xK_g), sendMessage $ ToggleGaps)
             , ((myModMask .|. controlMask, xK_h), sendMessage $ ModifyGaps incGap)
             , ((myModMask .|. controlMask, xK_f), sendMessage $ ModifyGaps decGap)
