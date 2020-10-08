@@ -35,7 +35,7 @@ let
     unpackPhase = ":";
     installPhase = ''
       mkdir -p $out/bin
-      cp ${./bmc/bmc.py} $out/bin/custom-browsermediacontrol
+      cp ${./polybar/scripts/bmc/bmc.py} $out/bin/custom-browsermediacontrol
       chmod +x $out/bin/custom-browsermediacontrol
     '';
   };
