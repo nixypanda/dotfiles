@@ -17,6 +17,15 @@ import XMonad.Layout.Spacing
     )
 import XMonad.Layout.NoBorders (Ambiguity(..), ConfigurableBorder, lessBorders)
 import XMonad.Layout.ThreeColumns (ThreeCol(..))
+import XMonad.Layout.MultiToggle
+    ( MultiToggle
+    , EOT
+    , HCons
+    , Toggle(Toggle)
+    , mkToggle
+    , single
+    )
+import XMonad.Layout.MultiToggle.Instances (StdTransformers(FULL))
 
 import XMonad.Util.EZConfig (additionalKeys, removeKeys)
 import XMonad.Util.NamedScratchpad
@@ -39,14 +48,14 @@ main = do
     xmonad . docks . ewmh $ myConfig
 
 
-myConfig :: XConfig (MyLayoutModifiers MyLayouts)
+myConfig :: XConfig (MyLayoutModifiers MyTogglableLayouts)
 myConfig =
      def
          { logHook = ewmhDesktopsLogHook
          , terminal = myTerminal
          , startupHook = myStartupHook
          , manageHook =  myManageHook
-         , layoutHook = myLayoutModifiers myLayouts 
+         , layoutHook = myLayoutModifiers myTogglableLayouts
          , workspaces = myWorkspaces
          , handleEventHook = fullscreenEventHook <+> handleEventHook def
 
@@ -128,6 +137,7 @@ keysToAdd =
             ]
         layoutRelated =
             [ ((myModMask, xK_n), sendMessage NextLayout)
+            , ((myModMask, xK_m), sendMessage $ Toggle FULL)
             , ((myModMask .|. controlMask, xK_g), sendMessage $ ToggleGaps)
             , ((myModMask .|. controlMask, xK_h), sendMessage $ ModifyGaps incGap)
             , ((myModMask .|. controlMask, xK_f), sendMessage $ ModifyGaps decGap)
@@ -143,11 +153,16 @@ keysToAdd =
                     incGap = fmap (fmap (+ 5))
 
 
-type MyLayouts = Choose Tall (Choose ThreeCol Full)
+type MyLayouts = Choose Tall ThreeCol
+type MyTogglableLayouts = MultiToggle (HCons StdTransformers EOT) MyLayouts
+
+
+myTogglableLayouts :: MyTogglableLayouts a
+myTogglableLayouts = mkToggle (single FULL) myLayouts
 
 
 myLayouts :: MyLayouts a
-myLayouts = tall ||| threeCol ||| Full
+myLayouts = tall ||| threeCol
     where
         tall :: Tall a
         tall = Tall { tallNMaster = 1, tallRatioIncrement = 3/100, tallRatio = 1/2 }
@@ -171,7 +186,8 @@ type MyLayoutModifiers a =
         )
 
 
-myLayoutModifiers :: MyLayouts Window -> (MyLayoutModifiers MyLayouts) Window
+myLayoutModifiers :: MyTogglableLayouts Window ->
+    (MyLayoutModifiers MyTogglableLayouts) Window
 myLayoutModifiers =
     lessBorders OnlyScreenFloat . avoidStruts . spacingLayoutSetup . gapLayoutSetup
         where
