@@ -399,7 +399,7 @@ in
       enable = true;
       enableContribAndExtras = true;
       config = pkgs.writeText "xmonad.hs" ''
-        ${builtins.readFile ./xmonad.hs}
+        ${builtins.readFile ./xmonad/config.hs}
 
         myFocusedBorderColor = "${colorscheme.accent-primary}"
         myNormalBorderColor = "${colorscheme.bg-primary-bright}"
