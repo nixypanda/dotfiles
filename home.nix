@@ -402,6 +402,7 @@ in
         ${builtins.readFile ./xmonad.hs}
 
         myFocusedBorderColor = "${colorscheme.accent-primary}"
+        myNormalBorderColor = "${colorscheme.bg-primary-bright}"
       '';
     };
   };

@@ -90,6 +90,7 @@ myConfig =
          -- NOTE: Injected using nix strings.
          -- Think about parsing colorscheme.nix file in some way
          , focusedBorderColor = myFocusedBorderColor
+         , normalBorderColor = myNormalBorderColor
          , borderWidth = 3
          }
          -- NOTE: Ordering matters here
