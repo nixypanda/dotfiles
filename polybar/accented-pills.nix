@@ -1,9 +1,10 @@
 {colors}:
 let
-  separator = color: {
+  separator = {color, size ? 1}: 
+    {
       type = "custom/text";
-
-      content = " ";
+      # NOTE: How to do? `take n . repeat`
+      content = if size == 1 then " " else "       ";
       content-background = color;
       content-foreground = color;
   };
@@ -36,13 +37,12 @@ in
 
       width = "${builtins.toString(100 - secondary-bar-width-pct)}%";
 
-      modules-left = "ewmh right separator separator separator saparator separator separator separator left-bmc browsermediacontrol right-bmc";
+      modules-left = "ewmh right separator-huge left bmc right";
       modules-center = "left title right";
       modules-right = "left";
 
       tray-position = "right";
       tray-padding = 7 ;
-      tray-transparent = true;
       tray-background = colors.bg-primary;
       tray-maxsize = 12;
     };
@@ -77,27 +77,23 @@ in
       format = "<label-state>";
 
       label-active = "%icon%";
-      label-active-foreground = colors.fg-secondary;
-      label-active-underline =  colors.bg-primary-transparent-argb;
-      label-active-background = colors.accent-primary;
+      label-active-foreground = colors.accent-primary;
+      label-active-background = colors.bg-primary;
       label-active-padding = 2;
 
       label-occupied = "%icon%";
-      label-occupied-foreground = colors.fg-secondary;
-      label-occupied-background = colors.bg-secondary;
-      label-occupied-underline = colors.bg-primary-transparent-argb;
+      label-occupied-foreground = colors.fg-primary;
+      label-occupied-background = colors.bg-primary-bright;
       label-occupied-padding = 2;
 
       label-urgent = "%icon%";
-      label-urgent-foreground = colors.fg-secondary;
-      label-urgent-underline =  colors.bg-primary-transparent-argb;
-      label-urgent-background = colors.alert;
+      label-urgent-foreground = colors.alert;
+      label-urgent-background = colors.bg-primary;
       label-urgent-padding = 2;
 
       label-empty = "%icon%";
       label-empty-foreground = colors.fg-primary;
       label-empty-background = colors.bg-primary;
-      label-empty-underline = colors.bg-primary-transparent-argb;
       label-empty-padding = 2;
     };
 
@@ -113,12 +109,12 @@ in
       label-maxlen = 100;
     };
 
-    "module/browsermediacontrol" = {
+    "module/bmc" = {
       type = "custom/script";
       exec = "custom-browsermediacontrol";
 
       format = "<label>";
-      format-background = colors.bg-secondary-transparent-argb;
+      format-background = colors.bg-primary;
       format-foreground = colors.fg-primary;
 
       border-size = 2;
@@ -138,7 +134,7 @@ in
       time = "%I:%M %p";
       time-alt = "%d-%m-%y";
 
-      format = " <label>";
+      format = "  <label>";
       format-background = colors.bg-primary;
       format-foreground = colors.fg-primary;
       format-padding = 1;
@@ -156,14 +152,12 @@ in
       click-left = "rofi -modi 'Powermenu:custom-script-sysmenu' -show Powermenu -theme sysmenu -location 3 -yoffset 25 &";
     };
 
-    "module/separator" = separator colors.bg-primary-transparent-argb;
-    "module/separator-red" = separator colors.alert;
-    "module/separator-bg" = separator colors.bg-primary;
+    "module/separator" = separator { color = colors.bg-primary-transparent-argb; };
+    "module/separator-huge" = separator { color = colors.bg-primary-transparent-argb; size = 7; };
+    "module/separator-red" = separator { color = colors.alert; };
+    "module/separator-bg" = separator { color = colors.bg-primary; };
     "module/left" = filled-half-circle "left" colors.bg-primary;	
     "module/right" = filled-half-circle "right" colors.bg-primary;	
     "module/left-red" = filled-half-circle "left" colors.alert;	
     "module/right-red" = filled-half-circle "right" colors.alert;	
-    # NOTE: Not Working
-    "module/left-bmc" = filled-half-circle "left" colors.bg-secondary-transparent-argb;	
-    "module/right-bmc" = filled-half-circle "right" colors.bg-secondary-transparent-argb;	
   }
