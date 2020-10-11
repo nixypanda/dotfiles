@@ -66,6 +66,7 @@ in
     git
     gitAndTools.gh
     ngrok
+    gnumake
     # Moar colors
     gitAndTools.delta
     bat
@@ -139,7 +140,7 @@ in
     perl
 
     # python
-    python3
+    (python3.withPackages (ps: with ps; [ setuptools ]))
     pipenv
     poetry
     python3Packages.pip
