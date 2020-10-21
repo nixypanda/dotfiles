@@ -153,6 +153,7 @@ in
     python3Packages.rope
     python3Packages.mypy
     python3Packages.flake8
+    python3Packages.twine
 
     # Ruby
     bundler
