@@ -432,6 +432,7 @@ in
       "*.color15" = colorscheme.white;
 
       "XTerm*font" = "xft:Hack Nerd Font Mono:pixelsize=12";
+      "*.internalBorder" = 4;
 
       "Xft.dpi" = 96;
       "Xft.antialias" = true;
