@@ -54,6 +54,7 @@ in
     lxappearance
     arc-icon-theme
     arc-theme
+    dracula-theme
     # system tray (Kind of a hack atm)
     # Need polybar to support this as a first class module
     gnome3.networkmanagerapplet
@@ -260,6 +261,7 @@ in
       vim-devicons
       awesome-vim-colorschemes
       vim-table-mode
+      dracula-vim
 
       # Navigation
       vim-sneak
