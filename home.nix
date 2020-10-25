@@ -80,7 +80,7 @@ in
     universal-ctags
     xcwd
     # system info
-    ytop
+    bottom
     neofetch
     # file browser
     ranger

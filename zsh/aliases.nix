@@ -3,9 +3,9 @@
   ":q"="exit";
   vi="nvim";
   vim="nvim";
-  top="ytop";
-  htop="ytop";
-  ytop="ytop --per-cpu --statusbar";
+  top="btm";
+  htop="btm";
+  ytop="btm";
   cat="bat";
 
   # docker-compose;
