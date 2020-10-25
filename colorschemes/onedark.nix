@@ -1,39 +1,43 @@
-{
-  # Note: This kinda feels like a hack and I am none to happy about it maybe in
-  # the future I might make this play nicely to with everything else. That is
-  # too much effort though. Creating a whole theme for vim
-  vim-name = "one";
-  gtk-name = "Arc-Dark";
-  gtk-icon-name = "Arc";
-  bat-theme-name = "OneHalfDark";
+let
+  utils = import ./utils.nix;
+in
+  rec {
+    # Note: This kinda feels like a hack and I am none to happy about it maybe in
+    # the future I might make this play nicely to with everything else. That is
+    # too much effort though. Creating a whole theme for vim
+    vim-name = "one";
+    gtk-name = "Arc-Dark";
+    gtk-icon-name = "Arc";
+    bat-theme-name = "OneHalfDark";
 
-  bg-primary = "#282C34";
-  bg-primary-bright = "#3e4451";
-  bg-primary-transparent-argb = "#993e4451";
-  bg-primary-bright-transparent-argb = "#993e4451";
-  fg-primary = "#ABB2BF";
-  fg-primary-bright = "#e6efff";
+    bg-primary = black;
+    bg-primary-bright = bright-black;
+    bg-primary-transparent-argb = utils.transparentify bg-primary;
+    bg-primary-bright-transparent-argb = utils.transparentify bg-primary-bright;
+    fg-primary = white;
+    fg-primary-bright = bright-white;
 
-  bg-secondary = "#ABB2BF";
-  bg-secondary-transparent-argb = "#77abb2bf";
-  fg-secondary = "#282C34";
-  fg-secondary-bright = "#1C1E20";
+    accent-primary = green;
+    accent-secondary = blue;
+    accent-tertiary = magenta;
 
-  accent-primary = "#98c379";
-  accent-primary-bright = "#70a54a";
+    alert = red;
+    warning = yellow;
 
-  accent-secondary = "#61AFEF";
-  accent-tertiary = "#C678DD";
-
-  alert = "#E06C75";
-  warning = "#E5C07B";
-
-  black    = "#282C34";
-  red      = "#E06C75";
-  green    = "#98C379";
-  yellow   = "#E5C07B";
-  blue     = "#61AFEF";
-  magenta  = "#C678DD";
-  cyan     = "#56b6c2";
-  white    = "#828791";
-}
+    black    = "#282C34";
+    red      = "#be5046";
+    green    = "#98C379";
+    yellow   = "#d19a66";
+    blue     = "#61AFEF";
+    magenta  = "#C678DD";
+    cyan     = "#56b6c2";
+    white    = "#ABB2BF";
+    bright-black    = "#3e4451";
+    bright-red      = "#E06C75";
+    bright-green    = "#98C379";
+    bright-yellow   = "#E5C07B";
+    bright-blue     = "#61AFEF";
+    bright-magenta  = "#C678DD";
+    bright-cyan     = "#56b6c2";
+    bright-white    = "#e6efff";
+  }

@@ -315,7 +315,6 @@ in
       " NOTE: Really wish the theme could overwrite this
       highlight CocErrorSign ctermfg=204 guifg=${colorscheme.alert}
       highlight CocWarningSign ctermfg=173 guifg=${colorscheme.warning}
-      highlight Pmenu ctermbg=237 guibg=${colorscheme.fg-secondary}
 
       ${builtins.readFile ./nvim/which_key.vim}
     '';
@@ -414,23 +413,23 @@ in
       "*.foreground" = colorscheme.fg-primary;
       "*.background" = colorscheme.bg-primary;
 
-      "*.color0"  = color-dim(colorscheme.black);
-      "*.color1"  = color-dim(colorscheme.red);
-      "*.color2"  = color-dim(colorscheme.green);
-      "*.color3"  = color-dim(colorscheme.yellow);
-      "*.color4"  = color-dim(colorscheme.blue);
-      "*.color5"  = color-dim(colorscheme.magenta);
-      "*.color6"  = color-dim(colorscheme.cyan);
-      "*.color7"  = color-dim(colorscheme.white);
+      "*.color0"  = colorscheme.black;
+      "*.color1"  = colorscheme.red;
+      "*.color2"  = colorscheme.green;
+      "*.color3"  = colorscheme.yellow;
+      "*.color4"  = colorscheme.blue;
+      "*.color5"  = colorscheme.magenta;
+      "*.color6"  = colorscheme.cyan;
+      "*.color7"  = colorscheme.white;
 
-      "*.color8"  = colorscheme.black;
-      "*.color9"  = colorscheme.red;
-      "*.color10" = colorscheme.green;
-      "*.color11" = colorscheme.yellow;
-      "*.color12" = colorscheme.blue;
-      "*.color13" = colorscheme.magenta;
-      "*.color14" = colorscheme.cyan;
-      "*.color15" = colorscheme.white;
+      "*.color8"  = colorscheme.bright-black;
+      "*.color9"  = colorscheme.bright-red;
+      "*.color10" = colorscheme.bright-green;
+      "*.color11" = colorscheme.bright-yellow;
+      "*.color12" = colorscheme.bright-blue;
+      "*.color13" = colorscheme.bright-magenta;
+      "*.color14" = colorscheme.bright-cyan;
+      "*.color15" = colorscheme.bright-white;
 
       "XTerm*font" = "xft:Hack Nerd Font Mono:pixelsize=12";
       "*.internalBorder" = 4;

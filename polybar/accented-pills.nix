@@ -25,7 +25,6 @@ in
       border-right-size = 0;
       border-color = colors.bg-primary-transparent-argb;
       background = colors.bg-primary-transparent-argb;
-      foreground = colors.fg-secondary;
 
       font-0 = "Hack Nerd Font:size=7;2";
       font-1 = "Hack Nerd Font:size=13;3";
@@ -147,7 +146,7 @@ in
       content = "";
       content-padding = 1;
       content-background = colors.alert;
-      content-foreground = colors.fg-secondary;
+      content-foreground = colors.bg-primary;
       content-underline = colors.bg-primary-transparent-argb;
       click-left = "rofi -modi 'Powermenu:custom-script-sysmenu' -show Powermenu -theme sysmenu -location 3 -yoffset 25 &";
     };
