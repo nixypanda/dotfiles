@@ -137,7 +137,7 @@ keysToAdd =
                 , spawn "rofi -modi \"Powermenu:custom-script-sysmenu\" -show Powermenu -theme sysmenu"
               )
             , ( (myModMask .|. shiftMask, xK_l)
-                , spawn "i3lock-fancy -p -t \"\""
+                , spawn "i3lock-fancy -t \"\""
               )
             , ( (myModMask .|. shiftMask, xK_Return)
                 , spawn $ myTerminal ++ " -e \"cd $(xcwd) && ~/.nix-profile/bin/zsh\""

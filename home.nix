@@ -47,6 +47,8 @@ in
   home.packages = with pkgs; [
     # GUI Apps
     google-chrome
+    slack
+    discord
     sxiv
     # Screen Locker
     i3lock-fancy
@@ -384,15 +386,34 @@ in
 
   services.picom = {
     enable = true;
+    inactiveOpacity = "0.75";
+    activeOpacity = "0.80";
     blur = true;
+    experimentalBackends = true;
+    opacityRule = [
+      "100:class_g   *?= 'Google-chrome'"
+    ];
+    extraOptions = ''
+      blur-strength = 8;
+      blur-method = "dual_kawase";
+      corner-radius = 8;
+      round-borders = 1;
+
+      rounded-corners-exclude = [
+        "class_g = 'Polybar'",
+        "class_g = 'Google-chrome'"
+      ];
+    '';
     fade = true;
     fadeDelta = 5;
-    shadow = true;
-    experimentalBackends = true;
-    extraOptions = ''
-      focus-exclude = [ "class_g ?= 'rofi'" ];
-      blur-strength = 20;
-    '';
+    package = pkgs.picom.overrideAttrs(o: {
+      src = pkgs.fetchFromGitHub {
+        repo = "picom";
+        owner = "ibhagwan";
+        rev = "44b4970f70d6b23759a61a2b94d9bfb4351b41b1";
+        sha256 = "0iff4bwpc00xbjad0m000midslgx12aihs33mdvfckr75r114ylh";
+      };
+    });
   };
 
   xsession = {
