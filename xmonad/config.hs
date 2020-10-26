@@ -133,6 +133,9 @@ keysToAdd =
             [ ( (myModMask, xK_space)
                 , spawn "rofi -show drun -theme grid"
               )
+            , ( (myModMask, xK_e)
+                , spawn "rofi -modi \"Powermenu:custom-script-sysmenu\" -show Powermenu -theme sysmenu"
+              )
             , ( (myModMask .|. shiftMask, xK_l)
                 , spawn "i3lock-fancy -p -t \"\""
               )
