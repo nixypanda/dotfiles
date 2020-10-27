@@ -76,8 +76,8 @@ in
       format = "<label-state>";
 
       label-active = "%icon%";
-      label-active-foreground = colors.accent-primary;
-      label-active-background = colors.bg-primary;
+      label-active-foreground = colors.bg-primary;
+      label-active-background = colors.accent-primary;
       label-active-padding = 2;
 
       label-occupied = "%icon%";
