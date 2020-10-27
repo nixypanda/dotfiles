@@ -25,7 +25,7 @@ in
     warning = yellow;
 
     black    = "#282C34";
-    red      = "#be5046";
+    red      = "#E06C75";
     green    = "#98C379";
     yellow   = "#d19a66";
     blue     = "#61AFEF";
@@ -33,7 +33,7 @@ in
     cyan     = "#56b6c2";
     white    = "#ABB2BF";
     bright-black    = "#3e4451";
-    bright-red      = "#E06C75";
+    bright-red      = "#be5046";
     bright-green    = "#98C379";
     bright-yellow   = "#E5C07B";
     bright-blue     = "#61AFEF";
