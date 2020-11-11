@@ -50,6 +50,8 @@ in
     slack
     discord
     sxiv
+    exiv2
+    imagemagick
     # Screen Locker
     i3lock-fancy
     # Theming (GTK)
@@ -249,6 +251,9 @@ in
   home.file.".config/rofi/grid.rasi".source = ./rofi/grid.rasi;
   home.file.".config/rofi/sysmenu.rasi".source = ./rofi/sysmenu.rasi;
 
+  home.file.".config/sxiv/exec/image-info".text = ''
+    ${builtins.readFile ./sxiv/image_info.sh}
+  '';
 
   # systray stuff
   home.file.".config/volumeicon/volumeicon".source = ./systray/volumeicon.cfg;
