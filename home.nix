@@ -291,7 +291,8 @@ in
       coc-json
       coc-pairs
       coc-prettier
-      coc-python
+      # Note: Re-add once upstream is updated
+      # coc-python
       coc-rls
       coc-snippets
       coc-solargraph
