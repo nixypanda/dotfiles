@@ -25,7 +25,6 @@ import XMonad.Layout.Spacing
     , bottom
     , right
     , left
-    , spacingRaw
     , toggleWindowSpacingEnabled
     , incWindowSpacing
     , decWindowSpacing
@@ -227,7 +226,7 @@ type MyLayoutModifiers a =
         )
 
 
-myLayoutModifiers :: MyTogglableLayouts Window ->
+myLayoutModifiers :: MyTogglableLayouts Window -> 
     (MyLayoutModifiers MyTogglableLayouts) Window
 myLayoutModifiers =
       lessBorders OnlyScreenFloat
