@@ -1,4 +1,6 @@
-" Move these over to vim-plug like setup
+" HACK: Extensions outside the control of home-manager
+" REASON: not present in nixpkgs
+" TODO: Move these over to home-manager file
 let g:coc_global_extensions = [
             \ 'coc-actions',
             \ ]
