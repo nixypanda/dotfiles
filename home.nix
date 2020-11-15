@@ -392,23 +392,23 @@ in
 
   services.picom = {
     enable = true;
-    inactiveOpacity = "0.75";
-    activeOpacity = "0.80";
+    # inactiveOpacity = "0.55";
+    # activeOpacity = "0.85";
     blur = true;
     experimentalBackends = true;
     opacityRule = [
       "100:class_g   *?= 'Google-chrome'"
     ];
     extraOptions = ''
-      blur-strength = 8;
-      blur-method = "dual_kawase";
-      corner-radius = 8;
-      round-borders = 1;
-
-      rounded-corners-exclude = [
-        "class_g = 'Polybar'",
-        "class_g = 'Google-chrome'"
-      ];
+      # blur-method = "dual_kawase";
+      # blur-strength = 8;
+      # corner-radius = 8;
+      # round-borders = 1;
+      #
+      # rounded-corners-exclude = [
+      #   "class_g = 'Polybar'",
+      #   "class_g = 'Google-chrome'"
+      # ];
     '';
     fade = true;
     fadeDelta = 5;
