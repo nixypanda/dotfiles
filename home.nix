@@ -75,7 +75,6 @@ in
     # Moar colors
     gitAndTools.delta
     bat
-    direnv
     starship
     zsh-syntax-highlighting
     # Searching/Movement helpers
@@ -211,6 +210,11 @@ in
   programs.bat = {
     enable = true;
     config.theme = colorscheme.bat-theme-name;
+  };
+
+  programs.direnv = {
+    enable = true;
+    enableNixDirenvIntegration = true;
   };
 
   programs.git = {
@@ -368,6 +372,8 @@ in
       ${builtins.readFile ./zsh/session_variables.zsh}
       ${builtins.readFile ./zsh/functions.zsh}
       ${builtins.readFile ./zsh/secrets.zsh}
+
+      eval "$(direnv hook zsh)"
 
       bindkey -M vicmd 'k' history-beginning-search-backward
       bindkey -M vicmd 'j' history-beginning-search-forward

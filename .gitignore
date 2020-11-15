@@ -1,3 +1,4 @@
 result
 zsh/secrets.zsh
 secrets/
+.direnv/
