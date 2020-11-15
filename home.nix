@@ -40,8 +40,6 @@ let
     '';
   };
 
-  color-dim = color: color;
-
 in
 {
   home.packages = with pkgs; [
