@@ -64,7 +64,15 @@ import XMonad.Util.NamedScratchpad
     , customFloating
     )
 
-import XMonad.StackSet (RationalRect(RationalRect), greedyView, focusMaster, shift)
+import XMonad.StackSet
+    ( RationalRect(RationalRect)
+    , greedyView
+    , focusMaster
+    , shift
+    , current
+    , workspace
+    , layout
+    )
 import Graphics.X11.ExtraTypes.XF86
     ( xF86XK_AudioLowerVolume
     , xF86XK_AudioRaiseVolume
@@ -80,7 +88,7 @@ main = do
 myConfig :: XConfig (MyLayoutModifiers MyTogglableLayouts)
 myConfig =
      def
-         { logHook = ewmhDesktopsLogHook
+         { logHook = myLogHook
          , terminal = myTerminal
          , startupHook = myStartupHook
          , manageHook =  myManageHook
@@ -289,3 +297,20 @@ myManageHook = composeAll
 myStartupHook :: X ()
 myStartupHook = do
     spawn "custom-panel-launch"
+
+
+layoutDisplay :: String -> String
+layoutDisplay "Spacing Tall" = "█▌▋"
+layoutDisplay "Spacing ThreeCol" = "█▐▐"
+layoutDisplay "Spacing Full" = "███"
+layoutDisplay x = x
+
+
+layoutLogger :: X ()
+layoutLogger = withWindowSet $ \ws -> do
+    let layoutName = layoutDisplay . description . layout . workspace $ current ws
+    io $ appendFile ("/home/sherub/.xmonad/xmonad-layout") (layoutName ++ "\n")
+
+
+myLogHook :: X ()
+myLogHook = ewmhDesktopsLogHook >> layoutLogger

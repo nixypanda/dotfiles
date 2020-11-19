@@ -36,7 +36,7 @@ in
 
       width = "${builtins.toString(100 - secondary-bar-width-pct)}%";
 
-      modules-left = "ewmh right sep-huge left bmc right";
+      modules-left = "ewmh right sep left layout-xmonad right sep-huge left bmc right";
       modules-center = "left title right";
       modules-right = "left";
 
@@ -94,6 +94,15 @@ in
       label-empty-foreground = colors.fg-primary;
       label-empty-background = colors.bg-primary;
       label-empty-padding = 2;
+    };
+
+    "module/layout-xmonad" = {
+      type = "custom/script";
+      exec = "tail -F \"$HOME/.xmonad/xmonad-layout\"";
+      label = "%output%";
+      tail = true;
+      label-background = colors.bg-primary;
+      label-foreground = colors.fg-primary;
     };
 
     "module/title" = {
@@ -155,8 +164,18 @@ in
     "module/sep-huge" = separator { color = colors.bg-primary-transparent-argb; size = 7; };
     "module/sep-red" = separator { color = colors.alert; };
     "module/sep-bg" = separator { color = colors.bg-primary; };
-    "module/left" = filled-half-circle "left" colors.bg-primary;	
-    "module/right" = filled-half-circle "right" colors.bg-primary;	
+    "module/sep-ap" = separator { color = colors.accent-primary; };
+    "module/sep-as" = separator { color = colors.accent-secondary; };
+    "module/sep-at" = separator { color = colors.accent-tertiary; };
+
+    "module/left-ap" = filled-half-circle "left" colors.accent-primary;	
+    "module/right-ap" = filled-half-circle "right" colors.accent-primary;	
+    "module/left-as" = filled-half-circle "left" colors.accent-secondary;	
+    "module/right-as" = filled-half-circle "right" colors.accent-secondary;	
+    "module/left-at" = filled-half-circle "left" colors.accent-tertiary;	
+    "module/right-at" = filled-half-circle "right" colors.accent-tertiary;	
+    "module/left" = filled-half-circle "left" colors.bg-primary;
+    "module/right" = filled-half-circle "right" colors.bg-primary;
     "module/left-red" = filled-half-circle "left" colors.alert;	
     "module/right-red" = filled-half-circle "right" colors.alert;	
   }
