@@ -64,9 +64,9 @@ in
       enable-scroll = false;
 
       icon-0 = "a;";
-      icon-1 = "s;";
-      icon-2 = "d;";
-      icon-3 = "f;";
+      icon-1 = "s;";
+      icon-2 = "d;ﭮ";
+      icon-3 = "f;";
       icon-4 = "u;u";
       icon-5 = "i;i";
       icon-6 = "o;o";
