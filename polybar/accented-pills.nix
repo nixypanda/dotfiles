@@ -36,7 +36,7 @@ in
 
       width = "${builtins.toString(100 - secondary-bar-width-pct)}%";
 
-      modules-left = "ewmh right separator-huge left bmc right";
+      modules-left = "ewmh right sep-huge left bmc right";
       modules-center = "left title right";
       modules-right = "left";
 
@@ -53,7 +53,7 @@ in
       offset-x = "${builtins.toString(100 - secondary-bar-width-pct)}%";
 
       modules-left = "right";
-      modules-right = "left date separator-bg separator-red powermenu separator-red right-red";
+      modules-right = "left date sep-bg sep-red powermenu sep-red right-red";
     };
 
     "module/ewmh" = {
@@ -151,10 +151,10 @@ in
       click-left = "rofi -modi 'Powermenu:custom-script-sysmenu' -show Powermenu -theme sysmenu -location 3 -yoffset 25 &";
     };
 
-    "module/separator" = separator { color = colors.bg-primary-transparent-argb; };
-    "module/separator-huge" = separator { color = colors.bg-primary-transparent-argb; size = 7; };
-    "module/separator-red" = separator { color = colors.alert; };
-    "module/separator-bg" = separator { color = colors.bg-primary; };
+    "module/sep" = separator { color = colors.bg-primary-transparent-argb; };
+    "module/sep-huge" = separator { color = colors.bg-primary-transparent-argb; size = 7; };
+    "module/sep-red" = separator { color = colors.alert; };
+    "module/sep-bg" = separator { color = colors.bg-primary; };
     "module/left" = filled-half-circle "left" colors.bg-primary;	
     "module/right" = filled-half-circle "right" colors.bg-primary;	
     "module/left-red" = filled-half-circle "left" colors.alert;	
