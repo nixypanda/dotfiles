@@ -8,10 +8,11 @@ let
       content-background = color;
       content-foreground = color;
   };
-  filled-half-circle = direction: color: {
+  filled-half-circle = { direction, color-fg, color-bg ? colors.bg-primary-transparent-argb }: {
     content = if direction == "left" then "%{T2}%{T-}" else "%{T2}%{T-}";
     type = "custom/text";	
-    content-foreground = color;	
+    content-foreground = color-fg;	
+    content-background = color-bg;
   };
   secondary-bar-width-pct = 7.6;
 in
@@ -160,22 +161,26 @@ in
       click-left = "rofi -modi 'Powermenu:custom-script-sysmenu' -show Powermenu -theme sysmenu -location 3 -yoffset 25 &";
     };
 
-    "module/sep" = separator { color = colors.bg-primary-transparent-argb; };
-    "module/sep-huge" = separator { color = colors.bg-primary-transparent-argb; size = 7; };
-    "module/sep-red" = separator { color = colors.alert; };
-    "module/sep-bg" = separator { color = colors.bg-primary; };
-    "module/sep-ap" = separator { color = colors.accent-primary; };
-    "module/sep-as" = separator { color = colors.accent-secondary; };
-    "module/sep-at" = separator { color = colors.accent-tertiary; };
+    "module/sep"       =  separator { color = colors.bg-primary-transparent-argb; };           
+    "module/sep-huge"  =  separator { color = colors.bg-primary-transparent-argb; size = 7; };
+    "module/sep-red"   =  separator { color = colors.alert;                       };        
+    "module/sep-bg"    =  separator { color = colors.bg-primary;                  };        
+    "module/sep-bg-b"  =  separator { color = colors.bg-primary-bright;           };        
+    "module/sep-ap"    =  separator { color = colors.accent-primary;              };        
+    "module/sep-as"    =  separator { color = colors.accent-secondary;            };        
+    "module/sep-at"    =  separator { color = colors.accent-tertiary;             };        
 
-    "module/left-ap" = filled-half-circle "left" colors.accent-primary;	
-    "module/right-ap" = filled-half-circle "right" colors.accent-primary;	
-    "module/left-as" = filled-half-circle "left" colors.accent-secondary;	
-    "module/right-as" = filled-half-circle "right" colors.accent-secondary;	
-    "module/left-at" = filled-half-circle "left" colors.accent-tertiary;	
-    "module/right-at" = filled-half-circle "right" colors.accent-tertiary;	
-    "module/left" = filled-half-circle "left" colors.bg-primary;
-    "module/right" = filled-half-circle "right" colors.bg-primary;
-    "module/left-red" = filled-half-circle "left" colors.alert;	
-    "module/right-red" = filled-half-circle "right" colors.alert;	
+    "module/right-bg-bgb" = filled-half-circle { direction = "right"; color-fg = colors.bg-primary; color-bg = colors.bg-primary-bright; };
+    "module/left-ap"      = filled-half-circle { direction = "left" ; color-fg = colors.accent-primary; };
+    "module/right-ap"     = filled-half-circle { direction = "right"; color-fg = colors.accent-primary; };
+    "module/left-as"      = filled-half-circle { direction = "left" ; color-fg = colors.accent-secondary; };
+    "module/right-as"     = filled-half-circle { direction = "right"; color-fg = colors.accent-secondary; };
+    "module/left-at"      = filled-half-circle { direction = "left" ; color-fg = colors.accent-tertiary; };
+    "module/right-at"     = filled-half-circle { direction = "right"; color-fg = colors.accent-tertiary; };
+    "module/left-bg-b"    = filled-half-circle { direction = "left" ; color-fg = colors.bg-primary-bright; };
+    "module/right-bg-b"   = filled-half-circle { direction = "right"; color-fg = colors.bg-primary-bright; };
+    "module/left"         = filled-half-circle { direction = "left" ; color-fg = colors.bg-primary; };
+    "module/right"        = filled-half-circle { direction = "right"; color-fg = colors.bg-primary; };
+    "module/left-red"     = filled-half-circle { direction = "left" ; color-fg = colors.alert; };
+    "module/right-red"    = filled-half-circle { direction = "right"; color-fg = colors.alert; };
   }
