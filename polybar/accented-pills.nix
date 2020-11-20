@@ -37,7 +37,7 @@ in
 
       width = "${builtins.toString(100 - secondary-bar-width-pct)}%";
 
-      modules-left = "ewmh right sep left layout-xmonad right sep-huge left bmc right";
+      modules-left = "ewmh right-bg-bgb sep-bg-b layout-xmonad right-bg-b sep-huge left bmc right";
       modules-center = "left title right";
       modules-right = "left";
 
@@ -102,7 +102,7 @@ in
       exec = "tail -F \"$HOME/.xmonad/xmonad-layout\"";
       label = "%output%";
       tail = true;
-      label-background = colors.bg-primary;
+      label-background = colors.bg-primary-bright;
       label-foreground = colors.fg-primary;
     };
 
