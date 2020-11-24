@@ -294,6 +294,8 @@ in
 
       vim-fugitive
       vim-gitgutter
+
+      nvim-treesitter
     ];
 
     extraConfig = ''
@@ -314,6 +316,17 @@ in
 
       ${builtins.readFile ./nvim/which_key.vim}
     '';
+
+    package = pkgs.neovim-unwrapped.overrideAttrs(o: {
+      src = pkgs.fetchFromGitHub {
+        owner = "neovim";
+        repo = "neovim";
+        rev = "a6bd52d877875deecb65d367bca8eda5d89fb8bc";
+        sha256 = "5FSvHvvvzUHJT0q4y4bSMY6MYH5N8HNBK+pRyFURTd8=";
+      };
+
+      buildInputs = o.buildInputs ++ [pkgs.tree-sitter];
+    });
 
   };
 
