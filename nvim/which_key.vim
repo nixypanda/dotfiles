@@ -46,6 +46,24 @@ let g:which_key_map.b = {
             \ 'A' : [':bufdo bd'        , 'Close all buffer'],
             \}
 
+" d is for debug
+let g:which_key_map.d = {
+      \ 'name' : '+debug' ,
+      \ 'b' : ['<Plug>VimspectorToggleBreakpoint'              , 'Breakpoint'],
+      \ 'B' : ['<Plug>VimspectorToggleConditionalBreakpoint'   , 'Conditional breakpoint'],
+      \ 'c' : ['<Plug>VimspectorRunToCursor'                   , 'Run to cursor'],
+      \ 'd' : ['<Plug>VimspectorContinue'                      , 'Continue'],
+      \ 'f' : ['<Plug>VimspectorAddFunctionBreakpoint'         , 'Function breakpoint'],
+      \ 'm' : [':MaximizerToggle'                              , 'Maximize window'],
+      \ 'o' : ['<Plug>VimspectorStepOver'                      , 'Step over'],
+      \ 'O' : ['<Plug>VimspectorStepOut'                       , 'Step out'],
+      \ 'i' : ['<Plug>VimspectorStepInto'                      , 'Step into'],
+      \ 'p' : ['<Plug>VimspectorPause'                         , 'Pause'],
+      \ 'r' : ['<Plug>VimspectorRestart'                       , 'Restart'],
+      \ 's' : ['<Plug>VimspectorStop'                          , 'Stop'],
+      \ }
+
+
 " s is for search
 let g:which_key_map.s = {
             \ 'name' : '+Search' ,

@@ -297,6 +297,8 @@ in
       vim-fugitive
       vim-gitgutter
 
+      vimspector
+
       vimPlugsFromSource.nvim-treesitter
       vimPlugsFromSource.nvim-treesitter-refactor
       vimPlugsFromSource.nvim-treesitter-textobjects
