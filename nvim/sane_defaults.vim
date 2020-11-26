@@ -64,7 +64,8 @@ set diffopt+=vertical
 " Setup characters for whitespace
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:.
 
-set foldmethod=indent
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 set nofoldenable
 
 

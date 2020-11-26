@@ -23,6 +23,8 @@ let
 
   custom-browsermediacontrol =
     (import ./browser-media-control/default.nix) { pkgs = pkgs; };
+  
+  vimPlugsFromSource = (import ./nvim/plugins.nix) pkgs;
 
 in
 {
@@ -295,7 +297,9 @@ in
       vim-fugitive
       vim-gitgutter
 
-      nvim-treesitter
+      vimPlugsFromSource.nvim-treesitter
+      vimPlugsFromSource.nvim-treesitter-refactor
+      vimPlugsFromSource.nvim-treesitter-textobjects
     ];
 
     extraConfig = ''
@@ -308,11 +312,9 @@ in
       " Vim theme info
       colorscheme ${colorscheme.vim-name}
 
-      " Coc highlights
-      " Makes the floating window more readable
-      " NOTE: Really wish the theme could overwrite this
-      highlight CocErrorSign ctermfg=204 guifg=${colorscheme.alert}
-      highlight CocWarningSign ctermfg=173 guifg=${colorscheme.warning}
+      lua << EOF
+        ${builtins.readFile ./nvim/treesitter.lua}
+      EOF
 
       ${builtins.readFile ./nvim/which_key.vim}
     '';
