@@ -55,8 +55,8 @@
 
   "yaml.format.enable": true,
 
-  // coc-rls
-  "rust-client.disableRustup": true,
+  // coc-rust-analyzer
+  "rust-analyzer.serverPath": "/nix/store/ci3swx0v35bs81irkgbwvm77fhpf6kq3-rust-analyzer-unstable-2020-11-09/bin/rust-analyzer",
 
   // coc-explorer
   "explorer.width": 30,

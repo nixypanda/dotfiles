@@ -148,7 +148,7 @@ in
 
     # rust
     rustc
-    rls
+    rust-analyzer
     cargo
     rustfmt
   ];
@@ -280,7 +280,7 @@ in
       coc-prettier
       # Note: Re-add once upstream is updated
       # coc-python
-      coc-rls
+      coc-rust-analyzer
       coc-snippets
       coc-solargraph
       coc-tsserver
