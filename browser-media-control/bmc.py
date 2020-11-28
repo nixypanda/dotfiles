@@ -27,7 +27,7 @@ bus = SessionBus()
 
 try:
     Player = bus.get("org.kde.plasma.browser_integration", "/org/mpris/MediaPlayer2")
-except GLib.Error as e:
+except GLib.Error:
     exit()
 
 
