@@ -197,7 +197,7 @@ keysToAdd =
                     incGap = fmap (fmap (+ 5))
 
 
-type MyLayouts = Choose Tall ThreeCol
+type MyLayouts = Choose Tall (Choose ThreeCol (Mirror Tall))
 type MyTogglableLayouts = MultiToggle (HCons StdTransformers EOT) MyLayouts
 
 
@@ -206,14 +206,17 @@ myTogglableLayouts = mkToggle (single FULL) myLayouts
 
 
 myLayouts :: MyLayouts a
-myLayouts = tall ||| threeCol
+myLayouts = tall ||| threeCol ||| mirrorTall
     where
         tall :: Tall a
-        tall = Tall { tallNMaster = 1, tallRatioIncrement = 3/100, tallRatio = 1/2 }
+        tall = Tall { tallNMaster = 1, tallRatioIncrement = 3/100, tallRatio = 3/5 }
 
         threeCol :: ThreeCol a
         threeCol = ThreeCol
             { threeColNMaster = 1, threeColDelta = 3/100, threeColFrac = 1/2 }
+
+        mirrorTall :: Mirror Tall a
+        mirrorTall = Mirror tall
 
 
 type MyLayoutModifiers a =
@@ -303,6 +306,7 @@ layoutDisplay :: String -> String
 layoutDisplay "Spacing Tall" = "█▌▋"
 layoutDisplay "Spacing ThreeCol" = "█▐▐"
 layoutDisplay "Spacing Full" = "███"
+layoutDisplay "Spacing Mirror Tall" = "▀▀▀"
 layoutDisplay x = x
 
 
