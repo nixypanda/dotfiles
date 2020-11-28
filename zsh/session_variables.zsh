@@ -14,7 +14,6 @@ export DOTFILES=~/.dotfiles
 
 # export ZSH=~/.oh-my-zsh
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
-export BAT_THEME="OneHalfDark"
 export EDITOR="nvim"
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"

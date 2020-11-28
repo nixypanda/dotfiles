@@ -58,7 +58,6 @@ in
     gnumake
     # Moar colors
     gitAndTools.delta
-    bat
     starship
     zsh-syntax-highlighting
     # Searching/Movement helpers

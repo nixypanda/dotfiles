@@ -8,7 +8,7 @@ in
     vim-name = "one";
     gtk-name = "Arc-Dark";
     gtk-icon-name = "Arc";
-    bat-theme-name = "OneHalfDark";
+    bat-theme-name = "base16";
 
     bg-primary = black;
     bg-primary-bright = bright-black;
