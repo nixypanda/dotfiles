@@ -76,3 +76,5 @@ vnoremap K :m '<-2<CR>gv=gv
 
 " Add line length end indicator
 set colorcolumn=88
+
+set shell=zsh
