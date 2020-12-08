@@ -144,10 +144,6 @@ in
     python3Packages.flake8
     python3Packages.twine
 
-    # Ruby
-    bundler
-    solargraph
-
     # rust
     rustc
     rust-analyzer
