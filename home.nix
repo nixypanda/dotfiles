@@ -49,6 +49,7 @@ in
     volumeicon
     solaar
     psensor
+    gnome3.nautilus
 
     # CLI tools / Terminal facification
     awscli
