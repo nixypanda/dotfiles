@@ -131,6 +131,7 @@ in
     (python3.withPackages (ps: with ps; [ setuptools ]))
     pipenv
     poetry
+    autoflake
     python3Packages.pip
     python3Packages.black
     python3Packages.ipython
