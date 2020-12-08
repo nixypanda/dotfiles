@@ -32,9 +32,7 @@ import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders
     ( Ambiguity(OnlyScreenFloat)
     , ConfigurableBorder
-    , SmartBorder
     , lessBorders
-    , smartBorders
     )
 import XMonad.Layout.ThreeColumns
     ( ThreeCol(ThreeCol)
@@ -222,29 +220,13 @@ myLayouts = tall ||| threeCol ||| mirrorTall
 type MyLayoutModifiers a =
     ModifiedLayout
         (ConfigurableBorder Ambiguity)
-        (ModifiedLayout
-            AvoidStruts
-            (ModifiedLayout
-                Spacing
-                (ModifiedLayout
-                    Gaps
-                    (ModifiedLayout 
-                        SmartBorder
-                        a
-                    )
-                )
-            )
-        )
+        (ModifiedLayout AvoidStruts (ModifiedLayout Spacing (ModifiedLayout Gaps a)))
 
 
 myLayoutModifiers :: MyTogglableLayouts Window -> 
     (MyLayoutModifiers MyTogglableLayouts) Window
 myLayoutModifiers =
-      lessBorders OnlyScreenFloat
-    . avoidStruts
-    . spacingLayoutSetup
-    . gapLayoutSetup
-    . smartBorders
+      lessBorders OnlyScreenFloat . avoidStruts . spacingLayoutSetup . gapLayoutSetup
         where
             spacingLayoutSetup :: l a -> ModifiedLayout Spacing l a
             spacingLayoutSetup = ModifiedLayout $
