@@ -206,6 +206,7 @@ in
       core = {
         pager = "delta";
       };
+      pull.ff = "only";
       delta = {
         features = "side-by-side line-numbers decorations";
       };
