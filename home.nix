@@ -255,6 +255,7 @@ in
       awesome-vim-colorschemes
       vim-table-mode
       dracula-vim
+      colorizer
 
       # Navigation
       vim-sneak
