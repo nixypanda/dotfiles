@@ -250,7 +250,6 @@ in
 
     plugins = with pkgs.vimPlugins; [
       # Appearance
-      vim-airline
       vim-devicons
       awesome-vim-colorschemes
       vim-table-mode
@@ -301,11 +300,11 @@ in
       vimPlugsFromSource.nvim-treesitter
       vimPlugsFromSource.nvim-treesitter-refactor
       vimPlugsFromSource.nvim-treesitter-textobjects
+      vimPlugsFromSource.nvim-bubbly
     ];
 
     extraConfig = ''
       ${builtins.readFile ./nvim/sane_defaults.vim}
-      ${builtins.readFile ./nvim/airline.vim}
       ${builtins.readFile ./nvim/navigation.vim}
       ${builtins.readFile ./nvim/coc.vim}
 
@@ -315,6 +314,20 @@ in
 
       lua << EOF
         ${builtins.readFile ./nvim/treesitter.lua}
+        vim.g.bubbly_palette = {
+           background = "${colorscheme.bg-primary-bright}",
+           foreground = "${colorscheme.fg-primary}",
+           black = "${colorscheme.black}",
+           red = "${colorscheme.red}",
+           green = "${colorscheme.green}",
+           yellow = "${colorscheme.yellow}",
+           blue = "${colorscheme.blue}",
+           purple = "${colorscheme.magenta}",
+           cyan = "${colorscheme.cyan}",
+           white = "${colorscheme.white}",
+           lightgrey = "${colorscheme.light-grey}",
+           darkgrey = "${colorscheme.grey}",
+        }
       EOF
 
       ${builtins.readFile ./nvim/which_key.vim}

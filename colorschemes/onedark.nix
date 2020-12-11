@@ -32,6 +32,7 @@ in
     magenta  = "#C678DD";
     cyan     = "#56b6c2";
     white    = "#ABB2BF";
+    grey     = "#404247";
     bright-black    = "#3e4451";
     bright-red      = "#be5046";
     bright-green    = "#98C379";
@@ -40,4 +41,5 @@ in
     bright-magenta  = "#C678DD";
     bright-cyan     = "#56b6c2";
     bright-white    = "#e6efff";
+    light-grey      = "#57595e";
   }

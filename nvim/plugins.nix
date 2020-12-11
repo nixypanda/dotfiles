@@ -34,6 +34,17 @@
     };
   };
 
+  nvim-bubbly = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "bubbly.nvim";
+    version = "41c52c7bbab785487d2ada34455ecc22b12b90ab";
+    src = pkgs.fetchFromGitHub {
+      owner = "datwaft";
+      repo = "bubbly.nvim";
+      rev = "41c52c7bbab785487d2ada34455ecc22b12b90ab";
+      sha256 = "gcSuMShhEeOAQtGGDczrLkWezrcok33sKV13BGWFj+w=";
+    };
+  };
+
   nvim-lspconfig = pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "nvim-lspconfig";
     version = "e6bc6b23bc162132b3040e0b0847ecfc04ff808c";
