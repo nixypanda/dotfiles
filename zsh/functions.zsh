@@ -71,7 +71,7 @@ function pyclean () {
 
 # Recursive execution
 function recursive() {
-    for d in ./*/ ; do /home/sherub/.nix-profile/bin/zsh -c "(cd "$d" && "$@")"; done
+    for d in ./*/ ; do /home/sherub/.nix-profile/bin/zsh -c "(cd "$d" && pwd && "$@")"; done
 }
 
 function recursivep() {
