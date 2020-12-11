@@ -308,10 +308,10 @@ in
       ${builtins.readFile ./nvim/airline.vim}
       ${builtins.readFile ./nvim/navigation.vim}
       ${builtins.readFile ./nvim/coc.vim}
-      ${builtins.readFile ./nvim/theme.vim}
 
       " Vim theme info
       colorscheme ${colorscheme.vim-name}
+      ${builtins.readFile ./nvim/theme.vim}
 
       lua << EOF
         ${builtins.readFile ./nvim/treesitter.lua}
