@@ -162,11 +162,11 @@ let g:which_key_map.l = {
             \ }
 
 
-let g:which_key_map.t = {
-      \ 'name' : '+treesitter' ,
-      \ 's' : ['gnn'   , 'Select current scope'],
-      \ }
-
+let g:which_key_map.n = {
+    \'name' : '+navigation',
+    \'s' : ['psn', 'Swap Parameter Next'],
+    \'S' : ['psp', 'Swap Parameter Previous'],
+    \ }
 
 " Register which key map
 autocmd VimEnter * call which_key#register('<Space>', "g:which_key_map")

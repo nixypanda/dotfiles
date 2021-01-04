@@ -23,6 +23,19 @@ require'nvim-treesitter.configs'.setup {
                 ["if"] = "@function.inner",
                 ["ac"] = "@class.outer",
                 ["ic"] = "@class.inner",
+                ["ab"] = "@block.outer",
+                ["ib"] = "@block.inner",
+                ["aa"] = "@parameter.outer",
+                ["ia"] = "@parameter.inner",
+            },
+        },
+        swap = {
+            enable = true,
+            swap_next = {
+                ["psn"] = "@parameter.inner",
+            },
+            swap_previous = {
+                ["psp"] = "@parameter.inner",
             },
         },
     },
