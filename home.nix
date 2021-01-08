@@ -63,7 +63,7 @@ in
     zsh-syntax-highlighting
     # Searching/Movement helpers
     fzf
-    jump
+    zoxide
     ripgrep
     universal-ctags
     xcwd
@@ -389,8 +389,8 @@ in
       bindkey -M vicmd 'k' history-beginning-search-backward
       bindkey -M vicmd 'j' history-beginning-search-forward
 
-      eval "$(jump shell zsh)"
       alias ls="ls --color=auto -F"
+      eval "$(zoxide init zsh)"
 
       eval "$(starship init zsh)"
     '';
