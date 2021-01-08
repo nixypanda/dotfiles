@@ -244,7 +244,7 @@ myLayoutModifiers =
 
             screenBorder = Border { top = 5, bottom = 5, right = 5, left = 5 }
             windowBorder = Border { top = 5, bottom = 5, right = 5, left = 5 }
-            edgeGap = 40
+            edgeGap = 0
 
 
 myScratchPads :: [NamedScratchpad]
