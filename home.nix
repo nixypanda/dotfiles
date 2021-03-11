@@ -263,7 +263,6 @@ in
       colorizer
 
       # Navigation
-      vim-sneak
       fzf-vim
 
       # English
