@@ -121,6 +121,7 @@ in
     # JavaScript
     nodejs
     nodePackages.livedown
+    yarn
 
     # Nix
     rnix-lsp
