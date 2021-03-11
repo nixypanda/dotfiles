@@ -50,6 +50,7 @@ in
     solaar
     psensor
     gnome3.nautilus
+    p3x-onenote
 
     # CLI tools / Terminal facification
     awscli
