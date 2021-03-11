@@ -142,12 +142,9 @@ in
     python3Packages.ipython
     python3Packages.pynvim
     python3Packages.isort
-    python3Packages.jedi
     python3Packages.parso
-    python3Packages.rope
-    python3Packages.mypy
-    python3Packages.flake8
     python3Packages.twine
+    nodePackages.pyright
 
     # rust
     rustc
@@ -274,22 +271,6 @@ in
       vim-haskellConcealPlus
       vim-polyglot
 
-      coc-nvim
-      # coc-actions
-      coc-eslint
-      coc-go
-      coc-json
-      coc-pairs
-      coc-prettier
-      # Note: Re-add once upstream is updated
-      # coc-python
-      coc-rust-analyzer
-      coc-snippets
-      coc-solargraph
-      coc-tsserver
-      coc-yaml
-      coc-go
-
       # Text objects
       tcomment_vim
       vim-surround
@@ -308,12 +289,24 @@ in
       vimPlugsFromSource.nvim-popup
       vimPlugsFromSource.nvim-plenary
       vimPlugsFromSource.nvim-telescope
+      vimPlugsFromSource.nvim-lspconfig
+      vimPlugsFromSource.nvim-lspsaga
+      vimPlugsFromSource.nvim-compe
+      vimPlugsFromSource.nvim-web-devicons
+      vimPlugsFromSource.nvim-tree
     ];
 
     extraConfig = ''
       ${builtins.readFile ./nvim/sane_defaults.vim}
-      ${builtins.readFile ./nvim/navigation.vim}
-      ${builtins.readFile ./nvim/coc.vim}
+
+      "" Jump to Definition/Refrences/Implementation
+      nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+      nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
+      nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
+      "" scroll down hover doc or scroll in definition preview
+      nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
+      "" scroll up hover doc
+      nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
 
       " Vim theme info
       colorscheme ${colorscheme.vim-name}
@@ -336,6 +329,7 @@ in
            darkgrey = "${colorscheme.grey}",
         }
         ${builtins.readFile ./nvim/telescope.lua}
+        ${builtins.readFile ./nvim/lsp.lua}
       EOF
 
       ${builtins.readFile ./nvim/which_key.vim}
@@ -353,9 +347,6 @@ in
     });
 
   };
-
-  # coc-config for vim
-  home.file.".config/nvim/coc-settings.json".source = ./nvim/coc-settings.json;
 
   programs.nushell = {
     enable = true;

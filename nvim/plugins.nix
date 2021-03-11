@@ -8,7 +8,7 @@
       owner = "nvim-treesitter";
       repo = "nvim-treesitter";
       rev = "master";
-      sha256 = "sha256-Q5AtqMcnCvEo/yPhh+84jfJQNMmp0ZDaMKi/x1CDZ+A=";
+      sha256 = "sha256-K4thdkpmK+Pc/8uXRFVRpu58QsakkhKzqI7yHujTfiA=";
     };
   };
 
@@ -19,7 +19,7 @@
       owner = "nvim-treesitter";
       repo = "nvim-treesitter-refactor";
       rev = "master";
-      sha256 = "sha256-4hzwxKSBnG1HRlaGMcixJdWEf4Fy+HHUE0JEDm/X6kk=";
+      sha256 = "sha256-t4L9avmEKcONPB+D7UG69Cs88bzKJpgXI0bwO7e56Z8=";
     };
   };
 
@@ -30,7 +30,7 @@
       owner = "nvim-treesitter";
       repo = "nvim-treesitter-textobjects";
       rev = "master";
-      sha256 = "sha256-RzfqnBqnNuqkBntKOvGxzie1f8rAoDOM4FaHYGMs1B8=";
+      sha256 = "sha256-lTgY677ZNxOcvafaB0l2qVVkn9zYFi5DZzLytE0gAy8=";
     };
   };
 
@@ -78,59 +78,61 @@
     };
   };
 
-  # nvim-lspconfig = pkgs.vimutils.buildvimpluginfrom2nix {
-  #   pname = "nvim-lspconfig";
-  #   version = "master";
-  #   src = pkgs.fetchfromgithub {
-  #     owner = "neovim";
-  #     repo = "nvim-lspconfig";
-  #     rev = "master";
-  #     sha256 = "1vsr13nmzfbwdd3gr5rajiq00qwib1j5ri74nbj5ifshhlm0aqkd";
-  #   };
-  # };
-  #
-  # nvim-completion = pkgs.vimutils.buildvimpluginfrom2nix {
-  #   pname = "completion-nvim";
-  #   version = "master";
-  #   src = pkgs.fetchfromgithub {
-  #     owner = "nvim-lua";
-  #     repo = "completion-nvim";
-  #     rev = "936bbd17577101a4ffb07ea7f860f77dd8007d43";
-  #     sha256 = "1z399q3v36hx2ipj1fhxcc051pi4q0lifyglmclxi5zkbmm0z6a7";
-  #   };
-  # };
-  #
-  # nvim-completion-treesitter = pkgs.vimutils.buildvimpluginfrom2nix {
-  #   pname = "completion-treesitter";
-  #   version = "master";
-  #   src = pkgs.fetchfromgithub {
-  #     owner = "nvim-treesitter";
-  #     repo = "master";
-  #     rev = "45c9b2faff4785539a0d0c655440c2465fed985a";
-  #     sha256 = "19pgdzzk7zq85b1grfjf0nncvs5vxrd4rj1p90iw2amq4mvqrx3l";
-  #   };
-  # };
-  #
-  # nvim-completion-tags = pkgs.vimutils.buildvimpluginfrom2nix {
-  #   pname = "completion-tags";
-  #   version = "master";
-  #   src = pkgs.fetchfromgithub {
-  #     owner = "kristijanhusak";
-  #     repo = "completion-tags";
-  #     rev = "master";
-  #     sha256 = "1s51bk5qragcjjb57zr4s2lxm4z8d6gwj5ympai8jfgq4sxwzdfc";
-  #   };
-  # };
-  #
-  # nvim-completion-buffers = pkgs.vimUtils.buildVimPluginFrom2Nix {
-  #   pname = "completion-buffers";
-  #   version = "441a58b77c04409e8ccb35fd4970598ae551462f";
-  #   src = pkgs.fetchFromGitHub {
-  #     owner = "steelsojka";
-  #     repo = "completion-buffers";
-  #     rev = "441a58b77c04409e8ccb35fd4970599ae551462f";
-  #     sha256 = "0000000000000000000000000000000000000000000000000000";
-  #   };
-  # };
+  nvim-lspconfig = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "nvim-lspconfig";
+    version = "master";
+    src = pkgs.fetchFromGitHub {
+      owner = "neovim";
+      repo = "nvim-lspconfig";
+      rev = "master";
+      sha256 = "sha256-ioWoYt3bp+jm+RuXUi0nkwFhhNFxPPuY3mFEj9TOSkg=";
+    };
+  };
+
+  nvim-lspsaga = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "nvim-lspsaga";
+    version = "master";
+    src = pkgs.fetchFromGitHub {
+      owner = "glepnir";
+      repo = "lspsaga.nvim";
+      rev = "main";
+      sha256 = "sha256-dsKXlDk5cHRIKnH0awZu3iROWjL2ivLloZMhSmVyTbE=";
+    };
+  };
+
+  nvim-compe = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "nvim-compe";
+    version = "master";
+    src = pkgs.fetchFromGitHub {
+      owner = "hrsh7th";
+      repo = "nvim-compe";
+      rev = "master";
+      sha256 = "sha256-xBA7u8lusLW5hbZkkVrrH5M1g30wh+J7mIBRF8krXG0=";
+    };
+  };
+
+
+  nvim-web-devicons = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "nvim-web-devicons";
+    version = "master";
+    src = pkgs.fetchFromGitHub {
+      owner = "kyazdani42";
+      repo = "nvim-web-devicons";
+      rev = "master";
+      sha256 = "sha256-Veoi0h9jPOEP1mCNuyW0782lHLMUf7/Pncy8jCXjGuc=";
+    };
+  };
+
+  nvim-tree = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "nvim-tree";
+    version = "master";
+    src = pkgs.fetchFromGitHub {
+      owner = "kyazdani42";
+      repo = "nvim-tree.lua";
+      rev = "master";
+      sha256 = "sha256-F1e4T4N5cbAkshay2kbE61pAzNx+pHd1eg60s8rDfAc=";
+    };
+  };
+
 
 }

@@ -21,7 +21,7 @@ let g:which_key_map['.'] = [ ':e $DOTFILES'               , 'Open dotfiles' ]
 let g:which_key_map[';'] = [ ':Commands'                  , 'Commands' ]
 let g:which_key_map['='] = [ '<C-W>='                     , 'Balance windows' ]
 let g:which_key_map['d'] = [ ':bd'                        , 'Delete buffer']
-let g:which_key_map['e'] = [ ':CocCommand explorer'       , 'Explorer' ]
+let g:which_key_map['e'] = [ ':NvimTreeToggle'            , 'Explorer' ]
 let g:which_key_map['h'] = [ '<C-W>s'                     , 'Split below']
 let g:which_key_map['q'] = [ 'q'                          , 'Quit' ]
 let g:which_key_map['v'] = [ '<C-W>v'                     , 'Split right']
@@ -32,7 +32,7 @@ let g:which_key_map['w'] = [ 'w'                          , 'Write' ]
 " a is for actions
 let g:which_key_map.a = {
             \ 'name' : '+actions' ,
-            \ 'e' : [':CocCommand explorer'    , 'Explorer'],
+            \ 'e' : [':NvimTreeToggle'         , 'Explorer'],
             \ 's' : [':let @/ = ""'            , 'Remove search highlight'],
             \ 't' : [':TableModeToggle'        , 'Start/Stop Table Mode'],
             \ 'w' : [':set list!'              , 'Show/hide whitespace']
@@ -103,41 +103,15 @@ let g:which_key_map.g = {
 
 " l is for language server protocol
 let g:which_key_map.l = {
-            \ 'name' : '+lsp' ,
-            \ '.' : [':CocConfig'                          , 'config'],
-            \ ';' : ['<Plug>(coc-refactor)'                , 'refactor'],
-            \ 'a' : [':CocCommand actions.open'            , 'line action'],
-            \ 'A' : ['<Plug>(coc-codeaction-selected)'     , 'selected action'],
-            \ 'b' : [':CocNext'                            , 'next action'],
-            \ 'B' : [':CocPrev'                            , 'prev action'],
-            \ 'c' : [':CocList commands'                   , 'commands'],
-            \ 'd' : ['<Plug>(coc-definition)'              , 'definition'],
-            \ 'D' : ['<Plug>(coc-declaration)'             , 'declaration'],
-            \ 'e' : [':CocList extensions'                 , 'extensions'],
-            \ 'f' : ['<Plug>(coc-format-selected)'         , 'format selected'],
-            \ 'F' : ['<Plug>(coc-format)'                  , 'format'],
-            \ 'h' : ['<Plug>(coc-float-hide)'              , 'hide'],
-            \ 'i' : ['<Plug>(coc-implementation)'          , 'implementation'],
-            \ 'I' : [':CocList diagnostics'                , 'diagnostics'],
-            \ 'j' : ['<Plug>(coc-float-jump)'              , 'float jump'],
-            \ 'l' : ['<Plug>(coc-codelens-action)'         , 'code lens'],
-            \ 'n' : ['<Plug>(coc-diagnostic-next)'         , 'next diagnostic'],
-            \ 'N' : ['<Plug>(coc-diagnostic-next-error)'   , 'next error'],
-            \ 'o' : ['<Plug>(coc-openlink)'                , 'open link'],
-            \ 'O' : [':CocList outline'                    , 'outline'],
-            \ 'p' : ['<Plug>(coc-diagnostic-prev)'         , 'prev diagnostic'],
-            \ 'P' : ['<Plug>(coc-diagnostic-prev-error)'   , 'prev error'],
-            \ 'q' : ['<Plug>(coc-fix-current)'             , 'quickfix'],
-            \ 'r' : ['<Plug>(coc-rename)'                  , 'rename'],
-            \ 'R' : ['<Plug>(coc-references)'              , 'references'],
-            \ 's' : [':CocList -I symbols'                 , 'references'],
-            \ 't' : ['<Plug>(coc-type-definition)'         , 'type definition'],
-            \ 'u' : [':CocListResume'                      , 'resume list'],
-            \ 'U' : [':CocUpdate'                          , 'update CoC'],
-            \ 'v' : [':Vista!!'                            , 'tag viewer'],
-            \ 'z' : [':CocDisable'                         , 'disable CoC'],
-            \ 'Z' : [':CocEnable'                          , 'enable CoC'],
-            \ }
+    \ 'name' : '+lsp' ,
+    \ 'a' : [':Lspsaga code_action'            , 'Code Action'],
+    \ 'd' : [':Lspsaga hover_doc'              , 'Preview Doc'],
+    \ 'j' : [':Lspsaga diagnostic_jump_next'   , 'Next Action'],
+    \ 'k' : [':Lspsaga diagnostic_jump_prev'   , 'Prev Action'],
+    \ 'r' : [':Lspsaga rename'                 , 'Rename'],
+    \ 'R' : [':Lspsaga lsp_finder'             , 'Definition and Refrences'],
+    \ 's' : [':Lspsaga signature_help'         , 'Preview Signature'],
+    \ }
 
 
 let g:which_key_map.n = {
