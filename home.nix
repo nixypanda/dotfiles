@@ -275,7 +275,6 @@ in
       coc-nvim
       # coc-actions
       coc-eslint
-      coc-explorer
       coc-go
       coc-json
       coc-pairs
