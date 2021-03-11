@@ -346,8 +346,8 @@ in
       src = pkgs.fetchFromGitHub {
         owner = "neovim";
         repo = "neovim";
-        rev = "b535575acdb037c35a9b688bc2d8adc2f3dece8d";
-        sha256 = "sha256-8AbjEaHG/6h35CunubmzImHvIx8DS1QVHOgTEtxIM4w=";
+        rev = "0869cbd55c29ee02a2aeecc0fde3d19f09d5002e";
+        sha256 = "sha256-WJalUJ2CVDpoLuIJEWlHAoIMXkc7W8td76JVcIKky2E=";
       };
 
       buildInputs = o.buildInputs ++ [pkgs.tree-sitter];
