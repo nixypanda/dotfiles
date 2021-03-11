@@ -63,35 +63,13 @@ let g:which_key_map.d = {
       \ 's' : ['<Plug>VimspectorStop'                          , 'Stop'],
       \ }
 
-
-" s is for search
 let g:which_key_map.s = {
-            \ 'name' : '+Search' ,
-            \ '/' : [':History/'     , 'History'],
-            \ ';' : [':Commands'     , 'Commands'],
-            \ 'a' : [':Ag'           , 'Text: Ag'],
-            \ 'B' : [':BLines'       , 'Lines in current buffer'],
-            \ 'b' : [':Buffers'      , 'Open buffers'],
-            \ 'c' : [':Commits'      , 'Commits'],
-            \ 'C' : [':BCommits'     , 'Commits for buffer'],
-            \ 'f' : [':Files'        , 'Files'],
-            \ 'g' : [':GFiles'       , 'Git files'],
-            \ 'G' : [':GFiles?'      , 'Modified git files'],
-            \ 'h' : [':History'      , 'File history'],
-            \ 'H' : [':History:'     , 'Command history'],
-            \ 'l' : [':Lines'        , 'Lines'] ,
-            \ 'm' : [':Marks'        , 'Marks'] ,
-            \ 'M' : [':Maps'         , 'Normal maps'] ,
-            \ 'p' : [':Helptags'     , 'Help tags'] ,
-            \ 'P' : [':Tags'         , 'Project tags'],
-            \ 's' : [':Snippets'     , 'Snippets'],
-            \ 'S' : [':Colors'       , 'Color schemes'],
-            \ 't' : [':Rg'           , 'Text: Rg'],
-            \ 'T' : [':BTags'        , 'Buffer tags'],
-            \ 'w' : [':Windows'      , 'Search windows'],
-            \ 'y' : [':Filetypes'    , 'File types'],
-            \ 'z' : [':FZF'          , 'FZF'],
-            \ }
+    \ 'name' : '+Search' ,
+    \ 'f' : [':Telescope find_files', 'Files'],
+    \ 't' : [':Telescope live_grep',  'Text (live grep)'],
+    \ 'b' : [':Telescope buffers',    'Open Buffers'],
+    \ 'h' : [':Telescope help_tags',  'Help tags'],
+    \ }
 
 " g is for git
 let g:which_key_map.g = {

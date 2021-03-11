@@ -306,6 +306,9 @@ in
       vimPlugsFromSource.nvim-treesitter-refactor
       vimPlugsFromSource.nvim-treesitter-textobjects
       vimPlugsFromSource.nvim-bubbly
+      vimPlugsFromSource.nvim-popup
+      vimPlugsFromSource.nvim-plenary
+      vimPlugsFromSource.nvim-telescope
     ];
 
     extraConfig = ''
@@ -333,6 +336,7 @@ in
            lightgrey = "${colorscheme.light-grey}",
            darkgrey = "${colorscheme.grey}",
         }
+        ${builtins.readFile ./nvim/telescope.lua}
       EOF
 
       ${builtins.readFile ./nvim/which_key.vim}
