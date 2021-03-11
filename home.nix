@@ -123,6 +123,9 @@ in
     nodePackages.livedown
     yarn
 
+    # lua
+    lua
+
     # Nix
     rnix-lsp
 
