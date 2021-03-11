@@ -149,6 +149,7 @@ in
     # rust
     rustc
     rust-analyzer
+    clippy
     cargo
     rustfmt
   ];
