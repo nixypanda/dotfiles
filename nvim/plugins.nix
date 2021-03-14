@@ -34,14 +34,14 @@
     };
   };
 
-  nvim-bubbly = pkgs.vimUtils.buildVimPluginFrom2Nix {
-    pname = "bubbly.nvim";
-    version = "master";
+  nvim-galaxyline = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "galaxyline";
+    version = "main";
     src = pkgs.fetchFromGitHub {
-      owner = "datwaft";
-      repo = "bubbly.nvim";
-      rev = "master";
-      sha256 = "sha256-VmHjxeDc4ZVIygKGOVWU8ILkInmV6o792+gi4VOVxKA=";
+      owner = "glepnir";
+      repo = "galaxyline.nvim";
+      rev = "main";
+      sha256 = "sha256-SOM9Xc++Oj3XvLz9Nb/ZICAZO0jqKJIZej/c0oNxRO4=";
     };
   };
 

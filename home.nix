@@ -86,6 +86,7 @@ in
     usbutils
     pciutils
     less
+    tokei
 
     # Fonts
     (nerdfonts.override { fonts = [ "Hack" ]; })
@@ -285,7 +286,7 @@ in
       vimPlugsFromSource.nvim-treesitter
       vimPlugsFromSource.nvim-treesitter-refactor
       vimPlugsFromSource.nvim-treesitter-textobjects
-      vimPlugsFromSource.nvim-bubbly
+      vimPlugsFromSource.nvim-galaxyline
       vimPlugsFromSource.nvim-popup
       vimPlugsFromSource.nvim-plenary
       vimPlugsFromSource.nvim-telescope
@@ -314,22 +315,9 @@ in
 
       lua << EOF
         ${builtins.readFile ./nvim/treesitter.lua}
-        vim.g.bubbly_palette = {
-           background = "${colorscheme.bg-primary-bright}",
-           foreground = "${colorscheme.fg-primary}",
-           black = "${colorscheme.black}",
-           red = "${colorscheme.red}",
-           green = "${colorscheme.green}",
-           yellow = "${colorscheme.yellow}",
-           blue = "${colorscheme.blue}",
-           purple = "${colorscheme.magenta}",
-           cyan = "${colorscheme.cyan}",
-           white = "${colorscheme.white}",
-           lightgrey = "${colorscheme.light-grey}",
-           darkgrey = "${colorscheme.grey}",
-        }
         ${builtins.readFile ./nvim/telescope.lua}
         ${builtins.readFile ./nvim/lsp.lua}
+        ${builtins.readFile ./nvim/statusline.lua}
       EOF
 
       ${builtins.readFile ./nvim/which_key.vim}
