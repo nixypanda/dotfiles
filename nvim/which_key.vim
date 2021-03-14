@@ -65,10 +65,12 @@ let g:which_key_map.d = {
 
 let g:which_key_map.s = {
     \ 'name' : '+Search' ,
-    \ 'f' : [':Telescope find_files', 'Files'],
-    \ 't' : [':Telescope live_grep',  'Text (live grep)'],
-    \ 'b' : [':Telescope buffers',    'Open Buffers'],
-    \ 'h' : [':Telescope help_tags',  'Help tags'],
+    \ 'f' : [':Telescope find_files',            'Files'],
+    \ 't' : [':Telescope live_grep',             'Text (live grep)'],
+    \ 'b' : [':Telescope buffers',               'Open Buffers'],
+    \ 'h' : [':Telescope help_tags',             'Help tags'],
+    \ 's' : [':Telescope lsp_workspace_symbols', 'Workspace symbols'],
+    \ 'm' : [':Telescope marks',                 'Marks'],
     \ }
 
 " g is for git
@@ -104,13 +106,14 @@ let g:which_key_map.g = {
 " l is for language server protocol
 let g:which_key_map.l = {
     \ 'name' : '+lsp' ,
-    \ 'a' : [':Lspsaga code_action'            , 'Code Action'],
-    \ 'd' : [':Lspsaga hover_doc'              , 'Preview Doc'],
-    \ 'j' : [':Lspsaga diagnostic_jump_next'   , 'Next Action'],
-    \ 'k' : [':Lspsaga diagnostic_jump_prev'   , 'Prev Action'],
-    \ 'r' : [':Lspsaga rename'                 , 'Rename'],
-    \ 'R' : [':Lspsaga lsp_finder'             , 'Definition and Refrences'],
-    \ 's' : [':Lspsaga signature_help'         , 'Preview Signature'],
+    \ 'a' : [':Lspsaga code_action'                , 'Code Action'],
+    \ 'd' : [':Lspsaga hover_doc'                  , 'Preview Doc'],
+    \ 'j' : [':Lspsaga diagnostic_jump_next'       , 'Next Action'],
+    \ 'k' : [':Lspsaga diagnostic_jump_prev'       , 'Prev Action'],
+    \ 'r' : [':Lspsaga rename'                     , 'Rename'],
+    \ 'R' : [':Lspsaga lsp_finder'                 , 'Definition and Refrences'],
+    \ 'e' : [':Telescope lsp_workspace_diagnostics', 'Project Errors/Warnings'],
+    \ 's' : [':Lspsaga signature_help'             , 'Preview Signature'],
     \ }
 
 
