@@ -8,7 +8,7 @@
       owner = "nvim-treesitter";
       repo = "nvim-treesitter";
       rev = "master";
-      sha256 = "sha256-K4thdkpmK+Pc/8uXRFVRpu58QsakkhKzqI7yHujTfiA=";
+      sha256 = "sha256-Q5AtqMcnCvEo/yPhh+84jfJQNMmp0ZDaMKi/x1CDZ+A=";
     };
   };
 
