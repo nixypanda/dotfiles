@@ -254,29 +254,23 @@ in
 
     plugins = with pkgs.vimPlugins; [
       # Appearance
-      vim-devicons
       awesome-vim-colorschemes
       vim-table-mode
       dracula-vim
       colorizer
 
-      # Navigation
-      fzf-vim
-
-      # English
-      vim-grammarous
-
       # Programming
-      # markdown-preview
       vim-which-key
       vim-haskellConcealPlus
       vim-polyglot
+      vim-dadbod
 
       # Text objects
       tcomment_vim
       vim-surround
       vim-repeat
       vim-indent-object
+      delimitMate
 
       vim-fugitive
       vim-gitgutter
