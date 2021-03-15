@@ -23,6 +23,10 @@ require'lspconfig'.sumneko_lua.setup{
     }
 }
 
+-- nix
+require'lspconfig'.rnix.setup{}
+
+
 local saga = require 'lspsaga'
 saga.init_lsp_saga{}
 require'lspsaga.diagnostic'.show_line_diagnostics()
