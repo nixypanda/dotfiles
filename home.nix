@@ -308,6 +308,7 @@ in
 
       "" lsp shit that can't be done in lua atm
       autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
+      autocmd BufWritePre *.hs lua vim.lsp.buf.formatting_sync(nil, 1000)
 
       ${builtins.readFile ./nvim/which_key.vim}
     '';

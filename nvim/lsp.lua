@@ -9,7 +9,11 @@ require'lspconfig'.rust_analyzer.setup{
 require'lspconfig'.pyright.setup{}
 
 -- Haskell
-require'lspconfig'.hls.setup{}
+require'lspconfig'.hls.setup{
+    settings = {
+        languageServerHaskell = { formattingProvider = "brittany" }
+    }
+}
 
 -- lua
 require'lspconfig'.sumneko_lua.setup{
