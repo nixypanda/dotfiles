@@ -7,10 +7,17 @@ require'lspconfig'.pyright.setup{}
 -- Haskell
 require'lspconfig'.hls.setup{}
 
+-- lua
+require'lspconfig'.sumneko_lua.setup{
+    cmd = {"lua-language-server"},
+    settings = {
+        Lua = { diagnostics = { globals = {'vim'} } }
+    }
+}
+
 local saga = require 'lspsaga'
 saga.init_lsp_saga{}
 require'lspsaga.diagnostic'.show_line_diagnostics()
-
 
 -- Completion
 vim.o.completeopt = "menuone,noselect"

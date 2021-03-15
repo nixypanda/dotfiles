@@ -126,6 +126,7 @@ in
 
     # lua
     lua
+    sumneko-lua-language-server
 
     # Nix
     rnix-lsp
