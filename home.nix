@@ -293,18 +293,22 @@ in
     ];
 
     extraConfig = ''
-      ${builtins.readFile ./nvim/sane_defaults.vim}
-
-      " Vim theme info
-      colorscheme ${colorscheme.vim-name}
-      ${builtins.readFile ./nvim/theme.vim}
+      " NOTE: For some reason these settings don't have any affect if configured
+      " in lua
+      set number relativenumber
+      set colorcolumn=88
 
       lua << EOF
+        ${builtins.readFile ./nvim/sane_defaults.lua}
         ${builtins.readFile ./nvim/treesitter.lua}
         ${builtins.readFile ./nvim/telescope.lua}
         ${builtins.readFile ./nvim/lsp.lua}
         ${builtins.readFile ./nvim/statusline.lua}
       EOF
+
+      " Vim theme info
+      colorscheme ${colorscheme.vim-name}
+      ${builtins.readFile ./nvim/theme.vim}
 
       "" lsp shit that can't be done in lua atm
       autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
