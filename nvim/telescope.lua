@@ -1,5 +1,1 @@
-local actions = require('telescope.actions')
-require('telescope').setup{
-  defaults = {
-  }
-}
+require('telescope').setup{}
