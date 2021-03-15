@@ -23,6 +23,14 @@ local saga = require 'lspsaga'
 saga.init_lsp_saga{}
 require'lspsaga.diagnostic'.show_line_diagnostics()
 
+-- Jump to Definition/Refrences/Implementation
+vim.api.nvim_set_keymap('n', 'gd', [[<cmd>lua vim.lsp.buf.definition()<CR>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', 'gi', [[<cmd>lua vim.lsp.buf.implementation()<CR>]], {noremap = true, silent = true})
+-- scroll down hover doc or scroll in definition preview
+vim.api.nvim_set_keymap('n', '<C-f>', [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>]], {noremap = true, silent = true})
+-- scroll up hover doc
+vim.api.nvim_set_keymap('n', '<C-b>', [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>]], {noremap = true, silent = true})
+
 -- Completion
 vim.o.completeopt = "menuone,noselect"
 

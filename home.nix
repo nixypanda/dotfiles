@@ -295,15 +295,6 @@ in
     extraConfig = ''
       ${builtins.readFile ./nvim/sane_defaults.vim}
 
-      "" Jump to Definition/Refrences/Implementation
-      nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
-      nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
-      nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
-      "" scroll down hover doc or scroll in definition preview
-      nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
-      "" scroll up hover doc
-      nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
-
       " Vim theme info
       colorscheme ${colorscheme.vim-name}
       ${builtins.readFile ./nvim/theme.vim}
