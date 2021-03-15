@@ -3,7 +3,6 @@ set encoding=UTF-8
 set cursorline
 let mapleader=" "
 
-
 " More natural pane spliting
 set splitbelow
 set splitright
@@ -33,7 +32,6 @@ set laststatus=2
 
 syntax on
 
-" Lightline recommended defaults
 " -- INSERT -- is unnecessary anymore because the mode information is
 "  displayed in the statusline. 
 set noshowmode
@@ -68,11 +66,9 @@ set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 set nofoldenable
 
-
 " Move highlighted stuff up down
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
-
 
 " Add line length end indicator
 set colorcolumn=88

@@ -15,7 +15,6 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
             \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
-
 " Single mappings
 let g:which_key_map['.'] = [ ':e $DOTFILES'               , 'Open dotfiles' ]
 let g:which_key_map[';'] = [ ':Commands'                  , 'Commands' ]
@@ -115,7 +114,6 @@ let g:which_key_map.l = {
     \ 'e' : [':Telescope lsp_workspace_diagnostics', 'Project Errors/Warnings'],
     \ 's' : [':Lspsaga signature_help'             , 'Preview Signature'],
     \ }
-
 
 let g:which_key_map.n = {
     \'name' : '+navigation',
