@@ -1,5 +1,9 @@
 -- Rust
-require'lspconfig'.rust_analyzer.setup{}
+require'lspconfig'.rust_analyzer.setup{
+    settings = {
+        rust_analyzer = { checkOnSave = { command = "clippy"}}
+    }
+}
 
 -- Python
 require'lspconfig'.pyright.setup{}
