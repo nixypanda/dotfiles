@@ -297,7 +297,7 @@ in
       " NOTE: For some reason these settings don't have any affect if configured
       " in lua
       set number relativenumber
-      set colorcolumn=88
+      set colorcolumn=100
 
       lua << EOF
         ${builtins.readFile ./nvim/sane_defaults.lua}
