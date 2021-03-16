@@ -266,6 +266,7 @@ in
       vim-haskellConcealPlus
       vim-polyglot
       vim-dadbod
+      lspkind-nvim
 
       # Text objects
       tcomment_vim
