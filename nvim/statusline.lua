@@ -90,12 +90,6 @@ gl.short_line_list = {'NvimTree'}
 local sep = { right_filled = '', left_filled = '', right = '', left = '' }
 
 gls.left = {
-    -- {
-    --     FirstElement = {
-    --         provider = function() return '▋' end,
-    --         highlight = { colors.cyan, colors.section_bg }
-    --     },
-    -- },
     {
         ViMode = {
             provider = function()
