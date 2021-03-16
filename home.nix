@@ -257,16 +257,22 @@ in
       # Appearance
       awesome-vim-colorschemes
       vim-table-mode
-      dracula-vim
-      colorizer
       barbar-nvim
+      nvim-tree-lua
+      nvim-web-devicons
+      galaxyline-nvim
 
       # Programming
       vim-which-key
       vim-haskellConcealPlus
       vim-polyglot
-      vim-dadbod
       lspkind-nvim
+      nvim-treesitter
+      nvim-treesitter-refactor
+      nvim-treesitter-textobjects
+      nvim-lspconfig
+      lspsaga-nvim
+      nvim-compe
 
       # Text objects
       tcomment_vim
@@ -274,24 +280,22 @@ in
       vim-repeat
       vim-indent-object
       delimitMate
-
+      
+      # Git
       vim-fugitive
       vim-gitgutter
 
+      # DAP
       vimspector
 
-      vimPlugsFromSource.nvim-treesitter
-      vimPlugsFromSource.nvim-treesitter-refactor
-      vimPlugsFromSource.nvim-treesitter-textobjects
-      vimPlugsFromSource.nvim-galaxyline
+      # Fuzzy Finder
+      telescope-nvim
+
+      # General Deps
+      # popup-nvim
+      # Note: Current version on nixpkgs seems broken
       vimPlugsFromSource.nvim-popup
-      vimPlugsFromSource.nvim-plenary
-      vimPlugsFromSource.nvim-telescope
-      vimPlugsFromSource.nvim-lspconfig
-      vimPlugsFromSource.nvim-lspsaga
-      vimPlugsFromSource.nvim-compe
-      vimPlugsFromSource.nvim-web-devicons
-      vimPlugsFromSource.nvim-tree
+      plenary-nvim
     ];
 
     extraConfig = ''
