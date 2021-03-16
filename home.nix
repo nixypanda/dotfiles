@@ -259,6 +259,7 @@ in
       vim-table-mode
       dracula-vim
       colorizer
+      barbar-nvim
 
       # Programming
       vim-which-key
