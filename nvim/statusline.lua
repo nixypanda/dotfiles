@@ -3,7 +3,7 @@ local gls = gl.section
 local devicons = require 'nvim-web-devicons'
 
 local theme = {
-    black       = '#282C34',
+    black       = '#2C323C',
     black_light = '#3E4452',
     yellow      = "#d19a66",
     cyan        = "#56b6c2",
@@ -165,6 +165,23 @@ gls.left = {
             separator_highlight = {colors.bgl,colors.bg},
         }
     },
+}
+
+gls.mid = {
+    {
+        ShowLspClient = {
+            provider = 'GetLspClient',
+            condition = function ()
+                local tbl = {['dashboard'] = true,['']=true}
+                if tbl[vim.bo.filetype] then
+                    return false
+                end
+                return true
+            end,
+            icon = ' ',
+            highlight = {colors.info,colors.bg,'bold'}
+        }
+    }
 }
 
 
