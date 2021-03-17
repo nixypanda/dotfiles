@@ -5,7 +5,6 @@ in
     # Note: This kinda feels like a hack and I am none to happy about it maybe in
     # the future I might make this play nicely to with everything else. That is
     # too much effort though. Creating a whole theme for vim
-    vim-name = "one";
     gtk-name = "Arc-Dark";
     gtk-icon-name = "Arc";
     bat-theme-name = "base16";
@@ -37,7 +36,7 @@ in
     bright-red      = "#be5046";
     bright-green    = "#98C379";
     bright-yellow   = "#E5C07B";
-    bright-blue     = "#61AFEF";
+    bright-blue     = "#528bff";
     bright-magenta  = "#C678DD";
     bright-cyan     = "#56b6c2";
     bright-white    = "#e6efff";

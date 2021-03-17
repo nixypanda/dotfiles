@@ -291,6 +291,8 @@ in
       nvim-tree-lua
       nvim-web-devicons
       galaxyline-nvim
+      vimPlugsFromSource.nvim-colorbuddy
+      colorizer
 
       # Programming
       vim-which-key
@@ -328,6 +330,24 @@ in
       plenary-nvim
     ];
 
+        # vim.g.terminal_color_0"  = "${colorscheme.black}"
+        # vim.g.terminal_color_1"  = "${colorscheme.red}"
+        # vim.g.terminal_color_2"  = "${colorscheme.green}"
+        # vim.g.terminal_color_3"  = "${colorscheme.yellow}"
+        # vim.g.terminal_color_4"  = "${colorscheme.blue}"
+        # vim.g.terminal_color_5"  = "${colorscheme.magenta}"
+        # vim.g.terminal_color_6"  = "${colorscheme.cyan}"
+        # vim.g.terminal_color_7"  = "${colorscheme.white}"
+        # vim.g.terminal_color_8"  = "${colorscheme.bright-black}"
+        # vim.g.terminal_color_9"  = "${colorscheme.bright-red}"
+        # vim.g.terminal_color_10" = "${colorscheme.bright-green}"
+        # vim.g.terminal_color_11" = "${colorscheme.bright-yellow}"
+        # vim.g.terminal_color_12" = "${colorscheme.bright-blue}"
+        # vim.g.terminal_color_13" = "${colorscheme.bright-magenta}"
+        # vim.g.terminal_color_14" = "${colorscheme.bright-cyan}"
+        # vim.g.terminal_color_15" = "${colorscheme.bright-white}"
+
+
     extraConfig = ''
       " NOTE: For some reason these settings don't have any affect if configured
       " in lua
@@ -335,6 +355,36 @@ in
       set colorcolumn=100
 
       lua << EOF
+        require("colorbuddy").setup()
+
+        Color.new('mono_1', "#abb2bf")
+        Color.new('mono_2', "#828997")
+        Color.new('mono_3', "#5c6370")
+        Color.new('mono_4', "#4b5263")
+
+        Color.new('hue_1',   "${colorscheme.cyan}")
+        Color.new('hue_1_2', "${colorscheme.bright-cyan}")
+        Color.new('hue_2',   "${colorscheme.blue}")
+        Color.new('hue_2_2', "${colorscheme.bright-blue}")
+        Color.new('hue_3',   "${colorscheme.magenta}")
+        Color.new('hue_3_2', "${colorscheme.bright-magenta}")
+        Color.new('hue_4',   "${colorscheme.green}")
+        Color.new('hue_4_2', "${colorscheme.bright-green}")
+        Color.new('hue_5',   "${colorscheme.red}")
+        Color.new('hue_5_2', "${colorscheme.bright-red}")
+        Color.new('hue_6',   "${colorscheme.yellow}")
+        Color.new('hue_6_2', "${colorscheme.bright-yellow}")
+
+        Color.new('syntax_bg',   "${colorscheme.bg-primary}")
+        Color.new('visual_grey', "${colorscheme.bg-primary-bright}")
+
+        Color.new('syntax_cursor', "#2c323c")
+        Color.new('vertsplit',     "#181a1f")
+        Color.new('special_grey',  "#3b4048")
+        Color.new('pmenu',         "#333841")
+
+
+        ${builtins.readFile ./nvim/colors.lua}
         ${builtins.readFile ./nvim/sane_defaults.lua}
         ${builtins.readFile ./nvim/treesitter.lua}
         ${builtins.readFile ./nvim/telescope.lua}
@@ -343,7 +393,6 @@ in
       EOF
 
       " Vim theme info
-      colorscheme ${colorscheme.vim-name}
       ${builtins.readFile ./nvim/theme.vim}
 
       "" lsp shit that can't be done in lua atm
