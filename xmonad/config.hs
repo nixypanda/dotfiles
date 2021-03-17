@@ -114,7 +114,7 @@ myModMask = mod1Mask
 
 
 myTerminal :: String
-myTerminal = "xterm"
+myTerminal = "kitty"
 
 
 keysToRemove :: [(KeyMask, KeySym)]
@@ -145,7 +145,7 @@ keysToAdd =
                 , spawn "i3lock-fancy -t \"\""
               )
             , ( (myModMask .|. shiftMask, xK_Return)
-                , spawn $ myTerminal ++ " -e \"cd $(xcwd) && ~/.nix-profile/bin/zsh\""
+                , spawn $ myTerminal ++ " -d \"$(xcwd)\""
               )
             , ( (myModMask .|. shiftMask, xK_4)
                 , spawn "sleep 0.2 && scrot -s ~/Pictures/screenshots/scrot_%Y-%m-%d-%H%M%S.png"
@@ -252,8 +252,8 @@ myScratchPads = [ scTerminal ]
     where
         scTerminal = NS
             { name = "terminal"
-            , cmd = myTerminal ++ " -name scratchpad"
-            , query = resource =? "scratchpad"
+            , cmd = myTerminal ++ " --class=scratchpad"
+            , query = className =? "scratchpad"
             , hook = customFloating largeRect
             }
         largeRect = RationalRect l t w h
