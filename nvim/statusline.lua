@@ -87,7 +87,7 @@ end
 
 gl.short_line_list = {'NvimTree'}
 
-local sep = { right_filled = '', left_filled = '', right = '', left = '' }
+local sep = { right_filled = '█ ', left_filled = ' █', right = '  ', left = '  ' }
 
 gls.left = {
     {
@@ -96,7 +96,7 @@ gls.left = {
                 local modehl = mode_hl()
                 highlight('GalaxyViMode', colors.bg, modehl, 'bold')
                 highlight('GalaxyViModeInv', modehl, colors.bgl, 'bold')
-                return string.format('  %s ', mode_label())
+                return string.format('  %s', mode_label())
             end,
             separator = sep.right_filled,
             separator_highlight = 'GalaxyViModeInv',
@@ -239,7 +239,7 @@ gls.right = {
     {
         PerCent = {
             provider = 'LinePercent',
-            separator = ' |',
+            separator = sep.left,
             separator_highlight = 'GalaxyViMode',
             highlight = 'GalaxyViMode',
         }
