@@ -285,7 +285,7 @@ in
 
     plugins = with pkgs.vimPlugins; [
       # Appearance
-      vim-table-mode
+      vim-table-mode # vimscript
       barbar-nvim
       nvim-tree-lua
       nvim-web-devicons
@@ -293,9 +293,9 @@ in
       one-nvim
 
       # Programming
-      vim-which-key
-      vim-haskellConcealPlus
-      vim-polyglot
+      vim-which-key          # vimscript
+      vim-haskellConcealPlus # vimscript
+      vim-polyglot           # vimscript
       lspkind-nvim
       nvim-treesitter
       nvim-treesitter-refactor
@@ -305,18 +305,17 @@ in
       nvim-compe
 
       # Text objects
-      tcomment_vim
-      vim-surround
-      vim-repeat
-      vim-indent-object
-      delimitMate
+      tcomment_vim # vimscript
+      vim-surround # vimscript
+      vim-repeat   # vimscript
+      delimitMate  # vimscript
 
       # Git
-      vim-fugitive
-      vim-gitgutter
+      vim-fugitive  # vimscript
+      vim-gitgutter # vimscript
 
       # DAP
-      vimspector
+      vimspector # vimscript
 
       # Fuzzy Finder
       telescope-nvim
