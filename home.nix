@@ -285,12 +285,12 @@ in
 
     plugins = with pkgs.vimPlugins; [
       # Appearance
-      awesome-vim-colorschemes
       vim-table-mode
       barbar-nvim
       nvim-tree-lua
       nvim-web-devicons
       galaxyline-nvim
+      one-nvim
 
       # Programming
       vim-which-key
@@ -343,7 +343,7 @@ in
       EOF
 
       " Vim theme info
-      colorscheme ${colorscheme.vim-name}
+      colorscheme one-nvim
       ${builtins.readFile ./nvim/theme.vim}
 
       "" lsp shit that can't be done in lua atm
