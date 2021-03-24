@@ -408,21 +408,6 @@ in
         # leading_trailing_space_bg = "white";
       };
     };
-    package = pkgs.nushell.overrideAttrs(o: rec {
-      name = "nushell-${version}";
-      version = "0.25.1";
-      src = pkgs.fetchFromGitHub {
-        repo = "nushell";
-        owner = "nushell";
-        rev = "${version}";
-        sha256 = "sha256-pLKZQ/UxJvvraRQ/coKws4IhCvjLNvk2hjw1NuIpVHM=";
-      };
-      cargoDeps = o.cargoDeps.overrideAttrs (lib.const {
-        name = "${name}-vendor.tar.gz";
-        inherit src;
-        outputHash = "sha256-5zC5qF8Qr8Q3C0iRit1jXV87DJKZ43C5nPokmit328U=";
-      });
-    });
   };
 
   programs.zsh = {
