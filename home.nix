@@ -297,7 +297,7 @@ in
       vim-haskellConcealPlus
       vim-polyglot
       lspkind-nvim
-      vimPlugsFromSource.nvim-treesitter
+      nvim-treesitter
       nvim-treesitter-refactor
       nvim-treesitter-textobjects
       nvim-lspconfig
