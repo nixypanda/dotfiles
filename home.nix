@@ -28,6 +28,12 @@ let
 
 in
 {
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball {
+      url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
+    }))
+  ];
+
   home.packages = with pkgs; [
     # GUI Apps
     google-chrome
@@ -352,17 +358,7 @@ in
       ${builtins.readFile ./nvim/which_key.vim}
     '';
 
-    package = pkgs.neovim-unwrapped.overrideAttrs(o: {
-      src = pkgs.fetchFromGitHub {
-        owner = "neovim";
-        repo = "neovim";
-        rev = "070e084a64dd08ff28c826843f0d61ca51837841";
-        sha256 = "sha256-rWLubr/XtEWSWUZbcg5lxp3DGjWwc67DwSi0lOeHV+Y=";
-      };
-
-      buildInputs = o.buildInputs ++ [pkgs.tree-sitter];
-    });
-
+    package = pkgs.neovim-nightly;
   };
 
   programs.nushell = {
