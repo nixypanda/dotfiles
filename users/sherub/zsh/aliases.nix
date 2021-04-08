@@ -36,6 +36,7 @@
 
   # Grep;
   grep="grep --color=auto";
+  nix-stray-roots="nix-store --gc --print-roots | egrep -v \"^(/nix/var|/run/\w+-system|\{memory)\"";
 
   # json formatting;
   json="python3 -m json.tool";
