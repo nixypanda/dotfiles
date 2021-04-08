@@ -301,7 +301,7 @@ in
       # Programming
       vim-which-key          # vimscript
       vim-haskellConcealPlus # vimscript
-      vim-polyglot           # vimscript
+      vim-nix                # vimscript
       lspkind-nvim
       nvim-treesitter
       nvim-treesitter-refactor
