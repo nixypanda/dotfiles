@@ -10,14 +10,14 @@
       sha256 = "sha256-1s/x4KMzDIZat4AHVEqe/IcGsD7xEClEWrt8o5aaL0g=";
     };
   };
-  nvim-treesitter = pkgs.vimUtils.buildVimPluginFrom2Nix {
-    pname = "nvim-treesitter";
+  nvim-rust-tools = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "nvim-rust-tools";
     version = "master";
     src = pkgs.fetchFromGitHub {
-      owner = "nvim-treesitter";
-      repo = "nvim-treesitter";
+      owner = "simrat39";
+      repo = "rust-tools.nvim";
       rev = "master";
-      sha256 = "sha256-Q5AtqMcnCvEo/yPhh+84jfJQNMmp0ZDaMKi/x1CDZ+A=";
+      sha256 = "sha256-PELLnW9/b7/vDuws0+6wKyhxZjExyCSIe5dzEUKLz5M=";
     };
   };
   nvim-lsp-saga = pkgs.vimUtils.buildVimPluginFrom2Nix {

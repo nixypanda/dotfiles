@@ -4,6 +4,7 @@ require'lspconfig'.rust_analyzer.setup{
         rust_analyzer = { checkOnSave = { command = "clippy"}}
     }
 }
+require'rust-tools'.setup()
 
 -- Python
 require'lspconfig'.pyright.setup{}

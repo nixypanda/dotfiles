@@ -309,6 +309,7 @@ in
       nvim-lspconfig
       vimPlugsFromSource.nvim-lsp-saga
       nvim-compe
+      vimPlugsFromSource.nvim-rust-tools
 
       # Text objects
       tcomment_vim # vimscript
