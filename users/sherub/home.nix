@@ -307,7 +307,7 @@ in
       nvim-treesitter-refactor
       nvim-treesitter-textobjects
       nvim-lspconfig
-      lspsaga-nvim
+      vimPlugsFromSource.nvim-lsp-saga
       nvim-compe
 
       # Text objects
