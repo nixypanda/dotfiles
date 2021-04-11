@@ -12,11 +12,7 @@
         system = "x86_64-linux";
         homeDirectory = "/home/sherub";
         username = "sherub";
-        configuration = { config, lib, pkgs, colorscheme, ... }:
-
-        let
-          colorscheme = (import ./colorschemes/onedark.nix);
-        in
+        configuration = { config, lib, pkgs, ... }:
         {
           nixpkgs.config = {
             allowUnfree = true;
@@ -76,7 +72,7 @@
             ${builtins.readFile ./sxiv/image_info.sh}
           '';
         };
-        };
       };
     };
-  }
+  };
+}
