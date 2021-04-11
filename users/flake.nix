@@ -6,9 +6,7 @@
     home-manager.url = "github:nix-community/home-manager";
   };
   outputs = {self, ... }@inputs:
-  let
-    overlays = [inputs.neovim-nightly-overlay.overlay];
-  in {
+  {
     homeConfigurations = {
       nixos = inputs.home-manager.lib.homeManagerConfiguration {
         system = "x86_64-linux";
@@ -23,7 +21,7 @@
           nixpkgs.config = {
             allowUnfree = true;
           };
-          nixpkgs.overlays = overlays;
+          nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlay ];
           imports = [
             ./modules/browser.nix
             ./modules/git.nix
