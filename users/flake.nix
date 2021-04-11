@@ -29,6 +29,7 @@
             ./modules/git.nix
             ./modules/desktop-environment/index.nix
             ./modules/nvim/index.nix
+            ./modules/programming.nix
           ];
 
           home.packages = with pkgs; [
@@ -77,63 +78,6 @@
             openvpn
             gnome3.networkmanager-openvpn
 
-            # Programming
-
-            # C
-            gcc
-
-            # Clojure
-            clojure
-            clojure-lsp
-
-            # Elm
-            elmPackages.elm-language-server
-
-            # go
-            go
-            gopls
-
-            # Haskell
-            ghc
-            haskellPackages.cabal-install
-            haskellPackages.stack
-            haskellPackages.haskell-language-server
-
-            # JavaScript
-            nodejs
-            nodePackages.livedown
-            yarn
-
-            # lua
-            lua
-            sumneko-lua-language-server
-
-            # Nix
-            rnix-lsp
-
-            # perl
-            perl
-
-            # python
-            (python3.withPackages (ps: with ps; [ setuptools ]))
-            pipenv
-            poetry
-            autoflake
-            python3Packages.pip
-            python3Packages.black
-            python3Packages.ipython
-            python3Packages.pynvim
-            python3Packages.isort
-            python3Packages.parso
-            python3Packages.twine
-            nodePackages.pyright
-
-            # rust
-            rustc
-            rust-analyzer
-            clippy
-            cargo
-            rustfmt
           ];
 
           # Home Manager needs a bit of information about you and the
