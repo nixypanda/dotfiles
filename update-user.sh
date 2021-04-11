@@ -1,2 +1,2 @@
 #!/bin/sh
-nix-channel --update
+nix flake update ./users

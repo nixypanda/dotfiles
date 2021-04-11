@@ -1,4 +1,4 @@
 #!/bin/sh
 pushd ~/.dotfiles
-home-manager switch -f ./users/sherub/home.nix
+home-manager switch --flake "./users#nixos"
 popd

@@ -1,12 +1,6 @@
-let
-  lib = import <nixpkgs/lib>;
-  inherit (lib.strings)
-    removePrefix
-  ;
-in
 {
   transparentify = color:
-    "#99${removePrefix "#" color}";
+    color;
 
   brighter = color:
     color;
