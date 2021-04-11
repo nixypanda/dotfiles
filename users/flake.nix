@@ -48,6 +48,7 @@
             ./modules/fonts.nix
             ./modules/kitty.nix
             ./modules/alacritty.nix
+            ./modules/system-management/index.nix
           ];
 
           home.packages = with pkgs; [
