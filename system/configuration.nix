@@ -5,11 +5,9 @@
 { config, pkgs, ... }:
 
 let
-  openrgb-rules = builtins.fetchurl {
-    url = "https://raw.githubusercontent.com/CalcProgrammer1/OpenRGB/master/60-openrgb.rules";
-  };
   solaar-rules = builtins.fetchurl {
-    url = "https://raw.githubusercontent.com/pwr/Solaar/master/rules.d/42-logitech-unify-permissions.rules";
+    url = "https://github.com/pwr-Solaar/Solaar/blob/1.0.5/rules.d/42-logitech-unify-permissions.rules";
+    sha256 = "sha256:1l5ap3xb2p30i8zrqjzq8hj9xnwhnjssmymqygknkxkk1fc3vp5k";
   };
 in
 {
@@ -70,6 +68,8 @@ in
      openrgb
      i2c-tools
      ddccontrol
+
+     cowsay
    ];
    environment.pathsToLink = ["/libexec"];
 
