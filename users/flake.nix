@@ -14,7 +14,7 @@
         system = "x86_64-linux";
         homeDirectory = "/home/sherub";
         username = "sherub";
-        configuration = { config, lib, pkgs, ... }:
+        configuration = { config, lib, pkgs, colorscheme, ... }:
 
         let
           colorscheme = (import ./colorschemes/onedark.nix);
@@ -49,12 +49,12 @@
           };
           nixpkgs.overlays = overlays;
           imports = [
+            ./modules/browser.nix
             ./modules/git.nix
           ];
 
           home.packages = with pkgs; [
             # GUI Apps
-            google-chrome
             slack
             discord
             sxiv
@@ -191,13 +191,6 @@
           # the Home Manager release notes for a list of state version
           # changes in each release.
           home.stateVersion = "20.09";
-
-          home.file.".config/google-chrome/NativeMessagingHosts".source = pkgs.symlinkJoin {
-            name = "native-messaging-hosts";
-            paths = [
-              "${pkgs.plasma-browser-integration}/etc/var/empty/chrome/native-messaging-hosts"
-            ];
-          };
 
           gtk = {
             enable = true;
