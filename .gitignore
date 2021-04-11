@@ -1,4 +1,3 @@
 result
 .direnv/
-users/zsh/secrets.zsh
-users/secrets
+**/secrets*
