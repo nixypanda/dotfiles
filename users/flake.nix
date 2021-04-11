@@ -42,10 +42,6 @@
             imagemagick
 
             p3x-onenote
-            # file browser
-            ranger
-            # screenshot utility
-            scrot
 
             # Fonts
             (nerdfonts.override { fonts = [ "Hack" ]; })

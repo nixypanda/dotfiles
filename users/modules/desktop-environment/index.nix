@@ -49,6 +49,10 @@ in
       plasma-browser-integration
       custom-browsermediacontrol
 
+      # file browser
+      ranger
+      # screenshot utility
+      scrot
     ];
 
     programs.rofi = {
