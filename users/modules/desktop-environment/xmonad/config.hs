@@ -273,7 +273,7 @@ myManageHook = composeAll
     , className =? "Psensor" --> doFloat
     , className =? "Nm-connection-editor" --> doFloat
     , className =? "Gddccontrol" --> doFloat
-    , className =? "Sxiv" --> doFullFloat
+    , className =? "feh" --> doFullFloat
     , namedScratchpadManageHook myScratchPads
     , insertPosition End Newer
     ]

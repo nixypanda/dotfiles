@@ -54,10 +54,6 @@
             # GUI Apps
             slack
             discord
-            sxiv
-            exiv2
-            imagemagick
-
             p3x-onenote
 
             # Docker
@@ -67,10 +63,6 @@
             gnome3.networkmanager-openvpn
 
           ];
-
-          home.file.".config/sxiv/exec/image-info".text = ''
-            ${builtins.readFile ./sxiv/image_info.sh}
-          '';
         };
       };
     };

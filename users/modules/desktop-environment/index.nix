@@ -44,15 +44,17 @@ in
       # custom scripts
       custom-script-sysmenu
       custom-panel-launch
-      # Music shit
-      # Note: Turn this into a singular package
-      plasma-browser-integration
       custom-browsermediacontrol
+
+      # Required so that BMC can work with chrome
+      plasma-browser-integration
 
       # file browser
       ranger
       # screenshot utility
       scrot
+      # image viewer
+      feh
     ];
 
     programs.rofi = {
