@@ -25,8 +25,8 @@ rofi,
 [etc](./home.nix#L48-L161).
 
 ## Here are a few screenshots to showase this config in action!
-![Wall](./users/sherub/screenshots/wallpaper.png?raw=true "Wallpaper")
-![Sysinfo](./users/sherub/screenshots/sysinfo.png?raw=true "System Info")
-![App Launcher](./users/sherub/screenshots/rofi-search.png?raw=true "App Launcher")
-![Ricing](./users/sherub/screenshots/vim-xmonad-config-edit.png?raw=true "Ricing in progress")
-![Locked](./users/sherub/screenshots/locked.png?raw=true "Locked")
+![Wall](./users/screenshots/wallpaper.png?raw=true "Wallpaper")
+![Sysinfo](./users/screenshots/sysinfo.png?raw=true "System Info")
+![App Launcher](./users/screenshots/rofi-search.png?raw=true "App Launcher")
+![Ricing](./users/screenshots/vim-xmonad-config-edit.png?raw=true "Ricing in progress")
+![Locked](./users/screenshots/locked.png?raw=true "Locked")

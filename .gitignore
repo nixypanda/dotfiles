@@ -1,4 +1,4 @@
 result
 .direnv/
-users/sherub/zsh/secrets.zsh
-users/sherub/secrets
+users/zsh/secrets.zsh
+users/secrets

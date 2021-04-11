@@ -17,7 +17,7 @@
         configuration = { config, lib, pkgs, ... }:
 
         let
-          colorscheme = (import ./sherub/colorschemes/onedark.nix);
+          colorscheme = (import ./colorschemes/onedark.nix);
 
           custom-panel-launch = pkgs.writeScriptBin "custom-panel-launch" ''
             #!/${pkgs.stdenv.shell}
@@ -34,13 +34,13 @@
 
           custom-script-sysmenu = pkgs.writeScriptBin "custom-script-sysmenu" ''
             #!/${pkgs.stdenv.shell}
-            ${builtins.readFile ./sherub/polybar/scripts/sysmenu.sh}
+            ${builtins.readFile ./polybar/scripts/sysmenu.sh}
           '';
 
           custom-browsermediacontrol =
-            (import ./sherub/browser-media-control/default.nix) { pkgs = pkgs; };
+            (import ./browser-media-control/default.nix) { pkgs = pkgs; };
 
-            vimPlugsFromSource = (import ./sherub/nvim/plugins.nix) pkgs;
+            vimPlugsFromSource = (import ./nvim/plugins.nix) pkgs;
 
         in
         {
@@ -179,8 +179,8 @@
 
           # Home Manager needs a bit of information about you and the
           # paths it should manage.
-          home.username = "sherub";
-          home.homeDirectory = "/home/sherub";
+          # home.username = "sherub";
+          # home.homeDirectory = "/home/sherub";
 
           # This value determines the Home Manager release that your
           # configuration is compatible with. This helps avoid breakage
@@ -211,7 +211,7 @@
 
           programs.alacritty = {
             enable = true;
-            settings = (import ./sherub/alacritty/config.nix) { colors = colorscheme; };
+            settings = (import ./alacritty/config.nix) { colors = colorscheme; };
           };
 
           programs.bat = {
@@ -290,15 +290,15 @@
               foreground: ${colorscheme.fg-primary};
             }
           '';
-          home.file.".config/rofi/grid.rasi".source = ./sherub/rofi/grid.rasi;
-          home.file.".config/rofi/sysmenu.rasi".source = ./sherub/rofi/sysmenu.rasi;
+          home.file.".config/rofi/grid.rasi".source = ./rofi/grid.rasi;
+          home.file.".config/rofi/sysmenu.rasi".source = ./rofi/sysmenu.rasi;
 
           home.file.".config/sxiv/exec/image-info".text = ''
-            ${builtins.readFile ./sherub/sxiv/image_info.sh}
+            ${builtins.readFile ./sxiv/image_info.sh}
           '';
 
           # systray stuff
-          home.file.".config/volumeicon/volumeicon".source = ./sherub/systray/volumeicon.cfg;
+          home.file.".config/volumeicon/volumeicon".source = ./systray/volumeicon.cfg;
 
           programs.neovim = {
             enable = true;
@@ -356,22 +356,22 @@
               set colorcolumn=100
 
               lua << EOF
-                ${builtins.readFile ./sherub/nvim/sane_defaults.lua}
-                ${builtins.readFile ./sherub/nvim/treesitter.lua}
-                ${builtins.readFile ./sherub/nvim/telescope.lua}
-                ${builtins.readFile ./sherub/nvim/lsp.lua}
-                ${builtins.readFile ./sherub/nvim/statusline.lua}
+                ${builtins.readFile ./nvim/sane_defaults.lua}
+                ${builtins.readFile ./nvim/treesitter.lua}
+                ${builtins.readFile ./nvim/telescope.lua}
+                ${builtins.readFile ./nvim/lsp.lua}
+                ${builtins.readFile ./nvim/statusline.lua}
               EOF
 
               " Vim theme info
               colorscheme one-nvim
-              ${builtins.readFile ./sherub/nvim/theme.vim}
+              ${builtins.readFile ./nvim/theme.vim}
 
               "" lsp shit that can't be done in lua atm
               autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
               autocmd BufWritePre *.hs lua vim.lsp.buf.formatting_sync(nil, 1000)
 
-              ${builtins.readFile ./sherub/nvim/which_key.vim}
+              ${builtins.readFile ./nvim/which_key.vim}
             '';
 
             package = pkgs.neovim-nightly;
@@ -396,7 +396,7 @@
                 "def dcpytest [container] { docker-compose exec $container /bin/bash -c 'pytest' }"
                 "def dcpytestlf [container] { docker-compose exec $container /bin/bash -c 'pytest --lf' }"
                 "def dcpytestni [container] { docker-compose exec $container /bin/bash -c 'pytest -m \"not integration\"' }"
-              ] ++ (lib.mapAttrsToList (k: v: "alias ${k} = ${v}") (import ./sherub/zsh/aliases.nix));
+              ] ++ (lib.mapAttrsToList (k: v: "alias ${k} = ${v}") (import ./zsh/aliases.nix));
               color_config = {
                 # green|g, red|r, blue|u, black|b, yellow|y, purple|p, cyan|c, white|w
                 primitive_int = "wb";
@@ -427,7 +427,7 @@
             enableCompletion = true;
             defaultKeymap = "viins";
             enableAutosuggestions = true;
-            shellAliases = (import ./sherub/zsh/aliases.nix);
+            shellAliases = (import ./zsh/aliases.nix);
             history.extended = true;
             plugins = [
               {
@@ -447,10 +447,10 @@
 
             # For this to work with flakes we need to get this into git
             # TODO: Figure out how to use git-crypt
-            # ${builtins.readFile ./sherub/zsh/secrets.zsh}
+            # ${builtins.readFile ./zsh/secrets.zsh}
             initExtraBeforeCompInit = ''
-              ${builtins.readFile ./sherub/zsh/session_variables.zsh}
-              ${builtins.readFile ./sherub/zsh/functions.zsh}
+              ${builtins.readFile ./zsh/session_variables.zsh}
+              ${builtins.readFile ./zsh/functions.zsh}
 
               eval "$(direnv hook zsh)"
 
@@ -471,7 +471,7 @@
 
           services.polybar = {
             enable = true;
-            config = (import ./sherub/polybar/accented-pills.nix) { colors = colorscheme; };
+            config = (import ./polybar/accented-pills.nix) { colors = colorscheme; };
             script = "polybar main &";
           };
 
@@ -506,7 +506,7 @@
               enable = true;
               enableContribAndExtras = true;
               config = pkgs.writeText "xmonad.hs" ''
-                ${builtins.readFile ./sherub/xmonad/config.hs}
+                ${builtins.readFile ./xmonad/config.hs}
 
                 myFocusedBorderColor = "${colorscheme.accent-primary}"
                 myNormalBorderColor = "${colorscheme.bg-primary-bright}"
