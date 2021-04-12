@@ -25,7 +25,7 @@ in
 
     less
     tokei
-  ]  ++ (lib.optionals (stdenv.isDarwin == false) [ xcwd usbutils ]);
+  ]  ++ (lib.optionals (stdenv.isDarwin == false) [ usbutils ]);
 
   programs.bat = {
     enable = true;

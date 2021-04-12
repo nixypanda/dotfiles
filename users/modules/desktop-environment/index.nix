@@ -55,6 +55,9 @@ in
       scrot
       # image viewer
       feh
+      # Utility to open present directory (Only use it with xmonad to open
+      # terminal in same directory)
+      xcwd
     ];
 
     home.file.".config/google-chrome/NativeMessagingHosts".source = pkgs.symlinkJoin {
