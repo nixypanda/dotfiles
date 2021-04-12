@@ -1,6 +1,6 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
-  colorscheme = (import ../colorschemes/onedark.nix);
+  colorscheme = (import ../colorschemes/onedark.nix) { lib = lib; };
 in
 {
   home.packages = with pkgs; [

@@ -1,6 +1,6 @@
-{ config, pkgs, libs, ... }:
+{ config, pkgs, lib, ... }:
 let
-  colorscheme = (import ../../colorschemes/onedark.nix);
+  colorscheme = (import ../../colorschemes/onedark.nix) { lib = lib; };
   vimPlugsFromSource = (import ./plugins.nix) pkgs;
 in
 {

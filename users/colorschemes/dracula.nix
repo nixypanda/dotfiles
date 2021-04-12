@@ -1,5 +1,5 @@
 let
-  utils = import ./utils.nix;
+  utils = (import ./utils.nix) {lib = lib; };
 in
 rec {
   # Note: This kinda feels like a hack and I am none to happy about it maybe in
