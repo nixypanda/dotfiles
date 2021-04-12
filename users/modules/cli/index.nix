@@ -20,12 +20,9 @@ in
     # system info
     bottom
     neofetch
-    # Busybox replacements
-    pciutils
 
-    less
     tokei
-  ]  ++ (lib.optionals (stdenv.isDarwin == false) [ usbutils ]);
+  ];
 
   programs.bat = {
     enable = true;

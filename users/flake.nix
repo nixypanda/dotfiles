@@ -50,6 +50,11 @@
             discord
             p3x-onenote
 
+            # Busybox replacements
+            pciutils
+            usbutils
+            less
+
             # Docker
             docker-compose
 
