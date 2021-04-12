@@ -6,7 +6,6 @@
 
     # Clojure
     clojure
-    clojure-lsp
 
     # Elm
     elmPackages.elm-language-server
@@ -28,7 +27,6 @@
 
     # lua
     lua
-    sumneko-lua-language-server
 
     # Nix
     rnix-lsp
@@ -53,5 +51,8 @@
     rustfmt
     # perl (this is required by rust)
     perl
-  ];
+  ]  ++ (lib.optionals (stdenv.isDarwin == false) [
+    # Note: What possible reason would this have to not build on mac
+    sumneko-lua-language-server
+  ]);
 }

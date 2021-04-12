@@ -16,16 +16,16 @@ in
     zoxide
     ripgrep
     universal-ctags
-    xcwd
+
     # system info
     bottom
     neofetch
     # Busybox replacements
-    usbutils
     pciutils
+
     less
     tokei
-  ];
+  ]  ++ (lib.optionals (stdenv.isDarwin == false) [ xcwd usbutils ]);
 
   programs.bat = {
     enable = true;
@@ -117,7 +117,6 @@ in
       bindkey -M vicmd 'k' history-beginning-search-backward
       bindkey -M vicmd 'j' history-beginning-search-forward
 
-      alias ls="ls --color=auto -F"
       eval "$(zoxide init zsh)"
 
       eval "$(starship init zsh)"

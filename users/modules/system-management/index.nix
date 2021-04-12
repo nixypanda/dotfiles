@@ -1,11 +1,11 @@
-{ config, pkgs, libs, ... }:
+{ config, pkgs, lib, ... }:
 let
   apply-system = pkgs.writeScriptBin "apply-system" ''
     ${builtins.readFile ./apply-system.sh}
   '';
-  apply-user = pkgs.writeScriptBin "apply-user" ''
-    ${builtins.readFile ./apply-user.sh}
-  '';
+  apply-user = if (pkgs.stdenv.isDarwin)
+  then (pkgs.writeScriptBin "apply-user" ''${builtins.readFile ./apply-user-mac.sh}'')
+  else (pkgs.writeScriptBin "apply-user" ''${builtins.readFile ./apply-user-nixos.sh}'');
   update-system = pkgs.writeScriptBin "update-system" ''
     ${builtins.readFile ./update-system.sh}
   '';

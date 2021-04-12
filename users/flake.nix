@@ -14,15 +14,8 @@
         username = "sherub";
         configuration = { config, lib, pkgs, ... }:
         {
-          nixpkgs.config = {
-            allowUnfree = true;
-          };
+          nixpkgs.config = { allowUnfree = true; };
           nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlay ];
-
-          # Home Manager needs a bit of information about you and the
-          # paths it should manage.
-          # home.username = "sherub";
-          # home.homeDirectory = "/home/sherub";
 
           # This value determines the Home Manager release that your
           # configuration is compatible with. This helps avoid breakage
@@ -63,6 +56,51 @@
             openvpn
             gnome3.networkmanager-openvpn
 
+          ];
+        };
+      };
+
+      macbook-pro = inputs.home-manager.lib.homeManagerConfiguration {
+        system = "x86_64-darwin";
+        homeDirectory = "/Users/sherubthakur";
+        username = "sherubthakur";
+        configuration = { config, lib, pkgs, ... }:
+        {
+          xdg.configFile."nix/nix.conf".text = ''
+            experimental-features = nix-command flakes ca-references
+          '';
+          nixpkgs.config = { allowUnfree = true; };
+          nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlay ];
+
+          # This value determines the Home Manager release that your
+          # configuration is compatible with. This helps avoid breakage
+          # when a new Home Manager release introduces backwards
+          # incompatible changes.
+          #
+          # You can update Home Manager without changing this value. See
+          # the Home Manager release notes for a list of state version
+          # changes in each release.
+          home.stateVersion = "20.09";
+
+          # Let Home Manager install and manage itself.
+          programs.home-manager.enable = true;
+
+
+          imports = [
+            ./modules/git.nix
+            ./modules/nvim/index.nix
+            ./modules/programming.nix
+            ./modules/cli/index.nix
+            ./modules/fonts.nix
+            ./modules/kitty.nix
+            ./modules/alacritty.nix
+            ./modules/tmux.nix
+            ./modules/system-management/index.nix
+          ];
+
+          home.packages = with pkgs; [
+            # Docker
+            docker-compose
           ];
         };
       };
