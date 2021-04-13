@@ -8,9 +8,13 @@ in
     awscli
     ngrok
     gnumake
+    docker-compose
+    tokei
+
     # Moar colors
     starship
     zsh-syntax-highlighting
+
     # Searching/Movement helpers
     fzf
     zoxide
@@ -20,8 +24,6 @@ in
     # system info
     bottom
     neofetch
-
-    tokei
   ];
 
   programs.bat = {

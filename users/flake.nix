@@ -55,12 +55,8 @@
             usbutils
             less
 
-            # Docker
-            docker-compose
-
             openvpn
             gnome3.networkmanager-openvpn
-
           ];
         };
       };
@@ -101,11 +97,6 @@
             ./modules/alacritty.nix
             ./modules/tmux.nix
             ./modules/system-management/index.nix
-          ];
-
-          home.packages = with pkgs; [
-            # Docker
-            docker-compose
           ];
         };
       };
