@@ -121,6 +121,16 @@ let g:which_key_map.l = {
     \ 's' : [':Lspsaga signature_help'             , 'Preview Signature'],
     \ }
 
+" F is for fold
+let g:which_key_map.f = {
+    \ 'name': '+fold',
+    \ 'O' : [':set foldlevel=20'  , 'open all'],
+    \ 'C' : [':set foldlevel=0'   , 'close all'],
+    \ 'c' : [':foldclose'         , 'close'],
+    \ 'o' : [':foldopen'          , 'open'],
+    \ 't' : ['za'                 , 'toggle'],
+    \ }
+
 let g:which_key_map.n = {
     \'name' : '+navigation',
     \'s' : ['psn', 'Swap Parameter Next'],
