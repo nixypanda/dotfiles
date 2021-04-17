@@ -54,6 +54,7 @@
             pciutils
             usbutils
             less
+            stress
 
             openvpn
             gnome3.networkmanager-openvpn
