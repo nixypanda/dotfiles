@@ -11,6 +11,8 @@ in
     plugins = with pkgs.vimPlugins; [
       # Appearance
       vim-table-mode # vimscript
+      indentLine  # vimscript
+      indent-blankline-nvim
       barbar-nvim
       nvim-tree-lua
       nvim-web-devicons
@@ -66,6 +68,9 @@ in
         ${builtins.readFile ./lsp.lua}
         ${builtins.readFile ./statusline.lua}
       EOF
+
+      " Set indentLine char
+      let g:indentLine_char='▏'
 
       " Vim theme info
       colorscheme one-nvim
