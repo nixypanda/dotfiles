@@ -129,3 +129,8 @@ let g:which_key_map.n = {
 
 " Register which key map
 autocmd VimEnter * call which_key#register('<Space>', "g:which_key_map")
+
+autocmd FileType which_key highlight WhichKey guifg=#61afef guibg=#282c34 ctermbg=12 ctermfg=7
+autocmd FileType which_key highlight WhichKeySeperator guifg=#e06c75 guibg=#282c34 ctermbg=12 ctermfg=7
+autocmd FileType which_key highlight WhichKeyGroup guifg=#61afef guibg=#282c34 cterm=bold ctermbg=12 ctermfg=7
+autocmd FileType which_key highlight WhichKeyDesc guifg=#abb2bf guibg=#282c34 ctermbg=12 ctermfg=7
