@@ -31,10 +31,10 @@ in
       vimPlugsFromSource.nvim-rust-tools
 
       # Text objects
-      tcomment_vim # vimscript
-      vim-surround # vimscript
-      vim-repeat   # vimscript
-      delimitMate  # vimscript
+      tcomment_vim    # vimscript
+      vim-surround    # vimscript
+      vim-repeat      # vimscript
+      nvim-autopairs
 
       # Git
       vim-fugitive  # vimscript

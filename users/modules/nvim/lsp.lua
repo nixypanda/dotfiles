@@ -40,6 +40,10 @@ vim.api.nvim_set_keymap('n', '<C-f>', [[<cmd>lua require('lspsaga.action').smart
 -- scroll up hover doc
 vim.api.nvim_set_keymap('n', '<C-b>', [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>]], {noremap = true, silent = true})
 
+
+-- Autopairs
+require('nvim-autopairs').setup()
+
 -- Completion
 vim.o.completeopt = "menuone,noselect"
 
@@ -109,6 +113,34 @@ vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
+
+-- Before        Input         After
+-- ------------------------------------
+-- {|}           <CR>          {
+--                                 |
+--                             }
+local npairs = require('nvim-autopairs')
+vim.g.completion_confirm_key = ""
+_G.MUtils = {}
+MUtils.completion_confirm=function()
+  if vim.fn.pumvisible() ~= 0  then
+    if vim.fn.complete_info()["selected"] ~= -1 then
+      vim.fn["compe#confirm"]()
+      return npairs.esc("")
+    else
+      vim.api.nvim_select_popupmenu_item(0, false, false, {})
+      vim.fn["compe#confirm"]()
+      return npairs.esc("<c-n>")
+    end
+  else
+    return npairs.check_break_line_char()
+  end
+end
+
+vim.api.nvim_set_keymap('i' , '<CR>','v:lua.MUtils.completion_confirm()', {expr = true , noremap = true})
+
+
+-- Prettify LSP shit
 
 require('lspkind').init({})
 
