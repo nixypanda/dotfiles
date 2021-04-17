@@ -49,10 +49,6 @@ vim.o.signcolumn = 'yes'
 -- Setup whitespace chars
 vim.o.listchars = 'eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:.'
 
-vim.o.foldmethod = 'expr'
-vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
-vim.o.foldenable = false
-
 -- " Add line length end indicator
 -- vim.o.colorcolumn = '88'
 

@@ -58,9 +58,8 @@ in
     extraConfig = ''
       " NOTE: For some reason these settings don't have any affect if configured
       " in lua
-      set number relativenumber
-      set colorcolumn=100
 
+      ${builtins.readFile ./sane_defaults.vim}
       lua << EOF
         ${builtins.readFile ./sane_defaults.lua}
         ${builtins.readFile ./treesitter.lua}
