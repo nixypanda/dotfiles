@@ -30,6 +30,8 @@ in
       nvim-lspconfig
       vimPlugsFromSource.nvim-lsp-saga
       nvim-compe
+      vim-vsnip
+      vim-vsnip-integ
       vimPlugsFromSource.nvim-rust-tools
 
       # Text objects
@@ -78,6 +80,8 @@ in
       "" lsp shit that can't be done in lua atm
       autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
       autocmd BufWritePre *.hs lua vim.lsp.buf.formatting_sync(nil, 1000)
+
+      let g:vsnip_snippet_dir = expand('~/.dotfiles/users/modules/nvim/vsnip')
 
       ${builtins.readFile ./which_key.vim}
     '';
