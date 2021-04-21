@@ -19,7 +19,7 @@ in
   rec {
     "bar/base" = {
       monitor = "HDMI-1";
-      height = 20;
+      height = 27;
 
       border-size = 2;
       border-left-size = 0;
@@ -28,8 +28,7 @@ in
       background = colors.bg-primary-transparent-argb;
 
       font-0 = "Hack Nerd Font:size=7;2";
-      font-1 = "Hack Nerd Font:size=13;3";
-      font-2 = "Hack Nerd Font:size=13;3";
+      font-1 = "Hack Nerd Font:size=18;4";
     };
 
     "bar/main" = {
