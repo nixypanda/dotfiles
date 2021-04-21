@@ -69,8 +69,6 @@ in
      openrgb
      i2c-tools
      ddccontrol
-
-     cowsay
    ];
    environment.pathsToLink = ["/libexec"];
 
