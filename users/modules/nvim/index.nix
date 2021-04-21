@@ -16,7 +16,7 @@ in
       barbar-nvim
       nvim-tree-lua
       nvim-web-devicons
-      galaxyline-nvim
+      lualine-nvim
       one-nvim
 
       # Programming
