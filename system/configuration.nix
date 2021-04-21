@@ -31,6 +31,7 @@ in
   };
 
   boot.kernelModules = [ "i2c-dev" "i2c-piix4" ];
+  boot.initrd.kernelModules = [ "amdgpu" ];
 
   nix = {
     package = pkgs.nixFlakes;
@@ -101,8 +102,10 @@ in
   sound.enable = true;
   hardware.bluetooth.enable = true;
   hardware.pulseaudio.enable = true;
+  hardware.enableRedistributableFirmware = true;
 
   hardware.opengl = {
+    enable = true;
     driSupport = true;
   }; 
 
@@ -111,9 +114,10 @@ in
   services.xserver = {
     enable = true;
     xkbOptions = "caps:swapescape";
+    videoDrivers = [ "modesetting" "amdgpu" "radeon" ];
 
     displayManager.sessionCommands = ''
-      xrandr --output HDMI-1 --mode 1920x1080
+      xrandr --output HDMI-1 --mode 2560x1440
     '';
     desktopManager.session = [
       {
