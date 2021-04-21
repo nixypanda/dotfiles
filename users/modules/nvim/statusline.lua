@@ -1,6 +1,7 @@
 local gl = require('galaxyline')
 local gls = gl.section
 local devicons = require 'nvim-web-devicons'
+local statusline_diagnostics = require('galaxyline.provider_diagnostic')
 
 local theme = {
     black       = '#2C323C',
@@ -133,13 +134,14 @@ gls.left = {
             highlight = {colors.fg, colors.bgl},
             separator = sep.right,
             separator_highlight = {colors.bg, colors.bgl},
+            condition = buffer_not_empty,
         },
     },
     {
         DiagnosticError = {
             provider = 'DiagnosticError',
             icon = '  ',
-            highlight = {colors.error,colors.bgl}
+            highlight = {colors.error,colors.bgl},
         }
     },
     {
