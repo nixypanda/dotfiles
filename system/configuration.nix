@@ -112,11 +112,8 @@ in
   services.xserver = {
     enable = true;
     xkbOptions = "caps:swapescape";
-    videoDrivers = [ "modesetting" "amdgpu" "radeon" ];
+    videoDrivers = [ "amdgpu" ];
 
-    displayManager.sessionCommands = ''
-      xrandr --output HDMI-1 --mode 2560x1440
-    '';
     desktopManager.session = [
       {
         name = "home-manager";

@@ -124,7 +124,6 @@ in
         
         rounded-corners-exclude = [
           "class_g = 'Polybar'",
-          "class_g = 'Google-chrome'"
         ];
       '';
       fade = true;
