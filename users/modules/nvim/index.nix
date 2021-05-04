@@ -20,7 +20,7 @@ in
       one-nvim
 
       # Programming
-      vim-which-key          # vimscript
+      which-key-nvim
       vim-haskellConcealPlus # vimscript
       vim-nix                # vimscript
       lspkind-nvim
@@ -83,7 +83,9 @@ in
 
       let g:vsnip_snippet_dir = expand('~/.dotfiles/users/modules/nvim/vsnip')
 
-      ${builtins.readFile ./which_key.vim}
+      lua << EOF
+        ${builtins.readFile ./which_key.lua}
+      EOF
     '';
 
     package = pkgs.neovim-nightly;
