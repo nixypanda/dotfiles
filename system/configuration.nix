@@ -114,6 +114,10 @@ in
     xkbOptions = "caps:swapescape";
     videoDrivers = [ "amdgpu" ];
 
+    displayManager.sessionCommands = ''
+      xrandr --output DisplayPort-9 --mode 3840x2160 --scale 0.70x0.70
+    '';
+
     desktopManager.session = [
       {
         name = "home-manager";
