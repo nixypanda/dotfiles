@@ -74,21 +74,22 @@ local mappings = {
     },
     l = {
         name = "+LSP",
-        a = {"<cmd>Lspsaga code_action<cr>", "Code Action"},
-        A = {"<cmd>Lspsaga range_code_action<cr>", "Selected Action"},
-        d = {"<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics"},
+        a = {"<cmd>Lspsaga code_action<cr>",                 "Code Action"},
+        d = {"<cmd>Telescope lsp_document_diagnostics<cr>",  "Document Diagnostics"},
         D = {"<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics"},
-        i = {"<cmd>LspInfo<cr>", "Info"},
-        j = {"<cmd>Lspsaga diagnostic_jump_next<cr>", "Next Action"},
-        k = {"<cmd>Lspsaga diagnostic_jump_prev<cr>", "Previous Action"},
-        R = {"<cmd>Lspsaga lsp_finder<cr>", "Definition and Refrences"},
-        l = {"<cmd>Lspsaga show_line_diagnostics<cr>", "Line Diagnostics"},
-        p = {"<cmd>Lspsaga preview_definition<cr>", "Preview Definition"},
-        r = {"<cmd>Lspsaga rename<cr>", "Rename"},
-        t = {"<cmd>Lspsaga signature_help<cr>", "Signature Help"},
-        x = {"<cmd>cclose<cr>", "Close Quickfix"},
-        s = {"<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols"},
-        S = {"<cmd>Telescope lsp_workspace_symbols<cr>", "Workspace Symbols"}
+        I = {"<cmd>LspInfo<cr>",                             "Info"},
+        j = {"<cmd>Lspsaga diagnostic_jump_next<cr>",        "Next Action"},
+        k = {"<cmd>Lspsaga diagnostic_jump_prev<cr>",        "Previous Action"},
+        r = {"<cmd>Lspsaga rename<cr>",                      "Rename"},
+        R = {"<cmd>Lspsaga lsp_finder<cr>",                  "Definition and Refrences"},
+        l = {"<cmd>Lspsaga show_line_diagnostics<cr>",       "Line Diagnostics"},
+        p = {"<cmd>Lspsaga preview_definition<cr>",          "Preview Definition"},
+        t = {"<cmd>Lspsaga signature_help<cr>",              "Signature Help"},
+        f = {
+            name = "+Rust",
+            r = {"<cmd>RustRunnables<cr>",    "Run"},
+            p = {"<cmd>RustParentModule<cr>", "Goto Parent Module"},
+        }
     },
 
     s = {
