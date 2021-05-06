@@ -1,0 +1,3 @@
+require('gitsigns').setup {
+    keymaps = {}
+}

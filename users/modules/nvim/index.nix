@@ -43,7 +43,7 @@ in
 
       # Git
       vim-fugitive  # vimscript
-      vim-gitgutter # vimscript
+      gitsigns-nvim
 
       # DAP
       vimspector # vimscript
@@ -68,6 +68,7 @@ in
         ${builtins.readFile ./telescope.lua}
         ${builtins.readFile ./lsp.lua}
         ${builtins.readFile ./statusline.lua}
+        ${builtins.readFile ./git.lua}
         ${builtins.readFile ./which_key.lua}
       EOF
 
