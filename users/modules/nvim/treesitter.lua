@@ -33,10 +33,10 @@ require'nvim-treesitter.configs'.setup {
         swap = {
             enable = true,
             swap_next = {
-                ["psn"] = "@parameter.inner",
+                ["<leader>npn"] = "@parameter.inner",
             },
             swap_previous = {
-                ["psp"] = "@parameter.inner",
+                ["<leader>npp"] = "@parameter.inner",
             },
         },
     },
