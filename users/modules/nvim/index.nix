@@ -11,13 +11,14 @@ in
     plugins = with pkgs.vimPlugins; [
       # Appearance
       vim-table-mode # vimscript
-      indentLine  # vimscript
+      indentLine     # vimscript
       indent-blankline-nvim
       barbar-nvim
       nvim-tree-lua
       nvim-web-devicons
       lualine-nvim
       one-nvim
+      dashboard-nvim #vimscript
 
       # Programming
       which-key-nvim
@@ -58,20 +59,17 @@ in
     ];
 
     extraConfig = ''
-      " NOTE: For some reason these settings don't have any affect if configured
-      " in lua
-
       ${builtins.readFile ./sane_defaults.vim}
+      ${builtins.readFile ./dashboard.vim}
+
       lua << EOF
         ${builtins.readFile ./sane_defaults.lua}
         ${builtins.readFile ./treesitter.lua}
         ${builtins.readFile ./telescope.lua}
         ${builtins.readFile ./lsp.lua}
         ${builtins.readFile ./statusline.lua}
+        ${builtins.readFile ./which_key.lua}
       EOF
-
-      " Set indentLine char
-      let g:indentLine_char='▏'
 
       " Vim theme info
       colorscheme one-nvim
@@ -82,10 +80,7 @@ in
       autocmd BufWritePre *.hs lua vim.lsp.buf.formatting_sync(nil, 1000)
 
       let g:vsnip_snippet_dir = expand('~/.dotfiles/users/modules/nvim/vsnip')
-
-      lua << EOF
-        ${builtins.readFile ./which_key.lua}
-      EOF
+      ${builtins.readFile ./indentline.vim}
     '';
 
     package = pkgs.neovim-nightly;
