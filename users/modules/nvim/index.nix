@@ -29,11 +29,11 @@ in
       nvim-treesitter-refactor
       nvim-treesitter-textobjects
       nvim-lspconfig
-      vimPlugsFromSource.nvim-lsp-saga
+      lspsaga-nvim
       nvim-compe
       vim-vsnip
       vim-vsnip-integ
-      vimPlugsFromSource.nvim-rust-tools
+      rust-tools-nvim
 
       # Text objects
       tcomment_vim    # vimscript
@@ -52,9 +52,7 @@ in
       telescope-nvim
 
       # General Deps
-      # popup-nvim
-      # Note: Current version on nixpkgs seems broken
-      vimPlugsFromSource.nvim-popup
+      popup-nvim
       plenary-nvim
     ];
 
@@ -72,15 +70,7 @@ in
         ${builtins.readFile ./which_key.lua}
       EOF
 
-      " Vim theme info
-      colorscheme one-nvim
       ${builtins.readFile ./theme.vim}
-
-      "" lsp shit that can't be done in lua atm
-      autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
-      autocmd BufWritePre *.hs lua vim.lsp.buf.formatting_sync(nil, 1000)
-
-      let g:vsnip_snippet_dir = expand('~/.dotfiles/users/modules/nvim/vsnip')
       ${builtins.readFile ./indentline.vim}
     '';
 

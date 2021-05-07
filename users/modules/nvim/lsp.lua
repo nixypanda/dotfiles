@@ -161,3 +161,13 @@ vim.fn.sign_define("LspDiagnosticsSignError", {texthl = "LspDiagnosticsSignError
 vim.fn.sign_define("LspDiagnosticsSignWarning", {texthl = "LspDiagnosticsSignWarning", text = "", numhl = "LspDiagnosticsSignWarning"})
 vim.fn.sign_define("LspDiagnosticsSignHint", {texthl = "LspDiagnosticsSignHint", text = "", numhl = "LspDiagnosticsSignHint"})
 vim.fn.sign_define("LspDiagnosticsSignInformation", {texthl = "LspDiagnosticsSignInformation", text = "", numhl = "LspDiagnosticsSignInformation"})
+
+-- Set loction for snippets to be in dotfiles repo so that it is accessible everywhere
+vim.g.vsnip_snippet_dir = vim.fn.expand('~/.dotfiles/users/modules/nvim/vsnip')
+
+
+
+-- lsp shit that can't be done in lua atm.
+-- Note: This is even worse then writing vimscript (Can't believe that would be possible but here you go)
+vim.api.nvim_command('autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 1000)')
+vim.api.nvim_command('autocmd BufWritePre *.hs lua vim.lsp.buf.formatting_sync(nil, 1000)')
