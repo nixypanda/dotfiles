@@ -65,8 +65,6 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
    environment.systemPackages = with pkgs; [
-     vim
-     home-manager
      openrgb
      i2c-tools
      ddccontrol
@@ -116,7 +114,7 @@ in
     videoDrivers = [ "amdgpu" ];
 
     displayManager.sessionCommands = ''
-      xrandr --output DisplayPort-9 --mode 3840x2160 --scale 0.70x0.70
+      xrandr --output DisplayPort-0 --mode 3840x2160 --scale 0.70x0.70
     '';
 
     desktopManager.session = [
