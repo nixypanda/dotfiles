@@ -14,18 +14,19 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-label/nixos";
+    { device = "/dev/disk/by-label/NIXROOT";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-label/boot";
+    { device = "/dev/disk/by-label/NIXBOOT";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-label/swap"; }
+    [ { device = "/dev/disk/by-label/NIXSWAP"; }
     ];
 
   nix.maxJobs = lib.mkDefault 16;
+  hardware.video.hidpi.enable = lib.mkDefault true;
 }
