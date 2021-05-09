@@ -26,6 +26,7 @@ in
       devices = ["nodev"];
       efiSupport = true;
       enable = true;
+      useOSProber = true;
     };
     # systemd-boot.enable = true;
   };
