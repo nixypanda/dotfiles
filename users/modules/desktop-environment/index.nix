@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 let
-  colorscheme = (import ../../colorschemes/onedark.nix) { lib = lib; };
+  colorscheme = (import ../../colorschemes/dracula.nix) { lib = lib; };
   custom-panel-launch = pkgs.writeScriptBin "custom-panel-launch" ''
     #!/${pkgs.stdenv.shell}
 
