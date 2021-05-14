@@ -104,6 +104,7 @@ local mappings = {
         s = {"<cmd>Telescope lsp_document_symbols<cr>",  "Document Symbols"},
         S = {"<cmd>Telescope lsp_workspace_symbols<cr>", "Workspace Symbols"},
         t = {"<cmd>Telescope live_grep<cr>",             "Text"},
+        T = {"<cmd>TodoTelescope<cr>",                   "Todos"},
     },
     w = {
       name = "+Window",

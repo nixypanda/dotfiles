@@ -10,7 +10,6 @@ in
 
     plugins = with pkgs.vimPlugins; [
       # Appearance
-      vim-table-mode # vimscript
       indentLine     # vimscript
       indent-blankline-nvim
       barbar-nvim
@@ -51,6 +50,10 @@ in
       # Fuzzy Finder
       telescope-nvim
 
+      # Text Helpers
+      vim-table-mode # vimscript
+      vimPlugsFromSource.nvim-todo-comments
+
       # General Deps
       popup-nvim
       plenary-nvim
@@ -67,6 +70,7 @@ in
         ${builtins.readFile ./lsp.lua}
         ${builtins.readFile ./statusline.lua}
         ${builtins.readFile ./git.lua}
+        ${builtins.readFile ./todo.lua}
         ${builtins.readFile ./which_key.lua}
       EOF
 
