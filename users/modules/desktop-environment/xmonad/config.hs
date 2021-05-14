@@ -274,6 +274,7 @@ myManageHook = composeAll
     , className =? "Nm-connection-editor" --> doFloat
     , className =? "Gddccontrol" --> doFloat
     , className =? "feh" --> doFullFloat
+    , className =? ".blueman-manager-wrapped" --> doFloat
     , namedScratchpadManageHook myScratchPads
     , insertPosition End Newer
     ]
