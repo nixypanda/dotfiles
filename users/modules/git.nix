@@ -1,6 +1,7 @@
 { config, pkgs, libs, ... }:
 {
   home.packages = with pkgs; [
+    git-crypt
     gitAndTools.delta
     gitAndTools.gh
   ];
@@ -23,5 +24,8 @@
       };
     };
   };
+
+  programs.gpg.enable = true;
+  services.gpg-agent.enable = true;
 
 }

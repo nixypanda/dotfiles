@@ -105,11 +105,11 @@ in
     };
 
     # For this to work with flakes we need to get this into git
-    # TODO: Figure out how to use git-crypt
     # ${builtins.readFile ./zsh/secrets.zsh}
     initExtraBeforeCompInit = ''
       ${builtins.readFile ./zsh/session_variables.zsh}
       ${builtins.readFile ./zsh/functions.zsh}
+      ${builtins.readFile ../../../.secrets/env-vars.sh}
 
       eval "$(direnv hook zsh)"
 
@@ -121,5 +121,4 @@ in
       eval "$(starship init zsh)"
     '';
   };
-
 }
