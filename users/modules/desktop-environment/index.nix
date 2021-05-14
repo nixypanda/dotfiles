@@ -30,6 +30,8 @@ in
       # Theming (GTK)
       lxappearance
       dracula-theme
+      moka-icon-theme
+      numix-icon-theme-square
 
       # system tray (Kind of a hack atm)
       # Need polybar to support this as a first class module

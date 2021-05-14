@@ -17,6 +17,7 @@ in
       nvim-web-devicons
       lualine-nvim
       one-nvim
+      dracula-vim
       dashboard-nvim #vimscript
 
       # Programming

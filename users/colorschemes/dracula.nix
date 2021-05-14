@@ -1,3 +1,4 @@
+{lib, ...}:
 let
   utils = (import ./utils.nix) {lib = lib; };
 in
@@ -7,7 +8,7 @@ rec {
   # too much effort though. Creating a whole theme for vim
   vim-name = "dracula";
   gtk-name = "Dracula";
-  gtk-icon-name = "Moka";
+  gtk-icon-name = "Faba";
   bat-theme-name = "Dracula";
 
   bg-primary = black;
@@ -20,9 +21,9 @@ rec {
   accent-primary = blue;
   accent-secondary = magenta;
   accent-tertiary = "#ffb86c";
+
   alert = red;
   warning = yellow;
-
 
   black          = "#282a36";
   red            = "#FF5555";
