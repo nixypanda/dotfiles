@@ -29,8 +29,6 @@ in
 
       # Theming (GTK)
       lxappearance
-      arc-icon-theme
-      arc-theme
       dracula-theme
 
       # system tray (Kind of a hack atm)

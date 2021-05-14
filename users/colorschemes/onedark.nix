@@ -7,8 +7,8 @@ in
     # the future I might make this play nicely to with everything else. That is
     # too much effort though. Creating a whole theme for vim
     vim-name = "one";
-    gtk-name = "Arc-Dark";
-    gtk-icon-name = "Arc";
+    gtk-name = "Dracula";
+    gtk-icon-name = "Adwaita";
     bat-theme-name = "base16";
 
     bg-primary = black;
