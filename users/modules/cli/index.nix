@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 let
-  colorscheme = (import ../../colorschemes/dracula.nix) { lib = lib; };
+  colorscheme = (import ../../colorschemes/dracula.nix);
 in
 {
   home.packages = with pkgs; [
