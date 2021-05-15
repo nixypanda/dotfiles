@@ -1,7 +1,4 @@
-{ config, pkgs, lib, ... }:
-let
-  colorscheme = (import ../colorschemes/dracula.nix);
-in
+{ config, pkgs, lib, colorscheme, ... }:
 {
   programs.kitty = {
     enable = true;

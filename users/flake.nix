@@ -12,8 +12,12 @@
         system = "x86_64-linux";
         homeDirectory = "/home/sherub";
         username = "sherub";
-        configuration = { config, lib, pkgs, ... }:
+        configuration = { config, lib, pkgs, ... }@configInput:
         {
+          _module.args = {
+            colorscheme = (import ./colorschemes/dracula.nix);
+          };
+
           nixpkgs.config = { allowUnfree = true; };
           nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlay ];
 
@@ -29,7 +33,6 @@
 
           # Let Home Manager install and manage itself.
           programs.home-manager.enable = true;
-
 
           imports = [
             ./modules/browser.nix

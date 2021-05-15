@@ -1,6 +1,5 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, colorscheme, ... }:
 let
-  colorscheme = (import ../../colorschemes/dracula.nix);
   vimPlugsFromSource = (import ./plugins.nix) pkgs;
 in
 {
@@ -64,7 +63,11 @@ in
       ${builtins.readFile ./sane_defaults.vim}
       ${builtins.readFile ./dashboard.vim}
 
+      colorscheme ${colorscheme.vim-name}
+
       lua << EOF
+        local statusline_theme = '${colorscheme.vim-statusline}'
+
         ${builtins.readFile ./sane_defaults.lua}
         ${builtins.readFile ./treesitter.lua}
         ${builtins.readFile ./telescope.lua}

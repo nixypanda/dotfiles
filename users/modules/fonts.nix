@@ -1,7 +1,4 @@
-{ pkgs, lib, ... }:
-let
-  colorscheme = (import ../colorschemes/dracula.nix);
-in
+{ pkgs, lib, colorscheme, ... }:
 {
   home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "Hack" ]; })

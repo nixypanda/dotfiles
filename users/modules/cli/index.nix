@@ -1,7 +1,4 @@
-{ config, pkgs, lib, ... }:
-let
-  colorscheme = (import ../../colorschemes/dracula.nix);
-in
+{ config, pkgs, lib, colorscheme, ... }:
 {
   home.packages = with pkgs; [
     # CLI tools / Terminal facification

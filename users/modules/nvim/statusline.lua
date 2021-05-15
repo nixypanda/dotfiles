@@ -2,7 +2,7 @@ require('lualine').setup{
     options = {
         section_separators = {'', ''},
         component_separators = {'', ''},
-        theme = 'dracula',
+        theme = statusline_theme,
         iconsEnabled = true,
     },
     sections = {

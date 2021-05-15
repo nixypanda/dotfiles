@@ -6,6 +6,7 @@ rec {
   # the future I might make this play nicely to with everything else. That is
   # too much effort though. Creating a whole theme for vim
   vim-name = "dracula";
+  vim-statusline = "dracula";
   gtk-name = "Dracula";
   gtk-icon-name = "Faba";
   bat-theme-name = "Dracula";
