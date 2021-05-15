@@ -43,6 +43,7 @@ in
       # Git
       vim-fugitive  # vimscript
       gitsigns-nvim
+      vimPlugsFromSource.nvim-octo
 
       # DAP
       vimspector # vimscript

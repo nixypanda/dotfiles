@@ -70,7 +70,36 @@ local mappings = {
             h = {"<cmd>diffget //2<cr>", "Get hunk from left"},
             l = {"<cmd>diffget //3<cr>", "Get hunk from right"},
             f = {"<cmd>Gwrite!<cr>", "Finish"},
-        }
+        },
+    },
+    o = {
+        name = "+Github/Octo",
+        c = {
+            name = "+Comment",
+            a = {"<cmd>require\"octo.commands\".add_comment()<cr>",    "Add a comment"},
+            d = {"<cmd>require\"octo.commands\".delete_comment()<cr>", "Delete a comment"},
+            j = {"<cmd>require\"octo.navigation\".next_comment()<cr>", "Goto next comment"},
+            k = {"<cmd>require\"octo.navigation\".prev_comment()<cr>", "Goto prev comment"},
+        },
+        p = {
+            name = "+PR",
+            b = {"<cmd>Octo pr browser<cr>", "Open PR in browser"},
+            c = {"<cmd>Octo pr commits<cr>", "List commits"},
+            f = {"<cmd>Octo pr files<cr>",   "List changed files"},
+            l = {"<cmd>Octo pr list<cr>",    "List all PRs in the repo"},
+        },
+        r = {
+            name = "+Review",
+            d = {"<cmd>Octo review discard<cr>", "Discard review"},
+            s = {"<cmd>Octo review start<cr>",   "Start a review"},
+            S = {"<cmd>Octo review submit<cr>",  "Submit review"},
+            r = {"<cmd>Octo review resume<cr>",  "Resume review"},
+        },
+        R = {
+            name = "+Reaction",
+            u = {"<cmd>Octo reaction +1<cr>", "+1"},
+            d = {"<cmd>Octo reaction -1<cr>", "-1"},
+        },
     },
     l = {
         name = "+LSP",

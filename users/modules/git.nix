@@ -3,7 +3,6 @@
   home.packages = with pkgs; [
     git-crypt
     gitAndTools.delta
-    gitAndTools.gh
   ];
   programs.git = {
     enable = true;
@@ -23,6 +22,11 @@
         file-decoration-style = "none";
       };
     };
+  };
+
+  programs.gh = {
+    enable = true;
+    gitProtocol = "ssh";
   };
 
   programs.gpg.enable = true;
