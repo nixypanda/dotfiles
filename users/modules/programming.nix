@@ -51,6 +51,8 @@
     rustfmt
     # perl (this is required by rust)
     perl
+
+    nur.repos.crazazy.efm-langserver
   ]  ++ (lib.optionals (stdenv.isDarwin == false) [
     # Note: What possible reason would this have to not build on mac
     sumneko-lua-language-server

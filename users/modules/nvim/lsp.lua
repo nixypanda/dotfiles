@@ -171,3 +171,22 @@ vim.g.vsnip_snippet_dir = vim.fn.expand('~/.dotfiles/users/modules/nvim/vsnip')
 -- Note: This is even worse then writing vimscript (Can't believe that would be possible but here you go)
 vim.api.nvim_command('autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 1000)')
 vim.api.nvim_command('autocmd BufWritePre *.hs lua vim.lsp.buf.formatting_sync(nil, 1000)')
+vim.api.nvim_command('autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 1000)')
+
+
+-- EFM Setup
+require"lspconfig".efm.setup {
+    init_options = {documentFormatting = true},
+    filetypes = {"python"},
+    settings = {
+        rootMarkers = {".git/"},
+        languages = {
+            python = {
+                {
+                    formatCommand = "black --quiet -",
+                    formatStdin = true
+                },
+            }
+        }
+    }
+}
