@@ -4,8 +4,12 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     home-manager.url = "github:nix-community/home-manager";
+    nur.url = "github:nix-community/NUR";
   };
-  outputs = {self, ... }@inputs:
+  outputs = {self, nur, ... }@inputs:
+  let
+    overlays = [ inputs.neovim-nightly-overlay.overlay nur.overlay ];
+  in
   {
     homeConfigurations = {
       nixos = inputs.home-manager.lib.homeManagerConfiguration {
@@ -19,7 +23,7 @@
           };
 
           nixpkgs.config = { allowUnfree = true; };
-          nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlay ];
+          nixpkgs.overlays = overlays;
 
           # This value determines the Home Manager release that your
           # configuration is compatible with. This helps avoid breakage
@@ -75,7 +79,7 @@
             experimental-features = nix-command flakes ca-references
           '';
           nixpkgs.config = { allowUnfree = true; };
-          nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlay ];
+          nixpkgs.overlays = overlays;
 
           # This value determines the Home Manager release that your
           # configuration is compatible with. This helps avoid breakage
