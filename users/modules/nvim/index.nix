@@ -29,6 +29,7 @@ in
       nvim-treesitter-textobjects
       nvim-lspconfig
       lspsaga-nvim
+      vimPlugsFromSource.nvim-lsp-signature
       nvim-compe
       vim-vsnip
       vim-vsnip-integ

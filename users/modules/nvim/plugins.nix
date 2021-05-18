@@ -20,4 +20,14 @@
       sha256 = "sha256-gpkaDAaRWyPQ911YlpBxFxEWEhJlYDSGT45fEQ4UAnE=";
     };
   };
+  nvim-lsp-signature = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "nvim-lsp-signature";
+    version = "master";
+    src = pkgs.fetchFromGitHub {
+      owner = "ray-x";
+      repo = "lsp_signature.nvim";
+      rev = "master";
+      sha256 = "sha256-/SnCofoQNKY6M9i5WA/hnZlrPvbbBQzQFwMBsmkRGC4=";
+    };
+  };
 }
