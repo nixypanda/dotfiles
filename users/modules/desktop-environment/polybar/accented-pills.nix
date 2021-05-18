@@ -1,5 +1,14 @@
 {colors}:
 let
+  background = colors.bg-primary-bright-transparent-argb;
+
+  module-background = colors.bg-primary;
+  module-foreground = colors.fg-primary;
+  module-background-alt = colors.bg-primary-bright;
+
+  accent = colors.accent-primary;
+  attention = colors.alert;
+
   separator = {color, size ? 1}: 
     {
       type = "custom/text";
@@ -8,12 +17,14 @@ let
       content-background = color;
       content-foreground = color;
   };
-  filled-half-circle = { direction, color-fg, color-bg ? colors.bg-primary-transparent-argb }: {
+
+  filled-half-circle = { direction, color-fg ? module-background, color-bg ? background }: {
     content = if direction == "left" then "%{T2}%{T-}" else "%{T2}%{T-}";
     type = "custom/text";	
     content-foreground = color-fg;	
     content-background = color-bg;
   };
+
   secondary-bar-width-pct = 7.6;
 in
   rec {
@@ -24,8 +35,8 @@ in
       border-size = 2;
       border-left-size = 0;
       border-right-size = 0;
-      border-color = colors.bg-primary-transparent-argb;
-      background = colors.bg-primary-transparent-argb;
+      border-color = background;
+      background = background;
 
       font-0 = "Hack Nerd Font:size=7;2";
       font-1 = "Hack Nerd Font:size=18;4";
@@ -42,7 +53,7 @@ in
 
       tray-position = "right";
       tray-padding = 7 ;
-      tray-background = colors.bg-primary;
+      tray-background = module-background;
       tray-maxsize = 12;
     };
 
@@ -76,23 +87,23 @@ in
       format = "<label-state>";
 
       label-active = "%icon%";
-      label-active-foreground = colors.bg-primary;
-      label-active-background = colors.accent-primary;
+      label-active-foreground = background;
+      label-active-background = accent;
       label-active-padding = 2;
 
       label-occupied = "%icon%";
-      label-occupied-foreground = colors.fg-primary;
-      label-occupied-background = colors.bg-primary-bright;
+      label-occupied-foreground = module-foreground;
+      label-occupied-background = module-background-alt;
       label-occupied-padding = 2;
 
       label-urgent = "%icon%";
-      label-urgent-foreground = colors.alert;
-      label-urgent-background = colors.bg-primary;
+      label-urgent-foreground = module-foreground;
+      label-urgent-background = attention;
       label-urgent-padding = 2;
 
       label-empty = "%icon%";
-      label-empty-foreground = colors.fg-primary;
-      label-empty-background = colors.bg-primary;
+      label-empty-foreground = module-foreground;
+      label-empty-background = module-background;
       label-empty-padding = 2;
     };
 
@@ -101,17 +112,16 @@ in
       exec = "tail -F \"$HOME/.xmonad/xmonad-layout\"";
       label = "%output%";
       tail = true;
-      label-background = colors.bg-primary-bright;
-      label-foreground = colors.fg-primary;
+      label-background = module-background-alt;
+      label-foreground = module-foreground;
     };
 
     "module/title" = {
       type = "internal/xwindow";
 
       format = "<label>";
-      format-foreground = colors.fg-primary;
-      format-background = colors.bg-primary;
-      format-underline = colors.bg-primary-transparent-argb;
+      format-foreground = module-foreground;
+      format-background = module-background;
 
       label = " %title% ";
       label-maxlen = 100;
@@ -122,11 +132,11 @@ in
       exec = "custom-browsermediacontrol";
 
       format = "<label>";
-      format-background = colors.bg-primary;
-      format-foreground = colors.fg-primary;
+      format-background = module-background;
+      format-foreground = module-foreground;
 
       border-size = 2;
-      border-color = colors.fg-primary;
+      border-color = module-foreground;
 
       scroll-up = "custom-browsermediacontrol --volume 1 &";
       scroll-down = "custom-browsermediacontrol --volume -1 &";
@@ -143,8 +153,8 @@ in
       time-alt = "%d-%m-%y";
 
       format = "  <label>";
-      format-background = colors.bg-primary;
-      format-foreground = colors.fg-primary;
+      format-background = module-background;
+      format-foreground = module-foreground;
       format-padding = 1;
 
       label = "%time%";
@@ -154,32 +164,23 @@ in
       type = "custom/text";
       content = "";
       content-padding = 1;
-      content-background = colors.alert;
-      content-foreground = colors.bg-primary;
-      content-underline = colors.bg-primary-transparent-argb;
+      content-background = attention;
+      content-foreground = module-background;
       click-left = "rofi -modi 'Powermenu:custom-script-sysmenu' -show Powermenu -theme sysmenu -location 3 -yoffset 25 &";
     };
 
-    "module/sep"       =  separator { color = colors.bg-primary-transparent-argb; };           
-    "module/sep-huge"  =  separator { color = colors.bg-primary-transparent-argb; size = 7; };
-    "module/sep-red"   =  separator { color = colors.alert;                       };        
-    "module/sep-bg"    =  separator { color = colors.bg-primary;                  };        
-    "module/sep-bg-b"  =  separator { color = colors.bg-primary-bright;           };        
-    "module/sep-ap"    =  separator { color = colors.accent-primary;              };        
-    "module/sep-as"    =  separator { color = colors.accent-secondary;            };        
-    "module/sep-at"    =  separator { color = colors.accent-tertiary;             };        
+    "module/sep"       =  separator { color = background;            };           
+    "module/sep-huge"  =  separator { color = background; size = 7;  };
+    "module/sep-red"   =  separator { color = attention;             };        
+    "module/sep-bg"    =  separator { color = module-background;     };        
+    "module/sep-bg-b"  =  separator { color = module-background-alt; };        
 
-    "module/right-bg-bgb" = filled-half-circle { direction = "right"; color-fg = colors.bg-primary; color-bg = colors.bg-primary-bright; };
-    "module/left-ap"      = filled-half-circle { direction = "left" ; color-fg = colors.accent-primary; };
-    "module/right-ap"     = filled-half-circle { direction = "right"; color-fg = colors.accent-primary; };
-    "module/left-as"      = filled-half-circle { direction = "left" ; color-fg = colors.accent-secondary; };
-    "module/right-as"     = filled-half-circle { direction = "right"; color-fg = colors.accent-secondary; };
-    "module/left-at"      = filled-half-circle { direction = "left" ; color-fg = colors.accent-tertiary; };
-    "module/right-at"     = filled-half-circle { direction = "right"; color-fg = colors.accent-tertiary; };
-    "module/left-bg-b"    = filled-half-circle { direction = "left" ; color-fg = colors.bg-primary-bright; };
-    "module/right-bg-b"   = filled-half-circle { direction = "right"; color-fg = colors.bg-primary-bright; };
-    "module/left"         = filled-half-circle { direction = "left" ; color-fg = colors.bg-primary; };
-    "module/right"        = filled-half-circle { direction = "right"; color-fg = colors.bg-primary; };
-    "module/left-red"     = filled-half-circle { direction = "left" ; color-fg = colors.alert; };
-    "module/right-red"    = filled-half-circle { direction = "right"; color-fg = colors.alert; };
+    "module/right-bg-bgb" = filled-half-circle { direction = "right"; color-fg = module-background; color-bg = module-background-alt; };
+    "module/left-bg-bgb"  = filled-half-circle { direction = "left"; color-fg = module-background; color-bg = module-background-alt; };
+    "module/left-bg-b"    = filled-half-circle { direction = "left" ; color-fg = module-background-alt; };
+    "module/right-bg-b"   = filled-half-circle { direction = "right"; color-fg = module-background-alt; };
+    "module/left"         = filled-half-circle { direction = "left" ; };
+    "module/right"        = filled-half-circle { direction = "right"; };
+    "module/left-red"     = filled-half-circle { direction = "left" ; color-fg = attention; };
+    "module/right-red"    = filled-half-circle { direction = "right"; color-fg = attention; };
   }
