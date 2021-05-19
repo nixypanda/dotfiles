@@ -110,8 +110,8 @@ in
 
     services.picom = {
       enable = true;
-      inactiveOpacity = "0.70";
-      activeOpacity = "0.95";
+      inactiveOpacity = "0.50";
+      activeOpacity = "0.90";
       blur = true;
       experimentalBackends = true;
       opacityRule = [
