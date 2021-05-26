@@ -8,7 +8,7 @@ rec {
   vim-name = "dracula";
   vim-statusline = "dracula";
   gtk-name = "Dracula";
-  gtk-icon-name = "Numix-Light";
+  gtk-icon-name = "Moka";
   bat-theme-name = "Dracula";
 
   bg-primary = black;
