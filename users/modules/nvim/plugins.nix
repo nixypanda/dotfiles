@@ -7,7 +7,7 @@
       owner = "folke";
       repo = "todo-comments.nvim";
       rev = "main";
-      sha256 = "sha256-dyCmp/UnJ3zZr8ezMAhmvCNyLnahRg8/KUetxbGJC0E=";
+      sha256 = "sha256-xpN/g+GuuBZtiD/pSk3TYiN6xhYECJbA46aRlObVT2g=";
     };
   };
   nvim-octo = pkgs.vimUtils.buildVimPluginFrom2Nix {
@@ -17,7 +17,7 @@
       owner = "pwntester";
       repo = "octo.nvim";
       rev = "master";
-      sha256 = "sha256-gpkaDAaRWyPQ911YlpBxFxEWEhJlYDSGT45fEQ4UAnE=";
+      sha256 = "sha256-6zL2diOsOGuThkIbok0JKbmrZi2KfyKsrm/00J5g4Wg=";
     };
   };
   nvim-lsp-signature = pkgs.vimUtils.buildVimPluginFrom2Nix {
