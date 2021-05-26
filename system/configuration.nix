@@ -7,7 +7,7 @@
 let
   solaar-rules = builtins.fetchurl {
     url = "https://github.com/pwr-Solaar/Solaar/blob/1.0.5/rules.d/42-logitech-unify-permissions.rules";
-    sha256 = "sha256:18l7i2mr5l7y6240xm68cd5d72s9b4i9mf3j61jnr465pgh6xjjn";
+    sha256 = "sha256:15sdan6qjl4kxnmcr0g3jw96fyhnda2wcvbjb1m1y5w88a6qn774";
   };
 in
 {
@@ -39,6 +39,9 @@ in
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+
+    # https://github.com/NixOS/nixpkgs/issues/124215
+    sandboxPaths = [ "/bin/sh=${pkgs.bash}/bin/sh"];
   };
 
   # networking.hostName = "nixos"; # Define your hostname.
