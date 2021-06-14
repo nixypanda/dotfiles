@@ -44,17 +44,17 @@ local mappings = {
     },
 
     b = {
-      name = '+buffers',
-      A = {'<cmd>bufdo bd<cr>'            , 'Close all buffer'},
-      c = {'<cmd>BufferClose<cr>'         , 'Close this buffer'},
-      C = {'<cmd>w | %bd | e#<cr>'        , 'Close all other buffers'},
-      d = {'<cmd>bd<cr>'                  , 'Close buffer'},
-      j = {'<cmd>BufferNext<cr>'          , 'Next Buffer'},
-      k = {'<cmd>BufferPrevious<cr>'      , 'Previous Buffer'},
-      J = {'<cmd>BufferMoveNext<cr>'      , 'Swap with Next Buffer'},
-      K = {'<cmd>BufferMovePrevious<cr>'  , 'Swap with Previous Buffer'},
-      G = {'<cmd>BufferLast<cr>'          , 'Last Buffer'},
-     },
+        name = '+buffers',
+        A = {'<cmd>bufdo bd<cr>'            , 'Close all buffer'},
+        c = {'<cmd>BufferClose<cr>'         , 'Close this buffer'},
+        C = {'<cmd>w | %bd | e#<cr>'        , 'Close all other buffers'},
+        d = {'<cmd>bd<cr>'                  , 'Close buffer'},
+        j = {'<cmd>BufferNext<cr>'          , 'Next Buffer'},
+        k = {'<cmd>BufferPrevious<cr>'      , 'Previous Buffer'},
+        J = {'<cmd>BufferMoveNext<cr>'      , 'Swap with Next Buffer'},
+        K = {'<cmd>BufferMovePrevious<cr>'  , 'Swap with Previous Buffer'},
+        G = {'<cmd>BufferLast<cr>'          , 'Last Buffer'},
+    },
     d = {
         name = "+dap",
         b = {"<cmd>lua require'dap'.toggle_breakpoint()<cr>",                           "Toggle breakpoint"},
@@ -148,31 +148,31 @@ local mappings = {
         T = {"<cmd>TodoTelescope<cr>",                   "Todos"},
     },
     w = {
-      name = "+Window",
-      h = {"<C-w><C-h>", "Move to left window"},
-      j = {"<C-w><C-j>", "Move to below window"},
-      k = {"<C-w><C-k>", "Move to above window"},
-      l = {"<C-w><C-l>", "Move to right window"},
-      w = {"<C-w>w", "Move to other window"},
-      x = {"<C-w>x", "Swap with other window"},
-      s = {"<C-w>s", "Split window"},
-      v = {"<C-w>v", "Split window vertically"},
-      c = {"<C-w>q", "Close window"},
-      o = {"<C-w>o", "Keep only current window"},
-      t = {"<C-w>T", "Move window to a tab"},
-      m = {
-        name = "+Max",
-        W = {"<C-w>|", "Max out width"},
-        H = {"<C-w>_", "Max out hight"}
-      },
-      r = {
-        name = "+Resize",
-        l = {"<cmd>vertical resize +10<cr>", "Increase width"},
-        k = {"<cmd>resize +10<cr>", "Increase height"},
-        h = {"<cmd>vertical resize -10<cr>", "Decrease width"},
-        j = {"<cmd>resize -10<cr>", "Decrease height"}
-      },
-      n = {"<C-w>=", "Normalize Windows"}
+        name = "+Window",
+        h = {"<C-w><C-h>", "Move to left window"},
+        j = {"<C-w><C-j>", "Move to below window"},
+        k = {"<C-w><C-k>", "Move to above window"},
+        l = {"<C-w><C-l>", "Move to right window"},
+        w = {"<C-w>w", "Move to other window"},
+        x = {"<C-w>x", "Swap with other window"},
+        s = {"<C-w>s", "Split window"},
+        v = {"<C-w>v", "Split window vertically"},
+        c = {"<C-w>q", "Close window"},
+        o = {"<C-w>o", "Keep only current window"},
+        t = {"<C-w>T", "Move window to a tab"},
+        m = {
+            name = "+Max",
+            W = {"<C-w>|", "Max out width"},
+            H = {"<C-w>_", "Max out hight"}
+        },
+        r = {
+            name = "+Resize",
+            l = {"<cmd>vertical resize +10<cr>", "Increase width"},
+            k = {"<cmd>resize +10<cr>", "Increase height"},
+            h = {"<cmd>vertical resize -10<cr>", "Decrease width"},
+            j = {"<cmd>resize -10<cr>", "Decrease height"}
+        },
+        n = {"<C-w>=", "Normalize Windows"}
     }
 }
 
