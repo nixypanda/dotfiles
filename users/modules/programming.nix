@@ -32,7 +32,7 @@
     rnix-lsp
 
     # python
-    (python3.withPackages (ps: with ps; [ setuptools pip ]))
+    (python3.withPackages (ps: with ps; [ setuptools pip debugpy ]))
     poetry
     autoflake
     python3Packages.pip

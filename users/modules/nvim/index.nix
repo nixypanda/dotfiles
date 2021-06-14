@@ -47,7 +47,9 @@ in
       vimPlugsFromSource.nvim-octo
 
       # DAP
-      vimspector # vimscript
+      nvim-dap
+      nvim-dap-ui
+      vimPlugsFromSource.nvim-dap-python
 
       # Fuzzy Finder
       telescope-nvim
@@ -74,6 +76,7 @@ in
         ${builtins.readFile ./treesitter.lua}
         ${builtins.readFile ./telescope.lua}
         ${builtins.readFile ./lsp.lua}
+        ${builtins.readFile ./dap.lua}
         ${builtins.readFile ./statusline.lua}
         ${builtins.readFile ./git.lua}
         ${builtins.readFile ./todo.lua}

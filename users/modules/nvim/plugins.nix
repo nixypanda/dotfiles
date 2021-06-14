@@ -30,4 +30,14 @@
       sha256 = "sha256-/SnCofoQNKY6M9i5WA/hnZlrPvbbBQzQFwMBsmkRGC4=";
     };
   };
+  nvim-dap-python = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "nvim-dap-python";
+    version = "master";
+    src = pkgs.fetchFromGitHub {
+      owner = "mfussenegger";
+      repo = "nvim-dap-python";
+      rev = "master";
+      sha256 = "sha256-yu/6nNtAlveQ4OTIBdmeVQkc8qFfxnDDeqM6R8HUibg=";
+    };
+  };
 }

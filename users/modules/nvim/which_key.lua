@@ -55,7 +55,19 @@ local mappings = {
       K = {'<cmd>BufferMovePrevious<cr>'  , 'Swap with Previous Buffer'},
       G = {'<cmd>BufferLast<cr>'          , 'Last Buffer'},
      },
-
+    d = {
+        name = "+dap",
+        b = {"<cmd>lua require'dap'.toggle_breakpoint()<cr>",                           "Toggle breakpoint"},
+        i = {"<cmd>lua require'dap'.step_into()<cr>",                                   "Step into"},
+        o = {"<cmd>lua require'dap'.step_over()<cr>",                                   "Step over"},
+        O = {"<cmd>lua require'dap'.step_out()<cr>",                                    "Step out"},
+        I = {"<cmd>lua require'dap.ui.widgets'.hover()<cr>",                            "Inspect variable under cursor"},
+        S = {"<cmd>lua local w=require'dap.ui.widgets';w.centered_float(w.scopes)<cr>", "Show Scopes"},
+        s = {"<cmd>lua require'dap'.continue()<cr>",                                    "Start debugging"},
+        f = {"<cmd>lua require'dap'.stop()<cr>",                                        "Finish debugging"},
+        j = {"<cmd>lua require'dap'.down()<cr>",                                        "Go down in call stack"},
+        k = {"<cmd>lua require'dap'.up()<cr>",                                          "Go up in call stack"},
+    },
     g = {
         name = "+Git",
         b = {"<cmd>Git blame<cr>", "Blame"},
