@@ -4,6 +4,8 @@
     # C
     gcc
 
+    lldb
+
     # Clojure
     clojure
 
