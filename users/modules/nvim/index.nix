@@ -34,6 +34,7 @@ in
       vim-vsnip
       vim-vsnip-integ
       rust-tools-nvim
+      vimPlugsFromSource.nvim-lsp-symbols-outline
 
       # Text objects
       tcomment_vim    # vimscript

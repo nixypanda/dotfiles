@@ -40,7 +40,8 @@ local mappings = {
     a = {
         name = "+Actions",
         s = {'<cmd>let @/ = ""<cr>', "Remove search highlight"},
-        t = {'<cmd>TableModeToggle<cr>', "Start/Stop Table mode"}
+        t = {'<cmd>TableModeToggle<cr>', "Start/Stop Table mode"},
+        d = {"<cmd>SymbolsOutline<cr>", "Toggle Document Symbols Outline"}
     },
 
     b = {

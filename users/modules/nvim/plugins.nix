@@ -30,4 +30,14 @@
       sha256 = "sha256-yu/6nNtAlveQ4OTIBdmeVQkc8qFfxnDDeqM6R8HUibg=";
     };
   };
+  nvim-lsp-symbols-outline = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "nvim-lsp-symbols-outline";
+    version = "master";
+    src = pkgs.fetchFromGitHub {
+      owner = "simrat39";
+      repo = "symbols-outline";
+      rev = "master";
+      sha256 = "sha256-pBEOq6A3ST6pCHRoBECERUH5lZ5AZ0KCegWXFoZsvBU=";
+    };
+  };
 }
