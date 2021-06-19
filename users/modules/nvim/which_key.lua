@@ -41,7 +41,6 @@ local mappings = {
         name = "+Actions",
         s = {'<cmd>let @/ = ""<cr>', "Remove search highlight"},
         t = {'<cmd>TableModeToggle<cr>', "Start/Stop Table mode"},
-        d = {"<cmd>SymbolsOutline<cr>", "Toggle Document Symbols Outline"}
     },
 
     b = {
@@ -90,14 +89,20 @@ local mappings = {
         a = {"<cmd>Lspsaga code_action<cr>",                 "Code Action"},
         d = {"<cmd>Telescope lsp_document_diagnostics<cr>",  "Document Diagnostics"},
         D = {"<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics"},
+        i = {"<cmd>Telescope lsp_implementations<cr>",       "Implementations"},
         I = {"<cmd>LspInfo<cr>",                             "Info"},
         j = {"<cmd>Lspsaga diagnostic_jump_next<cr>",        "Next Action"},
         k = {"<cmd>Lspsaga diagnostic_jump_prev<cr>",        "Previous Action"},
-        r = {"<cmd>Lspsaga rename<cr>",                      "Rename"},
-        R = {"<cmd>Lspsaga lsp_finder<cr>",                  "Definition and Refrences"},
         l = {"<cmd>Lspsaga show_line_diagnostics<cr>",       "Line Diagnostics"},
+        o = {"<cmd>SymbolsOutline<cr>",                      "Toggle Document Symbols Outline"},
         p = {"<cmd>Lspsaga preview_definition<cr>",          "Preview Definition"},
-        t = {"<cmd>Lspsaga signature_help<cr>",              "Signature Help"},
+        r = {"<cmd>Telescope lsp_references<cr>",            "Refrences"},
+        R = {"<cmd>Lspsaga rename<cr>",                      "Rename"},
+        s = {"<cmd>Telescope lsp_document_symbols<cr>",      "Document Symbols"},
+        S = {"<cmd>Telescope lsp_workspace_symbols<cr>",     "Workspace Symbols"},
+        T = {"<cmd>Lspsaga signature_help<cr>",              "Signature Help"},
+
+        -- Custom that need to go away
         f = {
             name = "+Rust",
             r = {"<cmd>RustRunnables<cr>",    "Run"},
@@ -107,17 +112,16 @@ local mappings = {
 
     s = {
         name = "+Search",
-        b = {"<cmd>Telescope buffers<cr>",               "Open Buffers"},
-        f = {"<cmd>Telescope find_files<cr>",            "Find File"},
-        h = {"<cmd>Telescope help_tags<cr>",             "Help Tags"},
-        m = {"<cmd>Telescope marks<cr>",                 "Marks"},
-        M = {"<cmd>Telescope man_pages<cr>",             "Man Pages"},
-        r = {"<cmd>Telescope oldfiles<cr>",              "Open Recent File"},
-        R = {"<cmd>Telescope registers<cr>",             "Registers"},
-        s = {"<cmd>Telescope lsp_document_symbols<cr>",  "Document Symbols"},
-        S = {"<cmd>Telescope lsp_workspace_symbols<cr>", "Workspace Symbols"},
-        t = {"<cmd>Telescope live_grep<cr>",             "Text"},
-        T = {"<cmd>TodoTelescope<cr>",                   "Todos"},
+        b = {"<cmd>Telescope buffers<cr>",         "Open Buffers"},
+        c = {"<cmd>Telescope command_history<cr>", "Previous commands"},
+        f = {"<cmd>Telescope find_files<cr>",      "Find File"},
+        h = {"<cmd>Telescope help_tags<cr>",       "Help Tags"},
+        m = {"<cmd>Telescope marks<cr>",           "Marks"},
+        M = {"<cmd>Telescope man_pages<cr>",       "Man Pages"},
+        r = {"<cmd>Telescope oldfiles<cr>",        "Open Recent File"},
+        R = {"<cmd>Telescope registers<cr>",       "Registers"},
+        t = {"<cmd>Telescope live_grep<cr>",       "Text"},
+        T = {"<cmd>TodoTelescope<cr>",             "Todos"},
     },
     w = {
         name = "+Window",
