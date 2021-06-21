@@ -1,25 +1,5 @@
 {pkgs, ...}:
 {
-  nvim-todo-comments = pkgs.vimUtils.buildVimPluginFrom2Nix {
-    pname = "nvim-todo-comments";
-    version = "master";
-    src = pkgs.fetchFromGitHub {
-      owner = "folke";
-      repo = "todo-comments.nvim";
-      rev = "main";
-      sha256 = "sha256-xpN/g+GuuBZtiD/pSk3TYiN6xhYECJbA46aRlObVT2g=";
-    };
-  };
-  nvim-lsp-signature = pkgs.vimUtils.buildVimPluginFrom2Nix {
-    pname = "nvim-lsp-signature";
-    version = "master";
-    src = pkgs.fetchFromGitHub {
-      owner = "ray-x";
-      repo = "lsp_signature.nvim";
-      rev = "master";
-      sha256 = "sha256-/SnCofoQNKY6M9i5WA/hnZlrPvbbBQzQFwMBsmkRGC4=";
-    };
-  };
   nvim-dap-python = pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "nvim-dap-python";
     version = "master";
@@ -35,9 +15,9 @@
     version = "master";
     src = pkgs.fetchFromGitHub {
       owner = "simrat39";
-      repo = "symbols-outline";
+      repo = "symbols-outline.nvim";
       rev = "master";
-      sha256 = "sha256-pBEOq6A3ST6pCHRoBECERUH5lZ5AZ0KCegWXFoZsvBU=";
+      sha256 = "sha256-UckUSlwej/DcvS123UeKHJafx5dx5t71mYH/Y05fBVc=";
     };
   };
 }

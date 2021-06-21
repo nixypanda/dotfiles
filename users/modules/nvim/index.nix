@@ -29,7 +29,7 @@ in
       nvim-treesitter-textobjects
       nvim-lspconfig
       lspsaga-nvim
-      vimPlugsFromSource.nvim-lsp-signature
+      lsp_signature-nvim
       nvim-compe
       vim-vsnip
       vim-vsnip-integ
@@ -56,7 +56,7 @@ in
 
       # Text Helpers
       vim-table-mode # vimscript
-      vimPlugsFromSource.nvim-todo-comments
+      todo-comments-nvim
 
       # General Deps
       popup-nvim
