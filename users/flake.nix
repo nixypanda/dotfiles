@@ -43,7 +43,6 @@
             ./modules/git.nix
             ./modules/desktop-environment/index.nix
             ./modules/nvim/index.nix
-            ./modules/programming.nix
             ./modules/cli/index.nix
             ./modules/fonts.nix
             ./modules/kitty.nix
@@ -98,7 +97,6 @@
           imports = [
             ./modules/git.nix
             ./modules/nvim/index.nix
-            ./modules/programming.nix
             ./modules/cli/index.nix
             ./modules/fonts.nix
             ./modules/kitty.nix
