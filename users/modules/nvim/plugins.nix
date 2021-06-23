@@ -17,7 +17,7 @@
       owner = "simrat39";
       repo = "symbols-outline.nvim";
       rev = "master";
-      sha256 = "sha256-UckUSlwej/DcvS123UeKHJafx5dx5t71mYH/Y05fBVc=";
+      sha256 = "sha256-/q8My/8GTrc1QB0jtLeUZKslpbRvg6v5Y8gRcMOIgRo=";
     };
   };
 }
