@@ -10,7 +10,9 @@ let
     polybar powermenu &
     nm-applet &
     volumeicon &
+    deadd-notification-center &
     solaar -w hide &
+    blueman-applet &
   '';
 
   custom-script-sysmenu = pkgs.writeScriptBin "custom-script-sysmenu" ''
@@ -59,6 +61,10 @@ in
       xcwd
 
       psmisc
+
+      # Notifications
+      deadd-notification-center
+      notify-desktop
     ];
 
     home.file.".config/google-chrome/NativeMessagingHosts".source = pkgs.symlinkJoin {
@@ -107,6 +113,7 @@ in
       enable = true;
       imageDirectory = "%h/Pictures/backgrounds";
     };
+    home.file.".config/deadd/deadd.css".source = ./deadd/dracula.css;
 
     services.picom = {
       enable = true;
@@ -116,6 +123,7 @@ in
       experimentalBackends = true;
       opacityRule = [
         "100:class_g   *?= 'Google-chrome'"
+        "95:class_g   *?= 'Deadd-notification-center'"
       ];
       extraOptions = ''
         blur-method = "dual_kawase";

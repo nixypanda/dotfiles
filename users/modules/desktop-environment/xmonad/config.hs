@@ -156,6 +156,9 @@ keysToAdd =
             , ( (myModMask, xK_c)
                 , namedScratchpadAction myScratchPads "terminal"
               )
+            , ( (myModMask .|. shiftMask, xK_n)
+                , spawn $ "kill -s USR1 $(pidof deadd-notification-center)"
+              )
             ]
 
         workspaceKeyAndIdentifiers = 
