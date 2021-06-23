@@ -124,6 +124,7 @@ in
       opacityRule = [
         "100:class_g   *?= 'Google-chrome'"
         "95:class_g   *?= 'Deadd-notification-center'"
+        "75:class_g   *?= 'Rofi'"
       ];
       extraOptions = ''
         blur-method = "dual_kawase";
