@@ -133,6 +133,7 @@ in
       lua << EOF
         local statusline_theme = '${colorscheme.vim-statusline}'
 
+        ${builtins.readFile ./nvim-tree.lua}
         ${builtins.readFile ./sane_defaults.lua}
         ${builtins.readFile ./treesitter.lua}
         ${builtins.readFile ./telescope.lua}
