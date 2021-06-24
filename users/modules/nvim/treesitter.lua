@@ -1,6 +1,30 @@
 require'nvim-treesitter.configs'.setup {
     -- Note: installing nix grammer requires treesitter installed as command line too
-    ensure_installed = {"rust", "python", "bash", "go", "haskell", "json", "lua"},
+    ensure_installed = {
+        "bash",
+        "c",
+        "css",
+        "dockerfile",
+        "elm",
+        "go",
+        "haskell",
+        "html",
+        "java",
+        "javascript",
+        "json",
+        "latex",
+        "lua",
+        "nix",
+        "python",
+        "regex",
+        "ruby",
+        "rust",
+        "scss",
+        "toml",
+        "tsx",
+        "typescript",
+        "yaml",
+    },
     highlight = {
         enable = true,
     },
@@ -12,6 +36,9 @@ require'nvim-treesitter.configs'.setup {
             scope_incremental = "grc",
             node_decremental = "grm",
         },
+    },
+    indent = {
+        enable = true,
     },
     refactor = {
         highlight_definitions = { enable = true },
