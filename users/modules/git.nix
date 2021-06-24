@@ -29,7 +29,6 @@
     gitProtocol = "ssh";
   };
 
-  programs.gpg.enable = true;
-  services.gpg-agent.enable = true;
-
+  programs.gpg.enable = (pkgs.stdenv.isDarwin == false);
+  services.gpg-agent.enable = (pkgs.stdenv.isDarwin == false);
 }
