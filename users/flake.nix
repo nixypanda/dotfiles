@@ -98,6 +98,7 @@
 
 
                 imports = [
+                  ./modules/kitty.nix
                   ./modules/git.nix
                   ./modules/nvim/index.nix
                   ./modules/cli/index.nix
