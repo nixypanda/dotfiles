@@ -1,12 +1,18 @@
 
 
 -- Rust
+require'rust-tools'.setup()
 require'lspconfig'.rust_analyzer.setup{
     settings = {
         rust_analyzer = { checkOnSave = { command = "clippy"}}
     },
+    on_attach = function()
+        require'lsp_signature'.on_attach({
+            bind = true,
+            handler_opts = { border = 'single' }
+        })
+    end
 }
-require'rust-tools'.setup()
 
 -- Python
 require'lspconfig'.pyright.setup{}
@@ -29,9 +35,6 @@ require'lspconfig'.sumneko_lua.setup{
 -- nix
 require'lspconfig'.rnix.setup{}
 
--- FIX: Not working.
--- NOTE: lua vim.lsp.buf.signature_help() works fine
--- NOTE: lua require("lsp_signature").signature() works fine
 -- signature help
 require'lsp_signature'.on_attach({
     bind = true,
