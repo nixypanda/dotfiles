@@ -74,6 +74,9 @@
             username = "sherubthakur";
             configuration = { config, lib, pkgs, ... }:
               {
+                _module.args = {
+                  colorscheme = (import ./colorschemes/dracula.nix);
+                };
                 xdg.configFile."nix/nix.conf".text = ''
                   experimental-features = nix-command flakes ca-references
                 '';
