@@ -34,96 +34,101 @@ require"which-key".setup {
     show_help = true -- show help message on the command line when the popup is visible
 }
 
-
 local mappings = {
     e = {"<cmd>NvimTreeToggle<cr>", "Explorer"},
     a = {
         name = "+Actions",
         s = {'<cmd>let @/ = ""<cr>', "Remove search highlight"},
-        t = {'<cmd>TableModeToggle<cr>', "Start/Stop Table mode"},
+        t = {'<cmd>TableModeToggle<cr>', "Start/Stop Table mode"}
     },
 
     b = {
         name = '+buffers',
-        A = {'<cmd>bufdo bd<cr>'            , 'Close all buffer'},
-        c = {'<cmd>BufferClose<cr>'         , 'Close this buffer'},
-        C = {'<cmd>w | %bd | e#<cr>'        , 'Close all other buffers'},
-        d = {'<cmd>bd<cr>'                  , 'Close buffer'},
-        j = {'<cmd>BufferNext<cr>'          , 'Next Buffer'},
-        k = {'<cmd>BufferPrevious<cr>'      , 'Previous Buffer'},
-        J = {'<cmd>BufferMoveNext<cr>'      , 'Swap with Next Buffer'},
-        K = {'<cmd>BufferMovePrevious<cr>'  , 'Swap with Previous Buffer'},
-        G = {'<cmd>BufferLast<cr>'          , 'Last Buffer'},
+        A = {'<cmd>bufdo bd<cr>', 'Close all buffer'},
+        c = {'<cmd>BufferClose<cr>', 'Close this buffer'},
+        C = {'<cmd>w | %bd | e#<cr>', 'Close all other buffers'},
+        d = {'<cmd>bd<cr>', 'Close buffer'},
+        j = {'<cmd>BufferNext<cr>', 'Next Buffer'},
+        k = {'<cmd>BufferPrevious<cr>', 'Previous Buffer'},
+        J = {'<cmd>BufferMoveNext<cr>', 'Swap with Next Buffer'},
+        K = {'<cmd>BufferMovePrevious<cr>', 'Swap with Previous Buffer'},
+        G = {'<cmd>BufferLast<cr>', 'Last Buffer'}
     },
     d = {
         name = "+dap",
-        b = {"<cmd>lua require'dap'.toggle_breakpoint()<cr>",                           "Toggle breakpoint"},
-        i = {"<cmd>lua require'dap'.step_into()<cr>",                                   "Step into"},
-        o = {"<cmd>lua require'dap'.step_over()<cr>",                                   "Step over"},
-        O = {"<cmd>lua require'dap'.step_out()<cr>",                                    "Step out"},
-        I = {"<cmd>lua require'dap.ui.widgets'.hover()<cr>",                            "Inspect variable under cursor"},
-        S = {"<cmd>lua local w=require'dap.ui.widgets';w.centered_float(w.scopes)<cr>", "Show Scopes"},
-        s = {"<cmd>lua require'dap'.continue()<cr>",                                    "Start debugging"},
-        f = {"<cmd>lua require'dap'.stop()<cr>",                                        "Finish debugging"},
-        j = {"<cmd>lua require'dap'.down()<cr>",                                        "Go down in call stack"},
-        k = {"<cmd>lua require'dap'.up()<cr>",                                          "Go up in call stack"},
+        b = {"<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle breakpoint"},
+        i = {"<cmd>lua require'dap'.step_into()<cr>", "Step into"},
+        o = {"<cmd>lua require'dap'.step_over()<cr>", "Step over"},
+        O = {"<cmd>lua require'dap'.step_out()<cr>", "Step out"},
+        I = {
+            "<cmd>lua require'dap.ui.widgets'.hover()<cr>",
+            "Inspect variable under cursor"
+        },
+        S = {
+            "<cmd>lua local w=require'dap.ui.widgets';w.centered_float(w.scopes)<cr>",
+            "Show Scopes"
+        },
+        s = {"<cmd>lua require'dap'.continue()<cr>", "Start debugging"},
+        f = {"<cmd>lua require'dap'.stop()<cr>", "Finish debugging"},
+        j = {"<cmd>lua require'dap'.down()<cr>", "Go down in call stack"},
+        k = {"<cmd>lua require'dap'.up()<cr>", "Go up in call stack"}
     },
     g = {
         name = "+Git",
         b = {"<cmd>Git blame<cr>", "Blame"},
-        j = {'<cmd>lua require"gitsigns".next_hunk()<CR>',       "Next Hunk"},
-        k = {'<cmd>lua require"gitsigns".prev_hunk()<CR>',       "Prev Hunk"},
-        p = {'<cmd>lua require"gitsigns".preview_hunk()<CR>',    "Preview Hunk"},
-        s = {'<cmd>lua require"gitsigns".stage_hunk()<CR>',      "Stage Hunk"},
+        j = {'<cmd>lua require"gitsigns".next_hunk()<CR>', "Next Hunk"},
+        k = {'<cmd>lua require"gitsigns".prev_hunk()<CR>', "Prev Hunk"},
+        p = {'<cmd>lua require"gitsigns".preview_hunk()<CR>', "Preview Hunk"},
+        s = {'<cmd>lua require"gitsigns".stage_hunk()<CR>', "Stage Hunk"},
         u = {'<cmd>lua require"gitsigns".undo_stage_hunk()<CR>', "Undo Stage Hunk"},
         c = {
             name = "+Conflict Resolution",
             s = {"<cmd>Gdiffsplit!<cr>", "Start"},
             h = {"<cmd>diffget //2<cr>", "Get hunk from left"},
             l = {"<cmd>diffget //3<cr>", "Get hunk from right"},
-            f = {"<cmd>Gwrite!<cr>", "Finish"},
-        },
+            f = {"<cmd>Gwrite!<cr>", "Finish"}
+        }
     },
     l = {
         name = "+LSP",
-        a = {"<cmd>Lspsaga code_action<cr>",                 "Code Action"},
-        d = {"<cmd>Telescope lsp_document_diagnostics<cr>",  "Document Diagnostics"},
+        a = {"<cmd>Lspsaga code_action<cr>", "Code Action"},
+        d = {"<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics"},
         D = {"<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics"},
-        F = {"<cmd>LspRestart<cr>",                          "Restart LSP"},
-        i = {"<cmd>Telescope lsp_implementations<cr>",       "Implementations"},
-        I = {"<cmd>LspInfo<cr>",                             "Info"},
-        j = {"<cmd>Lspsaga diagnostic_jump_next<cr>",        "Next Action"},
-        k = {"<cmd>Lspsaga diagnostic_jump_prev<cr>",        "Previous Action"},
-        l = {"<cmd>Lspsaga show_line_diagnostics<cr>",       "Line Diagnostics"},
-        o = {"<cmd>SymbolsOutline<cr>",                      "Toggle Document Symbols Outline"},
-        p = {"<cmd>Lspsaga preview_definition<cr>",          "Preview Definition"},
-        r = {"<cmd>Telescope lsp_references<cr>",            "Refrences"},
-        R = {"<cmd>Lspsaga rename<cr>",                      "Rename"},
-        s = {"<cmd>Telescope lsp_document_symbols<cr>",      "Document Symbols"},
-        S = {"<cmd>Telescope lsp_workspace_symbols<cr>",     "Workspace Symbols"},
-        T = {"<cmd>Lspsaga signature_help<cr>",              "Signature Help"},
+        F = {"<cmd>LspRestart<cr>", "Restart LSP"},
+        i = {"<cmd>Telescope lsp_implementations<cr>", "Implementations"},
+        I = {"<cmd>LspInfo<cr>", "Info"},
+        j = {"<cmd>Lspsaga diagnostic_jump_next<cr>", "Next Action"},
+        k = {"<cmd>Lspsaga diagnostic_jump_prev<cr>", "Previous Action"},
+        l = {"<cmd>Lspsaga show_line_diagnostics<cr>", "Line Diagnostics"},
+        o = {"<cmd>SymbolsOutline<cr>", "Toggle Document Symbols Outline"},
+        p = {"<cmd>Lspsaga preview_definition<cr>", "Preview Definition"},
+        r = {"<cmd>Telescope lsp_references<cr>", "Refrences"},
+        R = {"<cmd>Lspsaga rename<cr>", "Rename"},
+        s = {"<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols"},
+        S = {"<cmd>Telescope lsp_workspace_symbols<cr>", "Workspace Symbols"},
+        T = {"<cmd>Lspsaga signature_help<cr>", "Signature Help"},
 
         -- Custom that need to go away
         f = {
             name = "+Rust",
-            r = {"<cmd>RustRunnables<cr>",    "Run"},
-            p = {"<cmd>RustParentModule<cr>", "Goto Parent Module"},
+            r = {"<cmd>RustRunnables<cr>", "Run"},
+            p = {"<cmd>RustParentModule<cr>", "Goto Parent Module"}
         }
     },
 
     s = {
         name = "+Search",
-        b = {"<cmd>Telescope buffers<cr>",         "Open Buffers"},
+        b = {"<cmd>Telescope buffers<cr>", "Open Buffers"},
         c = {"<cmd>Telescope command_history<cr>", "Previous commands"},
-        C = {"<cmd>Telescope commands<cr>",        "Available commands"},
-        f = {"<cmd>Telescope find_files<cr>",      "Find File"},
-        h = {"<cmd>Telescope help_tags<cr>",       "Help Tags"},
-        m = {"<cmd>Telescope marks<cr>",           "Marks"},
-        M = {"<cmd>Telescope man_pages<cr>",       "Man Pages"},
-        r = {"<cmd>Telescope oldfiles<cr>",        "Open Recent File"},
-        R = {"<cmd>Telescope registers<cr>",       "Registers"},
-        t = {"<cmd>Telescope live_grep<cr>",       "Text"},
-        T = {"<cmd>TodoTelescope<cr>",             "Todos"},
+        C = {"<cmd>Telescope commands<cr>", "Available commands"},
+        f = {"<cmd>Telescope find_files<cr>", "Find File"},
+        h = {"<cmd>Telescope help_tags<cr>", "Help Tags"},
+        m = {"<cmd>Telescope marks<cr>", "Marks"},
+        M = {"<cmd>Telescope man_pages<cr>", "Man Pages"},
+        r = {"<cmd>Telescope oldfiles<cr>", "Open Recent File"},
+        R = {"<cmd>Telescope registers<cr>", "Registers"},
+        t = {"<cmd>Telescope live_grep<cr>", "Text"},
+        T = {"<cmd>TodoTelescope<cr>", "Todos"}
     },
     w = {
         name = "+Window",

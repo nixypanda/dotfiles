@@ -33,6 +33,7 @@ in
 
     # lua
     lua
+    luaformatter
 
     # Nix
     rnix-lsp
