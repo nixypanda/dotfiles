@@ -1,3 +1,54 @@
+-- Enable (broadcasting) snippet capability for completion
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+-- bash
+require'lspconfig'.bashls.setup {}
+
+-- cmake
+require'lspconfig'.cmake.setup {}
+
+-- css
+require'lspconfig'.cssls.setup {
+    capabilities = capabilities,
+    cmd = {"css-languageserver", "--stdio"}
+}
+
+-- docker
+require'lspconfig'.dockerls.setup {}
+
+-- elm
+require'lspconfig'.elmls.setup {}
+
+-- go
+require'lspconfig'.gopls.setup {}
+
+-- Haskell
+require'lspconfig'.hls.setup {
+    settings = {languageServerHaskell = {formattingProvider = "brittany"}}
+}
+
+-- html
+require'lspconfig'.html.setup {
+    capabilities = capabilities,
+    cmd = {'html-languageserver', '--stdio'}
+}
+
+-- json
+require'lspconfig'.jsonls.setup {cmd = {"json-languageserver", "--stdio"}}
+
+-- lua
+require'lspconfig'.sumneko_lua.setup {
+    cmd = {"lua-language-server"},
+    settings = {Lua = {diagnostics = {globals = {'vim'}}}}
+}
+
+-- nix
+require'lspconfig'.rnix.setup {}
+
+-- Python
+require'lspconfig'.pyright.setup {}
+
 -- Rust
 require'rust-tools'.setup()
 require'lspconfig'.rust_analyzer.setup {
@@ -10,22 +61,8 @@ require'lspconfig'.rust_analyzer.setup {
     end
 }
 
--- Python
-require'lspconfig'.pyright.setup {}
-
--- Haskell
-require'lspconfig'.hls.setup {
-    settings = {languageServerHaskell = {formattingProvider = "brittany"}}
-}
-
--- lua
-require'lspconfig'.sumneko_lua.setup {
-    cmd = {"lua-language-server"},
-    settings = {Lua = {diagnostics = {globals = {'vim'}}}}
-}
-
--- nix
-require'lspconfig'.rnix.setup {}
+-- vim
+require'lspconfig'.vimls.setup {}
 
 -- signature help
 require'lsp_signature'.on_attach({bind = true, handler_opts = {border = 'single'}})

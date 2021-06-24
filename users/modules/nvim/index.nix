@@ -5,39 +5,42 @@ in
 {
 
   home.packages = with pkgs; [
+    # bash
+    nodePackages.bash-language-server
     # C
     gcc
-
-    lldb
-
+    # css
+    nodePackages.vscode-css-languageserver-bin
+    # cmake
+    cmake-language-server
     # Clojure
     clojure
-
+    # docker
+    nodePackages.dockerfile-language-server-nodejs
     # Elm
     elmPackages.elm-language-server
-
     # go
     go
     gopls
-
     # Haskell
     ghc
     haskellPackages.cabal-install
     haskellPackages.stack
     haskellPackages.haskell-language-server
-
+    # HTML
+    nodePackages.vscode-html-languageserver-bin
     # JavaScript
     nodejs
-    nodePackages.livedown
     yarn
-
+    # json
+    nodePackages.vscode-json-languageserver-bin
     # lua
     lua
     luaformatter
-
+    # Makrdown
+    nodePackages.livedown
     # Nix
     rnix-lsp
-
     # python
     (python3.withPackages (ps: with ps; [ setuptools pip debugpy ]))
     poetry
@@ -49,16 +52,18 @@ in
     python3Packages.parso
     python3Packages.twine
     nodePackages.pyright
-
     # rust
     rustc
     rust-analyzer
     clippy
     cargo
     rustfmt
-    # perl (this is required by rust)
-    perl
+    perl # perl (this is required by rust)
+    lldb # debugging setup
+    #Vim
+    nodePackages.vim-language-server
 
+    # General purpose programming language server
     nur.repos.crazazy.efm-langserver
   ]  ++ (lib.optionals (stdenv.isDarwin == false) [
     # Note: What possible reason would this have to not build on mac
