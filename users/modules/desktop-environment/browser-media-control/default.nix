@@ -1,4 +1,4 @@
-{pkgs}:
+{ pkgs }:
 
 pkgs.stdenv.mkDerivation {
   name = "custom-browsermediacontrol";
@@ -6,10 +6,14 @@ pkgs.stdenv.mkDerivation {
     pkg-config
     cairo
     gobject-introspection
-    (python3.withPackages (python3Packages: with python3Packages; [
-      pydbus
-      pygobject3
-    ]))
+    (
+      python3.withPackages (
+        python3Packages: with python3Packages; [
+          pydbus
+          pygobject3
+        ]
+      )
+    )
   ];
   unpackPhase = ":";
   installPhase = ''

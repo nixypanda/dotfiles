@@ -13,9 +13,10 @@
         xmonad-extras
         haskell-language-server
       ];
-    in {
-      devShell."${system}" = pkgs.mkShell {
-        buildInputs = with pkgs; [ (ghc.withPackages haskellDeps) ];
+    in
+      {
+        devShell."${system}" = pkgs.mkShell {
+          buildInputs = with pkgs; [ (ghc.withPackages haskellDeps) ];
+        };
       };
-    };
 }

@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 {
   nvim-dap-python = pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "nvim-dap-python";

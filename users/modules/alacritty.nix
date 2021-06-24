@@ -22,7 +22,7 @@ let
         #
         # Blank space added around the window in pixels. This padding is scaled
         # by DPI and the specified value is always added at both opposing sides.
-        padding = {x = 5; y = 5;};
+        padding = { x = 5; y = 5; };
         dynamic_padding = false;
 
         # Window decorations
@@ -73,8 +73,8 @@ let
       colors = {
         # Default colors
         primary = {
-          background  = colors.bg-primary;
-          foreground  = colors.fg-primary;
+          background = colors.bg-primary;
+          foreground = colors.fg-primary;
 
           # Bright and dim foreground colors
           #
@@ -83,7 +83,7 @@ let
           # `draw_bold_text_with_bright_colors` is `false`, the normal foreground
           # color will be used.
           #dim_foreground  = "0x9a9a9a";
-          bright_foreground  = colors.fg-primary-bright;
+          bright_foreground = colors.fg-primary-bright;
         };
 
         # Cursor colors
@@ -96,14 +96,14 @@ let
 
         # Normal colors
         normal = {
-          black    = colors.black  ;
-          red      = colors.red    ;
-          green    = colors.green  ;
-          yellow   = colors.yellow ;
-          blue     = colors.blue   ;
-          magenta  = colors.magenta;
-          cyan     = colors.cyan   ;
-          white    = colors.white  ;
+          black = colors.black;
+          red = colors.red;
+          green = colors.green;
+          yellow = colors.yellow;
+          blue = colors.blue;
+          magenta = colors.magenta;
+          cyan = colors.cyan;
+          white = colors.white;
         };
 
         # # Bright colors
@@ -135,13 +135,13 @@ let
       };
 
       key_bindings = [
-        { key = "V";        mods = "Command"; action = "Paste"; }
-        { key = "C";        mods = "Command"; action = "Copy" ; }
-        { key = "Paste";                      action = "Paste"; }
-        { key = "Copy";                       action = "Copy" ; }
-        { key = "H";        mods = "Command"; action = "Hide" ; }
-        { key = "Q";        mods = "Command"; action = "Quit" ; }
-        { key = "W";        mods = "Command"; action = "Quit" ; }
+        { key = "V"; mods = "Command"; action = "Paste"; }
+        { key = "C"; mods = "Command"; action = "Copy"; }
+        { key = "Paste"; action = "Paste"; }
+        { key = "Copy"; action = "Copy"; }
+        { key = "H"; mods = "Command"; action = "Hide"; }
+        { key = "Q"; mods = "Command"; action = "Quit"; }
+        { key = "W"; mods = "Command"; action = "Quit"; }
       ];
     };
 in

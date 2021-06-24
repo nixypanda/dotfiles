@@ -1,6 +1,7 @@
 # Dotfiles
 
-Here lies the dotfiles crafted with much care. Mostly declarative configuration.
+Here lies the dotfiles crafted with much care. Mostly declarative
+configuration.
 
 ## Configuration
 
@@ -15,19 +16,20 @@ Here lies the dotfiles crafted with much care. Mostly declarative configuration.
 | Browser                  | Google Chrome                                                                                                                                                                                 | Google Chrome                                                           |
 | User environment manager | [Home Manager](https://github.com/nix-community/home-manager)                                                                                                                                 | [Home Manager](https://github.com/nix-community/home-manager)           |
 
-
 ## Here are a few screenshots to showase this config in action!
 
 ### Dracula
+
 ![Sysinfo](./screenshots/dracula/sysinfo.png?raw=true "System Info")
 ![Wall](./screenshots/dracula/wallpaper.png?raw=true "Wallpaper")
-![App Launcher](./screenshots/dracula/rofi-search.png?raw=true "App Launcher")
+![App-Launcher](./screenshots/dracula/rofi-search.png?raw=true "App Launcher")
 ![Ricing](./screenshots/dracula/in-action.png?raw=true "Ricing in progress")
 ![Locked](./screenshots/dracula/locked.png?raw=true "Locked")
 
 ### Onedark
+
 ![Sysinfo](./screenshots/onedark/sysinfo.png?raw=true "System Info")
 ![Wall](./screenshots/onedark/wallpaper.png?raw=true "Wallpaper")
-![App Launcher](./screenshots/onedark/rofi-search.png?raw=true "App Launcher")
+![App-Launcher](./screenshots/onedark/rofi-search.png?raw=true "App Launcher")
 ![Ricing](./screenshots/onedark/in-action.png?raw=true "Ricing in progress")
 ![Locked](./screenshots/onedark/locked.png?raw=true "Locked")

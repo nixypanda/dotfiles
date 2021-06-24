@@ -37,8 +37,9 @@ in
     # lua
     lua
     luaformatter
-    # Makrdown
+    # makrdown
     nodePackages.livedown
+    pandoc
     # Nix
     rnix-lsp
     # python
@@ -65,10 +66,13 @@ in
 
     # General purpose programming language server
     nur.repos.crazazy.efm-langserver
-  ]  ++ (lib.optionals (stdenv.isDarwin == false) [
-    # Note: What possible reason would this have to not build on mac
-    sumneko-lua-language-server
-  ]);
+    nodePackages.prettier
+  ] ++ (
+    lib.optionals (stdenv.isDarwin == false) [
+      # Note: What possible reason would this have to not build on mac
+      sumneko-lua-language-server
+    ]
+  );
 
   programs.neovim = {
     enable = true;
@@ -76,7 +80,7 @@ in
 
     plugins = with pkgs.vimPlugins; [
       # Appearance
-      indentLine     # vimscript
+      indentLine # vimscript
       indent-blankline-nvim
       barbar-nvim
       nvim-tree-lua
@@ -89,7 +93,7 @@ in
       # Programming
       which-key-nvim
       vim-haskellConcealPlus # vimscript
-      vim-nix                # vimscript
+      vim-nix # vimscript
       lspkind-nvim
       nvim-treesitter
       nvim-treesitter-refactor
@@ -104,13 +108,13 @@ in
       vimPlugsFromSource.nvim-lsp-symbols-outline
 
       # Text objects
-      tcomment_vim    # vimscript
-      vim-surround    # vimscript
-      vim-repeat      # vimscript
+      tcomment_vim # vimscript
+      vim-surround # vimscript
+      vim-repeat # vimscript
       nvim-autopairs
 
       # Git
-      vim-fugitive  # vimscript
+      vim-fugitive # vimscript
       gitsigns-nvim
 
       # DAP

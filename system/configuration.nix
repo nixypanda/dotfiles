@@ -12,8 +12,9 @@ let
 in
 {
   imports =
-    [ # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+    [
+      # Include the results of the hardware scan.
+      ./hardware-configuration.nix
     ];
 
   # Get me proprietary packages
@@ -23,7 +24,7 @@ in
   boot.loader = {
     efi.canTouchEfiVariables = true;
     grub = {
-      devices = ["nodev"];
+      devices = [ "nodev" ];
       efiSupport = true;
       enable = true;
       useOSProber = true;
@@ -41,11 +42,11 @@ in
     '';
 
     # https://github.com/NixOS/nixpkgs/issues/124215
-    sandboxPaths = [ "/bin/sh=${pkgs.bash}/bin/sh"];
+    sandboxPaths = [ "/bin/sh=${pkgs.bash}/bin/sh" ];
   };
 
   # networking.hostName = "nixos"; # Define your hostname.
-  networking.networkmanager.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.networkmanager.enable = true; # Enables wireless support via wpa_supplicant.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
@@ -67,12 +68,12 @@ in
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-   environment.systemPackages = with pkgs; [
-     openrgb
-     i2c-tools
-     ddccontrol
-   ];
-   environment.pathsToLink = ["/libexec"];
+  environment.systemPackages = with pkgs; [
+    openrgb
+    i2c-tools
+    ddccontrol
+  ];
+  environment.pathsToLink = [ "/libexec" ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -107,7 +108,7 @@ in
   hardware.opengl = {
     enable = true;
     driSupport = true;
-  }; 
+  };
 
   # Enable the X11 windowing system.
   services.blueman.enable = true;

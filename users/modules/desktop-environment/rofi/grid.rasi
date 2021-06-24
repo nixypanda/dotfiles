@@ -1,40 +1,40 @@
 configuration {
-    modi: "drun,run,calc,emoji,file-browser";
-    drun-display-format: "{icon} {name}";
+  modi: "drun,run,calc,emoji,file-browser";
+  drun-display-format: "{icon} {name}";
 
-    display-ssh:    "";
-    display-run:    "";
-    display-drun:   "";
-    display-window: "";
-    display-combi:  "";
+  display-ssh: "";
+  display-run: "";
+  display-drun: "";
+  display-window: "";
+  display-combi: "";
 
-	show-icons: true;
-	icon-theme: "Arc";
-	hide-scrollbar: true;
-    fullscreen: false;
-	terminal: "alacritty";
+  show-icons: true;
+  icon-theme: "Arc";
+  hide-scrollbar: true;
+  fullscreen: false;
+  terminal: "alacritty";
 }
 
 @import "colors.rasi"
 
 * {
-  text-font:                            "hack 12";
+  text-font: "hack 12";
 
-  inputbar-margin:                      3px 3px;
-  prompt-padding:                       15px 20px;
-  entry-padding:                        15px 15px 15px 0px;
-  list-element-padding:                 10px;
-  list-element-margin:                  @inputbar-margin;
-  list-element-border:                  0px 5px 0px 5px;
+  inputbar-margin: 3px 3px;
+  prompt-padding: 15px 20px;
+  entry-padding: 15px 15px 15px 0px;
+  list-element-padding: 10px;
+  list-element-margin: @inputbar-margin;
+  list-element-border: 0px 5px 0px 5px;
 
-  apps-textbox-prompt-colon-padding:    15px -5px 0px 0px;
+  apps-textbox-prompt-colon-padding: 15px -5px 0px 0px;
 }
 
 #window {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.0);
-    padding: 25% 25%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0);
+  padding: 25% 25%;
 }
 
 #mainbox {

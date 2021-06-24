@@ -25,20 +25,20 @@ rec {
   alert = red;
   warning = yellow;
 
-  black          = "#282a36";
-  red            = "#FF5555";
-  green          = "#50FA7B";
-  yellow         = "#F1FA8C";
-  blue           = "#BD93F9";
-  magenta        = "#FF79C6";
-  cyan           = "#8BE9FD";
-  white          = "#F8F8F2";
-  bright-black   = "#44475a";
-  bright-red     = "#FF6E6E";
-  bright-green   = "#69FF94";
-  bright-yellow  = "#FFFFA5";
-  bright-blue    = "#D6ACFF";
+  black = "#282a36";
+  red = "#FF5555";
+  green = "#50FA7B";
+  yellow = "#F1FA8C";
+  blue = "#BD93F9";
+  magenta = "#FF79C6";
+  cyan = "#8BE9FD";
+  white = "#F8F8F2";
+  bright-black = "#44475a";
+  bright-red = "#FF6E6E";
+  bright-green = "#69FF94";
+  bright-yellow = "#FFFFA5";
+  bright-blue = "#D6ACFF";
   bright-magenta = "#FF92DF";
-  bright-cyan    = "#A4FFFF";
-  bright-white   = "#FFFFFF";
+  bright-cyan = "#A4FFFF";
+  bright-white = "#FFFFFF";
 }

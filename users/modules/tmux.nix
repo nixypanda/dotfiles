@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 let
   github-tmux-onedark-src = pkgs.fetchFromGitHub {
     owner = "odedlaz";

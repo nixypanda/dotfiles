@@ -11,16 +11,16 @@
       foreground = "${colorscheme.fg-primary}";
       background = "${colorscheme.bg-primary}";
 
-      color0  = "${colorscheme.black}";
-      color1  = "${colorscheme.red}";
-      color2  = "${colorscheme.green}";
-      color3  = "${colorscheme.yellow}";
-      color4  = "${colorscheme.blue}";
-      color5  = "${colorscheme.magenta}";
-      color6  = "${colorscheme.cyan}";
-      color7  = "${colorscheme.white}";
-      color8  = "${colorscheme.bright-black}";
-      color9  = "${colorscheme.bright-red}";
+      color0 = "${colorscheme.black}";
+      color1 = "${colorscheme.red}";
+      color2 = "${colorscheme.green}";
+      color3 = "${colorscheme.yellow}";
+      color4 = "${colorscheme.blue}";
+      color5 = "${colorscheme.magenta}";
+      color6 = "${colorscheme.cyan}";
+      color7 = "${colorscheme.white}";
+      color8 = "${colorscheme.bright-black}";
+      color9 = "${colorscheme.bright-red}";
       color10 = "${colorscheme.bright-green}";
       color11 = "${colorscheme.bright-yellow}";
       color12 = "${colorscheme.bright-blue}";

@@ -233,15 +233,25 @@ vim.api.nvim_command(
     'autocmd BufWritePre *.py  lua vim.lsp.buf.formatting_sync(nil, 1000)')
 vim.api.nvim_command(
     'autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 1000)')
+vim.api.nvim_command(
+    'autocmd BufWritePre *.nix lua vim.lsp.buf.formatting_sync(nil, 1000)')
 
 -- EFM Setup
 require"lspconfig".efm.setup {
     init_options = {documentFormatting = true},
-    filetypes = {"python", "lua"},
+    filetypes = {"css", "html", "json", "lua", "python", "markdown"},
     settings = {
         rootMarkers = {".git/"},
         languages = {
-            python = {{formatCommand = "black --quiet -", formatStdin = true}},
+            css = {{formatCommand = "prettier --parser css"}},
+            scss = {{formatCommand = "prettier --parser scss"}},
+            json = {{formatCommand = "prettier --parser json"}},
+            html = {{formatCommand = "prettier --parser html"}},
+            markdown = {{formatCommand = 'pandoc -f markdown -t gfm -sp --tab-stop=2'}},
+            python = {
+                {formatCommand = "isort --quiet -", formatStdin = true},
+                {formatCommand = "black --quiet -", formatStdin = true}
+            },
             lua = {
                 {
                     formatCommand = "lua-format -i --no-keep-simple-function-one-line --no-break-after-operator --column-limit=88 --break-after-table-lb",
