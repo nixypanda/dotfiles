@@ -32,6 +32,7 @@ in
     # JavaScript
     nodejs
     yarn
+    nodePackages.typescript-language-server
     # json
     nodePackages.vscode-json-languageserver-bin
     # lua

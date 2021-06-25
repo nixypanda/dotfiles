@@ -61,6 +61,9 @@ require'lspconfig'.rust_analyzer.setup {
     end
 }
 
+-- TypeScript/JavaScript
+require'lspconfig'.tsserver.setup {}
+
 -- vim
 require'lspconfig'.vimls.setup {}
 
