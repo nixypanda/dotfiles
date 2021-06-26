@@ -154,6 +154,8 @@ in
         ${builtins.readFile ./git.lua}
         ${builtins.readFile ./todo.lua}
         ${builtins.readFile ./which_key.lua}
+
+        ${builtins.readFile ./dummy.lua}
       EOF
 
       ${builtins.readFile ./theme.vim}
