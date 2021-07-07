@@ -3,39 +3,44 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- bash
-require'lspconfig'.bashls.setup {}
+require'lspconfig'.bashls.setup {cmd = lang_servers_cmd.bashls}
 
 -- cmake
-require'lspconfig'.cmake.setup {}
+require'lspconfig'.cmake.setup {cmd = lang_servers_cmd.cmake}
 
 -- css
 require'lspconfig'.cssls.setup {
     capabilities = capabilities,
-    cmd = {"css-languageserver", "--stdio"}
+    cmd = lang_servers_cmd.cssls
 }
 
 -- docker
-require'lspconfig'.dockerls.setup {}
+require'lspconfig'.dockerls.setup {cmd = lang_servers_cmd.dockerls}
 
 -- elm
-require'lspconfig'.elmls.setup {}
+require'lspconfig'.elmls.setup {
+    cmd = lang_servers_cmd.elmls,
+    init_options = {
+        elmPath = lang_servers_cmd.elm,
+        elmTestPath = lang_servers_cmd.elm_test,
+        elmFormatPath = lang_servers_cmd.elm_format
+    }
+}
 
 -- go
-require'lspconfig'.gopls.setup {}
+require'lspconfig'.gopls.setup {cmd = lang_servers_cmd.gopls}
 
 -- Haskell
 require'lspconfig'.hls.setup {
-    settings = {languageServerHaskell = {formattingProvider = "brittany"}}
+    settings = {languageServerHaskell = {formattingProvider = "brittany"}},
+    cmd = lang_servers_cmd.hls
 }
 
 -- html
-require'lspconfig'.html.setup {
-    capabilities = capabilities,
-    cmd = {'html-languageserver', '--stdio'}
-}
+require'lspconfig'.html.setup {capabilities = capabilities, cmd = lang_servers_cmd.html}
 
 -- json
-require'lspconfig'.jsonls.setup {cmd = {"json-languageserver", "--stdio"}}
+require'lspconfig'.jsonls.setup {cmd = lang_servers_cmd.jsonls}
 
 -- lua
 require'lspconfig'.sumneko_lua.setup {
@@ -44,15 +49,28 @@ require'lspconfig'.sumneko_lua.setup {
 }
 
 -- nix
-require'lspconfig'.rnix.setup {}
+require'lspconfig'.rnix.setup {cmd = lang_servers_cmd.rnix}
 
 -- Python
-require'lspconfig'.pyright.setup {}
+require'lspconfig'.pyright.setup {cmd = lang_servers_cmd.pyright}
 
 -- Rust
 require'rust-tools'.setup()
 require'lspconfig'.rust_analyzer.setup {
-    settings = {rust_analyzer = {checkOnSave = {command = "clippy"}}},
+    cmd = lang_servers_cmd.rust_analyzer,
+    settings = {
+        ['rust-analyzer'] = {
+            checkOnSave = {
+                allFeatures = true,
+                overrideCommand = {
+                    lang_servers_cmd.clippy, '--workspace', '--message-format=json',
+                    '--all-targets', '--all-features'
+                }
+            }
+            -- TODO: Fix this
+            -- rustfmt = {overrideCommand = {lang_servers_cmd.rustfmt, "--"}}
+        }
+    },
     on_attach = function()
         require'lsp_signature'.on_attach({
             bind = true,
@@ -62,10 +80,10 @@ require'lspconfig'.rust_analyzer.setup {
 }
 
 -- TypeScript/JavaScript
-require'lspconfig'.tsserver.setup {}
+require'lspconfig'.tsserver.setup {cmd = lang_servers_cmd.tsserver}
 
 -- vim
-require'lspconfig'.vimls.setup {}
+require'lspconfig'.vimls.setup {cmd = lang_servers_cmd.vimls}
 
 -- signature help
 require'lsp_signature'.on_attach({bind = true, handler_opts = {border = 'single'}})
@@ -241,23 +259,31 @@ vim.api.nvim_command(
 
 -- EFM Setup
 require"lspconfig".efm.setup {
+    cmd = lang_servers_cmd.efmls,
     init_options = {documentFormatting = true},
     filetypes = {"css", "html", "json", "lua", "python", "markdown"},
     settings = {
         rootMarkers = {".git/"},
         languages = {
-            css = {{formatCommand = "prettier --parser css"}},
-            scss = {{formatCommand = "prettier --parser scss"}},
-            json = {{formatCommand = "prettier --parser json"}},
-            html = {{formatCommand = "prettier --parser html"}},
+            css = {{formatCommand = lang_servers_cmd.prettier .. " --parser css"}},
+            scss = {{formatCommand = lang_servers_cmd.prettier .. " --parser scss"}},
+            json = {{formatCommand = lang_servers_cmd.prettier .. " --parser json"}},
+            html = {{formatCommand = lang_servers_cmd.prettier .. " --parser html"}},
             markdown = {{formatCommand = 'pandoc -f markdown -t gfm -sp --tab-stop=2'}},
             python = {
-                {formatCommand = "isort --quiet -", formatStdin = true},
-                {formatCommand = "black --quiet -", formatStdin = true}
+                {
+                    formatCommand = lang_servers_cmd.isort .. " --quiet -",
+                    formatStdin = true
+                },
+                {
+                    formatCommand = lang_servers_cmd.black .. " --quiet -",
+                    formatStdin = true
+                }
             },
             lua = {
                 {
-                    formatCommand = "lua-format -i --no-keep-simple-function-one-line --no-break-after-operator --column-limit=88 --break-after-table-lb",
+                    formatCommand = lang_servers_cmd.lua_format
+                        .. " -i --no-keep-simple-function-one-line --no-break-after-operator --column-limit=88 --break-after-table-lb",
                     formatStdin = true
                 }
             }
