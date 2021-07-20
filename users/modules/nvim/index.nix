@@ -3,7 +3,6 @@ let
   vimPlugsFromSource = (import ./plugins.nix) pkgs;
 in
 {
-
   home.packages = with pkgs; [
     # C
     gcc
@@ -50,7 +49,6 @@ in
 
     plugins = with pkgs.vimPlugins; [
       # Appearance
-      indentLine # vimscript
       indent-blankline-nvim
       barbar-nvim
       nvim-tree-lua
