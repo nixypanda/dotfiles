@@ -1,7 +1,7 @@
 configuration {
   modi: "window,run,drun";
   show-icons: true;
-  font: "Hack 10";
+  font: "Hack Nerd Font 12";
   columns: 1;
   lines: 5;
 }
