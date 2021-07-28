@@ -2,13 +2,12 @@
   description = "Home manager flake";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     home-manager.url = "github:nix-community/home-manager";
     nur.url = "github:nix-community/NUR";
   };
   outputs = { self, nur, ... }@inputs:
     let
-      overlays = [ inputs.neovim-nightly-overlay.overlay nur.overlay ];
+      overlays = [ nur.overlay ];
     in
       {
         homeConfigurations = {

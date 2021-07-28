@@ -87,7 +87,7 @@ in
 
       # DAP
       nvim-dap
-      nvim-dap-ui
+      # nvim-dap-ui
       vimPlugsFromSource.nvim-dap-python
 
       # Fuzzy Finder
@@ -159,7 +159,5 @@ in
       ${builtins.readFile ./theme.vim}
       ${builtins.readFile ./indentline.vim}
     '';
-
-    package = pkgs.neovim-nightly;
   };
 }

@@ -45,4 +45,4 @@ dap.configurations.rust = {
 }
 
 -- General Setup
-require('dapui').setup()
+-- require('dapui').setup()
