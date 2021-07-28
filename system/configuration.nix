@@ -116,6 +116,8 @@ in
     enable = true;
     xkbOptions = "caps:swapescape";
     videoDrivers = [ "amdgpu" ];
+    autoRepeatDelay = 200;
+    autoRepeatInterval = 20;
 
     displayManager.sessionCommands = ''
       xrandr --output DisplayPort-0 --mode 3840x2160 --scale 0.70x0.70
