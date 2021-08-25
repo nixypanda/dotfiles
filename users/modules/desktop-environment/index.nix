@@ -152,6 +152,31 @@ in
     );
   };
 
+  services.xidlehook = {
+    enable = true;
+    # NOTE: The delays add onto the previous value (and the value is in seconds)
+    timers = [
+      {
+        delay = 60;
+        command = "${pkgs.notify-desktop}/bin/notify-desktop --app-name=i3lock-fancy --urgency=critical \"Locking screen in 1 min\"";
+        canceller = "${pkgs.notify-desktop}/bin/notify-desktop --app-name=i3lock-fancy \"Locking screen cancelled\"";
+      }
+      {
+        delay = 60;
+        command = "${pkgs.i3lock-fancy}/bin/i3lock-fancy";
+      }
+      {
+        delay = 420;
+        command = "${pkgs.notify-desktop}/bin/notify-desktop --app-name=systemctl --urgency=critical \"Sleeping in 1 min\"";
+        canceller = "${pkgs.notify-desktop}/bin/notify-desktop --app-name=systemctl \"Sleep cancelled\"";
+      }
+      {
+        delay = 60;
+        command = "systemctl -i suspend";
+      }
+    ];
+  };
+
   xsession = {
     enable = true;
     scriptPath = ".hm-xsession";
