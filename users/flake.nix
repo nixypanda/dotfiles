@@ -17,6 +17,7 @@
             username = "sherub";
             configuration = { config, lib, pkgs, ... }@configInput:
               {
+                # NOTE: Here we are injecting colorscheme so that it is passed down all the imports
                 _module.args = {
                   colorscheme = (import ./colorschemes/dracula.nix);
                 };
@@ -39,13 +40,16 @@
                   ./modules/system-management
                 ];
 
+                # Packages that don't fit in the modules that we have
                 home.packages = with pkgs; [
                   # GUI Apps
                   slack
                   discord
                   p3x-onenote
 
-                  # Busybox replacements
+                  # Busybox replacements: As the default ones give out very
+                  # limited info which is extremely unhelpful when debugging
+                  # something
                   pciutils
                   usbutils
                   less
@@ -63,6 +67,7 @@
             username = "sherubthakur";
             configuration = { config, lib, pkgs, ... }:
               {
+                # NOTE: Here we are injecting colorscheme so that it is passed down all the imports
                 _module.args = {
                   colorscheme = (import ./colorschemes/dracula.nix);
                 };
@@ -74,7 +79,6 @@
 
                 # Let Home Manager install and manage itself.
                 programs.home-manager.enable = true;
-
 
                 imports = [
                   ./modules/kitty.nix
