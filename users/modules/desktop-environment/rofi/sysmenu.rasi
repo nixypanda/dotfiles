@@ -3,7 +3,7 @@ configuration {
   show-icons: true;
   font: "Hack Nerd Font 12";
   columns: 1;
-  lines: 5;
+  lines: 4;
 }
 
 @import "colors.rasi"
