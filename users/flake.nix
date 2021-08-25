@@ -40,13 +40,13 @@
                 imports = [
                   ./modules/browser.nix
                   ./modules/git.nix
-                  ./modules/desktop-environment/index.nix
-                  ./modules/nvim/index.nix
-                  ./modules/cli/index.nix
+                  ./modules/desktop-environment
+                  ./modules/nvim
+                  ./modules/cli
                   ./modules/fonts.nix
                   ./modules/kitty.nix
                   ./modules/alacritty.nix
-                  ./modules/system-management/index.nix
+                  ./modules/system-management
                 ];
 
                 home.packages = with pkgs; [
@@ -99,13 +99,13 @@
                 imports = [
                   ./modules/kitty.nix
                   ./modules/git.nix
-                  ./modules/nvim/index.nix
-                  ./modules/cli/index.nix
+                  ./modules/nvim
+                  ./modules/cli
                   ./modules/fonts.nix
                   ./modules/kitty.nix
                   ./modules/alacritty.nix
                   ./modules/tmux.nix
-                  ./modules/system-management/index.nix
+                  ./modules/system-management
                 ];
               };
           };

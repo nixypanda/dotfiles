@@ -2,7 +2,7 @@ require('lualine').setup {
     options = {
         section_separators = {'', ''},
         component_separators = {'', ''},
-        -- Hack : This is defined in the nvim/index.nix (String interpolation)
+        -- Hack : This is defined in the nvim/default.nix (String interpolation)
         theme = statusline_theme,
         iconsEnabled = true
     },
