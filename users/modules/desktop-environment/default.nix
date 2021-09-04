@@ -157,7 +157,7 @@ in
     # NOTE: The delays add onto the previous value (and the value is in seconds)
     timers = [
       {
-        delay = 60;
+        delay = 240;
         command = "${pkgs.notify-desktop}/bin/notify-desktop --app-name=i3lock-fancy --urgency=critical \"Locking screen in 1 min\"";
         canceller = "${pkgs.notify-desktop}/bin/notify-desktop --app-name=i3lock-fancy \"Locking screen cancelled\"";
       }
@@ -166,7 +166,7 @@ in
         command = "${pkgs.i3lock-fancy}/bin/i3lock-fancy";
       }
       {
-        delay = 420;
+        delay = 240;
         command = "${pkgs.notify-desktop}/bin/notify-desktop --app-name=systemctl --urgency=critical \"Sleeping in 1 min\"";
         canceller = "${pkgs.notify-desktop}/bin/notify-desktop --app-name=systemctl \"Sleep cancelled\"";
       }
