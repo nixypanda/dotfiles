@@ -73,7 +73,7 @@ in
       vim-vsnip
       vim-vsnip-integ
       rust-tools-nvim
-      vimPlugsFromSource.nvim-lsp-symbols-outline
+      symbols-outline-nvim
 
       # Text objects
       tcomment_vim # vimscript
