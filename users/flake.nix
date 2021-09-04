@@ -38,12 +38,12 @@
                   ./modules/kitty.nix
                   ./modules/alacritty.nix
                   ./modules/system-management
+                  ./modules/work.nix
                 ];
 
                 # Packages that don't fit in the modules that we have
                 home.packages = with pkgs; [
                   # GUI Apps
-                  slack
                   discord
                   p3x-onenote
 
@@ -55,7 +55,6 @@
                   less
                   stress
 
-                  openvpn
                   gnome3.networkmanager-openvpn
                 ];
               };
