@@ -57,7 +57,7 @@ in
       lualine-nvim
       one-nvim
       dracula-vim
-      dashboard-nvim #vimscript
+      vimPlugsFromSource.nvim-alpha
 
       # Programming
       which-key-nvim
@@ -106,11 +106,11 @@ in
     # cmake = {"${pkgs.cmake-language-server}/bin/cmake-language-server"},
     extraConfig = ''
       ${builtins.readFile ./sane_defaults.vim}
-      ${builtins.readFile ./dashboard.vim}
 
       colorscheme ${colorscheme.vim-name}
 
       lua << EOF
+      ${builtins.readFile ./dashboard.lua}
         local statusline_theme = '${colorscheme.vim-statusline}'
 
         local lang_servers_cmd = {

@@ -10,4 +10,14 @@
       sha256 = "sha256-vQ7wWiSdCDd1hQfi9Mv67ZpmBvDcO/hy8IOgMzE2yUk=";
     };
   };
+  nvim-alpha = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "nvim-alpha";
+    version = "main";
+    src = pkgs.fetchFromGitHub {
+      owner = "goolord";
+      repo = "alpha-nvim";
+      rev = "main";
+      sha256 = "sha256-MGfxAuyGOF7sMk+l9iBBelUlvg5OJEd0iOxf4Oger5s=";
+    };
+  };
 }
