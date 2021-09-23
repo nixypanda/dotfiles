@@ -34,6 +34,7 @@ in
     rustc
     cargo
     rustfmt
+    cargo-tarpaulin
     perl # perl (this is required by rust)
     lldb # debugging setup
   ] ++ (
