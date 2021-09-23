@@ -6,7 +6,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 require'lspconfig'.bashls.setup {cmd = lang_servers_cmd.bashls}
 
 -- cmake
-require'lspconfig'.cmake.setup {cmd = lang_servers_cmd.cmake}
+-- require'lspconfig'.cmake.setup {cmd = lang_servers_cmd.cmake}
 
 -- css
 require'lspconfig'.cssls.setup {

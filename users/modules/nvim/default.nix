@@ -103,6 +103,7 @@ in
       plenary-nvim
     ];
 
+    # cmake = {"${pkgs.cmake-language-server}/bin/cmake-language-server"},
     extraConfig = ''
       ${builtins.readFile ./sane_defaults.vim}
       ${builtins.readFile ./dashboard.vim}
@@ -115,7 +116,6 @@ in
         local lang_servers_cmd = {
           bashls = {"${pkgs.nodePackages.bash-language-server}/bin/bash-language-server", "start"},
           cssls = {"${pkgs.nodePackages.vscode-css-languageserver-bin}/bin/css-languageserver", "--stdio"},
-          cmake = {"${pkgs.cmake-language-server}/bin/cmake-language-server"},
           dockerls = {"${pkgs.nodePackages.dockerfile-language-server-nodejs}/bin/docker-langserver", "--stdio"},
           elmls = {"${pkgs.elmPackages.elm-language-server}/bin/elm-language-server"},
           gopls = {"${pkgs.gopls}/bin/gopls"},
