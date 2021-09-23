@@ -7,6 +7,8 @@
     gnumake
     docker-compose
     tokei
+    dig
+    wireshark
 
     # Moar colors
     starship
@@ -21,6 +23,9 @@
     # system info
     bottom
     neofetch
+
+    # benchmarking
+    httperf
   ];
 
   programs.bat = {
