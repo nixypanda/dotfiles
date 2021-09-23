@@ -44,7 +44,7 @@
     settings = {
       edit_mode = "vi";
       # figure out how to use z add here
-      prompt = "za $(pwd) | echo $(starship prompt)";
+      # prompt = "echo $(starship prompt)";
       startup = [
         "def z [a] {if $(echo $a | empty?) == $true { cd ~ } {echo $a | each { if $it == '-' { cd - } {cd $(zoxide query -- $it | str trim)}}}}"
         "def zi [a] {echo $(do -i {zoxide query -i $a} | str trim) | each { cd $it }}"
