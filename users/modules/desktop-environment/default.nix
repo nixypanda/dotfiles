@@ -166,7 +166,7 @@ in
         command = "${pkgs.i3lock-fancy}/bin/i3lock-fancy";
       }
       {
-        delay = 240;
+        delay = 240 + 1200;
         command = "${pkgs.notify-desktop}/bin/notify-desktop --app-name=systemctl --urgency=critical \"Sleeping in 1 min\"";
         canceller = "${pkgs.notify-desktop}/bin/notify-desktop --app-name=systemctl \"Sleep cancelled\"";
       }
