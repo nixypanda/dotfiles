@@ -2,14 +2,13 @@ configuration {
   modi: "window,run,drun";
   show-icons: true;
   font: "Hack Nerd Font 12";
-  columns: 1;
-  lines: 4;
 }
 
 @import "colors.rasi"
 
 #window {
-  width: 10%;
+  width: 7%;
+  height: 33%;
   background-color: @background;
   padding: 5px;
   border: 3px;
@@ -28,41 +27,46 @@ configuration {
   columns: 4;
   layout: vertical;
   background-color: transparent;
+  columns: 1;
+  lines: 4;
 }
 
-element {
+#element {
   margin: 8px;
   padding: 10px;
   border-radius: 5px;
   orientation: vertical;
-}
-
-element-icon {
-  size: 48px;
-  margin: 2px;
-}
-
-element-text {
-  horizontal-align: 0.5;
-  vertical-align: 0.5;
-}
-
-#element.normal.normal {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: @background;
   text-color: @foreground;
 }
 
-#element.selected.normal {
+#element-icon {
+  size: 48px;
+  margin: 2px;
+  horizontal-align: 0.5;
+  vertical-align: 0.5;
+  background-color: @background;
+  text-color: @foreground;
+}
+
+#element-text {
+  horizontal-align: 0.5;
+  vertical-align: 0.5;
+  background-color: @background;
+  text-color: @foreground;
+}
+
+#element.selected {
   background-color: @accent;
   text-color: @background;
 }
 
-#element.alternate.normal {
-  background-color: rgba(0, 0, 0, 0);
-  text-color: @foreground;
+#element-text.selected {
+  background-color: @accent;
+  text-color: @background;
 }
 
-#mode-switcher {
-  border: 0px 0px 0px;
-  border-color: @separatorcolor;
+#element-icon.selected {
+  background-color: @accent;
+  text-color: @background;
 }

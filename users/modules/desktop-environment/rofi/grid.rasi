@@ -1,5 +1,5 @@
 configuration {
-  modi: "drun,run,calc,emoji,file-browser";
+  modi: "drun,run,calc,emoji,filebrowser";
   drun-display-format: "{icon} {name}";
 
   display-ssh: "";
@@ -44,12 +44,8 @@ configuration {
   border-color: @accent;
   border-width: 2px;
   box-shadow: 2px;
-}
-
-* {
   background-color: @background;
   text-color: @foreground;
-  font: @text-font;
 }
 
 inputbar,
@@ -57,7 +53,14 @@ prompt,
 textbox-prompt-colon,
 entry {
   background-color: @background;
+  text-color: @foreground;
   border-radius: 10px;
+}
+
+#listview {
+  background-color: @background;
+  columns: 2;
+  cycle: false;
 }
 
 #inputbar {
@@ -80,6 +83,7 @@ entry {
 #entry {
   text-color: @accent;
   padding: @entry-padding;
+  background-color: @background;
 }
 
 #element {
@@ -91,9 +95,29 @@ entry {
   border-radius: 10px;
 }
 
+#element-text {
+  background-color: @background;
+  text-color: @foreground;
+}
+
+#element-icon {
+  background-color: @background;
+  text-color: @foreground;
+}
+
 #element.selected {
   background-color: @accent;
   text-color: @background;
   border-color: @accent;
   border-radius: 10px;
+}
+
+#element-text.selected {
+  background-color: @accent;
+  text-color: @background;
+}
+
+#element-icon.selected {
+  background-color: @accent;
+  text-color: @background;
 }
