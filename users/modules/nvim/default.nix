@@ -37,12 +37,7 @@ in
     cargo-tarpaulin
     perl # perl (this is required by rust)
     lldb # debugging setup
-  ] ++ (
-    lib.optionals (stdenv.isDarwin == false) [
-      # Note: What possible reason would this have to not build on mac
-      sumneko-lua-language-server
-    ]
-  );
+  ] ++ (lib.optional pkgs.stdenv.isLinux [ sumneko-lua-language-server ]);
 
   programs.neovim = {
     enable = true;

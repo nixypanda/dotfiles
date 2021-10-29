@@ -29,6 +29,6 @@
     settings.git_protocol = "ssh";
   };
 
-  programs.gpg.enable = (pkgs.stdenv.isDarwin == false);
-  services.gpg-agent.enable = (pkgs.stdenv.isDarwin == false);
+  programs.gpg.enable = pkgs.stdenv.isLinux;
+  services.gpg-agent.enable = pkgs.stdenv.isLinux;
 }
