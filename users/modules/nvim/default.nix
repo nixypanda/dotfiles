@@ -70,7 +70,16 @@ in
       nvim-lspconfig
       lspsaga-nvim
       lsp_signature-nvim
-      nvim-compe
+      ## Autocompletion setup
+      nvim-cmp
+      cmp-path
+      cmp-vsnip
+      cmp-buffer
+      cmp-nvim-lsp
+      cmp-nvim-lua
+      cmp-treesitter
+      cmp-calc
+
       vim-vsnip
       vim-vsnip-integ
       rust-tools-nvim
