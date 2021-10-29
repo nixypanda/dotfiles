@@ -1,5 +1,6 @@
 { pkgs, ... }:
 {
+
   nvim-dap-python = pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "nvim-dap-python";
     version = "master";
@@ -7,9 +8,10 @@
       owner = "mfussenegger";
       repo = "nvim-dap-python";
       rev = "master";
-      sha256 = "sha256-vQ7wWiSdCDd1hQfi9Mv67ZpmBvDcO/hy8IOgMzE2yUk=";
+      sha256 = "sha256-yRFoqQrG1H+ADJGt1x6+9em221B32C6ia0VEi8PRRIc=";
     };
   };
+
   nvim-alpha = pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "nvim-alpha";
     version = "main";
@@ -17,7 +19,8 @@
       owner = "goolord";
       repo = "alpha-nvim";
       rev = "main";
-      sha256 = "sha256-MGfxAuyGOF7sMk+l9iBBelUlvg5OJEd0iOxf4Oger5s=";
+      sha256 = "sha256-RdvlKhrqjbYvAw+X0tkzZea4GwgJv0YlMgQY/SEtH8c=";
     };
   };
+
 }

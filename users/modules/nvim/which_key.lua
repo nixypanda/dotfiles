@@ -91,7 +91,7 @@ local mappings = {
     },
     l = {
         name = "+LSP",
-        a = {"<cmd>Lspsaga code_action<cr>", "Code Action"},
+        a = {"<cmd>Telescope lsp_code_actions<cr>", "Code Action"},
         d = {"<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics"},
         D = {"<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics"},
         f = {"<cmd>lua vim.lsp.buf.formatting_sync(nil, 1000)<cr>", "Format document"},

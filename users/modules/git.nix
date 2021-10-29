@@ -26,7 +26,7 @@
 
   programs.gh = {
     enable = true;
-    gitProtocol = "ssh";
+    settings.git_protocol = "ssh";
   };
 
   programs.gpg.enable = (pkgs.stdenv.isDarwin == false);
