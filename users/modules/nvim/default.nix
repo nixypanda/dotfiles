@@ -37,6 +37,8 @@ in
     cargo-tarpaulin
     perl # perl (this is required by rust)
     lldb # debugging setup
+    rust-analyzer
+    cargo-clippy
   ] ++ (lib.optional pkgs.stdenv.isLinux [ sumneko-lua-language-server ]);
 
   programs.neovim = {
@@ -128,7 +130,6 @@ in
           jsonls = {"${pkgs.nodePackages.vscode-json-languageserver-bin}/bin/json-languageserver", "--stdio"},
           pyright = {"${pkgs.nodePackages.pyright}/bin/pyright-langserver", "--stdio"},
           rnix = {"${pkgs.rnix-lsp}/bin/rnix-lsp"},
-          rust_analyzer = {"${pkgs.rust-analyzer}/bin/rust-analyzer"},
           tsserver = {"${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server", "--stdio"},
           vimls = {"${pkgs.nodePackages.vim-language-server}/bin/vim-language-server", "--stdio"},
           yamlls = {"${pkgs.nodePackages.yaml-language-server}/bin/yaml-language-server", "--stdio"},
@@ -138,7 +139,6 @@ in
           isort = "${pkgs.python3Packages.isort}/bin/isort",
           black = "${pkgs.python3Packages.black}/bin/black",
           lua_format = "${pkgs.luaformatter}/bin/lua-format",
-          clippy = "${pkgs.clippy}/bin/cargo-clippy",
           rustfmt = "${pkgs.rustfmt}/bin/cargo-fmt",
 
           elm = "${pkgs.elmPackages.elm}/bin/elm",

@@ -61,18 +61,6 @@ require'lspconfig'.pyright.setup {cmd = lang_servers_cmd.pyright}
 -- Rust
 require'rust-tools'.setup()
 require'lspconfig'.rust_analyzer.setup {
-    cmd = lang_servers_cmd.rust_analyzer,
-    settings = {
-        ['rust-analyzer'] = {
-            checkOnSave = {
-                allFeatures = true,
-                overrideCommand = {
-                    lang_servers_cmd.clippy, '--workspace', '--message-format=json',
-                    '--all-targets', '--all-features'
-                }
-            }
-        }
-    },
     on_attach = function()
         require'lsp_signature'.on_attach({
             bind = true,

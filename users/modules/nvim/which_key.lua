@@ -112,8 +112,10 @@ local mappings = {
         -- Custom that need to go away
         t = {
             name = "+Rust",
-            r = {"<cmd>RustRunnables<cr>", "Run"},
-            p = {"<cmd>RustParentModule<cr>", "Goto Parent Module"}
+            r = {"<cmd>lua require('rust-tools.runnables').runnables()<cr>", "Run"},
+            d = {
+                "<cmd>lua require('rust-tools.debuggables').debuggables()<cr>", "Debug"
+            }
         }
     },
 
