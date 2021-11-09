@@ -38,8 +38,8 @@ in
     perl # perl (this is required by rust)
     lldb # debugging setup
     rust-analyzer
-    cargo-clippy
-  ] ++ (lib.optional pkgs.stdenv.isLinux [ sumneko-lua-language-server ]);
+    clippy
+  ] ++ (lib.optional pkgs.stdenv.isLinux sumneko-lua-language-server);
 
   programs.neovim = {
     enable = true;

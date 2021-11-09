@@ -81,8 +81,6 @@ in
     package = pkgs.rofi.override {
       plugins = [ pkgs.rofi-emoji pkgs.rofi-calc pkgs.rofi-file-browser ];
     };
-    lines = 7;
-    width = 40;
     font = "hack 10";
   };
   home.file.".config/rofi/colors.rasi".text = ''

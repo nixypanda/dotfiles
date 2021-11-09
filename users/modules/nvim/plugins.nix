@@ -8,7 +8,7 @@
       owner = "mfussenegger";
       repo = "nvim-dap-python";
       rev = "master";
-      sha256 = "sha256-yRFoqQrG1H+ADJGt1x6+9em221B32C6ia0VEi8PRRIc=";
+      sha256 = "sha256-ZPJuv+XsizTZmYC4CZkzV8NGwt+Mlq+KmddQsLApEYQ=";
     };
   };
 
@@ -19,7 +19,7 @@
       owner = "goolord";
       repo = "alpha-nvim";
       rev = "main";
-      sha256 = "sha256-RdvlKhrqjbYvAw+X0tkzZea4GwgJv0YlMgQY/SEtH8c=";
+      sha256 = "sha256-/FW29rwyYLQgpItomriu98MF2nog6lVzz75wX4Tz3WE=";
     };
   };
 

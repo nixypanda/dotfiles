@@ -7,7 +7,7 @@
 let
   solaar-rules = builtins.fetchurl {
     url = "https://github.com/pwr-Solaar/Solaar/blob/1.0.5/rules.d/42-logitech-unify-permissions.rules";
-    sha256 = "sha256:0z938bxvd57z1laai7ng5h8vwln7l4hw3y4agmk6j3zg95abaq2i";
+    sha256 = "sha256:0j441dnhhrzacchsi872dpl1cgpck6xkfrgcpva550wwqwhyqyfw";
   };
 in
 {
