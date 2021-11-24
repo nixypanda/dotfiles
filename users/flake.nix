@@ -3,6 +3,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nur.url = "github:nix-community/NUR";
   };
   outputs = { self, nur, ... }@inputs:

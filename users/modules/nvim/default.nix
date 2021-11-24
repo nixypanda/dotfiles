@@ -45,6 +45,8 @@ in
     enable = true;
     vimAlias = true;
 
+    package = pkgs.neovim-nightly;
+
     plugins = with pkgs.vimPlugins; [
       # Appearance
       indent-blankline-nvim
@@ -76,6 +78,7 @@ in
       cmp-nvim-lua
       cmp-treesitter
       cmp-calc
+      vimPlugsFromSource.nvim-copilot
 
       vim-vsnip
       vim-vsnip-integ

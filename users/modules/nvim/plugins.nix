@@ -23,4 +23,16 @@
     };
   };
 
+  nvim-copilot = pkgs.vimUtils.buildVimPluginFrom2Nix
+    {
+      pname = "nvim-copilot";
+      version = "release";
+      src = pkgs.fetchFromGitHub {
+        owner = "github";
+        repo = "copilot.vim";
+        rev = "release";
+        sha256 = "sha256-hKRkn/+6S2JfAlgN13X2HNl/1vIjeMM5YnSTEwVQDTg=";
+      };
+    };
+
 }
