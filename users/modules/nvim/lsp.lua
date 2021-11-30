@@ -131,7 +131,7 @@ cmp.setup({
         ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})
     },
     sources = cmp.config.sources({
-        {name = 'nvim_lsp'}, {name = 'vsnip'}, {name = 'nvim_lua'}, {name = 'calc'}
+       {name = 'nvim_lsp'}, {name = 'vsnip'}, {name = 'nvim_lua'}, {name = 'calc'}
     }, {{name = 'buffer'}, {name = 'path'}})
 })
 

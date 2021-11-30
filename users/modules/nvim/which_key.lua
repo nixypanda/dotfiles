@@ -91,7 +91,7 @@ local mappings = {
     },
     l = {
         name = "+LSP",
-        a = {"<cmd>Telescope lsp_code_actions<cr>", "Code Action"},
+        a = {"<cmd>Lspsaga code_action<cr>", "Code Action"},
         d = {"<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics"},
         D = {"<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics"},
         f = {"<cmd>lua vim.lsp.buf.formatting_sync(nil, 1000)<cr>", "Format document"},
@@ -103,7 +103,7 @@ local mappings = {
         l = {"<cmd>Lspsaga show_line_diagnostics<cr>", "Line Diagnostics"},
         o = {"<cmd>SymbolsOutline<cr>", "Toggle Document Symbols Outline"},
         p = {"<cmd>Lspsaga preview_definition<cr>", "Preview Definition"},
-        r = {"<cmd>Telescope lsp_references<cr>", "Refrences"},
+        r = {"<cmd>Lspsaga lsp_finder<cr>", "Refrences"},
         R = {"<cmd>Lspsaga rename<cr>", "Rename"},
         s = {"<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols"},
         S = {"<cmd>Telescope lsp_workspace_symbols<cr>", "Workspace Symbols"},

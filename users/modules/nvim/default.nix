@@ -36,7 +36,7 @@ in
     rustfmt
     cargo-tarpaulin
     perl # perl (this is required by rust)
-    lldb # debugging setup
+    # lldb # debugging setup
     rust-analyzer
     clippy
   ] ++ (lib.optional pkgs.stdenv.isLinux sumneko-lua-language-server);
@@ -44,8 +44,6 @@ in
   programs.neovim = {
     enable = true;
     vimAlias = true;
-
-    package = pkgs.neovim-nightly;
 
     plugins = with pkgs.vimPlugins; [
       # Appearance
@@ -67,7 +65,7 @@ in
       nvim-treesitter-refactor
       nvim-treesitter-textobjects
       nvim-lspconfig
-      lspsaga-nvim
+      vimPlugsFromSource.nvim-lsp-saga
       lsp_signature-nvim
       ## Autocompletion setup
       nvim-cmp
@@ -79,6 +77,7 @@ in
       cmp-treesitter
       cmp-calc
       vimPlugsFromSource.nvim-copilot
+      # vimPlugsFromSource.nvim-cmp-copilot
 
       vim-vsnip
       vim-vsnip-integ
