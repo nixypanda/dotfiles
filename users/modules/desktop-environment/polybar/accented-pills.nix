@@ -29,7 +29,7 @@ let
 in
 rec {
   "bar/base" = {
-    monitor = "DisplayPort-0";
+    monitor = "DisplayPort-1";
     height = 27;
 
     border-size = 2;
