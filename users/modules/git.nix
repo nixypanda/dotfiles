@@ -13,6 +13,8 @@
         pager = "delta";
       };
       pull.ff = "only";
+      # NOTE: Required so that `go get` can fetch private repos
+      url."ssh://git@github.com/".insteadOf = "https://github.com/";
       delta = {
         features = "side-by-side line-numbers decorations";
       };
