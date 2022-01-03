@@ -101,6 +101,7 @@ in
 
       # Fuzzy Finder
       telescope-nvim
+      telescope-fzf-native-nvim
 
       # Text Helpers
       vim-table-mode # vimscript
