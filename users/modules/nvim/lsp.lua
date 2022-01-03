@@ -233,6 +233,14 @@ vim.api.nvim_command(
 
 -- Prettify LSP diagnostic messages/icons
 
+vim.diagnostic.config({
+    virtual_text = false,
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = false
+})
+
 require('lspkind').init({})
 
 vim.fn.sign_define("LspDiagnosticsSignError", {
