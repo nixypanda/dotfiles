@@ -93,6 +93,7 @@
                 ./modules/alacritty.nix
                 ./modules/tmux.nix
                 ./modules/system-management
+                ./modules/work.nix
               ];
             };
         };
