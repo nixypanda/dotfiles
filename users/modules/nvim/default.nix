@@ -76,7 +76,7 @@ in
       cmp-nvim-lua
       cmp-treesitter
       cmp-calc
-      vimPlugsFromSource.nvim-copilot
+      # vimPlugsFromSource.nvim-copilot
       # vimPlugsFromSource.nvim-cmp-copilot
 
       vim-vsnip
