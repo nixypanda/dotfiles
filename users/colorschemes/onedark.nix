@@ -2,14 +2,17 @@ let
   utils = (import ./utils.nix);
 in
 rec {
+  name = "onedark";
+
   # Note: This kinda feels like a hack and I am none to happy about it maybe in
   # the future I might make this play nicely to with everything else. That is
   # too much effort though. Creating a whole theme for vim
-  vim-name = "one";
+  vim-name = "one-nvim";
   vim-statusline = "onedark";
-  gtk-name = "Dracula";
-  gtk-icon-name = "Adwaita";
+  gtk-name = "palenight";
+  gtk-icon-name = "Moka";
   bat-theme-name = "base16";
+  deadd-css-file = ../modules/desktop-environment/deadd/onedark.css;
 
   bg-primary = black;
   bg-primary-bright = bright-black;
@@ -33,7 +36,6 @@ rec {
   magenta = "#C678DD";
   cyan = "#56b6c2";
   white = "#ABB2BF";
-  grey = "#404247";
   bright-black = "#3e4451";
   bright-red = "#be5046";
   bright-green = "#98C379";
@@ -42,5 +44,4 @@ rec {
   bright-magenta = "#C678DD";
   bright-cyan = "#56b6c2";
   bright-white = "#e6efff";
-  light-grey = "#57595e";
 }

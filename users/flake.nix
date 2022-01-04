@@ -71,7 +71,7 @@
             {
               # NOTE: Here we are injecting colorscheme so that it is passed down all the imports
               _module.args = {
-                colorscheme = (import ./colorschemes/dracula.nix);
+                colorscheme = (import ./colorschemes/onedark.nix);
               };
 
               nixpkgs.config = { allowUnfree = true; };

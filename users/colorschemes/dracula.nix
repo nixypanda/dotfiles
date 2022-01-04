@@ -2,6 +2,8 @@ let
   utils = (import ./utils.nix);
 in
 rec {
+  name = "dracula";
+
   # Note: This kinda feels like a hack and I am none to happy about it maybe in
   # the future I might make this play nicely to with everything else. That is
   # too much effort though. Creating a whole theme for vim
@@ -10,6 +12,7 @@ rec {
   gtk-name = "Dracula";
   gtk-icon-name = "Moka";
   bat-theme-name = "Dracula";
+  deadd-css-file = ../modules/desktop-environment/deadd/dracula.css;
 
   bg-primary = black;
   bg-primary-bright = bright-black;

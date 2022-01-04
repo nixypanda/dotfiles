@@ -33,6 +33,8 @@ in
     dracula-theme
     moka-icon-theme
     numix-icon-theme-square
+    whitesur-icon-theme
+    palenight-theme
 
     # system tray (Kind of a hack atm)
     # Need polybar to support this as a first class module
@@ -111,9 +113,9 @@ in
 
   services.random-background = {
     enable = true;
-    imageDirectory = "%h/Pictures/backgrounds";
+    imageDirectory = "%h/Pictures/backgrounds/${colorscheme.name}";
   };
-  home.file.".config/deadd/deadd.css".source = ./deadd/dracula.css;
+  home.file.".config/deadd/deadd.css".source = colorscheme.deadd-css-file;
 
   services.picom = {
     enable = true;
@@ -131,7 +133,7 @@ in
       blur-strength = 8;
       corner-radius = 8;
       round-borders = 1;
-        
+
       rounded-corners-exclude = [
         "class_g = 'Polybar'",
       ];
@@ -190,3 +192,4 @@ in
     };
   };
 }
+
