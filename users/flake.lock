@@ -63,11 +63,96 @@
         "type": "github"
       }
     },
+    "nvim-alpha-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1641201316,
+        "narHash": "sha256-44mSqzis4hxlg1F4dIQ5m6N8fLX3L0iNqJ1OiKFts4Q=",
+        "owner": "goolord",
+        "repo": "alpha-nvim",
+        "rev": "e43067e7990ab800f623afb3f5743adcc8274ec2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "goolord",
+        "repo": "alpha-nvim",
+        "type": "github"
+      }
+    },
+    "nvim-cmp-copilot-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1636114685,
+        "narHash": "sha256-07cdIAJbGI8nbxvqO3I2ebP9mW1kzbraPW44WOpQRjk=",
+        "owner": "hrsh7th",
+        "repo": "cmp-copilot",
+        "rev": "104f6784351911d39e11f4edeaf43dc9ecc23cc2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hrsh7th",
+        "repo": "cmp-copilot",
+        "type": "github"
+      }
+    },
+    "nvim-copilot-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1638862742,
+        "narHash": "sha256-gnFiuXpKF55cWxCXNXe3zqQaVmGoUV5aRBGIlyUUfIM=",
+        "owner": "github",
+        "repo": "copilot.vim",
+        "rev": "c01314840b94da0b9767b52f8a4bbc579214e509",
+        "type": "github"
+      },
+      "original": {
+        "owner": "github",
+        "repo": "copilot.vim",
+        "type": "github"
+      }
+    },
+    "nvim-dap-python-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1640340567,
+        "narHash": "sha256-8tkfycGdx6lklg4Nw3Bd2NKmcrqOg9/PcpXV0Fgflqw=",
+        "owner": "mfussenegger",
+        "repo": "nvim-dap-python",
+        "rev": "0597faa228c0d0f8917d4991cbe82a1d7bfd9756",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mfussenegger",
+        "repo": "nvim-dap-python",
+        "type": "github"
+      }
+    },
+    "nvim-lspsaga-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1639948427,
+        "narHash": "sha256-mUwtxtBz94vEA5C5gFC3E5kdDm3UIN2FP/lYYVdap1s=",
+        "owner": "tami5",
+        "repo": "lspsaga.nvim",
+        "rev": "55979c8390037615c21ac109f538189316cfef18",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tami5",
+        "repo": "lspsaga.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",
-        "nur": "nur"
+        "nur": "nur",
+        "nvim-alpha-src": "nvim-alpha-src",
+        "nvim-cmp-copilot-src": "nvim-cmp-copilot-src",
+        "nvim-copilot-src": "nvim-copilot-src",
+        "nvim-dap-python-src": "nvim-dap-python-src",
+        "nvim-lspsaga-src": "nvim-lspsaga-src"
       }
     }
   },

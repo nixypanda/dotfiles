@@ -1,7 +1,4 @@
 { config, pkgs, lib, colorscheme, ... }:
-let
-  vimPlugsFromSource = (import ./plugins.nix) pkgs;
-in
 {
   home.packages = with pkgs; [
     # C
@@ -54,7 +51,7 @@ in
       lualine-nvim
       one-nvim
       dracula-vim
-      vimPlugsFromSource.nvim-alpha
+      nvim-alpha
 
       # Programming
       which-key-nvim
@@ -65,7 +62,7 @@ in
       nvim-treesitter-refactor
       nvim-treesitter-textobjects
       nvim-lspconfig
-      vimPlugsFromSource.nvim-lsp-saga
+      nvim-lsp-saga
       lsp_signature-nvim
       ## Autocompletion setup
       nvim-cmp
@@ -76,8 +73,8 @@ in
       cmp-nvim-lua
       cmp-treesitter
       cmp-calc
-      # vimPlugsFromSource.nvim-copilot
-      # vimPlugsFromSource.nvim-cmp-copilot
+      # nvim-copilot
+      # nvim-cmp-copilot
 
       vim-vsnip
       vim-vsnip-integ
@@ -97,7 +94,7 @@ in
       # DAP
       nvim-dap
       # nvim-dap-ui
-      vimPlugsFromSource.nvim-dap-python
+      nvim-dap-python
 
       # Fuzzy Finder
       telescope-nvim
@@ -119,7 +116,8 @@ in
       colorscheme ${colorscheme.vim-name}
 
       lua << EOF
-      ${builtins.readFile ./dashboard.lua}
+        ${builtins.readFile ./dashboard.lua}
+
         local statusline_theme = '${colorscheme.vim-statusline}'
 
         local lang_servers_cmd = {
