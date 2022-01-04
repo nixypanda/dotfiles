@@ -52,6 +52,7 @@
       one-nvim
       dracula-vim
       # nvim-alpha
+      nvim-colorizer-lua
 
       # Programming
       which-key-nvim
@@ -64,6 +65,8 @@
       nvim-lspconfig
       nvim-lsp-saga
       lsp_signature-nvim
+      rust-tools-nvim
+      symbols-outline-nvim
       ## Autocompletion setup
       nvim-cmp
       cmp-path
@@ -75,11 +78,8 @@
       cmp-calc
       # nvim-copilot
       # nvim-cmp-copilot
-
       vim-vsnip
       vim-vsnip-integ
-      rust-tools-nvim
-      symbols-outline-nvim
 
       # Text objects
       tcomment_vim # vimscript
@@ -151,6 +151,7 @@
         ${builtins.readFile ./sane_defaults.lua}
         ${builtins.readFile ./treesitter.lua}
         ${builtins.readFile ./telescope.lua}
+        ${builtins.readFile ./colorizer.lua}
 
         ${builtins.readFile ./lsp.lua}
         ${builtins.readFile ./dap.lua}
