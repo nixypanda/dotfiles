@@ -53,6 +53,7 @@
       dracula-vim
       # nvim-alpha
       nvim-colorizer-lua
+      tokyonight-nvim
 
       # Programming
       which-key-nvim

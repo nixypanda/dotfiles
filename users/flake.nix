@@ -71,7 +71,7 @@
             {
               # NOTE: Here we are injecting colorscheme so that it is passed down all the imports
               _module.args = {
-                colorscheme = (import ./colorschemes/onedark.nix);
+                colorscheme = (import ./colorschemes/tokyonight.nix);
               };
 
               nixpkgs.config = { allowUnfree = true; };
