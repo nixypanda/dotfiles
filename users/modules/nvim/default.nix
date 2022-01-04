@@ -51,7 +51,7 @@
       lualine-nvim
       one-nvim
       dracula-vim
-      nvim-alpha
+      # nvim-alpha
 
       # Programming
       which-key-nvim
