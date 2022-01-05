@@ -1,5 +1,3 @@
-
--- Setup nvim-cmp.
 local cmp = require 'cmp'
 local lspkind = require('lspkind')
 
@@ -77,3 +75,10 @@ cmp.setup({
 
 -- Set loction for snippets to be in dotfiles repo so that it is accessible everywhere
 vim.g.vsnip_snippet_dir = vim.fn.expand('~/.dotfiles/users/modules/nvim/vsnip')
+
+-- Autopairs
+require('nvim-autopairs').setup {}
+
+-- Completion (default setting)
+vim.o.completeopt = "menuone,noselect"
+

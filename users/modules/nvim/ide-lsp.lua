@@ -96,13 +96,6 @@ vim.api.nvim_set_keymap('n', '<C-d>',
                         [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>]],
                         {noremap = true, silent = true})
 
--- Autopairs
-require('nvim-autopairs').setup {}
-
--- Completion
-
-vim.o.completeopt = "menuone,noselect"
-
 -- EFM (Various Commands as LSP) Setup
 require"lspconfig".efm.setup {
     cmd = lang_servers_cmd.efmls,
