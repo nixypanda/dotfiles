@@ -154,6 +154,7 @@
         ${builtins.readFile ./telescope.lua}
         ${builtins.readFile ./colorizer.lua}
 
+        ${builtins.readFile ./completion.lua}
         ${builtins.readFile ./lsp.lua}
         ${builtins.readFile ./dap.lua}
         ${builtins.readFile ./statusline.lua}
