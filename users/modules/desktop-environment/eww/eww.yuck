@@ -175,16 +175,16 @@
 ;;  power buttons 
 (defwidget logout [] 
     (box :class "genwin"  
-        (button :class "btn_logout" :onclick "openbox --exit" "")))
+        (button :class "btn_logout" :onclick "killall xmonad-x86_64-linux" "☛")))
 (defwidget sleep [] 
     (box :class "genwin"  
-        (button :class "btn_sleep" :onclick "systemctl suspend" "")))
+        (button :class "btn_sleep" :onclick "systemctl suspend" "⏾")))
 (defwidget reboot [] 
-    (box :class "genwin"  
-        (button :class "btn_reboot" :onclick "systemctl reboot" "")))
+    (box :class "genwin"
+        (button :class "btn_reboot" :onclick "systemctl reboot" "↺")))
 (defwidget poweroff [] 
     (box :class "genwin"  
-        (button :class "btn_poweroff" :onclick "systemctl poweroff" "")))
+        (button :class "btn_poweroff" :onclick "systemctl poweroff" "⏻")))
 
 ;;  folders 
 (defwidget folders [] 
