@@ -102,12 +102,12 @@
 (defwidget music [] 
     (box :class "genwin" :orientation "h" :space-evenly "false"  
     ;; FIXME: Unable to see the album art
-        (box :class "album_art"  :style
+        (box :class "album_art" :style
             "background-image: url('/home/sherub/Pictures/backgrounds/tokyonight/BirdOneDarker.png');")
         ;; (box :class "album_art"  :style "background-image: url('${COVER}');")
-        (box :orientation "v" :spacing 29 :space-evenly "false"  
-            (label :halign "center" :class "song" :wrap "true"  :text SONG)
-            (label :halign "center" :class "artist" :wrap "true"  :text ARTIST)
+        (box :orientation "v" :valign "center" :spacing 29 :space-evenly "false"  
+            (label :halign "center" :class "song" :wrap "true" :text SONG)
+            (label :halign "center" :class "artist" :wrap "true" :text ARTIST)
             (box :orientation "h" :spacing 15 :halign "center" :space-evenly "true"  
                 (button :class "btn_prev" :onclick "custom-browsermediacontrol --prev" "玲")
                 (button :class "btn_play" :onclick "custom-browsermediacontrol --playpause" STATUS_ICON)
