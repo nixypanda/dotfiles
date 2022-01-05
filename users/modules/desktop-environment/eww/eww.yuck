@@ -16,10 +16,8 @@
 (defpoll BATTERY :interval "5s"  "~/.config/eww/scripts/sys_info --bat")
 
 ;;  Time vars 
-(defpoll HOUR :interval "5s"  "date +\"%I\"")
-(defpoll MIN :interval "5s"  "date +\"%M\"")
-(defpoll MER :interval "5s"  "date +\"%p\"")
-(defpoll DAY :interval "5s"  "date +\"%A\"")
+(defpoll DAY :interval "1m"  "date +\"%A\"")
+(defpoll TIME :interval "10s" "date +\"%I:%M %p\"")
 
 ;;  Uptime vars 
 (defpoll UPHOUR :interval "5s"  "uptime -p | awk '{print $2 \" \" $3}' | sed 's/,//g'")
@@ -82,12 +80,10 @@
 
 ;;  clock 
 (defwidget clock [] 
-    (box :class "genwin" :orientation "h" :space-evenly "false"  
-        (label :class "time_hour" :valign "start" :wrap "true" :limit-width 25 :text HOUR)
-        (label :class "time_min" :valign "end" :wrap "true" :limit-width 25 :text MIN)
-        (box :orientation "v" :spacing 10 :space-evenly "false"  
-            (label :class "time_mer" :halign "end" :wrap "true" :limit-width 25 :text MER)
-            (label :class "time_day" :halign "end" :wrap "true" :limit-width 25 :text DAY))))
+    (box :class "genwin"
+        (box :orientation "v" :halign "center" :valign "center"  
+            (label :class "clock_time" :halign "center" :text TIME)
+            (label :class "clock_day" :halign "center" :text DAY))))
 
 ;;  uptime 
 (defwidget uptime [] 

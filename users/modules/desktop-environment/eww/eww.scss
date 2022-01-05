@@ -87,30 +87,16 @@
 }
 
 /** Clock ********************************************/
-.time_hour, .time_min {
+.clock_time {
 	color: #81A1C1;
 	font-size : 45px;
 	font-weight : bold;
 }
-.time_hour {
-	margin : 10px 0px 0px 10px;
-}
-.time_min {
-	margin : 0px 0px 10px 0px;
-}
 
-.time_mer {
-	color: #A3BE8C;
-	font-size : 30px;
-	font-weight : bold;
-	margin : 10px 0px 0px 0px;
-}
-
-.time_day {
+.clock_day {
 	color: #EBCB8B;
 	font-size : 17px;
 	font-weight : normal;
-	margin : 0px 0px -30px 10px;
 }
 
 /** Uptime ********************************************/
