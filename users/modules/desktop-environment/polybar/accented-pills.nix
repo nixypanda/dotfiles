@@ -129,7 +129,7 @@ rec {
 
   "module/bmc" = {
     type = "custom/script";
-    exec = "custom-browsermediacontrol";
+    exec = "custom-browsermediacontrol --polybar-display full";
 
     format = "<label>";
     format-background = module-background;
