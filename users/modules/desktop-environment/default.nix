@@ -19,6 +19,10 @@ let
     #!/${pkgs.stdenv.shell}
     ${builtins.readFile ./polybar/scripts/sysmenu.sh}
   '';
+  custom-script-eww-sysinfo = pkgs.writeScriptBin "custom-script-eww-sysinfo" ''
+    #!/${pkgs.stdenv.shell}
+    ${builtins.readFile ./eww/scripts/custom-eww-sysinfo.sh}
+  '';
 
   custom-browsermediacontrol =
     (import ./browser-media-control/default.nix) { pkgs = pkgs; };
@@ -48,6 +52,7 @@ in
     custom-script-sysmenu
     custom-panel-launch
     custom-browsermediacontrol
+    custom-script-eww-sysinfo
 
     # Required so that BMC can work with chrome
     plasma-browser-integration

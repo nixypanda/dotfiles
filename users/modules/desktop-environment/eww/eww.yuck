@@ -10,10 +10,8 @@
 
 ;;  System vars 
 (defpoll HOST :interval "5s"  "hostname")
-(defpoll CPU_USAGE :interval "1s"  "~/.config/eww/scripts/sys_info --cpu")
-(defpoll MEM_USAGE :interval "1s"  "~/.config/eww/scripts/sys_info --mem")
-(defpoll BLIGHT :interval "1s"  "~/.config/eww/scripts/sys_info --blight")
-(defpoll BATTERY :interval "5s"  "~/.config/eww/scripts/sys_info --bat")
+(defpoll CPU_USAGE :interval "1s"  "custom-script-eww-sysinfo --cpu")
+(defpoll MEM_USAGE :interval "1s"  "custom-script-eww-sysinfo --mem")
 
 ;;  Time vars 
 (defpoll DAY :interval "1m"  "date +\"%A\"")
@@ -67,17 +65,11 @@
     (box :class "genwin"  
         (box :orientation "v" :spacing 25 :halign "center" :valign "center" :space-evenly "false"  
             (box :class "cpu_bar" :orientation "h" :spacing 20 :space-evenly "false"  
-                (label :class "iconcpu" :text "")
+                (label :class "iconcpu" :text "⌗")
                 (scale :min 0 :max 100 :value CPU_USAGE :active "false"))
             (box :class "mem_bar" :orientation "h" :spacing 20 :space-evenly "false"  
-                (label :class "iconmem" :text "")
-                (scale :min 0 :max 100 :value MEM_USAGE :active "false"))
-            (box :class "bright_bar" :orientation "h" :spacing 20 :space-evenly "false"  
-                (label :class "iconbright" :text "")
-                (scale :min 0 :max 100 :value BLIGHT :active "false"))
-            (box :class "bat_bar" :orientation "h" :spacing 20 :space-evenly "false"  
-                (label :class "iconbat" :text "")
-                (scale :min 0 :max 100 :value BATTERY :active "false")))))
+                (label :class "iconmem" :text "▙")
+                (scale :min 0 :max 100 :value MEM_USAGE :active "false")))))
 
 ;;  clock 
 (defwidget clock [] 
