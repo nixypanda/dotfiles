@@ -4,8 +4,8 @@
 ;; ** Modified by : Dusty
 
 ;;  Profile vars 
-(defvar IMAGE "images/fox.png")
 (defvar NAME "Sherub Thakur")
+(defpoll DOTFILES :interval "10m" "echo $DOTFILES")
 (defpoll UNAME :interval "5m"  "whoami")
 
 ;;  System vars 
@@ -56,10 +56,11 @@
 
 ;;  profile 
 (defwidget user [] 
-    (box :class "genwin" :orientation "v" :spacing 20 :space-evenly "false"  
-        (box :class "face" :halign "center" :style "background-image: url('${IMAGE});")
-        (label :class "fullname" :halign "center" :wrap "true" :limit-width 25 :text NAME)
-        (label :class "username" :halign "center" :wrap "true" :limit-width 25 :text UNAME)))
+    (box :class "genwin"  
+        (box :orientation "v" :spacing 20 :space-evenly "false" :halign "center" :valign "center"
+            (box :class "face" :halign "center" :style "background-image: url('${DOTFILES}/images/profile.jpg');")
+            (label :class "fullname" :halign "center" :wrap "true" :limit-width 25 :text NAME)
+            (label :class "username" :halign "center" :wrap "true" :limit-width 25 :text UNAME))))
 
 ;;  system 
 (defwidget system [] 
@@ -154,19 +155,26 @@
 
 ;;  apps 
 (defwidget apps [] 
-    (box :class "genwin" :orientation "v" :space-evenly "false"  
-        (box :class "appbox" :orientation "h" :space-evenly "false"  
-            (button :style "background-image: url('images/icons/vivaldi.svg');" :class "app_vivaldi" :onclick "~/.config/eww/scripts/open_apps --vd")
-            (button :style "background-image: url('images/icons/telegram.svg');" :class "app_telegram" :onclick "~/.config/eww/scripts/open_apps --tg")
-            (button :style "background-image: url('images/icons/discord.svg');" :class "app_discord" :onclick "~/.config/eww/scripts/open_apps --dc"))
-                        (box :class "appbox" :orientation "h" :space-evenly "false"  
-            (button :style "background-image: url('images/icons/terminal.svg');" :class "app_terminal" :onclick "~/.config/eww/scripts/open_apps --tr")
-            (button :style "background-image: url('images/icons/files.svg');" :class "app_files" :onclick "~/.config/eww/scripts/open_apps --fm")
-            (button :style "background-image: url('images/icons/geany.svg');" :class "app_geany" :onclick "~/.config/eww/scripts/open_apps --ge"))
-                        (box :class "appbox" :orientation "h" :space-evenly "false"  
-            (button :style "background-image: url('images/icons/code.svg');" :class "app_code" :onclick "~/.config/eww/scripts/open_apps --cd")
-            (button :style "background-image: url('images/icons/gimp.svg');" :class "app_gimp" :onclick "~/.config/eww/scripts/open_apps --gp")
-            (button :style "background-image: url('images/icons/virtualbox.svg');" :class "app_vbox" :onclick "~/.config/eww/scripts/open_apps --vb"))))
+    (box :class "genwin"  
+        (box :orientation "v" :spacing 25 :halign "center" :valign "center" :space-evenly "false"  
+            (box :class "appbox" :orientation "h" :space-evenly "false"  
+                (button
+                    :style "background-image: url('${DOTFILES}/images/icons/files.png');"
+                    :class "app_files"
+                    :onclick "eww close-all && nautlis &")
+                (button
+                    :style "background-image: url('${DOTFILES}/images/icons/discord.png');"
+                    :class "app_discord"
+                    :onclick "eww close-all && discord &"))
+            (box :class "appbox" :orientation "h" :space-evenly "false"  
+                (button
+                    :style "background-image: url('${DOTFILES}/images/icons/terminal.png');"
+                    :class "app_code"
+                    :onclick "eww close-all && kitty &")
+                (button
+                    :style "background-image: url('${DOTFILES}/images/icons/slack.png');"
+                    :class "app_vbox"
+                    :onclick "eww close-all && slack &")))))
 
 ;;  power buttons 
 (defwidget logout [] 
