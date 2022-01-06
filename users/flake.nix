@@ -109,6 +109,7 @@
                 procps
 
                 gnome3.networkmanager-openvpn
+                glxinfo
               ];
             };
         };
