@@ -115,28 +115,28 @@
 ;;  github 
 (defwidget github [] 
     (box :class "github"  
-        (button :class "iconweb" :onclick "~/.config/eww/scripts/open_links --gh" "")))
+        (button :class "iconweb" :onclick "eww close-all && xdg-open 'https://github.com'" "")))
 
 ;;  reddit 
 (defwidget reddit [] 
     (box :class "reddit"  
-        (button :class "iconweb" :onclick "~/.config/eww/scripts/open_links --rd" "樓")))
+        (button :class "iconweb" :onclick "eww close-all && xdg-open 'https://reddit.com'" "樓")))
 
 ;;  twitter 
 (defwidget twitter [] 
     (box :class "twitter"  
-        (button :class "iconweb" :onclick "~/.config/eww/scripts/open_links --tw" "")))
+        (button :class "iconweb" :onclick "eww close-all && xdg-open 'https://twitter.com'" "")))
 
 ;;  youtube 
 (defwidget youtube [] 
     (box :class "youtube"  
-        (button :class "iconweb" :onclick "~/.config/eww/scripts/open_links --yt" "")))
+        (button :class "iconweb" :onclick "eww close-all && xdg-open 'https://youtube.com'" "")))
 
 ;;  mail 
 (defwidget mail [] 
     (box :class "mail" 
         (box :orientation "h" :halign "center" :spacing 20 :space-evenly "false"  
-            (button :class "iconmail" :onclick "~/.config/eww/scripts/open_links --mail" "")
+            (button :class "iconmail" :onclick "eww close-all && xdg-open 'https://mail.google.com'" "")
             (box :class "mailbox" :space-evenly "false"  
                 (button :class "label_mails" :onclick "~/.config/eww/scripts/open_links --mail" MAILS)))))
 
