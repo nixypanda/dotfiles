@@ -74,7 +74,7 @@
 ;;  clock 
 (defwidget clock [] 
     (box :class "genwin"
-        (box :orientation "v" :halign "center" :valign "center"  
+        (box :orientation "v" :halign "center" :valign "center" :spacing 1
             (label :class "clock_time" :halign "center" :text TIME)
             (label :class "clock_day" :halign "center" :text DAY))))
 
@@ -128,10 +128,15 @@
 ;;  mail 
 (defwidget mail [] 
     (box :class "mail" 
-        (box :orientation "h" :halign "center" :spacing 20 :space-evenly "false"  
-            (button :class "iconmail" :onclick "eww close-all && xdg-open 'https://mail.google.com'" "")
-            (box :class "mailbox" :space-evenly "false"  
-                (button :class "label_mails" :onclick "~/.config/eww/scripts/open_links --mail" MAILS)))))
+        (button :class "iconmail" :onclick "eww close-all && xdg-open 'https://mail.google.com'" "")))
+
+;;  nixos serach 
+(defwidget nix_search [] 
+    (box :class "nixos"
+        (button
+            :class "iconweb"
+            :onclick "eww close-all && xdg-open 'https://search.nixos.org/packages?channel=unstable'"
+            "")))
 
 ;;  weather 
 (defwidget weather [] 
@@ -210,7 +215,7 @@
 
 ;;  background 
 (defwindow background :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x 0 :y 0 :width "1360px" :height "768px") (bg))
+        :geometry (geometry :x 0 :y 0 :width "100%" :height "100%") (bg))
 
 ;;  profile 
 (defwindow profile :stacking "fg" :focusable "false" :screen 1 
@@ -259,21 +264,27 @@
 
 ;;  weather 
 (defwindow weather :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x "43%" :y "14%" :width "32%" :height "28%")
+        :geometry (geometry :x "43%" :y "14%" :width "31%" :height "28%")
                         (weather))
 
 ;;  apps 
 (defwindow apps :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x "59%" :y "44%" :width "16%" :height "28%")
+        :geometry (geometry :x "59%" :y "44%" :width "15%" :height "28%")
                         (apps))
 
 ;;  mail 
 (defwindow mail :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x "59%" :y "74%" :width "16%" :height "12%")
+        :geometry (geometry :x "59%" :y "74%" :width "7%" :height "12%")
                         (mail))
+
+;;  nixos
+(defwindow nix_search :stacking "fg" :focusable "false" :screen 1 
+        :geometry (geometry :x "67%" :y "74%" :width "7%" :height "12%")
+                        (nix_search))
+
 ;;  logout 
 (defwindow logout :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x "76%" :y "14%" :width "7%" :height "13%")
+        :geometry (geometry :x "75%" :y "14%" :width "8%" :height "13%")
                         (logout))
 
 ;;  sleep 
@@ -283,7 +294,7 @@
 
 ;;  reboot 
 (defwindow reboot :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x "76%" :y "29%" :width "7%" :height "13%")
+        :geometry (geometry :x "75%" :y "29%" :width "8%" :height "13%")
                         (reboot))
 
 ;;  poweroff 
@@ -293,5 +304,5 @@
 
 ;;  folders 
 (defwindow folders :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x "76%" :y "44%" :width "16%" :height "42%")
+        :geometry (geometry :x "75%" :y "44%" :width "17%" :height "42%")
                         (folders))
