@@ -161,7 +161,7 @@
                 (button
                     :style "background-image: url('${DOTFILES}/images/icons/files.png');"
                     :class "app_files"
-                    :onclick "eww close-all && nautlis &")
+                    :onclick "eww close-all && nautilus &")
                 (button
                     :style "background-image: url('${DOTFILES}/images/icons/discord.png');"
                     :class "app_discord"
@@ -195,28 +195,22 @@
     (box :class "genwin" :orientation "v" :space-evenly "false"  
         (box :class "hddbox" :orientation "h" :space-evenly "false"  
             (box :space-evenly "false"  
-                (button :class "hddicon" :onclick "~/.config/eww/scripts/open_apps --fm" ""))
+                (button :class "hddicon" :onclick "eww close-all && nautilus &" ""))
             (label :class "fs_sep" :text "|")
             (box :space-evenly "false"  
                 (label :class "hdd_label" :wrap "true" :limit-width 25 :text FREE)))
         (box :orientation "h" :space-evenly "false"  
-            (button :class "iconfolder1" :onclick "~/.config/eww/scripts/open_folders --docs" "")
-            (button :class "label_folder1" :onclick "~/.config/eww/scripts/open_folders --docs" "Documents"))
+            (button :class "iconfolder1" :onclick "eww close-all && nautilus ~/Documents &" "")
+            (button :class "label_folder1" :onclick "eww close-all && nautilus ~/Documents &" "Documents"))
         (box :orientation "h" :space-evenly "false"  
-            (button :class "iconfolder2" :onclick "~/.config/eww/scripts/open_folders --dl" "")
-            (button :class "label_folder2" :onclick "~/.config/eww/scripts/open_folders --dl" "Downloads"))
+            (button :class "iconfolder2" :onclick "eww close-all && nautilus ~/Downloads &" "")
+            (button :class "label_folder2" :onclick "eww close-all && nautilus ~/Downloads &" "Downloads"))
         (box :orientation "h" :space-evenly "false"  
-            (button :class "iconfolder3" :onclick "~/.config/eww/scripts/open_folders --music" "")
-            (button :class "label_folder3" :onclick "~/.config/eww/scripts/open_folders --music" "Music"))
+            (button :class "iconfolder4" :onclick "eww close-all && nautilus ~/Pictures &" "")
+            (button :class "label_folder4" :onclick "eww close-all && nautilus ~/Pictures &" "Pictures"))
         (box :orientation "h" :space-evenly "false"  
-            (button :class "iconfolder4" :onclick "~/.config/eww/scripts/open_folders --pics" "")
-            (button :class "label_folder4" :onclick "~/.config/eww/scripts/open_folders --pics" "Pictures"))
-        (box :orientation "h" :space-evenly "false"  
-            (button :class "iconfolder5" :onclick "~/.config/eww/scripts/open_folders --cfg" "ﮛ")
-            (button :class "label_folder5" :onclick "~/.config/eww/scripts/open_folders --cfg" "~/.config"))
-        (box :orientation "h" :space-evenly "false"  
-            (button :class "iconfolder6" :onclick "~/.config/eww/scripts/open_folders --local" "ﮛ")
-            (button :class "label_folder6" :onclick "~/.config/eww/scripts/open_folders --local" "~/.local"))))
+            (button :class "iconfolder5" :onclick "eww close-all && nautilus ~/.dotfiles &" "")
+            (button :class "label_folder5" :onclick "eww close-all && nautilus ~/.dotfiles &" "Dotfiles"))))
 
 
 
