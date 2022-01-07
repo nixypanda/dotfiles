@@ -9,6 +9,7 @@
     tokei
     dig
     wireshark
+    unzip
 
     # Moar colors
     starship
