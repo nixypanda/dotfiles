@@ -26,6 +26,8 @@ let
 
   custom-browsermediacontrol =
     (import ./browser-media-control/default.nix) { pkgs = pkgs; };
+  custom-weather-cli =
+    (import ./weather-cli/default.nix) { pkgs = pkgs; };
 in
 {
   home.packages = with pkgs; [
@@ -53,6 +55,7 @@ in
     custom-panel-launch
     custom-browsermediacontrol
     custom-script-eww-sysinfo
+    custom-weather-cli
 
     # Required so that BMC can work with chrome
     plasma-browser-integration

@@ -29,12 +29,11 @@
 (defpoll COVER :interval "1s"  "custom-browsermediacontrol --display cover")
 
 ;; Weather vars
-(defpoll ICON :interval "15m"  "~/.config/eww/scripts/weather_info --icon")
-(defpoll STAT :interval "15m"  "~/.config/eww/scripts/weather_info --stat")
-(defpoll TEMP :interval "15m"  "~/.config/eww/scripts/weather_info --temp")
-(defpoll HEX :interval "15m"  "~/.config/eww/scripts/weather_info --hex")
-(defpoll QUOTE :interval "15m"  "~/.config/eww/scripts/weather_info --quote")
-(defpoll QUOTE2 :interval "15m"  "~/.config/eww/scripts/weather_info --quote2")
+(defpoll ICON :interval "15m"  "custom-weather-cli --display icon")
+(defpoll STAT :interval "15m"  "custom-weather-cli --display stat")
+(defpoll TEMP :interval "15m"  "custom-weather-cli --display temp")
+(defpoll HEX :interval "15m"  "custom-weather-cli --display hex")
+(defpoll QUOTE :interval "15m"  "custom-weather-cli --display quote")
 
 ;;  Apps vars 
 (defpoll MAILS :interval "5m"  "~/.config/eww/scripts/mails")
@@ -141,14 +140,14 @@
 ;;  weather 
 (defwidget weather [] 
     (box :class "genwin" 
-        (box :orientation "v" :spacing 5 :space-evenly "false"  
-            (box :orientation "h"  
-                (label :class "iconweather" :halign "start" :style "color: ${HEX};" :text ICON)
-                (label :class "label_temp" :halign "end" :text TEMP))
-            (box :orientation "v" :spacing 5 :halign "center" :space-evenly "false"  
-                (label :class "label_stat" :text STAT)
-                (label :class "label_quote" :text QUOTE)
-                (label :class "label_quote" :text QUOTE2)))))
+        (box :orientation "v" :spacing 25 :halign "center" :valign "center" :space-evenly "false"  
+            (box :orientation "v" :spacing 25 :space-evenly "false"  
+                (box :orientation "h"  
+                    (label :class "iconweather" :halign "start" :style "color: ${HEX};" :text ICON)
+                    (label :class "label_temp" :halign "end" :text TEMP))
+                (box :orientation "v" :spacing 5 :halign "center" :space-evenly "false"  
+                    (label :class "label_stat" :text STAT)
+                    (label :class "label_quote" :text QUOTE))))))
 
 ;;  apps 
 (defwidget apps [] 
