@@ -11,6 +11,7 @@ let
     nm-applet &
     volumeicon &
     deadd-notification-center &
+    eww daemon &
     solaar -w hide &
     blueman-applet &
   '';

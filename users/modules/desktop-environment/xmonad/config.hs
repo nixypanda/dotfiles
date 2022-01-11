@@ -159,6 +159,9 @@ keysToAdd =
             , ( (myModMask .|. shiftMask, xK_n)
                 , spawn $ "kill -s USR1 $(pidof deadd-notification-center)"
               )
+            , ( (myModMask .|. shiftMask, xK_w)
+                , spawn $ "eww open-many --toggle background profile system clock uptime music github reddit twitter youtube weather apps mail nix_search logout sleep reboot poweroff folders"
+              )
             ]
 
         workspaceKeyAndIdentifiers = 
