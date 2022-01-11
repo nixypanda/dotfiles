@@ -2,6 +2,7 @@
 ;; ** Widgets config for EWW
 ;; ** Created by : @adi1090x
 ;; ** Modified by : Dusty
+;; ** Further modified by : @sherubthakur
 
 ;;  Profile vars 
 (defvar NAME "Sherub Thakur")
