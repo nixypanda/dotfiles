@@ -281,6 +281,7 @@ myManageHook = composeAll
     , className =? "Gddccontrol" --> doFloat
     , className =? "feh" --> doFullFloat
     , className =? ".blueman-manager-wrapped" --> doFloat
+    , className =? "Pavucontrol" --> doFloat
     , namedScratchpadManageHook myScratchPads
     , insertPosition End Newer
     ]

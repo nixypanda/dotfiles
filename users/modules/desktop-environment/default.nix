@@ -4,12 +4,12 @@ let
     #!/${pkgs.stdenv.shell}
 
     killall -q polybar
-    killall -q volumeicon
+    kill $(pidof pasystray)
 
     polybar main &
     polybar powermenu &
     nm-applet &
-    volumeicon &
+    pasystray &
     deadd-notification-center &
     eww daemon &
     solaar -w hide &
@@ -46,9 +46,9 @@ in
     # system tray (Kind of a hack atm)
     # Need polybar to support this as a first class module
     gnome3.networkmanagerapplet
-    volumeicon
     psensor
     gnome3.nautilus
+    pasystray
 
     # custom scripts
     custom-script-sysmenu
@@ -69,6 +69,8 @@ in
     # Utility to open present directory (Only use it with xmonad to open
     # terminal in same directory)
     xcwd
+    # Sound control panel
+    pavucontrol
 
     psmisc
 
