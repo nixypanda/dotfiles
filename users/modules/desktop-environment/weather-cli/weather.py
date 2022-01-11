@@ -186,7 +186,7 @@ def weather_display_info(weather: Optional[Dict]):
         hex = "#adadff"
 
     return {
-        "description": description,
+        "description": description.capitalize(),
         "hex": hex,
         "icon": icon,
         "quote": quote,
