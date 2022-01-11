@@ -11,6 +11,7 @@ let
     nm-applet &
     volumeicon &
     deadd-notification-center &
+    eww daemon &
     solaar -w hide &
     blueman-applet &
   '';
@@ -19,9 +20,15 @@ let
     #!/${pkgs.stdenv.shell}
     ${builtins.readFile ./polybar/scripts/sysmenu.sh}
   '';
+  custom-script-eww-sysinfo = pkgs.writeScriptBin "custom-script-eww-sysinfo" ''
+    #!/${pkgs.stdenv.shell}
+    ${builtins.readFile ./eww/scripts/custom-eww-sysinfo.sh}
+  '';
 
   custom-browsermediacontrol =
     (import ./browser-media-control/default.nix) { pkgs = pkgs; };
+  custom-weather-cli =
+    (import ./weather-cli/default.nix) { pkgs = pkgs; };
 in
 {
   home.packages = with pkgs; [
@@ -48,6 +55,8 @@ in
     custom-script-sysmenu
     custom-panel-launch
     custom-browsermediacontrol
+    custom-script-eww-sysinfo
+    custom-weather-cli
 
     # Required so that BMC can work with chrome
     plasma-browser-integration
@@ -64,7 +73,7 @@ in
 
     psmisc
 
-    nur.repos.fortuneteller2k.impure.eww
+    eww
 
     # Notifications
     deadd-notification-center
@@ -94,6 +103,9 @@ in
   '';
   home.file.".config/rofi/grid.rasi".source = ./rofi/grid.rasi;
   home.file.".config/rofi/sysmenu.rasi".source = ./rofi/sysmenu.rasi;
+
+  home.file.".config/eww/eww.scss".source = ./eww/eww.scss;
+  home.file.".config/eww/eww.yuck".source = ./eww/eww.yuck;
 
   # systray stuff
   home.file.".config/volumeicon/volumeicon".source = ./systray/volumeicon.cfg;

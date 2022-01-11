@@ -1,0 +1,358 @@
+/** Global *******************************************/
+*{
+	all: unset;
+	font-family: feather;
+	font-family: Hack;
+}
+
+/** Background ***************************************/
+.bg {
+	background-color: #24283b;
+	opacity: 0.3;
+}
+
+/** Generic window ***********************************/
+.genwin {
+	background-color: #24283b;
+	border-radius: 16px;
+}
+
+/** Profile ******************************************/
+.face {
+	background-image: url('images/fox.png');
+	background-size: 175px;
+	background-position: 50% 35%;
+	min-height: 175px;
+	min-width: 175px;
+	margin: 40px 0px 0px 2px;
+	border-radius: 100%;
+}
+
+.fullname {
+	color: #7aa2f7;
+	font-size : 30px;
+	font-weight : bold;
+}
+
+.username {
+	color: #bb9af7;
+	font-size : 22px;
+	font-weight : bold;
+	margin : -15px 0px 0px 0px;
+}
+
+/** System ********************************************/
+.iconcpu, .iconmem, .iconbright, .iconbat {
+	font-size : 22px;
+	font-weight : normal;
+}
+.iconcpu {
+	color: #f7768e;
+}
+.iconmem {
+	color: #9ece6a;
+}
+
+.cpu_bar, .mem_bar, .bright_bar, .bat_bar, scale trough {
+	all: unset;
+	background-color: #3A404C;
+	border-radius: 16px;
+	min-height: 12px;
+	min-width: 170px;
+}
+
+.cpu_bar, .mem_bar, .bright_bar, .bat_bar, scale trough highlight {
+	all: unset;
+	border-radius: 16px;
+}
+
+.cpu_bar scale trough highlight {
+	background-color: #f7768e;
+}
+.mem_bar scale trough highlight {
+	background-color: #9ece6a;
+}
+
+/** Clock ********************************************/
+.clock_time {
+	color: #7aa2f7;
+	font-size : 45px;
+	font-weight : bold;
+}
+
+.clock_day {
+	color: #e0af68;
+	font-size : 17px;
+	font-weight : normal;
+}
+
+/** Uptime ********************************************/
+.icontimer {
+	color: #bb9af7;
+	font-size : 50px;
+	font-weight : normal;
+}
+
+.uphour {
+	color: #E5E9F0;
+	font-size : 28px;
+	font-weight : bold;
+}
+
+.upmin {
+	color: #E5E9F0;
+	font-size : 22px;
+	font-weight : bold;
+}
+
+/** Music ***************************************/
+.album_art {
+	background-size: cover;	
+	background-position: center;
+	min-height: 184px;
+	min-width: 184px;
+	margin: 20px;
+	border-radius: 14px;
+}
+
+.song {
+	color: #8FBCBB;
+	font-size : 18px;
+	font-weight : bold;
+	margin : 15px 0px 0px 0px;
+}
+
+.artist {
+	color: #e0af68;
+	font-size : 14px;
+	font-weight : normal;
+	margin : 0px 0px 0px 0px;
+}
+
+.btn_prev, .btn_play, .btn_next {
+	font-family: Iosevka Nerd Font;
+}
+.btn_prev {
+	color: #e0af68;
+	font-size : 32px;
+	font-weight : normal;
+}
+.btn_play {
+	color: #9ece6a;
+	font-size : 40px;
+	font-weight : bold;
+}
+.btn_next {
+	color: #e0af68;
+	font-size : 32px;
+	font-weight : normal;
+}
+
+.music_bar scale trough highlight {
+	all: unset;
+	background-color: #bb9af7;
+	border-radius: 8px;
+}
+.music_bar scale trough {
+	all: unset;
+	background-color: #3A404C;
+	border-radius: 8px;
+	min-height: 10px;
+	min-width: 180px;
+	margin : 0px 10px 0px 0px;
+}
+
+/** Weather ***************************************/
+.iconweather {
+	font-family: Iosevka Nerd Font;
+	font-size : 58px;
+	font-weight : normal;
+	margin : 10px 0px 0px 30px;
+}
+
+.label_temp {
+	color : #A6D1DD;
+	font-size : 54px;
+	font-weight : bold;
+	margin : 15px 25px 0px 0px;
+}
+
+.label_stat {
+	color : #f7768e;
+	font-size : 30px;
+	font-weight : bold;
+	margin: 0px 0px 10px 0px;
+}
+
+.label_quote {
+	color : #E5E5E5;
+	font-size : 18px;
+	font-weight : normal;
+}
+
+/** Applications ***************************************/
+.appbox {
+	margin : 10px 0px 0px 12px;
+}
+
+.app_vivaldi, .app_telegram, .app_discord, .app_terminal,
+.app_files, .app_geany, .app_code, .app_gimp, .app_vbox {
+    background-repeat: no-repeat;
+	background-size: 54px;
+	min-height: 54px;
+	min-width: 54px;
+	margin: 5px 7px 0px 7px;
+}
+
+.app_vivaldi {}
+.app_telegram {}
+.app_discord {}
+.app_terminal {}
+.app_files {}
+.app_geany {}
+.app_code {}
+.app_gimp {}
+.app_vbox {}
+
+/** Links ***************************************/
+.iconweb, .iconmail {
+	color: #FFFFFF;
+	font-family: Iosevka Nerd Font;
+	font-size : 60px;
+	font-weight : normal;
+}
+.iconmail {
+	color: #DF584E;
+}
+
+.github {
+	background-color: #24292E;
+	border-radius: 16px;
+}
+.reddit {
+	background-color: #E46231;
+	border-radius: 16px;
+}
+.twitter {
+	background-color: #61AAD6;
+	border-radius: 16px;
+}
+.youtube {
+	background-color: #DF584E;
+	border-radius: 16px;
+}
+.nixos {
+	background-color: #4c6eb1;
+	border-radius: 16px;
+}
+.mail {
+	background-color: #FFFFFF;
+	border-radius: 16px;
+}
+
+.mailbox {
+	background-color: #E5E5E5;
+	border-radius: 10px;
+	margin: 24px 0px 24px 0px;
+}
+.label_mails {
+	color: #404040;
+	font-size : 24px;
+	font-weight : bold;
+	margin: 0px 6px 0px 6px;
+}
+
+/** Power buttons ***************************************/
+.btn_logout, .btn_sleep, .btn_reboot, .btn_poweroff {
+	font-size : 48px;
+	font-weight : bold;
+}
+
+.btn_logout {
+	color: #f7768e;
+}
+.btn_sleep {
+	color: #9ece6a;
+}
+.btn_reboot {
+	color: #e0af68;
+}
+.btn_poweroff {
+	color: #7dcfff;
+}
+
+/** Home folders ***************************************/
+.hddbox {
+	background-color: #414868;
+	border-radius: 10px;
+	margin : 15px;
+}
+.hddicon {
+	color: #7aa2f7;
+	font-family: Iosevka Nerd Font;
+	font-size : 70px;
+	font-weight : normal;
+	margin : 5px 10px 5px 25px;
+}
+.hdd_label {
+	color: #E5E9F0;
+	font-size : 32px;
+	font-weight : bold;
+	margin : 0px 0px 0px 10px;
+}
+.fs_sep {
+	color: #2E3440;
+	font-size : 34px;
+	font-weight : bold;
+}
+
+.iconfolder1, .iconfolder2, .iconfolder3, .iconfolder4, .iconfolder5, .iconfolder6  {
+	font-family: Iosevka Nerd Font;
+	font-size : 24px;
+	font-weight : normal;
+	margin : 0px 0px 0px 35px;
+}
+.iconfolder1 {
+	color: #f7768e;
+}
+.iconfolder2 {
+	color: #9ece6a;
+}
+.iconfolder3 {
+	color: #e0af68;
+}
+.iconfolder4 {
+	color: #7aa2f7;
+}
+.iconfolder5 {
+	color: #bb9af7;
+}
+.iconfolder6 {
+	color: #7dcfff;
+}
+
+.label_folder1, .label_folder2, .label_folder3, .label_folder4, .label_folder5, .label_folder6  {
+	font-size : 22px;
+	font-weight : normal;
+	margin : 0px 0px 0px 30px;
+}
+.label_folder1 {
+	color: #f7768e;
+}
+.label_folder2 {
+	color: #9ece6a;
+}
+.label_folder3 {
+	color: #e0af68;
+}
+.label_folder4 {
+	color: #7aa2f7;
+}
+.label_folder5 {
+	color: #bb9af7;
+}
+.label_folder6 {
+	color: #7dcfff;
+}
+
+/** EOF *************************************************/

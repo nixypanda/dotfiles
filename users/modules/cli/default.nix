@@ -9,6 +9,8 @@
     tokei
     dig
     wireshark
+    unzip
+    jq
 
     # Moar colors
     starship
@@ -106,12 +108,10 @@
       plugins = [ "git" "vi-mode" ];
     };
 
-    # For this to work with flakes we need to get this into git
-    # ${builtins.readFile ./zsh/secrets.zsh}
-    # ${builtins.readFile ../../../.secrets/env-vars.sh}
     initExtraBeforeCompInit = ''
       ${builtins.readFile ./zsh/session_variables.zsh}
       ${builtins.readFile ./zsh/functions.zsh}
+      ${builtins.readFile ../../../.secrets/env-vars.sh}
 
       eval "$(direnv hook zsh)"
 

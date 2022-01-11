@@ -14,12 +14,12 @@ rec {
   bat-theme-name = "base16";
   deadd-css-file = ../modules/desktop-environment/deadd/tokyonight.css;
 
-  bg-primary = black;
-  bg-primary-bright = bright-black;
+  bg-primary = "#24283b";
+  bg-primary-bright = "#1f2335";
   bg-primary-transparent-argb = utils.transparentify bg-primary;
   bg-primary-bright-transparent-argb = utils.transparentify bg-primary-bright;
-  fg-primary = white;
-  fg-primary-bright = bright-white;
+  fg-primary = bright-white;
+  fg-primary-bright = "#fefefe";
 
   accent-primary = blue;
   accent-secondary = magenta;
