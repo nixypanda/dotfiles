@@ -4,12 +4,6 @@
 
 { config, pkgs, ... }:
 
-let
-  solaar-rules = builtins.fetchurl {
-    url = "https://github.com/pwr-Solaar/Solaar/blob/1.0.5/rules.d/42-logitech-unify-permissions.rules";
-    sha256 = "sha256:0j441dnhhrzacchsi872dpl1cgpck6xkfrgcpva550wwqwhyqyfw";
-  };
-in
 {
   imports =
     [
@@ -72,6 +66,7 @@ in
     openrgb
     i2c-tools
     ddccontrol
+    solaar
   ];
   environment.pathsToLink = [ "/libexec" ];
 
@@ -133,6 +128,7 @@ in
       }
     ];
   };
+  services.udev.packages = with pkgs; [ solaar ];
   # services.xserver.enable = true;
   # services.xserver.layout = "us";
   # services.xserver.xkbOptions = "eurosign:e";
@@ -151,10 +147,10 @@ in
   };
 
   # Switch Pro Controller udev rules
-  services.udev.extraRules = ''
-    ${builtins.readFile solaar-rules}
-    ${builtins.readFile ./openrgb.rules}
-  '';
+  # NOTE: Removing these udev rules
+  # services.udev.extraRules = ''
+  #   ${builtins.readFile ./openrgb.rules}
+  # '';
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

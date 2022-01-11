@@ -47,7 +47,6 @@ in
     # Need polybar to support this as a first class module
     gnome3.networkmanagerapplet
     volumeicon
-    solaar
     psensor
     gnome3.nautilus
 
