@@ -35,7 +35,7 @@ require"which-key".setup {
 }
 
 local mappings = {
-    e = {"<cmd>NvimTreeToggle<cr>", "Explorer"},
+    e = {"<cmd>lua Nvim_tree_toggle()<cr>", "Explorer"},
     a = {
         name = "+Actions",
         s = {'<cmd>let @/ = ""<cr>', "Remove search highlight"},
