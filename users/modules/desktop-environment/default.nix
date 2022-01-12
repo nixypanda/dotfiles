@@ -74,6 +74,7 @@ in
 
     psmisc
 
+    # Widgets
     eww
 
     # Notifications
