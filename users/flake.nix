@@ -91,6 +91,7 @@
                 ./modules/alacritty.nix
                 ./modules/system-management
                 ./modules/work.nix
+                ./modules/programming.nix
               ];
 
               # Packages that don't fit in the modules that we have
@@ -148,6 +149,7 @@
                 ./modules/tmux.nix
                 ./modules/system-management
                 ./modules/work.nix
+                ./modules/programming.nix
               ];
             };
         };
