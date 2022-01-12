@@ -6,45 +6,19 @@
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol
                                                                      .make_client_capabilities())
 
--- bash
-require'lspconfig'.bashls.setup {cmd = lang_servers_cmd.bashls}
-
--- cmake
--- require'lspconfig'.cmake.setup {cmd = lang_servers_cmd.cmake}
-
--- css
-require'lspconfig'.cssls.setup {
-    capabilities = capabilities,
-    cmd = lang_servers_cmd.cssls
-}
-
--- docker
-require'lspconfig'.dockerls.setup {cmd = lang_servers_cmd.dockerls}
-
 -- elm
-require'lspconfig'.elmls.setup {
-    cmd = lang_servers_cmd.elmls,
-    init_options = {
-        elmPath = lang_servers_cmd.elm,
-        elmTestPath = lang_servers_cmd.elm_test,
-        elmFormatPath = lang_servers_cmd.elm_format
-    }
-}
+require'lspconfig'.elmls.setup {}
 
 -- go
-require'lspconfig'.gopls.setup {cmd = lang_servers_cmd.gopls}
+require'lspconfig'.gopls.setup {}
 
 -- Haskell
 require'lspconfig'.hls.setup {
-    settings = {languageServerHaskell = {formattingProvider = "brittany"}},
-    cmd = lang_servers_cmd.hls
+    settings = {languageServerHaskell = {formattingProvider = "brittany"}}
 }
 
--- html
-require'lspconfig'.html.setup {capabilities = capabilities, cmd = lang_servers_cmd.html}
-
--- json
-require'lspconfig'.jsonls.setup {cmd = lang_servers_cmd.jsonls}
+-- JavaScript/TypeScript
+require'lspconfig'.tsserver.setup {}
 
 -- lua
 require'lspconfig'.sumneko_lua.setup {
@@ -53,10 +27,10 @@ require'lspconfig'.sumneko_lua.setup {
 }
 
 -- nix
-require'lspconfig'.rnix.setup {cmd = lang_servers_cmd.rnix}
+require'lspconfig'.rnix.setup {}
 
 -- Python
-require'lspconfig'.pyright.setup {cmd = lang_servers_cmd.pyright}
+require'lspconfig'.pyright.setup {}
 
 -- Rust
 require'rust-tools'.setup()
@@ -69,11 +43,75 @@ require'lspconfig'.rust_analyzer.setup {
     end
 }
 
--- TypeScript/JavaScript
-require'lspconfig'.tsserver.setup {cmd = lang_servers_cmd.tsserver}
+-- shit you need to deal with
+require'lspconfig'.bashls.setup {}
+require'lspconfig'.cmake.setup {}
+require'lspconfig'.cssls.setup {capabilities = capabilities}
+require'lspconfig'.dockerls.setup {}
+require'lspconfig'.html.setup {capabilities = capabilities}
 
--- vim
-require'lspconfig'.vimls.setup {cmd = lang_servers_cmd.vimls}
+local schemas = {
+    {
+        description = "TypeScript compiler configuration file",
+        fileMatch = {"tsconfig.json", "tsconfig.*.json"},
+        url = "https://json.schemastore.org/tsconfig.json"
+    }, {
+        description = "Babel configuration",
+        fileMatch = {".babelrc.json", ".babelrc", "babel.config.json"},
+        url = "https://json.schemastore.org/babelrc.json"
+    }, {
+        description = "ESLint config",
+        fileMatch = {".eslintrc.json", ".eslintrc"},
+        url = "https://json.schemastore.org/eslintrc.json"
+    }, {
+        description = "Prettier config",
+        fileMatch = {".prettierrc", ".prettierrc.json", "prettier.config.json"},
+        url = "https://json.schemastore.org/prettierrc"
+    }, {
+        description = "Stylelint config",
+        fileMatch = {".stylelintrc", ".stylelintrc.json", "stylelint.config.json"},
+        url = "https://json.schemastore.org/stylelintrc"
+    }, {
+        description = "Configuration file as an alternative for configuring your repository in the settings page.",
+        fileMatch = {".codeclimate.json"},
+        url = "https://json.schemastore.org/codeclimate.json"
+    }, {
+        description = "AWS CloudFormation provides a common language for you to describe and provision all the infrastructure resources in your cloud environment.",
+        fileMatch = {"*.cf.json", "cloudformation.json"},
+        url = "https://raw.githubusercontent.com/awslabs/goformation/v5.2.9/schema/cloudformation.schema.json"
+    }, {
+        description = "The AWS Serverless Application Model (AWS SAM, previously known as Project Flourish) extends AWS CloudFormation to provide a simplified way of defining the Amazon API Gateway APIs, AWS Lambda functions, and Amazon DynamoDB tables needed by your serverless application.",
+        fileMatch = {"serverless.template", "*.sam.json", "sam.json"},
+        url = "https://raw.githubusercontent.com/awslabs/goformation/v5.2.9/schema/sam.schema.json"
+    }, {
+        description = "Json schema for properties json file for a GitHub Workflow template",
+        fileMatch = {".github/workflow-templates/**.properties.json"},
+        url = "https://json.schemastore.org/github-workflow-template-properties.json"
+    }, {
+        description = "golangci-lint configuration file",
+        fileMatch = {".golangci.toml", ".golangci.json"},
+        url = "https://json.schemastore.org/golangci-lint.json"
+    }, {
+        description = "NPM configuration file",
+        fileMatch = {"package.json"},
+        url = "https://json.schemastore.org/package.json"
+    }
+}
+
+require'lspconfig'.jsonls.setup {settings = {json = {schemas = schemas}}}
+require'lspconfig'.vimls.setup {}
+require'lspconfig'.yamlls.setup {
+    settings = {
+        yaml = {
+            schemas = {
+                ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+                ["https://json.schemastore.org/drone.json"] = "/.drone.yml",
+                ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json"] = "/openapi.yml",
+                ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "/docker-compose.json"
+            }
+        }
+    }
+}
 
 -- signature help
 require'lsp_signature'.on_attach({bind = true, handler_opts = {border = 'single'}})
@@ -98,31 +136,23 @@ vim.api.nvim_set_keymap('n', '<C-d>',
 
 -- EFM (Various Commands as LSP) Setup
 require"lspconfig".efm.setup {
-    cmd = lang_servers_cmd.efmls,
     init_options = {documentFormatting = true},
     filetypes = {"css", "html", "json", "lua", "python", "markdown"},
     settings = {
         rootMarkers = {".git/"},
         languages = {
-            css = {{formatCommand = lang_servers_cmd.prettier .. " --parser css"}},
-            scss = {{formatCommand = lang_servers_cmd.prettier .. " --parser scss"}},
-            json = {{formatCommand = lang_servers_cmd.prettier .. " --parser json"}},
-            html = {{formatCommand = lang_servers_cmd.prettier .. " --parser html"}},
+            css = {{formatCommand = "prettier --parser css"}},
+            scss = {{formatCommand = "prettier --parser scss"}},
+            json = {{formatCommand = "prettier --parser json"}},
+            html = {{formatCommand = "prettier --parser html"}},
             markdown = {{formatCommand = 'pandoc -f markdown -t gfm -sp --tab-stop=2'}},
             python = {
-                {
-                    formatCommand = lang_servers_cmd.isort .. " --quiet -",
-                    formatStdin = true
-                },
-                {
-                    formatCommand = lang_servers_cmd.black .. " --quiet -",
-                    formatStdin = true
-                }
+                {formatCommand = "isort --quiet -", formatStdin = true},
+                {formatCommand = "black --quiet -", formatStdin = true}
             },
             lua = {
                 {
-                    formatCommand = lang_servers_cmd.lua_format
-                        .. " -i --no-keep-simple-function-one-line --no-break-after-operator --column-limit=88 --break-after-table-lb",
+                    formatCommand = "lua-format -i --no-keep-simple-function-one-line --no-break-after-operator --column-limit=88 --break-after-table-lb",
                     formatStdin = true
                 }
             }

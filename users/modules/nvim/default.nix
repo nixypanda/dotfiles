@@ -1,41 +1,54 @@
 { config, pkgs, lib, colorscheme, ... }:
 {
   home.packages = with pkgs; [
-    # C
-    gcc
-    # Clojure
-    clojure
-    # go
-    go
+    # elm
+    elmPackages.elm-language-server
+    elmPackages.elm
+    elmPackages.elm-test
+    elmPackages.elm-format
+
+    # Go
+    gopls
+
     # Haskell
-    ghc
-    haskellPackages.cabal-install
-    haskellPackages.stack
+    haskellPackages.haskell-language-server
+
     # JavaScript
-    nodejs
-    yarn
+    nodePackages.typescript-language-server
+
     # lua
-    lua
+    luaformatter
+
+    # Nix
+    rnix-lsp
+
+    # python
+    python3Packages.isort
+    black
+    python3Packages.black
+    nodePackages.pyright
+
+    # Rust
+    rust-analyzer
+    rustfmt
+    clippy
+    # lldb # debugging setup
+
+    # general purpose / multiple langs
+    nur.repos.crazazy.efm-langserver
+    nodePackages.prettier
+
+    # shit you need to deal with
+    cmake-language-server
+    nodePackages.bash-language-server
+    nodePackages.dockerfile-language-server-nodejs
+    nodePackages.vscode-langservers-extracted
+    nodePackages.vim-language-server
+    nodePackages.yaml-language-server
     # makrdown
+    # This is a cli utility as we can't display all this in cli
     nodePackages.livedown
     pandoc
-    # python
-    (python3.withPackages (ps: with ps; [ setuptools pip debugpy ]))
-    poetry
-    autoflake
-    python3Packages.pip
-    python3Packages.ipython
-    python3Packages.parso
-    python3Packages.twine
-    # rust
-    rustc
-    cargo
-    rustfmt
-    cargo-tarpaulin
-    perl # perl (this is required by rust)
-    # lldb # debugging setup
-    rust-analyzer
-    clippy
   ] ++ (lib.optional pkgs.stdenv.isLinux sumneko-lua-language-server);
 
   programs.neovim = {
@@ -110,7 +123,6 @@
       plenary-nvim
     ];
 
-    # cmake = {"${pkgs.cmake-language-server}/bin/cmake-language-server"},
     extraConfig = ''
       colorscheme ${colorscheme.vim-name}
       ${builtins.readFile ./base-sane.vim}
@@ -120,33 +132,6 @@
         ${builtins.readFile ./base-sane.lua}
 
         local statusline_theme = '${colorscheme.vim-statusline}'
-
-        local lang_servers_cmd = {
-          bashls = {"${pkgs.nodePackages.bash-language-server}/bin/bash-language-server", "start"},
-          cssls = {"${pkgs.nodePackages.vscode-css-languageserver-bin}/bin/css-languageserver", "--stdio"},
-          dockerls = {"${pkgs.nodePackages.dockerfile-language-server-nodejs}/bin/docker-langserver", "--stdio"},
-          elmls = {"${pkgs.elmPackages.elm-language-server}/bin/elm-language-server"},
-          gopls = {"${pkgs.gopls}/bin/gopls"},
-          hls = {"${pkgs.haskellPackages.haskell-language-server}/bin/haskell-language-server", "--lsp"},
-          html = {"${pkgs.nodePackages.vscode-html-languageserver-bin}/bin/html-languageserver", "--stdio"},
-          jsonls = {"${pkgs.nodePackages.vscode-json-languageserver-bin}/bin/json-languageserver", "--stdio"},
-          pyright = {"${pkgs.nodePackages.pyright}/bin/pyright-langserver", "--stdio"},
-          rnix = {"${pkgs.rnix-lsp}/bin/rnix-lsp"},
-          tsserver = {"${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server", "--stdio"},
-          vimls = {"${pkgs.nodePackages.vim-language-server}/bin/vim-language-server", "--stdio"},
-          yamlls = {"${pkgs.nodePackages.yaml-language-server}/bin/yaml-language-server", "--stdio"},
-          efmls = {"${pkgs.nur.repos.crazazy.efm-langserver}/bin/efm-langserver"},
-
-          prettier = "${pkgs.nodePackages.prettier}/bin/prettier",
-          isort = "${pkgs.python3Packages.isort}/bin/isort",
-          black = "${pkgs.python3Packages.black}/bin/black",
-          lua_format = "${pkgs.luaformatter}/bin/lua-format",
-          rustfmt = "${pkgs.rustfmt}/bin/cargo-fmt",
-
-          elm = "${pkgs.elmPackages.elm}/bin/elm",
-          elm_test = "${pkgs.elmPackages.elm-test}/bin/elm-test",
-          elm_format = "${pkgs.elmPackages.elm-format}/bin/elm-format",
-        }
 
         ${builtins.readFile ./look-dashboard.lua}
         ${builtins.readFile ./look-colorizer.lua}
