@@ -77,7 +77,7 @@
       # Programming
       which-key-nvim
       vim-haskellConcealPlus # vimscript
-      vim-nix # vimscript
+      nvim-yuck # vimscript
       lspkind-nvim
       nvim-treesitter
       nvim-treesitter-refactor

@@ -159,6 +159,22 @@
         "type": "github"
       }
     },
+    "nvim-yuck-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1628507071,
+        "narHash": "sha256-lp7qJWkvelVfoLCyI0aAiajTC+0W1BzDhmtta7tnICE=",
+        "owner": "elkowar",
+        "repo": "yuck.vim",
+        "rev": "6dc3da77c53820c32648cf67cbdbdfb6994f4e08",
+        "type": "github"
+      },
+      "original": {
+        "owner": "elkowar",
+        "repo": "yuck.vim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
@@ -169,7 +185,8 @@
         "nvim-copilot-src": "nvim-copilot-src",
         "nvim-dap-python-src": "nvim-dap-python-src",
         "nvim-lspsaga-src": "nvim-lspsaga-src",
-        "nvim-sqls-src": "nvim-sqls-src"
+        "nvim-sqls-src": "nvim-sqls-src",
+        "nvim-yuck-src": "nvim-yuck-src"
       }
     }
   },
