@@ -43,6 +43,15 @@ require'lspconfig'.rust_analyzer.setup {
     end
 }
 
+-- SQL
+require('lspconfig').sqls.setup {
+    on_attach = function(client, bufnr)
+        require('sqls').on_attach(client, bufnr)
+    end
+}
+
+require'lspconfig'.terraformls.setup {}
+
 -- shit you need to deal with
 require'lspconfig'.bashls.setup {}
 require'lspconfig'.cmake.setup {}

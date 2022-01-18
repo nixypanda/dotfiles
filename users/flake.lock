@@ -143,6 +143,22 @@
         "type": "github"
       }
     },
+    "nvim-sqls-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1641991384,
+        "narHash": "sha256-jQVAwot3wEntdEWirA/8H0/tIaIKvk9NRdcc5GwSmNw=",
+        "owner": "nanotee",
+        "repo": "sqls.nvim",
+        "rev": "f573781dee03b802f04bd0a00c80c2915164f2c2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nanotee",
+        "repo": "sqls.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
@@ -152,7 +168,8 @@
         "nvim-cmp-copilot-src": "nvim-cmp-copilot-src",
         "nvim-copilot-src": "nvim-copilot-src",
         "nvim-dap-python-src": "nvim-dap-python-src",
-        "nvim-lspsaga-src": "nvim-lspsaga-src"
+        "nvim-lspsaga-src": "nvim-lspsaga-src",
+        "nvim-sqls-src": "nvim-sqls-src"
       }
     }
   },

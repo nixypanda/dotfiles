@@ -26,6 +26,10 @@
       url = "github:hrsh7th/cmp-copilot";
       flake = false;
     };
+    nvim-sqls-src = {
+      url = "github:nanotee/sqls.nvim";
+      flake = false;
+    };
   };
   outputs = { self, nur, ... }@inputs:
     let
@@ -49,6 +53,10 @@
         nvim-cmp-copilot = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-cmp-copilot";
           src = inputs.nvim-cmp-copilot;
+        };
+        nvim-sqls = pkgs.vimUtils.buildVimPlugin {
+          name = "nvim-sqls";
+          src = inputs.nvim-sqls-src;
         };
       };
 

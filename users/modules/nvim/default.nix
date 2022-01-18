@@ -34,6 +34,12 @@
     clippy
     # lldb # debugging setup
 
+    # SQL
+    sqls
+
+    # terraform
+    terraform-ls
+
     # general purpose / multiple langs
     nur.repos.crazazy.efm-langserver
     nodePackages.prettier
@@ -81,6 +87,7 @@
       lsp_signature-nvim
       rust-tools-nvim
       symbols-outline-nvim
+      nvim-sqls
       ## Autocompletion setup
       nvim-cmp
       cmp-path
