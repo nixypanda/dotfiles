@@ -105,7 +105,7 @@
     ];
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "vi-mode" ];
+      plugins = [ "git" "vi-mode" "web-search" "aws" "terraform" ];
     };
 
     initExtraBeforeCompInit = ''
