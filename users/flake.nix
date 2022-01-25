@@ -127,6 +127,7 @@
 
                 gnome3.networkmanager-openvpn
                 glxinfo
+                zoom-us
               ];
             };
         };
