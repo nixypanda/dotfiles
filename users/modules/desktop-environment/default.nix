@@ -45,7 +45,7 @@ in
 
     # system tray (Kind of a hack atm)
     # Need polybar to support this as a first class module
-    gnome3.networkmanagerapplet
+    networkmanagerapplet
     psensor
     gnome3.nautilus
     pasystray
