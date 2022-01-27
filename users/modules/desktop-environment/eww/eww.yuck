@@ -88,12 +88,9 @@
                 (label :class "upmin" :halign "start" :wrap "true" :limit-width 25 :text UPMIN)))))
 
 ;;  Music 
-(defwidget music [] 
+(defwidget music [album-art-class] 
     (box :class "genwin" :orientation "h" :space-evenly "false"  
-    ;; FIXME: Unable to see the album art
-        (box :class "album_art" :style
-            "background-image: url('/home/sherub/Pictures/backgrounds/tokyonight/BirdOneDarker.png');")
-        ;; (box :class "album_art"  :style "background-image: url('${COVER}');")
+        (box :class album-art-class :style "background-image: url('${COVER}');")
         (box :orientation "v" :valign "center" :spacing 29 :space-evenly "false"  
             (label :halign "center" :class "song" :wrap "true" :text SONG)
             (label :halign "center" :class "artist" :wrap "true" :text ARTIST)
@@ -102,8 +99,7 @@
                 (button :class "btn_play" :onclick "custom-browsermediacontrol --playpause" STATUS_ICON)
                 (button :class "btn_next" :onclick "custom-browsermediacontrol --next" "怜"))
             (box :class "music_bar" :halign "center"  
-            ;; FIXME: This does not work!
-                (scale :onscroll "mpc -q seek +1" :min 0 :active "true" :max 100 :value CURRENT)))))
+                (scale :min 0 :active "true" :max 100 :value CURRENT)))))
 
 ;;  github 
 (defwidget github [] 
@@ -240,7 +236,7 @@
 ;;  music 
 (defwindow full-music :stacking "fg" :focusable "false" :screen 1 
         :geometry (geometry :x "27%" :y "44%" :width "31%" :height "28%")
-                        (music))
+  (music :album-art-class "album_art-large"))
 
 ;;  github 
 (defwindow full-github :stacking "fg" :focusable "false" :screen 1 
@@ -307,7 +303,11 @@
         :geometry (geometry :x "75%" :y "44%" :width "17%" :height "42%")
                         (folders))
 
-;; Power menu
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; TopBar Dropdown-ish things ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Power menu ;;
 
 ;;  background 
 (defwindow powermenu-background :stacking "fg" :focusable "false" :screen 1 
@@ -333,3 +333,14 @@
 (defwindow powermenu-poweroff :stacking "fg" :focusable "false" :screen 1 
         :geometry (geometry :anchor "top right" :x -15 :y 545 :width 150 :height 150)
   (poweroff))
+
+
+;; Browser Media control ;;
+
+(defwindow topbar-music-background :stacking "fg" :focusable "false" :screen 1 
+        :geometry (geometry :x 180 :y 40 :width 530 :height 330)
+  (bg))
+
+(defwindow topbar-music :stacking "fg" :focusable "false" :screen 1 
+        :geometry (geometry :x 195 :y 55 :width 500 :height 300)
+  (music :album-art-class "album_art"))

@@ -140,6 +140,7 @@ rec {
 
     scroll-up = "custom-browsermediacontrol --volume 1 &";
     scroll-down = "custom-browsermediacontrol --volume -1 &";
+    click-left = "eww open-many --toggle topbar-music-background topbar-music";
 
     interval = "0.1";
   };

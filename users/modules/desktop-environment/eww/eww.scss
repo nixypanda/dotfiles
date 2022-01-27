@@ -109,8 +109,17 @@
 .album_art {
 	background-size: cover;	
 	background-position: center;
-	min-height: 184px;
-	min-width: 184px;
+	min-height: 200px;
+	min-width: 200px;
+	margin: 20px;
+	border-radius: 14px;
+}
+
+.album_art-large {
+	background-size: cover;	
+	background-position: center;
+	min-height: 300px;
+	min-width: 400px;
 	margin: 20px;
 	border-radius: 14px;
 }
