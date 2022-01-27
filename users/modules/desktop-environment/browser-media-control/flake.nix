@@ -8,7 +8,7 @@
     let
       system = "x86_64-linux";
       pkgs = inputs.unstable.legacyPackages.${system};
-      pythonDeps = ps: with ps; [ pydbus pygobject3 ];
+      pythonDeps = ps: with ps; [ pydbus pygobject3 requests ];
       deps = with pkgs; [
         pkg-config
         cairo
@@ -16,19 +16,19 @@
         (python3.withPackages pythonDeps)
       ];
     in
-      {
-        devShell."${system}" = pkgs.mkShell {
-          buildInputs = deps;
-        };
-        defaultPackage."${system}" = pkgs.stdenv.mkDerivation {
-          name = "custom-browsermediacontrol";
-          buildInputs = deps;
-          unpackPhase = ":";
-          installPhase = ''
-            mkdir -p $out/bin
-            cp ${./bmc.py} $out/bin/custom-browsermediacontrol
-            chmod +x $out/bin/custom-browsermediacontrol
-          '';
-        };
+    {
+      devShell."${system}" = pkgs.mkShell {
+        buildInputs = deps;
       };
+      defaultPackage."${system}" = pkgs.stdenv.mkDerivation {
+        name = "custom-browsermediacontrol";
+        buildInputs = deps;
+        unpackPhase = ":";
+        installPhase = ''
+          mkdir -p $out/bin
+          cp ${./bmc.py} $out/bin/custom-browsermediacontrol
+          chmod +x $out/bin/custom-browsermediacontrol
+        '';
+      };
+    };
 }

@@ -2,13 +2,20 @@
 
 # Taken from https://github.com/haideralipunjabi/polybar-browsermediacontrol
 import argparse
+import json
 import os
+from os import path
 
+import requests
 from gi.repository import GLib
 from pydbus import SessionBus
 
-ICON_PLAY = " "
-ICON_PAUSE = " "
+ALBUM_ART_TMP_LOC = "/tmp/bmc-album-art.jpg"
+ALBUM_ART_META_TMP_LOC = "/tmp/bmc-album-art.json"
+DEFAULT_ALBUM_ART_LOC = "~/.dotfiles/images/music.png"
+
+ICON_PLAY = ""
+ICON_PAUSE = ""
 ICON_NEXT = "怜"
 ICON_PREV = "玲"
 ICON = ""
@@ -72,6 +79,30 @@ def as_percent(value, total):
     return int(value / total * 100)
 
 
+def album_art_is_up_to_date(url: str) -> bool:
+    if not path.exists(ALBUM_ART_TMP_LOC):
+        return False
+    if not path.exists(ALBUM_ART_META_TMP_LOC):
+        return False
+
+    try:
+        with open(ALBUM_ART_META_TMP_LOC, "r") as f:
+            furl = json.load(f)["url"]
+    except Exception:
+        return False
+    else:
+        return furl == url
+
+
+def download_album_art(url: str):
+    res = requests.get(url)
+    if res.status_code == 200:
+        with open(ALBUM_ART_TMP_LOC, "wb") as f:
+            f.write(res.content)
+        with open(ALBUM_ART_META_TMP_LOC, "w") as f:
+            f.write(json.dumps({"url": url}))
+
+
 title = Player.Metadata["xesam:title"]
 
 if args.display == "song":
@@ -81,7 +112,17 @@ if args.display == "artist":
     print(Player.Metadata["xesam:artist"])
     exit()
 if args.display == "cover":
-    print(Player.Metadata["mpris:artUrl"])
+    url = Player.Metadata["mpris:artUrl"]
+    if album_art_is_up_to_date(url):
+
+        print(ALBUM_ART_TMP_LOC)
+    else:
+        try:
+            download_album_art(url)
+        except Exception as e:
+            print(DEFAULT_ALBUM_ART_LOC)
+        else:
+            print(ALBUM_ART_TMP_LOC)
     exit()
 if args.display == "position":
     print(as_percent(Player.Position, Player.Metadata["mpris:length"]))
@@ -92,7 +133,6 @@ if args.display == "status":
 if args.display == "status-icon":
     print(ICON)
     exit()
-
 
 # Polybar display
 
@@ -107,6 +147,9 @@ def truncate(text, max_len):
         return f"{text[:max_len]}..."
     return text
 
+
+# Polybar has some issues with how it displays stuff
+ICON += " "
 
 if args.polybar_display == "full":
     output = (

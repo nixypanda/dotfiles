@@ -11,6 +11,7 @@ pkgs.stdenv.mkDerivation {
         python3Packages: with python3Packages; [
           pydbus
           pygobject3
+          requests
         ]
       )
     )
