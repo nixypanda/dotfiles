@@ -104,7 +104,6 @@ in
     }
   '';
   home.file.".config/rofi/grid.rasi".source = ./rofi/grid.rasi;
-  home.file.".config/rofi/sysmenu.rasi".source = ./rofi/sysmenu.rasi;
 
   home.file.".config/eww/eww.scss".source = ./eww/eww.scss;
   home.file.".config/eww/eww.yuck".source = ./eww/eww.yuck;

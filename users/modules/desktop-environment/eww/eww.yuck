@@ -306,3 +306,30 @@
 (defwindow full-folders :stacking "fg" :focusable "false" :screen 1 
         :geometry (geometry :x "75%" :y "44%" :width "17%" :height "42%")
                         (folders))
+
+;; Power menu
+
+;;  background 
+(defwindow powermenu-background :stacking "fg" :focusable "false" :screen 1 
+        :geometry (geometry :anchor "top right" :x -5 :y 40 :width 180 :height 675)
+  (bg))
+
+;;  logout 
+(defwindow powermenu-logout :stacking "fg" :focusable "false" :screen 1 
+        :geometry (geometry :anchor "top right" :x -15 :y 50 :width 150 :height 150)
+  (logout))
+
+;;  sleep 
+(defwindow powermenu-sleep :stacking "fg" :focusable "false" :screen 1 
+        :geometry (geometry :anchor "top right" :x -15 :y 215 :width 150 :height 150)
+  (sleep))
+
+;;  reboot 
+(defwindow powermenu-reboot :stacking "fg" :focusable "false" :screen 1 
+        :geometry (geometry :anchor "top right" :x -15 :y 380 :width 150 :height 150)
+  (reboot))
+
+;;  poweroff 
+(defwindow powermenu-poweroff :stacking "fg" :focusable "false" :screen 1 
+        :geometry (geometry :anchor "top right" :x -15 :y 545 :width 150 :height 150)
+  (poweroff))

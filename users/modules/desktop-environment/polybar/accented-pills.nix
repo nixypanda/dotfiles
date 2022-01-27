@@ -166,7 +166,7 @@ rec {
     content-padding = 1;
     content-background = attention;
     content-foreground = module-background;
-    click-left = "rofi -modi 'Powermenu:custom-script-sysmenu' -show Powermenu -theme sysmenu -location 3 -yoffset 25 &";
+    click-left = "eww open-many --toggle powermenu-background powermenu-logout powermenu-sleep powermenu-reboot powermenu-poweroff";
   };
 
   "module/sep" = separator { color = background; };
