@@ -16,7 +16,7 @@ rec {
 
   bg-primary = "#24283b";
   bg-primary-bright = "#1f2335";
-  bg-primary-transparent-argb = utils.transparentify bg-primary;
+  bg-primary-transparent-argb = utils.transparentify accent-primary;
   bg-primary-bright-transparent-argb = utils.transparentify bg-primary-bright;
   fg-primary = bright-white;
   fg-primary-bright = "#fefefe";

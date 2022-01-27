@@ -1,7 +1,7 @@
 with builtins;
 {
   transparentify = color:
-    "#99${substring 1 (stringLength color - 1) color}";
+    "#00${substring 1 (stringLength color - 1) color}";
 
   # TODO: Implemet a version that makes a color brighter
   # Possible algo

@@ -6,6 +6,7 @@ let
     killall -q polybar
     kill $(pidof pasystray)
 
+    eww close topbar-btw-bg && eww open topbar-btw-bg
     polybar main &
     polybar powermenu &
     nm-applet &
@@ -14,6 +15,7 @@ let
     eww daemon &
     solaar -w hide &
     blueman-applet &
+    eww close topbar-btw && eww open topbar-btw
   '';
 
   custom-script-sysmenu = pkgs.writeScriptBin "custom-script-sysmenu" ''

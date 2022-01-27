@@ -8,13 +8,30 @@
 /** Background ***************************************/
 .bg {
 	background-color: #7aa2f7;
-	opacity: 0.1;
+	opacity: 0.2;
 }
 
 /** Generic window ***********************************/
 .genwin {
 	background-color: #24283b;
 	border-radius: 16px;
+}
+
+/** BTW window ***********************************/
+.btw-icon {
+	background-size: 20px;
+	// background-color: #28292A;
+	// background-color: #3a404c;
+	background-color: #24283b;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    border-style: solid;
+    border-radius: 20px;
+    border-width: 1px;
+    border-color: #7aa2f7;
+
+	margin : 2px;
 }
 
 /** Profile ******************************************/

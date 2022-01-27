@@ -13,7 +13,7 @@ let
     {
       type = "custom/text";
       # NOTE: How to do? `take n . repeat`
-      content = if size == 1 then " " else "       ";
+      content = if size == 1 then " " else "         ";
       content-background = color;
       content-foreground = color;
     };
@@ -26,11 +26,14 @@ let
   };
 
   secondary-bar-width-pct = 7.6;
+  btw-icon-width = 1;
 in
 rec {
   "bar/base" = {
     monitor = "DisplayPort-1";
-    height = 27;
+    height = 28;
+    offset-y = 5;
+    offset-x = "${builtins.toString btw-icon-width}%";
 
     border-size = 2;
     border-left-size = 0;
@@ -45,9 +48,9 @@ rec {
   "bar/main" = {
     "inherit" = "bar/base";
 
-    width = "${builtins.toString (100 - secondary-bar-width-pct)}%";
+    width = "${builtins.toString (100 - secondary-bar-width-pct - btw-icon-width)}%";
 
-    modules-left = "ewmh right-bg-bgb sep-bg-b layout-xmonad right-bg-b sep-huge left bmc right";
+    modules-left = "sep-huge left ewmh right-bg-bgb sep-bg-b layout-xmonad right-bg-b sep-huge left bmc right";
     modules-center = "left title right";
     modules-right = "left";
 
@@ -87,7 +90,7 @@ rec {
     format = "<label-state>";
 
     label-active = "%icon%";
-    label-active-foreground = background;
+    label-active-foreground = module-background;
     label-active-background = accent;
     label-active-padding = 2;
 
