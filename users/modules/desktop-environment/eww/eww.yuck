@@ -19,8 +19,8 @@
 (defpoll TIME :interval "10s" "date +\"%I:%M %p\"")
 
 ;;  Uptime vars 
-(defpoll UPHOUR :interval "5s"  "uptime -p | awk '{print $2 \" \" $3}' | sed 's/,//g'")
-(defpoll UPMIN :interval "5s"  "uptime -p | awk '{print $4 \" \" $5}'")
+(defpoll UPHOUR :interval "1m"  "uptime -p | awk '{print $2 \" \" $3}' | sed 's/,//g'")
+(defpoll UPMIN :interval "1m"  "uptime -p | awk '{print $4 \" \" $5}'")
 
 ;;  Music vars 
 (defpoll SONG :interval "1s"  "custom-browsermediacontrol --display song")
@@ -214,95 +214,95 @@
 ;;  ******************************************************************************** 
 
 ;;  background 
-(defwindow background :stacking "fg" :focusable "false" :screen 1 
+(defwindow full-background :stacking "fg" :focusable "false" :screen 1 
         :geometry (geometry :x 0 :y 0 :width "100%" :height "100%") (bg))
 
 ;;  profile 
-(defwindow profile :stacking "fg" :focusable "false" :screen 1 
+(defwindow full-profile :stacking "fg" :focusable "false" :screen 1 
         :geometry (geometry :x "8%" :y "14%" :width "18%" :height "42%")
                         (user))
 
 ;;  system 
-(defwindow system :stacking "fg" :focusable "false" :screen 1 
+(defwindow full-system :stacking "fg" :focusable "false" :screen 1 
         :geometry (geometry :x "8%" :y "58%" :width "18%" :height "28%")
                         (system))
 
 ;;  clock 
-(defwindow clock :stacking "fg" :focusable "false" :screen 1 
+(defwindow full-clock :stacking "fg" :focusable "false" :screen 1 
         :geometry (geometry :x "27%" :y "14%" :width "15%" :height "13%")
                         (clock))
 
 ;;  uptime 
-(defwindow uptime :stacking "fg" :focusable "false" :screen 1 
+(defwindow full-uptime :stacking "fg" :focusable "false" :screen 1 
         :geometry (geometry :x "27%" :y "29%" :width "15%" :height "13%")
                         (uptime))
 
 ;;  music 
-(defwindow music :stacking "fg" :focusable "false" :screen 1 
+(defwindow full-music :stacking "fg" :focusable "false" :screen 1 
         :geometry (geometry :x "27%" :y "44%" :width "31%" :height "28%")
                         (music))
 
 ;;  github 
-(defwindow github :stacking "fg" :focusable "false" :screen 1 
+(defwindow full-github :stacking "fg" :focusable "false" :screen 1 
         :geometry (geometry :x "27%" :y "74%" :width "7%" :height "12%")
                         (github))
 
 ;;  reddit 
-(defwindow reddit :stacking "fg" :focusable "false" :screen 1 
+(defwindow full-reddit :stacking "fg" :focusable "false" :screen 1 
         :geometry (geometry :x "35%" :y "74%" :width "7%" :height "12%")
                         (reddit))
 
 ;;  twitter 
-(defwindow twitter :stacking "fg" :focusable "false" :screen 1 
+(defwindow full-twitter :stacking "fg" :focusable "false" :screen 1 
         :geometry (geometry :x "43%" :y "74%" :width "7%" :height "12%")
                         (twitter))
 
 ;;  youtube 
-(defwindow youtube :stacking "fg" :focusable "false" :screen 1 
+(defwindow full-youtube :stacking "fg" :focusable "false" :screen 1 
         :geometry (geometry :x "51%" :y "74%" :width "7%" :height "12%")
                         (youtube))
 
 ;;  weather 
-(defwindow weather :stacking "fg" :focusable "false" :screen 1 
+(defwindow full-weather :stacking "fg" :focusable "false" :screen 1 
         :geometry (geometry :x "43%" :y "14%" :width "31%" :height "28%")
                         (weather))
 
 ;;  apps 
-(defwindow apps :stacking "fg" :focusable "false" :screen 1 
+(defwindow full-apps :stacking "fg" :focusable "false" :screen 1 
         :geometry (geometry :x "59%" :y "44%" :width "15%" :height "28%")
                         (apps))
 
 ;;  mail 
-(defwindow mail :stacking "fg" :focusable "false" :screen 1 
+(defwindow full-mail :stacking "fg" :focusable "false" :screen 1 
         :geometry (geometry :x "59%" :y "74%" :width "7%" :height "12%")
                         (mail))
 
 ;;  nixos
-(defwindow nix_search :stacking "fg" :focusable "false" :screen 1 
+(defwindow full-nix_search :stacking "fg" :focusable "false" :screen 1 
         :geometry (geometry :x "67%" :y "74%" :width "7%" :height "12%")
                         (nix_search))
 
 ;;  logout 
-(defwindow logout :stacking "fg" :focusable "false" :screen 1 
+(defwindow full-logout :stacking "fg" :focusable "false" :screen 1 
         :geometry (geometry :x "75%" :y "14%" :width "8%" :height "13%")
                         (logout))
 
 ;;  sleep 
-(defwindow sleep :stacking "fg" :focusable "false" :screen 1 
+(defwindow full-sleep :stacking "fg" :focusable "false" :screen 1 
         :geometry (geometry :x "84%" :y "14%" :width "8%" :height "13%")
                         (sleep))
 
 ;;  reboot 
-(defwindow reboot :stacking "fg" :focusable "false" :screen 1 
+(defwindow full-reboot :stacking "fg" :focusable "false" :screen 1 
         :geometry (geometry :x "75%" :y "29%" :width "8%" :height "13%")
                         (reboot))
 
 ;;  poweroff 
-(defwindow poweroff :stacking "fg" :focusable "false" :screen 1 
+(defwindow full-poweroff :stacking "fg" :focusable "false" :screen 1 
         :geometry (geometry :x "84%" :y "29%" :width "8%" :height "13%")
                         (poweroff))
 
 ;;  folders 
-(defwindow folders :stacking "fg" :focusable "false" :screen 1 
+(defwindow full-folders :stacking "fg" :focusable "false" :screen 1 
         :geometry (geometry :x "75%" :y "44%" :width "17%" :height "42%")
                         (folders))
