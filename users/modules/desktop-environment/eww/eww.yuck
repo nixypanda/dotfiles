@@ -355,4 +355,5 @@
   :geometry (geometry :x 0 :y 0 :width 40 :height 40)
   (button
       :style "background-image: url('${DOTFILES}/images/icons/nixos.png');"
-      :class "btw-icon"))
+      :class "btw-icon"
+      :onclick "rofi -no-config -no-lazy-grab -show drun -modi drun -theme launcher &"))

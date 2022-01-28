@@ -6,13 +6,13 @@ let
     killall -q polybar
     kill $(pidof pasystray)
 
+    eww daemon &
     eww close topbar-btw-bg && eww open topbar-btw-bg
     polybar main &
     polybar powermenu &
     nm-applet &
     pasystray &
     deadd-notification-center &
-    eww daemon &
     solaar -w hide &
     blueman-applet &
     eww close topbar-btw && eww open topbar-btw
@@ -101,11 +101,13 @@ in
   home.file.".config/rofi/colors.rasi".text = ''
     * {
       accent: ${colorscheme.accent-primary};
+      accent-secondary: ${colorscheme.accent-secondary};
       background: ${colorscheme.bg-primary};
       foreground: ${colorscheme.fg-primary};
     }
   '';
   home.file.".config/rofi/grid.rasi".source = ./rofi/grid.rasi;
+  home.file.".config/rofi/launcher.rasi".source = ./rofi/launcher.rasi;
 
   home.file.".config/eww/eww.scss".source = ./eww/eww.scss;
   home.file.".config/eww/eww.yuck".source = ./eww/eww.yuck;
