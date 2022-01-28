@@ -87,6 +87,7 @@
       lsp_signature-nvim
       rust-tools-nvim
       symbols-outline-nvim
+      nvim-fidget
       nvim-sqls
       ## Autocompletion setup
       nvim-cmp
@@ -97,7 +98,7 @@
       cmp-nvim-lua
       cmp-treesitter
       cmp-calc
-      # nvim-copilot
+      # copilot.vim
       # nvim-cmp-copilot
       vim-vsnip
       vim-vsnip-integ
@@ -123,6 +124,7 @@
 
       # Text Helpers
       vim-table-mode # vimscript
+      venn-nvim
       todo-comments-nvim
 
       # General Deps
@@ -151,6 +153,7 @@
 
         ${builtins.readFile ./git.lua}
         ${builtins.readFile ./todo.lua}
+        ${builtins.readFile ./edit.lua}
 
         ${builtins.readFile ./nav-nvim-tree.lua}
         ${builtins.readFile ./nav-telescope.lua}

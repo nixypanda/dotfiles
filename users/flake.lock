@@ -95,22 +95,6 @@
         "type": "github"
       }
     },
-    "nvim-copilot-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1638862742,
-        "narHash": "sha256-gnFiuXpKF55cWxCXNXe3zqQaVmGoUV5aRBGIlyUUfIM=",
-        "owner": "github",
-        "repo": "copilot.vim",
-        "rev": "c01314840b94da0b9767b52f8a4bbc579214e509",
-        "type": "github"
-      },
-      "original": {
-        "owner": "github",
-        "repo": "copilot.vim",
-        "type": "github"
-      }
-    },
     "nvim-dap-python-src": {
       "flake": false,
       "locked": {
@@ -124,6 +108,22 @@
       "original": {
         "owner": "mfussenegger",
         "repo": "nvim-dap-python",
+        "type": "github"
+      }
+    },
+    "nvim-fidget-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1643322126,
+        "narHash": "sha256-gi/8unP5e6W05OmHTiljLZGzrLVkqh0LBUu7k3L+Jfw=",
+        "owner": "j-hui",
+        "repo": "fidget.nvim",
+        "rev": "6ec0e07d21b908802ae8a7b69b00d9c4acdd1955",
+        "type": "github"
+      },
+      "original": {
+        "owner": "j-hui",
+        "repo": "fidget.nvim",
         "type": "github"
       }
     },
@@ -182,8 +182,8 @@
         "nur": "nur",
         "nvim-alpha-src": "nvim-alpha-src",
         "nvim-cmp-copilot-src": "nvim-cmp-copilot-src",
-        "nvim-copilot-src": "nvim-copilot-src",
         "nvim-dap-python-src": "nvim-dap-python-src",
+        "nvim-fidget-src": "nvim-fidget-src",
         "nvim-lspsaga-src": "nvim-lspsaga-src",
         "nvim-sqls-src": "nvim-sqls-src",
         "nvim-yuck-src": "nvim-yuck-src"

@@ -18,12 +18,12 @@
       url = "github:goolord/alpha-nvim";
       flake = false;
     };
-    nvim-copilot-src = {
-      url = "github:github/copilot.vim";
-      flake = false;
-    };
     nvim-cmp-copilot-src = {
       url = "github:hrsh7th/cmp-copilot";
+      flake = false;
+    };
+    nvim-fidget-src = {
+      url = "github:j-hui/fidget.nvim";
       flake = false;
     };
     nvim-sqls-src = {
@@ -50,9 +50,9 @@
           name = "nvim-alpha";
           src = inputs.nvim-alpha-src;
         };
-        nvim-copilot = pkgs.vimUtils.buildVimPlugin {
-          name = "nvim-copilot";
-          src = inputs.nvim-copilot-src;
+        nvim-fidget = pkgs.vimUtils.buildVimPlugin {
+          name = "nvim-fidget";
+          src = inputs.nvim-fidget-src;
         };
         nvim-cmp-copilot = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-cmp-copilot";

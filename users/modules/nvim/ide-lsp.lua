@@ -217,3 +217,4 @@ vim.fn.sign_define("LspDiagnosticsSignInformation", {
     numhl = "LspDiagnosticsSignInformation"
 })
 
+require"fidget".setup {}
