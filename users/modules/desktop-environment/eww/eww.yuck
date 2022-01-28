@@ -396,3 +396,41 @@
     :style "background-image: url('${DOTFILES}/images/icons/nixos.png');"
     :class "btw-icon"
     :onclick "rofi -no-config -no-lazy-grab -show drun -modi drun -theme launcher &"))
+
+
+;; Power menu ;;
+
+(defwindow powermenu-bg
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x 0 :y 0 :width "100%" :height "100%")
+  (bg))
+
+(defwindow powermenu-logout
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :anchor "center center" :x "-15%" :y 0 :width "8%" :height "13%")
+  (logout))
+
+(defwindow powermenu-sleep
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :anchor "center center" :x "-5%" :y 0 :width "8%" :height "13%")
+  (sleep))
+
+(defwindow powermenu-reboot
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :anchor "center center" :x "5%" :y 0 :width "8%" :height "13%")
+  (reboot))
+
+(defwindow powermenu-poweroff
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :anchor "center center" :x "15%" :y 0 :width "8%" :height "13%")
+  (poweroff))

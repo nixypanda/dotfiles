@@ -133,6 +133,19 @@ openWidgetsPanel =
       "full-folders"
     ]
 
+openPowerMenu :: String
+openPowerMenu =
+  unwords
+    [ "eww",
+      "open-many",
+      "--toggle",
+      "powermenu-bg",
+      "powermenu-logout",
+      "powermenu-sleep",
+      "powermenu-reboot",
+      "powermenu-poweroff"
+    ]
+
 keysToRemove :: [(KeyMask, KeySym)]
 keysToRemove = defaultWorkSpaceSwitchBinding ++ defaultWorkSpaceWindowMoveBinding
   where
@@ -154,7 +167,7 @@ keysToAdd =
           spawn "rofi -show drun -theme grid"
         ),
         ( (myModMask, xK_e),
-          spawn "rofi -modi \"Powermenu:custom-script-sysmenu\" -show Powermenu -theme sysmenu"
+          spawn openPowerMenu
         ),
         ( (myModMask .|. shiftMask, xK_l),
           spawn "i3lock-fancy -t \"\""
