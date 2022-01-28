@@ -10,6 +10,8 @@ from typing import Dict, Optional
 import requests
 
 APP_ID = environ["OPEN_WEATHER_API_KEY"]
+TEMP_STORE_LOCATION = "/tmp/weather.json"
+TEMP_STALE_THRESHOLD = timedelta(hours=2)
 
 
 def mk_parser():
@@ -36,12 +38,12 @@ class OpenWeatherMapAPIWrapper:
 
 class WeatherRepo:
     def store(self, weather: Dict):
-        with open("/tmp/weather.json", "w") as f:
+        with open(TEMP_STORE_LOCATION, "w") as f:
             f.write(json.dumps(weather, indent=4))
 
     def retrive(self) -> Optional[Dict]:
         try:
-            with open("/tmp/weather.json", "r") as f:
+            with open(TEMP_STORE_LOCATION, "r") as f:
                 return json.load(f)
         except FileNotFoundError:
             return None
@@ -76,7 +78,7 @@ def is_stale(weather):
     except:
         return False
     else:
-        return datetime.now() - last_updated_at > timedelta(hours=2)
+        return datetime.now() - last_updated_at > TEMP_STALE_THRESHOLD
 
 
 def get_weather_service() -> WeatherService:
@@ -198,8 +200,8 @@ if __name__ == "__main__":
     parser = mk_parser()
     args = parser.parse_args()
 
-    weather_repo = get_weather_service()
-    weather = weather_repo.get_current_data()
+    weather_service = get_weather_service()
+    weather = weather_service.get_current_data()
     display = weather_display_info(weather)
 
     if args.display == "icon":
