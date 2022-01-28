@@ -112,7 +112,7 @@ openWidgetsPanel =
     [ "eww",
       "open-many",
       "--toggle",
-      "full-background",
+      "full-bg",
       "full-profile",
       "full-system",
       "full-clock",

@@ -143,7 +143,7 @@ rec {
 
     scroll-up = "custom-browsermediacontrol --volume 1 &";
     scroll-down = "custom-browsermediacontrol --volume -1 &";
-    click-left = "eww open-many --toggle topbar-music-background topbar-music";
+    click-left = "eww open-many --toggle topbar-music-bg topbar-music";
 
     interval = "0.1";
   };
@@ -170,7 +170,7 @@ rec {
     content-padding = 1;
     content-background = attention;
     content-foreground = module-background;
-    click-left = "eww open-many --toggle powermenu-background powermenu-logout powermenu-sleep powermenu-reboot powermenu-poweroff";
+    click-left = "eww open-many --toggle topbar-powermenu-bg topbar-powermenu-logout topbar-powermenu-sleep topbar-powermenu-reboot topbar-powermenu-poweroff";
   };
 
   "module/sep" = separator { color = background; };

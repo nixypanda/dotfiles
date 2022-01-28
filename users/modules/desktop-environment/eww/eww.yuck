@@ -1,9 +1,3 @@
-;;  **
-;; ** Widgets config for EWW
-;; ** Created by : @adi1090x
-;; ** Modified by : Dusty
-;; ** Further modified by : @sherubthakur
-
 ;;  Profile vars 
 (defvar NAME "Sherub Thakur")
 (defpoll DOTFILES :interval "10m" "echo \"/home/sherub/.dotfiles\"")
@@ -42,266 +36,289 @@
 ;;  Files vars 
 (defpoll FREE :interval "5s"  "df -h / | awk '{print $4}' | tail -n 1 | sed 's/G/GB/'")
 
-    
 
 ;;  ******************************************************************************** 
 
-    
-
-;;  background 
 (defwidget bg [] 
-    (box :class "bg"))
+  (box :class "bg"))
 
-;;  profile 
 (defwidget user [] 
-    (box :class "genwin"  
-        (box :orientation "v" :spacing 20 :space-evenly "false" :halign "center" :valign "center"
-            (box :class "face" :halign "center" :style "background-image: url('${DOTFILES}/images/profile.jpg');")
-            (label :class "fullname" :halign "center" :wrap "true" :limit-width 25 :text NAME)
-            (label :class "username" :halign "center" :wrap "true" :limit-width 25 :text UNAME))))
+  (box :class "genwin"  
+    (box :orientation "v" :spacing 20 :space-evenly "false" :halign "center" :valign "center"
+      (box
+        :class "face"
+        :halign "center"
+        :style "background-image: url('${DOTFILES}/images/profile.jpg');")
+      (label :class "fullname" :halign "center" :wrap "true" :limit-width 25 :text NAME)
+      (label :class "username" :halign "center" :wrap "true" :limit-width 25 :text UNAME))))
 
-;;  system 
 (defwidget system [] 
-    (box :class "genwin"  
-        (box :orientation "v" :spacing 25 :halign "center" :valign "center" :space-evenly "false"  
-            (box :class "cpu_bar" :orientation "h" :spacing 20 :space-evenly "false"  
-                (label :class "iconcpu" :text "⌗")
-                (scale :min 0 :max 100 :value CPU_USAGE :active "false"))
-            (box :class "mem_bar" :orientation "h" :spacing 20 :space-evenly "false"  
-                (label :class "iconmem" :text "▙")
-                (scale :min 0 :max 100 :value MEM_USAGE :active "false")))))
+  (box :class "genwin"  
+    (box :orientation "v" :spacing 25 :halign "center" :valign "center" :space-evenly "false"  
+      (box :class "cpu_bar" :orientation "h" :spacing 20 :space-evenly "false"  
+        (label :class "iconcpu" :text "⌗")
+        (scale :min 0 :max 100 :value CPU_USAGE :active "false"))
+      (box :class "mem_bar" :orientation "h" :spacing 20 :space-evenly "false"  
+        (label :class "iconmem" :text "▙")
+        (scale :min 0 :max 100 :value MEM_USAGE :active "false")))))
 
-;;  clock 
 (defwidget clock [] 
-    (box :class "genwin"
-        (box :orientation "v" :halign "center" :valign "center" :spacing 1
-            (label :class "clock_time" :halign "center" :text TIME)
-            (label :class "clock_day" :halign "center" :text DAY))))
+  (box :class "genwin"
+    (box :orientation "v" :halign "center" :valign "center" :spacing 1
+      (label :class "clock_time" :halign "center" :text TIME)
+      (label :class "clock_day" :halign "center" :text DAY))))
 
-;;  uptime 
 (defwidget uptime [] 
-    (box :class "genwin" 
-        (box :orientation "h" :halign "center" :spacing 30 :space-evenly "false"  
-            (label :class "icontimer" :valign "center" :text "祥")
-            (box :orientation "v" :valign "center" :spacing 0 :space-evenly "false"  
-                (label :class "uphour" :halign "start" :wrap "true" :limit-width 25 :text UPHOUR)
-                (label :class "upmin" :halign "start" :wrap "true" :limit-width 25 :text UPMIN)))))
+  (box :class "genwin" 
+    (box :orientation "h" :halign "center" :spacing 30 :space-evenly "false"  
+      (label :class "icontimer" :valign "center" :text "祥")
+      (box :orientation "v" :valign "center" :spacing 0 :space-evenly "false"  
+        (label :class "uphour" :halign "start" :wrap "true" :limit-width 25 :text UPHOUR)
+        (label :class "upmin" :halign "start" :wrap "true" :limit-width 25 :text UPMIN)))))
 
-;;  Music 
 (defwidget music [album-art-class] 
-    (box :class "genwin" :orientation "h" :space-evenly "false"  
-        (box :class album-art-class :style "background-image: url('${COVER}');")
-        (box :orientation "v" :valign "center" :spacing 29 :space-evenly "false"  
-            (label :halign "center" :class "song" :wrap "true" :text SONG)
-            (label :halign "center" :class "artist" :wrap "true" :text ARTIST)
-            (box :orientation "h" :spacing 15 :halign "center" :space-evenly "true"  
-                (button :class "btn_prev" :onclick "custom-browsermediacontrol --prev" "玲")
-                (button :class "btn_play" :onclick "custom-browsermediacontrol --playpause" STATUS_ICON)
-                (button :class "btn_next" :onclick "custom-browsermediacontrol --next" "怜"))
-            (box :class "music_bar" :halign "center"  
-                (scale :min 0 :active "true" :max 100 :value CURRENT)))))
+  (box :class "genwin" :orientation "h" :space-evenly "false"  
+    (box :class album-art-class :style "background-image: url('${COVER}');")
+    (box :orientation "v" :valign "center" :spacing 29 :space-evenly "false"  
+      (label :halign "center" :class "song" :wrap "true" :text SONG)
+      (label :halign "center" :class "artist" :wrap "true" :text ARTIST)
+      (box :orientation "h" :spacing 15 :halign "center" :space-evenly "true"  
+        (button :class "btn_prev" :onclick "custom-browsermediacontrol --prev" "玲")
+        (button :class "btn_play" :onclick "custom-browsermediacontrol --playpause" STATUS_ICON)
+        (button :class "btn_next" :onclick "custom-browsermediacontrol --next" "怜"))
+      (box :class "music_bar" :halign "center"  
+        (scale :min 0 :active "true" :max 100 :value CURRENT)))))
 
-;;  github 
+;; Links
 (defwidget github [] 
-    (box :class "github"  
-        (button :class "iconweb" :onclick "eww close-all && xdg-open 'https://github.com'" "")))
-
-;;  reddit 
+  (box :class "github"  
+    (button :class "iconweb" :onclick "eww close-all && xdg-open 'https://github.com'" "")))
 (defwidget reddit [] 
-    (box :class "reddit"  
-        (button :class "iconweb" :onclick "eww close-all && xdg-open 'https://reddit.com'" "樓")))
-
-;;  twitter 
+  (box :class "reddit"  
+    (button :class "iconweb" :onclick "eww close-all && xdg-open 'https://reddit.com'" "樓")))
 (defwidget twitter [] 
-    (box :class "twitter"  
-        (button :class "iconweb" :onclick "eww close-all && xdg-open 'https://twitter.com'" "")))
-
-;;  youtube 
+  (box :class "twitter"  
+    (button :class "iconweb" :onclick "eww close-all && xdg-open 'https://twitter.com'" "")))
 (defwidget youtube [] 
-    (box :class "youtube"  
-        (button :class "iconweb" :onclick "eww close-all && xdg-open 'https://youtube.com'" "")))
-
-;;  mail 
+  (box :class "youtube"  
+    (button :class "iconweb" :onclick "eww close-all && xdg-open 'https://youtube.com'" "")))
 (defwidget mail [] 
-    (box :class "mail" 
-        (button :class "iconmail" :onclick "eww close-all && xdg-open 'https://mail.google.com'" "")))
-
-;;  nixos serach 
+  (box :class "mail" 
+    (button :class "iconmail" :onclick "eww close-all && xdg-open 'https://mail.google.com'" "")))
 (defwidget nix_search [] 
-    (box :class "nixos"
-        (button
-            :class "iconweb"
-            :onclick "eww close-all && xdg-open 'https://search.nixos.org/packages?channel=unstable'"
-            "")))
+  (box :class "nixos"
+    (button
+      :class "iconweb"
+      :onclick "eww close-all && xdg-open 'https://search.nixos.org/packages?channel=unstable'"
+      "")))
 
-;;  weather 
 (defwidget weather [] 
-    (box :class "genwin" 
-        (box :orientation "v" :spacing 25 :halign "center" :valign "center" :space-evenly "false"  
-            (box :orientation "v" :spacing 25 :space-evenly "false"  
-                (box :orientation "h"  
-                    (label :class "iconweather" :halign "start" :style "color: ${HEX};" :text ICON)
-                    (label :class "label_temp" :halign "end" :text TEMP))
-                (box :orientation "v" :spacing 5 :halign "center" :space-evenly "false"  
-                    (label :class "label_stat" :text STAT)
-                    (label :class "label_quote" :text QUOTE))))))
+  (box :class "genwin" 
+    (box :orientation "v" :spacing 25 :halign "center" :valign "center" :space-evenly "false"  
+      (box :orientation "v" :spacing 25 :space-evenly "false"  
+        (box :orientation "h"  
+          (label :class "iconweather" :halign "start" :style "color: ${HEX};" :text ICON)
+          (label :class "label_temp" :halign "end" :text TEMP))
+        (box :orientation "v" :spacing 5 :halign "center" :space-evenly "false"  
+          (label :class "label_stat" :text STAT)
+          (label :class "label_quote" :text QUOTE))))))
 
-;;  apps 
 (defwidget apps [] 
-    (box :class "genwin"  
-        (box :orientation "v" :spacing 25 :halign "center" :valign "center" :space-evenly "false"  
-            (box :class "appbox" :orientation "h" :space-evenly "false"  
-                (button
-                    :style "background-image: url('${DOTFILES}/images/icons/files.png');"
-                    :class "app_files"
-                    :onclick "eww close-all && nautilus &")
-                (button
-                    :style "background-image: url('${DOTFILES}/images/icons/discord.png');"
-                    :class "app_discord"
-                    :onclick "eww close-all && discord &"))
-            (box :class "appbox" :orientation "h" :space-evenly "false"  
-                (button
-                    :style "background-image: url('${DOTFILES}/images/icons/terminal.png');"
-                    :class "app_code"
-                    :onclick "eww close-all && kitty &")
-                (button
-                    :style "background-image: url('${DOTFILES}/images/icons/slack.png');"
-                    :class "app_vbox"
-                    :onclick "eww close-all && slack &")))))
+  (box :class "genwin"  
+    (box :orientation "v" :spacing 25 :halign "center" :valign "center" :space-evenly "false"  
+      (box :class "appbox" :orientation "h" :space-evenly "false"  
+        (button
+          :style "background-image: url('${DOTFILES}/images/icons/files.png');"
+          :class "app_files"
+          :onclick "eww close-all && nautilus &")
+        (button
+          :style "background-image: url('${DOTFILES}/images/icons/discord.png');"
+          :class "app_discord"
+          :onclick "eww close-all && discord &"))
+      (box :class "appbox" :orientation "h" :space-evenly "false"  
+        (button
+          :style "background-image: url('${DOTFILES}/images/icons/terminal.png');"
+          :class "app_code"
+          :onclick "eww close-all && kitty &")
+        (button
+          :style "background-image: url('${DOTFILES}/images/icons/slack.png');"
+          :class "app_vbox"
+          :onclick "eww close-all && slack &")))))
 
 ;;  power buttons 
 (defwidget logout [] 
-    (box :class "genwin"  
-        (button :class "btn_logout" :onclick "killall xmonad-x86_64-linux" "☛")))
+  (box :class "genwin"  
+    (button :class "btn_logout" :onclick "killall xmonad-x86_64-linux" "☛")))
 (defwidget sleep [] 
-    (box :class "genwin"  
-        (button :class "btn_sleep" :onclick "systemctl suspend" "⏾")))
+  (box :class "genwin"  
+    (button :class "btn_sleep" :onclick "systemctl suspend" "⏾")))
 (defwidget reboot [] 
-    (box :class "genwin"
-        (button :class "btn_reboot" :onclick "systemctl reboot" "↺")))
+  (box :class "genwin"
+    (button :class "btn_reboot" :onclick "systemctl reboot" "↺")))
 (defwidget poweroff [] 
-    (box :class "genwin"  
-        (button :class "btn_poweroff" :onclick "systemctl poweroff" "⏻")))
+  (box :class "genwin"  
+    (button :class "btn_poweroff" :onclick "systemctl poweroff" "⏻")))
 
-;;  folders 
 (defwidget folders [] 
-    (box :class "genwin" :orientation "v" :space-evenly "false"  
-        (box :class "hddbox" :orientation "h" :space-evenly "false"  
-            (box :space-evenly "false"  
-                (button :class "hddicon" :onclick "eww close-all && nautilus &" ""))
-            (label :class "fs_sep" :text "|")
-            (box :space-evenly "false"  
-                (label :class "hdd_label" :wrap "true" :limit-width 25 :text FREE)))
-        (box :orientation "h" :space-evenly "false"  
-            (button :class "iconfolder1" :onclick "eww close-all && nautilus ~/Documents &" "")
-            (button :class "label_folder1" :onclick "eww close-all && nautilus ~/Documents &" "Documents"))
-        (box :orientation "h" :space-evenly "false"  
-            (button :class "iconfolder2" :onclick "eww close-all && nautilus ~/Downloads &" "")
-            (button :class "label_folder2" :onclick "eww close-all && nautilus ~/Downloads &" "Downloads"))
-        (box :orientation "h" :space-evenly "false"  
-            (button :class "iconfolder4" :onclick "eww close-all && nautilus ~/Pictures &" "")
-            (button :class "label_folder4" :onclick "eww close-all && nautilus ~/Pictures &" "Pictures"))
-        (box :orientation "h" :space-evenly "false"  
-            (button :class "iconfolder5" :onclick "eww close-all && nautilus ~/.dotfiles &" "")
-            (button :class "label_folder5" :onclick "eww close-all && nautilus ~/.dotfiles &" "Dotfiles"))))
-
+  (box :class "genwin" :orientation "v" :space-evenly "false"  
+    (box :class "hddbox" :orientation "h" :space-evenly "false"  
+      (box :space-evenly "false"  
+        (button :class "hddicon" :onclick "eww close-all && nautilus &" ""))
+      (label :class "fs_sep" :text "|")
+      (box :space-evenly "false"  
+        (label :class "hdd_label" :wrap "true" :limit-width 25 :text FREE)))
+    (box :orientation "h" :space-evenly "false"  
+      (button :class "iconfolder1" :onclick "eww close-all && nautilus ~/Documents &" "")
+      (button :class "label_folder1" :onclick "eww close-all && nautilus ~/Documents &" "Documents"))
+    (box :orientation "h" :space-evenly "false"  
+      (button :class "iconfolder2" :onclick "eww close-all && nautilus ~/Downloads &" "")
+      (button :class "label_folder2" :onclick "eww close-all && nautilus ~/Downloads &" "Downloads"))
+    (box :orientation "h" :space-evenly "false"  
+      (button :class "iconfolder4" :onclick "eww close-all && nautilus ~/Pictures &" "")
+      (button :class "label_folder4" :onclick "eww close-all && nautilus ~/Pictures &" "Pictures"))
+    (box :orientation "h" :space-evenly "false"  
+      (button :class "iconfolder5" :onclick "eww close-all && nautilus ~/.dotfiles &" "")
+      (button :class "label_folder5" :onclick "eww close-all && nautilus ~/.dotfiles &" "Dotfiles"))))
 
 
 ;;  ******************************************************************************** 
 
-;;  background 
-(defwindow full-background :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x 0 :y 0 :width "100%" :height "100%") (bg))
+;;;;;;;;;;;;;;;;;;
+;; Widget Panel ;;
+;;;;;;;;;;;;;;;;;;
 
-;;  profile 
-(defwindow full-profile :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x "8%" :y "14%" :width "18%" :height "42%")
-                        (user))
+(defwindow full-bg
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x 0 :y 0 :width "100%" :height "100%")
+  (bg))
 
-;;  system 
-(defwindow full-system :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x "8%" :y "58%" :width "18%" :height "28%")
-                        (system))
+(defwindow full-profile
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x "8%" :y "14%" :width "18%" :height "42%")
+  (user))
 
-;;  clock 
-(defwindow full-clock :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x "27%" :y "14%" :width "15%" :height "13%")
-                        (clock))
+(defwindow full-system
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x "8%" :y "58%" :width "18%" :height "28%")
+  (system))
 
-;;  uptime 
-(defwindow full-uptime :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x "27%" :y "29%" :width "15%" :height "13%")
-                        (uptime))
+(defwindow full-clock
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x "27%" :y "14%" :width "15%" :height "13%")
+  (clock))
 
-;;  music 
-(defwindow full-music :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x "27%" :y "44%" :width "31%" :height "28%")
+(defwindow full-uptime
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x "27%" :y "29%" :width "15%" :height "13%")
+  (uptime))
+
+(defwindow full-music
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x "27%" :y "44%" :width "31%" :height "28%")
   (music :album-art-class "album_art-large"))
 
-;;  github 
-(defwindow full-github :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x "27%" :y "74%" :width "7%" :height "12%")
-                        (github))
+(defwindow full-github
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x "27%" :y "74%" :width "7%" :height "12%")
+  (github))
 
-;;  reddit 
-(defwindow full-reddit :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x "35%" :y "74%" :width "7%" :height "12%")
-                        (reddit))
+(defwindow full-reddit
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x "35%" :y "74%" :width "7%" :height "12%")
+  (reddit))
 
-;;  twitter 
-(defwindow full-twitter :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x "43%" :y "74%" :width "7%" :height "12%")
-                        (twitter))
+(defwindow full-twitter
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x "43%" :y "74%" :width "7%" :height "12%")
+  (twitter))
 
-;;  youtube 
-(defwindow full-youtube :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x "51%" :y "74%" :width "7%" :height "12%")
-                        (youtube))
+(defwindow full-youtube
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x "51%" :y "74%" :width "7%" :height "12%")
+  (youtube))
 
-;;  weather 
-(defwindow full-weather :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x "43%" :y "14%" :width "31%" :height "28%")
-                        (weather))
+(defwindow full-weather
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x "43%" :y "14%" :width "31%" :height "28%")
+  (weather))
 
-;;  apps 
-(defwindow full-apps :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x "59%" :y "44%" :width "15%" :height "28%")
-                        (apps))
+(defwindow full-apps
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x "59%" :y "44%" :width "15%" :height "28%")
+  (apps))
 
-;;  mail 
-(defwindow full-mail :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x "59%" :y "74%" :width "7%" :height "12%")
-                        (mail))
+(defwindow full-mail
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x "59%" :y "74%" :width "7%" :height "12%")
+  (mail))
 
-;;  nixos
-(defwindow full-nix_search :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x "67%" :y "74%" :width "7%" :height "12%")
-                        (nix_search))
+(defwindow full-nix_search
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x "67%" :y "74%" :width "7%" :height "12%")
+  (nix_search))
 
-;;  logout 
-(defwindow full-logout :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x "75%" :y "14%" :width "8%" :height "13%")
-                        (logout))
+(defwindow full-logout
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x "75%" :y "14%" :width "8%" :height "13%")
+  (logout))
 
-;;  sleep 
-(defwindow full-sleep :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x "84%" :y "14%" :width "8%" :height "13%")
-                        (sleep))
+(defwindow full-sleep
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x "84%" :y "14%" :width "8%" :height "13%")
+  (sleep))
 
-;;  reboot 
-(defwindow full-reboot :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x "75%" :y "29%" :width "8%" :height "13%")
-                        (reboot))
+(defwindow full-reboot
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x "75%" :y "29%" :width "8%" :height "13%")
+  (reboot))
 
-;;  poweroff 
-(defwindow full-poweroff :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x "84%" :y "29%" :width "8%" :height "13%")
-                        (poweroff))
+(defwindow full-poweroff
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x "84%" :y "29%" :width "8%" :height "13%")
+  (poweroff))
 
-;;  folders 
-(defwindow full-folders :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x "75%" :y "44%" :width "17%" :height "42%")
-                        (folders))
+(defwindow full-folders
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x "75%" :y "44%" :width "17%" :height "42%")
+  (folders))
 
 ;;;;;;;;;;;;;;;;;;;
 ;; TopBar things ;;
@@ -309,51 +326,73 @@
 
 ;; Power menu ;;
 
-;;  background 
-(defwindow powermenu-background :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :anchor "top right" :x -5 :y 40 :width 180 :height 675)
+(defwindow topbar-powermenu-bg
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :anchor "top right" :x -5 :y 40 :width 180 :height 675)
   (bg))
 
-;;  logout 
-(defwindow powermenu-logout :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :anchor "top right" :x -15 :y 50 :width 150 :height 150)
+(defwindow topbar-powermenu-logout
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :anchor "top right" :x -15 :y 50 :width 150 :height 150)
   (logout))
 
-;;  sleep 
-(defwindow powermenu-sleep :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :anchor "top right" :x -15 :y 215 :width 150 :height 150)
+(defwindow topbar-powermenu-sleep
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :anchor "top right" :x -15 :y 215 :width 150 :height 150)
   (sleep))
 
-;;  reboot 
-(defwindow powermenu-reboot :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :anchor "top right" :x -15 :y 380 :width 150 :height 150)
+(defwindow topbar-powermenu-reboot
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :anchor "top right" :x -15 :y 380 :width 150 :height 150)
   (reboot))
 
-;;  poweroff 
-(defwindow powermenu-poweroff :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :anchor "top right" :x -15 :y 545 :width 150 :height 150)
+(defwindow topbar-powermenu-poweroff
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :anchor "top right" :x -15 :y 545 :width 150 :height 150)
   (poweroff))
 
 
 ;; Browser Media control ;;
 
-(defwindow topbar-music-background :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x 180 :y 40 :width 530 :height 330)
+(defwindow topbar-music-bg
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x 180 :y 40 :width 530 :height 330)
   (bg))
 
-(defwindow topbar-music :stacking "fg" :focusable "false" :screen 1 
-        :geometry (geometry :x 195 :y 55 :width 500 :height 300)
+(defwindow topbar-music
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x 195 :y 55 :width 500 :height 300)
   (music :album-art-class "album_art"))
 
 ;; The BTW icon ;;
 
-(defwindow topbar-btw-bg :stacking "bg" :focusable "false" :screen 1 
-        :geometry (geometry :x 0 :y 0 :width "100%" :height 40)
+(defwindow topbar-btw-bg
+  :stacking "bg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x 0 :y 0 :width "100%" :height 40)
   (bg))
 
-(defwindow topbar-btw :stacking "fg" :focusable "false" :screen 1
+(defwindow topbar-btw
+  :stacking "fg"
+  :focusable "false"
+  :screen 1
   :geometry (geometry :x 0 :y 0 :width 40 :height 40)
   (button
-      :style "background-image: url('${DOTFILES}/images/icons/nixos.png');"
-      :class "btw-icon"
-      :onclick "rofi -no-config -no-lazy-grab -show drun -modi drun -theme launcher &"))
+    :style "background-image: url('${DOTFILES}/images/icons/nixos.png');"
+    :class "btw-icon"
+    :onclick "rofi -no-config -no-lazy-grab -show drun -modi drun -theme launcher &"))
