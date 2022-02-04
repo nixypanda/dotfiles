@@ -163,7 +163,7 @@ keysToAdd =
     ++ layoutRelated
   where
     launchers =
-      [ ( (myModMask, xK_space),
+      [ ( (myModMask, xK_Return),
           spawn "rofi -show drun -theme grid"
         ),
         ( (myModMask, xK_e),
