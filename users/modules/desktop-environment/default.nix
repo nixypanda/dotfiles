@@ -90,6 +90,12 @@ in
       "${pkgs.plasma-browser-integration}/etc/var/empty/chrome/native-messaging-hosts"
     ];
   };
+  home.file.".config/chromium/NativeMessagingHosts".source = pkgs.symlinkJoin {
+    name = "native-messaging-hosts";
+    paths = [
+      "${pkgs.plasma-browser-integration}/etc/chromium/native-messaging-hosts"
+    ];
+  };
 
   programs.rofi = {
     enable = true;
