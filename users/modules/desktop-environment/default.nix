@@ -73,8 +73,12 @@ in
     xcwd
     # Sound control panel
     pavucontrol
+    # openvpn interop
+    gnome3.networkmanager-openvpn
 
-    psmisc
+    # info
+    glxinfo
+    radeontop
 
     # Widgets
     eww
@@ -82,6 +86,16 @@ in
     # Notifications
     deadd-notification-center
     notify-desktop
+
+    # Busybox replacements: As the default ones give out very
+    # limited info which is extremely unhelpful when debugging
+    # something
+    pciutils
+    usbutils
+    less
+    stress
+    procps
+    psmisc
   ];
 
   home.file.".config/google-chrome/NativeMessagingHosts".source = pkgs.symlinkJoin {

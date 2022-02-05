@@ -11,6 +11,7 @@ let
   grammerly-id = "kbfnbcaeplbcioakkpcpgfkobkghlhen";
   return-youtube-dislikes = "gebbhagfogifgggkldgodflihgfeippi";
   pocket-tube-id = "kdmnjgijlmjgmimahnillepgcgeemffb"; # Youtube subscription manager
+  color-picker = "ohcpnigalekghcmgcdcenkpelffpdolg";
 in
 {
   home.packages = with pkgs; [
@@ -31,6 +32,7 @@ in
       { id = grammerly-id; }
       { id = return-youtube-dislikes; }
       { id = pocket-tube-id; }
+      { id = color-picker; }
     ];
   };
 }

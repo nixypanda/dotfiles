@@ -112,22 +112,8 @@
 
               # Packages that don't fit in the modules that we have
               home.packages = with pkgs; [
-                # GUI Apps
                 discord
                 p3x-onenote
-
-                # Busybox replacements: As the default ones give out very
-                # limited info which is extremely unhelpful when debugging
-                # something
-                pciutils
-                usbutils
-                less
-                stress
-                procps
-
-                gnome3.networkmanager-openvpn
-                glxinfo
-                zoom-us
               ];
             };
         };

@@ -8,5 +8,6 @@
     consul
     terraform
     packer
+    zoom-us
   ];
 }
