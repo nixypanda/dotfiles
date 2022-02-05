@@ -126,6 +126,7 @@ openWidgetsPanel =
       "full-apps",
       "full-mail",
       "full-nix_search",
+      "full-goodreads",
       "full-logout",
       "full-sleep",
       "full-reboot",
@@ -280,7 +281,7 @@ myLayoutModifiers =
 
     screenBorder = Border {top = 5, bottom = 5, right = 5, left = 5}
     windowBorder = Border {top = 5, bottom = 5, right = 5, left = 5}
-    edgeGap = 0
+    edgeGap = 4
 
 myScratchPads :: [NamedScratchpad]
 myScratchPads = [scTerminal]

@@ -56,17 +56,17 @@
   (box :class "genwin"  
     (box :orientation "v" :spacing 25 :halign "center" :valign "center" :space-evenly "false"  
       (box :class "cpu_bar" :orientation "h" :spacing 20 :space-evenly "false"  
-        (label :class "iconcpu" :text "⌗")
+        (label :class "iconcpu" :text "C")
         (scale :min 0 :max 100 :value CPU_USAGE :active "false"))
       (box :class "mem_bar" :orientation "h" :spacing 20 :space-evenly "false"  
-        (label :class "iconmem" :text "▙")
+        (label :class "iconmem" :text "M")
         (scale :min 0 :max 100 :value MEM_USAGE :active "false")))))
 
 (defwidget clock [] 
   (box :class "genwin"
-    (box :orientation "v" :halign "center" :valign "center" :spacing 1
-      (label :class "clock_time" :halign "center" :text TIME)
-      (label :class "clock_day" :halign "center" :text DAY))))
+    (box :orientation "v" :halign "center" :valign "center" :spacing 0 :space-evenly "false"
+      (label :class "clock_time" :valign "center" :halign "center" :text TIME)
+      (label :class "clock_day" :valign "center" :halign "center" :text DAY))))
 
 (defwidget uptime [] 
   (box :class "genwin" 
@@ -77,7 +77,7 @@
         (label :class "upmin" :halign "start" :wrap "true" :limit-width 25 :text UPMIN)))))
 
 (defwidget music [album-art-class] 
-  (box :class "genwin" :orientation "h" :space-evenly "false"  
+  (box :class "genwin" :orientation "h" :space-evenly "false" :spacing 5
     (box :class album-art-class :style "background-image: url('${COVER}');")
     (box :orientation "v" :valign "center" :spacing 29 :space-evenly "false"  
       (label :halign "center" :class "song" :wrap "true" :text SONG)
@@ -105,6 +105,9 @@
 (defwidget mail [] 
   (box :class "mail" 
     (button :class "iconmail" :onclick "eww close-all && xdg-open 'https://mail.google.com'" "")))
+(defwidget goodreads [] 
+  (box :class "goodreads" 
+    (button :class "iconreads" :onclick "eww close-all && xdg-open 'https://goodreads.com'" "g")))
 (defwidget nix_search [] 
   (box :class "nixos"
     (button
@@ -125,25 +128,23 @@
 
 (defwidget apps [] 
   (box :class "genwin"  
-    (box :orientation "v" :spacing 25 :halign "center" :valign "center" :space-evenly "false"  
-      (box :class "appbox" :orientation "h" :space-evenly "false"  
+    (box :orientation "v" :halign "center" :valign "center" :space-evenly "false"  
         (button
           :style "background-image: url('${DOTFILES}/images/icons/files.png');"
-          :class "app_files"
+          :class "app"
           :onclick "eww close-all && nautilus &")
         (button
           :style "background-image: url('${DOTFILES}/images/icons/discord.png');"
-          :class "app_discord"
-          :onclick "eww close-all && discord &"))
-      (box :class "appbox" :orientation "h" :space-evenly "false"  
+          :class "app"
+          :onclick "eww close-all && discord &")
         (button
           :style "background-image: url('${DOTFILES}/images/icons/terminal.png');"
-          :class "app_code"
+          :class "app"
           :onclick "eww close-all && kitty &")
         (button
           :style "background-image: url('${DOTFILES}/images/icons/slack.png');"
-          :class "app_vbox"
-          :onclick "eww close-all && slack &")))))
+          :class "app"
+          :onclick "eww close-all && slack &"))))
 
 ;;  power buttons 
 (defwidget logout [] 
@@ -183,6 +184,7 @@
 
 ;;  ******************************************************************************** 
 
+
 ;;;;;;;;;;;;;;;;;;
 ;; Widget Panel ;;
 ;;;;;;;;;;;;;;;;;;
@@ -198,126 +200,133 @@
   :stacking "fg"
   :focusable "false"
   :screen 1 
-  :geometry (geometry :x "8%" :y "14%" :width "18%" :height "42%")
+  :geometry (geometry :x "14%" :y "16%" :width "15%" :height "40%")
   (user))
 
 (defwindow full-system
   :stacking "fg"
   :focusable "false"
   :screen 1 
-  :geometry (geometry :x "8%" :y "58%" :width "18%" :height "28%")
+  :geometry (geometry :x "14%" :y "58%" :width "15%" :height "26%")
   (system))
 
 (defwindow full-clock
   :stacking "fg"
   :focusable "false"
   :screen 1 
-  :geometry (geometry :x "27%" :y "14%" :width "15%" :height "13%")
+  :geometry (geometry :x "30%" :y "16%" :width "15%" :height "12%")
   (clock))
 
 (defwindow full-uptime
   :stacking "fg"
   :focusable "false"
   :screen 1 
-  :geometry (geometry :x "27%" :y "29%" :width "15%" :height "13%")
+  :geometry (geometry :x "30%" :y "30%" :width "15%" :height "12%")
   (uptime))
+
+(defwindow full-weather
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x "30%" :y "44%" :width "31%" :height "26%")
+  (weather))
 
 (defwindow full-music
   :stacking "fg"
   :focusable "false"
   :screen 1 
-  :geometry (geometry :x "27%" :y "44%" :width "31%" :height "28%")
+  :geometry (geometry :x "46%" :y "16%" :width "23%" :height "26%")
   (music :album-art-class "album_art-large"))
+
+(defwindow full-apps
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x "62%" :y "44%" :width "7%" :height "26%")
+  (apps))
 
 (defwindow full-github
   :stacking "fg"
   :focusable "false"
   :screen 1 
-  :geometry (geometry :x "27%" :y "74%" :width "7%" :height "12%")
+  :geometry (geometry :x "30%" :y "72%" :width "7%" :height "12%")
   (github))
 
 (defwindow full-reddit
   :stacking "fg"
   :focusable "false"
   :screen 1 
-  :geometry (geometry :x "35%" :y "74%" :width "7%" :height "12%")
+  :geometry (geometry :x "38%" :y "72%" :width "7%" :height "12%")
   (reddit))
 
 (defwindow full-twitter
   :stacking "fg"
   :focusable "false"
   :screen 1 
-  :geometry (geometry :x "43%" :y "74%" :width "7%" :height "12%")
+  :geometry (geometry :x "46%" :y "72%" :width "7%" :height "12%")
   (twitter))
 
 (defwindow full-youtube
   :stacking "fg"
   :focusable "false"
   :screen 1 
-  :geometry (geometry :x "51%" :y "74%" :width "7%" :height "12%")
+  :geometry (geometry :x "54%" :y "72%" :width "7%" :height "12%")
   (youtube))
-
-(defwindow full-weather
-  :stacking "fg"
-  :focusable "false"
-  :screen 1 
-  :geometry (geometry :x "43%" :y "14%" :width "31%" :height "28%")
-  (weather))
-
-(defwindow full-apps
-  :stacking "fg"
-  :focusable "false"
-  :screen 1 
-  :geometry (geometry :x "59%" :y "44%" :width "15%" :height "28%")
-  (apps))
 
 (defwindow full-mail
   :stacking "fg"
   :focusable "false"
   :screen 1 
-  :geometry (geometry :x "59%" :y "74%" :width "7%" :height "12%")
+  :geometry (geometry :x "62%" :y "72%" :width "7%" :height "12%")
   (mail))
 
 (defwindow full-nix_search
   :stacking "fg"
   :focusable "false"
   :screen 1 
-  :geometry (geometry :x "67%" :y "74%" :width "7%" :height "12%")
+  :geometry (geometry :x "70%" :y "72%" :width "7%" :height "12%")
   (nix_search))
+
+(defwindow full-goodreads
+  :stacking "fg"
+  :focusable "false"
+  :screen 1 
+  :geometry (geometry :x "78%" :y "72%" :width "7%" :height "12%")
+  (goodreads))
 
 (defwindow full-logout
   :stacking "fg"
   :focusable "false"
   :screen 1 
-  :geometry (geometry :x "75%" :y "14%" :width "8%" :height "13%")
+  :geometry (geometry :x "70%" :y "16%" :width "7%" :height "12%")
   (logout))
 
 (defwindow full-sleep
   :stacking "fg"
   :focusable "false"
   :screen 1 
-  :geometry (geometry :x "84%" :y "14%" :width "8%" :height "13%")
+  :geometry (geometry :x "78%" :y "16%" :width "7%" :height "12%")
   (sleep))
 
 (defwindow full-reboot
   :stacking "fg"
   :focusable "false"
   :screen 1 
-  :geometry (geometry :x "75%" :y "29%" :width "8%" :height "13%")
+  :geometry (geometry :x "70%" :y "30%" :width "7%" :height "12%")
   (reboot))
 
 (defwindow full-poweroff
   :stacking "fg"
   :focusable "false"
   :screen 1 
-  :geometry (geometry :x "84%" :y "29%" :width "8%" :height "13%")
+  :geometry (geometry :x "78%" :y "30%" :width "7%" :height "12%")
   (poweroff))
 
 (defwindow full-folders
   :stacking "fg"
   :focusable "false"
   :screen 1 
-  :geometry (geometry :x "75%" :y "44%" :width "17%" :height "42%")
+  :geometry (geometry :x "70%" :y "44%" :width "15%" :height "26%")
   (folders))
 
 ;;;;;;;;;;;;;;;;;;;
