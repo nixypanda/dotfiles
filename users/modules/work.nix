@@ -6,8 +6,10 @@
     nomad
     vault
     consul
+    envoy
     terraform
     packer
+    vagrant
     zoom-us
   ];
 }
