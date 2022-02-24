@@ -12,6 +12,7 @@ let
   return-youtube-dislikes = "gebbhagfogifgggkldgodflihgfeippi";
   pocket-tube-id = "kdmnjgijlmjgmimahnillepgcgeemffb"; # Youtube subscription manager
   color-picker = "ohcpnigalekghcmgcdcenkpelffpdolg";
+  okta-id = "glnpjglilkicbckjpbgcfkogebgllemb";
 in
 {
   home.packages = with pkgs; [
@@ -33,6 +34,7 @@ in
       { id = return-youtube-dislikes; }
       { id = pocket-tube-id; }
       { id = color-picker; }
+      { id = okta-id; }
     ];
   };
 }
