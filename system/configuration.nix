@@ -26,7 +26,7 @@
     # systemd-boot.enable = true;
   };
 
-  boot.kernelModules = [ "i2c-dev" "i2c-piix4" ];
+  boot.kernelModules = [ "i2c-dev" "i2c-piix4" "kvm-amd" ];
   boot.initrd.kernelModules = [ "amdgpu" ];
 
   nix = {
@@ -143,7 +143,7 @@
   users.users.sherub = {
     isNormalUser = true;
     # Enable ‘sudo’, 'audio' for the user.
-    extraGroups = [ "wheel" "audio" "docker" ];
+    extraGroups = [ "wheel" "audio" "docker" "qemu-libvirtd" "libvirtd" ];
   };
 
   # Switch Pro Controller udev rules
@@ -160,6 +160,9 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.09"; # Did you read the comment?
 
+  users.extraGroups.vboxusers.members = [ "sherub" ];
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.libvirtd.enable = true;
   virtualisation.docker.enable = true;
   virtualisation.docker.enableOnBoot = true;
 }
