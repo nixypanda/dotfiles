@@ -3,19 +3,18 @@ let
   custom-panel-launch = pkgs.writeScriptBin "custom-panel-launch" ''
     #!/${pkgs.stdenv.shell}
 
-    killall -q polybar
-    kill $(pidof pasystray)
-
-    eww daemon &
-    eww close topbar-btw-bg && eww open topbar-btw-bg
-    polybar main &
-    polybar powermenu &
-    nm-applet &
-    pasystray &
-    deadd-notification-center &
-    solaar -w hide &
-    blueman-applet &
-    eww close topbar-btw && eww open topbar-btw
+    # killall -q polybar
+    # kill $(pidof pasystray)
+    # eww daemon &
+    # eww close topbar-btw-bg && eww open topbar-btw-bg
+    # polybar main &
+    # polybar powermenu &
+    # nm-applet &
+    # pasystray &
+    # deadd-notification-center &
+    # solaar -w hide &
+    # blueman-applet &
+    # eww close topbar-btw && eww open topbar-btw
   '';
 
   custom-script-sysmenu = pkgs.writeScriptBin "custom-script-sysmenu" ''
@@ -31,6 +30,8 @@ let
     (import ./browser-media-control/default.nix) { pkgs = pkgs; };
   custom-weather-cli =
     (import ./weather-cli/default.nix) { pkgs = pkgs; };
+  custom-taffybar =
+    (import ./taffybar/default.nix) { pkgs = pkgs; };
 in
 {
   home.packages = with pkgs; [
@@ -58,6 +59,7 @@ in
     custom-browsermediacontrol
     custom-script-eww-sysinfo
     custom-weather-cli
+    custom-taffybar
 
     # Required so that BMC can work with chrome
     plasma-browser-integration
@@ -146,6 +148,10 @@ in
     enable = true;
     config = (import ./polybar/accented-pills.nix) { colors = colorscheme; };
     script = "polybar main &";
+  };
+
+  services.taffybar = {
+    enable = true;
   };
 
   services.random-background = {
