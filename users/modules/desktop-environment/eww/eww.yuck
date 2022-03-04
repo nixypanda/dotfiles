@@ -400,7 +400,7 @@
   :stacking "fg"
   :focusable "false"
   :screen 1
-  :geometry (geometry :x 0 :y 0 :width 40 :height 40)
+  :geometry (geometry :x 3 :y 3 :width 43 :height 43)
   (button
     :style "background-image: url('${DOTFILES}/images/icons/nixos.png');"
     :class "btw-icon"
