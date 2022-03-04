@@ -3,18 +3,22 @@ let
   custom-panel-launch = pkgs.writeScriptBin "custom-panel-launch" ''
     #!/${pkgs.stdenv.shell}
 
-    # killall -q polybar
-    # kill $(pidof pasystray)
-    # eww daemon &
-    # eww close topbar-btw-bg && eww open topbar-btw-bg
-    # polybar main &
-    # polybar powermenu &
-    # nm-applet &
-    # pasystray &
-    # deadd-notification-center &
-    # solaar -w hide &
-    # blueman-applet &
-    # eww close topbar-btw && eww open topbar-btw
+    killall custom-taffybar
+    kill $(pidof pasystray)
+    killall nm-applet
+
+    eww daemon &
+    deadd-notification-center &
+
+    nm-applet &
+    nm-tray &
+    solaar -w hide &
+    blueman-applet &
+    pasystray &
+    status-notifier-watcher &
+
+    custom-taffybar &
+    eww close topbar-btw && eww open topbar-btw
   '';
 
   custom-script-sysmenu = pkgs.writeScriptBin "custom-script-sysmenu" ''
@@ -52,6 +56,7 @@ in
     psensor
     gnome3.nautilus
     pasystray
+    nm-tray
 
     # custom scripts
     custom-script-sysmenu
@@ -60,6 +65,7 @@ in
     custom-script-eww-sysinfo
     custom-weather-cli
     custom-taffybar
+    haskellPackages.status-notifier-item
 
     # Required so that BMC can work with chrome
     plasma-browser-integration
@@ -145,14 +151,15 @@ in
   };
 
   services.polybar = {
-    enable = true;
+    enable = false;
     config = (import ./polybar/accented-pills.nix) { colors = colorscheme; };
     script = "polybar main &";
   };
 
   services.taffybar = {
-    enable = true;
+    enable = false;
   };
+  # home.file.".config/taffybar/taffybar.hs".source = ./taffybar/taffybar.hs;
 
   services.random-background = {
     enable = true;
@@ -226,6 +233,7 @@ in
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;
+      extraPackages = haskellPackages: [ haskellPackages.taffybar ];
       config = pkgs.writeText "xmonad.hs" ''
         ${builtins.readFile ./xmonad/config.hs}
 
