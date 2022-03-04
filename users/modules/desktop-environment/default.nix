@@ -21,10 +21,6 @@ let
     eww close topbar-btw && eww open topbar-btw
   '';
 
-  custom-script-sysmenu = pkgs.writeScriptBin "custom-script-sysmenu" ''
-    #!/${pkgs.stdenv.shell}
-    ${builtins.readFile ./polybar/scripts/sysmenu.sh}
-  '';
   custom-script-eww-sysinfo = pkgs.writeScriptBin "custom-script-eww-sysinfo" ''
     #!/${pkgs.stdenv.shell}
     ${builtins.readFile ./eww/scripts/custom-eww-sysinfo.sh}
@@ -59,7 +55,6 @@ in
     nm-tray
 
     # custom scripts
-    custom-script-sysmenu
     custom-panel-launch
     custom-browsermediacontrol
     custom-script-eww-sysinfo
@@ -149,17 +144,6 @@ in
     iconTheme = { name = colorscheme.gtk-icon-name; };
     theme = { name = colorscheme.gtk-name; };
   };
-
-  services.polybar = {
-    enable = false;
-    config = (import ./polybar/accented-pills.nix) { colors = colorscheme; };
-    script = "polybar main &";
-  };
-
-  services.taffybar = {
-    enable = false;
-  };
-  # home.file.".config/taffybar/taffybar.hs".source = ./taffybar/taffybar.hs;
 
   services.random-background = {
     enable = true;
