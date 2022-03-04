@@ -61,8 +61,7 @@ myConfig =
       endWidgets = powerMenu : map (>>= buildContentsBox) [clock, tray],
       barPosition = Top,
       barHeight = 50,
-      widgetSpacing = 10,
-      cssPath = Just "/home/sherub/.dotfiles/users/modules/desktop-environment/taffybar/taffybar.css"
+      widgetSpacing = 10
     }
 
 myWorkspacesConfig :: WorkspacesConfig
