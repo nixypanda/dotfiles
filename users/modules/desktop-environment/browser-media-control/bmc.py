@@ -148,12 +148,6 @@ def status_to_icon(status: str) -> str:
         return ICON_STOPPED
 
 
-def truncate(text, max_len):
-    if len(text) > max_len:
-        return f"{text[:max_len]}..."
-    return text
-
-
 def display(player: Player, arg):
     song = player.current_song
 
@@ -183,31 +177,6 @@ def display(player: Player, arg):
         raise ValueError("Did not expect to reach here")
 
 
-def polybar_display(player: Player, arg):
-    def action(command, text):
-        # %{A1:PATH -- prev :}I%{A}
-        return "%{A1:" + PATH + " --" + command + ":}" + text + "%{A}"
-
-    song = player.current_song
-    icon = status_to_icon(player.status) + " "
-
-    prev_icon = action("prev", ICON_PREV)
-    pp_icon = action("playpause", icon)
-    next_icon = action("next", ICON_NEXT)
-    title = truncate(song.title, TITLE_LENGTH)
-
-    if arg == "full":
-        return f"{prev_icon} {pp_icon} {next_icon} {title}"
-    if arg == "play/pause":
-        return pp_icon
-    if arg == "title":
-        return title
-    if arg == "next":
-        return next_icon
-    else:
-        raise ValueError("Did not expect to reach here")
-
-
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--volume", type=int)
@@ -218,9 +187,6 @@ def main():
         "--display",
         type=str,
         choices=["song", "artist", "cover", "position", "status", "status-icon"],
-    )
-    parser.add_argument(
-        "--polybar-display", type=str, choices=["play/pause", "title", "next", "full"]
     )
     args = parser.parse_args()
     player = Player(SessionBus())
@@ -235,9 +201,6 @@ def main():
         player.prev()
     elif args.display is not None:
         result = display(player, args.display)
-        print(result)
-    elif args.polybar_display is not None:
-        result = polybar_display(player, args.polybar_display)
         print(result)
     else:
         raise ValueError("Did not expect to reach here")
