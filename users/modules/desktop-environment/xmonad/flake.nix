@@ -12,11 +12,12 @@
         xmonad-contrib
         xmonad-extras
         haskell-language-server
+        taffybar
       ];
     in
-      {
-        devShell."${system}" = pkgs.mkShell {
-          buildInputs = with pkgs; [ (ghc.withPackages haskellDeps) ];
-        };
+    {
+      devShell."${system}" = pkgs.mkShell {
+        buildInputs = with pkgs; [ (ghc.withPackages haskellDeps) ];
       };
+    };
 }
