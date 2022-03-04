@@ -102,6 +102,8 @@
       # nvim-cmp-copilot
       vim-vsnip
       vim-vsnip-integ
+      project-nvim
+      direnv-vim
 
       # Text objects
       tcomment_vim # vimscript
@@ -155,6 +157,7 @@
         ${builtins.readFile ./todo.lua}
         ${builtins.readFile ./edit.lua}
 
+        ${builtins.readFile ./nav-project.lua}
         ${builtins.readFile ./nav-nvim-tree.lua}
         ${builtins.readFile ./nav-telescope.lua}
         ${builtins.readFile ./nav-which_key.lua}

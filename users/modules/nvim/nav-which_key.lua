@@ -95,7 +95,6 @@ local mappings = {
         d = {"<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics"},
         D = {"<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics"},
         f = {"<cmd>lua vim.lsp.buf.formatting_sync(nil, 1000)<cr>", "Format document"},
-        F = {"<cmd>LspRestart<cr>", "Restart LSP"},
         i = {"<cmd>Telescope lsp_implementations<cr>", "Implementations"},
         I = {"<cmd>LspInfo<cr>", "Info"},
         j = {"<cmd>Lspsaga diagnostic_jump_next<cr>", "Next Action"},
@@ -108,6 +107,8 @@ local mappings = {
         s = {"<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols"},
         S = {"<cmd>Telescope lsp_workspace_symbols<cr>", "Workspace Symbols"},
         T = {"<cmd>Lspsaga signature_help<cr>", "Signature Help"},
+        u = {"<cmd>LspRestart<cr>", "Restart LSP"},
+        U = {"<cmd>LspStart<cr>", "Start LSP"},
 
         -- Custom that need to go away
         t = {
@@ -128,6 +129,7 @@ local mappings = {
         h = {"<cmd>Telescope help_tags<cr>", "Help Tags"},
         m = {"<cmd>Telescope marks<cr>", "Marks"},
         M = {"<cmd>Telescope man_pages<cr>", "Man Pages"},
+        p = {"<cmd>Telescope projects<cr>", "Projects"},
         r = {"<cmd>Telescope oldfiles<cr>", "Open Recent File"},
         R = {"<cmd>Telescope registers<cr>", "Registers"},
         t = {"<cmd>Telescope live_grep<cr>", "Text"},
