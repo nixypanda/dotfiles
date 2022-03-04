@@ -114,6 +114,17 @@ in
     ];
   };
 
+  home.file.".config/taffybar/taffybar.css".source = ./taffybar/taffybar.css;
+  home.file.".config/taffybar/colors.css".text = ''
+    @define-color font-color ${colorscheme.fg-primary};
+    @define-color accent ${colorscheme.accent-primary};
+    @define-color bg ${colorscheme.bg-primary};
+    @define-color bg-alt ${colorscheme.bright-black};
+    @define-color menu-background-color @bg;
+    @define-color menu-background-color-selected @bg-alt;
+    @define-color menu-font-color @font-color;
+  '';
+
   programs.rofi = {
     enable = true;
     package = pkgs.rofi.override {

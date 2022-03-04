@@ -1,28 +1,5 @@
-@define-color transparent rgba(0.0, 0.0, 0.0, 0.4);
 
-@define-color black  #24283b;
-@define-color red  #f7768e;
-@define-color green  #9ece6a;
-@define-color yellow  #e0af68;
-@define-color blue  #7aa2f7;
-@define-color magenta  #bb9af7;
-@define-color cyan  #7dcfff;
-@define-color white  #a9b1d6;
-@define-color bright-black  #414868;
-@define-color bright-red  #f7768e;
-@define-color bright-green  #9ece6a;
-@define-color bright-yellow  #e0af68;
-@define-color bright-blue  #7aa2f7;
-@define-color bright-magenta  #bb9af7;
-@define-color bright-cyan  #7dcfff;
-@define-color bright-white  #c0caf5;
-
-@define-color active-window-color @bright-black;
-@define-color urgent-window-color @red;
-@define-color font-color @white;
-@define-color menu-background-color @black;
-@define-color menu-font-color @white;
-@define-color accent @blue;
+@import "colors.css";
 
 /* Top level styling */
 
@@ -35,8 +12,8 @@
     padding: 5px;
     padding-left: 50px;
 	font-size: 8pt;
-    color: @white;
-	border-color: @black;
+    color: @font-color;
+	border-color: @bg;
 }
 
 .inner-pad {
@@ -47,7 +24,7 @@
     padding: 5px 10px;
 	transition: background-color .5s;
 	border-radius: 20px;
-	background-color: @black;
+	background-color: @bg;
 }
 
 /* Workspaces styling */
@@ -57,7 +34,7 @@
     border-radius: 20px;
     border-left: 10px;
     padding: 1px 10px 1px 10px;
-    background-color: @black;
+    background-color: @bg;
 }
 
 .empty .contents {
@@ -73,7 +50,7 @@
 	opacity: 1;
     border-radius: 5px;
     padding: 2px 10px;
-	background-color: @bright-black;
+	background-color: @bg-alt;
 }
 
 .contents .window-icon {
@@ -88,11 +65,11 @@
 
 .workspace-label {
 	opacity: 1;
-	color: @white;
+	color: @font-color;
 }
 
 .active .workspace-label {
-	color: @white;
+	color: @font-color;
 }
 
 
@@ -117,7 +94,7 @@
 }
 
 .window-icon-container.active {
-	background-color: @white;
+	background-color: @font-color;
 }
 
 .window-icon-container.urgent {
@@ -141,12 +118,12 @@
 button {
 	all: initial;
     font-size: 8pt;
-    color: @white;
-	background-color: @black;
+    color: @font-color;
+	background-color: @bg;
 }
 
 button:checked, button:hover .Contents:hover {
-	box-shadow: inset 0 -3px @blue;
+	box-shadow: inset 0 -3px @accent;
 }
 
 /* Music Player Styles */
@@ -158,7 +135,7 @@ button:checked, button:hover .Contents:hover {
     border-radius: 20px;
     /* This affects more than the music icon FML*/
     font-size: 14pt;
-    background-color: @bright-black;
+    background-color: @bg-alt;
 }
 
 
@@ -185,9 +162,9 @@ button:checked, button:hover .Contents:hover {
 }
 
 .taffy-window menuitem:hover, menuitem:hover {
-	background-color: @bright-black;
+	background-color: @menu-background-color-selected;
 }
 
 .taffy-window menuitem:hover > label, menuitem:hover > label {
-	color: @white;
+	color: @font-color;
 }
