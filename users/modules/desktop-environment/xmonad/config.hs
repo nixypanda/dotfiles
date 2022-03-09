@@ -322,17 +322,5 @@ myStartupHook :: X ()
 myStartupHook = do
   spawn "custom-panel-launch"
 
-layoutDisplay :: String -> String
-layoutDisplay "Spacing Tall" = "█▌▋"
-layoutDisplay "Spacing ThreeCol" = "█▐▐"
-layoutDisplay "Spacing Full" = "███"
-layoutDisplay "Spacing Mirror Tall" = "▀▀▀"
-layoutDisplay x = x
-
-layoutLogger :: X ()
-layoutLogger = withWindowSet $ \ws -> do
-  let layoutName = layoutDisplay . description . layout . workspace $ current ws
-  io $ appendFile "/home/sherub/.xmonad/xmonad-layout" (layoutName ++ "\n")
-
 myLogHook :: X ()
-myLogHook = ewmhDesktopsLogHook >> layoutLogger
+myLogHook = ewmhDesktopsLogHook
