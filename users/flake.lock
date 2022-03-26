@@ -95,6 +95,22 @@
         "type": "github"
       }
     },
+    "nvim-copilot": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1644957617,
+        "narHash": "sha256-eAAbnXVm/vzt/kVq3vBw91GtfSVlAdYTbOzAZFD49hs=",
+        "owner": "github",
+        "repo": "copilot.vim",
+        "rev": "47eb231463d3654de1a205c4e30567fbd006965d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "github",
+        "repo": "copilot.vim",
+        "type": "github"
+      }
+    },
     "nvim-dap-python-src": {
       "flake": false,
       "locked": {
@@ -182,6 +198,7 @@
         "nur": "nur",
         "nvim-alpha-src": "nvim-alpha-src",
         "nvim-cmp-copilot-src": "nvim-cmp-copilot-src",
+        "nvim-copilot": "nvim-copilot",
         "nvim-dap-python-src": "nvim-dap-python-src",
         "nvim-fidget-src": "nvim-fidget-src",
         "nvim-lspsaga-src": "nvim-lspsaga-src",

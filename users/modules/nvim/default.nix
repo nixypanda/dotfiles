@@ -98,7 +98,7 @@
       cmp-nvim-lua
       cmp-treesitter
       cmp-calc
-      # copilot.vim
+      nvim-copilot
       # nvim-cmp-copilot
       vim-vsnip
       vim-vsnip-integ
@@ -149,6 +149,7 @@
         ${builtins.readFile ./look-statusline.lua}
 
         ${builtins.readFile ./ide-treesitter.lua}
+        ${builtins.readFile ./ide-copilot.lua}
         ${builtins.readFile ./ide-completion.lua}
         ${builtins.readFile ./ide-lsp.lua}
         ${builtins.readFile ./ide-dap.lua}

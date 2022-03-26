@@ -22,6 +22,10 @@
       url = "github:hrsh7th/cmp-copilot";
       flake = false;
     };
+    nvim-copilot = {
+      url = "github:github/copilot.vim";
+      flake = false;
+    };
     nvim-fidget-src = {
       url = "github:j-hui/fidget.nvim";
       flake = false;
@@ -57,6 +61,10 @@
         nvim-cmp-copilot = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-cmp-copilot";
           src = inputs.nvim-cmp-copilot;
+        };
+        nvim-copilot = pkgs.vimUtils.buildVimPlugin {
+          name = "nvim-copilot";
+          src = inputs.nvim-copilot;
         };
         nvim-sqls = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-sqls";
