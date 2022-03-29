@@ -11,6 +11,7 @@
     wireshark
     unzip
     jq
+    act
 
     # Moar colors
     starship
