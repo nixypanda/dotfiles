@@ -60,6 +60,11 @@
     '';
   };
 
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   programs.nushell = {
     enable = true;
     settings = {
