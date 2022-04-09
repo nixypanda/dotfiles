@@ -9,6 +9,7 @@
 
     # go
     go
+    golangci-lint
 
     # Haskell
     ghc
