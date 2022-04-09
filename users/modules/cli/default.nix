@@ -12,6 +12,7 @@
     unzip
     jq
     act
+    fx
 
     # Moar colors
     starship
