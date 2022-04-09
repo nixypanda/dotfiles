@@ -41,7 +41,7 @@
     terraform-ls
 
     # general purpose / multiple langs
-    nur.repos.crazazy.efm-langserver
+    efm-langserver
     nodePackages.prettier
 
     # shit you need to deal with
