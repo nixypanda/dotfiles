@@ -13,6 +13,11 @@
     jq
     act
     fx
+    dua
+    procs
+    hexyl
+    nix-du
+    graphviz
 
     # Moar colors
     starship
