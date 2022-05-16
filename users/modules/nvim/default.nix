@@ -24,8 +24,31 @@
 
     # python
     python3Packages.isort
-    black
-    python3Packages.black
+    (black.overrideAttrs (o:
+      rec {
+        pname = "black";
+        version = "19.10b0";
+        src = python3Packages.fetchPypi {
+          inherit pname version;
+          hash = "sha256-wu23Ogjp4Ob2Wg5q8YsFm4sc3VvvmX16Cxgd+T3IFTk=";
+        };
+        propagatedBuildInputs = with python3Packages; [ attrs appdirs click toml aiohttp aiohttp-cors pathspec regex typed-ast ];
+        disabledTests = [
+          # requires network access
+          "test_gen_check_output"
+          "test_cache_multiple_files"
+          "test_expression"
+          "test_expression_diff"
+          "test_expression_ff"
+          "test_failed_formatting_does_not_get_cached"
+        ] ++ lib.optionals stdenv.isDarwin [
+          # fails on darwin
+          "test_expression_diff"
+          # Fail on Hydra, see https://github.com/NixOS/nixpkgs/pull/130785
+          "test_bpo_2142_workaround"
+          "test_skip_magic_trailing_comma"
+        ];
+      }))
     nodePackages.pyright
 
     # Rust
