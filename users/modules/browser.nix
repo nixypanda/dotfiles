@@ -16,10 +16,6 @@ let
   unhook-id = "khncfooichmfjbepaaaebmommgaepoid";
 in
 {
-  home.packages = with pkgs; [
-    google-chrome
-  ];
-
   programs.chromium = {
     enable = true;
     extensions = [
