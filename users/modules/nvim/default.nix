@@ -40,6 +40,7 @@
           "test_expression"
           "test_expression_diff"
           "test_expression_ff"
+          "test_shh_click"
           "test_failed_formatting_does_not_get_cached"
         ] ++ lib.optionals stdenv.isDarwin [
           # fails on darwin
