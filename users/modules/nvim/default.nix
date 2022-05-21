@@ -123,7 +123,6 @@
       cmp-calc
       nvim-copilot
       # nvim-cmp-copilot
-      cmp-tabnine
       vim-vsnip
       vim-vsnip-integ
       project-nvim
