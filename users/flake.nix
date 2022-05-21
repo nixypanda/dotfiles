@@ -38,8 +38,11 @@
       url = "github:elkowar/yuck.vim";
       flake = false;
     };
+    taffybar = {
+      url = "github:taffybar/taffybar";
+    };
   };
-  outputs = { self, nur, ... }@inputs:
+  outputs = { self, nur, taffybar, ... }@inputs:
     let
       newPlugins = pkgs: {
         nvim-lsp-saga = pkgs.vimUtils.buildVimPlugin {
@@ -78,6 +81,7 @@
 
       overlays = [
         nur.overlay
+        taffybar.overlay
 
         (final: prev: {
           vimPlugins = prev.vimPlugins // (newPlugins prev.pkgs);
