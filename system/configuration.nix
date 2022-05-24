@@ -36,7 +36,7 @@
     '';
 
     # https://github.com/NixOS/nixpkgs/issues/124215
-    sandboxPaths = [ "/bin/sh=${pkgs.bash}/bin/sh" ];
+    settings.extra-sandbox-paths = [ "/bin/sh=${pkgs.bash}/bin/sh" ];
   };
 
   # networking.hostName = "nixos"; # Define your hostname.
