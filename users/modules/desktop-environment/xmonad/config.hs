@@ -3,7 +3,7 @@ import Graphics.X11.ExtraTypes.XF86
     xF86XK_AudioMute,
     xF86XK_AudioRaiseVolume,
   )
--- import System.Taffybar.Support.PagerHints (pagerHints)
+import System.Taffybar.Support.PagerHints (pagerHints)
 import XMonad
 import XMonad.Hooks.EwmhDesktops (ewmh, ewmhDesktopsLogHook, fullscreenEventHook)
 import XMonad.Hooks.InsertPosition (Focus (Newer), Position (End), insertPosition)
@@ -76,7 +76,7 @@ import XMonad.Util.NamedScratchpad
 
 main :: IO ()
 main = do
-  xmonad . docks . ewmh $ myConfig
+  xmonad . docks . ewmh . pagerHints $ myConfig
 
 myConfig :: XConfig (MyLayoutModifiers MyTogglableLayouts)
 myConfig =
