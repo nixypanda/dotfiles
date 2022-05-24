@@ -5,7 +5,7 @@ import Graphics.X11.ExtraTypes.XF86
   )
 import System.Taffybar.Support.PagerHints (pagerHints)
 import XMonad
-import XMonad.Hooks.EwmhDesktops (ewmh, ewmhDesktopsLogHook, fullscreenEventHook)
+import XMonad.Hooks.EwmhDesktops (ewmh, ewmhFullscreen)
 import XMonad.Hooks.InsertPosition (Focus (Newer), Position (End), insertPosition)
 import XMonad.Hooks.ManageDocks (AvoidStruts, avoidStruts, docks, manageDocks)
 import XMonad.Hooks.ManageHelpers (doFullFloat)
@@ -76,18 +76,17 @@ import XMonad.Util.NamedScratchpad
 
 main :: IO ()
 main = do
-  xmonad . docks . ewmh . pagerHints $ myConfig
+  xmonad . docks . ewmh . ewmhFullscreen . pagerHints $ myConfig
 
 myConfig :: XConfig (MyLayoutModifiers MyTogglableLayouts)
 myConfig =
   def
-    { logHook = myLogHook,
-      terminal = myTerminal,
+    { terminal = myTerminal,
       startupHook = myStartupHook,
       manageHook = myManageHook,
       layoutHook = myLayoutModifiers myTogglableLayouts,
       workspaces = myWorkspaces,
-      handleEventHook = fullscreenEventHook <+> handleEventHook def,
+      handleEventHook = handleEventHook def,
       -- NOTE: Injected using nix strings.
       -- Think about parsing colorscheme.nix file in some way
       focusedBorderColor = myFocusedBorderColor,
@@ -321,6 +320,3 @@ myManageHook =
 myStartupHook :: X ()
 myStartupHook = do
   spawn "custom-panel-launch"
-
-myLogHook :: X ()
-myLogHook = ewmhDesktopsLogHook

@@ -1,12 +1,12 @@
 {
   description = "XMonad Config";
   inputs = {
-    unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    taffybar.url = "github:sherubthakur/taffybar";
+    flake-utils.url = "github:numtide/flake-utils";
   };
-  outputs = inputs:
+  outputs = inputs @ { self, nixpkgs, flake-utils, taffybar, ... }:
     let
-      system = "x86_64-linux";
-      pkgs = inputs.unstable.legacyPackages.${system};
       haskellDeps = ps: with ps; [
         xmonad
         xmonad-contrib
@@ -15,9 +15,13 @@
         taffybar
       ];
     in
-    {
-      devShell."${system}" = pkgs.mkShell {
-        buildInputs = with pkgs; [ (ghc.withPackages haskellDeps) ];
-      };
+    flake-utils.lib.simpleFlake {
+      inherit self nixpkgs;
+      name = "XMonad Dev environment";
+      overlay = taffybar.overlay;
+      shell = ({ pkgs ? import <nixpkgs> }:
+        pkgs.mkShell {
+          buildInputs = with pkgs; [ (ghc.withPackages haskellDeps) ];
+        });
     };
 }
