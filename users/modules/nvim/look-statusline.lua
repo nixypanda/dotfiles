@@ -1,3 +1,5 @@
+vim.api.nvim_set_option('laststatus', 3)
+
 require('lualine').setup {
     options = {
         section_separators = {left = '', right = ''},
