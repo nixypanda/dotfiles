@@ -39,7 +39,7 @@
       flake = false;
     };
     taffybar = {
-      url = "github:taffybar/taffybar";
+      url = "github:sherubthakur/taffybar";
     };
   };
   outputs = { self, nur, taffybar, ... }@inputs:

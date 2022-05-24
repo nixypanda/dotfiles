@@ -528,15 +528,15 @@
         "nixpkgs": "nixpkgs_10"
       },
       "locked": {
-        "lastModified": 1650283551,
-        "narHash": "sha256-bRyZjPo31ikzoyU71qJupI5QykctG0pkiwk9/GWnIk0=",
-        "owner": "taffybar",
+        "lastModified": 1653379678,
+        "narHash": "sha256-WpuI+cqTZZ704rarUTVM9rrXiYagj6ZWRtxA4cpdAPA=",
+        "owner": "sherubthakur",
         "repo": "taffybar",
-        "rev": "ef86d5a6f5bebd2a5e0963aaae5d4c807bef28ba",
+        "rev": "644616c54cb460c28bcac4cd6c70206de0018a34",
         "type": "github"
       },
       "original": {
-        "owner": "taffybar",
+        "owner": "sherubthakur",
         "repo": "taffybar",
         "type": "github"
       }
