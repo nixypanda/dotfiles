@@ -16,6 +16,7 @@ executable custom-taffybar
                      , filepath
                      , gtk3
                      , gi-gtk
+                     , gtk-strut
                      , text
                      , taffybar
                      , process

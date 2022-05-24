@@ -16,6 +16,7 @@ import GI.Gtk
     toWidget,
     widgetShow,
   )
+import Graphics.UI.GIGtkStrut (StrutSize (ExactSize))
 import System.Process (spawnCommand)
 import System.Taffybar (startTaffybar)
 import System.Taffybar.Context (TaffyIO, TaffybarConfig)
@@ -60,7 +61,7 @@ myConfig =
       centerWidgets = map (>>= buildContentsBox) [windowsW],
       endWidgets = powerMenu : map (>>= buildContentsBox) [clock, tray],
       barPosition = Top,
-      barHeight = 50,
+      barHeight = ExactSize 50,
       widgetSpacing = 10
     }
 
