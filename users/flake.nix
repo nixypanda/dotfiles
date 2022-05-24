@@ -102,7 +102,12 @@
                 colorscheme = (import ./colorschemes/tokyonight.nix);
               };
 
-              nixpkgs.config = { allowUnfree = true; };
+              nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+                "zoom"
+                "slack"
+                "ngrok"
+                "discord"
+              ];
               nixpkgs.overlays = overlays;
 
               # Let Home Manager install and manage itself.
