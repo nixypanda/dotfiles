@@ -4,6 +4,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager";
     nur.url = "github:nix-community/NUR";
+    taffybar.url = "github:sherubthakur/taffybar";
 
     # Nvim plugins
     nvim-lspsaga-src = {
@@ -42,13 +43,11 @@
       url = "github:protex/better-digraphs.nvim";
       flake = false;
     };
-    taffybar = {
-      url = "github:sherubthakur/taffybar";
-    };
+
   };
   outputs = { self, nur, taffybar, ... }@inputs:
     let
-      newPlugins = pkgs: {
+      missingVimPluginsInNixpkgs = pkgs: {
         nvim-lsp-saga = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-lsp-saga";
           src = inputs.nvim-lspsaga-src;
@@ -92,9 +91,8 @@
         taffybar.overlay
 
         (final: prev: {
-          vimPlugins = prev.vimPlugins // (newPlugins prev.pkgs);
+          vimPlugins = prev.vimPlugins // (missingVimPluginsInNixpkgs prev.pkgs);
         })
-
       ];
 
       unfreePredicate = lib: pkg: builtins.elem (lib.getName pkg) [
