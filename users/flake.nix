@@ -95,6 +95,18 @@
         "ngrok"
         "discord"
       ];
+
+      common_modules = [
+        ./modules/alacritty.nix
+        ./modules/cli
+        ./modules/fonts.nix
+        ./modules/git.nix
+        ./modules/kitty.nix
+        ./modules/nvim
+        ./modules/programming.nix
+        ./modules/system-management
+        ./modules/work.nix
+      ];
     in
     {
       homeConfigurations = {
@@ -115,18 +127,9 @@
               # Let Home Manager install and manage itself.
               programs.home-manager.enable = true;
 
-              imports = [
+              imports = common_modules ++ [
                 ./modules/browser.nix
-                ./modules/git.nix
                 ./modules/desktop-environment
-                ./modules/nvim
-                ./modules/cli
-                ./modules/fonts.nix
-                ./modules/kitty.nix
-                ./modules/alacritty.nix
-                ./modules/system-management
-                ./modules/work.nix
-                ./modules/programming.nix
               ];
 
               # Packages that don't fit in the modules that we have
@@ -160,18 +163,8 @@
                 docker
               ];
 
-              imports = [
-                ./modules/kitty.nix
-                ./modules/git.nix
-                ./modules/nvim
-                ./modules/cli
-                ./modules/fonts.nix
-                ./modules/kitty.nix
-                ./modules/alacritty.nix
+              imports = common_modules ++ [
                 ./modules/tmux.nix
-                ./modules/system-management
-                ./modules/work.nix
-                ./modules/programming.nix
               ];
             };
         };
