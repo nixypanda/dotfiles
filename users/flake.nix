@@ -88,6 +88,13 @@
         })
 
       ];
+
+      unfreePredicate = lib: pkg: builtins.elem (lib.getName pkg) [
+        "zoom"
+        "slack"
+        "ngrok"
+        "discord"
+      ];
     in
     {
       homeConfigurations = {
@@ -102,12 +109,7 @@
                 colorscheme = (import ./colorschemes/tokyonight.nix);
               };
 
-              nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-                "zoom"
-                "slack"
-                "ngrok"
-                "discord"
-              ];
+              nixpkgs.config.allowUnfreePredicate = (unfreePredicate lib);
               nixpkgs.overlays = overlays;
 
               # Let Home Manager install and manage itself.
@@ -148,7 +150,7 @@
               xdg.configFile."nix/nix.conf".text = ''
                 experimental-features = nix-command flakes ca-references
               '';
-              nixpkgs.config = { allowUnfree = true; };
+              nixpkgs.config.allowUnfreePredicate = (unfreePredicate lib);
               nixpkgs.overlays = overlays;
 
               # Let Home Manager install and manage itself.
