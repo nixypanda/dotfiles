@@ -69,7 +69,6 @@
     nodePackages.prettier
 
     # shit you need to deal with
-    cmake-language-server
     nodePackages.bash-language-server
     nodePackages.dockerfile-language-server-nodejs
     nodePackages.vscode-langservers-extracted
@@ -79,7 +78,14 @@
     # This is a cli utility as we can't display all this in cli
     nodePackages.livedown
     pandoc
-  ] ++ (lib.optional pkgs.stdenv.isLinux sumneko-lua-language-server);
+  ] ++ (if pkgs.stdenv.isLinux then [
+    # Not available on darwin
+    sumneko-lua-language-server
+    # Depends on pygls which does not build on darwin
+    cmake-language-server
+  ] else [
+
+  ]);
 
   programs.neovim = {
     enable = true;

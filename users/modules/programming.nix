@@ -9,7 +9,6 @@
 
     # go
     go
-    golangci-lint
 
     # Haskell
     ghc
@@ -36,5 +35,10 @@
     cargo
     cargo-tarpaulin
     perl # perl (this is required by rust)
-  ];
+  ] ++ (if pkgs.stdenv.isLinux then [
+    # Has some build failures on darwin
+    golangci-lint
+  ] else [
+
+  ]);
 }

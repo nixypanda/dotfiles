@@ -1,15 +1,21 @@
 { config, pkgs, libs, ... }:
 {
   home.packages = with pkgs; [
-    slack
     openvpn
     nomad
     vault
     consul
-    envoy
     terraform
     packer
     vagrant
+  ] ++ (if pkgs.stdenv.isLinux then [
+    # Unavailable for darwin
+    envoy
+    # Sha mismatch on darwin
     zoom-us
-  ];
+    # Build error on darwin
+    slack
+  ] else [
+
+  ]);
 }
