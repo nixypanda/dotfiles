@@ -51,6 +51,7 @@ in
 
       # lua
       luaformatter
+      sumneko-lua-language-server
 
       # Nix
       rnix-lsp
@@ -86,9 +87,8 @@ in
       # This is a cli utility as we can't display all this in cli
       nodePackages.livedown
       pandoc
+
     ] ++ (if pkgs.stdenv.isLinux then [
-      # Not available on darwin
-      sumneko-lua-language-server
       # Depends on pygls which does not build on darwin
       cmake-language-server
     ] else [
