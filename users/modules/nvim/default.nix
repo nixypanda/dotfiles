@@ -108,7 +108,7 @@ in
       lualine-nvim
       one-nvim
       dracula-vim
-      # nvim-alpha
+      nvim-alpha
       nvim-colorizer-lua
       tokyonight-nvim
 
