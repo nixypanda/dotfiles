@@ -161,6 +161,8 @@ in
       # Fuzzy Finder
       telescope-nvim
       telescope-fzf-native-nvim
+      nvim-better-digraphs
+      cheatsheet-nvim
 
       # Text Helpers
       vim-table-mode # vimscript

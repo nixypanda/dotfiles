@@ -370,6 +370,22 @@
         "type": "github"
       }
     },
+    "nvim-better-digraphs-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1650987584,
+        "narHash": "sha256-CnuEllJ3GmOncdk/E/AMQaw1j+cqnq4Nznzcd2yfCRM=",
+        "owner": "protex",
+        "repo": "better-digraphs.nvim",
+        "rev": "0312fa370c8aa031f9d55a46384f7c8adf3c4cb5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "protex",
+        "repo": "better-digraphs.nvim",
+        "type": "github"
+      }
+    },
     "nvim-cmp-copilot-src": {
       "flake": false,
       "locked": {
@@ -488,6 +504,7 @@
         "nixpkgs": "nixpkgs_2",
         "nur": "nur",
         "nvim-alpha-src": "nvim-alpha-src",
+        "nvim-better-digraphs-src": "nvim-better-digraphs-src",
         "nvim-cmp-copilot-src": "nvim-cmp-copilot-src",
         "nvim-copilot": "nvim-copilot",
         "nvim-dap-python-src": "nvim-dap-python-src",

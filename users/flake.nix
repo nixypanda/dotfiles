@@ -38,6 +38,10 @@
       url = "github:elkowar/yuck.vim";
       flake = false;
     };
+    nvim-better-digraphs-src = {
+      url = "github:protex/better-digraphs.nvim";
+      flake = false;
+    };
     taffybar = {
       url = "github:sherubthakur/taffybar";
     };
@@ -76,6 +80,10 @@
         nvim-yuck = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-yuck";
           src = inputs.nvim-yuck-src;
+        };
+        nvim-better-digraphs = pkgs.vimUtils.buildVimPlugin {
+          name = "nvim-better-digraphs";
+          src = inputs.nvim-better-digraphs-src;
         };
       };
 

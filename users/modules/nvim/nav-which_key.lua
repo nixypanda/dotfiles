@@ -40,6 +40,7 @@ local mappings = {
         name = "+Actions",
         s = { '<cmd>let @/ = ""<cr>', "Remove search highlight" },
         t = { '<cmd>TableModeToggle<cr>', "Start/Stop Table mode" },
+        d = { '<cmd>lua require"better-digraphs".digraphs("i")<cr>', "Digraphs" },
     },
 
     b = {
@@ -126,7 +127,8 @@ local mappings = {
         c = { "<cmd>Telescope command_history<cr>", "Previous commands" },
         C = { "<cmd>Telescope commands<cr>", "Available commands" },
         f = { "<cmd>Telescope find_files<cr>", "Find File" },
-        h = { "<cmd>Telescope help_tags<cr>", "Help Tags" },
+        h = { "<cmd>CheatSheet<cr>", "Help Tags" },
+        H = { "<cmd>Telescope help_tags<cr>", "Help Tags" },
         m = { "<cmd>Telescope marks<cr>", "Marks" },
         M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
         p = { "<cmd>Telescope projects<cr>", "Projects" },
