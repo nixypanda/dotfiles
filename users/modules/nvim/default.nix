@@ -1,91 +1,99 @@
 { config, pkgs, lib, colorscheme, ... }:
+let
+  blackv19 = with pkgs; (black.overrideAttrs (o:
+    rec {
+      pname = "black";
+      version = "19.10b0";
+      src = python3Packages.fetchPypi {
+        inherit pname version;
+        hash = "sha256-wu23Ogjp4Ob2Wg5q8YsFm4sc3VvvmX16Cxgd+T3IFTk=";
+      };
+      propagatedBuildInputs = with python3Packages; [
+        attrs
+        appdirs
+        click
+        toml
+        aiohttp
+        aiohttp-cors
+        pathspec
+        regex
+        typed-ast
+      ];
+      disabledTests = [
+        # requires network access
+        "test_gen_check_output"
+        "test_cache_multiple_files"
+        "test_expression"
+        "test_expression_diff"
+        "test_expression_ff"
+        "test_shhh_click"
+        "test_failed_formatting_does_not_get_cached"
+      ];
+    }));
+in
 {
-  home.packages = with pkgs; [
-    # elm
-    elmPackages.elm-language-server
-    elmPackages.elm
-    elmPackages.elm-test
-    elmPackages.elm-format
+  home.packages = with pkgs;
+    [
+      # elm
+      elmPackages.elm-language-server
+      elmPackages.elm
+      elmPackages.elm-test
+      elmPackages.elm-format
 
-    # Go
-    gopls
+      # Go
+      gopls
 
-    # Haskell
-    haskellPackages.haskell-language-server
+      # Haskell
+      haskellPackages.haskell-language-server
 
-    # JavaScript
-    nodePackages.typescript-language-server
+      # JavaScript
+      nodePackages.typescript-language-server
 
-    # lua
-    luaformatter
+      # lua
+      luaformatter
 
-    # Nix
-    rnix-lsp
+      # Nix
+      rnix-lsp
 
-    # python
-    python3Packages.isort
-    (black.overrideAttrs (o:
-      rec {
-        pname = "black";
-        version = "19.10b0";
-        src = python3Packages.fetchPypi {
-          inherit pname version;
-          hash = "sha256-wu23Ogjp4Ob2Wg5q8YsFm4sc3VvvmX16Cxgd+T3IFTk=";
-        };
-        propagatedBuildInputs = with python3Packages; [ attrs appdirs click toml aiohttp aiohttp-cors pathspec regex typed-ast ];
-        disabledTests = [
-          # requires network access
-          "test_gen_check_output"
-          "test_cache_multiple_files"
-          "test_expression"
-          "test_expression_diff"
-          "test_expression_ff"
-          "test_shhh_click"
-          "test_failed_formatting_does_not_get_cached"
-        ] ++ lib.optionals stdenv.isDarwin [
-          # fails on darwin
-          "test_expression_diff"
-          # Fail on Hydra, see https://github.com/NixOS/nixpkgs/pull/130785
-          "test_bpo_2142_workaround"
-          "test_skip_magic_trailing_comma"
-        ];
-      }))
-    nodePackages.pyright
+      # python
+      python3Packages.isort
+      nodePackages.pyright
+      blackv19
 
-    # Rust
-    rust-analyzer
-    rustfmt
-    clippy
-    # lldb # debugging setup
+      # Rust
+      rust-analyzer
+      rustfmt
+      clippy
+      # lldb # debugging setup
 
-    # SQL
-    sqls
+      # SQL
+      sqls
 
-    # terraform
-    terraform-ls
+      # terraform
+      terraform-ls
 
-    # general purpose / multiple langs
-    efm-langserver
-    nodePackages.prettier
+      # general purpose / multiple langs
+      efm-langserver
+      nodePackages.prettier
 
-    # shit you need to deal with
-    nodePackages.bash-language-server
-    nodePackages.dockerfile-language-server-nodejs
-    nodePackages.vscode-langservers-extracted
-    nodePackages.vim-language-server
-    nodePackages.yaml-language-server
-    # makrdown
-    # This is a cli utility as we can't display all this in cli
-    nodePackages.livedown
-    pandoc
-  ] ++ (if pkgs.stdenv.isLinux then [
-    # Not available on darwin
-    sumneko-lua-language-server
-    # Depends on pygls which does not build on darwin
-    cmake-language-server
-  ] else [
+      # shit you need to deal with
+      nodePackages.bash-language-server
+      nodePackages.dockerfile-language-server-nodejs
+      nodePackages.vscode-langservers-extracted
+      nodePackages.vim-language-server
+      nodePackages.yaml-language-server
+      # makrdown
+      # This is a cli utility as we can't display all this in cli
+      nodePackages.livedown
+      pandoc
+    ] ++ (if pkgs.stdenv.isLinux then [
+      # Not available on darwin
+      sumneko-lua-language-server
+      # Depends on pygls which does not build on darwin
+      cmake-language-server
+    ] else [
 
-  ]);
+    ]);
 
   programs.neovim = {
     enable = true;
