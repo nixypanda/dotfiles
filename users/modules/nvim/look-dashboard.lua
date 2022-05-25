@@ -54,7 +54,7 @@ else
         dashboard.button("q", "  Quit NVIM", ":qa<CR>")
     }
 
-    dashboard.section.footer.val = {"NEOVIM"}
+    dashboard.section.footer.val = { "NEOVIM" }
 
     alpha.setup(dashboard.opts)
 end

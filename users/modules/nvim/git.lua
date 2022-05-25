@@ -1,2 +1,1 @@
-require('gitsigns').setup {keymaps = {}}
-
+require('gitsigns').setup { keymaps = {} }

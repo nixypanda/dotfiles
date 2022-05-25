@@ -10,7 +10,7 @@ end
 
 local feedkey = function(key, mode)
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode,
-                          true)
+        true)
 end
 
 cmp.setup({
@@ -19,16 +19,16 @@ cmp.setup({
             vim.fn["vsnip#anonymous"](args.body)
         end
     },
-    formatting = {format = lspkind.cmp_format({with_text = true, maxwidth = 50})},
+    formatting = { format = lspkind.cmp_format({ with_text = true, maxwidth = 50 }) },
     mapping = {
-        ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), {'i', 'c'}),
-        ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), {'i', 'c'}),
-        ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), {'i', 'c'}),
+        ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+        ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+        ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
         -- If you want to remove the default `<C-y>` mapping, You can specify
         -- `cmp.config.disable` value.
         ['<C-y>'] = cmp.config.disable,
-        ['<C-e>'] = cmp.mapping({i = cmp.mapping.abort(), c = cmp.mapping.close()}),
-        ['<CR>'] = cmp.mapping.confirm({select = true}),
+        ['<C-e>'] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }),
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
@@ -41,7 +41,7 @@ cmp.setup({
             else
                 fallback()
             end
-        end, {"i", "s"}),
+        end, { "i", "s" }),
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
@@ -50,11 +50,11 @@ cmp.setup({
             else
                 fallback()
             end
-        end, {"i", "s"})
+        end, { "i", "s" })
     },
     sources = cmp.config.sources({
-        {name = 'nvim_lsp'}, {name = 'vsnip'}, {name = 'nvim_lua'}, {name = 'calc'}
-    }, {{name = 'buffer'}, {name = 'path'}})
+        { name = 'nvim_lsp' }, { name = 'vsnip' }, { name = 'nvim_lua' }, { name = 'calc' }
+    }, { { name = 'buffer' }, { name = 'path' } })
 })
 
 -- Before        Input         After
@@ -81,4 +81,3 @@ require('nvim-autopairs').setup {}
 
 -- Completion (default setting)
 vim.o.completeopt = "menuone,noselect"
-

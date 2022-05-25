@@ -1,11 +1,11 @@
-require'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup {
     -- Note: installing nix grammer requires treesitter installed as command line too
     ensure_installed = {
         "bash", "c", "css", "dockerfile", "elm", "go", "haskell", "hcl", "html", "java",
         "javascript", "json", "latex", "lua", "nix", "python", "regex", "ruby", "rust",
         "scss", "toml", "tsx", "typescript", "yaml"
     },
-    highlight = {enable = true},
+    highlight = { enable = true },
     incremental_selection = {
         enable = true,
         keymaps = {
@@ -15,8 +15,8 @@ require'nvim-treesitter.configs'.setup {
             node_decremental = "grm"
         }
     },
-    indent = {enable = true},
-    refactor = {highlight_definitions = {enable = true}},
+    indent = { enable = true },
+    refactor = { highlight_definitions = { enable = true } },
     textobjects = {
         select = {
             enable = true,
@@ -33,8 +33,8 @@ require'nvim-treesitter.configs'.setup {
         },
         swap = {
             enable = true,
-            swap_next = {["<leader>npn"] = "@parameter.inner"},
-            swap_previous = {["<leader>npp"] = "@parameter.inner"}
+            swap_next = { ["<leader>npn"] = "@parameter.inner" },
+            swap_previous = { ["<leader>npp"] = "@parameter.inner" }
         }
     }
 }
