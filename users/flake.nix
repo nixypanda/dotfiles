@@ -145,7 +145,7 @@
             {
               # NOTE: Here we are injecting colorscheme so that it is passed down all the imports
               _module.args = {
-                colorscheme = (import ./colorschemes/dracula.nix);
+                colorscheme = (import ./colorschemes/tokyonight.nix);
               };
               xdg.configFile."nix/nix.conf".text = ''
                 experimental-features = nix-command flakes ca-references
