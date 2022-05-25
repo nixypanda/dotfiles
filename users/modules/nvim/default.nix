@@ -83,7 +83,6 @@ in
       nodePackages.vscode-langservers-extracted
       nodePackages.vim-language-server
       nodePackages.yaml-language-server
-      # makrdown
       # This is a cli utility as we can't display all this in cli
       nodePackages.livedown
       pandoc
@@ -137,9 +136,9 @@ in
       cmp-treesitter
       cmp-calc
       nvim-copilot
-      # nvim-cmp-copilot
       vim-vsnip
       vim-vsnip-integ
+      ## Project management
       project-nvim
       direnv-vim
 
@@ -155,7 +154,7 @@ in
 
       # DAP
       nvim-dap
-      # nvim-dap-ui
+      nvim-dap-ui
       nvim-dap-python
 
       # Fuzzy Finder

@@ -70,7 +70,8 @@ local mappings = {
             "Show Scopes"
         },
         s = { "<cmd>lua require'dap'.continue()<cr>", "Start debugging" },
-        f = { "<cmd>lua require'dap'.stop()<cr>", "Finish debugging" },
+        t = { "<cmd>lua require'dap'.terminate()<cr>", "Terminate debugging" },
+        f = { "<cmd>lua require'dap'.close()<cr>", "Finish debugging" },
         j = { "<cmd>lua require'dap'.down()<cr>", "Go down in call stack" },
         k = { "<cmd>lua require'dap'.up()<cr>", "Go up in call stack" }
     },
