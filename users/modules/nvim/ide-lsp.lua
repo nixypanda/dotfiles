@@ -146,7 +146,7 @@ vim.api.nvim_set_keymap('n', '<C-d>',
 -- EFM (Various Commands as LSP) Setup
 require "lspconfig".efm.setup {
     init_options = { documentFormatting = true },
-    filetypes = { "css", "html", "json", "lua", "python", "markdown" },
+    filetypes = { "css", "html", "json", "python", "markdown" },
     settings = {
         rootMarkers = { ".git/" },
         languages = {
@@ -158,12 +158,6 @@ require "lspconfig".efm.setup {
             python = {
                 { formatCommand = "isort --quiet -", formatStdin = true },
                 { formatCommand = "black --quiet -", formatStdin = true }
-            },
-            lua = {
-                {
-                    formatCommand = "lua-format -i --no-keep-simple-function-one-line --no-break-after-operator --column-limit=88 --break-after-table-lb",
-                    formatStdin = true
-                }
             }
         }
     }
