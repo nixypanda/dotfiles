@@ -165,18 +165,15 @@ require "lspconfig".efm.setup {
 
 -- AUTO FORMATTING
 
--- lsp shit that can't be done in lua atm.
--- Note: This is even worse then writing vimscript (Can't believe that would be possible but here you go)
-vim.api.nvim_command(
-    'autocmd BufWritePre *.rs  lua vim.lsp.buf.formatting_sync(nil, 1000)')
-vim.api.nvim_command(
-    'autocmd BufWritePre *.hs  lua vim.lsp.buf.formatting_sync(nil, 1000)')
-vim.api.nvim_command(
-    'autocmd BufWritePre *.py  lua vim.lsp.buf.formatting_sync(nil, 1000)')
-vim.api.nvim_command(
-    'autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 1000)')
-vim.api.nvim_command(
-    'autocmd BufWritePre *.nix lua vim.lsp.buf.formatting_sync(nil, 1000)')
+for _, file_pattern in ipairs({ "*.rs", "*.hs", "*.py", "*.lua", "*.nix" }) do
+    vim.api.nvim_create_autocmd(
+        'BufWritePre',
+        {
+            pattern = file_pattern,
+            callback = function() vim.lsp.buf.formatting_sync(nil, 1000) end
+        }
+    )
+end
 
 -- Prettify LSP diagnostic messages/icons
 
