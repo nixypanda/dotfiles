@@ -43,6 +43,10 @@
       url = "github:protex/better-digraphs.nvim";
       flake = false;
     };
+    nvim-nu-src = {
+      url = "github:LhKipp/nvim-nu";
+      flake = false;
+    };
 
   };
   outputs = { self, nur, taffybar, ... }@inputs:
@@ -83,6 +87,10 @@
         nvim-better-digraphs = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-better-digraphs";
           src = inputs.nvim-better-digraphs-src;
+        };
+        nvim-nu = pkgs.vimUtils.buildVimPlugin {
+          name = "nvim-nu";
+          src = inputs.nvim-nu-src;
         };
       };
 

@@ -115,6 +115,7 @@ in
       which-key-nvim
       vim-haskellConcealPlus # vimscript
       nvim-yuck # vimscript
+      nvim-nu
       lspkind-nvim
       nvim-treesitter
       nvim-treesitter-refactor

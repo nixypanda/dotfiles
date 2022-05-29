@@ -466,6 +466,22 @@
         "type": "github"
       }
     },
+    "nvim-nu-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1645111223,
+        "narHash": "sha256-cqP6jjRZOA36Hrw1dreqOpuXS0PtPBQGm0Z1jEdSCTM=",
+        "owner": "LhKipp",
+        "repo": "nvim-nu",
+        "rev": "3ef01939989f4d45520873fdac23a2cd7c9c226b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "LhKipp",
+        "repo": "nvim-nu",
+        "type": "github"
+      }
+    },
     "nvim-sqls-src": {
       "flake": false,
       "locked": {
@@ -510,6 +526,7 @@
         "nvim-dap-python-src": "nvim-dap-python-src",
         "nvim-fidget-src": "nvim-fidget-src",
         "nvim-lspsaga-src": "nvim-lspsaga-src",
+        "nvim-nu-src": "nvim-nu-src",
         "nvim-sqls-src": "nvim-sqls-src",
         "nvim-yuck-src": "nvim-yuck-src",
         "taffybar": "taffybar"
