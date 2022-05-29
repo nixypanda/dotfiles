@@ -59,7 +59,7 @@ require 'lspconfig'.cssls.setup { capabilities = capabilities }
 require 'lspconfig'.dockerls.setup {}
 require 'lspconfig'.html.setup { capabilities = capabilities }
 
-local schemas = {
+local json_schemas = {
     {
         description = "TypeScript compiler configuration file",
         fileMatch = { "tsconfig.json", "tsconfig.*.json" },
@@ -107,7 +107,7 @@ local schemas = {
     }
 }
 
-require 'lspconfig'.jsonls.setup { settings = { json = { schemas = schemas } } }
+require 'lspconfig'.jsonls.setup { settings = { json = { schemas = json_schemas } } }
 require 'lspconfig'.vimls.setup {}
 require 'lspconfig'.yamlls.setup {
     settings = {
@@ -121,27 +121,6 @@ require 'lspconfig'.yamlls.setup {
         }
     }
 }
-
--- signature help
-require 'lsp_signature'.on_attach({ bind = true, handler_opts = { border = 'single' } })
-
-local saga = require 'lspsaga'
-saga.init_lsp_saga {}
-require 'lspsaga.diagnostic'.show_line_diagnostics()
-
--- Jump to Definition/Refrences/Implementation
-vim.api.nvim_set_keymap('n', 'gd', [[<cmd>lua vim.lsp.buf.definition()<CR>]],
-    { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'gi', [[<cmd>lua vim.lsp.buf.implementation()<CR>]],
-    { noremap = true, silent = true })
--- scroll down hover doc or scroll in definition preview
-vim.api.nvim_set_keymap('n', '<C-f>',
-    [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>]],
-    { noremap = true, silent = true })
--- scroll up hover doc
-vim.api.nvim_set_keymap('n', '<C-d>',
-    [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>]],
-    { noremap = true, silent = true })
 
 -- EFM (Various Commands as LSP) Setup
 require "lspconfig".efm.setup {
@@ -162,6 +141,30 @@ require "lspconfig".efm.setup {
         }
     }
 }
+
+
+-- signature help
+require 'lsp_signature'.on_attach({ bind = true, handler_opts = { border = 'single' } })
+
+-- prettier output for lsp diagnostics/renaming menu/references list/etc
+local saga = require 'lspsaga'
+saga.init_lsp_saga {}
+require 'lspsaga.diagnostic'.show_line_diagnostics()
+
+-- Basic LSP keybindings
+-- Jump to Definition/Implementation
+vim.api.nvim_set_keymap('n', 'gd', [[<cmd>lua vim.lsp.buf.definition()<CR>]],
+    { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'gi', [[<cmd>lua vim.lsp.buf.implementation()<CR>]],
+    { noremap = true, silent = true })
+-- scroll down hover doc or scroll in definition preview
+vim.api.nvim_set_keymap('n', '<C-f>',
+    [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>]],
+    { noremap = true, silent = true })
+-- scroll up hover doc
+vim.api.nvim_set_keymap('n', '<C-d>',
+    [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>]],
+    { noremap = true, silent = true })
 
 -- AUTO FORMATTING
 
@@ -208,4 +211,6 @@ vim.fn.sign_define("LspDiagnosticsSignInformation", {
     numhl = "LspDiagnosticsSignInformation"
 })
 
+-- Display LSP messages overlayd on the current buffer (instead of the status
+-- line) at the bottom right corner
 require "fidget".setup {}
