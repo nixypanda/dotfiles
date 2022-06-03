@@ -121,11 +121,11 @@ in
       nvim-treesitter-refactor
       nvim-treesitter-textobjects
       nvim-lspconfig
-      nvim-lsp-saga
+      lspsaga-nvim
       lsp_signature-nvim
       rust-tools-nvim
       symbols-outline-nvim
-      nvim-fidget
+      fidget-nvim
       nvim-sqls
       ## Autocompletion setup
       nvim-cmp
@@ -136,7 +136,7 @@ in
       cmp-nvim-lua
       cmp-treesitter
       cmp-calc
-      nvim-copilot
+      copilot-vim
       vim-vsnip
       vim-vsnip-integ
       ## Project management
