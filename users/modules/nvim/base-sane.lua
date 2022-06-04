@@ -47,7 +47,14 @@ vim.o.signcolumn = 'yes'
 -- vim.g.diffopt = vim.g.diffopt .. 'vertical'
 
 -- Setup whitespace chars
-vim.o.listchars = 'eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:.'
+vim.opt.listchars = {
+    eol = '¬',
+    tab = '>·',
+    trail = '~',
+    extends = '>',
+    precedes = '<',
+    space = '.'
+}
 
 -- " Add line length end indicator
 -- vim.o.colorcolumn = '88'
