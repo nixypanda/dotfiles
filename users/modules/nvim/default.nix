@@ -178,10 +178,10 @@ in
     extraConfig = ''
       colorscheme ${colorscheme.vim-name}
       ${builtins.readFile ./base-sane.vim}
-      ${builtins.readFile ./look-theme.vim}
 
       lua << EOF
         ${builtins.readFile ./base-sane.lua}
+        ${builtins.readFile ./look-theme.lua}
 
         local statusline_theme = '${colorscheme.vim-statusline}'
 
