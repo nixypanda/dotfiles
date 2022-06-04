@@ -52,9 +52,19 @@ cmp.setup({
             end
         end, { "i", "s" })
     },
-    sources = cmp.config.sources({
-        { name = 'nvim_lsp' }, { name = 'vsnip' }, { name = 'nvim_lua' }, { name = 'calc' }
-    }, { { name = 'buffer' }, { name = 'path' } })
+    sources = cmp.config.sources(
+        {
+            { name = 'nvim_lsp' },
+            { name = 'vsnip' },
+            { name = 'nvim_lua' },
+            { name = 'calc' },
+            { name = 'crates' }
+        },
+        {
+            { name = 'buffer' },
+            { name = 'path' }
+        }
+    )
 })
 
 -- Before        Input         After

@@ -42,6 +42,7 @@ require 'lspconfig'.rust_analyzer.setup {
         })
     end
 }
+require 'crates'.setup()
 
 -- SQL
 require('lspconfig').sqls.setup {

@@ -127,6 +127,7 @@ in
       symbols-outline-nvim
       fidget-nvim
       nvim-sqls
+      crates-nvim
       ## Autocompletion setup
       nvim-cmp
       cmp-path
