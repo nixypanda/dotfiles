@@ -18,6 +18,7 @@
     hexyl
     nix-du
     graphviz
+    unrar
 
     # Moar colors
     starship

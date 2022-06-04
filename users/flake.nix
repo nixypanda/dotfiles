@@ -76,6 +76,7 @@
         "slack"
         "ngrok"
         "discord"
+        "unrar"
       ];
 
       common_modules = [
