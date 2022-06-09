@@ -121,6 +121,7 @@ in
       nvim-treesitter-refactor
       nvim-treesitter-textobjects
       nvim-lspconfig
+      nvim-regexplainer
       lspsaga-nvim
       lsp_signature-nvim
       rust-tools-nvim
@@ -173,6 +174,7 @@ in
       # General Deps
       popup-nvim
       plenary-nvim
+      nui-nvim
     ];
 
     extraConfig = ''
@@ -189,6 +191,7 @@ in
         ${builtins.readFile ./look-colorizer.lua}
         ${builtins.readFile ./look-statusline.lua}
 
+        ${builtins.readFile ./ide-regexplainer.lua}
         ${builtins.readFile ./ide-treesitter.lua}
         ${builtins.readFile ./ide-copilot.lua}
         ${builtins.readFile ./ide-completion.lua}

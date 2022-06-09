@@ -41,6 +41,7 @@ local mappings = {
         s = { '<cmd>let @/ = ""<cr>', "Remove search highlight" },
         t = { '<cmd>TableModeToggle<cr>', "Start/Stop Table mode" },
         d = { '<cmd>lua require"better-digraphs".digraphs("i")<cr>', "Digraphs" },
+        r = { '<cmd>RegexplainerToggle<cr>', "Explain Regex (Show/Hide)" },
     },
 
     b = {

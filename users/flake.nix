@@ -31,7 +31,10 @@
       url = "github:LhKipp/nvim-nu";
       flake = false;
     };
-
+    nvim-regexplainer-src = {
+      url = "github:bennypowers/nvim-regexplainer";
+      flake = false;
+    };
   };
   outputs = { self, nur, taffybar, ... }@inputs:
     let
@@ -59,6 +62,10 @@
         nvim-nu = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-nu";
           src = inputs.nvim-nu-src;
+        };
+        nvim-regexplainer = pkgs.vimUtils.buildVimPlugin {
+          name = "nvim-regexplainer";
+          src = inputs.nvim-regexplainer-src;
         };
       };
 

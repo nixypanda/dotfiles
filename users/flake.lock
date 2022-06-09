@@ -418,6 +418,22 @@
         "type": "github"
       }
     },
+    "nvim-regexplainer-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1650446856,
+        "narHash": "sha256-AXPTE6uPhMAVUMEXb7BCwGba2YqNg51PxBFFYLoW04g=",
+        "owner": "bennypowers",
+        "repo": "nvim-regexplainer",
+        "rev": "e9900b464bd6083afe22755858b0b5c27d7a3bb4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "bennypowers",
+        "repo": "nvim-regexplainer",
+        "type": "github"
+      }
+    },
     "nvim-sqls-src": {
       "flake": false,
       "locked": {
@@ -459,6 +475,7 @@
         "nvim-better-digraphs-src": "nvim-better-digraphs-src",
         "nvim-dap-python-src": "nvim-dap-python-src",
         "nvim-nu-src": "nvim-nu-src",
+        "nvim-regexplainer-src": "nvim-regexplainer-src",
         "nvim-sqls-src": "nvim-sqls-src",
         "nvim-yuck-src": "nvim-yuck-src",
         "taffybar": "taffybar"
