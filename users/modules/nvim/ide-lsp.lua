@@ -149,7 +149,11 @@ require 'lsp_signature'.on_attach({ bind = true, handler_opts = { border = 'sing
 
 -- prettier output for lsp diagnostics/renaming menu/references list/etc
 local saga = require 'lspsaga'
-saga.init_lsp_saga {}
+saga.init_lsp_saga {
+    finder_action_keys = {
+        open = "<Return>",
+    },
+}
 require 'lspsaga.diagnostic'.show_line_diagnostics()
 
 -- Basic LSP keybindings
