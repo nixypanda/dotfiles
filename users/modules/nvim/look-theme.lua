@@ -3,6 +3,8 @@ local file_syntax_map = {
     { pattern = "flake.lock", syntax = "json" },
     { pattern = "*.tfstate", syntax = "json" },
     { pattern = "*.nomad", syntax = "hcl" },
+    { pattern = "lotus58.keymap", syntax = "c" },
+    { pattern = "lotus58.conf", syntax = "c" },
 }
 
 for _, elm in ipairs(file_syntax_map) do
