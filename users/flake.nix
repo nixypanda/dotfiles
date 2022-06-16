@@ -96,6 +96,7 @@
         ./modules/programming.nix
         ./modules/system-management
         ./modules/work.nix
+        ./modules/media.nix
       ];
     in
     {

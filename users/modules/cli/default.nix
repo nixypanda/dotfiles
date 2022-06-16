@@ -19,6 +19,7 @@
     nix-du
     graphviz
     unrar
+    bashmount
 
     # Moar colors
     starship
