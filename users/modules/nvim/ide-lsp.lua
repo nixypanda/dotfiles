@@ -151,7 +151,10 @@ require 'lsp_signature'.on_attach({ bind = true, handler_opts = { border = 'sing
 local saga = require 'lspsaga'
 saga.init_lsp_saga {
     finder_action_keys = {
-        open = "<Return>",
+        open = '<CR>',
+        vsplit = 'v',
+        split = 's',
+        quit = { 'q', '<Esc>' }
     },
 }
 require 'lspsaga.diagnostic'.show_line_diagnostics()
