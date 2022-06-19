@@ -96,7 +96,6 @@
         ./modules/programming.nix
         ./modules/system-management
         ./modules/work.nix
-        ./modules/media.nix
       ];
     in
     {
@@ -121,6 +120,7 @@
               imports = common_modules ++ [
                 ./modules/browser.nix
                 ./modules/desktop-environment
+                ./modules/media.nix
               ];
 
               # Packages that don't fit in the modules that we have
