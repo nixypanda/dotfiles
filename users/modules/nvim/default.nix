@@ -138,7 +138,6 @@ in
       cmp-nvim-lua
       cmp-treesitter
       cmp-calc
-      copilot-vim
       vim-vsnip
       vim-vsnip-integ
       ## Project management
@@ -193,7 +192,6 @@ in
 
         ${builtins.readFile ./ide-regexplainer.lua}
         ${builtins.readFile ./ide-treesitter.lua}
-        ${builtins.readFile ./ide-copilot.lua}
         ${builtins.readFile ./ide-completion.lua}
         ${builtins.readFile ./ide-lsp.lua}
         ${builtins.readFile ./ide-dap.lua}
