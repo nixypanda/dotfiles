@@ -33,7 +33,6 @@ require 'lspconfig'.rnix.setup {}
 require 'lspconfig'.pyright.setup {}
 
 -- Rust
-require 'rust-tools'.setup()
 require 'lspconfig'.rust_analyzer.setup {
     on_attach = function()
         require 'lsp_signature'.on_attach({
@@ -42,6 +41,7 @@ require 'lspconfig'.rust_analyzer.setup {
         })
     end
 }
+require 'rust-tools'.setup()
 require 'crates'.setup()
 
 -- SQL
