@@ -101,7 +101,7 @@ in
     plugins = with pkgs.vimPlugins; [
       # Appearance
       indent-blankline-nvim
-      barbar-nvim
+      bufferline-nvim
       nvim-tree-lua
       nvim-web-devicons
       lualine-nvim
@@ -189,6 +189,7 @@ in
         ${builtins.readFile ./look-dashboard.lua}
         ${builtins.readFile ./look-colorizer.lua}
         ${builtins.readFile ./look-statusline.lua}
+        ${builtins.readFile ./look-topline.lua}
 
         ${builtins.readFile ./ide-regexplainer.lua}
         ${builtins.readFile ./ide-treesitter.lua}
