@@ -177,14 +177,15 @@ in
     ];
 
     extraConfig = ''
-      colorscheme ${colorscheme.vim-name}
       ${builtins.readFile ./base-sane.vim}
 
       lua << EOF
         ${builtins.readFile ./base-sane.lua}
         ${builtins.readFile ./look-theme.lua}
 
+        -- We do theme specific stuff in look-theme. This needs to come after that
         local statusline_theme = '${colorscheme.vim-statusline}'
+        vim.cmd[[ colorscheme ${colorscheme.vim-name}]]
 
         ${builtins.readFile ./look-dashboard.lua}
         ${builtins.readFile ./look-colorizer.lua}

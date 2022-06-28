@@ -60,3 +60,14 @@ vim.opt.listchars = {
 -- vim.o.colorcolumn = '88'
 
 vim.o.shell = 'zsh'
+
+-- More prominent splits. This is a general problem with a lot of the themes
+vim.opt.fillchars = {
+    vert = '█',
+    horiz = '▀',
+    horizup = '█',
+    horizdown = '█',
+    vertleft = '█',
+    vertright = '█',
+    verthoriz = '█',
+}
