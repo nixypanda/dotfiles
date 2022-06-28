@@ -173,7 +173,7 @@ keysToAdd =
         ( (myModMask .|. shiftMask, xK_l),
           spawn "i3lock-fancy -t \"\""
         ),
-        ( (myModMask .|. shiftMask, xK_Return),
+        ( (myModMask .|. shiftMask, xK_space),
           spawn $ myTerminal ++ " -d \"$(xcwd)\""
         ),
         ( (myModMask .|. shiftMask, xK_4),
