@@ -147,17 +147,6 @@ require "lspconfig".efm.setup {
 -- signature help
 require 'lsp_signature'.on_attach({ bind = true, handler_opts = { border = 'single' } })
 
--- prettier output for lsp diagnostics/renaming menu/references list/etc
-local saga = require 'lspsaga'
-saga.init_lsp_saga {
-    finder_action_keys = {
-        open = '<CR>',
-        vsplit = 'v',
-        split = 's',
-        quit = { 'q', '<Esc>' }
-    },
-}
-require 'lspsaga.diagnostic'.show_line_diagnostics()
 
 -- Basic LSP keybindings
 -- Jump to Definition/Implementation
@@ -188,6 +177,18 @@ end
 
 -- Prettify LSP diagnostic messages/icons
 
+-- prettier output for lsp diagnostics/renaming menu/references list/etc
+local saga = require 'lspsaga'
+saga.init_lsp_saga {
+    finder_action_keys = {
+        open = '<CR>',
+        vsplit = 'v',
+        split = 's',
+        quit = { 'q', '<Esc>' }
+    },
+}
+require 'lspsaga.diagnostic'.show_line_diagnostics()
+
 vim.diagnostic.config({
     virtual_text = false,
     signs = true,
@@ -197,27 +198,6 @@ vim.diagnostic.config({
 })
 
 require('lspkind').init({})
-
-vim.fn.sign_define("LspDiagnosticsSignError", {
-    texthl = "LspDiagnosticsSignError",
-    text = "",
-    numhl = "LspDiagnosticsSignError"
-})
-vim.fn.sign_define("LspDiagnosticsSignWarning", {
-    texthl = "LspDiagnosticsSignWarning",
-    text = "",
-    numhl = "LspDiagnosticsSignWarning"
-})
-vim.fn.sign_define("LspDiagnosticsSignHint", {
-    texthl = "LspDiagnosticsSignHint",
-    text = "",
-    numhl = "LspDiagnosticsSignHint"
-})
-vim.fn.sign_define("LspDiagnosticsSignInformation", {
-    texthl = "LspDiagnosticsSignInformation",
-    text = "",
-    numhl = "LspDiagnosticsSignInformation"
-})
 
 -- Display LSP messages overlayd on the current buffer (instead of the status
 -- line) at the bottom right corner

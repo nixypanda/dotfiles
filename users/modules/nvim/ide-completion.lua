@@ -64,7 +64,11 @@ cmp.setup({
             { name = 'buffer' },
             { name = 'path' }
         }
-    )
+    ),
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+    },
 })
 
 -- Before        Input         After
