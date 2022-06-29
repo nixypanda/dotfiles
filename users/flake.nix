@@ -35,6 +35,10 @@
       url = "github:bennypowers/nvim-regexplainer";
       flake = false;
     };
+    nvim-lspsaga-src = {
+      url = "github:glepnir/lspsaga.nvim";
+      flake = false;
+    };
   };
   outputs = { self, nur, taffybar, ... }@inputs:
     let
@@ -66,6 +70,10 @@
         nvim-regexplainer = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-regexplainer";
           src = inputs.nvim-regexplainer-src;
+        };
+        nvim-lspsaga = pkgs.vimUtils.buildVimPlugin {
+          name = "nvim-lspsaga";
+          src = inputs.nvim-lspsaga-src;
         };
       };
 

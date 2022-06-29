@@ -180,11 +180,19 @@ end
 -- prettier output for lsp diagnostics/renaming menu/references list/etc
 local saga = require 'lspsaga'
 saga.init_lsp_saga {
+    border_style = "rounded",
+    move_in_saga = { prev = 'k', next = 'j' },
+    diagnostic_header = { " ", " ", "", " " },
+    code_action_icon = " ",
     finder_action_keys = {
         open = '<CR>',
         vsplit = 'v',
         split = 's',
         quit = { 'q', '<Esc>' }
+    },
+    code_action_keys = {
+        quit = { "q", '<Esc>' },
+        exec = "<CR>",
     },
 }
 require 'lspsaga.diagnostic'.show_line_diagnostics()
@@ -196,6 +204,17 @@ vim.diagnostic.config({
     update_in_insert = false,
     severity_sort = false
 })
+
+local diagnostic_symbol_map = {
+    { name = "DiagnosticSignError", symbol = " " },
+    { name = "DiagnosticSignWarn", symbol = " " },
+    { name = "DiagnosticSignInfo", symbol = "" },
+    { name = "DiagnosticSignHint", symbol = " " },
+}
+
+for _, elm in ipairs(diagnostic_symbol_map) do
+    vim.fn.sign_define(elm.name, { texthl = elm.name, text = elm.symbol, numhl = elm.name })
+end
 
 require('lspkind').init({})
 

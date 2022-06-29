@@ -456,6 +456,22 @@
         "type": "github"
       }
     },
+    "nvim-lspsaga-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1656486800,
+        "narHash": "sha256-ikB4pWgl4t9bIM+B+IpiTj5PinE9CfEmfvAGCbcio2A=",
+        "owner": "glepnir",
+        "repo": "lspsaga.nvim",
+        "rev": "0ff3799d85ce6bdb61bf19d356bc08e9fbfcaa46",
+        "type": "github"
+      },
+      "original": {
+        "owner": "glepnir",
+        "repo": "lspsaga.nvim",
+        "type": "github"
+      }
+    },
     "nvim-nu-src": {
       "flake": false,
       "locked": {
@@ -528,6 +544,7 @@
         "nvim-alpha-src": "nvim-alpha-src",
         "nvim-better-digraphs-src": "nvim-better-digraphs-src",
         "nvim-dap-python-src": "nvim-dap-python-src",
+        "nvim-lspsaga-src": "nvim-lspsaga-src",
         "nvim-nu-src": "nvim-nu-src",
         "nvim-regexplainer-src": "nvim-regexplainer-src",
         "nvim-sqls-src": "nvim-sqls-src",

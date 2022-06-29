@@ -122,7 +122,7 @@ in
       nvim-treesitter-textobjects
       nvim-lspconfig
       nvim-regexplainer
-      lspsaga-nvim
+      nvim-lspsaga
       lsp_signature-nvim
       rust-tools-nvim
       symbols-outline-nvim
