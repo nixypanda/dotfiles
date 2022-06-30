@@ -1,36 +1,4 @@
 { config, pkgs, lib, colorscheme, ... }:
-let
-  blackv19 = with pkgs; (black.overrideAttrs (o:
-    rec {
-      pname = "black";
-      version = "19.10b0";
-      src = python3Packages.fetchPypi {
-        inherit pname version;
-        hash = "sha256-wu23Ogjp4Ob2Wg5q8YsFm4sc3VvvmX16Cxgd+T3IFTk=";
-      };
-      propagatedBuildInputs = with python3Packages; [
-        attrs
-        appdirs
-        click
-        toml
-        aiohttp
-        aiohttp-cors
-        pathspec
-        regex
-        typed-ast
-      ];
-      disabledTests = [
-        # requires network access
-        "test_gen_check_output"
-        "test_cache_multiple_files"
-        "test_expression"
-        "test_expression_diff"
-        "test_expression_ff"
-        "test_shhh_click"
-        "test_failed_formatting_does_not_get_cached"
-      ];
-    }));
-in
 {
   home.packages = with pkgs;
     [
@@ -59,7 +27,7 @@ in
       # python
       python3Packages.isort
       nodePackages.pyright
-      blackv19
+      black
 
       # Rust
       rust-analyzer
