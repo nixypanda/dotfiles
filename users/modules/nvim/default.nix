@@ -23,11 +23,15 @@
 
       # Nix
       rnix-lsp
+      deadnix
+      statix
 
       # python
       python3Packages.isort
       nodePackages.pyright
       black
+      python3Packages.flake8
+      mypy
 
       # Rust
       rust-analyzer
@@ -47,10 +51,15 @@
 
       # shit you need to deal with
       nodePackages.bash-language-server
+      shellcheck
       nodePackages.dockerfile-language-server-nodejs
+      hadolint
       nodePackages.vscode-langservers-extracted
       nodePackages.vim-language-server
       nodePackages.yaml-language-server
+      yamllint
+      gitlint
+      taplo-cli
       # This is a cli utility as we can't display all this in cli
       nodePackages.livedown
       pandoc

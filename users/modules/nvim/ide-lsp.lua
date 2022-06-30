@@ -125,13 +125,26 @@ require 'lspconfig'.yamlls.setup {
 }
 
 -- null (Various tools as LSP) Setup
-require "null-ls".setup {
+local null_ls = require("null-ls")
+null_ls.setup {
     sources = {
-        -- python formatting
-        require("null-ls").builtins.formatting.black,
-        require("null-ls").builtins.formatting.isort,
+        -- python
+        null_ls.builtins.formatting.black,
+        null_ls.builtins.formatting.isort,
+        null_ls.builtins.diagnostics.flake8,
+        null_ls.builtins.diagnostics.mypy,
         -- js, html, css, formatting
-        require("null-ls").builtins.formatting.prettier,
+        null_ls.builtins.formatting.prettier,
+        -- nix
+        null_ls.builtins.code_actions.statix,
+        null_ls.builtins.diagnostics.statix,
+        null_ls.builtins.diagnostics.deadnix,
+        -- shell scripting
+        null_ls.builtins.code_actions.shellcheck,
+        -- other
+        null_ls.builtins.diagnostics.gitlint,
+        null_ls.builtins.diagnostics.hadolint,
+        null_ls.builtins.diagnostics.yamllint,
     }
 }
 
