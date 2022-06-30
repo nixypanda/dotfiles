@@ -97,6 +97,7 @@
       fidget-nvim
       nvim-sqls
       crates-nvim
+      null-ls-nvim
       ## Autocompletion setup
       nvim-cmp
       cmp-path

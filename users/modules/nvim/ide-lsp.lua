@@ -42,6 +42,7 @@ require 'lspconfig'.rust_analyzer.setup {
     end
 }
 require 'rust-tools'.setup()
+require('rust-tools.inlay_hints').set_inlay_hints()
 require 'crates'.setup()
 
 -- SQL
@@ -123,23 +124,14 @@ require 'lspconfig'.yamlls.setup {
     }
 }
 
--- EFM (Various Commands as LSP) Setup
-require "lspconfig".efm.setup {
-    init_options = { documentFormatting = true },
-    filetypes = { "css", "html", "json", "python", "markdown" },
-    settings = {
-        rootMarkers = { ".git/" },
-        languages = {
-            css = { { formatCommand = "prettier --parser css" } },
-            scss = { { formatCommand = "prettier --parser scss" } },
-            json = { { formatCommand = "prettier --parser json" } },
-            html = { { formatCommand = "prettier --parser html" } },
-            markdown = { { formatCommand = 'pandoc -f markdown -t gfm -sp --tab-stop=2' } },
-            python = {
-                { formatCommand = "isort --quiet -", formatStdin = true },
-                { formatCommand = "black --quiet -", formatStdin = true }
-            }
-        }
+-- null (Various tools as LSP) Setup
+require "null-ls".setup {
+    sources = {
+        -- python formatting
+        require("null-ls").builtins.formatting.black,
+        require("null-ls").builtins.formatting.isort,
+        -- js, html, css, formatting
+        require("null-ls").builtins.formatting.prettier,
     }
 }
 
