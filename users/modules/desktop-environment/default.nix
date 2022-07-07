@@ -27,11 +27,11 @@ let
   '';
 
   custom-browsermediacontrol =
-    (import ./browser-media-control/default.nix) { pkgs = pkgs; };
+    (import ./browser-media-control/default.nix) { inherit pkgs; };
   custom-weather-cli =
-    (import ./weather-cli/default.nix) { pkgs = pkgs; };
+    (import ./weather-cli/default.nix) { inherit pkgs; };
   custom-taffybar =
-    (import ./taffybar/default.nix) { pkgs = pkgs; };
+    (import ./taffybar/default.nix) { inherit pkgs; };
 in
 {
   home.packages = with pkgs; [

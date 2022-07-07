@@ -18,10 +18,10 @@
       inherit self nixpkgs;
       name = "Taffybar Dev environment";
       # overlay = taffybar.overlay;
-      shell = ({ pkgs ? import <nixpkgs> }:
+      shell = { pkgs ? import <nixpkgs> }:
         pkgs.mkShell {
           buildInputs = with pkgs; [ (ghc.withPackages haskellDeps) ];
-        });
+        };
     };
 }
 

@@ -71,7 +71,7 @@
     defaultKeymap = "viins";
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
-    shellAliases = (import ./zsh/aliases.nix);
+    shellAliases = import ./zsh/aliases.nix;
     history.extended = true;
     oh-my-zsh = {
       enable = true;

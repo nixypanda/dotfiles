@@ -1,5 +1,5 @@
 let
-  utils = (import ./utils.nix);
+  utils = import ./utils.nix;
 in
 rec {
   name = "onedark";

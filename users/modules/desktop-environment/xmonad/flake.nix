@@ -16,12 +16,11 @@
       ];
     in
     flake-utils.lib.simpleFlake {
-      inherit self nixpkgs;
+      inherit self nixpkgs taffybar;
       name = "XMonad Dev environment";
-      overlay = taffybar.overlay;
-      shell = ({ pkgs ? import <nixpkgs> }:
+      shell = { pkgs ? import <nixpkgs> }:
         pkgs.mkShell {
           buildInputs = with pkgs; [ (ghc.withPackages haskellDeps) ];
-        });
+        };
     };
 }

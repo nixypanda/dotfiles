@@ -116,10 +116,10 @@
             {
               # NOTE: Here we are injecting colorscheme so that it is passed down all the imports
               _module.args = {
-                colorscheme = (import ./colorschemes/tokyonight.nix);
+                colorscheme = import ./colorschemes/tokyonight.nix;
               };
 
-              nixpkgs.config.allowUnfreePredicate = (unfreePredicate lib);
+              nixpkgs.config.allowUnfreePredicate = unfreePredicate lib;
               nixpkgs.overlays = overlays;
 
               # Let Home Manager install and manage itself.
@@ -147,12 +147,12 @@
             {
               # NOTE: Here we are injecting colorscheme so that it is passed down all the imports
               _module.args = {
-                colorscheme = (import ./colorschemes/tokyonight.nix);
+                colorscheme = import ./colorschemes/tokyonight.nix;
               };
               xdg.configFile."nix/nix.conf".text = ''
                 experimental-features = nix-command flakes ca-references
               '';
-              nixpkgs.config.allowUnfreePredicate = (unfreePredicate lib);
+              nixpkgs.config.allowUnfreePredicate = unfreePredicate lib;
               nixpkgs.overlays = overlays;
 
               # Let Home Manager install and manage itself.
