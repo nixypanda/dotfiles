@@ -37,6 +37,8 @@
 
     # benchmarking
     httperf
+
+    arandr
   ];
 
   programs.bat = {

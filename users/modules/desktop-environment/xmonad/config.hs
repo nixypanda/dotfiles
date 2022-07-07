@@ -85,7 +85,6 @@ myConfig =
       startupHook = myStartupHook,
       manageHook = myManageHook,
       layoutHook = myLayoutModifiers myTogglableLayouts,
-      workspaces = myWorkspaces,
       handleEventHook = handleEventHook def,
       -- NOTE: Injected using nix strings.
       -- Think about parsing colorscheme.nix file in some way
@@ -94,11 +93,7 @@ myConfig =
       borderWidth = 3
     }
     -- NOTE: Ordering matters here
-    `removeKeys` keysToRemove
     `additionalKeys` keysToAdd
-
-myWorkspaces :: [String]
-myWorkspaces = ["a", "s", "d", "f", "u", "i", "o", "p"]
 
 myModMask :: KeyMask
 myModMask = mod1Mask
@@ -147,31 +142,21 @@ openPowerMenu =
       "powermenu-poweroff"
     ]
 
-keysToRemove :: [(KeyMask, KeySym)]
-keysToRemove = defaultWorkSpaceSwitchBinding ++ defaultWorkSpaceWindowMoveBinding
-  where
-    defaultWorkSpaceWindowMoveBinding =
-      [(myModMask .|. shiftMask, n) | n <- [xK_1 .. xK_9]]
-    defaultWorkSpaceSwitchBinding =
-      [(myModMask, n) | n <- [xK_1 .. xK_9]]
-
 keysToAdd :: [((KeyMask, KeySym), X ())]
 keysToAdd =
   launchers
     ++ multimediaKeys
-    ++ workspaceSetup
-    ++ workspaceWindowMoveSetup
     ++ layoutRelated
   where
     launchers =
       [ ( (myModMask, xK_Return),
           spawn "rofi -show drun -theme grid"
         ),
-        ( (myModMask, xK_e),
+        ( (myModMask .|. controlMask, xK_p),
           spawn openPowerMenu
         ),
         ( (myModMask .|. shiftMask, xK_l),
-          spawn "i3lock-fancy -t \"\""
+          spawn "betterlockscreen --wall --blur -l"
         ),
         ( (myModMask .|. shiftMask, xK_space),
           spawn $ myTerminal ++ " -d \"$(xcwd)\""
@@ -191,19 +176,6 @@ keysToAdd =
         ( (myModMask .|. shiftMask, xK_w),
           spawn openWidgetsPanel
         )
-      ]
-
-    workspaceKeyAndIdentifiers =
-      zip myWorkspaces [xK_a, xK_s, xK_d, xK_f, xK_u, xK_i, xK_o, xK_p]
-
-    workspaceSetup =
-      [ ((myModMask, key), windows $ greedyView identifier)
-        | (identifier, key) <- workspaceKeyAndIdentifiers
-      ]
-
-    workspaceWindowMoveSetup =
-      [ ((shiftMask .|. myModMask, key), windows $ shift identifier)
-        | (identifier, key) <- workspaceKeyAndIdentifiers
       ]
 
     multimediaKeys =

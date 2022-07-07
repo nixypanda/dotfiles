@@ -87,7 +87,7 @@
     autoRepeatInterval = 20;
 
     displayManager.sessionCommands = ''
-      xrandr --output DisplayPort-1 --mode 3840x2160 --scale 0.70x0.70
+      xrandr --output DisplayPort-0 --mode 3840x2160 --scale 0.70x0.70 --output DisplayPort-1 --mode 2560x1440 --rotate left --left-of DisplayPort-0
     '';
 
     desktopManager.session = [

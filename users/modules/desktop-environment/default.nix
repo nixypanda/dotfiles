@@ -35,9 +35,6 @@ let
 in
 {
   home.packages = with pkgs; [
-    # Screen Locker
-    i3lock-fancy
-
     # Theming (GTK)
     lxappearance
     dracula-theme
@@ -157,6 +154,10 @@ in
     theme = { name = colorscheme.gtk-name; };
   };
 
+  services.betterlockscreen = {
+    enable = true;
+  };
+
   services.random-background = {
     enable = true;
     imageDirectory = "%h/Pictures/backgrounds/${colorscheme.name}";
@@ -204,12 +205,12 @@ in
     timers = [
       {
         delay = 240;
-        command = "${pkgs.notify-desktop}/bin/notify-desktop --app-name=i3lock-fancy --urgency=critical \"Locking screen in 1 min\"";
-        canceller = "${pkgs.notify-desktop}/bin/notify-desktop --app-name=i3lock-fancy \"Locking screen cancelled\"";
+        command = "${pkgs.notify-desktop}/bin/notify-desktop --app-name=betterlockscreen --urgency=critical \"Locking screen in 1 min\"";
+        canceller = "${pkgs.notify-desktop}/bin/notify-desktop --app-name=betterlockscreen \"Locking screen cancelled\"";
       }
       {
         delay = 60;
-        command = "${pkgs.i3lock-fancy}/bin/i3lock-fancy";
+        command = "${pkgs.betterlockscreen}/bin/betterlockscreen --wall blur -l";
       }
       {
         delay = 240 + 1200;
