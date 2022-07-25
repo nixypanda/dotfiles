@@ -411,11 +411,11 @@
     "nvim-alpha-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1655146893,
-        "narHash": "sha256-PAoh2euAICg6NMkHZNNJ/DzTUtSoRp0nk98/ajYxiHA=",
+        "lastModified": 1658591867,
+        "narHash": "sha256-7WBfJ0jTroFTrKVP0bLZtv3bCVWGBT/W2jBZFJiUioE=",
         "owner": "goolord",
         "repo": "alpha-nvim",
-        "rev": "ef27a59e5b4d7b1c2fe1950da3fe5b1c5f3b4c94",
+        "rev": "d688f46090a582be8f9d7b70b4cf999b780e993d",
         "type": "github"
       },
       "original": {
@@ -443,11 +443,11 @@
     "nvim-dap-python-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1653160590,
-        "narHash": "sha256-7xkzbaTs7QPTGuTGWstVqR4B/29Uvl0JMY4W+uX38go=",
+        "lastModified": 1657265025,
+        "narHash": "sha256-E8JnKdju+gi5bVkGmxhTvG6BqCmi0Yu2wpba1Qj/TN8=",
         "owner": "mfussenegger",
         "repo": "nvim-dap-python",
-        "rev": "2911f31f0ac830b95112a642a0fccd2b1a5d967a",
+        "rev": "cc6732ab33a84b3a6b4300fcda5b2f837851b88e",
         "type": "github"
       },
       "original": {
@@ -459,11 +459,11 @@
     "nvim-lspsaga-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1656486800,
-        "narHash": "sha256-ikB4pWgl4t9bIM+B+IpiTj5PinE9CfEmfvAGCbcio2A=",
+        "lastModified": 1658650654,
+        "narHash": "sha256-k55uswlk/Vfb+6C0b0dEjHjZOgnDUeX2DExncf01AkE=",
         "owner": "glepnir",
         "repo": "lspsaga.nvim",
-        "rev": "0ff3799d85ce6bdb61bf19d356bc08e9fbfcaa46",
+        "rev": "16f1007df58a35d916b718aff7cd0dae1a3e6c51",
         "type": "github"
       },
       "original": {
@@ -491,11 +491,11 @@
     "nvim-regexplainer-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1650446856,
-        "narHash": "sha256-AXPTE6uPhMAVUMEXb7BCwGba2YqNg51PxBFFYLoW04g=",
+        "lastModified": 1657877546,
+        "narHash": "sha256-BQXKAYSetDxJF0BNwyaGM+jIywOcWNADySJqWQ9qsaY=",
         "owner": "bennypowers",
         "repo": "nvim-regexplainer",
-        "rev": "e9900b464bd6083afe22755858b0b5c27d7a3bb4",
+        "rev": "211d096308ae5d5921a9a0ae27f69220557ccc2f",
         "type": "github"
       },
       "original": {
@@ -507,11 +507,11 @@
     "nvim-sqls-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1652904528,
-        "narHash": "sha256-5+MTd0RmYX065UzwKN+HvtOoGnQsM5S1D1Oh79gGF7A=",
+        "lastModified": 1657291129,
+        "narHash": "sha256-tatUEAI8EVXDYQPAAZ5+38YOPWb8Ei9VHCzHp+AyRjc=",
         "owner": "nanotee",
         "repo": "sqls.nvim",
-        "rev": "6592b0cb7fb52746c7650d19a66ac60ff0f9ba08",
+        "rev": "a0048b7018c99b68456f91b4aa42ce288f0c0774",
         "type": "github"
       },
       "original": {
@@ -541,15 +541,8 @@
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",
         "nur": "nur",
-        "nvim-alpha-src": "nvim-alpha-src",
-        "nvim-better-digraphs-src": "nvim-better-digraphs-src",
-        "nvim-dap-python-src": "nvim-dap-python-src",
-        "nvim-lspsaga-src": "nvim-lspsaga-src",
-        "nvim-nu-src": "nvim-nu-src",
-        "nvim-regexplainer-src": "nvim-regexplainer-src",
-        "nvim-sqls-src": "nvim-sqls-src",
-        "nvim-yuck-src": "nvim-yuck-src",
-        "taffybar": "taffybar"
+        "taffybar": "taffybar",
+        "vim-plugins": "vim-plugins"
       }
     },
     "status-notifier-item": {
@@ -608,6 +601,27 @@
         "owner": "numtide",
         "repo": "flake-utils",
         "type": "github"
+      }
+    },
+    "vim-plugins": {
+      "inputs": {
+        "nvim-alpha-src": "nvim-alpha-src",
+        "nvim-better-digraphs-src": "nvim-better-digraphs-src",
+        "nvim-dap-python-src": "nvim-dap-python-src",
+        "nvim-lspsaga-src": "nvim-lspsaga-src",
+        "nvim-nu-src": "nvim-nu-src",
+        "nvim-regexplainer-src": "nvim-regexplainer-src",
+        "nvim-sqls-src": "nvim-sqls-src",
+        "nvim-yuck-src": "nvim-yuck-src"
+      },
+      "locked": {
+        "narHash": "sha256-wmKFTaz0M/oK2z/Xbs3Gch95xprGfJnpuf8q5gydYU4=",
+        "path": "./users/modules/nvim/plugins",
+        "type": "path"
+      },
+      "original": {
+        "path": "./users/modules/nvim/plugins",
+        "type": "path"
       }
     }
   },
