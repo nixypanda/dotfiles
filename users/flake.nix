@@ -9,100 +9,99 @@
     # relative path is defined accordingly. This has potential of causing issues.
     vim-plugins.url = "path:./users/modules/nvim/plugins";
   };
-  outputs = { self, nur, taffybar, vim-plugins, ... }@inputs:
+  outputs = { self, nur, taffybar, vim-plugins, nixpkgs, home-manager }:
     let
-      overlays = [
-        nur.overlay
-        taffybar.overlay
-        vim-plugins.overlay
-      ];
-
-      unfreePredicate = lib: pkg: builtins.elem (lib.getName pkg) [
-        "zoom"
-        "slack"
-        "ngrok"
-        "discord"
-        "unrar"
-      ];
-
-      common_modules = [
-        ./modules/alacritty.nix
-        ./modules/cli
-        ./modules/fonts.nix
-        ./modules/git.nix
-        ./modules/kitty.nix
-        ./modules/nvim
-        ./modules/programming.nix
-        ./modules/system-management
-        ./modules/work.nix
-      ];
-
-      home-linux = { lib, pkgs, ... }:
+      home-common = { pkgs, lib, ... }:
         {
           # NOTE: Here we are injecting colorscheme so that it is passed down all the imports
           _module.args = {
             colorscheme = import ./colorschemes/tokyonight.nix;
           };
 
-          nixpkgs.config.allowUnfreePredicate = unfreePredicate lib;
-          nixpkgs.overlays = overlays;
+          nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+            "zoom"
+            "slack"
+            "ngrok"
+            "discord"
+            "unrar"
+          ];
+
+          nixpkgs.overlays = [
+            nur.overlay
+            taffybar.overlay
+            vim-plugins.overlay
+          ];
 
           # Let Home Manager install and manage itself.
           programs.home-manager.enable = true;
+          home.stateVersion = "22.05";
 
-          imports = common_modules ++ [
-            ./modules/browser.nix
-            ./modules/desktop-environment
-            ./modules/media.nix
-          ];
-
-          # Packages that don't fit in the modules that we have
-          home.packages = with pkgs; [
-            discord
-            p3x-onenote
+          imports = [
+            ./modules/alacritty.nix
+            ./modules/cli
+            ./modules/fonts.nix
+            ./modules/git.nix
+            ./modules/kitty.nix
+            ./modules/nvim
+            ./modules/programming.nix
+            ./modules/productivity.nix
+            ./modules/social.nix
+            ./modules/system-management
+            ./modules/work.nix
           ];
         };
 
-      home-macbook = { lib, pkgs, ... }:
+      home-macbook = { pkgs, ... }:
         {
-          # NOTE: Here we are injecting colorscheme so that it is passed down all the imports
-          _module.args = {
-            colorscheme = import ./colorschemes/tokyonight.nix;
-          };
           xdg.configFile."nix/nix.conf".text = ''
             experimental-features = nix-command flakes ca-references
           '';
-          nixpkgs.config.allowUnfreePredicate = unfreePredicate lib;
-          nixpkgs.overlays = overlays;
-
-          # Let Home Manager install and manage itself.
-          programs.home-manager.enable = true;
-
-          home.packages = with pkgs; [
-            docker
-          ];
-
-          imports = common_modules ++ [
+          home.homeDirectory = "/Users/sherubthakur";
+          home.username = "sherubthakur";
+          imports = [
             ./modules/tmux.nix
+          ];
+        };
+
+      home-linux = { pkgs, ... }:
+        {
+          home.homeDirectory = "/home/sherub";
+          home.username = "sherub";
+          imports = [
+            ./modules/browser.nix
+            ./modules/desktop-environment
+            ./modules/media.nix
           ];
         };
 
     in
     {
       homeConfigurations = {
-        nixos = inputs.home-manager.lib.homeManagerConfiguration {
-          system = "x86_64-linux";
-          homeDirectory = "/home/sherub";
-          username = "sherub";
-          configuration = home-linux;
-        };
+        nixos =
+          let
+            system = "x86_64-linux";
+            pkgs = nixpkgs.legacyPackages.${system};
+          in
+          home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            modules = [
+              home-common
+              home-linux
+            ];
+          };
 
-        macbook-pro = inputs.home-manager.lib.homeManagerConfiguration {
-          system = "x86_64-darwin";
-          homeDirectory = "/Users/sherubthakur";
-          username = "sherubthakur";
-          configuration = home-macbook;
-        };
+        macbook-pro =
+          let
+            system = "x86_64-darwin";
+            pkgs = nixpkgs.legacyPackages.${system};
+          in
+          home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            modules = [
+              home-common
+              home-macbook
+            ];
+          };
       };
     };
 }

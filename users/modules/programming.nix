@@ -7,6 +7,9 @@
     # Clojure
     clojure
 
+    # docker
+    docker
+
     # go
     go
 
