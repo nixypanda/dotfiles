@@ -170,7 +170,7 @@ vim.api.nvim_set_keymap('n', '<C-d>',
 
 -- AUTO FORMATTING
 
-for _, file_pattern in ipairs({ "*.rs", "*.hs", "*.py", "*.lua", "*.nix" }) do
+for _, file_pattern in ipairs({ "*.rs", "*.hs", "*.py", "*.lua", "*.nix", "*.tf" }) do
     vim.api.nvim_create_autocmd(
         'BufWritePre',
         {
