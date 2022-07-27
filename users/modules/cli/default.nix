@@ -14,7 +14,6 @@
     act
     fx
     dua
-    procs
     hexyl
     nix-du
     graphviz
