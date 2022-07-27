@@ -2,13 +2,28 @@
   description = "Home manager flake";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    home-manager.url = "github:nix-community/home-manager";
-    darwin.url = "github:LnL7/nix-darwin";
-    nur.url = "github:nix-community/NUR";
-    taffybar.url = "github:sherubthakur/taffybar";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    taffybar = {
+      url = "github:sherubthakur/taffybar";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # Applying the configuration happens from the .dotfiles directory so the
     # relative path is defined accordingly. This has potential of causing issues.
-    vim-plugins.url = "path:./users/modules/nvim/plugins";
+    vim-plugins = {
+      url = "path:./users/modules/nvim/plugins";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = { self, nur, taffybar, vim-plugins, nixpkgs, home-manager, darwin }:
     let
