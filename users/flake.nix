@@ -3,13 +3,14 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager";
+    darwin.url = "github:LnL7/nix-darwin";
     nur.url = "github:nix-community/NUR";
     taffybar.url = "github:sherubthakur/taffybar";
     # Applying the configuration happens from the .dotfiles directory so the
     # relative path is defined accordingly. This has potential of causing issues.
     vim-plugins.url = "path:./users/modules/nvim/plugins";
   };
-  outputs = { self, nur, taffybar, vim-plugins, nixpkgs, home-manager }:
+  outputs = { self, nur, taffybar, vim-plugins, nixpkgs, home-manager, darwin }:
     let
       home-common = { pkgs, lib, ... }:
         {
@@ -124,6 +125,23 @@
             modules = [
               home-common
               home-macbook
+            ];
+          };
+      };
+      # WARN: The intent here is to only use brew and nothing else.
+      # I have no idea what I am doing here. This setup is making using of
+      # nix-darwin which apperently has brew. Brew can be a potent practical
+      # fallback when the nix world is not so great no macos.
+      darwinConfigurations = {
+        "Sherubs-MacBook-Pro-2" =
+          let
+            system = "x86_64-darwin";
+            pkgs = nixpkgs.legacyPackages.${system};
+          in
+          darwin.lib.darwinSystem {
+            inherit pkgs;
+            modules = [
+              ./modules/homebrew.nix
             ];
           };
       };

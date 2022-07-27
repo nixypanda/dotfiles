@@ -17,9 +17,11 @@ export NVIM_TUI_ENABLE_TRUE_COLOR=1
 export EDITOR="nvim"
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
-# export SSL_CERT_FILE=~/.nix-profile/etc/ssl/certs/ca-bundle.crt
+export SSL_CERT_FILE=~/.nix-profile/etc/ssl/certs/ca-bundle.crt
 
-export PATH="$HOME/.local/bin:$HOME/.nix-profile/bin:$PATH"
+# /usr/local/bin is mac specific and where brew installs stuff. As we are
+# making use of brew as fallback so we need to add it
+export PATH="$HOME/.local/bin:$HOME/.nix-profile/bin:/usr/local/bin:$PATH"
 # Add python site-packages to path
 export NIX_PATH="$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH"
 export FPATH=~/.nix-profile/share/zsh/site-functions:$FPATH
