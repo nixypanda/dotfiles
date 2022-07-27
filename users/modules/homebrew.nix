@@ -7,5 +7,5 @@
 
   homebrew.taps = [ "homebrew/core" "homebrew/cask" "homebrew/cask-drivers" ];
   homebrew.casks = [ "google-chrome" "chromium" ];
-  homebrew.brews = [ ];
+  homebrew.brews = [ "ltex-ls" ];
 }

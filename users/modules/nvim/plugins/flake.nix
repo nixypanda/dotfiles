@@ -33,6 +33,10 @@
       url = "github:glepnir/lspsaga.nvim";
       flake = false;
     };
+    nvim-headlines-src = {
+      url = "github:lukas-reineke/headlines.nvim";
+      flake = false;
+    };
   };
   outputs = inputs:
     let
@@ -69,10 +73,14 @@
           name = "nvim-lspsaga";
           src = inputs.nvim-lspsaga-src;
         };
+        nvim-headlines = pkgs.vimUtils.buildVimPlugin {
+          name = "nvim-headlines";
+          src = inputs.nvim-headlines-src;
+        };
       };
     in
     {
-      overlay = final: prev: {
+      overlay = _final: prev: {
         vimPlugins = prev.vimPlugins // (missingVimPluginsInNixpkgs prev.pkgs);
       };
 

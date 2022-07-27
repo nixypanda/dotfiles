@@ -124,10 +124,18 @@ require 'lspconfig'.yamlls.setup {
     }
 }
 
+-- Grammer
+require 'lspconfig'.ltex.setup {}
+
 -- null (Various tools as LSP) Setup
 local null_ls = require("null-ls")
 null_ls.setup {
     sources = {
+        -- grammer
+        null_ls.builtins.diagnostics.vale,
+        -- markdown
+        null_ls.builtins.diagnostics.markdownlint,
+        null_ls.builtins.formatting.markdownlint,
         -- python
         null_ls.builtins.formatting.black,
         null_ls.builtins.formatting.isort,
@@ -170,7 +178,7 @@ vim.api.nvim_set_keymap('n', '<C-d>',
 
 -- AUTO FORMATTING
 
-for _, file_pattern in ipairs({ "*.rs", "*.hs", "*.py", "*.lua", "*.nix", "*.tf" }) do
+for _, file_pattern in ipairs({ "*.rs", "*.hs", "*.py", "*.lua", "*.md", "*.nix", "*.tf" }) do
     vim.api.nvim_create_autocmd(
         'BufWritePre',
         {

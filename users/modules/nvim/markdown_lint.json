@@ -1,0 +1,6 @@
+{
+  "MD033": {
+    // Allowed elements
+    "allowed_elements": ["summary", "details"]
+  }
+}

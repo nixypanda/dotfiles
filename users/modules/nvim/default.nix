@@ -8,6 +8,9 @@
       elmPackages.elm-test
       elmPackages.elm-format
 
+      # grammer
+      vale
+
       # Go
       gopls
 
@@ -20,6 +23,9 @@
       # lua
       luaformatter
       sumneko-lua-language-server
+
+      # Markdown
+      nodePackages.markdownlint-cli
 
       # Nix
       rnix-lsp
@@ -67,6 +73,8 @@
     ] ++ (if pkgs.stdenv.isLinux then [
       # Depends on pygls which does not build on darwin
       cmake-language-server
+      # Not available on mac using brew to install it
+      ltex-ls
     ] else [
 
     ]);
@@ -87,6 +95,7 @@
       nvim-alpha
       nvim-colorizer-lua
       tokyonight-nvim
+      nvim-headlines
 
       # Programming
       which-key-nvim
@@ -186,4 +195,6 @@
       EOF
     '';
   };
+  home.file.".vale.ini".source = ./vale.ini;
+  home.file.".markdownlintrc".source = ./markdown_lint.json;
 }

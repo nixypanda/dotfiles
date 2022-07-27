@@ -14,6 +14,8 @@ for _, elm in ipairs(file_syntax_map) do
     })
 end
 
+require("headlines").setup()
+
 -- This is a very specific setting which sets the color of border to be the
 -- dark background of the tokyonight theme. This is done because we want to
 -- have a seemless split between the filetree plugin and the buffer. As a side
