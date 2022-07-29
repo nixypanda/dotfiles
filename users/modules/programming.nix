@@ -17,6 +17,7 @@
     ghc
     haskellPackages.cabal-install
     haskellPackages.stack
+    cabal2nix
 
     # JavaScript
     nodejs
