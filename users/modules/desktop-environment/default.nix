@@ -110,6 +110,8 @@ in
       "${pkgs.plasma-browser-integration}/etc/chromium/native-messaging-hosts"
     ];
   };
+  home.file.".mozilla/native-messaging-hosts/org.kde.plasma.browser_integration.json".source =
+    "${pkgs.plasma-browser-integration}/lib/mozilla/native-messaging-hosts/org.kde.plasma.browser_integration.json";
 
   home.file.".config/taffybar/taffybar.css".source = ./taffybar/taffybar.css;
   home.file.".config/taffybar/colors.css".text = ''
@@ -166,8 +168,8 @@ in
 
   services.picom = {
     enable = true;
-    inactiveOpacity = 0.90;
-    activeOpacity = 0.95;
+    inactiveOpacity = 0.98;
+    activeOpacity = 1.00;
     experimentalBackends = true;
     opacityRules = [
       "100:class_g   *?= 'Google-chrome'"

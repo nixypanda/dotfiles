@@ -40,6 +40,10 @@
             "ngrok"
             "discord"
             "unrar"
+            # browser extensions
+            "onepassword-password-manager"
+            "grammarly"
+            "okta-browser-plugin"
           ];
 
           nixpkgs.overlays = [
