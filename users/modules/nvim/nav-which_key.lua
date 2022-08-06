@@ -87,8 +87,13 @@ local mappings = {
         c = {
             name = "+Conflict Resolution",
             s = { "<cmd>Gdiffsplit!<cr>", "Start" },
-            h = { "<cmd>diffget //2<cr>", "Get hunk from left" },
-            l = { "<cmd>diffget //3<cr>", "Get hunk from right" },
+            -- Fugitive follows a consistent naming convention when creating
+            -- buffers for the target and merge versions of a conflicted file.
+            -- The parent file from the target branch always includes the
+            -- string //2, while the parent from the merge branch always
+            -- contains //3.
+            h = { "<cmd>diffget //2<cr>", "Get hunk from left (target)" },
+            l = { "<cmd>diffget //3<cr>", "Get hunk from right (merge)" },
             f = { "<cmd>Gwrite!<cr>", "Finish" }
         }
     },
@@ -129,12 +134,12 @@ local mappings = {
         c = { "<cmd>Telescope command_history<cr>", "Previous commands" },
         C = { "<cmd>Telescope commands<cr>", "Available commands" },
         f = { "<cmd>Telescope find_files<cr>", "Find File" },
-        h = { "<cmd>CheatSheet<cr>", "Help Tags" },
+        h = { "<cmd>Cheatsheet<cr>", "Help Tags" },
         H = { "<cmd>Telescope help_tags<cr>", "Help Tags" },
+        j = { "<cmd>Telescope jumplist<cr>", "Jump List" },
         m = { "<cmd>Telescope marks<cr>", "Marks" },
-        M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
         p = { "<cmd>Telescope projects<cr>", "Projects" },
-        r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
+        r = { "<cmd>Telescope resume<cr>", "Goto last search state" },
         R = { "<cmd>Telescope registers<cr>", "Registers" },
         t = { "<cmd>Telescope live_grep<cr>", "Text" },
         T = { "<cmd>TodoTelescope<cr>", "Todos" }
