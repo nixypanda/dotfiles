@@ -10,6 +10,10 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixpkgs-firefox-darwin = {
+      url = "github:bandithedoge/nixpkgs-firefox-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,7 +29,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { self, nur, taffybar, vim-plugins, nixpkgs, home-manager, darwin }:
+  outputs = { self, nur, taffybar, vim-plugins, nixpkgs, home-manager, darwin, nixpkgs-firefox-darwin }:
     let
       home-common = { pkgs, lib, ... }:
         {
@@ -50,6 +54,7 @@
             nur.overlay
             taffybar.overlay
             vim-plugins.overlay
+            nixpkgs-firefox-darwin.overlay
           ];
 
           # Let Home Manager install and manage itself.
@@ -58,6 +63,7 @@
 
           imports = [
             ./modules/alacritty.nix
+            ./modules/browser.nix
             ./modules/cli
             ./modules/fonts.nix
             ./modules/git.nix
@@ -112,7 +118,6 @@
           home.homeDirectory = "/home/sherub";
           home.username = "sherub";
           imports = [
-            ./modules/browser.nix
             ./modules/desktop-environment
             ./modules/media.nix
           ];

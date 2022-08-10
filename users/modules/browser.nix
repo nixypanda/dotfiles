@@ -1,38 +1,8 @@
 { config, pkgs, libs, ... }:
-let
-  one-password-id = "aeblfdkhhhdcdjpifhhbdiojplfjncoa";
-  adblock-id = "gighmmpiobklfepjocnamgkkbiglidom";
-  dark-reader-id = "eimadpbcbfnmbkopoojfekhnkhdbieeh";
-  vimium-id = "dbepggeogbaibhgnhhndojpepiihcmeb";
-  octotree-id = "bkhaagjahfmjljalopjnoealnfndnagc";
-  plasma-integration-id = "cimiefiiaegbelhefglklhhakcgmhkai";
-  keepa-id = "neebplgakaahbhdphmkckjjcegoiijjo"; # Amazon price tracker
-  grammerly-id = "kbfnbcaeplbcioakkpcpgfkobkghlhen";
-  return-youtube-dislikes = "gebbhagfogifgggkldgodflihgfeippi";
-  pocket-tube-id = "kdmnjgijlmjgmimahnillepgcgeemffb"; # Youtube subscription manager
-  okta-id = "glnpjglilkicbckjpbgcfkogebgllemb";
-  unhook-id = "khncfooichmfjbepaaaebmommgaepoid";
-in
 {
-  programs.chromium = {
-    enable = true;
-    extensions = [
-      { id = one-password-id; }
-      { id = adblock-id; }
-      { id = dark-reader-id; }
-      { id = vimium-id; }
-      { id = octotree-id; }
-      { id = plasma-integration-id; }
-      { id = keepa-id; }
-      { id = grammerly-id; }
-      { id = return-youtube-dislikes; }
-      { id = pocket-tube-id; }
-      { id = okta-id; }
-      { id = unhook-id; }
-    ];
-  };
   programs.firefox = {
     enable = true;
+    package = if pkgs.stdenv.isLinux then pkgs.firefox-unwrapped else pkgs.firefox-bin;
     extensions = with pkgs.nur.repos.rycee.firefox-addons; [
       onepassword-password-manager
       ublock-origin
