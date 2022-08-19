@@ -2,7 +2,7 @@
 {
   programs.firefox = {
     enable = true;
-    package = if pkgs.stdenv.isLinux then pkgs.firefox-unwrapped else pkgs.firefox-bin;
+    package = if pkgs.stdenv.isLinux then pkgs.firefox else pkgs.firefox-bin;
     extensions = with pkgs.nur.repos.rycee.firefox-addons; [
       # return-youtube-dislikes
       clearurls

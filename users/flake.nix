@@ -54,7 +54,6 @@
             nur.overlay
             taffybar.overlay
             vim-plugins.overlay
-            nixpkgs-firefox-darwin.overlay
           ];
 
           # Let Home Manager install and manage itself.
@@ -79,6 +78,10 @@
 
       home-macbook = { config, pkgs, lib, ... }:
         {
+          # Hack: Firefox does not work on mac so we have to depend on an overlay.
+          nixpkgs.overlays = [
+            nixpkgs-firefox-darwin.overlay
+          ];
           home.homeDirectory = "/Users/sherubthakur";
           home.username = "sherubthakur";
           imports = [
