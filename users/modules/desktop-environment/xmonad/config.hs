@@ -9,6 +9,7 @@ import XMonad.Hooks.EwmhDesktops (ewmh, ewmhFullscreen)
 import XMonad.Hooks.InsertPosition (Focus (Newer), Position (End), insertPosition)
 import XMonad.Hooks.ManageDocks (AvoidStruts, avoidStruts, docks, manageDocks)
 import XMonad.Hooks.ManageHelpers (doFullFloat)
+import XMonad.Layout.Accordion (Accordion (Accordion))
 import XMonad.Layout.Gaps
   ( Direction2D (D, L, R, U),
     GapMessage (ModifyGaps, ToggleGaps),
@@ -16,6 +17,7 @@ import XMonad.Layout.Gaps
     Gaps,
     gaps,
   )
+import XMonad.Layout.Grid (Grid (Grid, GridRatio))
 import XMonad.Layout.LayoutModifier (ModifiedLayout (ModifiedLayout))
 import XMonad.Layout.MultiToggle
   ( EOT,
@@ -31,6 +33,7 @@ import XMonad.Layout.NoBorders
     ConfigurableBorder,
     lessBorders,
   )
+import XMonad.Layout.PerScreen (PerScreen, ifWider)
 import XMonad.Layout.Spacing
   ( Border (Border),
     Spacing (Spacing),
@@ -47,12 +50,8 @@ import XMonad.Layout.Spacing
     windowBorder,
     windowBorderEnabled,
   )
-import XMonad.Layout.ThreeColumns
-  ( ThreeCol (ThreeCol),
-    threeColDelta,
-    threeColFrac,
-    threeColNMaster,
-  )
+import XMonad.Layout.ThreeColumns (ThreeCol (ThreeCol, threeColDelta, threeColFrac, threeColNMaster))
+import XMonad.Layout.TwoPanePersistent (TwoPanePersistent (TwoPanePersistent, dFrac, mFrac, slaveWin))
 import XMonad.StackSet
   ( RationalRect (RationalRect),
     current,
@@ -76,24 +75,25 @@ import XMonad.Util.NamedScratchpad
 
 main :: IO ()
 main = do
-  xmonad . docks . ewmh . ewmhFullscreen . pagerHints $ myConfig
+  xmonad myConfig
 
 myConfig :: XConfig (MyLayoutModifiers MyTogglableLayouts)
 myConfig =
-  def
-    { terminal = myTerminal,
-      startupHook = myStartupHook,
-      manageHook = myManageHook,
-      layoutHook = myLayoutModifiers myTogglableLayouts,
-      handleEventHook = handleEventHook def,
-      -- NOTE: Injected using nix strings.
-      -- Think about parsing colorscheme.nix file in some way
-      focusedBorderColor = myFocusedBorderColor,
-      normalBorderColor = myNormalBorderColor,
-      borderWidth = 3
-    }
-    -- NOTE: Ordering matters here
-    `additionalKeys` keysToAdd
+  docks . ewmh . ewmhFullscreen . pagerHints $
+    def
+      { terminal = myTerminal,
+        startupHook = myStartupHook,
+        manageHook = myManageHook,
+        layoutHook = myLayoutModifiers myTogglableLayouts,
+        handleEventHook = handleEventHook def,
+        -- NOTE: Injected using nix strings.
+        -- Think about parsing colorscheme.nix file in some way
+        focusedBorderColor = myFocusedBorderColor,
+        normalBorderColor = myNormalBorderColor,
+        borderWidth = 3
+      }
+      -- NOTE: Ordering matters here
+      `additionalKeys` keysToAdd
 
 myModMask :: KeyMask
 myModMask = mod1Mask
@@ -201,29 +201,30 @@ keysToAdd =
         incGap :: GapSpec -> GapSpec
         incGap = fmap (fmap (+ 5))
 
-type MyLayouts = Choose Tall (Choose ThreeCol (Mirror Tall))
+type MyLayouts = PerScreen HorizontalMonitorLayouts VerticalMonitorLayouts
+
+type HorizontalMonitorLayouts = (Choose Tall (Choose TwoPanePersistent (Choose ThreeCol Grid)))
+
+type VerticalMonitorLayouts = (Choose (Mirror Tall) (Choose Accordion Grid))
+
+myLayouts :: MyLayouts Window
+myLayouts = ifWider minHorizontalWidth horizontalMonitorLayouts verticalMonitorLayouts
+  where
+    horizontalMonitorLayouts = tall ||| twoPane ||| threeCol ||| Grid
+    verticalMonitorLayouts = Mirror tall ||| Accordion ||| invertedGrid
+    -- we are using the `ifWider` layoutModifier to have two different sets of
+    -- layout modifiers for monitors in horizontal or vertical configuration
+    minHorizontalWidth = 2560
+
+    tall = Tall {tallNMaster = 1, tallRatioIncrement = 3 / 100, tallRatio = 3 / 5}
+    twoPane = TwoPanePersistent {slaveWin = Nothing, dFrac = 3 / 100, mFrac = 3 / 5}
+    threeCol = ThreeCol {threeColNMaster = 1, threeColDelta = 3 / 100, threeColFrac = 1 / 2}
+    invertedGrid = GridRatio (9 / 16)
 
 type MyTogglableLayouts = MultiToggle (HCons StdTransformers EOT) MyLayouts
 
-myTogglableLayouts :: MyTogglableLayouts a
+myTogglableLayouts :: MyTogglableLayouts Window
 myTogglableLayouts = mkToggle (single FULL) myLayouts
-
-myLayouts :: MyLayouts a
-myLayouts = tall ||| threeCol ||| mirrorTall
-  where
-    tall :: Tall a
-    tall = Tall {tallNMaster = 1, tallRatioIncrement = 3 / 100, tallRatio = 3 / 5}
-
-    threeCol :: ThreeCol a
-    threeCol =
-      ThreeCol
-        { threeColNMaster = 1,
-          threeColDelta = 3 / 100,
-          threeColFrac = 1 / 2
-        }
-
-    mirrorTall :: Mirror Tall a
-    mirrorTall = Mirror tall
 
 type MyLayoutModifiers a =
   ModifiedLayout

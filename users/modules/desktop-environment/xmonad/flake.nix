@@ -16,7 +16,7 @@
       ];
     in
     flake-utils.lib.simpleFlake {
-      inherit self nixpkgs taffybar;
+      inherit self nixpkgs;
       name = "XMonad Dev environment";
       shell = { pkgs ? import <nixpkgs> }:
         pkgs.mkShell {

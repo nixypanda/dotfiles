@@ -87,6 +87,10 @@ myLayoutConfig =
       layoutDisplay "Spacing ThreeCol" = "█▐▐"
       layoutDisplay "Spacing Full" = "███"
       layoutDisplay "Spacing Mirror Tall" = "▀▀▀"
+      layoutDisplay "Spacing TwoPanePersistent" = "█ █"
+      layoutDisplay "Spacing Accordion" = "▌█▐"
+      layoutDisplay "Spacing Grid" = "▚▚▚" 
+      layoutDisplay "Spacing GridRatio 0.5625" = "▚▚▚" 
       layoutDisplay x = x
    in LayoutConfig
         { formatLayout = return . layoutDisplay
