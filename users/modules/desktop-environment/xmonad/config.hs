@@ -74,13 +74,15 @@ import XMonad.Util.NamedScratchpad
   )
 
 main :: IO ()
-main = do
-  xmonad myConfig
+main = xmonad myConfig
 
 myConfig :: XConfig (MyLayoutModifiers MyTogglableLayouts)
 myConfig =
-  docks . ewmh . ewmhFullscreen . pagerHints $
-    def
+  docks
+    . ewmh
+    . ewmhFullscreen
+    . pagerHints
+    $ def
       { terminal = myTerminal,
         startupHook = myStartupHook,
         manageHook = myManageHook,
@@ -143,16 +145,16 @@ openPowerMenu =
     ]
 
 keysToAdd :: [((KeyMask, KeySym), X ())]
-keysToAdd =
-  launchers
-    ++ multimediaKeys
-    ++ layoutRelated
+keysToAdd = launchers ++ multimediaKeys ++ layoutRelated
   where
     launchers =
       [ ( (myModMask, xK_Return),
           spawn "rofi -show drun -theme grid"
         ),
-        ( (myModMask .|. controlMask, xK_p),
+        ( (myModMask, xK_c),
+          namedScratchpadAction myScratchPads "terminal"
+        ),
+        ( (myModMask .|. shiftMask, xK_p),
           spawn openPowerMenu
         ),
         ( (myModMask .|. shiftMask, xK_l),
@@ -161,20 +163,17 @@ keysToAdd =
         ( (myModMask .|. shiftMask, xK_space),
           spawn $ myTerminal ++ " -d \"$(xcwd)\""
         ),
-        ( (myModMask .|. shiftMask, xK_4),
-          spawn "sleep 0.2 && scrot -s ~/Pictures/screenshots/scrot_%Y-%m-%d-%H%M%S.png"
-        ),
-        ( (myModMask .|. shiftMask, xK_5),
-          spawn "sleep 0.2 && scrot -d 5 ~/Pictures/screenshots/scrot_%Y-%m-%d-%H%M%S.png"
-        ),
-        ( (myModMask, xK_c),
-          namedScratchpadAction myScratchPads "terminal"
-        ),
         ( (myModMask .|. shiftMask, xK_n),
           spawn "kill -s USR1 $(pidof deadd-notification-center)"
         ),
         ( (myModMask .|. shiftMask, xK_w),
           spawn openWidgetsPanel
+        ),
+        ( (myModMask .|. controlMask, xK_4),
+          spawn "sleep 0.2 && scrot -s ~/Pictures/screenshots/scrot_%Y-%m-%d-%H%M%S.png"
+        ),
+        ( (myModMask .|. controlMask, xK_5),
+          spawn "sleep 0.2 && scrot -d 5 ~/Pictures/screenshots/scrot_%Y-%m-%d-%H%M%S.png"
         )
       ]
 
@@ -266,12 +265,12 @@ myScratchPads = [scTerminal]
           query = className =? "scratchpad",
           hook = customFloating largeRect
         }
-    largeRect = RationalRect l t w h
+    largeRect = RationalRect locationLeft locationTop width height
       where
-        h = 2 / 3
-        w = 2 / 3
-        t = 1 / 6
-        l = 1 / 6
+        height = 2 / 3
+        width = 2 / 3
+        locationTop = 1 / 6
+        locationLeft = 1 / 6
 
 myManageHook :: ManageHook
 myManageHook =
@@ -291,5 +290,4 @@ myManageHook =
     ]
 
 myStartupHook :: X ()
-myStartupHook = do
-  spawn "custom-panel-launch"
+myStartupHook = spawn "custom-panel-launch"
