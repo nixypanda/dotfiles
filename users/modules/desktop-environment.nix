@@ -1,9 +1,9 @@
 { config, pkgs, lib, colorscheme, ... }:
 let
   custom-browsermediacontrol =
-    (import ../../custom-programs/browser-media-control/default.nix) { inherit pkgs; };
+    (import ../custom-programs/browser-media-control/default.nix) { inherit pkgs; };
   custom-weather-cli =
-    (import ../../custom-programs/weather-cli/default.nix) { inherit pkgs; };
+    (import ../custom-programs/weather-cli/default.nix) { inherit pkgs; };
 in
 {
   home.packages = with pkgs; [
