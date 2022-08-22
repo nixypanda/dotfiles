@@ -204,38 +204,18 @@
     ];
 
     extraConfig = ''
-      ${builtins.readFile ./base-sane.vim}
-
-      lua << EOF
-        ${builtins.readFile ./base-sane.lua}
-        ${builtins.readFile ./look-theme.lua}
-
-        -- We do theme specific stuff in look-theme. This needs to come after that
-        local statusline_theme = '${colorscheme.vim-statusline}'
-        vim.cmd[[ colorscheme ${colorscheme.vim-name}]]
-
-        ${builtins.readFile ./look-dashboard.lua}
-        ${builtins.readFile ./look-colorizer.lua}
-        ${builtins.readFile ./look-statusline.lua}
-        ${builtins.readFile ./look-topline.lua}
-
-        ${builtins.readFile ./ide-regexplainer.lua}
-        ${builtins.readFile ./ide-treesitter.lua}
-        ${builtins.readFile ./ide-completion.lua}
-        ${builtins.readFile ./ide-lsp.lua}
-        ${builtins.readFile ./ide-dap.lua}
-
-        ${builtins.readFile ./git.lua}
-        ${builtins.readFile ./todo.lua}
-        ${builtins.readFile ./edit.lua}
-
-        ${builtins.readFile ./nav-project.lua}
-        ${builtins.readFile ./nav-nvim-tree.lua}
-        ${builtins.readFile ./nav-telescope.lua}
-        ${builtins.readFile ./nav-which_key.lua}
-      EOF
+      colorscheme ${colorscheme.vim-name}
+      luafile ${builtins.toString ./init_lua.lua}
     '';
   };
+
+  xdg.configFile = {
+    "nvim/lua" = {
+      source = ./lua;
+      recursive = true;
+    };
+  };
+
   home.file.".vale.ini".source = ./vale.ini;
   home.file.".markdownlintrc".source = ./markdown_lint.json;
 }
