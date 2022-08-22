@@ -25,7 +25,7 @@
     # Applying the configuration happens from the .dotfiles directory so the
     # relative path is defined accordingly. This has potential of causing issues.
     vim-plugins = {
-      url = "path:./users/modules/nvim/plugins";
+      url = "path:./modules/nvim/plugins";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
