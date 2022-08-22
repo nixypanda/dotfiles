@@ -360,5 +360,4 @@
   # Show Punycode.
   # This helps to protect against possible character spoofing.
   "network.IDN_show_punycode" = true;
-
 }

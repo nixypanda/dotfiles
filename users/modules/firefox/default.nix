@@ -21,10 +21,8 @@
     profiles = {
       default = {
         name = "Default";
-        settings = import ./firefox/config.nix;
+        settings = import ./config.nix;
       };
     };
   };
-
 }
-

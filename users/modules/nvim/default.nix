@@ -2,6 +2,14 @@
 {
   home.packages = with pkgs;
     [
+      # Bash
+      nodePackages.bash-language-server
+      shellcheck
+
+      # Docker
+      nodePackages.dockerfile-language-server-nodejs
+      hadolint
+
       # elm
       elmPackages.elm-language-server
       elmPackages.elm
@@ -11,11 +19,17 @@
       # grammer
       vale
 
+      # Git
+      gitlint
+
       # Go
       gopls
 
       # Haskell
       haskellPackages.haskell-language-server
+
+      # HTML/CSS/JS
+      nodePackages.vscode-langservers-extracted
 
       # JavaScript
       nodePackages.typescript-language-server
@@ -24,8 +38,14 @@
       luaformatter
       sumneko-lua-language-server
 
+      # Make
+      cmake-language-server
+
       # Markdown
       nodePackages.markdownlint-cli
+      # This is a cli utility as we can't display all this in cli
+      nodePackages.livedown
+      pandoc
 
       # Nix
       rnix-lsp
@@ -51,28 +71,21 @@
       # terraform
       terraform-ls
 
+      # TOML
+      taplo-cli
+
+      # Vimscript
+      nodePackages.vim-language-server
+
+      # YAML
+      nodePackages.yaml-language-server
+      yamllint
+
       # general purpose / multiple langs
       efm-langserver
       nodePackages.prettier
-
-      # shit you need to deal with
-      nodePackages.bash-language-server
-      shellcheck
-      nodePackages.dockerfile-language-server-nodejs
-      hadolint
-      nodePackages.vscode-langservers-extracted
-      nodePackages.vim-language-server
-      nodePackages.yaml-language-server
-      yamllint
-      gitlint
-      taplo-cli
-      # This is a cli utility as we can't display all this in cli
-      nodePackages.livedown
-      pandoc
-
     ] ++ (if pkgs.stdenv.isLinux then [
-      # Depends on pygls which does not build on darwin
-      cmake-language-server
+      # Grammer
       # Not available on mac using brew to install it
       ltex-ls
     ] else [
@@ -85,24 +98,49 @@
 
     plugins = with pkgs.vimPlugins; [
       # Appearance
-      indent-blankline-nvim
       bufferline-nvim
-      nvim-tree-lua
-      nvim-web-devicons
-      lualine-nvim
-      one-nvim
       dracula-vim
+      indent-blankline-nvim
+      lualine-nvim
       nvim-alpha
       nvim-colorizer-lua
-      tokyonight-nvim
       nvim-headlines
+      nvim-tree-lua
+      nvim-web-devicons
+      one-nvim
+      tokyonight-nvim
+
+      # DAP
+      nvim-dap
+      nvim-dap-python
+      nvim-dap-ui
+
+      # Fuzzy Finder
+      cheatsheet-nvim
+      nvim-better-digraphs
+      telescope-fzf-native-nvim
+      telescope-nvim
+
+      # General Deps
+      nui-nvim
+      plenary-nvim
+      popup-nvim
+
+      # Git
+      gitsigns-nvim
+      vim-fugitive # vimscript
 
       # Programming
-      which-key-nvim
-      vim-haskellConcealPlus # vimscript
-      nvim-yuck # vimscript
-      nvim-nu
+      crates-nvim
+      fidget-nvim
+      lsp_signature-nvim
       lspkind-nvim
+      null-ls-nvim
+      nvim-lspconfig
+      nvim-lspsaga
+      nvim-nu
+      nvim-regexplainer
+      nvim-sqls
       (nvim-treesitter.withPlugins (plugins: with plugins; [
         tree-sitter-bash
         tree-sitter-c
@@ -133,60 +171,36 @@
       ]))
       nvim-treesitter-refactor
       nvim-treesitter-textobjects
-      nvim-lspconfig
-      nvim-regexplainer
-      nvim-lspsaga
-      lsp_signature-nvim
+      nvim-yuck # vimscript
       rust-tools-nvim
-      fidget-nvim
-      nvim-sqls
-      crates-nvim
-      null-ls-nvim
+      vim-haskellConcealPlus # vimscript
+      which-key-nvim
       ## Autocompletion setup
-      nvim-cmp
-      cmp-path
-      cmp-vsnip
       cmp-buffer
+      cmp-calc
       cmp-nvim-lsp
       cmp-nvim-lua
+      cmp-path
       cmp-treesitter
-      cmp-calc
+      cmp-vsnip
+      nvim-cmp
       vim-vsnip
       vim-vsnip-integ
+
       ## Project management
-      project-nvim
       direnv-vim
-
-      # Text objects
-      tcomment_vim # vimscript
-      vim-surround # vimscript
-      vim-repeat # vimscript
-      nvim-autopairs
-
-      # Git
-      vim-fugitive # vimscript
-      gitsigns-nvim
-
-      # DAP
-      nvim-dap
-      nvim-dap-ui
-      nvim-dap-python
-
-      # Fuzzy Finder
-      telescope-nvim
-      telescope-fzf-native-nvim
-      nvim-better-digraphs
-      cheatsheet-nvim
+      project-nvim
 
       # Text Helpers
-      vim-table-mode # vimscript
-      venn-nvim
       todo-comments-nvim
+      venn-nvim
+      vim-table-mode # vimscript
 
-      # General Deps
-      popup-nvim
-      plenary-nvim
-      nui-nvim
+      # Text objects
+      nvim-autopairs
+      tcomment_vim # vimscript
+      vim-repeat # vimscript
+      vim-surround # vimscript
     ];
 
     extraConfig = ''

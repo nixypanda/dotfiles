@@ -17,7 +17,6 @@ export NVIM_TUI_ENABLE_TRUE_COLOR=1
 export EDITOR="nvim"
 export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
-export SSL_CERT_FILE=~/.nix-profile/etc/ssl/certs/ca-bundle.crt
 
 # /usr/local/bin is mac specific and where brew installs stuff. As we are
 # making use of brew as fallback so we need to add it

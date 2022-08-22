@@ -61,18 +61,19 @@
           home.stateVersion = "22.05";
 
           imports = [
-            ./modules/alacritty.nix
-            ./modules/browser.nix
-            ./modules/cli
+            ./modules/alacritty
+            ./modules/bat
+            ./modules/cli.nix
+            ./modules/direnv
+            ./modules/firefox
             ./modules/fonts.nix
-            ./modules/git.nix
-            ./modules/kitty.nix
+            ./modules/git
+            ./modules/hashistack.nix
+            ./modules/kitty
             ./modules/nvim
             ./modules/programming.nix
-            ./modules/productivity.nix
-            ./modules/social.nix
             ./modules/system-management
-            ./modules/work.nix
+            ./modules/zsh
           ];
         };
 
@@ -85,35 +86,13 @@
           home.homeDirectory = "/Users/sherubthakur";
           home.username = "sherubthakur";
           imports = [
-            ./modules/tmux.nix
+            ./modules/nu/default-mac.nix
+            ./modules/tmux
+            ./modules/mac-symlink-applications.nix
           ];
           xdg.configFile."nix/nix.conf".text = ''
             experimental-features = nix-command flakes ca-references
           '';
-          # Symlink macos applications. This does not happen by default.
-          # https://github.com/nix-community/home-manager/issues/1341
-          home.activation = {
-            copyApplications =
-              let
-                apps = pkgs.buildEnv {
-                  name = "home-manager-applications";
-                  paths = config.home.packages;
-                  pathsToLink = "/Applications";
-                };
-              in
-              lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-                baseDir="$HOME/Applications/Home Manager Apps"
-                if [ -d "$baseDir" ]; then
-                  rm -rf "$baseDir"
-                fi
-                mkdir -p "$baseDir"
-                for appFile in ${apps}/Applications/*; do
-                  target="$baseDir/$(basename "$appFile")"
-                  $DRY_RUN_CMD cp ''${VERBOSE_ARG:+-v} -fHRL "$appFile" "$baseDir"
-                  $DRY_RUN_CMD chmod ''${VERBOSE_ARG:+-v} -R +w "$target"
-                done
-              '';
-          };
         };
 
       home-linux = { pkgs, ... }:
@@ -121,8 +100,25 @@
           home.homeDirectory = "/home/sherub";
           home.username = "sherub";
           imports = [
-            ./modules/desktop-environment
+            ./modules/discord
             ./modules/media.nix
+            ./modules/nu/default-linux.nix
+            ./modules/onenote
+            ./modules/slack
+
+            # Desktop Environment
+            ./modules/desktop-environment.nix
+            ./modules/betterlockscreen
+            ./modules/colorscheme-based-background
+            ./modules/deadd
+            ./modules/eww
+            ./modules/gtk
+            ./modules/picom
+            ./modules/plasma-browser-integration
+            ./modules/rofi
+            ./modules/taffybar
+            ./modules/xidlehook
+            ./modules/xmonad
           ];
         };
 

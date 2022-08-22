@@ -12,7 +12,7 @@ rec {
   gtk-name = "palenight";
   gtk-icon-name = "Moka";
   bat-theme-name = "base16";
-  deadd-css-file = ../modules/desktop-environment/deadd/tokyonight.css;
+  deadd-css-file = ../modules/deadd/tokyonight.css;
 
   bg-primary = "#24283b";
   bg-primary-bright = "#1f2335";

@@ -5,7 +5,15 @@
   homebrew.global.brewfile = true;
   homebrew.global.noLock = true;
 
-  homebrew.taps = [ "homebrew/core" "homebrew/cask" "homebrew/cask-drivers" ];
-  homebrew.casks = [ "google-chrome" ];
-  homebrew.brews = [ "ltex-ls" ];
+  homebrew.taps = [
+    "homebrew/cask"
+    "homebrew/cask-drivers"
+    "homebrew/core"
+  ];
+  homebrew.casks = [
+    "google-chrome"
+  ];
+  homebrew.brews = [
+    "ltex-ls"
+  ];
 }
