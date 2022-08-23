@@ -339,35 +339,35 @@
   :stacking "fg"
   :focusable "false"
   :screen 1 
-  :geometry (geometry :anchor "top right" :x -5 :y 40 :width 180 :height 675)
+  :geometry (geometry :anchor "top right" :x -5 :y 50 :width 180 :height 675)
   (bg))
 
 (defwindow topbar-powermenu-logout
   :stacking "fg"
   :focusable "false"
   :screen 1 
-  :geometry (geometry :anchor "top right" :x -15 :y 50 :width 150 :height 150)
+  :geometry (geometry :anchor "top right" :x -20 :y 65 :width 150 :height 150)
   (logout))
 
 (defwindow topbar-powermenu-sleep
   :stacking "fg"
   :focusable "false"
   :screen 1 
-  :geometry (geometry :anchor "top right" :x -15 :y 215 :width 150 :height 150)
+  :geometry (geometry :anchor "top right" :x -20 :y 230 :width 150 :height 150)
   (sleep))
 
 (defwindow topbar-powermenu-reboot
   :stacking "fg"
   :focusable "false"
   :screen 1 
-  :geometry (geometry :anchor "top right" :x -15 :y 380 :width 150 :height 150)
+  :geometry (geometry :anchor "top right" :x -20 :y 395 :width 150 :height 150)
   (reboot))
 
 (defwindow topbar-powermenu-poweroff
   :stacking "fg"
   :focusable "false"
   :screen 1 
-  :geometry (geometry :anchor "top right" :x -15 :y 545 :width 150 :height 150)
+  :geometry (geometry :anchor "top right" :x -20 :y 560 :width 150 :height 150)
   (poweroff))
 
 
@@ -377,14 +377,14 @@
   :stacking "fg"
   :focusable "false"
   :screen 1 
-  :geometry (geometry :x 180 :y 40 :width 530 :height 330)
+  :geometry (geometry :x 180 :y 50 :width 530 :height 330)
   (bg))
 
 (defwindow topbar-music
   :stacking "fg"
   :focusable "false"
   :screen 1 
-  :geometry (geometry :x 195 :y 55 :width 500 :height 300)
+  :geometry (geometry :x 195 :y 65 :width 500 :height 300)
   (music :album-art-class "album_art"))
 
 ;; The BTW icon ;;

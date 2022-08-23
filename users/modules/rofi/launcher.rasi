@@ -21,7 +21,7 @@ configuration {
     width: 600px;
     location: northwest;
     x-offset: 10;
-    y-offset: 40;
+    y-offset: 50;
     padding: 15px;
 }
 
