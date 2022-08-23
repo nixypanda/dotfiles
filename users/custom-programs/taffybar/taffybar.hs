@@ -26,6 +26,7 @@ import System.Taffybar.SimpleConfig
     SimpleTaffyConfig (..),
     defaultSimpleTaffyConfig,
     toTaffyConfig,
+    usePrimaryMonitor,
   )
 import System.Taffybar.Util (runCommand)
 import System.Taffybar.Widget
@@ -62,7 +63,8 @@ myConfig =
       endWidgets = powerMenu : map (>>= buildContentsBox) [clock, tray],
       barPosition = Top,
       barHeight = ExactSize 50,
-      widgetSpacing = 10
+      widgetSpacing = 10,
+      monitorsAction = usePrimaryMonitor
     }
 
 myWorkspacesConfig :: WorkspacesConfig
