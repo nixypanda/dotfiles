@@ -7,8 +7,8 @@
     experimentalBackends = true;
     opacityRules = [
       "100:class_g   *?= 'Firefox'"
-      "95:class_g   *?= 'Deadd-notification-center'"
-      "75:class_g   *?= 'Rofi'"
+      "100:class_g   *?= 'Deadd-notification-center'"
+      "100:class_g   *?= 'Rofi'"
     ];
     settings = {
       blur-method = "dual_kawase";
