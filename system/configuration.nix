@@ -26,6 +26,7 @@
   boot.kernelModules = [ "i2c-dev" "i2c-piix4" "kvm-amd" ];
   boot.initrd.kernelModules = [ "amdgpu" ];
 
+
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = ''
@@ -55,7 +56,6 @@
     openrgb
     i2c-tools
     ddccontrol
-    solaar
   ];
   environment.pathsToLink = [ "/libexec" ];
 
@@ -65,6 +65,10 @@
 
   # List services that you want to enable:
   services.openssh.enable = true;
+
+  # Logitech wireless device setup
+  hardware.logitech.wireless.enable = true;
+  hardware.logitech.wireless.enableGraphical = true; # for solaar to be included
 
   # Enable sound.
   sound.enable = true;
@@ -100,7 +104,6 @@
       }
     ];
   };
-  services.udev.packages = with pkgs; [ solaar ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sherub = {

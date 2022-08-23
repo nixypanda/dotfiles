@@ -17,8 +17,8 @@ let
     pasystray &
     status-notifier-watcher &
 
-    custom-taffybar &
     eww close topbar-btw &
+    custom-taffybar &
     eww open topbar-btw
   '';
   custom-taffybar =
