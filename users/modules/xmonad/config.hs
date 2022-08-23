@@ -166,7 +166,7 @@ keysToAdd = launchers ++ multimediaKeys ++ layoutRelated
         ( (myModMask .|. shiftMask, xK_n),
           spawn "kill -s USR1 $(pidof deadd-notification-center)"
         ),
-        ( (myModMask .|. shiftMask, xK_w),
+        ( (myModMask .|. controlMask, xK_w),
           spawn openWidgetsPanel
         ),
         ( (myModMask .|. controlMask, xK_4),
