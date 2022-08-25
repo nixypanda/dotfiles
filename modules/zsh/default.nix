@@ -22,7 +22,7 @@
       ${builtins.readFile ./session_variables.zsh}
       ${if pkgs.stdenv.isDarwin then builtins.readFile ./session_variables.mac.zsh else ""}
       ${builtins.readFile ./functions.zsh}
-      ${builtins.readFile ../../../.secrets/env-vars.sh}
+      ${builtins.readFile ../../.secrets/env-vars.sh}
 
       bindkey -M vicmd 'k' history-beginning-search-backward
       bindkey -M vicmd 'j' history-beginning-search-forward

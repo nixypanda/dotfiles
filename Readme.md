@@ -73,7 +73,7 @@ or parts of it setup on any system.
 
 - Get contents of this repo onto your system to `~/.dotfiles`
 - `cd` into `~/.dotfiles`
-- Execute: `nix run home-manager --no-write-lock-file -- switch --flake "./users#nixos"`
+- Execute: `nix run home-manager --no-write-lock-file -- switch --flake "./#nixos"`
 
 ### Full Setup of NixOS (first time)
 
@@ -92,17 +92,14 @@ or parts of it setup on any system.
   - Make sure you enable internet
 - Get contents of this repo onto your system to `~/.dotfiles`
 - `cd` into `~/.dotfiles`
-- Execute: `sudo nixos-rebuild switch --flake './system#nixos'`
-- Execute: `nix run home-manager --no-write-lock-file -- switch --flake "./users#nixos"`
+- Execute: `sudo nixos-rebuild switch --flake './#nixos'`
+- Execute: `nix run home-manager --no-write-lock-file -- switch --flake "./#nixos"`
 
 ## Code Structure
 
-- The top level folders `system` and `users` are both flakes
-- After that it's just a matter of following the code really
-- In users flake `imports` is where you can see what all will end up in the
-  final setup
-  - for NixOS
-  - for mac
+- The top level folder is a flake
+- After that it's just a matter of following the code really. So just open that
+  `flake.nix` file and start reading it from the top.
 
 ## Here are a few screenshots to showcase this config in action
 

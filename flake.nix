@@ -124,6 +124,12 @@
 
     in
     {
+
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [ ./system/configuration.nix ];
+      };
+
       homeConfigurations = {
         nixos =
           let

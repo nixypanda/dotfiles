@@ -3,5 +3,5 @@
 set -e
 
 pushd ~/.dotfiles
-nix flake update ./users
+sudo nix flake update .
 popd

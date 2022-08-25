@@ -12,24 +12,18 @@ let
     ${builtins.readFile ./apply-user-nixos.sh}
   '';
 
-  update-system = pkgs.writeScriptBin "update-system" ''
-    ${builtins.readFile ./update-system.sh}
+  update-dots = pkgs.writeScriptBin "update-dots" ''
+    ${builtins.readFile ./update-dots.sh}
   '';
-
-  update-user = pkgs.writeScriptBin "update-user" ''
-    ${builtins.readFile ./update-user.sh}
-  '';
-
 in
 {
   home.packages =
     if pkgs.stdenv.isLinux then [
       apply-system
       apply-user-nixos
-      update-system
-      update-user
+      update-dots
     ] else [
-      update-user
+      update-dots
       apply-user-mac
     ];
 }
