@@ -3,7 +3,6 @@
   home.packages = with pkgs; [
     # CLI tools / Terminal facification
     arandr
-    awscli
     bashmount
     dig
     docker-compose

@@ -62,6 +62,7 @@
 
           imports = [
             ./modules/alacritty
+            ./modules/aws
             ./modules/bat
             ./modules/cli.nix
             ./modules/direnv
