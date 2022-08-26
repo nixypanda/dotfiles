@@ -214,6 +214,7 @@
       source = ./lua;
       recursive = true;
     };
+    "nvim/init_lua.lua".source = ./init_lua.lua;
   };
 
   home.file.".vale.ini".source = ./vale.ini;
