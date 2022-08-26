@@ -103,6 +103,17 @@ or parts of it setup on any system.
 
 ## Here are a few screenshots to showcase this config in action
 
+### Tokyonight
+
+![System Info](./screenshots/tokyonight/sysinfo.png?raw=true "System Info")
+![Widgets](./screenshots/tokyonight/widgets.png?raw=true "Wallpaper")
+![App-Launcher](./screenshots/tokyonight/rofi-search.png?raw=true "App Launcher")
+![Ricing](./screenshots/tokyonight/in-action.png?raw=true "Ricing in progress")
+![Locked](./screenshots/tokyonight/locked.png?raw=true "Locked")
+
+<details>
+<summary>Click to see more screenshots from the past</summary>
+
 ### Dracula
 
 ![System Info](./screenshots/dracula/sysinfo.png?raw=true "System Info")
@@ -118,3 +129,5 @@ or parts of it setup on any system.
 ![App-Launcher](./screenshots/onedark/rofi-search.png?raw=true "App Launcher")
 ![Ricing](./screenshots/onedark/in-action.png?raw=true "Ricing in progress")
 ![Locked](./screenshots/onedark/locked.png?raw=true "Locked")
+
+</details>
