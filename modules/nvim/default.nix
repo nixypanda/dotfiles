@@ -1,97 +1,5 @@
 { config, pkgs, lib, colorscheme, ... }:
 {
-  home.packages = with pkgs;
-    [
-      # Bash
-      nodePackages.bash-language-server
-      shellcheck
-
-      # Docker
-      nodePackages.dockerfile-language-server-nodejs
-      hadolint
-
-      # elm
-      elmPackages.elm-language-server
-      elmPackages.elm
-      elmPackages.elm-test
-      elmPackages.elm-format
-
-      # grammer
-      vale
-
-      # Git
-      gitlint
-
-      # Go
-      gopls
-
-      # Haskell
-      haskellPackages.haskell-language-server
-
-      # HTML/CSS/JS
-      nodePackages.vscode-langservers-extracted
-
-      # JavaScript
-      nodePackages.typescript-language-server
-
-      # lua
-      luaformatter
-      sumneko-lua-language-server
-
-      # Make
-      cmake-language-server
-
-      # Markdown
-      nodePackages.markdownlint-cli
-      # This is a cli utility as we can't display all this in cli
-      nodePackages.livedown
-      pandoc
-
-      # Nix
-      rnix-lsp
-      deadnix
-      statix
-
-      # python
-      python3Packages.isort
-      nodePackages.pyright
-      black
-      python3Packages.flake8
-      mypy
-
-      # Rust
-      rust-analyzer
-      rustfmt
-      clippy
-      # lldb # debugging setup
-
-      # SQL
-      sqls
-
-      # terraform
-      terraform-ls
-
-      # TOML
-      taplo-cli
-
-      # Vimscript
-      nodePackages.vim-language-server
-
-      # YAML
-      nodePackages.yaml-language-server
-      yamllint
-
-      # general purpose / multiple langs
-      efm-langserver
-      nodePackages.prettier
-    ] ++ (if pkgs.stdenv.isLinux then [
-      # Grammer
-      # Not available on mac using brew to install it
-      ltex-ls
-    ] else [
-
-    ]);
-
   programs.neovim = {
     enable = true;
     vimAlias = true;
@@ -202,6 +110,99 @@
       vim-repeat # vimscript
       vim-surround # vimscript
     ];
+
+    extraPackages = with pkgs;
+      [
+        # Bash
+        nodePackages.bash-language-server
+        shellcheck
+
+        # Docker
+        nodePackages.dockerfile-language-server-nodejs
+        hadolint
+
+        # elm
+        elmPackages.elm-language-server
+        elmPackages.elm
+        elmPackages.elm-test
+        elmPackages.elm-format
+
+        # grammer
+        vale
+
+        # Git
+        gitlint
+
+        # Go
+        gopls
+
+        # Haskell
+        haskellPackages.haskell-language-server
+
+        # HTML/CSS/JS
+        nodePackages.vscode-langservers-extracted
+
+        # JavaScript
+        nodePackages.typescript-language-server
+
+        # lua
+        luaformatter
+        sumneko-lua-language-server
+
+        # Make
+        cmake-language-server
+
+        # Markdown
+        nodePackages.markdownlint-cli
+        # This is a cli utility as we can't display all this in cli
+        nodePackages.livedown
+        pandoc
+
+        # Nix
+        rnix-lsp
+        deadnix
+        statix
+
+        # python
+        python3Packages.isort
+        nodePackages.pyright
+        black
+        python3Packages.flake8
+        mypy
+
+        # Rust
+        rust-analyzer
+        rustfmt
+        clippy
+        # lldb # debugging setup
+
+        # SQL
+        sqls
+
+        # terraform
+        terraform-ls
+
+        # TOML
+        taplo-cli
+
+        # Vimscript
+        nodePackages.vim-language-server
+
+        # YAML
+        nodePackages.yaml-language-server
+        yamllint
+
+        # general purpose / multiple langs
+        efm-langserver
+        nodePackages.prettier
+      ] ++ (if pkgs.stdenv.isLinux then [
+        # Grammer
+        # Not available on mac using brew to install it
+        ltex-ls
+      ] else [
+
+      ]);
+
 
     extraConfig = ''
       colorscheme ${colorscheme.vim-name}
