@@ -1,4 +1,4 @@
-{ config, pkgs, lib, colorscheme, ... }:
+{ config, pkgs, colorscheme, ... }:
 {
   xsession = {
     enable = true;

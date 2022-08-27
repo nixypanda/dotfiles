@@ -1,4 +1,4 @@
-{ config, pkgs, lib, colorscheme, ... }:
+{ colorscheme, ... }:
 {
   services.random-background = {
     enable = true;

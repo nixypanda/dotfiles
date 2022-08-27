@@ -1,4 +1,4 @@
-{ config, pkgs, lib, colorscheme, ... }:
+{ pkgs, ... }:
 let
   custom-script-eww-sysinfo = pkgs.writeScriptBin "custom-script-eww-sysinfo" ''
     #!/${pkgs.stdenv.shell}

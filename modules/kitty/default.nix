@@ -1,4 +1,4 @@
-{ config, pkgs, lib, colorscheme, ... }:
+{ colorscheme, ... }:
 {
   programs.kitty = {
     enable = true;

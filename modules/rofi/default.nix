@@ -1,4 +1,4 @@
-{ config, pkgs, lib, colorscheme, ... }:
+{ pkgs, colorscheme, ... }:
 {
   programs.rofi = {
     enable = true;

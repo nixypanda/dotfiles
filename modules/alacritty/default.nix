@@ -1,7 +1,8 @@
-{ config, pkgs, lib, colorscheme, ... }:
-let
-  config = { colors }:
-    {
+{ colorscheme, ... }:
+{
+  programs.alacritty = {
+    enable = true;
+    settings = {
       env = {
         "TERM" = "xterm-256color";
       };
@@ -73,8 +74,8 @@ let
       colors = {
         # Default colors
         primary = {
-          background = colors.bg-primary;
-          foreground = colors.fg-primary;
+          background = colorscheme.bg-primary;
+          foreground = colorscheme.fg-primary;
 
           # Bright and dim foreground colors
           #
@@ -83,7 +84,7 @@ let
           # `draw_bold_text_with_bright_colors` is `false`, the normal foreground
           # color will be used.
           #dim_foreground  = "0x9a9a9a";
-          bright_foreground = colors.fg-primary-bright;
+          bright_foreground = colorscheme.fg-primary-bright;
         };
 
         # Cursor colors
@@ -96,42 +97,16 @@ let
 
         # Normal colors
         normal = {
-          black = colors.black;
-          red = colors.red;
-          green = colors.green;
-          yellow = colors.yellow;
-          blue = colors.blue;
-          magenta = colors.magenta;
-          cyan = colors.cyan;
-          white = colors.white;
+          inherit (colorscheme) black;
+          inherit (colorscheme) red;
+          inherit (colorscheme) green;
+          inherit (colorscheme) yellow;
+          inherit (colorscheme) blue;
+          inherit (colorscheme) magenta;
+          inherit (colorscheme) cyan;
+          inherit (colorscheme) white;
         };
 
-        # # Bright colors
-        # bright = {
-        #   black    = "0x5c6370";
-        #   red      = "0xe06c75";
-        #   green    = "0x98c379";
-        #   yellow   = "0xd19a66";
-        #   blue     = "0x61afef";
-        #   magenta  = "0xc678dd";
-        #   cyan     = "0x56b6c2";
-        #   white    = "0xe6efff";
-        # };
-        #
-        # # Dim colors
-        # #
-        # # If the dim colors are not set, they will be calculated automatically based
-        # # on the `normal` colors.
-        # dim = {
-        #   black    = "0x1e2127";
-        #   red      = "0xe06c75";
-        #   green    = "0x98c379";
-        #   yellow   = "0xd19a66";
-        #   blue     = "0x61afef";
-        #   magenta  = "0xc678dd";
-        #   cyan     = "0x56b6c2";
-        #   white    = "0x828791";
-        # };
       };
 
       key_bindings = [
@@ -144,10 +119,6 @@ let
         { key = "W"; mods = "Command"; action = "Quit"; }
       ];
     };
-in
-{
-  programs.alacritty = {
-    enable = true;
-    settings = config { colors = colorscheme; };
+
   };
 }

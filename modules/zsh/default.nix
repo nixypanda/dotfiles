@@ -1,4 +1,4 @@
-{ config, pkgs, lib, colorscheme, ... }:
+{ pkgs, ... }:
 {
   programs.fzf = {
     enable = true;

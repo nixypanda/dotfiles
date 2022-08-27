@@ -1,4 +1,4 @@
-{ config, pkgs, lib, colorscheme, ... }:
+{ config, pkgs, lib, ... }:
 {
   # Symlink macos applications. This does not happen by default.
   # https://github.com/nix-community/home-manager/issues/1341

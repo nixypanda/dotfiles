@@ -1,4 +1,3 @@
-{ config, pkgs, lib, colorscheme, ... }:
 {
   programs.nushell = {
     enable = true;

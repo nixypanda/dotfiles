@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, lib, ... }:
 let
   merge = lib.foldr (a: b: a // b) { };
 in

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, colorscheme, ... }:
+{ pkgs, colorscheme, ... }:
 let
   custom-panel-launch = pkgs.writeScriptBin "custom-panel-launch" ''
     #!/${pkgs.stdenv.shell}

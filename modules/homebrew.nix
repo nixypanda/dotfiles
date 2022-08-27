@@ -1,4 +1,4 @@
-{ _, ... }: {
+{
   homebrew.enable = true;
   homebrew.autoUpdate = true;
   homebrew.cleanup = "zap";

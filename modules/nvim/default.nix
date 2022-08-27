@@ -1,4 +1,4 @@
-{ config, pkgs, lib, colorscheme, ... }:
+{ pkgs, colorscheme, ... }:
 {
   programs.neovim = {
     enable = true;
@@ -7,14 +7,15 @@
     plugins = with pkgs.vimPlugins; [
       # Appearance
       bufferline-nvim
-      dracula-vim
       indent-blankline-nvim
       lualine-nvim
       nvim-alpha
       nvim-colorizer-lua
       nvim-headlines
-      nvim-tree-lua
       nvim-web-devicons
+
+      # Appearance: Themes
+      dracula-vim
       one-nvim
       tokyonight-nvim
 
@@ -22,6 +23,9 @@
       nvim-dap
       nvim-dap-python
       nvim-dap-ui
+
+      # File Tree
+      nvim-tree-lua
 
       # Fuzzy Finder
       cheatsheet-nvim
@@ -36,19 +40,19 @@
 
       # Git
       gitsigns-nvim
-      vim-fugitive # vimscript
+      vim-fugitive
 
-      # Programming
-      crates-nvim
+      # Programming: LSP
       fidget-nvim
       lsp_signature-nvim
       lspkind-nvim
       null-ls-nvim
       nvim-lspconfig
       nvim-lspsaga
-      nvim-nu
-      nvim-regexplainer
       nvim-sqls
+      rust-tools-nvim
+
+      # Progrmming: Treesitter
       (nvim-treesitter.withPlugins (plugins: with plugins; [
         tree-sitter-bash
         tree-sitter-c
@@ -77,13 +81,17 @@
         tree-sitter-typescript
         tree-sitter-yaml
       ]))
+      nvim-nu
       nvim-treesitter-refactor
       nvim-treesitter-textobjects
-      nvim-yuck # vimscript
-      rust-tools-nvim
-      vim-haskellConcealPlus # vimscript
       which-key-nvim
-      ## Autocompletion setup
+
+      # Programming: Language support
+      crates-nvim
+      nvim-yuck
+
+      ## Programming: Autocompletion setup
+      nvim-cmp
       cmp-buffer
       cmp-calc
       cmp-nvim-lsp
@@ -91,7 +99,6 @@
       cmp-path
       cmp-treesitter
       cmp-vsnip
-      nvim-cmp
       vim-vsnip
       vim-vsnip-integ
 
@@ -100,9 +107,11 @@
       project-nvim
 
       # Text Helpers
+      nvim-regexplainer
       todo-comments-nvim
       venn-nvim
-      vim-table-mode # vimscript
+      vim-haskellConcealPlus
+      vim-table-mode
 
       # Text objects
       nvim-autopairs

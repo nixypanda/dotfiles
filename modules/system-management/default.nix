@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, ... }:
 let
   apply-system = pkgs.writeScriptBin "apply-system" ''
     ${builtins.readFile ./apply-system.sh}

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, colorscheme, ... }:
+{ pkgs, colorscheme, ... }:
 {
   home.packages = with pkgs; [
     deadd-notification-center

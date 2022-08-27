@@ -1,4 +1,4 @@
-{ config, pkgs, lib, colorscheme, ... }:
+{ pkgs, ... }:
 let
   custom-browsermediacontrol =
     (import ../custom-programs/browser-media-control/default.nix) { inherit pkgs; };
