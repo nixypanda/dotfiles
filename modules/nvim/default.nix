@@ -115,7 +115,7 @@
 
       # Text objects
       nvim-autopairs
-      tcomment_vim
+      nvim-comment
       nvim-surround
     ];
 

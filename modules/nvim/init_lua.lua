@@ -22,3 +22,4 @@ require "nav-telescope"
 require "nav-which_key"
 
 require "text-surround"
+require "text-comment"
