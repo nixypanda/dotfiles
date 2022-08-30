@@ -32,6 +32,10 @@
       url = "github:nanotee/sqls.nvim";
       flake = false;
     };
+    nvim-surround-src = {
+      url = "github:kylechui/nvim-surround";
+      flake = false;
+    };
     nvim-yuck-src = {
       url = "github:elkowar/yuck.vim";
       flake = false;
@@ -71,6 +75,10 @@
         nvim-sqls = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-sqls";
           src = inputs.nvim-sqls-src;
+        };
+        nvim-surround = pkgs.vimUtils.buildVimPlugin {
+          name = "nvim-surround";
+          src = inputs.nvim-surround-src;
         };
         nvim-yuck = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-yuck";

@@ -115,9 +115,8 @@
 
       # Text objects
       nvim-autopairs
-      tcomment_vim # vimscript
-      vim-repeat # vimscript
-      vim-surround # vimscript
+      tcomment_vim
+      nvim-surround
     ];
 
     extraPackages = with pkgs;

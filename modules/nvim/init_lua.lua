@@ -20,3 +20,5 @@ require "nav-nvim-tree"
 require "nav-project"
 require "nav-telescope"
 require "nav-which_key"
+
+require "text-surround"

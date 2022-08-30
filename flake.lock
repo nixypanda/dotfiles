@@ -372,11 +372,11 @@
     "nvim-alpha-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1658591867,
-        "narHash": "sha256-7WBfJ0jTroFTrKVP0bLZtv3bCVWGBT/W2jBZFJiUioE=",
+        "lastModified": 1661796629,
+        "narHash": "sha256-YcjHMyn1QKG3Z3nUqMkkc6mFG+yTMWNU2tGjw2QtRZk=",
         "owner": "goolord",
         "repo": "alpha-nvim",
-        "rev": "d688f46090a582be8f9d7b70b4cf999b780e993d",
+        "rev": "09e5374465810d71c33e9b097214adcdebeee49a",
         "type": "github"
       },
       "original": {
@@ -404,11 +404,11 @@
     "nvim-dap-python-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1660548299,
-        "narHash": "sha256-Uw4NyMjP8DSOLpKItjme3DujMmFkR3rvc7i5oq0B6g8=",
+        "lastModified": 1661605137,
+        "narHash": "sha256-1774BX4Kc3GVZZs/nBvmssERpCRYJlxshJKW6OiHW/4=",
         "owner": "mfussenegger",
         "repo": "nvim-dap-python",
-        "rev": "287742d2824fd1fc25b367f50ddc14d52fde04ec",
+        "rev": "358fb85b05b9c99546c0b37f5c5fb72548cffe3c",
         "type": "github"
       },
       "original": {
@@ -494,6 +494,22 @@
       "original": {
         "owner": "nanotee",
         "repo": "sqls.nvim",
+        "type": "github"
+      }
+    },
+    "nvim-surround-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1661736405,
+        "narHash": "sha256-C789LjyjvaWV91LSfpd5/IVykMYpyxR2rgtEzGqvDkI=",
+        "owner": "kylechui",
+        "repo": "nvim-surround",
+        "rev": "01e17311bddffd65cc191bbefb845dba46780859",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kylechui",
+        "repo": "nvim-surround",
         "type": "github"
       }
     },
@@ -594,11 +610,11 @@
         "nvim-nu-src": "nvim-nu-src",
         "nvim-regexplainer-src": "nvim-regexplainer-src",
         "nvim-sqls-src": "nvim-sqls-src",
+        "nvim-surround-src": "nvim-surround-src",
         "nvim-yuck-src": "nvim-yuck-src"
       },
       "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-9swbNXF1mkQ2ncY14iCf9KXdT94QnsNX1uMn2VcRel4=",
+        "narHash": "sha256-fNqrdC/B7x6C5zDxkhC32vr3W8wwzSKMeFltaRIMqbE=",
         "path": "./modules/nvim/plugins",
         "type": "path"
       },
