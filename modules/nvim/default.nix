@@ -69,7 +69,7 @@
         tree-sitter-latex
         tree-sitter-lua
         tree-sitter-markdown
-        # tree-sitter-markdown_inline
+        tree-sitter-markdown-inline
         tree-sitter-nix
         tree-sitter-python
         tree-sitter-regex
@@ -163,7 +163,6 @@
         # Markdown
         nodePackages.markdownlint-cli
         # This is a cli utility as we can't display all this in cli
-        nodePackages.livedown
         pandoc
 
         # Nix
@@ -217,6 +216,10 @@
       luafile ${builtins.toString ./init_lua.lua}
     '';
   };
+
+  home.packages = with pkgs; [
+    nodePackages.livedown
+  ];
 
   xdg.configFile = {
     "nvim/lua" = {
