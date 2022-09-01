@@ -31,5 +31,8 @@
     # system info
     bottom
     neofetch
+
+    # Nix itself
+    nix
   ];
 }
