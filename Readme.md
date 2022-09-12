@@ -95,6 +95,13 @@ or parts of it setup on any system.
 - Execute: `sudo nixos-rebuild switch --flake './#nixos'`
 - Execute: `nix run home-manager --no-write-lock-file -- switch --flake "./#nixos"`
 
+### Caveat
+
+I make use of [git-crypt](https://github.com/AGWA/git-crypt) on files in the
+`.secrets` folder. If you plan to use these dotfiles then you will either have
+to replace those files with what you need or remove references to these files
+from the codebase.
+
 ## Code Structure
 
 - The top level folder is a flake
