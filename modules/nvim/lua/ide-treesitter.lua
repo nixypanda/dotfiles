@@ -1,10 +1,10 @@
 require 'nvim-treesitter.configs'.setup {
-    -- Note: installing nix grammer requires treesitter installed as command line too
     ensure_installed = {
-        "bash", "c", "css", "dockerfile", "elm", "go", "haskell", "hcl",
-        "html", "java", "javascript", "json", "latex", "lua", "markdown",
-        "markdown_inline", "nix", "python", "regex", "ruby", "rust", "scss",
-        "toml", "tsx", "typescript", "yaml"
+        -- This needs to be empty otherwise treesitter complains about
+        -- directory being not being writable. All the installation of the
+        -- parsers is done declaratively into an immutable location using nix,
+        -- so we don't really need to specify anything there.
+        -- https://github.com/NixOS/nixpkgs/issues/189838
     },
     highlight = { enable = true },
     incremental_selection = {

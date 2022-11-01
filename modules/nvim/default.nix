@@ -158,7 +158,7 @@
         sumneko-lua-language-server
 
         # Make
-        cmake-language-server
+        /* cmake-language-server */
 
         # Markdown
         nodePackages.markdownlint-cli
