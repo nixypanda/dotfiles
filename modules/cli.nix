@@ -19,6 +19,7 @@
     unrar
     unzip
     wireshark
+    pgcli
 
     # Moar colors
     starship

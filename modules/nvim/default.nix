@@ -76,6 +76,7 @@
         tree-sitter-ruby
         tree-sitter-rust
         tree-sitter-scss
+        tree-sitter-sql
         tree-sitter-toml
         tree-sitter-tsx
         tree-sitter-typescript
@@ -90,7 +91,7 @@
       crates-nvim
       nvim-yuck
 
-      ## Programming: Autocompletion setup
+      # Programming: Autocompletion setup
       nvim-cmp
       cmp-buffer
       cmp-calc
@@ -101,6 +102,10 @@
       cmp-vsnip
       vim-vsnip
       vim-vsnip-integ
+
+      # Programming: Database support
+      vim-dadbod
+      vim-dadbod-ui
 
       ## Project management
       direnv-vim
@@ -185,6 +190,7 @@
 
         # SQL
         sqls
+        postgresql
 
         # terraform
         terraform-ls
