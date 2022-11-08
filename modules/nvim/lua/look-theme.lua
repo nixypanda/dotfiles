@@ -2,7 +2,9 @@ local file_syntax_map = {
     { pattern = "*.rasi", syntax = "scss" },
     { pattern = "flake.lock", syntax = "json" },
     { pattern = "*.tfstate", syntax = "json" },
+    { pattern = "*.tfvars", syntax = "hcl" },
     { pattern = "*.nomad", syntax = "hcl" },
+    { pattern = "manifest", syntax = "hcl" },
     { pattern = "lotus58.keymap", syntax = "c" },
     { pattern = "lotus58.conf", syntax = "c" },
 }
