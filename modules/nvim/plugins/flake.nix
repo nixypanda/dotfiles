@@ -1,15 +1,7 @@
 {
   inputs = {
-    nvim-alpha-src = {
-      url = "github:goolord/alpha-nvim";
-      flake = false;
-    };
     nvim-better-digraphs-src = {
       url = "github:protex/better-digraphs.nvim";
-      flake = false;
-    };
-    nvim-dap-python-src = {
-      url = "github:mfussenegger/nvim-dap-python";
       flake = false;
     };
     nvim-headlines-src = {
@@ -32,29 +24,13 @@
       url = "github:nanotee/sqls.nvim";
       flake = false;
     };
-    nvim-surround-src = {
-      url = "github:kylechui/nvim-surround";
-      flake = false;
-    };
-    nvim-yuck-src = {
-      url = "github:elkowar/yuck.vim";
-      flake = false;
-    };
   };
   outputs = inputs:
     let
       missingVimPluginsInNixpkgs = pkgs: {
-        nvim-alpha = pkgs.vimUtils.buildVimPlugin {
-          name = "nvim-alpha";
-          src = inputs.nvim-alpha-src;
-        };
         nvim-better-digraphs = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-better-digraphs";
           src = inputs.nvim-better-digraphs-src;
-        };
-        nvim-dap-python = pkgs.vimUtils.buildVimPlugin {
-          name = "nvim-dap-python";
-          src = inputs.nvim-dap-python-src;
         };
         nvim-headlines = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-headlines";
@@ -75,14 +51,6 @@
         nvim-sqls = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-sqls";
           src = inputs.nvim-sqls-src;
-        };
-        nvim-surround = pkgs.vimUtils.buildVimPlugin {
-          name = "nvim-surround";
-          src = inputs.nvim-surround-src;
-        };
-        nvim-yuck = pkgs.vimUtils.buildVimPlugin {
-          name = "nvim-yuck";
-          src = inputs.nvim-yuck-src;
         };
       };
     in

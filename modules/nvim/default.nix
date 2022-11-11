@@ -9,7 +9,7 @@
       bufferline-nvim
       indent-blankline-nvim
       lualine-nvim
-      nvim-alpha
+      alpha-nvim
       nvim-colorizer-lua
       nvim-headlines
       nvim-web-devicons
@@ -89,7 +89,7 @@
 
       # Programming: Language support
       crates-nvim
-      nvim-yuck
+      yuck-vim
 
       # Programming: Autocompletion setup
       nvim-cmp

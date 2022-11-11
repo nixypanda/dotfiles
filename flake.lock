@@ -369,22 +369,6 @@
         "type": "github"
       }
     },
-    "nvim-alpha-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1662693863,
-        "narHash": "sha256-tKXSFZusajLLsbQj6VKZG1TJB+i5i1H5e5Q5tbe+ojM=",
-        "owner": "goolord",
-        "repo": "alpha-nvim",
-        "rev": "0bb6fc0646bcd1cdb4639737a1cee8d6e08bcc31",
-        "type": "github"
-      },
-      "original": {
-        "owner": "goolord",
-        "repo": "alpha-nvim",
-        "type": "github"
-      }
-    },
     "nvim-better-digraphs-src": {
       "flake": false,
       "locked": {
@@ -398,22 +382,6 @@
       "original": {
         "owner": "protex",
         "repo": "better-digraphs.nvim",
-        "type": "github"
-      }
-    },
-    "nvim-dap-python-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1667297967,
-        "narHash": "sha256-UlwLESRrfwtzQGP30nYVkELAQWs85eyo9ORIjMLr198=",
-        "owner": "mfussenegger",
-        "repo": "nvim-dap-python",
-        "rev": "27a0eff2bd3114269bb010d895b179e667e712bd",
-        "type": "github"
-      },
-      "original": {
-        "owner": "mfussenegger",
-        "repo": "nvim-dap-python",
         "type": "github"
       }
     },
@@ -452,11 +420,11 @@
     "nvim-nu-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1645111223,
-        "narHash": "sha256-cqP6jjRZOA36Hrw1dreqOpuXS0PtPBQGm0Z1jEdSCTM=",
+        "lastModified": 1667423920,
+        "narHash": "sha256-Ai2ot7d0TPQNDtY9Z/CPej5yJq7d6gZm1WJPW52L8/k=",
         "owner": "LhKipp",
         "repo": "nvim-nu",
-        "rev": "3ef01939989f4d45520873fdac23a2cd7c9c226b",
+        "rev": "94f237c219ae6bbb18e2f214783e0f1370eda27b",
         "type": "github"
       },
       "original": {
@@ -494,38 +462,6 @@
       "original": {
         "owner": "nanotee",
         "repo": "sqls.nvim",
-        "type": "github"
-      }
-    },
-    "nvim-surround-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1666935391,
-        "narHash": "sha256-EcygUu05HRYPbF71CIgrxitphFSkxdv+oP5ItwBDCsM=",
-        "owner": "kylechui",
-        "repo": "nvim-surround",
-        "rev": "7e5096b736ae252d04d543af6a13280125dc6d0f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "kylechui",
-        "repo": "nvim-surround",
-        "type": "github"
-      }
-    },
-    "nvim-yuck-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1667045807,
-        "narHash": "sha256-F7aS8d6jJQQoIGkG2o4KNnDZAIrq0c+otIHvjdoGbtY=",
-        "owner": "elkowar",
-        "repo": "yuck.vim",
-        "rev": "9b5e0370f70cc30383e1dabd6c215475915fe5c3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "elkowar",
-        "repo": "yuck.vim",
         "type": "github"
       }
     },
@@ -602,20 +538,16 @@
     },
     "vim-plugins": {
       "inputs": {
-        "nvim-alpha-src": "nvim-alpha-src",
         "nvim-better-digraphs-src": "nvim-better-digraphs-src",
-        "nvim-dap-python-src": "nvim-dap-python-src",
         "nvim-headlines-src": "nvim-headlines-src",
         "nvim-lspsaga-src": "nvim-lspsaga-src",
         "nvim-nu-src": "nvim-nu-src",
         "nvim-regexplainer-src": "nvim-regexplainer-src",
-        "nvim-sqls-src": "nvim-sqls-src",
-        "nvim-surround-src": "nvim-surround-src",
-        "nvim-yuck-src": "nvim-yuck-src"
+        "nvim-sqls-src": "nvim-sqls-src"
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-fNqrdC/B7x6C5zDxkhC32vr3W8wwzSKMeFltaRIMqbE=",
+        "narHash": "sha256-mc8xcT/Hd8Ax25pBepxw42tqCrUKFSpDGfov8tnz4Qc=",
         "path": "./modules/nvim/plugins",
         "type": "path"
       },
