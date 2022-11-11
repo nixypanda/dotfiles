@@ -171,9 +171,9 @@
         pandoc
 
         # Nix
-        rnix-lsp
         deadnix
         statix
+        nil
 
         # python
         python3Packages.isort

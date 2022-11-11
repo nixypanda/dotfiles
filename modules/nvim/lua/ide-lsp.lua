@@ -23,7 +23,7 @@ require 'lspconfig'.sumneko_lua.setup {
 }
 
 -- nix
-require 'lspconfig'.rnix.setup {}
+require 'lspconfig'.nil_ls.setup {}
 
 -- Python
 require 'lspconfig'.pyright.setup { capabilities = capabilities }
