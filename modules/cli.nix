@@ -20,6 +20,7 @@
     unzip
     wireshark
     pgcli
+    dogdns
 
     # Moar colors
     starship
