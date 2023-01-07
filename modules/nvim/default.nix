@@ -183,7 +183,6 @@
         mypy
 
         # Rust
-        rust-analyzer
         rustfmt
         clippy
         # lldb # debugging setup
@@ -225,6 +224,7 @@
 
   home.packages = with pkgs; [
     nodePackages.livedown
+    rust-analyzer
   ];
 
   xdg.configFile = {
