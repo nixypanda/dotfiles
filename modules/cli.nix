@@ -21,6 +21,8 @@
     wireshark
     pgcli
     dogdns
+    drone-cli
+
 
     # Moar colors
     starship
