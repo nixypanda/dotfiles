@@ -1,5 +1,4 @@
 require "base-sane"
-require "look-theme"
 
 require "look-colorizer"
 require "look-dashboard"
@@ -23,3 +22,5 @@ require "nav-which_key"
 
 require "text-surround"
 require "text-comment"
+
+require "look-theme"

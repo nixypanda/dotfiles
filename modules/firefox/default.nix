@@ -6,21 +6,6 @@ in
   programs.firefox = {
     enable = true;
     package = if pkgs.stdenv.isLinux then pkgs.firefox else pkgs.firefox-bin;
-    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-      clearurls
-      darkreader
-      df-youtube
-      facebook-container
-      grammarly
-      octotree
-      okta-browser-plugin
-      onepassword-password-manager
-      plasma-integration
-      return-youtube-dislikes
-      sponsorblock
-      ublock-origin
-      vimium
-    ];
     profiles = {
       default = {
         name = "Default";
@@ -30,6 +15,21 @@ in
           (import ./config/privacy.nix)
           (import ./config/tracking.nix)
           (import ./config/security.nix)
+        ];
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          clearurls
+          darkreader
+          df-youtube
+          facebook-container
+          grammarly
+          octotree
+          okta-browser-plugin
+          onepassword-password-manager
+          plasma-integration
+          return-youtube-dislikes
+          sponsorblock
+          ublock-origin
+          vimium
         ];
       };
       # This does not have as strict privacy settings as the default profile.

@@ -25,7 +25,6 @@ dap_python.setup("python")
 dap_python.test_runner = "pytest"
 
 -- Rust Setup
-local dap = require('dap')
 dap.adapters.lldb = {
     type = 'executable',
     command = 'lldb-vscode', -- adjust as needed

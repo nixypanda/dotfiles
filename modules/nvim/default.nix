@@ -157,7 +157,7 @@
 
         # lua
         luaformatter
-        sumneko-lua-language-server
+        lua-language-server
 
         # Make
         /* cmake-language-server */
@@ -177,7 +177,7 @@
         postgresql
 
         # terraform
-        terraform-ls
+        terraform-lsp
 
         # TOML
         taplo-cli

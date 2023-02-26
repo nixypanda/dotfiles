@@ -17,9 +17,27 @@ require 'lspconfig'.hls.setup {
 require 'lspconfig'.tsserver.setup {}
 
 -- lua
-require 'lspconfig'.sumneko_lua.setup {
-    cmd = { "lua-language-server" },
-    settings = { Lua = { diagnostics = { globals = { 'vim' } } } }
+require 'lspconfig'.lua_ls.setup {
+    settings = {
+        Lua = {
+            runtime = {
+                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                version = 'LuaJIT',
+            },
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = { 'vim' },
+            },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = vim.api.nvim_get_runtime_file("", true),
+            },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = {
+                enable = false,
+            },
+        },
+    },
 }
 
 -- nix
@@ -47,7 +65,7 @@ require('lspconfig').sqls.setup {
     end
 }
 
-require 'lspconfig'.terraformls.setup {}
+require 'lspconfig'.terraform_lsp.setup {}
 
 -- shit you need to deal with
 require 'lspconfig'.bashls.setup {}

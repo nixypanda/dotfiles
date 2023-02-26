@@ -16,7 +16,6 @@
     };
     nur = {
       url = "github:nix-community/NUR";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     taffybar = {
       url = "github:sherubthakur/taffybar";
@@ -26,7 +25,6 @@
     # relative path is defined accordingly. This has potential of causing issues.
     vim-plugins = {
       url = "path:./modules/nvim/plugins";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs = { self, nur, taffybar, vim-plugins, nixpkgs, home-manager, darwin, nixpkgs-firefox-darwin }:

@@ -18,7 +18,8 @@
     tokei
     unrar
     unzip
-    wireshark
+    # Build failing on MacOS
+    /* wireshark */
     pgcli
     dogdns
     drone-cli
