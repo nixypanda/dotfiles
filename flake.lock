@@ -385,6 +385,22 @@
         "type": "github"
       }
     },
+    "nvim-codeium-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1677278806,
+        "narHash": "sha256-E9O9ZLec9lMMHDuW+LWfvIukh/z+2FX9x9YD9k6l/xw=",
+        "owner": "Exafunction",
+        "repo": "codeium.vim",
+        "rev": "35ac4b5949535796a70dce6e184d34171f0ac7e6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Exafunction",
+        "repo": "codeium.vim",
+        "type": "github"
+      }
+    },
     "nvim-headlines-src": {
       "flake": false,
       "locked": {
@@ -539,6 +555,7 @@
     "vim-plugins": {
       "inputs": {
         "nvim-better-digraphs-src": "nvim-better-digraphs-src",
+        "nvim-codeium-src": "nvim-codeium-src",
         "nvim-headlines-src": "nvim-headlines-src",
         "nvim-lspsaga-src": "nvim-lspsaga-src",
         "nvim-nu-src": "nvim-nu-src",
@@ -547,7 +564,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-mc8xcT/Hd8Ax25pBepxw42tqCrUKFSpDGfov8tnz4Qc=",
+        "narHash": "sha256-bb9pL4iBdNbpfVeVUX0218n83W3BHFIP7jbr3FzAzOU=",
         "path": "./modules/nvim/plugins",
         "type": "path"
       },

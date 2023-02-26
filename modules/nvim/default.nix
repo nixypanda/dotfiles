@@ -5,6 +5,7 @@
     vimAlias = true;
 
     plugins = with pkgs.vimPlugins; [
+      nvim-codeium
       # Appearance
       bufferline-nvim
       indent-blankline-nvim

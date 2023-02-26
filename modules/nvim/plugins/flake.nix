@@ -24,10 +24,18 @@
       url = "github:nanotee/sqls.nvim";
       flake = false;
     };
+    nvim-codeium-src = {
+      url = "github:Exafunction/codeium.vim";
+      flake = false;
+    };
   };
   outputs = inputs:
     let
       missingVimPluginsInNixpkgs = pkgs: {
+        nvim-codeium = pkgs.vimUtils.buildVimPlugin {
+          name = "nvim-codeium";
+          src = inputs.nvim-codeium-src;
+        };
         nvim-better-digraphs = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-better-digraphs";
           src = inputs.nvim-better-digraphs-src;
