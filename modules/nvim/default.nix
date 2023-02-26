@@ -50,7 +50,6 @@
       nvim-lspconfig
       nvim-lspsaga
       nvim-sqls
-      rust-tools-nvim
 
       # Progrmming: Treesitter
       (nvim-treesitter.withPlugins (plugins: with plugins; [
@@ -149,9 +148,6 @@
         # Go
         gopls
 
-        # Haskell
-        haskellPackages.haskell-language-server
-
         # HTML/CSS/JS
         nodePackages.vscode-langservers-extracted
 
@@ -174,18 +170,6 @@
         deadnix
         statix
         nil
-
-        # python
-        python3Packages.isort
-        nodePackages.pyright
-        black
-        python3Packages.flake8
-        mypy
-
-        # Rust
-        rustfmt
-        clippy
-        # lldb # debugging setup
 
         # SQL
         sqls
@@ -224,7 +208,22 @@
 
   home.packages = with pkgs; [
     nodePackages.livedown
+
+    # Haskell
+    haskellPackages.haskell-language-server
+
+
+    # Rust
     rust-analyzer
+    rustfmt
+    clippy
+
+    # python
+    python3Packages.isort
+    nodePackages.pyright
+    black
+    python3Packages.flake8
+    mypy
   ];
 
   xdg.configFile = {
