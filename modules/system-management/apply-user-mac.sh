@@ -12,7 +12,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 pushd ~/.dotfiles
-home-manager switch --flake "./#macbook-pro"
+home-manager switch --flake "./#macbook-pro" -b backup
 
 if $with_brew; then
     echo "DOING SHIT WITH BREW"
