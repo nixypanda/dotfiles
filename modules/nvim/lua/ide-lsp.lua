@@ -38,8 +38,6 @@ require 'lspconfig'.rust_analyzer.setup {
         })
     end
 }
-require 'rust-tools'.setup()
-require('rust-tools').inlay_hints.enable()
 require 'crates'.setup()
 
 -- SQL
