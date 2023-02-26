@@ -133,9 +133,8 @@ null_ls.setup {
         null_ls.builtins.formatting.markdownlint,
         -- python
         null_ls.builtins.formatting.black,
-        null_ls.builtins.formatting.isort,
-        null_ls.builtins.diagnostics.flake8,
         null_ls.builtins.diagnostics.mypy,
+        null_ls.builtins.diagnostics.ruff.with({ command = { "python", "-m", "ruff" } }),
         -- js, html, css, formatting
         null_ls.builtins.formatting.prettier,
         -- nix

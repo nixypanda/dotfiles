@@ -23,6 +23,7 @@
     dogdns
     drone-cli
 
+    ruff
 
     # Moar colors
     starship
