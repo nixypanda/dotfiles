@@ -2,8 +2,6 @@ local file_syntax_map = {
     { pattern = "*.rasi",         syntax = "scss" },
     { pattern = "flake.lock",     syntax = "json" },
     { pattern = "*.tfstate",      syntax = "json" },
-    { pattern = "*.tfvars",       syntax = "hcl" },
-    { pattern = "*.tf",           syntax = "hcl" },
     { pattern = "*.nomad",        syntax = "hcl" },
     { pattern = "manifest",       syntax = "hcl" },
     { pattern = "lotus58.keymap", syntax = "c" },
@@ -13,7 +11,7 @@ local file_syntax_map = {
 for _, elm in ipairs(file_syntax_map) do
     vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
         pattern = elm.pattern,
-        command = "set syntax=" .. elm.syntax,
+        command = "set syntax=" .. elm.syntax
     })
 end
 
