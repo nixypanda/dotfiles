@@ -21,7 +21,7 @@ cmp.setup({
     },
     formatting = { format = lspkind.cmp_format({ with_text = true, maxwidth = 50 }) },
     mapping = {
-        ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+        ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs( -4), { 'i', 'c' }),
         ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
         ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
         -- If you want to remove the default `<C-y>` mapping, You can specify
@@ -45,7 +45,7 @@ cmp.setup({
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
-            elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+            elseif vim.fn["vsnip#jumpable"]( -1) == 1 then
                 feedkey("<Plug>(vsnip-jump-prev)", "")
             else
                 fallback()
@@ -100,5 +100,5 @@ vim.o.completeopt = "menuone,noselect"
 vim.g.codeium_disable_bindings = 1
 vim.keymap.set('i', '<C-j>', function() return vim.fn['codeium#Accept']() end, { expr = true })
 vim.keymap.set('i', '<M-]>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true })
-vim.keymap.set('i', '<M-[>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true })
+vim.keymap.set('i', '<M-[>', function() return vim.fn['codeium#CycleCompletions']( -1) end, { expr = true })
 vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true })

@@ -43,7 +43,6 @@ local mappings = {
         d = { '<cmd>lua require"better-digraphs".digraphs("i")<cr>', "Digraphs" },
         r = { '<cmd>RegexplainerToggle<cr>', "Explain Regex (Show/Hide)" },
     },
-
     b = {
         name = '+buffers',
         A = { '<cmd>bufdo bd<cr>', 'Close all buffer' },
@@ -128,7 +127,6 @@ local mappings = {
             }
         }
     },
-
     s = {
         name = "+Search",
         b = { "<cmd>Telescope buffers<cr>", "Open Buffers" },
