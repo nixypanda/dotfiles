@@ -1,10 +1,14 @@
 {
   homebrew.enable = true;
-  homebrew.autoUpdate = true;
-  homebrew.cleanup = "zap";
-  homebrew.global.brewfile = true;
-  homebrew.global.noLock = true;
-
+  homebrew.onActivation = {
+    autoUpdate = true;
+    cleanup = "zap";
+    upgrade = true;
+  };
+  homebrew.global = { 
+    brewfile = true;
+    lockfiles = false;
+  };
   homebrew.taps = [
     "homebrew/cask"
     "homebrew/cask-drivers"
