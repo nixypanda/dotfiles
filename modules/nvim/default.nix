@@ -40,7 +40,6 @@ in
     vimAlias = true;
 
     plugins = with pkgs.vimPlugins; [
-      nvim-codeium
       # Appearance
       bufferline-nvim
       indent-blankline-nvim
@@ -138,6 +137,7 @@ in
       cmp-vsnip
       vim-vsnip
       vim-vsnip-integ
+      nvim-codeium # AI completion prediction
 
       # Programming: Database support
       vim-dadbod
