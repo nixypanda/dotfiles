@@ -79,12 +79,10 @@ in
       vim-fugitive
 
       # Programming: LSP
-      fidget-nvim
-      lsp_signature-nvim
       lspkind-nvim
       null-ls-nvim
       nvim-lspconfig
-      nvim-lspsaga
+      lspsaga-nvim-original
       nvim-sqls
 
       # Progrmming: Treesitter
@@ -97,7 +95,6 @@ in
         tree-sitter-go
         tree-sitter-haskell
         tree-sitter-hcl
-        tree-sitter-terraform
         tree-sitter-html
         tree-sitter-java
         tree-sitter-javascript
@@ -109,13 +106,16 @@ in
         tree-sitter-nix
         tree-sitter-python
         tree-sitter-regex
+        tree-sitter-regex
         tree-sitter-ruby
         tree-sitter-rust
         tree-sitter-scss
         tree-sitter-sql
+        tree-sitter-terraform
         tree-sitter-toml
         tree-sitter-tsx
         tree-sitter-typescript
+        tree-sitter-vim
         tree-sitter-yaml
       ]))
       nvim-nu

@@ -8,10 +8,6 @@
       url = "github:lukas-reineke/headlines.nvim";
       flake = false;
     };
-    nvim-lspsaga-src = {
-      url = "github:glepnir/lspsaga.nvim";
-      flake = false;
-    };
     nvim-nu-src = {
       url = "github:LhKipp/nvim-nu";
       flake = false;
@@ -43,10 +39,6 @@
         nvim-headlines = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-headlines";
           src = inputs.nvim-headlines-src;
-        };
-        nvim-lspsaga = pkgs.vimUtils.buildVimPlugin {
-          name = "nvim-lspsaga";
-          src = inputs.nvim-lspsaga-src;
         };
         nvim-nu = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-nu";

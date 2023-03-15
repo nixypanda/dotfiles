@@ -49,12 +49,6 @@ require 'lspconfig'.pyright.setup { capabilities = capabilities }
 -- Rust
 require 'lspconfig'.rust_analyzer.setup {
     capabilities = capabilities,
-    on_attach = function()
-        require 'lsp_signature'.on_attach({
-            bind = true,
-            handler_opts = { border = 'single' }
-        })
-    end
 }
 require 'crates'.setup()
 
@@ -169,10 +163,6 @@ null_ls.setup {
 }
 
 
--- signature help
-require 'lsp_signature'.on_attach({ bind = true, handler_opts = { border = 'single' } })
-
-
 -- Basic LSP keybindings
 -- Jump to Definition/Implementation
 vim.api.nvim_set_keymap('n', 'gd', [[<cmd>lua vim.lsp.buf.definition()<CR>]],
@@ -195,7 +185,7 @@ for _, file_pattern in ipairs({ "*.rs", "*.hs", "*.py", "*.lua", "*.md", "*.nix"
         'BufWritePre',
         {
             pattern = file_pattern,
-            callback = function() vim.lsp.buf.formatting_sync(nil, 1000) end
+            callback = function() vim.lsp.buf.format(nil) end
         }
     )
 end
@@ -203,24 +193,7 @@ end
 -- Prettify LSP diagnostic messages/icons
 
 -- prettier output for lsp diagnostics/renaming menu/references list/etc
-local saga = require 'lspsaga'
-saga.init_lsp_saga {
-    border_style = "rounded",
-    move_in_saga = { prev = 'k', next = 'j' },
-    diagnostic_header = { " ", " ", "", " " },
-    code_action_icon = " ",
-    finder_action_keys = {
-        open = '<CR>',
-        vsplit = 'v',
-        split = 's',
-        quit = { 'q', '<Esc>' }
-    },
-    code_action_keys = {
-        quit = { "q", '<Esc>' },
-        exec = "<CR>",
-    },
-}
-require 'lspsaga.diagnostic'.show_line_diagnostics()
+require('lspsaga').setup({})
 
 vim.diagnostic.config({
     virtual_text = false,
@@ -252,7 +225,3 @@ function lspconfig_window.default_opts(opts)
 end
 
 require('lspkind').init({})
-
--- Display LSP messages overlayd on the current buffer (instead of the status
--- line) at the bottom right corner
-require "fidget".setup {}
