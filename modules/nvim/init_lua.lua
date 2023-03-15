@@ -6,6 +6,7 @@ require "look-git"
 require "look-statusline"
 require "look-todo"
 require "look-topline"
+require "look-general"
 
 require "ide-completion"
 require "ide-dap"

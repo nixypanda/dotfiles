@@ -48,6 +48,7 @@ in
       nvim-colorizer-lua
       nvim-headlines
       nvim-web-devicons
+      noice-nvim
 
       # Appearance: Themes
       dracula-vim
