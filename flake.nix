@@ -148,7 +148,7 @@
       # I have no idea what I am doing here. This setup is making using of
       # nix-darwin which apperently has brew. Brew can be a potent practical
       # fallback when the nix world is not so great no macos.
-      darwinConfigurations."Sherubs-MacBook-Pro-2" = darwin.lib.darwinSystem {
+      darwinConfigurations."nixyMac" = darwin.lib.darwinSystem {
         pkgs = nixpkgs.legacyPackages."x86_64-darwin";
         modules = [
           ./modules/homebrew.nix
