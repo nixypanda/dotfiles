@@ -138,7 +138,10 @@ in
       cmp-vsnip
       vim-vsnip
       vim-vsnip-integ
+
+      # Programming: AI shit
       nvim-codeium # AI completion prediction
+      ChatGPT-nvim
 
       # Programming: Database support
       vim-dadbod
