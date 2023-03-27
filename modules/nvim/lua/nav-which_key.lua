@@ -5,33 +5,33 @@ require "which-key".setup {
         -- the presets plugin, adds help for a bunch of default keybindings in Neovim
         -- No actual key bindings are created
         presets = {
-            operators = true, -- operators like d, y, ...
+            operators = true,    -- operators like d, y, ...
             motions = true,
             text_objects = true, -- triggered after entering an operator
-            windows = true, -- default bindings on <c-w>
-            nav = true, -- misc bindings to work with windows
-            z = true, -- bindings for folds, spelling and others prefixed with z
-            g = true -- bindings for prefixed with g
+            windows = true,      -- default bindings on <c-w>
+            nav = true,          -- misc bindings to work with windows
+            z = true,            -- bindings for folds, spelling and others prefixed with z
+            g = true             -- bindings for prefixed with g
         }
     },
     icons = {
         breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
         separator = "➜", -- symbol used between a key and it's label
-        group = "+" -- symbol prepended to a group
+        group = "+"       -- symbol prepended to a group
     },
     window = {
-        border = "single", -- none, single, double, shadow
-        position = "bottom", -- bottom, top
+        border = "single",       -- none, single, double, shadow
+        position = "bottom",     -- bottom, top
         margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
         padding = { 1, 1, 1, 1 } -- extra window padding [top, right, bottom, left]
     },
     layout = {
-        height = { min = 1, max = 25 }, -- min and max height of the columns
-        width = { min = 20, max = 50 }, -- min and max width of the columns
-        spacing = 3 -- spacing between columns
+        height = { min = 1, max = 25 },                                           -- min and max height of the columns
+        width = { min = 20, max = 50 },                                           -- min and max width of the columns
+        spacing = 3                                                               -- spacing between columns
     },
     hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
-    show_help = true -- show help message on the command line when the popup is visible
+    show_help = true                                                              -- show help message on the command line when the popup is visible
 }
 
 local mappings = {
@@ -122,15 +122,6 @@ local mappings = {
         T = { "<cmd>Lspsaga signature_help<cr>", "Signature Help" },
         u = { "<cmd>LspRestart<cr>", "Restart LSP" },
         U = { "<cmd>LspStart<cr>", "Start LSP" },
-
-        -- Custom that need to go away
-        t = {
-            name = "+Rust",
-            r = { "<cmd>lua require('rust-tools.runnables').runnables()<cr>", "Run" },
-            d = {
-                "<cmd>lua require('rust-tools.debuggables').debuggables()<cr>", "Debug"
-            }
-        }
     },
     s = {
         name = "+Search",
@@ -142,6 +133,7 @@ local mappings = {
         H = { "<cmd>Telescope help_tags<cr>", "Help Tags" },
         j = { "<cmd>Telescope jumplist<cr>", "Jump List" },
         m = { "<cmd>Telescope marks<cr>", "Marks" },
+        n = { "<cmd>Telescope notify<cr>", "Notifications" },
         p = { "<cmd>Telescope projects<cr>", "Projects" },
         r = { "<cmd>Telescope resume<cr>", "Goto last search state" },
         R = { "<cmd>Telescope registers<cr>", "Registers" },
@@ -178,12 +170,12 @@ local mappings = {
 }
 
 local opts = {
-    mode = "n", -- NORMAL mode
+    mode = "n",     -- NORMAL mode
     prefix = "<leader>",
-    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true, -- use `silent` when creating keymaps
+    buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+    silent = true,  -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps
-    nowait = false -- use `nowait` when creating keymaps
+    nowait = false  -- use `nowait` when creating keymaps
 }
 
 local wk = require("which-key")

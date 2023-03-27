@@ -131,6 +131,7 @@ in
       nvim-cmp
       cmp-buffer
       cmp-calc
+      cmp-cmdline
       cmp-nvim-lsp
       cmp-nvim-lua
       cmp-path

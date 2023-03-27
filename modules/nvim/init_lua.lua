@@ -8,6 +8,7 @@ require "look-todo"
 require "look-topline"
 require "look-general"
 
+require "ide-ai"
 require "ide-completion"
 require "ide-dap"
 require "ide-lsp"
