@@ -16,6 +16,7 @@
   ];
   homebrew.casks = [
     "google-chrome"
+    "vlc"
   ];
   homebrew.brews = [
     "ltex-ls"
