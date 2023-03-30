@@ -68,6 +68,7 @@
             ./modules/fonts.nix
             ./modules/git
             ./modules/hashistack.nix
+            ./modules/helix
             ./modules/kitty
             ./modules/nvim
             ./modules/programming.nix
