@@ -8,7 +8,7 @@ in
     package = if pkgs.stdenv.isLinux then pkgs.firefox else pkgs.firefox-bin;
     profiles = {
       default = {
-        name = "Default";
+        name = "privacy-friendly";
         settings = merge [
           (import ./config/annoyances.nix)
           (import ./config/browser-features.nix)
@@ -36,8 +36,26 @@ in
       # It uses the default firefox settings. Useful when something is not
       # working using the default profile
       shit = {
-        name = "crap";
+        name = "trade-privacy-for-convenience";
         id = 1;
+        settings = merge [
+          (import ./config/annoyances.nix)
+        ];
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          clearurls
+          darkreader
+          df-youtube
+          facebook-container
+          grammarly
+          octotree
+          okta-browser-plugin
+          onepassword-password-manager
+          plasma-integration
+          return-youtube-dislikes
+          sponsorblock
+          ublock-origin
+          vimium
+        ];
       };
     };
   };
