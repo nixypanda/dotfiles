@@ -102,8 +102,8 @@ local mappings = {
         a = { "<cmd>Lspsaga code_action<cr>", "Code Action" },
         c = {
             name = "+Call heriarchy",
-            i = { "<cmd>Lspsaga incoming_calls<cr>", "Hover Doc" },
-            o = { "<cmd>Lspsaga outgoing_calls<cr>", "Signature Help" },
+            i = { "<cmd>Lspsaga incoming_calls<cr>", "Incoming Calls" },
+            o = { "<cmd>Lspsaga outgoing_calls<cr>", "Outgoing Calls" },
         },
         d = { "<cmd>Telescope diagnostics bufnr=0<cr>", "Document Diagnostics" },
         D = { "<cmd>Telescope diagnostics<cr>", "Workspace Diagnostics" },
