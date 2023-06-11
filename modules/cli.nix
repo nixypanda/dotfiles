@@ -13,7 +13,6 @@
     hexyl
     jq
     ngrok
-    nix-du
     openvpn
     tokei
     unrar
