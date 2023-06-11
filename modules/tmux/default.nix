@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   programs.tmux = {
-    terminal = "xterm-256color";
+    terminal = "screen-256color";
     enable = true;
     baseIndex = 1;
     clock24 = true;
@@ -23,7 +23,8 @@
 
     plugins = with pkgs.tmuxPlugins; [
       vim-tmux-navigator
-      onedark-theme
+      # onedark-theme
+      catppuccin
     ];
   };
 }

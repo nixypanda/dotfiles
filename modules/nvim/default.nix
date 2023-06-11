@@ -54,6 +54,7 @@ in
       dracula-vim
       one-nvim
       tokyonight-nvim
+      catppuccin-nvim
 
       # DAP
       nvim-dap
@@ -243,7 +244,7 @@ in
 
 
     extraConfig = ''
-      colorscheme ${colorscheme.vim-name}
+      colorscheme catppuccin-macchiato
       luafile ${builtins.toString ./init_lua.lua}
     '';
   };

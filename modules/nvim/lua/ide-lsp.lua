@@ -1,5 +1,5 @@
 -- Need to add this to the language server to broadcast snippet compatibility
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- Enable (broadcasting) snippet capability for completion
 -- elm
@@ -206,10 +206,10 @@ vim.diagnostic.config({
 })
 
 local diagnostic_symbol_map = {
-    { name = "DiagnosticSignError", symbol = " " },
+    { name = "DiagnosticSignError", symbol = "☠ " },
     { name = "DiagnosticSignWarn",  symbol = " " },
     { name = "DiagnosticSignInfo",  symbol = "" },
-    { name = "DiagnosticSignHint",  symbol = " " },
+    { name = "DiagnosticSignHint",  symbol = "☛ " },
 }
 
 for _, elm in ipairs(diagnostic_symbol_map) do
