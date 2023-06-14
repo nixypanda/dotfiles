@@ -1,39 +1,4 @@
 { pkgs, colorscheme, ... }:
-    let tree-sitter-terraform = pkgs.stdenv.mkDerivation {
-      pname = "tree-sitter-terraform";
-
-      src = pkgs.fetchFromGitHub {
-        owner = "MichaHoffmann";
-        repo = "tree-sitter-hcl";
-        rev = "0ff887f2a60a147452d52db060de6b42f42f1441";
-        sha256 = "sha256-L4B2qtGqrtyLHyUMx1p0t4aKncm72dUE+e19Fv5iqUA=";
-      };
-      version = "v1.0.0";
-
-      CFLAGS = [ "-Isrc" "-O2" ];
-      CXXFLAGS = [ "-Isrc" "-O2" ];
-      stripDebugList = [ "parser" ];
-
-      buildPhase = ''
-        runHook preBuild
-        $CXX -fPIC -c dialects/terraform/src/scanner.cc -o scanner.o $CXXFLAGS
-        $CC -fPIC -c dialects/terraform/src/parser.c -o parser.o $CFLAGS
-        rm -rf parser
-        $CXX -shared -o parser *.o
-        runHook postBuild
-      '';
-
-      installPhase = ''
-        runHook preInstall
-        mkdir $out
-        mv parser $out/
-        if [[ -d queries ]]; then
-          cp -r queries $out
-        fi
-        runHook postInstall
-      '';
-    };
-in
 {
   programs.neovim = {
     enable = true;
@@ -88,36 +53,36 @@ in
 
       # Progrmming: Treesitter
       (nvim-treesitter.withPlugins (plugins: with plugins; [
-        tree-sitter-bash
-        tree-sitter-c
-        tree-sitter-css
-        tree-sitter-dockerfile
-        tree-sitter-elm
-        tree-sitter-go
-        tree-sitter-haskell
-        tree-sitter-hcl
-        tree-sitter-html
-        tree-sitter-java
-        tree-sitter-javascript
-        tree-sitter-json
-        tree-sitter-latex
-        tree-sitter-lua
-        tree-sitter-markdown
-        tree-sitter-markdown-inline
-        tree-sitter-nix
-        tree-sitter-python
-        tree-sitter-regex
-        tree-sitter-regex
-        tree-sitter-ruby
-        tree-sitter-rust
-        tree-sitter-scss
-        tree-sitter-sql
-        tree-sitter-terraform
-        tree-sitter-toml
-        tree-sitter-tsx
-        tree-sitter-typescript
-        tree-sitter-vim
-        tree-sitter-yaml
+        bash
+        c
+        css
+        dockerfile
+        elm
+        go
+        haskell
+        hcl
+        html
+        java
+        javascript
+        json
+        latex
+        lua
+        markdown
+        markdown-inline
+        nix
+        python
+        regex
+        regex
+        ruby
+        rust
+        scss
+        sql
+        terraform
+        toml
+        tsx
+        typescript
+        vim
+        yaml
       ]))
       nvim-nu
       nvim-treesitter-refactor
