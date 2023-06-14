@@ -22,6 +22,7 @@
 
     extraConfig = {
       pull.ff = "only";
+      init.defaultBranch = "main";
 
       # NOTE: Required so that `go get` can fetch private repos
       # NOTE: cargo breaks if this is present in the config
