@@ -1,6 +1,9 @@
 -- Need to add this to the language server to broadcast snippet compatibility
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+-- Dhall
+require 'lspconfig'.dhall_lsp_server.setup {}
+
 -- Enable (broadcasting) snippet capability for completion
 -- elm
 require 'lspconfig'.elmls.setup {}

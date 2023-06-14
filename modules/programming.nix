@@ -7,6 +7,11 @@
     # Clojure
     clojure
 
+    # dhall
+    dhall
+    haskellPackages.dhall-json
+    haskellPackages.dhall-yaml
+
     # docker
     docker
 

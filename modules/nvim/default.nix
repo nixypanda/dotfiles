@@ -56,6 +56,7 @@
         bash
         c
         css
+        dhall
         dockerfile
         elm
         go
@@ -136,6 +137,9 @@
         # Bash
         nodePackages.bash-language-server
         shellcheck
+
+        # dhall
+        dhall-lsp-server
 
         # Docker
         nodePackages.dockerfile-language-server-nodejs
