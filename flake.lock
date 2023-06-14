@@ -399,11 +399,11 @@
     "nvim-codeium-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1686287952,
-        "narHash": "sha256-Jbwxs/CBMAjdGSIE92foK9ihSqihJTw+ECzM5I3PGSc=",
+        "lastModified": 1686596580,
+        "narHash": "sha256-l8RKxkV6LG56jucaoJyW9h8/0nrohZCtzlcmcG76NB8=",
         "owner": "Exafunction",
         "repo": "codeium.vim",
-        "rev": "b748ff19c7c3fbd0b9e263d04ea58e10954027ff",
+        "rev": "c045bfe52288b21cff3690bc9c4d5e2dc8a8af2c",
         "type": "github"
       },
       "original": {
