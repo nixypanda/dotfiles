@@ -203,6 +203,11 @@
         # general purpose / multiple langs
         efm-langserver
         nodePackages.prettier
+
+        # utilities used by various programs
+        # telescope
+        ripgrep
+        fd
       ] ++ (if pkgs.stdenv.isLinux then [
         # Grammer
         # Not available on mac using brew to install it

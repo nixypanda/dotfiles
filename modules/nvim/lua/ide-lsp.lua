@@ -151,7 +151,7 @@ null_ls.setup {
         -- python
         null_ls.builtins.formatting.black,
         null_ls.builtins.diagnostics.mypy,
-        null_ls.builtins.diagnostics.ruff.with({ command = { "python", "-m", "ruff" } }),
+        null_ls.builtins.diagnostics.ruff,
         -- js, html, css, formatting
         null_ls.builtins.formatting.prettier,
         -- nix
