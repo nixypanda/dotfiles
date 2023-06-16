@@ -47,14 +47,14 @@ function gstashnfix() {
     git stash
     git rebase -i --autosquash $1~1
     git stash pop
-} 
+}
 
 function git-save-my-secret-commiting-ass() {
     git filter-branch --force --index-filter \
         "git rm --cached --ignore-unmatch $1" \
-         --prune-empty --tag-name-filter cat -- --all
+        --prune-empty --tag-name-filter cat -- --all
 
-    echo $1 >> .gitignore
+    echo $1 >>.gitignore
 
     git push origin --force --all
     git push origin --force --tags
@@ -65,15 +65,15 @@ function git-save-my-secret-commiting-ass() {
 }
 
 # Clean up python project of cache and stuff
-function pyclean () {
+function pyclean() {
     find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
 }
 
 # Recursive execution
 function recursive() {
-    for d in ./*/ ; do ~/.nix-profile/bin/zsh -c "(cd "$d" && pwd && "$@")"; done
+    for d in ./*/; do ~/.nix-profile/bin/zsh -c "(cd "$d" && pwd && "$@")"; done
 }
 
 function recursivep() {
-    for d in ./*/ ; do ~/.nix-profile/bin/zsh -c "(cd "$d" && "$@") &"; done
+    for d in ./*/; do ~/.nix-profile/bin/zsh -c "(cd "$d" && "$@") &"; done
 }

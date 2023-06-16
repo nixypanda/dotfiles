@@ -173,6 +173,8 @@ null_ls.setup {
         null_ls.builtins.formatting.nixfmt,
         -- shell scripting
         null_ls.builtins.code_actions.shellcheck,
+        -- terraform
+        null_ls.builtins.formatting.terraform_fmt,
         -- other
         null_ls.builtins.diagnostics.gitlint,
         null_ls.builtins.diagnostics.hadolint,
@@ -206,7 +208,9 @@ vim.api.nvim_set_keymap(
 
 -- AUTO FORMATTING
 
-local formats = { "*.rs", "*.hs", "*.py", "*.lua", "*.md", "*.nix", "*.tf" }
+local formats = {
+    "*.hs", "*.json", "*.lua", "*.md", "*.nix", "*.py", "*.rs", "*.tf", "*.yaml",
+}
 
 for _, file_pattern in ipairs(formats) do
     vim.api.nvim_create_autocmd(

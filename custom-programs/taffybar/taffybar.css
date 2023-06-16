@@ -1,100 +1,99 @@
-
 @import "colors.css";
 
 /* Top level styling */
 
 .taffy-window * {
-	font-family: "Noto Sans", sans-serif;
+  font-family: "Noto Sans", sans-serif;
 }
 
 .taffy-box {
-	border-style: solid;
-    padding: 5px;
-    padding-left: 50px;
-	font-size: 8pt;
-    color: @font-color;
-	border-color: @bg;
+  border-style: solid;
+  padding: 5px;
+  padding-left: 50px;
+  font-size: 8pt;
+  color: @font-color;
+  border-color: @bg;
 }
 
 .inner-pad {
-	padding: 0px;
+  padding: 0px;
 }
 
 .contents {
-    padding: 5px 10px;
-	transition: background-color .5s;
-	border-radius: 20px;
-	background-color: @bg;
+  padding: 5px 10px;
+  transition: background-color 0.5s;
+  border-radius: 20px;
+  background-color: @bg;
 }
 
 /* Workspaces styling */
 
 .workspaces {
-    border-style: solid;
-    border-radius: 20px;
-    border-left: 10px;
-    padding: 1px 10px 1px 10px;
-    background-color: @bg;
+  border-style: solid;
+  border-radius: 20px;
+  border-left: 10px;
+  padding: 1px 10px 1px 10px;
+  background-color: @bg;
 }
 
 .empty .contents {
-    border-radius: 2px;
+  border-radius: 2px;
 }
 
 .hidden .contents {
-    border-radius: 2px;
-    padding: 2px 5px;
+  border-radius: 2px;
+  padding: 2px 5px;
 }
 
 .active .contents {
-	opacity: 1;
-    border-radius: 5px;
-    padding: 2px 10px;
-	background-color: @bg-alt;
+  opacity: 1;
+  border-radius: 5px;
+  padding: 2px 10px;
+  background-color: @bg-alt;
 }
 
 .contents .window-icon {
-	opacity: 0.8;
-    padding: 1px;
+  opacity: 0.8;
+  padding: 1px;
 }
 
 .active .contents .window-icon {
-	opacity: 1;
-    padding: 1px;
+  opacity: 1;
+  padding: 1px;
 }
 
 .workspace-label {
-	opacity: 1;
-	color: @font-color;
+  opacity: 1;
+  color: @font-color;
 }
 
 .active .workspace-label {
-	color: @font-color;
+  color: @font-color;
 }
 
-
 .window-icon-container {
-	transition: opacity .5s, box-shadow .5s;
-	opacity: 1;
-	border-radius: 5px;
-    /* padding: 1px; */
-	transition: background-color 1s;
+  transition: opacity 0.5s, box-shadow 0.5s;
+  opacity: 1;
+  border-radius: 5px;
+  /* padding: 1px; */
+  transition: background-color 1s;
 }
 
 /* This gives space for the box-shadow () that follow.
    This will actually affect all widgets, (not just the workspace icons), but
    that is what we want since we want the icons to look the same. */
-.auto-size-image, .sni-tray  {
-	padding: 4px;
+.auto-size-image,
+.sni-tray {
+  padding: 4px;
 }
 
 .tray-icon-image {
-    padding-left: 5px;
-    padding-right: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .window-icon-container.active {
-	background-color: @font-color;
+  background-color: @font-color;
 }
 
 .window-icon-container.urgent {
@@ -105,66 +104,70 @@
 }
 
 .window-icon-container.minimized .window-icon {
-	opacity: .3;
+  opacity: 0.3;
 }
 
 .window-icon {
-	opacity: 1;
-	transition: opacity .5s;
+  opacity: 1;
+  transition: opacity 0.5s;
 }
 
 /* Button styling */
 
 button {
-	all: initial;
-    font-size: 8pt;
-    color: @font-color;
-	background-color: @bg;
+  all: initial;
+  font-size: 8pt;
+  color: @font-color;
+  background-color: @bg;
 }
 
-button:checked, button:hover .Contents:hover {
-	box-shadow: inset 0 -3px @accent;
+button:checked,
+button:hover .Contents:hover {
+  box-shadow: inset 0 -3px @accent;
 }
 
 /* Music Player Styles */
 .music-player {
-    padding: 2px 10px;
+  padding: 2px 10px;
 }
 .music-player-play-btn {
-    padding: 1px 10px;
-    border-radius: 20px;
-    /* This affects more than the music icon FML*/
-    font-size: 14pt;
-    background-color: @bg-alt;
+  padding: 1px 10px;
+  border-radius: 20px;
+  /* This affects more than the music icon FML*/
+  font-size: 14pt;
+  background-color: @bg-alt;
 }
-
 
 /* power-menu styling */
 
 .power-menu {
-    padding: 1px 20px;
-	border-radius: 20px;
-    font-size: 14pt;
-	background-color: @red;
-    color: @menu-background-color;
+  padding: 1px 20px;
+  border-radius: 20px;
+  font-size: 14pt;
+  background-color: @red;
+  color: @menu-background-color;
 }
 
 /* Menu styling */
 
 /* The ".taffy-window" prefixed selectors are needed because if they aren't present,
    the top level .Taffybar selector takes precedence */
-.taffy-window menuitem *,  menuitem * {
-	color: @menu-font-color;
+.taffy-window menuitem *,
+menuitem * {
+  color: @menu-font-color;
 }
 
-.taffy-window menuitem, menuitem {
-	background-color: @menu-background-color;
+.taffy-window menuitem,
+menuitem {
+  background-color: @menu-background-color;
 }
 
-.taffy-window menuitem:hover, menuitem:hover {
-	background-color: @menu-background-color-selected;
+.taffy-window menuitem:hover,
+menuitem:hover {
+  background-color: @menu-background-color-selected;
 }
 
-.taffy-window menuitem:hover > label, menuitem:hover > label {
-	color: @font-color;
+.taffy-window menuitem:hover > label,
+menuitem:hover > label {
+  color: @font-color;
 }

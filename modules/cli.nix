@@ -7,11 +7,13 @@
     docker-compose
     dua
     fx
+    fd
     gnumake
     graphviz
     hexyl
     jq
     ngrok
+    nodePackages.prettier
     openvpn
     tokei
     unrar
@@ -23,6 +25,7 @@
     drone-cli
 
     ruff
+    shfmt
 
     # Moar colors
     starship

@@ -145,6 +145,7 @@ in {
         # Bash
         nodePackages.bash-language-server
         shellcheck
+        shfmt
 
         # dhall
         dhall-lsp-server
