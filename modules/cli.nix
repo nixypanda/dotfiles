@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   home.packages = with pkgs; [
     # CLI tools / Terminal facification
     arandr
@@ -18,7 +17,7 @@
     unrar
     unzip
     # Build failing on MacOS
-    /* wireshark */
+    # wireshark
     pgcli
     dogdns
     drone-cli

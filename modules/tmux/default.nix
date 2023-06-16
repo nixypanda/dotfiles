@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   programs.tmux = {
     terminal = "screen-256color";
     enable = true;

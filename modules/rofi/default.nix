@@ -1,5 +1,4 @@
-{ pkgs, colorscheme, ... }:
-{
+{ pkgs, colorscheme, ... }: {
   programs.rofi = {
     enable = true;
     package = pkgs.rofi.override {

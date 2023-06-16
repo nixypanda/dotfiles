@@ -1,8 +1,6 @@
 {
   description = "Browser Media Controls";
-  inputs = {
-    unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-  };
+  inputs = { unstable.url = "github:NixOS/nixpkgs/nixos-unstable"; };
 
   outputs = inputs:
     let
@@ -15,11 +13,8 @@
         gobject-introspection
         (python3.withPackages pythonDeps)
       ];
-    in
-    {
-      devShell."${system}" = pkgs.mkShell {
-        buildInputs = deps;
-      };
+    in {
+      devShell."${system}" = pkgs.mkShell { buildInputs = deps; };
       defaultPackage."${system}" = pkgs.stdenv.mkDerivation {
         name = "custom-browsermediacontrol";
         buildInputs = deps;

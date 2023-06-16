@@ -1,12 +1,11 @@
-{ pkgs, colorscheme, nixpkgs_codelldb_fixed_on_mac, ... }:
+{ pkgs, colorscheme, codelldb_fixed_pkgs, ... }:
 let
-    # Using a fixed version of codelldb which works on Mac.
-    # We get this from an alternate nixpkgs repo.
-    # Caveat: This requires Xcode.app installed on the system
-    # NOTE: https://github.com/NixOS/nixpkgs/pull/211321
-    code_lldb = nixpkgs_codelldb_fixed_on_mac.vscode-extensions.vadimcn.vscode-lldb;
-in
-{
+  # Using a fixed version of codelldb which works on Mac.
+  # We get this from an alternate nixpkgs repo.
+  # Caveat: This requires Xcode.app installed on the system
+  # NOTE: https://github.com/NixOS/nixpkgs/pull/211321
+  code_lldb = codelldb_fixed_pkgs.vscode-extensions.vadimcn.vscode-lldb;
+in {
   programs.neovim = {
     enable = true;
     vimAlias = true;
@@ -59,39 +58,40 @@ in
       nvim-sqls
 
       # Progrmming: Treesitter
-      (nvim-treesitter.withPlugins (plugins: with plugins; [
-        bash
-        c
-        css
-        dhall
-        dockerfile
-        elm
-        go
-        haskell
-        hcl
-        html
-        java
-        javascript
-        json
-        latex
-        lua
-        markdown
-        markdown-inline
-        nix
-        python
-        regex
-        regex
-        ruby
-        rust
-        scss
-        sql
-        terraform
-        toml
-        tsx
-        typescript
-        vim
-        yaml
-      ]))
+      (nvim-treesitter.withPlugins (plugins:
+        with plugins; [
+          bash
+          c
+          css
+          dhall
+          dockerfile
+          elm
+          go
+          haskell
+          hcl
+          html
+          java
+          javascript
+          json
+          latex
+          lua
+          markdown
+          markdown-inline
+          nix
+          python
+          regex
+          regex
+          ruby
+          rust
+          scss
+          sql
+          terraform
+          toml
+          tsx
+          typescript
+          vim
+          yaml
+        ]))
       nvim-nu
       nvim-treesitter-refactor
       nvim-treesitter-textobjects
@@ -179,7 +179,7 @@ in
         lua-language-server
 
         # Make
-        /* cmake-language-server */
+        # cmake-language-server
 
         # Markdown
         nodePackages.markdownlint-cli
@@ -190,6 +190,7 @@ in
         deadnix
         statix
         nil
+        nixfmt
 
         # rust
         code_lldb
@@ -220,14 +221,16 @@ in
         ripgrep
         fd
 
-      ] ++ (if pkgs.stdenv.isLinux then [
-        # Grammer
-        # Not available on mac using brew to install it
-        ltex-ls
-      ] else [
+      ] ++ (if pkgs.stdenv.isLinux then
+        [
+          # Grammer
+          # Not available on mac using brew to install it
+          ltex-ls
+        ]
+      else
+        [
 
-      ]);
-
+        ]);
 
     extraConfig = ''
       colorscheme catppuccin-macchiato
@@ -240,7 +243,6 @@ in
 
     # Haskell
     haskellPackages.haskell-language-server
-
 
     # Rust
     rust-analyzer
@@ -261,11 +263,11 @@ in
       recursive = true;
     };
     "nvim/lua/injected.lua".text = ''
-    local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
-    return {
-        codelldb_path = extension_path .. 'adapter/codelldb',
-        liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib'
-    }
+      local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
+      return {
+          codelldb_path = extension_path .. 'adapter/codelldb',
+          liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib'
+      }
     '';
     "nvim/init_lua.lua".source = ./init_lua.lua;
   };

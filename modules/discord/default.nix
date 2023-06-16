@@ -1,6 +1,1 @@
-{ pkgs, ... }:
-{
-  home.packages = with pkgs; [
-    discord
-  ];
-}
+{ pkgs, ... }: { home.packages = with pkgs; [ discord ]; }

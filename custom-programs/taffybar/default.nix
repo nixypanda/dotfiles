@@ -1,2 +1,1 @@
-{ pkgs }:
-    pkgs.haskellPackages.callCabal2nix "my-taffybar" ./. { }
+{ pkgs }: pkgs.haskellPackages.callCabal2nix "my-taffybar" ./. { }

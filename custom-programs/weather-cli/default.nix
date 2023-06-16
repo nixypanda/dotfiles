@@ -4,13 +4,7 @@ pkgs.stdenv.mkDerivation {
   name = "custom-weather-cli";
   buildInputs = with pkgs; [
     pkg-config
-    (
-      python3.withPackages (
-        python3Packages: with python3Packages; [
-          requests
-        ]
-      )
-    )
+    (python3.withPackages (python3Packages: with python3Packages; [ requests ]))
   ];
   unpackPhase = ":";
   installPhase = ''

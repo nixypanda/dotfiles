@@ -5,20 +5,11 @@
     cleanup = "zap";
     upgrade = true;
   };
-  homebrew.global = { 
+  homebrew.global = {
     brewfile = true;
     lockfiles = false;
   };
-  homebrew.taps = [
-    "homebrew/cask"
-    "homebrew/cask-drivers"
-    "homebrew/core"
-  ];
-  homebrew.casks = [
-    "google-chrome"
-    "vlc"
-  ];
-  homebrew.brews = [
-    "ltex-ls"
-  ];
+  homebrew.taps = [ "homebrew/cask" "homebrew/cask-drivers" "homebrew/core" ];
+  homebrew.casks = [ "google-chrome" "vlc" ];
+  homebrew.brews = [ "ltex-ls" ];
 }

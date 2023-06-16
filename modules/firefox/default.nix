@@ -1,8 +1,6 @@
 { pkgs, lib, ... }:
-let
-  merge = lib.foldr (a: b: a // b) { };
-in
-{
+let merge = lib.foldr (a: b: a // b) { };
+in {
   programs.firefox = {
     enable = true;
     package = if pkgs.stdenv.isLinux then pkgs.firefox else pkgs.firefox-bin;
@@ -38,9 +36,7 @@ in
       shit = {
         name = "trade-privacy-for-convenience";
         id = 1;
-        settings = merge [
-          (import ./config/annoyances.nix)
-        ];
+        settings = merge [ (import ./config/annoyances.nix) ];
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           clearurls
           darkreader

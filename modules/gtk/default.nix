@@ -1,5 +1,4 @@
-{ pkgs, colorscheme, ... }:
-{
+{ pkgs, colorscheme, ... }: {
   home.packages = with pkgs; [
     lxappearance
     dracula-theme

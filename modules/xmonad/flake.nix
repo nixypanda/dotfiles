@@ -12,17 +12,17 @@
       inputs.flake-utils.follows = "flake-utils";
     };
   };
-  outputs = inputs @ { self, nixpkgs, flake-utils, taffybar-flake, ... }:
+  outputs = inputs@{ self, nixpkgs, flake-utils, taffybar-flake, ... }:
     let
-      haskellDeps = ps: with ps; [
-        xmonad
-        xmonad-contrib
-        xmonad-extras
-        haskell-language-server
-        taffybar
-      ];
-    in
-    flake-utils.lib.simpleFlake {
+      haskellDeps = ps:
+        with ps; [
+          xmonad
+          xmonad-contrib
+          xmonad-extras
+          haskell-language-server
+          taffybar
+        ];
+    in flake-utils.lib.simpleFlake {
       inherit self nixpkgs;
       inherit (taffybar-flake) overlay;
       name = "XMonad Dev environment";

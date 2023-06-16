@@ -1,8 +1,7 @@
 let
   # Regex that matches all strings starting with 'eww' that don't end in 'bg'
   non-background-eww-stuff = "^eww(?!.+-bg$).+$";
-in
-{
+in {
   services.picom = {
     enable = true;
     experimentalBackends = true;
@@ -10,7 +9,7 @@ in
     vSync = true;
 
     # Transparency/Opacity
-    inactiveOpacity = 0.80;
+    inactiveOpacity = 0.8;
     activeOpacity = 0.95;
     opacityRules = [
       "100:class_g   *?= 'Firefox'"
@@ -33,16 +32,12 @@ in
       # Blur
       blur-method = "dual_kawase";
       blur-strength = 8;
-      blur-backgroud-exclude = [
-        "class_g = 'eww-topbar-btw'"
-      ];
+      blur-backgroud-exclude = [ "class_g = 'eww-topbar-btw'" ];
 
       # Radius
       corner-radius = 10;
       round-borders = 1;
-      rounded-corners-exclude = [
-        "class_g = 'Custom-taffybar'"
-      ];
+      rounded-corners-exclude = [ "class_g = 'Custom-taffybar'" ];
     };
 
   };

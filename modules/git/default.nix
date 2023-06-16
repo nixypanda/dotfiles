@@ -1,8 +1,5 @@
-{ pkgs, ... }:
-{
-  home.packages = with pkgs; [
-    git-crypt
-  ];
+{ pkgs, ... }: {
+  home.packages = with pkgs; [ git-crypt ];
   programs.git = {
     enable = true;
     userName = "Sherub Thakur";

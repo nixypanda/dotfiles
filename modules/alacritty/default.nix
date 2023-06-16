@@ -1,11 +1,8 @@
-{ colorscheme, ... }:
-{
+{ colorscheme, ... }: {
   programs.alacritty = {
     enable = true;
     settings = {
-      env = {
-        "TERM" = "xterm-256color";
-      };
+      env = { "TERM" = "xterm-256color"; };
 
       background_opacity = 1.0;
 
@@ -23,7 +20,10 @@
         #
         # Blank space added around the window in pixels. This padding is scaled
         # by DPI and the specified value is always added at both opposing sides.
-        padding = { x = 5; y = 5; };
+        padding = {
+          x = 5;
+          y = 5;
+        };
         dynamic_padding = false;
 
         # Window decorations
@@ -66,9 +66,7 @@
       #
       # You can set `shell.program` to the path of your favorite shell, e.g. `/bin/fish`.
       # Entries in `shell.args` are passed unmodified as arguments to the shell.
-      shell = {
-        program = "/home/sherub/.nix-profile/bin/nu";
-      };
+      shell = { program = "/home/sherub/.nix-profile/bin/nu"; };
 
       # Colors (One Dark)
       colors = {
@@ -110,13 +108,39 @@
       };
 
       key_bindings = [
-        { key = "V"; mods = "Command"; action = "Paste"; }
-        { key = "C"; mods = "Command"; action = "Copy"; }
-        { key = "Paste"; action = "Paste"; }
-        { key = "Copy"; action = "Copy"; }
-        { key = "H"; mods = "Command"; action = "Hide"; }
-        { key = "Q"; mods = "Command"; action = "Quit"; }
-        { key = "W"; mods = "Command"; action = "Quit"; }
+        {
+          key = "V";
+          mods = "Command";
+          action = "Paste";
+        }
+        {
+          key = "C";
+          mods = "Command";
+          action = "Copy";
+        }
+        {
+          key = "Paste";
+          action = "Paste";
+        }
+        {
+          key = "Copy";
+          action = "Copy";
+        }
+        {
+          key = "H";
+          mods = "Command";
+          action = "Hide";
+        }
+        {
+          key = "Q";
+          mods = "Command";
+          action = "Quit";
+        }
+        {
+          key = "W";
+          mods = "Command";
+          action = "Quit";
+        }
       ];
     };
 

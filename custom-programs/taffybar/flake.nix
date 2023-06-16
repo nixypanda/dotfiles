@@ -12,16 +12,16 @@
       inputs.flake-utils.follows = "flake-utils";
     };
   };
-  outputs = inputs @ { self, nixpkgs, flake-utils, taffybar-flake, ... }:
+  outputs = inputs@{ self, nixpkgs, flake-utils, taffybar-flake, ... }:
     let
-      haskellDeps = ps: with ps; [
-        gtk3
-        haskell-language-server
-        taffybar
-        cabal-install
-      ];
-    in
-    flake-utils.lib.simpleFlake {
+      haskellDeps = ps:
+        with ps; [
+          gtk3
+          haskell-language-server
+          taffybar
+          cabal-install
+        ];
+    in flake-utils.lib.simpleFlake {
       inherit self nixpkgs;
       inherit (taffybar-flake) overlay;
 

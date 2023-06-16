@@ -53,8 +53,7 @@
           src = inputs.nvim-sqls-src;
         };
       };
-    in
-    {
+    in {
       overlay = _final: prev: {
         vimPlugins = prev.vimPlugins // (missingVimPluginsInNixpkgs prev.pkgs);
       };

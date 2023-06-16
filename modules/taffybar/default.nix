@@ -23,15 +23,15 @@ let
   '';
   custom-taffybar =
     (import ../../custom-programs/taffybar/default.nix) { inherit pkgs; };
-in
-{
+in {
   home.packages = with pkgs; [
     custom-panel-launch
     custom-taffybar
     haskellPackages.status-notifier-item
   ];
 
-  home.file.".config/taffybar/taffybar.css".source = ../../custom-programs/taffybar/taffybar.css;
+  home.file.".config/taffybar/taffybar.css".source =
+    ../../custom-programs/taffybar/taffybar.css;
   home.file.".config/taffybar/colors.css".text = ''
     @define-color font-color ${colorscheme.fg-primary};
     @define-color accent ${colorscheme.accent-primary};

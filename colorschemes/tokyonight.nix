@@ -1,7 +1,5 @@
-let
-  utils = import ./utils.nix;
-in
-rec {
+let utils = import ./utils.nix;
+in rec {
   name = "tokyonight";
 
   # Note: This kinda feels like a hack and I am none to happy about it maybe in
