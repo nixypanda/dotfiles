@@ -9,8 +9,11 @@ local check_backspace = function()
 end
 
 local feedkey = function(key, mode)
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode,
-        true)
+    vim.api.nvim_feedkeys(
+        vim.api.nvim_replace_termcodes(key, true, true, true),
+        mode,
+        true
+    )
 end
 
 cmp.setup({
@@ -84,22 +87,6 @@ cmp.setup.cmdline(':', {
         }
     })
 })
-
--- Before        Input         After
--- ------------------------------------
--- {|}           <CR>          {
---                                 |
---                             }
-
--- TODO: This is still not in nixpkgs-unstable (sigh!)
--- local cmp_autopairs = require('nvim-autopairs.completion.cmp')
--- cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({map_char = {tex = '{'}}))
-
--- require("nvim-autopairs.completion.cmp").setup({
---     map_cr = true, --  map <CR> on insert mode
---     map_complete = true, -- it will auto insert `(` after select function or method item
---     auto_select = false -- automatically select the first item
--- })
 
 -- Set loction for snippets to be in dotfiles repo so that it is accessible everywhere
 vim.g.vsnip_snippet_dir = vim.fn.expand('~/.dotfiles/users/modules/nvim/vsnip')

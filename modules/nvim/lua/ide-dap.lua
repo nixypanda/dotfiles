@@ -12,10 +12,14 @@ dap.listeners.before.event_exited["dapui_config"] = function()
 end
 
 -- TODO: Find a nice way to do this, so it picks up theme colors
-vim.fn.sign_define("DapBreakpoint",
-    { text = "⬤", texthl = "Error", linehl = "", numhl = "" })
-vim.fn.sign_define("DapStopped",
-    { text = "→", texthl = "Info", linehl = "Info", numhl = "" })
+vim.fn.sign_define(
+    "DapBreakpoint",
+    { text = "⊕", texthl = "Error", linehl = "", numhl = "" }
+)
+vim.fn.sign_define(
+    "DapStopped",
+    { text = "→", texthl = "Info", linehl = "Info", numhl = "" }
+)
 
 
 -- Python Setup

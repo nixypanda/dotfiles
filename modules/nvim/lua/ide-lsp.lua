@@ -24,7 +24,8 @@ require 'lspconfig'.lua_ls.setup {
     settings = {
         Lua = {
             runtime = {
-                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                -- Tell the language server which version of Lua you're using
+                -- (most likely LuaJIT in the case of Neovim)
                 version = 'LuaJIT',
             },
             diagnostics = {
@@ -90,62 +91,59 @@ local json_schemas = {
         description = "TypeScript compiler configuration file",
         fileMatch = { "tsconfig.json", "tsconfig.*.json" },
         url = "https://json.schemastore.org/tsconfig.json"
-    }, {
-    description = "Babel configuration",
-    fileMatch = { ".babelrc.json", ".babelrc", "babel.config.json" },
-    url = "https://json.schemastore.org/babelrc.json"
-}, {
-    description = "ESLint config",
-    fileMatch = { ".eslintrc.json", ".eslintrc" },
-    url = "https://json.schemastore.org/eslintrc.json"
-}, {
-    description = "Prettier config",
-    fileMatch = { ".prettierrc", ".prettierrc.json", "prettier.config.json" },
-    url = "https://json.schemastore.org/prettierrc"
-}, {
-    description = "Stylelint config",
-    fileMatch = { ".stylelintrc", ".stylelintrc.json", "stylelint.config.json" },
-    url = "https://json.schemastore.org/stylelintrc"
-}, {
-    description = "Configuration file as an alternative for configuring your repository in the settings page.",
-    fileMatch = { ".codeclimate.json" },
-    url = "https://json.schemastore.org/codeclimate.json"
-}, {
-    description =
-    "AWS CloudFormation provides a common language for you to describe and provision all the infrastructure resources in your cloud environment.",
-    fileMatch = { "*.cf.json", "cloudformation.json" },
-    url = "https://raw.githubusercontent.com/awslabs/goformation/v5.2.9/schema/cloudformation.schema.json"
-}, {
-    description =
-    "The AWS Serverless Application Model (AWS SAM, previously known as Project Flourish) extends AWS CloudFormation to provide a simplified way of defining the Amazon API Gateway APIs, AWS Lambda functions, and Amazon DynamoDB tables needed by your serverless application.",
-    fileMatch = { "serverless.template", "*.sam.json", "sam.json" },
-    url = "https://raw.githubusercontent.com/awslabs/goformation/v5.2.9/schema/sam.schema.json"
-}, {
-    description = "Json schema for properties json file for a GitHub Workflow template",
-    fileMatch = { ".github/workflow-templates/**.properties.json" },
-    url = "https://json.schemastore.org/github-workflow-template-properties.json"
-}, {
-    description = "golangci-lint configuration file",
-    fileMatch = { ".golangci.toml", ".golangci.json" },
-    url = "https://json.schemastore.org/golangci-lint.json"
-}, {
-    description = "NPM configuration file",
-    fileMatch = { "package.json" },
-    url = "https://json.schemastore.org/package.json"
-}
+    },
+    {
+        description = "Babel configuration",
+        fileMatch = { ".babelrc.json", ".babelrc", "babel.config.json" },
+        url = "https://json.schemastore.org/babelrc.json"
+    },
+    {
+        description = "ESLint config",
+        fileMatch = { ".eslintrc.json", ".eslintrc" },
+        url = "https://json.schemastore.org/eslintrc.json"
+    },
+    {
+        description = "Prettier config",
+        fileMatch = { ".prettierrc", ".prettierrc.json", "prettier.config.json" },
+        url = "https://json.schemastore.org/prettierrc"
+    },
+    {
+        description = "AWS CloudFormation",
+        fileMatch = { "*.cf.json", "cloudformation.json" },
+        url = "https://raw.githubusercontent.com/awslabs/goformation/v5.2.9/schema/cloudformation.schema.json"
+    },
+    {
+        description = "Json schema for properties json file for a GitHub Workflow template",
+        fileMatch = { ".github/workflow-templates/**.properties.json" },
+        url = "https://json.schemastore.org/github-workflow-template-properties.json"
+    },
+    {
+        description = "golangci-lint configuration file",
+        fileMatch = { ".golangci.toml", ".golangci.json" },
+        url = "https://json.schemastore.org/golangci-lint.json"
+    },
+    {
+        description = "NPM configuration file",
+        fileMatch = { "package.json" },
+        url = "https://json.schemastore.org/package.json"
+    }
 }
 
 require 'lspconfig'.jsonls.setup { settings = { json = { schemas = json_schemas } } }
+
 require 'lspconfig'.vimls.setup {}
+
+local yaml_schemas = {
+    ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+    ["https://json.schemastore.org/drone.json"] = "/.drone.yml",
+    ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json"] = "/openapi.yml",
+    ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "/docker-compose.json"
+}
+
 require 'lspconfig'.yamlls.setup {
     settings = {
         yaml = {
-            schemas = {
-                ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-                ["https://json.schemastore.org/drone.json"] = "/.drone.yml",
-                ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json"] = "/openapi.yml",
-                ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "/docker-compose.json"
-            }
+            schemas = yaml_schemas
         }
     }
 }
@@ -172,6 +170,7 @@ null_ls.setup {
         null_ls.builtins.code_actions.statix,
         null_ls.builtins.diagnostics.statix,
         null_ls.builtins.diagnostics.deadnix,
+        null_ls.builtins.formatting.nixfmt,
         -- shell scripting
         null_ls.builtins.code_actions.shellcheck,
         -- other
@@ -184,22 +183,32 @@ null_ls.setup {
 
 -- Basic LSP keybindings
 -- Jump to Definition/Implementation
-vim.api.nvim_set_keymap('n', 'gd', [[<cmd>lua vim.lsp.buf.definition()<CR>]],
-    { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'gi', [[<cmd>lua vim.lsp.buf.implementation()<CR>]],
-    { noremap = true, silent = true })
+vim.api.nvim_set_keymap(
+    'n', 'gd', [[<cmd>lua vim.lsp.buf.definition()<CR>]],
+    { noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap(
+    'n', 'gi', [[<cmd>lua vim.lsp.buf.implementation()<CR>]],
+    { noremap = true, silent = true }
+)
 -- scroll down hover doc or scroll in definition preview
-vim.api.nvim_set_keymap('n', '<C-f>',
+vim.api.nvim_set_keymap(
+    'n', '<C-f>',
     [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>]],
-    { noremap = true, silent = true })
+    { noremap = true, silent = true }
+)
 -- scroll up hover doc
-vim.api.nvim_set_keymap('n', '<C-d>',
+vim.api.nvim_set_keymap(
+    'n', '<C-d>',
     [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>]],
-    { noremap = true, silent = true })
+    { noremap = true, silent = true }
+)
 
 -- AUTO FORMATTING
 
-for _, file_pattern in ipairs({ "*.rs", "*.hs", "*.py", "*.lua", "*.md", "*.nix", "*.tf" }) do
+local formats = { "*.rs", "*.hs", "*.py", "*.lua", "*.md", "*.nix", "*.tf" }
+
+for _, file_pattern in ipairs(formats) do
     vim.api.nvim_create_autocmd(
         'BufWritePre',
         {
@@ -230,7 +239,10 @@ local diagnostic_symbol_map = {
 }
 
 for _, elm in ipairs(diagnostic_symbol_map) do
-    vim.fn.sign_define(elm.name, { texthl = elm.name, text = elm.symbol, numhl = elm.name })
+    vim.fn.sign_define(
+        elm.name,
+        { texthl = elm.name, text = elm.symbol, numhl = elm.name }
+    )
 end
 
 -- Add border to lspconfig info screen

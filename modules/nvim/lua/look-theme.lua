@@ -9,10 +9,10 @@ local file_syntax_map = {
 }
 
 for _, elm in ipairs(file_syntax_map) do
-    vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-        pattern = elm.pattern,
-        command = "set syntax=" .. elm.syntax
-    })
+    vim.api.nvim_create_autocmd(
+        { "BufNewFile", "BufRead" },
+        { pattern = elm.pattern, command = "set syntax=" .. elm.syntax }
+    )
 end
 
 require("headlines").setup()
