@@ -1,5 +1,5 @@
 -- Need to add this to the language server to broadcast snippet compatibility
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- Dhall
 require 'lspconfig'.dhall_lsp_server.setup {}
@@ -50,9 +50,23 @@ require 'lspconfig'.nil_ls.setup {}
 require 'lspconfig'.pyright.setup { capabilities = capabilities }
 
 -- Rust
-require 'lspconfig'.rust_analyzer.setup {
-    capabilities = capabilities,
-}
+local rt = require("rust-tools")
+local injected_config = require("injected")
+
+rt.setup({
+    hover_actions = {
+        auto_focus = true,
+    },
+    server = {
+        capabilities = capabilities,
+    },
+    dap = {
+        adapter = require('rust-tools.dap').get_codelldb_adapter(
+            injected_config.codelldb_path,
+            injected_config.liblldb_path
+        )
+    }
+})
 require 'crates'.setup()
 
 -- SQL

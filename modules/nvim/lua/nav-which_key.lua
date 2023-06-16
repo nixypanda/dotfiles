@@ -123,6 +123,15 @@ local mappings = {
         u = { "<cmd>LspRestart<cr>", "Restart LSP" },
         U = { "<cmd>LspStart<cr>", "Start LSP" },
     },
+    p = {
+        name = "+Programming Language Specific",
+        r = {
+            name = "+Rust",
+            h = { "<cmd>RustHoverActions<cr>", "Hover" },
+            d = { "<cmd>RustDisableInlayHints<cr>", "Disable Inlay Hints" },
+            e = { "<cmd>RustEnableInlayHints<cr>", "Enable Inlay Hints" },
+        }
+    },
     s = {
         name = "+Search",
         b = { "<cmd>Telescope buffers<cr>", "Open Buffers" },

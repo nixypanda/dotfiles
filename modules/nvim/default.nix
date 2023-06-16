@@ -93,6 +93,7 @@
       # Programming: Language support
       crates-nvim
       yuck-vim
+      rust-tools-nvim
 
       # Programming: Autocompletion setup
       nvim-cmp
@@ -183,6 +184,9 @@
         statix
         nil
 
+        # rust
+        code_lldb
+
         # SQL
         sqls
         postgresql
@@ -208,6 +212,7 @@
         # telescope
         ripgrep
         fd
+
       ] ++ (if pkgs.stdenv.isLinux then [
         # Grammer
         # Not available on mac using brew to install it
@@ -248,6 +253,13 @@
       source = ./lua;
       recursive = true;
     };
+    "nvim/lua/injected.lua".text = ''
+    local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
+    return {
+        codelldb_path = extension_path .. 'adapter/codelldb',
+        liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib'
+    }
+    '';
     "nvim/init_lua.lua".source = ./init_lua.lua;
   };
 
