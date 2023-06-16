@@ -365,6 +365,22 @@
         "type": "indirect"
       }
     },
+    "nixpkgs_codelldb_fixed": {
+      "locked": {
+        "lastModified": 1680536213,
+        "narHash": "sha256-z8M162lOQ6A6PFQLwnUjvZhCl/7OdZEObmuD0Xp02aI=",
+        "owner": "mstone",
+        "repo": "nixpkgs",
+        "rev": "fa70e7499b08524a4a02e7ce9e39847b9d3c95df",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mstone",
+        "repo": "nixpkgs",
+        "rev": "fa70e7499b08524a4a02e7ce9e39847b9d3c95df",
+        "type": "github"
+      }
+    },
     "nur": {
       "locked": {
         "lastModified": 1686325526,
@@ -482,6 +498,7 @@
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "nixpkgs-firefox-darwin": "nixpkgs-firefox-darwin",
+        "nixpkgs_codelldb_fixed": "nixpkgs_codelldb_fixed",
         "nur": "nur",
         "taffybar": "taffybar",
         "vim-plugins": "vim-plugins"

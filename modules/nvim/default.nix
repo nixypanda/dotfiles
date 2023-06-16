@@ -1,4 +1,11 @@
-{ pkgs, colorscheme, ... }:
+{ pkgs, colorscheme, nixpkgs_codelldb_fixed_on_mac, ... }:
+let
+    # Using a fixed version of codelldb which works on Mac.
+    # We get this from an alternate nixpkgs repo.
+    # Caveat: This requires Xcode.app installed on the system
+    # NOTE: https://github.com/NixOS/nixpkgs/pull/211321
+    code_lldb = nixpkgs_codelldb_fixed_on_mac.vscode-extensions.vadimcn.vscode-lldb;
+in
 {
   programs.neovim = {
     enable = true;
