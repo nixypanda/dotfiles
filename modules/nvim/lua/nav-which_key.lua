@@ -131,9 +131,11 @@ local mappings = {
         name = "+Programming Language Specific",
         r = {
             name = "+Rust",
-            h = { "<cmd>RustHoverActions<cr>", "Hover" },
             d = { "<cmd>RustDisableInlayHints<cr>", "Disable Inlay Hints" },
+            D = { "<cmd>RustDebugables<cr>", "Debugables" },
             e = { "<cmd>RustEnableInlayHints<cr>", "Enable Inlay Hints" },
+            h = { "<cmd>RustHoverActions<cr>", "Hover" },
+            r = { "<cmd>RustRunnables<cr>", "Runnables" },
         }
     },
     s = {

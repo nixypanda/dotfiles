@@ -12,6 +12,7 @@ require "ide-ai"
 require "ide-completion"
 require "ide-dap"
 require "ide-lsp"
+require "ide-rust"
 require "ide-regexplainer"
 require "ide-treesitter"
 

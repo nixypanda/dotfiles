@@ -40,6 +40,7 @@ in {
       nvim-better-digraphs
       telescope-fzf-native-nvim
       telescope-nvim
+      telescope-ui-select-nvim
 
       # General Deps
       nui-nvim

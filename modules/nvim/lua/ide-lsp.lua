@@ -50,26 +50,6 @@ require 'lspconfig'.nil_ls.setup {}
 -- Python
 require 'lspconfig'.pyright.setup { capabilities = capabilities }
 
--- Rust
-local rt = require("rust-tools")
-local injected_config = require("injected")
-
-rt.setup({
-    hover_actions = {
-        auto_focus = true,
-    },
-    server = {
-        capabilities = capabilities,
-    },
-    dap = {
-        adapter = require('rust-tools.dap').get_codelldb_adapter(
-            injected_config.codelldb_path,
-            injected_config.liblldb_path
-        )
-    }
-})
-require 'crates'.setup()
-
 -- SQL
 require('lspconfig').sqls.setup {
     on_attach = function(client, bufnr)
