@@ -12,10 +12,11 @@ require "ide-ai"
 require "ide-completion"
 require "ide-dap"
 require "ide-lsp"
-require "ide-haskell"
-require "ide-rust"
 require "ide-regexplainer"
 require "ide-treesitter"
+require "ide-formatting"
+require "ide-haskell"
+require "ide-rust"
 
 require "draw-venn"
 
