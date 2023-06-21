@@ -1,6 +1,19 @@
 -- prettier output for lsp diagnostics/renaming menu/references list/etc
 require('lspsaga').setup({})
 
+-- scroll down hover doc or scroll in definition preview
+vim.api.nvim_set_keymap(
+    'n', '<C-f>',
+    [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>]],
+    { noremap = true, silent = true }
+)
+-- scroll up hover doc
+vim.api.nvim_set_keymap(
+    'n', '<C-d>',
+    [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>]],
+    { noremap = true, silent = true }
+)
+
 vim.diagnostic.config({
     virtual_text = false,
     signs = true,

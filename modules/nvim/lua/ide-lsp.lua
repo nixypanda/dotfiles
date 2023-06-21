@@ -4,7 +4,6 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 -- Dhall
 require 'lspconfig'.dhall_lsp_server.setup {}
 
--- Enable (broadcasting) snippet capability for completion
 -- elm
 require 'lspconfig'.elmls.setup {}
 
@@ -54,8 +53,6 @@ require('lspconfig').sqls.setup {
 
 -- Terraform
 require 'lspconfig'.terraform_lsp.setup {}
-
-require 'lspconfig'.vimls.setup {}
 
 -- shit you need to deal with
 require 'lspconfig'.bashls.setup {}
@@ -107,17 +104,5 @@ vim.api.nvim_set_keymap(
 )
 vim.api.nvim_set_keymap(
     'n', 'gi', [[<cmd>lua vim.lsp.buf.implementation()<CR>]],
-    { noremap = true, silent = true }
-)
--- scroll down hover doc or scroll in definition preview
-vim.api.nvim_set_keymap(
-    'n', '<C-f>',
-    [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>]],
-    { noremap = true, silent = true }
-)
--- scroll up hover doc
-vim.api.nvim_set_keymap(
-    'n', '<C-d>',
-    [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>]],
     { noremap = true, silent = true }
 )
