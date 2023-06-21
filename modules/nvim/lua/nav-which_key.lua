@@ -41,11 +41,8 @@ require "which-key".setup {
 local mappings = {
     e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
     a = {
-        name = "+Actions",
-        s = { '<cmd>let @/ = ""<cr>', "Remove search highlight" },
-        t = { '<cmd>TableModeToggle<cr>', "Start/Stop Table mode" },
-        d = { '<cmd>lua require"better-digraphs".digraphs("i")<cr>', "Digraphs" },
-        r = { '<cmd>RegexplainerToggle<cr>', "Explain Regex (Show/Hide)" },
+        name = "+AI assistant",
+        c = { "<cmd>ChatGPT<cr>", "ChatGPT" },
     },
     b = {
         name = '+buffers',
@@ -170,6 +167,13 @@ local mappings = {
         R = { "<cmd>Telescope registers<cr>", "Registers" },
         t = { "<cmd>Telescope live_grep<cr>", "Text" },
         T = { "<cmd>TodoTelescope<cr>", "Todos" }
+    },
+    u = {
+        name = "+Utilities",
+        s = { '<cmd>let @/ = ""<cr>', "Remove search highlight" },
+        t = { '<cmd>TableModeToggle<cr>', "Start/Stop Table mode" },
+        d = { '<cmd>lua require"better-digraphs".digraphs("i")<cr>', "Digraphs" },
+        r = { '<cmd>RegexplainerToggle<cr>', "Explain Regex (Show/Hide)" },
     },
     w = {
         name = "+Window",
