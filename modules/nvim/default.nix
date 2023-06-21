@@ -32,9 +32,6 @@ in {
       nvim-dap-python
       nvim-dap-ui
 
-      # File Tree
-      nvim-tree-lua
-
       # Fuzzy Finder
       cheatsheet-nvim
       nvim-better-digraphs
@@ -50,6 +47,10 @@ in {
       # Git
       gitsigns-nvim
       vim-fugitive
+
+      # Navigation
+      nvim-tree-lua
+      vim-tmux-navigator
 
       # Programming: LSP
       lspkind-nvim
