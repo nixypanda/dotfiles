@@ -2,6 +2,10 @@
 
 set -e
 
+if [[ -d "$HOME/Applications/Home Manager Apps.backup" ]]; then
+    rm -r "$HOME/Applications/Home Manager Apps.backup"
+fi
+
 with_brew=false
 while [[ $# -gt 0 ]]; do
     case $1 in
