@@ -136,6 +136,22 @@ local mappings = {
             e = { "<cmd>RustEnableInlayHints<cr>", "Enable Inlay Hints" },
             h = { "<cmd>RustHoverActions<cr>", "Hover" },
             r = { "<cmd>RustRunnables<cr>", "Runnables" },
+        },
+        h = {
+            name = "+Haskell",
+            l = { "<cmd>vim.lsp.codelens.run()<cr>", "CodeLens" },
+            e = {
+                "<cmd>lua require('haskell-tools').lsp.buf_eval_all()<cr>",
+                "Eval code snippets in buffer"
+            },
+            r = {
+                "<cmd>lua require('haskell-tools').repl.toggle()<cr>",
+                "Repl for current package"
+            },
+            R = {
+                "<cmd>lua require('haskell-tools').repl.toggle(vim.api.nvim_buf_get_name(0))<cr>",
+                "Repl for current buffer"
+            },
         }
     },
     s = {

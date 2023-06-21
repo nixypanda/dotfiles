@@ -11,11 +11,6 @@ require 'lspconfig'.elmls.setup {}
 -- go
 require 'lspconfig'.gopls.setup {}
 
--- Haskell
-require 'lspconfig'.hls.setup {
-    settings = { languageServerHaskell = { formattingProvider = "brittany" } }
-}
-
 -- JavaScript/TypeScript
 require 'lspconfig'.tsserver.setup {}
 

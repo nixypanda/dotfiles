@@ -102,6 +102,7 @@ in {
       crates-nvim
       yuck-vim
       rust-tools-nvim
+      haskell-tools-nvim
 
       # Programming: Autocompletion setup
       nvim-cmp
