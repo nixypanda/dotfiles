@@ -20,6 +20,8 @@ in {
       nvim-headlines
       nvim-web-devicons
       noice-nvim
+      statuscol-nvim
+      nvim-ufo
 
       # Appearance: Themes
       dracula-vim

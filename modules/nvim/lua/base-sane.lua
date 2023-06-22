@@ -75,7 +75,3 @@ vim.opt.fillchars = {
 -- Set relative numbering
 vim.wo.number = true
 vim.wo.relativenumber = true
-
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-vim.opt.foldenable = false
