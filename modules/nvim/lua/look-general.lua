@@ -15,4 +15,18 @@ require("noice").setup({
         inc_rename = false,           -- enables an input dialog for inc-rename.nvim
         lsp_doc_border = false,       -- add a border to hover docs and signature help
     },
+    routes = {
+        {
+            -- null ls is too noisy, so skip it's messages
+            filter = {
+                event = 'lsp',
+                kind = 'progress',
+                cond = function(message)
+                    local client = vim.tbl_get(message.opts, 'progress', 'client')
+                    return client == 'null-ls'
+                end,
+            },
+            opts = { skip = true },
+        },
+    },
 })
