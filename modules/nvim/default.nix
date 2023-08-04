@@ -33,6 +33,7 @@ in {
       nvim-dap
       nvim-dap-python
       nvim-dap-ui
+      nvim-dap-go
 
       # Fuzzy Finder
       cheatsheet-nvim
@@ -180,6 +181,7 @@ in {
 
         # Go
         gopls
+        delve
 
         # HTML/CSS/JS
         nodePackages.vscode-langservers-extracted

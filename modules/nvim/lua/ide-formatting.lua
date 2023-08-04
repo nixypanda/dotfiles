@@ -1,5 +1,5 @@
 local formats = {
-    "*.hs", "*.json", "*.lua", "*.md", "*.nix", "*.py", "*.rs", "*.tf", "*.yaml",
+    "*.go", "*.hs", "*.json", "*.lua", "*.md", "*.nix", "*.py", "*.rs", "*.tf", "*.yaml",
 }
 
 for _, file_pattern in ipairs(formats) do

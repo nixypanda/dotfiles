@@ -126,6 +126,10 @@ local mappings = {
     },
     p = {
         name = "+Programming Language Specific",
+        g = {
+            name = "+Go",
+            d = { "<cmd>lua require('dap-go').debug_test()<cr>", "Debug nearest test" }
+        },
         r = {
             name = "+Rust",
             d = { "<cmd>RustDisableInlayHints<cr>", "Disable Inlay Hints" },

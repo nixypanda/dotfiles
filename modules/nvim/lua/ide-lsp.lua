@@ -8,7 +8,18 @@ require 'lspconfig'.dhall_lsp_server.setup {}
 require 'lspconfig'.elmls.setup {}
 
 -- go
-require 'lspconfig'.gopls.setup {}
+require 'lspconfig'.gopls.setup {
+    capabilities = capabilities,
+    settings = {
+        gopls = {
+            completeUnimported = true,
+            usePlaceholders = true,
+            analyses = {
+                unusedparams = true,
+            }
+        }
+    }
+}
 
 -- JavaScript/TypeScript
 require 'lspconfig'.tsserver.setup {}
@@ -92,6 +103,8 @@ null_ls.setup {
         null_ls.builtins.diagnostics.gitlint,
         null_ls.builtins.diagnostics.hadolint,
         null_ls.builtins.diagnostics.yamllint,
+        -- go formatting
+        null_ls.builtins.formatting.gofmt,
     }
 }
 
