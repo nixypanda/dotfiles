@@ -128,6 +128,13 @@ in {
       vim-dadbod
       vim-dadbod-ui
 
+      # Programming: Testing
+      FixCursorHold-nvim
+      neotest
+      neotest-python
+      neotest-rust
+      neotest-go
+
       ## Project management
       direnv-vim
       project-nvim

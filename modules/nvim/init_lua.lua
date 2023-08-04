@@ -18,6 +18,7 @@ require "ide-config-schemas"
 require "ide-regexplainer"
 require "ide-treesitter"
 require "ide-formatting"
+require "ide-testing"
 require "ide-haskell"
 require "ide-rust"
 

@@ -168,6 +168,33 @@ local mappings = {
         t = { "<cmd>Telescope live_grep<cr>", "Text" },
         T = { "<cmd>TodoTelescope<cr>", "Todos" }
     },
+    t = {
+        name = "+Tests",
+        a = { "<cmd>lua require('neotest').run.run({suite = true})<cr>", "Run all tests" },
+        d = {
+            "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>",
+            "Debug nearest test"
+        },
+        f = { "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", "Run file" },
+        j = {
+            "<cmd>lua require('neotest').jump.prev({ status = 'failed' })<cr>",
+            "Previous failed test"
+        },
+        k = {
+            "<cmd>lua require('neotest').jump.next({ status = 'failed' })<cr>",
+            "Next failed test"
+        },
+        o = {
+            "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>",
+            "Open output for nearest test"
+        },
+        p = {
+            "<cmd>lua require('neotest').output_panel.toggle()<cr>",
+            "Toggle raw output panel",
+        },
+        r = { "<cmd>lua require('neotest').run.run()<cr>", "Run nearest test" },
+        t = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Toggle summary" },
+    },
     u = {
         name = "+Utilities",
         s = { '<cmd>let @/ = ""<cr>', "Remove search highlight" },
