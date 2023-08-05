@@ -9,7 +9,7 @@
     enableCompletion = true;
     defaultKeymap = "viins";
     enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
+    syntaxHighlighting.enable = true;
     shellAliases = import ./aliases.nix;
     history.extended = true;
     oh-my-zsh = {
