@@ -160,6 +160,9 @@ in {
         shellcheck
         shfmt
 
+        # Clojure
+        clojure-lsp
+
         # dhall
         dhall-lsp-server
 
@@ -185,6 +188,9 @@ in {
 
         # HTML/CSS/JS
         nodePackages.vscode-langservers-extracted
+
+        # Java
+        java-language-server
 
         # JavaScript
         nodePackages.typescript-language-server

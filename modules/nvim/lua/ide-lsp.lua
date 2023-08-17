@@ -1,6 +1,9 @@
 -- Need to add this to the language server to broadcast snippet compatibility
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+-- Clojure
+require 'lspconfig'.clojure_lsp.setup {}
+
 -- Dhall
 require 'lspconfig'.dhall_lsp_server.setup {}
 
@@ -20,6 +23,9 @@ require 'lspconfig'.gopls.setup {
         }
     }
 }
+
+-- Java
+require 'lspconfig'.java_language_server.setup { cmd = { 'java-language-server' } }
 
 -- JavaScript/TypeScript
 require 'lspconfig'.tsserver.setup {}
