@@ -19,7 +19,7 @@ require "which-key".setup {
         -- symbol used in the command line area that shows your active key combo
         breadcrumb = "»",
         separator = "➜", -- symbol used between a key and it's label
-        group = "+"      -- symbol prepended to a group
+        group = "+" -- symbol prepended to a group
     },
     window = {
         border = "single",       -- none, single, double, shadow
@@ -75,6 +75,11 @@ local mappings = {
         f = { "<cmd>lua require'dap'.close()<cr>", "Finish debugging" },
         j = { "<cmd>lua require'dap'.down()<cr>", "Go down in call stack" },
         k = { "<cmd>lua require'dap'.up()<cr>", "Go up in call stack" }
+    },
+    D = {
+        name = "+Database",
+        a = { "<cmd>DBUIAddConnection<cr>", "Add new connection" },
+        t = { "<cmd>DBUIToggle<cr>", "Toggle DBUI" }
     },
     g = {
         name = "+Git",
