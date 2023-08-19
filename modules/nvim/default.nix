@@ -125,6 +125,9 @@ in {
       nvim-codeium # AI completion prediction
       ChatGPT-nvim
 
+      # Programming: Code Evaluation
+      conjure
+
       # Programming: Database support
       vim-dadbod
       vim-dadbod-ui
@@ -269,6 +272,7 @@ in {
     rust-analyzer
     rustfmt
     clippy
+    evcxr
 
     # python
     python3Packages.isort

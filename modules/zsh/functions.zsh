@@ -77,3 +77,10 @@ function recursive() {
 function recursivep() {
     for d in ./*/; do ~/.nix-profile/bin/zsh -c "(cd "$d" && "$@") &"; done
 }
+
+function cljrepl() {
+    clj -Sdeps '{:deps {nrepl/nrepl {:mvn/version "0.9.0"} cider/cider-nrepl {:mvn/version "0.28.4"}}}' \
+    -m nrepl.cmdline \
+    --middleware '["cider.nrepl/cider-middleware"]' \
+    --interactive
+}

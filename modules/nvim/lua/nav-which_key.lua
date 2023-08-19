@@ -56,6 +56,11 @@ local mappings = {
         K = { '<cmd>BufferMovePrevious<cr>', 'Swap with Previous Buffer' },
         G = { '<cmd>BufferLast<cr>', 'Last Buffer' }
     },
+    c = {
+        name = "+CodeEval",
+        e = { "<cmd>ConjureEvalRootForm<cr>", "Eval" },
+        l = { "<cmd>ConjureLogVSplit<cr>", "Show log (vertical split)" },
+    },
     d = {
         name = "+dap",
         b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle breakpoint" },
