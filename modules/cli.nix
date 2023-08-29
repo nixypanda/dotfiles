@@ -29,7 +29,6 @@
     shfmt
 
     # Moar colors
-    starship
     zsh-syntax-highlighting
 
     # Searching/Movement helpers
@@ -43,4 +42,6 @@
     # Nix itself
     nix
   ];
+
+  programs.starship = { enable = true; };
 }

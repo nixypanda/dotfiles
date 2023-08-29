@@ -32,7 +32,6 @@
 
       eval "$(direnv hook zsh)"
       eval "$(zoxide init zsh)"
-      eval "$(starship init zsh)"
     '';
   };
 }
