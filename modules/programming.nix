@@ -27,6 +27,7 @@
 
     # Java
     jdk17
+    maven
 
     # JavaScript
     nodejs
