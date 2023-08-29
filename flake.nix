@@ -73,6 +73,7 @@
           ./modules/hashistack.nix
           ./modules/helix
           ./modules/kitty
+          ./modules/nu
           ./modules/nvim
           ./modules/programming.nix
           ./modules/system-management
@@ -86,11 +87,7 @@
         nixpkgs.overlays = [ nixpkgs-firefox-darwin.overlay ];
         home.homeDirectory = "/Users/sherubthakur";
         home.username = "sherubthakur";
-        imports = [
-          ./modules/nu/default-mac.nix
-          ./modules/tmux
-          ./modules/mac-symlink-applications.nix
-        ];
+        imports = [ ./modules/tmux ./modules/mac-symlink-applications.nix ];
         xdg.configFile."nix/nix.conf".text = ''
           experimental-features = nix-command flakes
         '';
@@ -102,7 +99,6 @@
         imports = [
           ./modules/discord
           ./modules/media.nix
-          ./modules/nu/default-linux.nix
           ./modules/onenote
           ./modules/slack
 
