@@ -70,6 +70,7 @@ in {
           css
           dhall
           dockerfile
+          elixir
           elm
           go
           haskell
