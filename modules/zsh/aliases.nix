@@ -1,12 +1,13 @@
 {
   # I don't like the default but my hand just types it
   ":q" = "exit";
+  cat = "bat";
+  htop = "btm";
+  ls = "lsd";
+  top = "btm";
   vi = "nvim";
   vim = "nvim";
-  top = "btm";
-  htop = "btm";
   ytop = "btm";
-  cat = "bat";
 
   # docker-compose;
   dc = "docker-compose";

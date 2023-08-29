@@ -12,6 +12,7 @@
     graphviz
     hexyl
     jq
+    lsd
     ngrok
     nodePackages.prettier
     openvpn

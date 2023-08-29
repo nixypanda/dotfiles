@@ -10,6 +10,8 @@
       foreground = "${colorscheme.fg-primary}";
       background = "${colorscheme.bg-primary}";
 
+      macos_option_as_alt = "left";
+
       color0 = "${colorscheme.black}";
       color1 = "${colorscheme.red}";
       color2 = "${colorscheme.green}";

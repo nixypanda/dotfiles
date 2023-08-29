@@ -76,6 +76,7 @@
           ./modules/nvim
           ./modules/programming.nix
           ./modules/system-management
+          ./modules/zellij
           ./modules/zsh
         ];
       };
