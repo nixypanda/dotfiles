@@ -5,6 +5,9 @@ let
   # Caveat: This requires Xcode.app installed on the system
   # NOTE: https://github.com/NixOS/nixpkgs/pull/211321
   code_lldb = codelldb_fixed_pkgs.vscode-extensions.vadimcn.vscode-lldb;
+  tree-sitter-nu = pkgs.callPackage ./nvim-treesitter-nu.nix {
+    inherit (pkgs.tree-sitter) buildGrammar;
+  };
 in {
   programs.neovim = {
     enable = true;
@@ -97,8 +100,9 @@ in {
           typescript
           vim
           yaml
+
+          tree-sitter-nu.grammar
         ]))
-      nvim-nu
       nvim-treesitter-refactor
       nvim-treesitter-textobjects
       which-key-nvim
@@ -288,6 +292,9 @@ in {
       source = ./lua;
       recursive = true;
     };
+    "nvim/queries/nu/highlights.scm".text = tree-sitter-nu.highlights;
+    "nvim/queries/nu/injections.scm".text = tree-sitter-nu.injections;
+
     "nvim/lua/injected.lua".text = ''
       local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
       return {
