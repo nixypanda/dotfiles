@@ -62,7 +62,7 @@ in {
       lspkind-nvim
       null-ls-nvim
       nvim-lspconfig
-      lspsaga-nvim-original
+      lspsaga-nvim
       nvim-sqls
 
       # Progrmming: Treesitter
@@ -171,12 +171,12 @@ in {
         # Clojure
         clojure-lsp
 
-        # dhall
-        dhall-lsp-server
+        # dhall (broken on nix unstable)
+        # dhall-lsp-server
 
         # Docker
         nodePackages.dockerfile-language-server-nodejs
-        hadolint
+        # hadolint # (broken)
 
         # elm
         elmPackages.elm-language-server
