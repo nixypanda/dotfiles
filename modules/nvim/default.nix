@@ -39,16 +39,9 @@ in {
       nvim-dap-go
 
       # Fuzzy Finder
-      cheatsheet-nvim
-      nvim-better-digraphs
       telescope-fzf-native-nvim
       telescope-nvim
       telescope-ui-select-nvim
-
-      # General Deps
-      nui-nvim
-      plenary-nvim
-      popup-nvim
 
       # Git
       gitsigns-nvim

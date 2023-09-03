@@ -14,7 +14,7 @@ require('ufo').setup({
 })
 
 local show_line_diagnostics = function(arg)
-    require('lspsaga.showdiag'):show_diagnostics({ line = true, arg = arg })
+    require('lspsaga.diagnostic.show'):show_diagnostics({ line = true, arg = arg })
 end
 
 

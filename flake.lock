@@ -396,22 +396,6 @@
         "type": "github"
       }
     },
-    "nvim-better-digraphs-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1670426964,
-        "narHash": "sha256-cID/pukc66QtZuhzsD+qVBtKpI7sVxpY6/xK9IK9/mc=",
-        "owner": "protex",
-        "repo": "better-digraphs.nvim",
-        "rev": "2deb190707274fbbc01edaea1822235e836a2887",
-        "type": "github"
-      },
-      "original": {
-        "owner": "protex",
-        "repo": "better-digraphs.nvim",
-        "type": "github"
-      }
-    },
     "nvim-regexplainer-src": {
       "flake": false,
       "locked": {
@@ -563,13 +547,12 @@
     },
     "vim-plugins": {
       "inputs": {
-        "nvim-better-digraphs-src": "nvim-better-digraphs-src",
         "nvim-regexplainer-src": "nvim-regexplainer-src",
         "nvim-sqls-src": "nvim-sqls-src"
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-vtQgjm+CPn278UyuEWuAROyT+bMQ0vYyUlD+MqJFUzc=",
+        "narHash": "sha256-RIOBq0COAopFmR2GlrgCTZ5oW1bv/vGmYK0x/PTR2WY=",
         "path": "./modules/nvim/plugins",
         "type": "path"
       },

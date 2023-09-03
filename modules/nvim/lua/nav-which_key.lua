@@ -171,7 +171,6 @@ local mappings = {
         c = { "<cmd>Telescope command_history<cr>", "Previous commands" },
         C = { "<cmd>Telescope commands<cr>", "Available commands" },
         f = { "<cmd>Telescope find_files<cr>", "Find File" },
-        h = { "<cmd>Cheatsheet<cr>", "Help Tags" },
         H = { "<cmd>Telescope help_tags<cr>", "Help Tags" },
         j = { "<cmd>Telescope jumplist<cr>", "Jump List" },
         m = { "<cmd>Telescope marks<cr>", "Marks" },
@@ -213,7 +212,6 @@ local mappings = {
         name = "+Utilities",
         s = { '<cmd>let @/ = ""<cr>', "Remove search highlight" },
         t = { '<cmd>TableModeToggle<cr>', "Start/Stop Table mode" },
-        d = { '<cmd>lua require"better-digraphs".digraphs("i")<cr>', "Digraphs" },
         r = { '<cmd>RegexplainerToggle<cr>', "Explain Regex (Show/Hide)" },
     },
     w = {
