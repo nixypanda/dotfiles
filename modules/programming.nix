@@ -1,5 +1,8 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
+    # common
+    gnumake
+
     # C
     gcc
 
@@ -14,6 +17,7 @@
 
     # docker
     docker
+    docker-compose
 
     # go
     go
@@ -32,6 +36,7 @@
     # JavaScript
     nodejs
     yarn
+    nodePackages.prettier
 
     # lua
     lua
@@ -44,11 +49,15 @@
     python3Packages.ipython
     python3Packages.parso
     python3Packages.twine
+    ruff
 
     # rust
     cargo
     cargo-tarpaulin
     perl # this is required by rust
     rustc
+
+    # shell
+    shfmt
   ];
 }

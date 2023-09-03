@@ -4,39 +4,33 @@
     arandr
     bashmount
     dig
-    docker-compose
-    dua
-    fx
-    fd
-    gnumake
     graphviz
-    hexyl
-    jq
-    lsd
-    ngrok
-    nodePackages.prettier
-    openvpn
-    tokei
     unrar
     unzip
     # Build failing on MacOS
     # wireshark
     pgcli
-    dogdns
+
+    ngrok
+    openvpn
     drone-cli
 
-    ruff
-    shfmt
+    # Better alternatives
+    bottom # top
+    dogdns # dig
+    dua # disk usage analyzer
+    fd # find
+    hexyl # hex viewer
+    lsd # ls
+    ripgrep # grep
+    tokei # cloc, sloc, etc
+    zoxide # cd with jumping
 
-    # Moar colors
-    zsh-syntax-highlighting
+    # Structured data
+    fx
+    jc
+    jq
 
-    # Searching/Movement helpers
-    ripgrep
-    zoxide
-
-    # system info
-    bottom
     neofetch
 
     # Nix itself
