@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   programs.tmux = {
     terminal = "screen-256color";
+    shell = "${pkgs.nushell}/bin/nu";
     enable = true;
     baseIndex = 1;
     clock24 = true;

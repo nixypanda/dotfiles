@@ -20,7 +20,7 @@ in {
       lualine-nvim
       alpha-nvim
       nvim-colorizer-lua
-      nvim-headlines
+      headlines-nvim
       nvim-web-devicons
       noice-nvim
       statuscol-nvim
@@ -127,7 +127,7 @@ in {
       vim-vsnip-integ
 
       # Programming: AI shit
-      nvim-codeium # AI completion prediction
+      codeium-vim # AI completion prediction
       ChatGPT-nvim
 
       # Programming: Code Evaluation
