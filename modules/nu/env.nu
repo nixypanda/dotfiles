@@ -44,4 +44,6 @@ $env.NU_PLUGIN_DIRS = [
 # $env.PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
 
 # Add zoxide support
-zoxide init nushell | save -f ~/.zoxide.nu
+mkdir ~/.cache/nushell
+zoxide init nushell | save -f ~/.cache/nushell/.zoxide.nu
+carapace _carapace nushell | save --force ~/.cache/nushell/carapace.nu

@@ -32,6 +32,7 @@
     jq
 
     neofetch
+    carapace
 
     # Nix itself
     nix
