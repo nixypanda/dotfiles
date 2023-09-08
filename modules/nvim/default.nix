@@ -104,7 +104,8 @@ in {
       crates-nvim
       yuck-vim
       rust-tools-nvim
-      haskell-tools-nvim
+      # haskell-tools-nvim
+      nvim-haskell-tools
 
       # Programming: Autocompletion setup
       nvim-cmp
@@ -187,6 +188,13 @@ in {
         gopls
         delve
 
+        # Haskell
+        haskellPackages.haskell-language-server
+        haskellPackages.hoogle
+        haskellPackages.fast-tags
+        haskellPackages.haskell-debug-adapter
+        haskellPackages.ghci-dap
+
         # HTML/CSS/JS
         nodePackages.vscode-langservers-extracted
 
@@ -262,10 +270,6 @@ in {
 
   home.packages = with pkgs; [
     nodePackages.livedown
-
-    # Haskell
-    haskellPackages.haskell-language-server
-
     # Rust
     rust-analyzer
     rustfmt
