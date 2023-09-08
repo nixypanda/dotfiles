@@ -10,7 +10,7 @@
     };
     nvim-haskell-tools-src = {
       url =
-        "github:mrcjkb/haskell-tools.nvim/2c3cbdf386ecb03210b56962db96e601705c5118";
+        "github:mrcjkb/haskell-tools.nvim/fd7c33cc3e893a12c1d90aca9ff7ede7d01f003d";
       flake = false;
     };
   };
