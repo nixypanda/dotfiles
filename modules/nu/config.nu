@@ -140,7 +140,7 @@ $env.config = {
         {
             name: completion_menu
             only_buffer_difference: false
-            marker: "| "
+            marker: ""
             type: {
                 layout: columnar
                 columns: 4
@@ -150,21 +150,21 @@ $env.config = {
             style: {
                 text: green
                 selected_text: green_reverse
-                description_text: yellow
+                description_text: grey
             }
         }
         {
             name: history_menu
             only_buffer_difference: true
-            marker: "? "
+            marker: "(history-search) "
             type: {
                 layout: list
-                page_size: 10
+                page_size: 25
             }
             style: {
                 text: green
                 selected_text: green_reverse
-                description_text: yellow
+                description_text: grey
             }
         }
         {
@@ -630,14 +630,23 @@ $env.config = {
             event: {edit: capitalizechar}
         }
         {
-          name: fuzzy_history
-          modifier: control
-          keycode: char_r
-          mode: emacs
-          event: {
-            send: executehostcommand
-            cmd: "commandline (history | each { |it| $it.command } | uniq | reverse | str collect (char nl) | fzf --layout=reverse --height=40% -q (commandline) | decode utf-8 | str trim)"
-          }
+            name: fuzzy_history_fzf
+            modifier: control
+            keycode: char_r
+            mode: [emacs , vi_normal, vi_insert]
+            event: {
+              send: executehostcommand
+              cmd: "commandline (
+                history 
+                  | each { |it| $it.command } 
+                  | uniq 
+                  | reverse 
+                  | str join (char -i 0) 
+                  | fzf --read0 --tiebreak=chunk --layout=reverse  --multi --preview='bat --style=numbers {..}' --preview-window='bottom:hidden' --bind shift-tab:up,tab:down --height=50% -q (commandline)
+                  | decode utf-8 
+                  | str trim
+              )"
+            }
         }
     ]
 }
