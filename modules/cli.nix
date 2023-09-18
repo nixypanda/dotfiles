@@ -14,6 +14,7 @@
     ngrok
     openvpn
     drone-cli
+    mitmproxy
 
     # Better alternatives
     bottom # top
