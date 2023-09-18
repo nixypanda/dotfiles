@@ -188,13 +188,6 @@ in {
         gopls
         delve
 
-        # Haskell
-        haskellPackages.haskell-language-server
-        haskellPackages.hoogle
-        haskellPackages.fast-tags
-        haskellPackages.haskell-debug-adapter
-        haskellPackages.ghci-dap
-
         # HTML/CSS/JS
         nodePackages.vscode-langservers-extracted
 
@@ -275,6 +268,13 @@ in {
     rustfmt
     clippy
     evcxr
+
+    # Haskell
+    haskellPackages.haskell-language-server
+    haskellPackages.hoogle
+    haskellPackages.fast-tags
+    haskellPackages.haskell-debug-adapter
+    haskellPackages.ghci-dap
 
     # python
     python3Packages.isort
