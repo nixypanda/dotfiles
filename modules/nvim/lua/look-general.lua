@@ -17,13 +17,13 @@ require("noice").setup({
     },
     routes = {
         {
-            -- null ls is too noisy, so skip it's messages
+            -- skip progress messages from noisy servers
             filter = {
                 event = 'lsp',
                 kind = 'progress',
                 cond = function(message)
                     local client = vim.tbl_get(message.opts, 'progress', 'client')
-                    return client == 'null-ls'
+                    return client == 'null-ls' or client == 'ltex'
                 end,
             },
             opts = { skip = true },
