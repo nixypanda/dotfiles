@@ -89,28 +89,20 @@ null_ls.setup {
         null_ls.builtins.diagnostics.vale,
         -- markdown
         null_ls.builtins.diagnostics.markdownlint,
-        null_ls.builtins.formatting.markdownlint,
         -- python
         null_ls.builtins.formatting.black,
         null_ls.builtins.diagnostics.mypy,
         null_ls.builtins.diagnostics.ruff,
-        -- js, html, css, formatting
-        null_ls.builtins.formatting.prettier,
         -- nix
         null_ls.builtins.code_actions.statix,
         null_ls.builtins.diagnostics.statix,
         null_ls.builtins.diagnostics.deadnix,
-        null_ls.builtins.formatting.nixfmt,
         -- shell scripting
         null_ls.builtins.code_actions.shellcheck,
-        -- terraform
-        null_ls.builtins.formatting.terraform_fmt,
         -- other
         null_ls.builtins.diagnostics.gitlint,
         null_ls.builtins.diagnostics.hadolint,
         null_ls.builtins.diagnostics.yamllint,
-        -- go formatting
-        null_ls.builtins.formatting.gofmt,
     }
 }
 

@@ -396,6 +396,22 @@
         "type": "github"
       }
     },
+    "nvim-conform-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1696096174,
+        "narHash": "sha256-qfiBYWqQArQ19+GT6C+pATYhQSgdJhP0LcQxS8/rA1E=",
+        "owner": "stevearc",
+        "repo": "conform.nvim",
+        "rev": "37d036704a100ef6e6457be45b4dfc2f8e429572",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stevearc",
+        "repo": "conform.nvim",
+        "type": "github"
+      }
+    },
     "nvim-haskell-tools-src": {
       "flake": false,
       "locked": {
@@ -564,13 +580,14 @@
     },
     "vim-plugins": {
       "inputs": {
+        "nvim-conform-src": "nvim-conform-src",
         "nvim-haskell-tools-src": "nvim-haskell-tools-src",
         "nvim-regexplainer-src": "nvim-regexplainer-src",
         "nvim-sqls-src": "nvim-sqls-src"
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-bQnXPMVt4mGAWVolVEbg+7/f2dcQIOdt/PSO33V6oOY=",
+        "narHash": "sha256-/bgT9g2mKuV/S78I+0EeJCkrt9+yW27XFDQ0AALNrMg=",
         "path": "./modules/nvim/plugins",
         "type": "path"
       },

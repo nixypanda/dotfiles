@@ -13,6 +13,10 @@
         "github:mrcjkb/haskell-tools.nvim/fd7c33cc3e893a12c1d90aca9ff7ede7d01f003d";
       flake = false;
     };
+    nvim-conform-src = {
+      url = "github:stevearc/conform.nvim";
+      flake = false;
+    };
   };
   outputs = inputs:
     let
@@ -28,6 +32,10 @@
         nvim-haskell-tools = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-haskell-tools";
           src = inputs.nvim-haskell-tools-src;
+        };
+        nvim-conform = pkgs.vimUtils.buildVimPlugin {
+          name = "nvim-conform";
+          src = inputs.nvim-conform-src;
         };
       };
     in {
