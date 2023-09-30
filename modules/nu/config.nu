@@ -123,7 +123,7 @@ $env.config = {
         # run before the prompt is shown
         pre_prompt: [{ ||
           let direnv = (direnv export json | from json)
-          let direnv = if ($direnv | length) == 1 { $direnv } else { {} }
+          let direnv = if not ($direnv | is-empty) { $direnv } else { {} }
           $direnv | load-env
         }]
         pre_execution: [{ null }] # run before the repl input is run
