@@ -155,129 +155,100 @@ in {
       nvim-surround
     ];
 
-    extraPackages = with pkgs;
-      [
-        # Bash
-        nodePackages.bash-language-server
-        shellcheck
-        shfmt
+    extraPackages = with pkgs; [
+      # Bash
+      nodePackages.bash-language-server
+      shellcheck
+      shfmt
 
-        # Clojure
-        clojure-lsp
+      # Clojure
+      clojure-lsp
 
-        # dhall (broken on nix unstable)
-        # dhall-lsp-server
+      # dhall (broken on nix unstable)
+      # dhall-lsp-server
 
-        # Docker
-        nodePackages.dockerfile-language-server-nodejs
-        # hadolint # (broken)
+      # Docker
+      nodePackages.dockerfile-language-server-nodejs
+      # hadolint # (broken)
 
-        # elm
-        elmPackages.elm-language-server
-        elmPackages.elm
-        elmPackages.elm-test
-        elmPackages.elm-format
+      # elm
+      elmPackages.elm-language-server
+      elmPackages.elm
+      elmPackages.elm-test
+      elmPackages.elm-format
 
-        # grammer
-        vale
+      # grammer
+      vale
 
-        # Git
-        gitlint
+      # Git
+      gitlint
 
-        # Go
-        gopls
-        delve
+      # Go
+      gopls
+      delve
 
-        # HTML/CSS/JS
-        nodePackages.vscode-langservers-extracted
+      # HTML/CSS/JS
+      nodePackages.vscode-langservers-extracted
 
-        # Java
-        java-language-server
+      # Java
+      java-language-server
 
-        # JavaScript
-        nodePackages.typescript-language-server
+      # JavaScript
+      nodePackages.typescript-language-server
 
-        # lua
-        luaformatter
-        lua-language-server
+      # lua
+      luaformatter
+      lua-language-server
 
-        # Make
-        # cmake-language-server
+      # Make
+      # cmake-language-server
 
-        # Markdown
-        nodePackages.markdownlint-cli
-        # This is a cli utility as we can't display all this in cli
-        pandoc
+      # Markdown
+      nodePackages.markdownlint-cli
+      # This is a cli utility as we can't display all this in cli
+      pandoc
 
-        # Nix
-        deadnix
-        statix
-        nil
-        nixfmt
+      # Nix
+      deadnix
+      statix
+      nil
+      nixfmt
 
-        # rust
-        code_lldb
+      # rust
+      code_lldb
 
-        # SQL
-        sqls
-        postgresql
+      # SQL
+      sqls
+      postgresql
 
-        # terraform
-        terraform-lsp
+      # terraform
+      terraform-lsp
 
-        # TOML
-        taplo-cli
+      # TOML
+      taplo-cli
 
-        # Vimscript
-        nodePackages.vim-language-server
+      # Vimscript
+      nodePackages.vim-language-server
 
-        # YAML
-        nodePackages.yaml-language-server
-        yamllint
-
-        # general purpose / multiple langs
-        efm-langserver
-        nodePackages.prettier
-
-        # utilities used by various programs
-        # telescope
-        ripgrep
-        fd
+      # YAML
+      nodePackages.yaml-language-server
+      yamllint
 
       # general purpose / multiple langs
       efm-langserver
       nodePackages.prettier
 
-        ]);
+      # utilities used by various programs
+      # telescope
+      ripgrep
+      fd
+    ];
 
     extraConfig = ''
       colorscheme catppuccin-macchiato
       luafile ${builtins.toString ./init_lua.lua}
     '';
   };
-
-  home.packages = with pkgs; [
-    nodePackages.livedown
-    # Rust
-    rust-analyzer
-    rustfmt
-    clippy
-    evcxr
-
-    # Haskell
-    haskellPackages.haskell-language-server
-    haskellPackages.hoogle
-    haskellPackages.fast-tags
-    haskellPackages.haskell-debug-adapter
-    haskellPackages.ghci-dap
-
-    # python
-    python3Packages.isort
-    nodePackages.pyright
-    black
-    python3Packages.flake8
-    mypy
-  ];
 
   xdg.configFile = {
     "nvim/lua" = {
@@ -296,7 +267,32 @@ in {
     '';
     "nvim/init_lua.lua".source = ./init_lua.lua;
   };
+  home = {
 
-  home.file.".vale.ini".source = ./vale.ini;
-  home.file.".markdownlintrc".source = ./markdown_lint.json;
+    packages = with pkgs; [
+      nodePackages.livedown
+      # Rust
+      rust-analyzer
+      rustfmt
+      clippy
+      evcxr
+
+      # Haskell
+      haskellPackages.haskell-language-server
+      haskellPackages.hoogle
+      haskellPackages.fast-tags
+      haskellPackages.haskell-debug-adapter
+      haskellPackages.ghci-dap
+
+      # python
+      python3Packages.isort
+      nodePackages.pyright
+      black
+      python3Packages.flake8
+      mypy
+    ];
+
+    file.".vale.ini".source = ./vale.ini;
+    file.".markdownlintrc".source = ./markdown_lint.json;
+  };
 }

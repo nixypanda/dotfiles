@@ -5,10 +5,12 @@ let
     ${builtins.readFile ./scripts/custom-eww-sysinfo.sh}
   '';
 in {
-  home.packages = with pkgs; [ custom-script-eww-sysinfo eww ];
+  home = {
+    packages = with pkgs; [ custom-script-eww-sysinfo eww ];
 
-  home.file.".config/eww/eww.scss".source = ./eww.scss;
-  home.file.".config/eww/eww.yuck".source = ./eww.yuck;
+    file.".config/eww/eww.scss".source = ./eww.scss;
+    file.".config/eww/eww.yuck".source = ./eww.yuck;
+  };
 
   # So eww daemon starts in the parent shell, It executes the scripts
   # provided in that shell environment only. That environment does not have

@@ -1,14 +1,16 @@
 {
-  homebrew.enable = true;
-  homebrew.onActivation = {
-    autoUpdate = true;
-    cleanup = "zap";
-    upgrade = true;
+  homebrew = {
+    enable = true;
+    onActivation = {
+      autoUpdate = true;
+      cleanup = "zap";
+      upgrade = true;
+    };
+    global = {
+      brewfile = true;
+      lockfiles = false;
+    };
+    taps = [ "homebrew/cask" "homebrew/cask-drivers" "homebrew/core" ];
+    casks = [ "google-chrome" "vlc" ];
   };
-  homebrew.global = {
-    brewfile = true;
-    lockfiles = false;
-  };
-  homebrew.taps = [ "homebrew/cask" "homebrew/cask-drivers" "homebrew/core" ];
-  homebrew.casks = [ "google-chrome" "vlc" ];
 }

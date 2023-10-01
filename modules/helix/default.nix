@@ -3,9 +3,11 @@
     enable = true;
     settings = {
       theme = "tokyonight_storm";
-      editor.line-number = "relative";
-      editor.cursor-shape.insert = "bar";
-      editor.indent-guides.ender = true;
+      editor = {
+        line-number = "relative";
+        cursor-shape.insert = "bar";
+        indent-guides.ender = true;
+      };
     };
   };
 }

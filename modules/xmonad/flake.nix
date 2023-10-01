@@ -12,7 +12,7 @@
       inputs.flake-utils.follows = "flake-utils";
     };
   };
-  outputs = inputs@{ self, nixpkgs, flake-utils, taffybar-flake, ... }:
+  outputs = { self, nixpkgs, flake-utils, taffybar-flake, ... }:
     let
       haskellDeps = ps:
         with ps; [
