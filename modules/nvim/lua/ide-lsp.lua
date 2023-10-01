@@ -78,30 +78,21 @@ require 'lspconfig'.cssls.setup { capabilities = capabilities }
 require 'lspconfig'.dockerls.setup {}
 require 'lspconfig'.html.setup { capabilities = capabilities }
 
--- null (Various tools as LSP) Setup
-local null_ls = require("null-ls")
-null_ls.setup {
-    sources = {
-        -- grammer
-        null_ls.builtins.diagnostics.vale,
-        -- markdown
-        null_ls.builtins.diagnostics.markdownlint,
-        -- python
-        null_ls.builtins.formatting.black,
-        null_ls.builtins.diagnostics.mypy,
-        null_ls.builtins.diagnostics.ruff,
-        -- nix
-        null_ls.builtins.code_actions.statix,
-        null_ls.builtins.diagnostics.statix,
-        null_ls.builtins.diagnostics.deadnix,
-        -- shell scripting
-        null_ls.builtins.code_actions.shellcheck,
-        -- other
-        null_ls.builtins.diagnostics.gitlint,
-        null_ls.builtins.diagnostics.hadolint,
-        null_ls.builtins.diagnostics.yamllint,
-    }
+require('lint').linters_by_ft = {
+    markdown = { 'vale', 'markdownlint' },
+    python = { 'mypy', 'ruff' },
+    nix = { 'statix' },
+    bash = { 'shellcheck' },
+    sh = { 'shellcheck' },
+    dockerfile = { 'hadolint' },
+    yaml = { 'yamllint' },
 }
+
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+    callback = function()
+        require("lint").try_lint()
+    end,
+})
 
 
 -- Basic LSP keybindings

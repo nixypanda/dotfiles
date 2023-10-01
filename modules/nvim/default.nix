@@ -53,7 +53,7 @@ in {
 
       # Programming: LSP
       lspkind-nvim
-      null-ls-nvim
+      nvim-lint
       nvim-lspconfig
       lspsaga-nvim
       nvim-sqls
@@ -169,7 +169,7 @@ in {
 
       # Docker
       nodePackages.dockerfile-language-server-nodejs
-      # hadolint # (broken)
+      hadolint
 
       # elm
       elmPackages.elm-language-server
