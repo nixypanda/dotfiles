@@ -8,11 +8,6 @@
       url = "github:nanotee/sqls.nvim";
       flake = false;
     };
-    nvim-haskell-tools-src = {
-      url =
-        "github:mrcjkb/haskell-tools.nvim/fd7c33cc3e893a12c1d90aca9ff7ede7d01f003d";
-      flake = false;
-    };
     nvim-conform-src = {
       url = "github:stevearc/conform.nvim";
       flake = false;
@@ -28,10 +23,6 @@
         nvim-sqls = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-sqls";
           src = inputs.nvim-sqls-src;
-        };
-        nvim-haskell-tools = pkgs.vimUtils.buildVimPlugin {
-          name = "nvim-haskell-tools";
-          src = inputs.nvim-haskell-tools-src;
         };
         nvim-conform = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-conform";
