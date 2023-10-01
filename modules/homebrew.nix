@@ -11,5 +11,4 @@
   };
   homebrew.taps = [ "homebrew/cask" "homebrew/cask-drivers" "homebrew/core" ];
   homebrew.casks = [ "google-chrome" "vlc" ];
-  homebrew.brews = [ "ltex-ls" ];
 }

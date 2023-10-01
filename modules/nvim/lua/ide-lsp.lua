@@ -78,9 +78,6 @@ require 'lspconfig'.cssls.setup { capabilities = capabilities }
 require 'lspconfig'.dockerls.setup {}
 require 'lspconfig'.html.setup { capabilities = capabilities }
 
--- Grammer
-require 'lspconfig'.ltex.setup {}
-
 -- null (Various tools as LSP) Setup
 local null_ls = require("null-ls")
 null_ls.setup {

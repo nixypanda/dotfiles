@@ -244,14 +244,9 @@ in {
         ripgrep
         fd
 
-      ] ++ (if pkgs.stdenv.isLinux then
-        [
-          # Grammer
-          # Not available on mac using brew to install it
-          ltex-ls
-        ]
-      else
-        [
+      # general purpose / multiple langs
+      efm-langserver
+      nodePackages.prettier
 
         ]);
 
