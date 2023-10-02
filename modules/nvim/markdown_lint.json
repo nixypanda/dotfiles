@@ -2,5 +2,10 @@
   "MD033": {
     // Allowed elements
     "allowed_elements": ["summary", "details"]
+  },
+  // MD013/line-length - Line length
+  "MD013": {
+    // Number of characters
+    "line_length": 800
   }
 }
