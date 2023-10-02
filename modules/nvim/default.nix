@@ -242,6 +242,8 @@ in {
       # telescope
       ripgrep
       fd
+
+      ltex-ls
     ];
 
     extraConfig = ''

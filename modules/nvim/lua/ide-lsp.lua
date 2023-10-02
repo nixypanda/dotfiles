@@ -24,6 +24,17 @@ require 'lspconfig'.gopls.setup {
     }
 }
 
+-- grammer
+require 'lspconfig'.ltex.setup {
+    settings = {
+        ltex = {
+            ['ltex-ls'] = {
+                logLevel = "warning"
+            }
+        }
+    }
+}
+
 -- Java
 require 'lspconfig'.java_language_server.setup { cmd = { 'java-language-server' } }
 
