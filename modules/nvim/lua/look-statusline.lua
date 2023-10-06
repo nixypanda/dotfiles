@@ -2,8 +2,6 @@ vim.api.nvim_set_option('laststatus', 3)
 
 require('lualine').setup {
     options = {
-        section_separators = { left = '', right = '' },
-        component_separators = { left = '', right = '' },
         disabled_filetypes = { "NvimTree" },
         iconsEnabled = true
     },
@@ -14,7 +12,7 @@ require('lualine').setup {
             {
                 'diagnostics',
                 sources = { 'nvim_diagnostic' },
-                symbols = { error = " ", warn = " ", info = "", hint = " " },
+                symbols = { error = "☠ ", warn = " ", info = "", hint = "☛ " },
             }
         },
         lualine_x = { 'diff', 'branch' },
