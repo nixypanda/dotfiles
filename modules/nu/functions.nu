@@ -1,13 +1,25 @@
-export def "loc tldr" [] {
-    tokei -o json |
-    from json |
-    transpose |
-    flatten |
-    where column0 != "Total" |
-    insert files {|row| $row.reports | length } |
-    rename -c [column0 language] |
-    insert lines {|row| $row.blanks + $row.code + $row.comments}
-}
+# crashes
+# Error: nu::parser::parse_mismatch
+# 
+#   × Parse mismatch during operation.
+#    ╭─[/nix/store/kiawjm5hlcn8rkg0gd75g6025n6nqs5f-functions.nu:7:1]
+#  7 │     insert files {|row| $row.reports | length } |
+#  8 │     rename -c [column0 language] |
+#    ·               ─────────┬────────
+#    ·                        ╰── expected non-[] value
+#  9 │     insert lines {|row| $row.blanks + $row.code + $row.comments}
+#    ╰────
+# 
+# export def "loc tldr" [] {
+#     tokei -o json |
+#     from json |
+#     transpose |
+#     flatten |
+#     where column0 != "Total" |
+#     insert files {|row| $row.reports | length } |
+#     rename -c [column0 language] |
+#     insert lines {|row| $row.blanks + $row.code + $row.comments}
+# }
 
 # Function to create a fixup commit and perform an interactive rebase
 # Usage: gfix <commit_sha>

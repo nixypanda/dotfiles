@@ -197,7 +197,7 @@ in {
       nodePackages.typescript-language-server
 
       # lua
-      luaformatter
+      # luaformatter
       lua-language-server
 
       # Make

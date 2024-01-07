@@ -1,10 +1,10 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
-    consul
-    nomad_1_4
+    # consul
+    # nomad_1_4
     packer
-    terraform
-    vagrant
+    # terraform
+    # vagrant
     vault
   ];
 }

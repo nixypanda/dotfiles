@@ -49,6 +49,9 @@
             "ngrok"
             "discord"
             "unrar"
+            "consul"
+            "terraform"
+            "nomad"
             # browser extensions
             "onepassword-password-manager"
             "grammarly"
