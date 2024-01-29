@@ -125,7 +125,7 @@ local mappings = {
         p = { "<cmd>Lspsaga hover_doc<cr>", "Preview Definition" },
         r = { "<cmd>Lspsaga rename<cr>", "Rename" },
         s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
-        S = { "<cmd>Telescope lsp_workspace_symbols<cr>", "Workspace Symbols" },
+        S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" },
         u = { "<cmd>LspRestart<cr>", "Restart LSP" },
         U = { "<cmd>LspStart<cr>", "Start LSP" },
     },
