@@ -57,14 +57,14 @@ cmp.setup({
     },
     sources = cmp.config.sources(
         {
-            { name = 'nvim_lsp' },
+            { name = 'nvim_lsp', max_item_count = 10 },
             { name = 'vsnip' },
             { name = 'nvim_lua' },
             { name = 'calc' },
             { name = 'crates' }
         },
         {
-            { name = 'buffer' },
+            { name = 'buffer', max_item_count = 5, keyword_length = 3 },
             { name = 'path' }
         }
     ),
