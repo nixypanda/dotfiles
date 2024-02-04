@@ -8,6 +8,11 @@ let
   tree-sitter-nu = pkgs.callPackage ./nvim-treesitter-nu.nix {
     inherit (pkgs.tree-sitter) buildGrammar;
   };
+  venv-mypy = pkgs.writeScriptBin "venv-mypy" ''
+    #!/bin/sh
+    set -e
+    exec poetry run pylint "$@"
+  '';
 in {
   programs.neovim = {
     enable = true;
@@ -139,7 +144,7 @@ in {
       neotest-go
 
       ## Project management
-      direnv-vim
+      # direnv-vim
       project-nvim
 
       # Text Helpers
@@ -213,6 +218,9 @@ in {
       statix
       nil
       nixfmt
+
+      # Python
+      venv-mypy
 
       # rust
       code_lldb
