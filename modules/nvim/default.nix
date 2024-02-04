@@ -121,9 +121,6 @@ in {
       cmp-nvim-lua
       cmp-path
       cmp-treesitter
-      cmp-vsnip
-      vim-vsnip
-      vim-vsnip-integ
 
       # Programming: AI shit
       codeium-vim # AI completion prediction
