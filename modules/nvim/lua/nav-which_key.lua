@@ -191,7 +191,7 @@ local mappings = {
             "Next failed test"
         },
         o = {
-            "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>",
+            "<cmd>lua require('neotest').output.open({ enter = true })<cr>",
             "Open output for nearest test"
         },
         p = {
