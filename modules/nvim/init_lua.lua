@@ -9,6 +9,8 @@ require "look-todo"
 require "look-topline"
 require "look-general"
 
+require "nav-nvim-tree"
+
 require "ide-ai"
 require "ide-completion"
 require "ide-dap"
@@ -24,7 +26,6 @@ require "ide-rust"
 
 require "draw-venn"
 
-require "nav-nvim-tree"
 require "nav-project"
 require "nav-telescope"
 require "nav-which_key"

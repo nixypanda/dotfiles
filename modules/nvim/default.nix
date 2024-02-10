@@ -5,6 +5,7 @@ let
   # Caveat: This requires Xcode.app installed on the system
   # NOTE: https://github.com/NixOS/nixpkgs/pull/211321
   code_lldb = codelldb_fixed_pkgs.vscode-extensions.vadimcn.vscode-lldb;
+  python_with_debugpy = pkgs.python3.withPackages (ps: with ps; [ debugpy ]);
   tree-sitter-nu = pkgs.callPackage ./nvim-treesitter-nu.nix {
     inherit (pkgs.tree-sitter) buildGrammar;
   };
@@ -222,6 +223,7 @@ in {
 
       # Python
       venv-mypy
+      python_with_debugpy
 
       # rust
       code_lldb
@@ -273,7 +275,8 @@ in {
       local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
       return {
           codelldb_path = extension_path .. 'adapter/codelldb',
-          liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib'
+          liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib',
+          python_with_debugpy_path = '${python_with_debugpy}/bin/python'
       }
     '';
     "nvim/init_lua.lua".source = ./init_lua.lua;

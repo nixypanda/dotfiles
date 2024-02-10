@@ -42,13 +42,9 @@
     lua
 
     # python
-    (python3.withPackages (ps: with ps; [ setuptools pip debugpy ]))
-    autoflake
+    (python3.withPackages (ps: with ps; [ setuptools pip ]))
     poetry
-    pipenv
     python3Packages.ipython
-    python3Packages.parso
-    python3Packages.twine
     ruff
 
     # rust
