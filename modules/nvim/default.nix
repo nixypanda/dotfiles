@@ -121,6 +121,9 @@ in {
       cmp-nvim-lua
       cmp-path
       cmp-treesitter
+      luasnip
+      cmp_luasnip
+      friendly-snippets
 
       # Programming: AI shit
       codeium-vim # AI completion prediction
