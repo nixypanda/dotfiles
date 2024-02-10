@@ -73,11 +73,11 @@ require 'lspconfig'.nil_ls.setup {}
 require 'lspconfig'.pyright.setup { capabilities = capabilities }
 
 -- SQL
-require('lspconfig').sqls.setup {
-    on_attach = function(client, bufnr)
-        require('sqls').on_attach(client, bufnr)
-    end
-}
+-- require('lspconfig').sqls.setup {
+--     on_attach = function(client, bufnr)
+--         require('sqls').on_attach(client, bufnr)
+--     end
+-- }
 
 -- Terraform
 require 'lspconfig'.terraform_lsp.setup {}
