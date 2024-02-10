@@ -396,19 +396,19 @@
         "type": "github"
       }
     },
-    "nvim-conform-src": {
+    "nvim-lsp-file-operations-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1704565579,
-        "narHash": "sha256-McAlJD0dgf6OBT0aTdTKbMDiCGfne/aYHSbuWUALEWY=",
-        "owner": "stevearc",
-        "repo": "conform.nvim",
-        "rev": "0e61fc88f725b4411e63b43470a397c6102534c7",
+        "lastModified": 1706139094,
+        "narHash": "sha256-eXOqhfzDK+Jv5bV1wdWT4IA/wBAdkhWV+75HoNcYaR8=",
+        "owner": "antosha417",
+        "repo": "nvim-lsp-file-operations",
+        "rev": "223aca86b737dc66e9c51ebcda8788a8d9cc6cf2",
         "type": "github"
       },
       "original": {
-        "owner": "stevearc",
-        "repo": "conform.nvim",
+        "owner": "antosha417",
+        "repo": "nvim-lsp-file-operations",
         "type": "github"
       }
     },
@@ -563,13 +563,13 @@
     },
     "vim-plugins": {
       "inputs": {
-        "nvim-conform-src": "nvim-conform-src",
+        "nvim-lsp-file-operations-src": "nvim-lsp-file-operations-src",
         "nvim-regexplainer-src": "nvim-regexplainer-src",
         "nvim-sqls-src": "nvim-sqls-src"
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-1jvyquxCGbAh/LwFoexx3e12kYe1qpSf3kIYKuQE354=",
+        "narHash": "sha256-8EnqvNs0ShMHCLqxdNHcSHqH34B/vCkARN3DvDaSBuQ=",
         "path": "./modules/nvim/plugins",
         "type": "path"
       },

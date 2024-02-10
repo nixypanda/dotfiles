@@ -8,8 +8,8 @@
       url = "github:nanotee/sqls.nvim";
       flake = false;
     };
-    nvim-conform-src = {
-      url = "github:stevearc/conform.nvim";
+    nvim-lsp-file-operations-src = {
+      url = "github:antosha417/nvim-lsp-file-operations";
       flake = false;
     };
   };
@@ -24,9 +24,9 @@
           name = "nvim-sqls";
           src = inputs.nvim-sqls-src;
         };
-        nvim-conform = pkgs.vimUtils.buildVimPlugin {
-          name = "nvim-conform";
-          src = inputs.nvim-conform-src;
+        nvim-lsp-file-operations = pkgs.vimUtils.buildVimPlugin {
+          name = "nvim-lsp-file-operations";
+          src = inputs.nvim-lsp-file-operations-src;
         };
       };
     in {

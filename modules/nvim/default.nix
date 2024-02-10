@@ -62,7 +62,8 @@ in {
       nvim-lspconfig
       lspsaga-nvim
       nvim-sqls
-      nvim-conform
+      conform-nvim
+      nvim-lsp-file-operations
 
       # Progrmming: Treesitter
       (nvim-treesitter.withPlugins (plugins:

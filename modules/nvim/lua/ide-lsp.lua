@@ -115,6 +115,9 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 })
 
 
+-- LSP File operations
+require("lsp-file-operations").setup()
+
 -- Basic LSP keybindings
 -- Jump to Definition/Implementation
 vim.api.nvim_set_keymap(
