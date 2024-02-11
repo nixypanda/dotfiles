@@ -26,11 +26,11 @@ require('lualine').setup {
 local nvim_tree_shift = {
     function()
         return string.rep(
-            ' ', vim.api.nvim_win_get_width(require 'nvim-tree.view'.get_winnr()) - 1
+            ' ', vim.api.nvim_win_get_width(require 'nvim-tree.view'.get_winnr()) - 2
         )
     end,
     cond = require('nvim-tree.view').is_visible,
-    color = 'BufferInactive'
+    color = 'NvimTreeNormal'
 }
 
 require 'lualine'.setup {
