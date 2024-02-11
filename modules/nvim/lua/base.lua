@@ -1,3 +1,4 @@
+-- require "base-sane"
 vim.o.mouse = "a"
 -- vim.o.encoding = "UTF-8" -- redundant
 vim.o.cursorline = true
@@ -75,3 +76,53 @@ vim.opt.fillchars = {
 -- Set relative numbering
 vim.wo.number = true
 vim.wo.relativenumber = true
+
+-- require "look-lsp"
+vim.diagnostic.config({
+    virtual_text = false,
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = false
+})
+
+local diagnostic_symbol_map = {
+    { name = "DiagnosticSignError", symbol = "☠ " },
+    { name = "DiagnosticSignWarn", symbol = " " },
+    { name = "DiagnosticSignInfo", symbol = "" },
+    { name = "DiagnosticSignHint", symbol = "☛ " },
+}
+
+for _, elm in ipairs(diagnostic_symbol_map) do
+    vim.fn.sign_define(
+        elm.name,
+        { texthl = elm.name, text = elm.symbol, numhl = elm.name }
+    )
+end
+
+-- require "look-theme"
+local file_syntax_map = {
+    { pattern = "*.rasi",         syntax = "scss" },
+    { pattern = "flake.lock",     syntax = "json" },
+    { pattern = "*.tfstate",      syntax = "json" },
+    { pattern = "*.nomad",        syntax = "hcl" },
+    { pattern = "manifest",       syntax = "hcl" },
+    { pattern = "lotus58.keymap", syntax = "c" },
+    { pattern = "lotus58.conf",   syntax = "c" },
+}
+
+for _, elm in ipairs(file_syntax_map) do
+    vim.api.nvim_create_autocmd(
+        { "BufNewFile", "BufRead" },
+        { pattern = elm.pattern, command = "set syntax=" .. elm.syntax }
+    )
+end
+
+-- This is a very specific setting which sets the color of border to be the
+-- dark background of the tokyonight theme. This is done because we want to
+-- have a seemless split between the filetree plugin and the buffer. As a side
+-- effect for this we also get prominent splits as we need to use huge
+-- forground blocks to set this up.
+vim.g.tokyonight_colors = {
+    border = '#1f2335'
+}

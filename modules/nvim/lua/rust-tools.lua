@@ -1,6 +1,5 @@
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local rt = require("rust-tools")
-local injected_config = require("injected")
 
 rt.setup({
     tools = {
@@ -17,10 +16,7 @@ rt.setup({
         }
     },
     dap = {
-        adapter = require('rust-tools.dap').get_codelldb_adapter(
-            injected_config.codelldb_path,
-            injected_config.liblldb_path
-        )
+        -- Injected by nix: codelldb_path and liblldb_path
+        adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path)
     }
 })
-require 'crates'.setup()

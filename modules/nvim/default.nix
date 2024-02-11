@@ -6,7 +6,7 @@ let
   # NOTE: https://github.com/NixOS/nixpkgs/pull/211321
   code_lldb = codelldb_fixed_pkgs.vscode-extensions.vadimcn.vscode-lldb;
   python_with_debugpy = pkgs.python3.withPackages (ps: with ps; [ debugpy ]);
-  tree-sitter-nu = pkgs.callPackage ./nvim-treesitter-nu.nix {
+  tree-sitter-nu = pkgs.callPackage ./plugins/nvim-treesitter-nu.nix {
     inherit (pkgs.tree-sitter) buildGrammar;
   };
   venv-mypy = pkgs.writeScriptBin "venv-mypy" ''
@@ -21,16 +21,52 @@ in {
 
     plugins = with pkgs.vimPlugins; [
       # Appearance
-      bufferline-nvim
-      indent-blankline-nvim
-      lualine-nvim
-      alpha-nvim
-      nvim-colorizer-lua
-      headlines-nvim
+      {
+        plugin = bufferline-nvim;
+        type = "lua";
+        config = builtins.readFile ./lua/bufferline.lua;
+      }
+      {
+        plugin = indent-blankline-nvim;
+        type = "lua";
+        config = ''require("ibl").setup()'';
+      }
+      {
+        plugin = lualine-nvim;
+        type = "lua";
+        config = builtins.readFile ./lua/lualine.lua;
+      }
+      {
+        plugin = alpha-nvim;
+        type = "lua";
+        config = builtins.readFile ./lua/alpha.lua;
+      }
+      {
+        plugin = nvim-colorizer-lua;
+        type = "lua";
+        config = ''require "colorizer".setup { css = { rgb_fn = true, } }'';
+      }
+      {
+        plugin = headlines-nvim;
+        type = "lua";
+        config = ''require("headlines").setup()'';
+      }
       nvim-web-devicons
-      noice-nvim
-      statuscol-nvim
-      nvim-ufo
+      {
+        plugin = noice-nvim;
+        type = "lua";
+        config = builtins.readFile ./lua/noice.lua;
+      }
+      {
+        plugin = statuscol-nvim;
+        type = "lua";
+        config = builtins.readFile ./lua/statuscol.lua;
+      }
+      {
+        plugin = nvim-ufo;
+        type = "lua";
+        config = builtins.readFile ./lua/ufo.lua;
+      }
 
       # Appearance: Themes
       dracula-vim
@@ -40,82 +76,166 @@ in {
 
       # DAP
       nvim-dap
-      nvim-dap-python
-      nvim-dap-ui
-      nvim-dap-go
+      {
+        plugin = nvim-dap-ui;
+        type = "lua";
+        config = builtins.readFile ./lua/dapui.lua;
+      }
+      {
+        plugin = nvim-dap-python;
+        type = "lua";
+        config = ''
+          local dap_python = require("dap-python")
+
+          dap_python.setup("${python_with_debugpy}/bin/python")
+          dap_python.test_runner = "pytest"
+        '';
+      }
+      {
+        plugin = nvim-dap-go;
+        type = "lua";
+        config = ''require("dap-go").setup()'';
+      }
 
       # Fuzzy Finder
+      {
+        plugin = telescope-nvim;
+        type = "lua";
+        config = builtins.readFile ./lua/telescope.lua;
+      }
       telescope-fzf-native-nvim
-      telescope-nvim
       telescope-ui-select-nvim
 
       # Git
-      gitsigns-nvim
+      {
+        plugin = gitsigns-nvim;
+        type = "lua";
+        config = builtins.readFile ./lua/gitsigns.lua;
+      }
       vim-fugitive
 
+      # Keymaps
+      {
+        plugin = which-key-nvim;
+        type = "lua";
+        config = builtins.readFile ./lua/which-key.lua;
+      }
+
       # Navigation
-      nvim-tree-lua
+      {
+        plugin = nvim-tree-lua;
+        type = "lua";
+        config = builtins.readFile ./lua/nvim-tree.lua;
+      }
       vim-tmux-navigator
 
       # Programming: LSP
-      lspkind-nvim
-      nvim-lint
-      nvim-lspconfig
-      lspsaga-nvim
+      {
+        plugin = lspkind-nvim;
+        type = "lua";
+        config = "require('lspkind').init({})";
+      }
+      {
+        plugin = nvim-lint;
+        type = "lua";
+        config = builtins.readFile ./lua/lint.lua;
+      }
+      {
+        plugin = nvim-lspconfig;
+        type = "lua";
+        config = builtins.readFile ./lua/lspconfig.lua;
+      }
+      {
+        plugin = lspsaga-nvim;
+        type = "lua";
+        config = builtins.readFile ./lua/lspsaga.lua;
+      }
       nvim-sqls
-      conform-nvim
-      nvim-lsp-file-operations
+      {
+        plugin = conform-nvim;
+        type = "lua";
+        config = builtins.readFile ./lua/conform.lua;
+      }
+      {
+        plugin = nvim-lsp-file-operations;
+        type = "lua";
+        config = ''require("lsp-file-operations").setup()'';
+      }
 
       # Progrmming: Treesitter
-      (nvim-treesitter.withPlugins (plugins:
-        with plugins; [
-          bash
-          c
-          css
-          dhall
-          dockerfile
-          elixir
-          elm
-          go
-          haskell
-          hcl
-          html
-          java
-          javascript
-          json
-          latex
-          lua
-          markdown
-          markdown-inline
-          nix
-          python
-          regex
-          regex
-          ruby
-          rust
-          scss
-          sql
-          terraform
-          toml
-          tsx
-          typescript
-          vim
-          yaml
+      {
+        plugin = (nvim-treesitter.withPlugins (plugins:
+          with plugins; [
+            bash
+            c
+            css
+            dhall
+            dockerfile
+            elixir
+            elm
+            go
+            haskell
+            hcl
+            html
+            java
+            javascript
+            json
+            latex
+            lua
+            markdown
+            markdown-inline
+            nix
+            python
+            regex
+            regex
+            ruby
+            rust
+            scss
+            sql
+            terraform
+            toml
+            tsx
+            typescript
+            vim
+            yaml
 
-          tree-sitter-nu.grammar
-        ]))
+            tree-sitter-nu.grammar
+          ]));
+        type = "lua";
+        config = builtins.readFile ./lua/treesitter.lua;
+      }
       nvim-treesitter-refactor
       nvim-treesitter-textobjects
-      which-key-nvim
 
       # Programming: Language support
-      crates-nvim
+      {
+        plugin = crates-nvim;
+        type = "lua";
+        config = ''require("crates").setup()'';
+      }
       yuck-vim
-      rust-tools-nvim
-      haskell-tools-nvim
+      {
+        plugin = rust-tools-nvim;
+        type = "lua";
+        config = ''
+          local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
+          local codelldb_path = extension_path .. 'adapter/codelldb'
+          local liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib'
+          ${builtins.readFile ./lua/rust-tools.lua}
+        '';
+      }
+      {
+        plugin = haskell-tools-nvim;
+        type = "lua";
+        config = builtins.readFile ./lua/haskell-tools.lua;
+      }
 
       # Programming: Autocompletion setup
-      nvim-cmp
+      {
+        plugin = nvim-cmp;
+        type = "lua";
+        config = builtins.readFile ./lua/cmp.lua;
+      }
       cmp-buffer
       cmp-calc
       cmp-cmdline
@@ -128,8 +248,17 @@ in {
       friendly-snippets
 
       # Programming: AI shit
-      codeium-vim # AI completion prediction
-      ChatGPT-nvim
+      {
+        plugin = codeium-vim;
+        type = "lua";
+        config = builtins.readFile ./lua/codeium.lua;
+      }
+      {
+        plugin = ChatGPT-nvim;
+        type = "lua";
+        config =
+          ''require("chatgpt").setup({ keymaps = { submit = "<C-l>" } })'';
+      }
 
       # Programming: Code Evaluation
       conjure
@@ -140,26 +269,50 @@ in {
 
       # Programming: Testing
       FixCursorHold-nvim
-      neotest
+      {
+        plugin = neotest;
+        type = "lua";
+        config = builtins.readFile ./lua/neotest.lua;
+      }
       neotest-python
       neotest-rust
       neotest-go
 
-      ## Project management
-      # direnv-vim
-      project-nvim
-
       # Text Helpers
-      nvim-regexplainer
-      todo-comments-nvim
-      venn-nvim
+      {
+        plugin = nvim-regexplainer;
+        type = "lua";
+        config = builtins.readFile ./lua/regexplainer.lua;
+      }
+      {
+        plugin = todo-comments-nvim;
+        type = "lua";
+        config = "require 'todo-comments'.setup();";
+      }
+      {
+        plugin = venn-nvim;
+        type = "lua";
+        config = builtins.readFile ./lua/venn.lua;
+      }
       vim-haskellConcealPlus
       vim-table-mode
 
       # Text objects
-      nvim-autopairs
-      nvim-comment
-      nvim-surround
+      {
+        plugin = nvim-autopairs;
+        type = "lua";
+        config = "require('nvim-autopairs').setup {}";
+      }
+      {
+        plugin = nvim-comment;
+        type = "lua";
+        config = "require('nvim_comment').setup {}";
+      }
+      {
+        plugin = nvim-surround;
+        type = "lua";
+        config = "require('nvim-surround').setup {}";
+      }
     ];
 
     extraPackages = with pkgs; [
@@ -259,27 +412,13 @@ in {
 
     extraConfig = ''
       colorscheme catppuccin-macchiato
-      luafile ${builtins.toString ./init_lua.lua}
+      luafile ${builtins.toString ./lua/base.lua}
     '';
   };
 
   xdg.configFile = {
-    "nvim/lua" = {
-      source = ./lua;
-      recursive = true;
-    };
     "nvim/queries/nu/highlights.scm".text = tree-sitter-nu.highlights;
     "nvim/queries/nu/injections.scm".text = tree-sitter-nu.injections;
-
-    "nvim/lua/injected.lua".text = ''
-      local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
-      return {
-          codelldb_path = extension_path .. 'adapter/codelldb',
-          liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib',
-          python_with_debugpy_path = '${python_with_debugpy}/bin/python'
-      }
-    '';
-    "nvim/init_lua.lua".source = ./init_lua.lua;
   };
   home = {
 

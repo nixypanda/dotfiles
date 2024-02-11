@@ -1,7 +1,4 @@
 local cmp = require 'cmp'
-local lspkind = require('lspkind')
-
-lspkind.init({})
 
 local has_words_before = function()
     unpack = unpack or table.unpack
@@ -19,7 +16,7 @@ cmp.setup({
             luasnip.lsp_expand(args.body) -- For `luasnip` users.
         end,
     },
-    formatting = { format = lspkind.cmp_format({ with_text = true, maxwidth = 50 }) },
+    formatting = { format = require("lspkind").cmp_format({ with_text = true, maxwidth = 50 }) },
     mapping = {
         ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
         ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
@@ -83,9 +80,6 @@ cmp.setup.cmdline(':', {
         }
     })
 })
-
--- Autopairs
-require('nvim-autopairs').setup {}
 
 -- Completion (default setting)
 vim.o.completeopt = "menuone,noselect"

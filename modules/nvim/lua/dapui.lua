@@ -20,14 +20,3 @@ vim.fn.sign_define(
     "DapStopped",
     { text = "→", texthl = "Info", linehl = "Info", numhl = "" }
 )
-
-
--- Python Setup
-local dap_python = require("dap-python")
-
-dap_python.setup(require("injected").python_with_debugpy_path)
-dap_python.test_runner = "pytest"
-
-
--- Go setup
-require('dap-go').setup()
