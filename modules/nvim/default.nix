@@ -29,7 +29,7 @@ in {
       {
         plugin = indent-blankline-nvim;
         type = "lua";
-        config = ''require("ibl").setup()'';
+        config = builtins.readFile ./lua/indent-blankline.lua;
       }
       {
         plugin = lualine-nvim;
@@ -197,6 +197,7 @@ in {
             tsx
             typescript
             vim
+            vimdoc
             yaml
 
             tree-sitter-nu.grammar
@@ -312,6 +313,13 @@ in {
         plugin = nvim-surround;
         type = "lua";
         config = "require('nvim-surround').setup {}";
+      }
+
+      # Utilities
+      {
+        plugin = bigfile-nvim;
+        type = "lua";
+        config = builtins.readFile ./lua/bigfile.lua;
       }
     ];
 
