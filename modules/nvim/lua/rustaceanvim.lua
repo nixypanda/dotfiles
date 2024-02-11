@@ -1,13 +1,12 @@
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local rt = require("rust-tools")
 
-rt.setup({
+vim.g.rustaceanvim = {
 	tools = {
 		hover_actions = { auto_focus = true },
 	},
 	server = {
 		capabilities = capabilities,
-		settings = {
+		default_settings = {
 			["rust-analyzer"] = {
 				checkOnSave = { command = "clippy" },
 				-- RA will scan .direnv correspondingly entire nixpkgs repository
@@ -17,6 +16,6 @@ rt.setup({
 	},
 	dap = {
 		-- Injected by nix: codelldb_path and liblldb_path
-		adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+		adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb_path, liblldb_path),
 	},
-})
+}

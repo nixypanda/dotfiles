@@ -428,6 +428,22 @@
         "type": "github"
       }
     },
+    "nvim-rustaceanvim-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1707671902,
+        "narHash": "sha256-uxrUCVsdbFqTYIavfGx/rxGnR8YCA1x6dP/F13pU3/Q=",
+        "owner": "mrcjkb",
+        "repo": "rustaceanvim",
+        "rev": "a23ca1bd8fba6017f8c229a9db95ae8454fdf20b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mrcjkb",
+        "repo": "rustaceanvim",
+        "type": "github"
+      }
+    },
     "nvim-sqls-src": {
       "flake": false,
       "locked": {
@@ -565,11 +581,12 @@
       "inputs": {
         "nvim-lsp-file-operations-src": "nvim-lsp-file-operations-src",
         "nvim-regexplainer-src": "nvim-regexplainer-src",
+        "nvim-rustaceanvim-src": "nvim-rustaceanvim-src",
         "nvim-sqls-src": "nvim-sqls-src"
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-8EnqvNs0ShMHCLqxdNHcSHqH34B/vCkARN3DvDaSBuQ=",
+        "narHash": "sha256-t9dyDqatF2yes+aF16aPZN1CMbb+10zloEqXz21/RQM=",
         "path": "./modules/nvim/plugins",
         "type": "path"
       },

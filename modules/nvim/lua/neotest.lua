@@ -4,6 +4,6 @@ require("neotest").setup({
 		require("neotest-python")({
 			dap = { justMyCode = true },
 		}),
-		require("neotest-rust"),
+		require("rustaceanvim.neotest"),
 	},
 })

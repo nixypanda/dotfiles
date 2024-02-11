@@ -260,11 +260,10 @@ local mappings = {
 		},
 		r = {
 			name = "+Rust",
-			d = { "<cmd>RustDisableInlayHints<cr>", "Disable Inlay Hints" },
-			D = { "<cmd>RustDebugables<cr>", "Debugables" },
-			e = { "<cmd>RustEnableInlayHints<cr>", "Enable Inlay Hints" },
-			h = { "<cmd>RustHoverActions<cr>", "Hover" },
-			r = { "<cmd>RustRunnables<cr>", "Runnables" },
+			d = { "<cmd>RustLsp debugables<cr>", "Debugables" },
+			e = { "<cmd>RustLsp explainError<cr>", "Explain Error" },
+			r = { "<cmd>RustLsp runnables<cr>", "Runnables" },
+			t = { "<cmd>RustLsp testables<cr>", "Testables" },
 		},
 		h = {
 			name = "+Haskell",

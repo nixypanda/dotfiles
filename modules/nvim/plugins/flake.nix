@@ -12,6 +12,10 @@
       url = "github:antosha417/nvim-lsp-file-operations";
       flake = false;
     };
+    nvim-rustaceanvim-src = {
+      url = "github:mrcjkb/rustaceanvim";
+      flake = false;
+    };
   };
   outputs = inputs:
     let
@@ -27,6 +31,10 @@
         nvim-lsp-file-operations = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-lsp-file-operations";
           src = inputs.nvim-lsp-file-operations-src;
+        };
+        nvim-rustaceanvim = pkgs.vimUtils.buildVimPlugin {
+          name = "nvim-rustaceanvim";
+          src = inputs.nvim-rustaceanvim-src;
         };
       };
     in {

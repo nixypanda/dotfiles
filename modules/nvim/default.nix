@@ -216,13 +216,13 @@ in {
       }
       yuck-vim
       {
-        plugin = rust-tools-nvim;
+        plugin = nvim-rustaceanvim;
         type = "lua";
         config = ''
           local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
           local codelldb_path = extension_path .. 'adapter/codelldb'
           local liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib'
-          ${builtins.readFile ./lua/rust-tools.lua}
+          ${builtins.readFile ./lua/rustaceanvim.lua}
         '';
       }
       {
@@ -276,7 +276,6 @@ in {
         config = builtins.readFile ./lua/neotest.lua;
       }
       neotest-python
-      neotest-rust
       neotest-go
 
       # Text Helpers
