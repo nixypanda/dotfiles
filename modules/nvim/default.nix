@@ -365,7 +365,7 @@ in {
       nodePackages.typescript-language-server
 
       # lua
-      # luaformatter
+      stylua
       lua-language-server
 
       # Make

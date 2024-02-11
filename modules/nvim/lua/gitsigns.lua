@@ -1,5 +1,5 @@
-require('gitsigns').setup {
-    signs = {
-        untracked = { text = "▌", },
-    }
-}
+require("gitsigns").setup({
+	signs = {
+		untracked = { text = "▌" },
+	},
+})

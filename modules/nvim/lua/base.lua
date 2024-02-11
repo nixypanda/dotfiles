@@ -39,38 +39,38 @@ vim.o.cmdheight = 1
 vim.o.updatetime = 300
 
 -- " don't give |ins-completion-menu| messages.
-vim.o.shortmess = vim.o.shortmess .. 'c'
+vim.o.shortmess = vim.o.shortmess .. "c"
 
 -- " always show signcolumns
-vim.o.signcolumn = 'yes'
+vim.o.signcolumn = "yes"
 
 -- " Vertical split in conflict resolution / NOTE: Causes config to break
 -- vim.g.diffopt = vim.g.diffopt .. 'vertical'
 
 -- Setup whitespace chars
 vim.opt.listchars = {
-    eol = '¬',
-    tab = '>·',
-    trail = '~',
-    extends = '>',
-    precedes = '<',
-    space = '.'
+	eol = "¬",
+	tab = ">·",
+	trail = "~",
+	extends = ">",
+	precedes = "<",
+	space = ".",
 }
 
 -- " Add line length end indicator
 -- vim.o.colorcolumn = '88'
 
-vim.o.shell = 'zsh'
+vim.o.shell = "zsh"
 
 -- More prominent splits. This is a general problem with a lot of the themes
 vim.opt.fillchars = {
-    vert = '█',
-    horiz = '▀',
-    horizup = '█',
-    horizdown = '█',
-    vertleft = '█',
-    vertright = '█',
-    verthoriz = '█',
+	vert = "█",
+	horiz = "▀",
+	horizup = "█",
+	horizdown = "█",
+	vertleft = "█",
+	vertright = "█",
+	verthoriz = "█",
 }
 
 -- Set relative numbering
@@ -79,43 +79,40 @@ vim.wo.relativenumber = true
 
 -- require "look-lsp"
 vim.diagnostic.config({
-    virtual_text = false,
-    signs = true,
-    underline = true,
-    update_in_insert = false,
-    severity_sort = false
+	virtual_text = false,
+	signs = true,
+	underline = true,
+	update_in_insert = false,
+	severity_sort = false,
 })
 
 local diagnostic_symbol_map = {
-    { name = "DiagnosticSignError", symbol = "☠ " },
-    { name = "DiagnosticSignWarn", symbol = " " },
-    { name = "DiagnosticSignInfo", symbol = "" },
-    { name = "DiagnosticSignHint", symbol = "☛ " },
+	{ name = "DiagnosticSignError", symbol = "☠ " },
+	{ name = "DiagnosticSignWarn", symbol = " " },
+	{ name = "DiagnosticSignInfo", symbol = "" },
+	{ name = "DiagnosticSignHint", symbol = "☛ " },
 }
 
 for _, elm in ipairs(diagnostic_symbol_map) do
-    vim.fn.sign_define(
-        elm.name,
-        { texthl = elm.name, text = elm.symbol, numhl = elm.name }
-    )
+	vim.fn.sign_define(elm.name, { texthl = elm.name, text = elm.symbol, numhl = elm.name })
 end
 
 -- require "look-theme"
 local file_syntax_map = {
-    { pattern = "*.rasi",         syntax = "scss" },
-    { pattern = "flake.lock",     syntax = "json" },
-    { pattern = "*.tfstate",      syntax = "json" },
-    { pattern = "*.nomad",        syntax = "hcl" },
-    { pattern = "manifest",       syntax = "hcl" },
-    { pattern = "lotus58.keymap", syntax = "c" },
-    { pattern = "lotus58.conf",   syntax = "c" },
+	{ pattern = "*.rasi", syntax = "scss" },
+	{ pattern = "flake.lock", syntax = "json" },
+	{ pattern = "*.tfstate", syntax = "json" },
+	{ pattern = "*.nomad", syntax = "hcl" },
+	{ pattern = "manifest", syntax = "hcl" },
+	{ pattern = "lotus58.keymap", syntax = "c" },
+	{ pattern = "lotus58.conf", syntax = "c" },
 }
 
 for _, elm in ipairs(file_syntax_map) do
-    vim.api.nvim_create_autocmd(
-        { "BufNewFile", "BufRead" },
-        { pattern = elm.pattern, command = "set syntax=" .. elm.syntax }
-    )
+	vim.api.nvim_create_autocmd(
+		{ "BufNewFile", "BufRead" },
+		{ pattern = elm.pattern, command = "set syntax=" .. elm.syntax }
+	)
 end
 
 -- This is a very specific setting which sets the color of border to be the
@@ -124,5 +121,5 @@ end
 -- effect for this we also get prominent splits as we need to use huge
 -- forground blocks to set this up.
 vim.g.tokyonight_colors = {
-    border = '#1f2335'
+	border = "#1f2335",
 }

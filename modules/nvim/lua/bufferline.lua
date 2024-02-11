@@ -1,7 +1,7 @@
-require('bufferline').setup {
-    options = {
-        offsets = {
-            { filetype = "NvimTree", text = "", separator = false, }
-        }
-    }
-}
+require("bufferline").setup({
+	options = {
+		offsets = {
+			{ filetype = "NvimTree", text = "", separator = false },
+		},
+	},
+})
