@@ -1,41 +1,7 @@
 require "which-key".setup {
-    plugins = {
-        marks = true,
-        -- shows your registers on " in NORMAL or <C-r> in INSERT mode
-        registers = true,
-        -- the presets plugin, adds help for a bunch of default keybindings in Neovim
-        -- No actual key bindings are created
-        presets = {
-            operators = true,    -- operators like d, y, ...
-            motions = true,
-            text_objects = true, -- triggered after entering an operator
-            windows = true,      -- default bindings on <c-w>
-            nav = true,          -- misc bindings to work with windows
-            z = true,            -- bindings for folds, spelling & others with z prefix
-            g = true             -- bindings for prefixed with g
-        }
-    },
-    icons = {
-        -- symbol used in the command line area that shows your active key combo
-        breadcrumb = "»",
-        separator = "➜", -- symbol used between a key and it's label
-        group = "+" -- symbol prepended to a group
-    },
-    window = {
-        border = "single",       -- none, single, double, shadow
-        position = "bottom",     -- bottom, top
-        margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
-        padding = { 1, 1, 1, 1 } -- extra window padding [top, right, bottom, left]
-    },
     layout = {
         height = { min = 1, max = 25 }, -- min and max height of the columns
-        width = { min = 20, max = 50 }, -- min and max width of the columns
-        spacing = 3                     -- spacing between columns
     },
-    -- hide mapping boilerplate
-    hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " },
-    -- show help message on the command line when the popup is visible
-    show_help = true
 }
 
 local mappings = {
@@ -45,7 +11,7 @@ local mappings = {
         c = { "<cmd>ChatGPT<cr>", "ChatGPT" },
     },
     b = {
-        name = '+buffers',
+        name = '+Buffers',
         A = { '<cmd>bufdo bd<cr>', 'Close all buffer' },
         c = { '<cmd>BufferClose<cr>', 'Close this buffer' },
         C = { '<cmd>w | %bd | e#<cr>', 'Close all other buffers' },
@@ -59,24 +25,21 @@ local mappings = {
         l = { "<cmd>ConjureLogVSplit<cr>", "Show log (vertical split)" },
     },
     d = {
-        name = "+dap",
-        b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle breakpoint" },
-        i = { "<cmd>lua require'dap'.step_into()<cr>", "Step into" },
-        o = { "<cmd>lua require'dap'.step_over()<cr>", "Step over" },
-        O = { "<cmd>lua require'dap'.step_out()<cr>", "Step out" },
-        I = {
-            "<cmd>lua require'dap.ui.widgets'.hover()<cr>",
-            "Inspect variable under cursor"
-        },
-        S = {
-            "<cmd>lua local w=require'dap.ui.widgets';w.centered_float(w.scopes)<cr>",
-            "Show Scopes"
-        },
-        s = { "<cmd>lua require'dap'.continue()<cr>", "Start debugging" },
-        t = { "<cmd>lua require'dap'.terminate()<cr>", "Terminate debugging" },
-        f = { "<cmd>lua require'dap'.close()<cr>", "Finish debugging" },
-        j = { "<cmd>lua require'dap'.down()<cr>", "Go down in call stack" },
-        k = { "<cmd>lua require'dap'.up()<cr>", "Go up in call stack" }
+        name = "+Debug",
+        b = { function() require 'dap'.toggle_breakpoint() end, "Toggle breakpoint" },
+        i = { function() require 'dap'.step_into() end, "Step into" },
+        o = { function() require 'dap'.step_over() end, "Step over" },
+        O = { function() require 'dap'.step_out() end, "Step out" },
+        I = { function() require 'dap.ui.widgets'.hover() end, "Inspect variable under cursor" },
+        S = { function()
+            local w = require 'dap.ui.widgets'
+            w.centered_float(w.scopes)
+        end, "Show Scopes" },
+        s = { function() require 'dap'.continue() end, "Start debugging" },
+        t = { function() require 'dap'.terminate() end, "Terminate debugging" },
+        f = { function() require 'dap'.close() end, "Finish debugging" },
+        j = { function() require 'dap'.down() end, "Go down in call stack" },
+        k = { function() require 'dap'.up() end, "Go up in call stack" }
     },
     D = {
         name = "+Database",
@@ -86,12 +49,12 @@ local mappings = {
     g = {
         name = "+Git",
         b = { "<cmd>Git blame<cr>", "Blame" },
-        j = { '<cmd>lua require"gitsigns".next_hunk()<CR>', "Next Hunk" },
-        k = { '<cmd>lua require"gitsigns".prev_hunk()<CR>', "Prev Hunk" },
-        p = { '<cmd>lua require"gitsigns".preview_hunk()<CR>', "Preview Hunk" },
-        r = { '<cmd>Gitsigns reset_hunk<CR>', "Reset Hunk" },
-        s = { '<cmd>lua require"gitsigns".stage_hunk()<CR>', "Stage Hunk" },
-        u = { '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>', "Undo Stage Hunk" },
+        j = { function() require "gitsigns".next_hunk() end, "Next Hunk" },
+        k = { function() require "gitsigns".prev_hunk() end, "Prev Hunk" },
+        p = { function() require "gitsigns".preview_hunk() end, "Preview Hunk" },
+        r = { function() require "gitsigns".reset_hunk() end, "Reset Hunk" },
+        s = { function() require "gitsigns".stage_hunk() end, "Stage Hunk" },
+        u = { function() require "gitsigns".undo_stage_hunk() end, "Undo Stage Hunk" },
         c = {
             name = "+Conflict Resolution",
             s = { "<cmd>Gdiffsplit!<cr>", "Start" },
@@ -107,25 +70,22 @@ local mappings = {
     },
     l = {
         name = "+LSP",
-        a = { "<cmd>Lspsaga code_action<cr>", "Code Action" },
-        c = {
-            name = "+Call heriarchy",
-            i = { "<cmd>Lspsaga incoming_calls<cr>", "Incoming Calls" },
-            o = { "<cmd>Lspsaga outgoing_calls<cr>", "Outgoing Calls" },
-        },
-        d = { "<cmd>Telescope diagnostics bufnr=0<cr>", "Document Diagnostics" },
-        D = { "<cmd>Telescope diagnostics<cr>", "Workspace Diagnostics" },
-        f = { "<cmd>Lspsaga finder<cr>", "Refrences and implementations" },
-        F = { "<cmd>lua vim.lsp.buf.format(nil)<cr>", "Format document" },
+        a = { function() require("lspsaga.codeaction"):code_action() end, "Code Action" },
+        c = { function() require('lspsaga.diagnostic.show'):show_diagnostics({ cursor = true, args = {} }) end, "Cursor Diagnostics" },
+        d = { function() require('telescope.builtin').diagnostics({ bufnr = 0 }) end, "Document Diagnostics" },
+        D = { function() require('telescope.builtin').diagnostics() end, "Workspace Diagnostics" },
+        f = { function() require("lspsaga.finder"):new({}) end, "Refrences and implementations" },
+        i = { function() require('lspsaga.callhierarchy'):send_method(2, {}) end, "Incoming Calls" },
         I = { "<cmd>LspInfo<cr>", "Info" },
-        j = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "Next Action" },
-        k = { "<cmd>Lspsaga diagnostic_jump_prev<cr>", "Previous Action" },
-        l = { "<cmd>Lspsaga show_line_diagnostics<cr>", "Line Diagnostics" },
-        o = { "<cmd>Lspsaga outline<cr>", "Toggle Document Symbols Outline" },
-        p = { "<cmd>Lspsaga hover_doc<cr>", "Preview Definition" },
-        r = { "<cmd>Lspsaga rename<cr>", "Rename" },
-        s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
-        S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" },
+        j = { function() require('lspsaga.diagnostic'):goto_next() end, "Next Action" },
+        k = { function() require('lspsaga.diagnostic'):goto_prev() end, "Previous Action" },
+        l = { function() require('lspsaga.diagnostic.show'):show_diagnostics({ line = true, args = {} }) end, "Line Diagnostics" },
+        o = { function() require('lspsaga.callhierarchy'):send_method(3, {}) end, "Outgoing Calls" },
+        O = { function() require('lspsaga.symbol'):outline() end, "Toggle Document Symbols Outline" },
+        p = { function() require('lspsaga.hover'):render_hover_doc({}) end, "Preview Definition" },
+        r = { function() require('lspsaga.rename'):lsp_rename({}) end, "Rename" },
+        s = { function() require('telescope.builtin').lsp_document_symbols() end, "Document Symbols" },
+        S = { function() require('telescope.builtin').lsp_dynamic_workspace_symbols() end, "Workspace Symbols" },
         u = { "<cmd>LspRestart<cr>", "Restart LSP" },
         U = { "<cmd>LspStart<cr>", "Start LSP" },
     },
@@ -133,7 +93,7 @@ local mappings = {
         name = "+Programming Language Specific",
         g = {
             name = "+Go",
-            d = { "<cmd>lua require('dap-go').debug_test()<cr>", "Debug nearest test" }
+            d = { function() require('dap-go').debug_test() end, "Debug nearest test" }
         },
         r = {
             name = "+Rust",
@@ -145,61 +105,39 @@ local mappings = {
         },
         h = {
             name = "+Haskell",
-            l = { "<cmd>vim.lsp.codelens.run()<cr>", "CodeLens" },
-            e = {
-                "<cmd>lua require('haskell-tools').lsp.buf_eval_all()<cr>",
-                "Eval code snippets in buffer"
-            },
-            r = {
-                "<cmd>lua require('haskell-tools').repl.toggle()<cr>",
-                "Repl for current package"
-            },
-            R = {
-                "<cmd>lua require('haskell-tools').repl.toggle(vim.api.nvim_buf_get_name(0))<cr>",
+            l = { function() vim.lsp.codelens.run() end, "CodeLens" },
+            e = { function() require('haskell-tools').lsp.buf_eval_all() end, "Eval code snippets in buffer" },
+            r = { function() require('haskell-tools').repl.toggle() end, "Repl for current package" },
+            R = { function() require('haskell-tools').repl.toggle(vim.api.nvim_buf_get_name(0)) end,
                 "Repl for current buffer"
             },
         }
     },
     s = {
         name = "+Search",
-        b = { "<cmd>Telescope buffers<cr>", "Open Buffers" },
-        c = { "<cmd>Telescope command_history<cr>", "Previous commands" },
-        C = { "<cmd>Telescope commands<cr>", "Available commands" },
-        f = { "<cmd>Telescope find_files<cr>", "Find File" },
-        H = { "<cmd>Telescope help_tags<cr>", "Help Tags" },
-        j = { "<cmd>Telescope jumplist<cr>", "Jump List" },
-        m = { "<cmd>Telescope marks<cr>", "Marks" },
-        r = { "<cmd>Telescope resume<cr>", "Goto last search state" },
-        R = { "<cmd>Telescope registers<cr>", "Registers" },
-        t = { "<cmd>Telescope live_grep<cr>", "Text" },
+        b = { function() require('telescope.builtin').buffers() end, "Open Buffers" },
+        c = { function() require('telescope.builtin').command_history() end, "Previous commands" },
+        C = { function() require('telescope.builtin').commands() end, "Available commands" },
+        f = { function() require('telescope.builtin').find_files() end, "Find File" },
+        H = { function() require('telescope.builtin').help_tags() end, "Help Tags" },
+        j = { function() require('telescope.builtin').jumplist() end, "Jump List" },
+        m = { function() require('telescope.builtin').marks() end, "Marks" },
+        r = { function() require('telescope.builtin').resume() end, "Goto last search state" },
+        R = { function() require('telescope.builtin').registers() end, "Registers" },
+        t = { function() require('telescope.builtin').live_grep() end, "Text" },
         T = { "<cmd>TodoTelescope<cr>", "Todos" }
     },
     t = {
         name = "+Tests",
-        a = { "<cmd>lua require('neotest').run.run({suite = true})<cr>", "Run all tests" },
-        d = {
-            "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>",
-            "Debug nearest test"
-        },
-        f = { "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", "Run file" },
-        j = {
-            "<cmd>lua require('neotest').jump.prev({ status = 'failed' })<cr>",
-            "Previous failed test"
-        },
-        k = {
-            "<cmd>lua require('neotest').jump.next({ status = 'failed' })<cr>",
-            "Next failed test"
-        },
-        o = {
-            "<cmd>lua require('neotest').output.open({ enter = true })<cr>",
-            "Open output for nearest test"
-        },
-        p = {
-            "<cmd>lua require('neotest').output_panel.toggle()<cr>",
-            "Toggle raw output panel",
-        },
-        r = { "<cmd>lua require('neotest').run.run()<cr>", "Run nearest test" },
-        t = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Toggle summary" },
+        a = { function() require('neotest').run.run({ suite = true }) end, "Run all tests" },
+        d = { function() require('neotest').run.run({ strategy = 'dap' }) end, "Debug nearest test" },
+        f = { function() require('neotest').run.run(vim.fn.expand('%')) end, "Run file" },
+        j = { function() require('neotest').jump.prev({ status = 'failed' }) end, "Previous failed test" },
+        k = { function() require('neotest').jump.next({ status = 'failed' }) end, "Next failed test" },
+        o = { function() require('neotest').output.open({ enter = true }) end, "Open output for nearest test" },
+        p = { function() require('neotest').output_panel.toggle() end, "Toggle raw output panel", },
+        r = { function() require('neotest').run.run() end, "Run nearest test" },
+        t = { function() require('neotest').summary.toggle() end, "Toggle summary" },
     },
     u = {
         name = "+Utilities",
