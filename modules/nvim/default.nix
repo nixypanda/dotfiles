@@ -427,6 +427,7 @@ in {
     "nvim/queries/nu/highlights.scm".text = tree-sitter-nu.highlights;
     "nvim/queries/nu/injections.scm".text = tree-sitter-nu.injections;
   };
+
   home = {
 
     packages = with pkgs; [

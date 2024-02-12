@@ -19,7 +19,6 @@ in {
           darkreader
           df-youtube
           facebook-container
-          grammarly
           octotree
           okta-browser-plugin
           onepassword-password-manager
@@ -42,7 +41,6 @@ in {
           darkreader
           df-youtube
           facebook-container
-          grammarly
           octotree
           okta-browser-plugin
           onepassword-password-manager

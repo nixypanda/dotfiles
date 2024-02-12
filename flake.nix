@@ -16,7 +16,7 @@
     };
     nur = { url = "github:nix-community/NUR"; };
     taffybar = {
-      url = "github:sherubthakur/taffybar";
+      url = "github:nixypanda/taffybar";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -45,16 +45,10 @@
         nixpkgs.config.allowUnfreePredicate = pkg:
           builtins.elem (lib.getName pkg) [
             "zoom"
-            "slack"
             "ngrok"
-            "discord"
             "unrar"
-            "consul"
-            "terraform"
-            "nomad"
             # browser extensions
             "onepassword-password-manager"
-            "grammarly"
             "okta-browser-plugin"
           ];
 
@@ -65,7 +59,6 @@
         home.stateVersion = "22.05";
 
         imports = [
-          ./modules/alacritty
           ./modules/aws
           ./modules/bat
           ./modules/cli.nix
@@ -73,7 +66,6 @@
           ./modules/firefox
           ./modules/fonts.nix
           ./modules/git
-          ./modules/hashistack.nix
           ./modules/helix
           ./modules/kitty
           ./modules/nu

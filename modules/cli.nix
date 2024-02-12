@@ -14,7 +14,8 @@
     ngrok
     openvpn
     drone-cli
-    mitmproxy
+    # Broken for macos (from the looks of it)
+    # mitmproxy
 
     # Better alternatives
     bottom # top
