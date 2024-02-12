@@ -780,5 +780,4 @@ $env.config = {
 
 
 # Add zoxide support
-source ~/.cache/nushell/.zoxide.nu
 source ~/.cache/nushell/carapace.nu

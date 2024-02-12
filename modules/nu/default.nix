@@ -19,6 +19,7 @@ in {
     # use ${nu_scripts}/modules/git/git-v2.nu *
     extraConfig = ''
       ${builtins.readFile ./config.nu}
+      ${builtins.readFile ./zoxide_config.nu}
       ${builtins.readFile ./aliases.nu}
 
       # modules
