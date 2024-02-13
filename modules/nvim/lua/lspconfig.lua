@@ -70,6 +70,9 @@ lspconfig.lua_ls.setup({
 -- nix
 lspconfig.nil_ls.setup({})
 
+-- nu
+lspconfig.nushell.setup({})
+
 -- Python
 lspconfig.pyright.setup({ capabilities = capabilities })
 

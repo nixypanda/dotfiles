@@ -6,7 +6,7 @@ require("bigfile").setup({
 		local file_length = #file_contents
 		local filetype = vim.filetype.match({ buf = bufnr })
 
-		if file_length > 1000 and filetype == "python" then
+		if file_length > 2000 and filetype == "python" then
 			return true
 		end
 	end,

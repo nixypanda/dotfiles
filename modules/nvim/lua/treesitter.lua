@@ -39,3 +39,13 @@ require("nvim-treesitter.configs").setup({
 		},
 	},
 })
+
+-- Set filetype to "nu" for files named "*.nu"
+vim.filetype.add({ extension = { nu = "nu" } })
+-- Register the nu parser for files with "nu" filetype
+vim.treesitter.language.register("nu", "nu")
+-- Add our nu parser to treesitter and associate it with nu filetype.
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+parser_config.nu = {
+	filetype = "nu",
+}

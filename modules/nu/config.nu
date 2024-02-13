@@ -136,10 +136,27 @@ let light_theme = {
     shape_vardecl: purple
 }
 
-# External completer example
-# let carapace_completer = {|spans|
-#     carapace $spans.0 nushell $spans | from json
-# }
+let external_completer = {|spans|
+	let carapace_completer = {|spans|
+		carapace $spans.0 nushell ...$spans
+		| from json
+	}
+	let zoxide_completer = {|spans|
+		$spans | skip 1 | zoxide query -l $in | lines | where {|x| $x != $env.PWD}
+	}
+
+	let expanded_alias = scope aliases | where name == $spans.0 | get -i 0 | get -i expansion
+	let spans = if $expanded_alias != null  {
+		$spans | skip 1 | prepend ($expanded_alias | split row " " | take 1)
+	} else {
+		$spans
+	}
+
+	match $spans.0 {
+		__zoxide_z | __zoxide_zi => $zoxide_completer,
+		_ => $carapace_completer
+	} | do $in $spans
+}
 
 # The default config record. This is where much of your global configuration is setup.
 $env.config = {
@@ -204,13 +221,13 @@ $env.config = {
 
     completions: {
         case_sensitive: false # set to true to enable case-sensitive completions
-        quick: true    # set this to false to prevent auto-selecting completions when only one remains
+        quick: false    # set this to false to prevent auto-selecting completions when only one remains
         partial: true    # set this to false to prevent partial filling of the prompt
         algorithm: "prefix"    # prefix or fuzzy
         external: {
             enable: true # set to false to prevent nushell looking into $env.PATH to find more suggestions, `false` recommended for WSL users as this look up may be very slow
             max_results: 100 # setting it lower can improve completion performance at the cost of omitting some options
-            completer: null # check 'carapace_completer' above as an example
+            completer: $external_completer # check 'carapace_completer' above as an example
         }
     }
 
@@ -241,9 +258,11 @@ $env.config = {
     hooks: {
         # run before the prompt is shown
         pre_prompt: [{ ||
-          let direnv = (direnv export json | from json)
-          let direnv = if not ($direnv | is-empty) { $direnv } else { {} }
-          $direnv | load-env
+            if (which direnv | is-empty) {
+                return
+            }
+
+            direnv export json | from json | default {} | load-env
         }]
         pre_execution: [{ null }] # run before the repl input is run
         env_change: {
