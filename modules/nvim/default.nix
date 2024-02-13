@@ -181,6 +181,7 @@ in {
             javascript
             json
             latex
+            kdl
             lua
             markdown
             markdown-inline

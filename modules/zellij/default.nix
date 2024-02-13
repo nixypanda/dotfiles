@@ -2,11 +2,11 @@
   programs.zellij = {
     enable = true;
     enableZshIntegration = true;
-    settings = {
-      theme = "catppuccin-macchiato";
-      default_layout = "compact";
-      default_shell = "nu";
-      pane_frames = false;
-    };
   };
+  xdg.configFile."zellij/config.kdl".text = ''
+    default_shell "nu"
+    pane_frames false
+    theme "catppuccin-macchiato"
+    ${builtins.readFile ./keybinds.kdl}
+  '';
 }
