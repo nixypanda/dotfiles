@@ -8,10 +8,9 @@ A glance at what is present in this lair.
 
 | Name                     | What I am using (NixOS)                                                  | What I am using (Mac)                                |
 | ------------------------ | ------------------------------------------------------------------------ | ---------------------------------------------------- |
-| OS                       | [NixOS](https://nixos.org/)                                              | MacOS BigSur                                         |
+| OS                       | [NixOS](https://nixos.org/)                                              | macOS                                                |
 | Terminal Emulator        | [Kitty](https://sw.kovidgoyal.net/kitty/)                                | [Kitty](https://sw.kovidgoyal.net/kitty/)            |
-| Shell                    | [ZSH + ohmyzsh](https://ohmyz.sh/),                                      | [ZSH + ohmyzsh](https://ohmyz.sh/),                  |
-|                          | [Nu Shell](https://www.nushell.sh/)                                      | [Nu Shell](https://www.nushell.sh/)                  |
+| Shell                    | [Nu Shell](https://www.nushell.sh/)                                      | [Nu Shell](https://www.nushell.sh/)                  |
 | Font                     | Hack Nerd Font Mono                                                      | Hack Nerd Font Mono                                  |
 | Editor                   | [Neovim](https://neovim.io/)                                             | [Neovim](https://neovim.io/)                         |
 |                          | [XMonad](https://xmonad.org/),                                           |                                                      |
