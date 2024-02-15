@@ -98,3 +98,29 @@ def history-stats [
   print $"(ansi green)Total commands:(ansi reset)   ($total_cmds)"
   print $"(ansi green)Unique commands:(ansi reset)  ($unique_cmds)"
 }
+
+def is-ruff-pylint-yet [--detailed] {
+    def _how_much_is_done [data]  {
+        $data
+        | parse "- [{exists}] {feature}"
+        | histogram exists
+        | filter {|row| $row.exists == "x"}
+        | get percentage
+    }
+
+    let issue_str = curl -s https://api.github.com/repos/astral-sh/ruff/issues/970
+    | from json
+    | get body
+
+    let issue_structured = $issue_str | lines | filter { |row| $row != "" }
+    let split_by_type = $issue_structured | split list -r '^#' | skip 1
+    let types = $issue_structured | filter { |row| $row | str starts-with "#" } | str trim --char '#' | str trim
+
+    if $detailed {
+        let completion_by_type = $split_by_type | each { |row| _how_much_is_done $row} | flatten | wrap "%"
+        $types | wrap types | merge $completion_by_type
+    } else {
+        $split_by_type | flatten | _how_much_is_done $in | get 0
+    }
+
+}
