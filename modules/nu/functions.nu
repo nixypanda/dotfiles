@@ -25,7 +25,7 @@
 # Usage: gfix <commit_sha>
 def gfix [commit_sha] {
     git commit --fixup $commit_sha
-    git rebase -i --autosquash "$commit_sha~1"
+    git rebase -i --autosquash $"($commit_sha)~1"
 }
 
 # Function to create a fixup commit, stash changes, perform an interactive rebase,
@@ -34,7 +34,7 @@ def gfix [commit_sha] {
 def gstashnfix [commit_sha] {
     git commit --fixup $commit_sha
     git stash
-    git rebase -i --autosquash "$commit_sha~1"
+    git rebase -i --autosquash $"($commit_sha)~1"
     git stash pop
 }
 
