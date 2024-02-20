@@ -12,7 +12,7 @@ let
   venv-mypy = pkgs.writeScriptBin "venv-mypy" ''
     #!/bin/sh
     set -e
-    exec poetry run pylint "$@"
+    exec poetry run mypy "$@"
   '';
 in {
   programs.neovim = {
