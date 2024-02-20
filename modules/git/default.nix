@@ -21,6 +21,7 @@
       extraConfig = {
         pull.ff = "only";
         init.defaultBranch = "main";
+        merge.conflictstyle = "diff3";
 
         # NOTE: Required so that `go get` can fetch private repos
         # NOTE: cargo breaks if this is present in the config
