@@ -112,7 +112,16 @@ in {
         type = "lua";
         config = builtins.readFile ./lua/gitsigns.lua;
       }
-      vim-fugitive
+      {
+        plugin = git-conflict-nvim;
+        type = "lua";
+        config = "require('git-conflict').setup()";
+      }
+      {
+        plugin = nvim-blame;
+        type = "lua";
+        config = "require('blame').setup()";
+      }
 
       # Keymaps
       {

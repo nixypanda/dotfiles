@@ -51,7 +51,7 @@ local mappings = {
 	},
 	g = {
 		name = "+Git",
-		b = { "<cmd>Git blame<cr>", "Blame" },
+		b = { "<cmd>ToggleBlame virtual<cr>", "Blame" },
 		j = { require("gitsigns").next_hunk, "Next Hunk" },
 		k = { require("gitsigns").prev_hunk, "Prev Hunk" },
 		p = { require("gitsigns").preview_hunk, "Preview Hunk" },
@@ -60,15 +60,12 @@ local mappings = {
 		u = { require("gitsigns").undo_stage_hunk, "Undo Stage Hunk" },
 		c = {
 			name = "+Conflict Resolution",
-			s = { "<cmd>Gdiffsplit!<cr>", "Start" },
-			-- Fugitive follows a consistent naming convention when creating
-			-- buffers for the target and merge versions of a conflicted file.
-			-- The parent file from the target branch always includes the
-			-- string //2, while the parent from the merge branch always
-			-- contains //3.
-			h = { "<cmd>diffget //2<cr>", "Get hunk from left (target)" },
-			l = { "<cmd>diffget //3<cr>", "Get hunk from right (merge)" },
-			f = { "<cmd>Gwrite!<cr>", "Finish" },
+			b = { "<cmd>GitConflictChooseBoth<cr>", "Choose both" },
+			h = { "<cmd>GitConflictChooseOurs<cr>", "Choose ours" },
+			l = { "<cmd>GitConflictChooseTheirs<cr>", "Choose theirs" },
+			n = { "<cmd>GitConflictConflictNone<cr>", "Choose none" },
+			j = { "<cmd>GitConflictNextConflict<cr>", "Next conflict" },
+			k = { "<cmd>GitConflictPrevConflict<cr>", "Previous conflict" },
 		},
 	},
 	l = {

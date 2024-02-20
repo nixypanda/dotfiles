@@ -16,6 +16,10 @@
       url = "github:mrcjkb/rustaceanvim";
       flake = false;
     };
+    nvim-blame-src = {
+      url = "github:FabijanZulj/blame.nvim";
+      flake = false;
+    };
   };
   outputs = inputs:
     let
@@ -35,6 +39,10 @@
         nvim-rustaceanvim = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-rustaceanvim";
           src = inputs.nvim-rustaceanvim-src;
+        };
+        nvim-blame = pkgs.vimUtils.buildVimPlugin {
+          name = "nvim-blame";
+          src = inputs.nvim-blame-src;
         };
       };
     in {
