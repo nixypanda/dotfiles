@@ -26,36 +26,11 @@ local mappings = {
 	},
 	d = {
 		name = "+Debug",
-		b = {
-			function()
-				require("dap").toggle_breakpoint()
-			end,
-			"Toggle breakpoint",
-		},
-		i = {
-			function()
-				require("dap").step_into()
-			end,
-			"Step into",
-		},
-		o = {
-			function()
-				require("dap").step_over()
-			end,
-			"Step over",
-		},
-		O = {
-			function()
-				require("dap").step_out()
-			end,
-			"Step out",
-		},
-		I = {
-			function()
-				require("dap.ui.widgets").hover()
-			end,
-			"Inspect variable under cursor",
-		},
+		b = { require("dap").toggle_breakpoint, "Toggle breakpoint" },
+		i = { require("dap").step_into, "Step into" },
+		o = { require("dap").step_over, "Step over" },
+		O = { require("dap").step_out, "Step out" },
+		I = { require("dap.ui.widgets").hover, "Inspect variable under cursor" },
 		S = {
 			function()
 				local w = require("dap.ui.widgets")
@@ -63,36 +38,11 @@ local mappings = {
 			end,
 			"Show Scopes",
 		},
-		s = {
-			function()
-				require("dap").continue()
-			end,
-			"Start debugging",
-		},
-		t = {
-			function()
-				require("dap").terminate()
-			end,
-			"Terminate debugging",
-		},
-		f = {
-			function()
-				require("dap").close()
-			end,
-			"Finish debugging",
-		},
-		j = {
-			function()
-				require("dap").down()
-			end,
-			"Go down in call stack",
-		},
-		k = {
-			function()
-				require("dap").up()
-			end,
-			"Go up in call stack",
-		},
+		s = { require("dap").continue, "Start debugging" },
+		t = { require("dap").terminate, "Terminate debugging" },
+		f = { require("dap").close, "Finish debugging" },
+		j = { require("dap").down, "Go down in call stack" },
+		k = { require("dap").up, "Go up in call stack" },
 	},
 	D = {
 		name = "+Database",
@@ -102,42 +52,12 @@ local mappings = {
 	g = {
 		name = "+Git",
 		b = { "<cmd>Git blame<cr>", "Blame" },
-		j = {
-			function()
-				require("gitsigns").next_hunk()
-			end,
-			"Next Hunk",
-		},
-		k = {
-			function()
-				require("gitsigns").prev_hunk()
-			end,
-			"Prev Hunk",
-		},
-		p = {
-			function()
-				require("gitsigns").preview_hunk()
-			end,
-			"Preview Hunk",
-		},
-		r = {
-			function()
-				require("gitsigns").reset_hunk()
-			end,
-			"Reset Hunk",
-		},
-		s = {
-			function()
-				require("gitsigns").stage_hunk()
-			end,
-			"Stage Hunk",
-		},
-		u = {
-			function()
-				require("gitsigns").undo_stage_hunk()
-			end,
-			"Undo Stage Hunk",
-		},
+		j = { require("gitsigns").next_hunk, "Next Hunk" },
+		k = { require("gitsigns").prev_hunk, "Prev Hunk" },
+		p = { require("gitsigns").preview_hunk, "Preview Hunk" },
+		r = { require("gitsigns").reset_hunk, "Reset Hunk" },
+		s = { require("gitsigns").stage_hunk, "Stage Hunk" },
+		u = { require("gitsigns").undo_stage_hunk, "Undo Stage Hunk" },
 		c = {
 			name = "+Conflict Resolution",
 			s = { "<cmd>Gdiffsplit!<cr>", "Start" },
@@ -171,12 +91,7 @@ local mappings = {
 			end,
 			"Document Diagnostics",
 		},
-		D = {
-			function()
-				require("telescope.builtin").diagnostics()
-			end,
-			"Workspace Diagnostics",
-		},
+		D = { require("telescope.builtin").diagnostics, "Workspace Diagnostics" },
 		f = {
 			function()
 				require("lspsaga.finder"):new({})
@@ -232,18 +147,8 @@ local mappings = {
 			end,
 			"Rename",
 		},
-		s = {
-			function()
-				require("telescope.builtin").lsp_document_symbols()
-			end,
-			"Document Symbols",
-		},
-		S = {
-			function()
-				require("telescope.builtin").lsp_dynamic_workspace_symbols()
-			end,
-			"Workspace Symbols",
-		},
+		s = { require("telescope.builtin").lsp_document_symbols, "Document Symbols" },
+		S = { require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace Symbols" },
 		u = { "<cmd>LspRestart<cr>", "Restart LSP" },
 		U = { "<cmd>LspStart<cr>", "Start LSP" },
 	},
@@ -267,24 +172,9 @@ local mappings = {
 		},
 		h = {
 			name = "+Haskell",
-			l = {
-				function()
-					vim.lsp.codelens.run()
-				end,
-				"CodeLens",
-			},
-			e = {
-				function()
-					require("haskell-tools").lsp.buf_eval_all()
-				end,
-				"Eval code snippets in buffer",
-			},
-			r = {
-				function()
-					require("haskell-tools").repl.toggle()
-				end,
-				"Repl for current package",
-			},
+			l = { vim.lsp.codelens.run, "CodeLens" },
+			e = { require("haskell-tools").lsp.buf_eval_all, "Eval code snippets in buffer" },
+			r = { require("haskell-tools").repl.toggle, "Repl for current package" },
 			R = {
 				function()
 					require("haskell-tools").repl.toggle(vim.api.nvim_buf_get_name(0))
@@ -295,66 +185,17 @@ local mappings = {
 	},
 	s = {
 		name = "+Search",
-		b = {
-			function()
-				require("telescope.builtin").buffers()
-			end,
-			"Open Buffers",
-		},
-		c = {
-			function()
-				require("telescope.builtin").command_history()
-			end,
-			"Previous commands",
-		},
-		C = {
-			function()
-				require("telescope.builtin").commands()
-			end,
-			"Available commands",
-		},
-		f = {
-			function()
-				require("telescope.builtin").find_files()
-			end,
-			"Find File",
-		},
-		H = {
-			function()
-				require("telescope.builtin").help_tags()
-			end,
-			"Help Tags",
-		},
-		j = {
-			function()
-				require("telescope.builtin").jumplist()
-			end,
-			"Jump List",
-		},
-		m = {
-			function()
-				require("telescope.builtin").marks()
-			end,
-			"Marks",
-		},
-		r = {
-			function()
-				require("telescope.builtin").resume()
-			end,
-			"Goto last search state",
-		},
-		R = {
-			function()
-				require("telescope.builtin").registers()
-			end,
-			"Registers",
-		},
-		t = {
-			function()
-				require("telescope.builtin").live_grep()
-			end,
-			"Text",
-		},
+		b = { require("telescope.builtin").buffers, "Open Buffers" },
+		c = { require("telescope.builtin").command_history, "Previous commands" },
+		C = { require("telescope.builtin").commands, "Available commands" },
+		f = { require("telescope.builtin").find_files, "Find File" },
+		H = { require("telescope.builtin").help_tags, "Help Tags" },
+		j = { require("telescope.builtin").jumplist, "Jump List" },
+		m = { require("telescope.builtin").marks, "Marks" },
+		M = { "<cmd>Noice telescope<cr>", "Message History" },
+		r = { require("telescope.builtin").resume, "Goto last search state" },
+		R = { require("telescope.builtin").registers, "Registers" },
+		t = { require("telescope.builtin").live_grep, "Text" },
 		T = { "<cmd>TodoTelescope<cr>", "Todos" },
 	},
 	t = {
