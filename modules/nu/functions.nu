@@ -48,6 +48,18 @@ def "from env" []: string -> record {
     | transpose -r -d
 }
 
+def "from mypy" [] {
+    lines
+      | parse "{path}:{line}: {level}: {message} [{type}]" | upsert line {|row| $row.line | into int }
+}
+
+def "from flake8" [] {
+    lines
+      | parse "{path}:{line}:{column}: {code} {message}"
+      | upsert line {|row| ($row.line | into int) }
+      | upsert column {|row| ($row.column | into int) }
+}
+
 def whatismyip [] {
     curl -s ipinfo.io/what-is-my-ip | from json
 }
