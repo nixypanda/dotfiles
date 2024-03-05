@@ -82,6 +82,11 @@ in {
         config = builtins.readFile ./lua/dapui.lua;
       }
       {
+        plugin = nvim-dap-virtual-text;
+        type = "lua";
+        config = ''require("nvim-dap-virtual-text").setup()'';
+      }
+      {
         plugin = nvim-dap-python;
         type = "lua";
         config = ''
