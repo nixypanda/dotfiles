@@ -1,10 +1,12 @@
 { pkgs, ... }: {
-  home.packages = with pkgs; [ git-crypt ];
+  home.packages = with pkgs; [ git-crypt difftastic ];
   programs = {
     git = {
       enable = true;
       userName = "Sherub Thakur";
       userEmail = "sherub.thakur@gmail.com";
+
+      # difftastic = { enable = true; };
 
       delta = {
         enable = true;
@@ -38,4 +40,5 @@
     gpg.enable = pkgs.stdenv.isLinux;
   };
   services.gpg-agent.enable = pkgs.stdenv.isLinux;
+
 }

@@ -32,7 +32,7 @@
     vim-plugins = { url = "path:./modules/nvim/plugins"; };
   };
   outputs = { self, nur, taffybar, vim-plugins, nixpkgs, home-manager, darwin
-    , nixpkgs-firefox-darwin, nixpkgs_codelldb_fixed, }:
+    , nixpkgs-firefox-darwin, nixpkgs_codelldb_fixed }:
     let
       home-common = { lib, ... }: {
         # NOTE: Injecting colorscheme so that it is passed down all the imports

@@ -9,6 +9,7 @@ let
   tree-sitter-nu = pkgs.callPackage ./plugins/nvim-treesitter-nu.nix {
     inherit (pkgs.tree-sitter) buildGrammar;
   };
+  # ropecli = pkgs.callPackage ./custom/ropecli.nix { };
   venv-mypy = pkgs.writeScriptBin "venv-mypy" ''
     #!/bin/sh
     set -e
@@ -293,6 +294,13 @@ in {
       neotest-python
       neotest-go
 
+      # Programming: refactoring support
+      {
+        plugin = refactoring-nvim;
+        type = "lua";
+        config = ''require("refactoring").setup({})'';
+      }
+
       # Text Helpers
       {
         plugin = nvim-regexplainer;
@@ -461,10 +469,8 @@ in {
       haskellPackages.ghci-dap
 
       # python
-      python3Packages.isort
       nodePackages.pyright
-      black
-      python3Packages.flake8
+      ruff
       mypy
     ];
 
