@@ -47,6 +47,8 @@
             "zoom"
             "ngrok"
             "unrar"
+            "vscode"
+            "vscode-extension-MS-python-vscode-pylance"
             # browser extensions
             "onepassword-password-manager"
             "okta-browser-plugin"
@@ -74,6 +76,7 @@
           ./modules/system-management
           ./modules/zellij
           ./modules/zsh
+          ./modules/vscode
         ];
       };
 
