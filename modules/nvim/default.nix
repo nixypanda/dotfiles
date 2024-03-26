@@ -336,13 +336,6 @@ in {
         type = "lua";
         config = "require('nvim-surround').setup {}";
       }
-
-      # Utilities
-      {
-        plugin = bigfile-nvim;
-        type = "lua";
-        config = builtins.readFile ./lua/bigfile.lua;
-      }
     ];
 
     extraPackages = with pkgs; [
