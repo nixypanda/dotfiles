@@ -41,18 +41,20 @@
           codelldb_fixed_pkgs =
             nixpkgs_codelldb_fixed.legacyPackages."x86_64-darwin";
         };
+        nixpkgs.config = {
 
-        nixpkgs.config.allowUnfreePredicate = pkg:
-          builtins.elem (lib.getName pkg) [
-            "zoom"
-            "ngrok"
-            "unrar"
-            "vscode"
-            "vscode-extension-MS-python-vscode-pylance"
-            # browser extensions
-            "onepassword-password-manager"
-            "okta-browser-plugin"
-          ];
+          allowUnfreePredicate = pkg:
+            builtins.elem (lib.getName pkg) [
+              "zoom"
+              "ngrok"
+              "unrar"
+              "vscode"
+              "vscode-extension-MS-python-vscode-pylance"
+              # browser extensions
+              "onepassword-password-manager"
+              "okta-browser-plugin"
+            ];
+        };
 
         nixpkgs.overlays = [ nur.overlay taffybar.overlay vim-plugins.overlay ];
 

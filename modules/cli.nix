@@ -37,7 +37,7 @@
     carapace
 
     # Nix itself
-    nix
+    nixVersions.nix_2_21
   ];
 
   programs.starship = { enable = true; };

@@ -2,15 +2,6 @@
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local lspconfig = require("lspconfig")
 
--- Clojure
-lspconfig.clojure_lsp.setup({})
-
--- Dhall
-lspconfig.dhall_lsp_server.setup({})
-
--- elm
-lspconfig.elmls.setup({})
-
 -- go
 lspconfig.gopls.setup({
 	capabilities = capabilities,

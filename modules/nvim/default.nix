@@ -344,21 +344,9 @@ in {
       shellcheck
       shfmt
 
-      # Clojure
-      clojure-lsp
-
-      # dhall (broken on nix unstable)
-      # dhall-lsp-server
-
       # Docker
       nodePackages.dockerfile-language-server-nodejs
       hadolint
-
-      # elm
-      elmPackages.elm-language-server
-      elmPackages.elm
-      elmPackages.elm-test
-      elmPackages.elm-format
 
       # grammer
       vale
