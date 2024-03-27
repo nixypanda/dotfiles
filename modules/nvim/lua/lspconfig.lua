@@ -59,7 +59,7 @@ lspconfig.lua_ls.setup({
 })
 
 -- nix
-lspconfig.nil_ls.setup({})
+require("lspconfig").nixd.setup({})
 
 -- nu
 lspconfig.nushell.setup({})

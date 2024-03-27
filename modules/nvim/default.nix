@@ -382,7 +382,7 @@ in {
       # Nix
       deadnix
       statix
-      nil
+      nixd
       nixfmt
 
       # Python
