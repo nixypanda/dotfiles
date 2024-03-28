@@ -282,8 +282,10 @@ in {
       conjure
 
       # Programming: Database support
+      vim-dotenv
       vim-dadbod
       vim-dadbod-ui
+      nvim-dadbod-ssh
 
       # Programming: Testing
       FixCursorHold-nvim

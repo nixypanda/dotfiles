@@ -20,6 +20,10 @@
       url = "github:FabijanZulj/blame.nvim";
       flake = false;
     };
+    nvim-dadbod-ssh = {
+      url = "github:pbogut/vim-dadbod-ssh";
+      flake = false;
+    };
   };
   outputs = inputs:
     let
@@ -43,6 +47,10 @@
         nvim-blame = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-blame";
           src = inputs.nvim-blame-src;
+        };
+        nvim-dadbod-ssh = pkgs.vimUtils.buildVimPlugin {
+          name = "nvim-dadbod-ssh";
+          src = inputs.nvim-dadbod-ssh;
         };
       };
     in {

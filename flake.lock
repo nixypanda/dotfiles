@@ -412,6 +412,22 @@
         "type": "github"
       }
     },
+    "nvim-dadbod-ssh": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1710146143,
+        "narHash": "sha256-rkEADbPnx6pSgK2laBAUOFWWuuDH8PkxviYsLI7dhjY=",
+        "owner": "pbogut",
+        "repo": "vim-dadbod-ssh",
+        "rev": "0475a7184341fc31716c71feda0de27e63db4d2b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pbogut",
+        "repo": "vim-dadbod-ssh",
+        "type": "github"
+      }
+    },
     "nvim-lsp-file-operations-src": {
       "flake": false,
       "locked": {
@@ -447,11 +463,11 @@
     "nvim-rustaceanvim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1711349119,
-        "narHash": "sha256-dJteE8oiwqExgreSfx0XFDKRTkfZximVmTNH/q2jIjU=",
+        "lastModified": 1711539125,
+        "narHash": "sha256-yOjlsbTTB7CxEO+kWhVb4JQD8LPEkJHUDSkYN52h4Is=",
         "owner": "mrcjkb",
         "repo": "rustaceanvim",
-        "rev": "f1065516e568ac66b0e175aca7bfae330ca627ce",
+        "rev": "c2cdbeca8674e1b1b66ba870ff502bdad55a6d8a",
         "type": "github"
       },
       "original": {
@@ -596,6 +612,7 @@
     "vim-plugins": {
       "inputs": {
         "nvim-blame-src": "nvim-blame-src",
+        "nvim-dadbod-ssh": "nvim-dadbod-ssh",
         "nvim-lsp-file-operations-src": "nvim-lsp-file-operations-src",
         "nvim-regexplainer-src": "nvim-regexplainer-src",
         "nvim-rustaceanvim-src": "nvim-rustaceanvim-src",
@@ -603,7 +620,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-BTmGPjybNCsBMCtXustxxb4adwLo0AufVJvmQkMfz9A=",
+        "narHash": "sha256-YujhB0rB52nK1UiS+AqLkKwUibMbGd0AZatMV2EKnhE=",
         "path": "./modules/nvim/plugins",
         "type": "path"
       },
