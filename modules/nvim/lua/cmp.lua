@@ -49,14 +49,14 @@ cmp.setup({
 		end, { "i", "s" }),
 	},
 	sources = cmp.config.sources({
-		{ name = "nvim_lsp", max_item_count = 10 },
+		{ name = "nvim_lsp", max_item_count = 25 },
 		{ name = "luasnip" },
 		{ name = "nvim_lua" },
 		{ name = "calc" },
 		{ name = "crates" },
 	}, {
-		{ name = "buffer", max_item_count = 5, keyword_length = 3 },
 		{ name = "path" },
+		{ name = "buffer", max_item_count = 5, keyword_length = 3 },
 	}),
 	window = {
 		completion = cmp.config.window.bordered(),
