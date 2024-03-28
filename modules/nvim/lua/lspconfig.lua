@@ -68,11 +68,13 @@ lspconfig.nushell.setup({})
 lspconfig.pyright.setup({ capabilities = capabilities })
 
 -- SQL
--- lspconfig.sqls.setup {
---     on_attach = function(client, bufnr)
---         require('sqls').on_attach(client, bufnr)
---     end
--- }
+lspconfig.sqls.setup({
+	cmd = { "sqls", "-config", "~/.dotfiles/.secrets/nvim-sqls-config.yml" },
+
+	on_attach = function(client, bufnr)
+		require("sqls").on_attach(client, bufnr)
+	end,
+})
 
 -- Terraform
 lspconfig.terraform_lsp.setup({})
