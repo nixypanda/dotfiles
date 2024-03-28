@@ -59,7 +59,7 @@ lspconfig.lua_ls.setup({
 })
 
 -- nix
-require("lspconfig").nixd.setup({})
+lspconfig.nixd.setup({})
 
 -- nu
 lspconfig.nushell.setup({})
@@ -68,7 +68,7 @@ lspconfig.nushell.setup({})
 lspconfig.pyright.setup({ capabilities = capabilities })
 
 -- SQL
--- require('lspconfig').sqls.setup {
+-- lspconfig.sqls.setup {
 --     on_attach = function(client, bufnr)
 --         require('sqls').on_attach(client, bufnr)
 --     end
@@ -99,63 +99,29 @@ function lspconfig_window.default_opts(opts)
 	return win_opts
 end
 
--- json/yaml configs
-local json_schemas = {
-	{
-		description = "TypeScript compiler configuration file",
-		fileMatch = { "tsconfig.json", "tsconfig.*.json" },
-		url = "https://json.schemastore.org/tsconfig.json",
+-- json/yaml/toml configs
+lspconfig.jsonls.setup({
+	settings = {
+		json = {
+			schemas = require("schemastore").json.schemas(),
+			validate = { enable = true },
+		},
 	},
-	{
-		description = "Babel configuration",
-		fileMatch = { ".babelrc.json", ".babelrc", "babel.config.json" },
-		url = "https://json.schemastore.org/babelrc.json",
-	},
-	{
-		description = "ESLint config",
-		fileMatch = { ".eslintrc.json", ".eslintrc" },
-		url = "https://json.schemastore.org/eslintrc.json",
-	},
-	{
-		description = "Prettier config",
-		fileMatch = { ".prettierrc", ".prettierrc.json", "prettier.config.json" },
-		url = "https://json.schemastore.org/prettierrc",
-	},
-	{
-		description = "AWS CloudFormation",
-		fileMatch = { "*.cf.json", "cloudformation.json" },
-		url = "https://raw.githubusercontent.com/awslabs/goformation/v5.2.9/schema/cloudformation.schema.json",
-	},
-	{
-		description = "Json schema for properties json file for a GitHub Workflow template",
-		fileMatch = { ".github/workflow-templates/**.properties.json" },
-		url = "https://json.schemastore.org/github-workflow-template-properties.json",
-	},
-	{
-		description = "golangci-lint configuration file",
-		fileMatch = { ".golangci.toml", ".golangci.json" },
-		url = "https://json.schemastore.org/golangci-lint.json",
-	},
-	{
-		description = "NPM configuration file",
-		fileMatch = { "package.json" },
-		url = "https://json.schemastore.org/package.json",
-	},
-}
-
-lspconfig.jsonls.setup({ settings = { json = { schemas = json_schemas } } })
-
-local yaml_schemas = {
-	["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-	["https://json.schemastore.org/drone.json"] = "/.drone.yml",
-	["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json"] = "/openapi.yml",
-	["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "/docker-compose.json",
-}
+})
 
 lspconfig.yamlls.setup({
 	settings = {
 		yaml = {
-			schemas = yaml_schemas,
+			schemaStore = {
+				-- You must disable built-in schemaStore support if you want to use
+				-- this plugin and its advanced options like `ignore`.
+				enable = false,
+				-- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+				url = "",
+			},
+			schemas = require("schemastore").yaml.schemas(),
 		},
 	},
 })
+-- already has SchemaStore configured
+lspconfig.taplo.setup({})

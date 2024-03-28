@@ -160,6 +160,7 @@ in {
         type = "lua";
         config = builtins.readFile ./lua/lspconfig.lua;
       }
+      SchemaStore-nvim
       {
         plugin = lspsaga-nvim;
         type = "lua";
@@ -400,7 +401,7 @@ in {
       terraform-lsp
 
       # TOML
-      taplo-cli
+      taplo
 
       # Vimscript
       nodePackages.vim-language-server
