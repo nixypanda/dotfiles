@@ -27,6 +27,7 @@
     ripgrep # grep
     tokei # cloc, sloc, etc
     zoxide # cd with jumping
+    hyperfine # benchmarking (time)
 
     # Structured data
     fx
