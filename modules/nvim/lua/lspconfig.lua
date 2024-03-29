@@ -66,6 +66,33 @@ lspconfig.nushell.setup({})
 
 -- Python
 lspconfig.pyright.setup({ capabilities = capabilities })
+-- We are primarily using pyright for everything. Only using pylsp for rope refactors.
+lspconfig.pylsp.setup({
+	settings = {
+		pylsp = {
+			plugins = {
+				autopep8 = { enabled = false },
+				jedi_completion = { enabled = false },
+				jedi_definition = { enabled = false },
+				jedi_hover = { enabled = false },
+				jedi_references = { enabled = false },
+				jedi_signature_help = { enabled = false },
+				jedi_symbols = { enabled = false },
+				maccabe = { enabled = false },
+				preload = { enabled = false },
+				pycodestyle = { enabled = false },
+				pydocstyle = { enabled = false },
+				pyflakes = { enabled = false },
+				pylint = { enabled = false },
+				rope_completion = { enabled = false },
+				yapf = { enabled = false },
+				-- using a fork of ropify for renameing modules etc,
+				-- pyright already offers renaming capabilities that pylsp-rope offers at the moment
+				pylsp_rope = { enabled = true, rename = false },
+			},
+		},
+	},
+})
 
 -- SQL
 lspconfig.sqls.setup({

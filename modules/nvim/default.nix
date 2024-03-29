@@ -390,7 +390,7 @@ in {
 
       # Python
       venv-mypy
-      python_with_debugpy
+      (python3.withPackages (ps: with ps; [ python-lsp-server pylsp-rope ]))
 
       # rust
       code_lldb

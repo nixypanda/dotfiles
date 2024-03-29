@@ -297,3 +297,7 @@ local opts = {
 
 local wk = require("which-key")
 wk.register(mappings, opts)
+
+vim.keymap.set("v", "<leader>la", function()
+	require("lspsaga.codeaction"):code_action()
+end)
