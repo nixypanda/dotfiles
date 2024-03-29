@@ -23,4 +23,4 @@ end
 
 -- toggle keymappings for venn using <leader>v
 
-vim.api.nvim_set_keymap("n", "<leader>v", ":lua Toggle_venn()<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>uv", ":lua Toggle_venn()<CR>", { noremap = true, desc = "Toggle ASCII drawing" })

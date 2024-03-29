@@ -98,9 +98,7 @@ lspconfig.pylsp.setup({
 lspconfig.sqls.setup({
 	cmd = { "sqls", "-config", "~/.dotfiles/.secrets/nvim-sqls-config.yml" },
 
-	on_attach = function(client, bufnr)
-		require("sqls").on_attach(client, bufnr)
-	end,
+	on_attach = function(client, bufnr) require("sqls").on_attach(client, bufnr) end,
 })
 
 -- Terraform

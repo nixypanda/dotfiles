@@ -24,9 +24,7 @@ require("lualine").setup({
 -- Workaround to make the global statusline look shifted over when nvim tree is
 -- active
 local nvim_tree_shift = {
-	function()
-		return string.rep(" ", vim.api.nvim_win_get_width(require("nvim-tree.view").get_winnr()) - 2)
-	end,
+	function() return string.rep(" ", vim.api.nvim_win_get_width(require("nvim-tree.view").get_winnr()) - 2) end,
 	cond = require("nvim-tree.view").is_visible,
 	color = "NvimTreeNormal",
 }
