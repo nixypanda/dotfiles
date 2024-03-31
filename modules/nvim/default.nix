@@ -392,9 +392,6 @@ in {
       venv-mypy
       (python3.withPackages (ps: with ps; [ python-lsp-server pylsp-rope ]))
 
-      # rust
-      code_lldb
-
       # SQL
       sqls
       postgresql
