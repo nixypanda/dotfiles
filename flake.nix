@@ -24,7 +24,7 @@
     # Using alternate nixpkgs which has a fixed version of codelldb which works on Mac
     # Caveat: This requires Xcode.app installed on the system
     nixpkgs_codelldb_fixed = {
-      url = "github:mstone/nixpkgs/fa70e7499b08524a4a02e7ce9e39847b9d3c95df";
+      url = "github:nixypanda/nixpkgs/171e2c61fb27dadc865a5fe623c5d2eca4cfd4b9";
     };
 
     # Applying the configuration happens from the .dotfiles directory so the
