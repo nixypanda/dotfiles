@@ -108,7 +108,7 @@ local mappings = {
 		},
 		r = {
 			name = "+Rust",
-			d = { "<cmd>RustLsp debugables<cr>", "Debugables" },
+			d = { "<cmd>RustLsp debuggables<cr>", "Debugables" },
 			e = { "<cmd>RustLsp explainError<cr>", "Explain Error" },
 			r = { "<cmd>RustLsp runnables<cr>", "Runnables" },
 			t = { "<cmd>RustLsp testables<cr>", "Testables" },
