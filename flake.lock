@@ -367,17 +367,17 @@
     },
     "nixpkgs_codelldb_fixed": {
       "locked": {
-        "lastModified": 1680536213,
-        "narHash": "sha256-z8M162lOQ6A6PFQLwnUjvZhCl/7OdZEObmuD0Xp02aI=",
-        "owner": "mstone",
+        "lastModified": 1711784138,
+        "narHash": "sha256-EzAbCJ23AxoEnMp8Gc4agHpM64X3x6ieABgQRoez6Xo=",
+        "owner": "nixypanda",
         "repo": "nixpkgs",
-        "rev": "fa70e7499b08524a4a02e7ce9e39847b9d3c95df",
+        "rev": "87c5aa979c8a82fc462fabfdd225bb8c2df02696",
         "type": "github"
       },
       "original": {
-        "owner": "mstone",
+        "owner": "nixypanda",
         "repo": "nixpkgs",
-        "rev": "fa70e7499b08524a4a02e7ce9e39847b9d3c95df",
+        "rev": "87c5aa979c8a82fc462fabfdd225bb8c2df02696",
         "type": "github"
       }
     },
