@@ -60,7 +60,7 @@ vim.opt.listchars = {
 -- " Add line length end indicator
 -- vim.o.colorcolumn = '88'
 
-vim.o.shell = "zsh"
+vim.o.shell = "nu"
 
 -- More prominent splits. This is a general problem with a lot of the themes
 vim.opt.fillchars = {

@@ -64,19 +64,5 @@ cmp.setup({
 	},
 })
 
-cmp.setup.cmdline(":", {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = cmp.config.sources({
-		{ name = "path" },
-	}, {
-		{
-			name = "cmdline",
-			option = {
-				ignore_cmds = { "Man", "!" },
-			},
-		},
-	}),
-})
-
 -- Completion (default setting)
 vim.o.completeopt = "menuone,noselect"

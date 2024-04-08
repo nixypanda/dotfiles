@@ -43,11 +43,6 @@ in {
         config = builtins.readFile ./lua/alpha.lua;
       }
       {
-        plugin = nvim-colorizer-lua;
-        type = "lua";
-        config = ''require "colorizer".setup { css = { rgb_fn = true, } }'';
-      }
-      {
         plugin = headlines-nvim;
         type = "lua";
         config = ''require("headlines").setup()'';
@@ -68,11 +63,13 @@ in {
         type = "lua";
         config = builtins.readFile ./lua/ufo.lua;
       }
+      {
+        plugin = nvim-tree-lua;
+        type = "lua";
+        config = builtins.readFile ./lua/nvim-tree.lua;
+      }
 
       # Appearance: Themes
-      dracula-vim
-      one-nvim
-      tokyonight-nvim
       catppuccin-nvim
 
       # DAP
@@ -110,7 +107,6 @@ in {
         config = builtins.readFile ./lua/telescope.lua;
       }
       telescope-fzf-native-nvim
-      telescope-ui-select-nvim
 
       # Git
       {
@@ -135,14 +131,6 @@ in {
         type = "lua";
         config = builtins.readFile ./lua/which-key.lua;
       }
-
-      # Navigation
-      {
-        plugin = nvim-tree-lua;
-        type = "lua";
-        config = builtins.readFile ./lua/nvim-tree.lua;
-      }
-      vim-tmux-navigator
 
       # Programming: LSP
       {
@@ -231,7 +219,6 @@ in {
         type = "lua";
         config = ''require("crates").setup()'';
       }
-      yuck-vim
       {
         plugin = nvim-rustaceanvim;
         type = "lua";
@@ -256,11 +243,9 @@ in {
       }
       cmp-buffer
       cmp-calc
-      cmp-cmdline
       cmp-nvim-lsp
       cmp-nvim-lua
       cmp-path
-      cmp-treesitter
       luasnip
       cmp_luasnip
       friendly-snippets
@@ -271,15 +256,6 @@ in {
         type = "lua";
         config = builtins.readFile ./lua/codeium.lua;
       }
-      {
-        plugin = ChatGPT-nvim;
-        type = "lua";
-        config =
-          ''require("chatgpt").setup({ keymaps = { submit = "<C-l>" } })'';
-      }
-
-      # Programming: Code Evaluation
-      conjure
 
       # Programming: Database support
       vim-dotenv
@@ -288,7 +264,6 @@ in {
       nvim-dadbod-ssh
 
       # Programming: Testing
-      FixCursorHold-nvim
       {
         plugin = neotest;
         type = "lua";
@@ -297,19 +272,7 @@ in {
       neotest-python
       neotest-go
 
-      # Programming: refactoring support
-      {
-        plugin = refactoring-nvim;
-        type = "lua";
-        config = ''require("refactoring").setup({})'';
-      }
-
       # Text Helpers
-      {
-        plugin = nvim-regexplainer;
-        type = "lua";
-        config = builtins.readFile ./lua/regexplainer.lua;
-      }
       {
         plugin = todo-comments-nvim;
         type = "lua";
@@ -320,7 +283,6 @@ in {
         type = "lua";
         config = builtins.readFile ./lua/venn.lua;
       }
-      vim-haskellConcealPlus
       vim-table-mode
 
       # Text objects

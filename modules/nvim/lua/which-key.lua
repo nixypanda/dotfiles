@@ -23,11 +23,6 @@ local mappings = {
 		j = { "<cmd>bnext<cr>", "Next Buffer" },
 		k = { "<cmd>bperv<cr>", "Previous Buffer" },
 	},
-	c = {
-		name = "+CodeEval",
-		e = { "<cmd>ConjureEvalRootForm<cr>", "Eval" },
-		l = { "<cmd>ConjureLogVSplit<cr>", "Show log (vertical split)" },
-	},
 	d = {
 		name = "+Debug",
 		b = { require("dap").toggle_breakpoint, "Toggle breakpoint" },
@@ -53,7 +48,12 @@ local mappings = {
 		a = { "<cmd>DBUIAddConnection<cr>", "Add new connection" },
 		t = { "<cmd>DBUIToggle<cr>", "Toggle DBUI" },
 	},
-	e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+	e = {
+		name = "+Explorer",
+		c = { "<cmd>NvimTreeCollapse<cr>", "Collapse explorer" },
+		e = { "<cmd>NvimTreeToggle<cr>", "Toggle explorer" },
+		r = { "<cmd>NvimTreeRefresh<cr>", "Refresh explorer" },
+	},
 	g = {
 		name = "+Git",
 		b = { "<cmd>ToggleBlame virtual<cr>", "Blame" },
