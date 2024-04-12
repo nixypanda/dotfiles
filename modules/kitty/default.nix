@@ -11,6 +11,7 @@
       background = "${colorscheme.bg-primary}";
 
       macos_option_as_alt = "left";
+      macos_show_window_title_in = "none";
 
       color0 = "${colorscheme.black}";
       color1 = "${colorscheme.red}";

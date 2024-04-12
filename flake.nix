@@ -136,13 +136,9 @@
         };
       };
 
-      # WARN: The intent here is to only use brew and nothing else.
-      # I have no idea what I am doing here. This setup is making using of
-      # nix-darwin which apperently has brew. Brew can be a potent practical
-      # fallback when the nix world is not so great no macos.
       darwinConfigurations."nixyMac" = darwin.lib.darwinSystem {
         pkgs = nixpkgs.legacyPackages."x86_64-darwin";
-        modules = [ ./modules/homebrew.nix ];
+        modules = [ ./modules/system-mac ./modules/homebrew.nix ];
       };
     };
 }

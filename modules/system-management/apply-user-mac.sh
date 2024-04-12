@@ -20,11 +20,5 @@ done
 
 pushd ~/.dotfiles
 home-manager switch --flake "./#macbook-pro" -b backup
-
-if $with_brew; then
-    echo "DOING SHIT WITH BREW"
-    nix build ~/.dotfiles/\#darwinConfigurations.nixyMac.system
-    ./result/sw/bin/darwin-rebuild switch --flake ~/.dotfiles
-fi
-
 popd
+
