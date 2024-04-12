@@ -107,6 +107,7 @@ in {
         config = builtins.readFile ./lua/telescope.lua;
       }
       telescope-fzf-native-nvim
+      telescope-ui-select-nvim
 
       # Git
       {
@@ -271,6 +272,7 @@ in {
       }
       neotest-python
       neotest-go
+      FixCursorHold-nvim
 
       # Text Helpers
       {

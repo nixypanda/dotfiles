@@ -10,10 +10,6 @@ require("which-key").setup({
 })
 
 local mappings = {
-	a = {
-		name = "+AI assistant",
-		c = { "<cmd>ChatGPT<cr>", "ChatGPT" },
-	},
 	b = {
 		name = "+Buffers",
 		A = { "<cmd>bufdo bd<cr>", "Close all buffer" },
@@ -22,6 +18,8 @@ local mappings = {
 		d = { "<cmd>bd<cr>", "Close buffer" },
 		j = { "<cmd>bnext<cr>", "Next Buffer" },
 		k = { "<cmd>bperv<cr>", "Previous Buffer" },
+		s = { "<cmd>tab split<cr>", "Open buffer in new tab" },
+		S = { "<cmd>tab close<cr>", "Close tab" },
 	},
 	d = {
 		name = "+Debug",
