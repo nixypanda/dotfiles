@@ -50,6 +50,7 @@
               "unrar"
               "vscode"
               "vscode-extension-MS-python-vscode-pylance"
+              "codeium"
               # browser extensions
               "onepassword-password-manager"
               "okta-browser-plugin"

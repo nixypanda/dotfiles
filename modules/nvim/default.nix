@@ -255,7 +255,9 @@ in {
       {
         plugin = codeium-vim;
         type = "lua";
-        config = builtins.readFile ./lua/codeium.lua;
+        config = ''
+          vim.g.codeium_bin = "${pkgs.codeium}/bin/codeium_language_server"
+          ${builtins.readFile ./lua/codeium.lua}'';
       }
 
       # Programming: Database support
