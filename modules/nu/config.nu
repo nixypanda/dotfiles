@@ -460,7 +460,7 @@ $env.config = {
             mode: [emacs , vi_normal, vi_insert]
             event: {
               send: executehostcommand
-              cmd: "commandline (
+              cmd: "
                 history 
                   | each { |it| $it.command } 
                   | uniq 
@@ -469,7 +469,7 @@ $env.config = {
                   | fzf --read0 --tiebreak=chunk --layout=reverse  --multi --preview='bat --style=numbers {..}' --preview-window='bottom:hidden' --bind shift-tab:up,tab:down --height=50% -q (commandline)
                   | decode utf-8 
                   | str trim
-              )"
+              "
             }
         }
         {

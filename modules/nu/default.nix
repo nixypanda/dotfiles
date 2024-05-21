@@ -10,7 +10,6 @@ in {
       ${builtins.readFile ./aliases.nu}
 
       # modules
-      use ${nu_scripts}/modules/docker/docker.nu *
       use ${nu_scripts}/modules/nix/nix.nu *
 
       ${builtins.readFile ./functions.nu}
