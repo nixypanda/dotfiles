@@ -7,7 +7,7 @@ end
 
 require("lint").linters_by_ft = {
 	markdown = { "vale", "markdownlint" },
-	python = { "mypy", "ruff" },
+	python = { "mypy" },
 	nix = { "statix" },
 	bash = { "shellcheck" },
 	sh = { "shellcheck" },

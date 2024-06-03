@@ -65,6 +65,7 @@ lspconfig.nixd.setup({})
 lspconfig.nushell.setup({})
 
 -- Python
+lspconfig.ruff.setup({})
 lspconfig.pyright.setup({ capabilities = capabilities })
 -- We are primarily using pyright for everything. Only using pylsp for rope refactors.
 lspconfig.pylsp.setup({

@@ -10,7 +10,6 @@ require("conform").setup({
 		lua = { "stylua" },
 		markdown = { "prettier", "markdownlint" },
 		nix = { "nixfmt" },
-		python = { "ruff_fix", "ruff_format" },
 		terraform = { "terraform_fmt" },
 		yaml = { "prettier" },
 	},
@@ -20,7 +19,3 @@ require("conform").setup({
 		timeout_ms = 500,
 	},
 })
-
-require("conform").formatters.ruff_fix = {
-	prepend_args = { "--select", "I" },
-}
