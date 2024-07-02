@@ -14,7 +14,6 @@
     casks = [
       "google-chrome"
       "1password"
-      "protonvpn"
       "docker"
       "microsoft-onenote"
       "wireshark"
