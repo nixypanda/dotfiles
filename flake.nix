@@ -98,11 +98,6 @@
         home.homeDirectory = "/home/sherub";
         home.username = "sherub";
         imports = [
-          ./modules/discord
-          ./modules/media.nix
-          ./modules/onenote
-          ./modules/slack
-
           # Desktop Environment
           ./modules/desktop-environment.nix
           ./modules/betterlockscreen
