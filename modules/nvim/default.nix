@@ -417,7 +417,6 @@ in {
 
       # python
       pyright
-      ruff
       mypy
     ];
 

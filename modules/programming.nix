@@ -45,7 +45,6 @@
     (python3.withPackages (ps: with ps; [ setuptools pip ]))
     poetry
     python3Packages.ipython
-    ruff
 
     # rust
     cargo
