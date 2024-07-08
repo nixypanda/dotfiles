@@ -54,7 +54,7 @@ local mappings = {
 	},
 	g = {
 		name = "+Git",
-		b = { "<cmd>ToggleBlame window<cr>", "Blame" },
+		b = { "<cmd>BlameToggle window<cr>", "Blame" },
 		c = {
 			name = "+Conflict Resolution",
 			b = { "<cmd>GitConflictChooseBoth<cr>", "Choose both" },
