@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     # CLI tools / Terminal facification
     arandr
@@ -41,5 +42,7 @@
     nixVersions.nix_2_21
   ];
 
-  programs.starship = { enable = true; };
+  programs.starship = {
+    enable = true;
+  };
 }

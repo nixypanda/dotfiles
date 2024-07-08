@@ -1,6 +1,8 @@
 { pkgs, lib, ... }:
-let merge = lib.foldr (a: b: a // b) { };
-in {
+let
+  merge = lib.foldr (a: b: a // b) { };
+in
+{
   programs.firefox = {
     enable = true;
     package = if pkgs.stdenv.isLinux then pkgs.firefox else pkgs.firefox-bin;

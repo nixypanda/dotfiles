@@ -1,4 +1,5 @@
-{ colorscheme, ... }: {
+{ colorscheme, ... }:
+{
   programs.kitty = {
     enable = true;
     settings = {

@@ -1,4 +1,10 @@
-{ config, pkgs, colorscheme, ... }: {
+{
+  config,
+  pkgs,
+  colorscheme,
+  ...
+}:
+{
   xsession = {
     enable = true;
     scriptPath = ".hm-xsession";

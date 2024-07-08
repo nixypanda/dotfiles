@@ -8,7 +8,8 @@ let
       hash = "sha256-SsFHUnbS8cSGhIdAif782DvXFi3ar7gfrIZroNsoKoc=";
     };
   });
-in python310Packages.buildPythonPackage rec {
+in
+python310Packages.buildPythonPackage rec {
   pname = "ropify";
   version = "eb7658cf6d225c3c8964a2772b6f4d369322d18c";
 
@@ -21,7 +22,14 @@ in python310Packages.buildPythonPackage rec {
 
   pyproject = true;
 
-  nativeBuildInputs = with python310Packages; [ pip poetry-core ];
+  nativeBuildInputs = with python310Packages; [
+    pip
+    poetry-core
+  ];
 
-  propagatedBuildInputs = with python310Packages; [ click rope old_setuptools ];
+  propagatedBuildInputs = with python310Packages; [
+    click
+    rope
+    old_setuptools
+  ];
 }

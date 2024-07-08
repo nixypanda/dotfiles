@@ -17,14 +17,19 @@ let
   update-dots = pkgs.writeScriptBin "update-dots" ''
     ${builtins.readFile ./update-dots.sh}
   '';
-in {
-  home.packages = if pkgs.stdenv.isLinux then [
-    apply-system-nixos
-    apply-user-nixos
-    update-dots
-  ] else [
-    update-dots
-    apply-user-mac
-    apply-system-mac
-  ];
+in
+{
+  home.packages =
+    if pkgs.stdenv.isLinux then
+      [
+        apply-system-nixos
+        apply-user-nixos
+        update-dots
+      ]
+    else
+      [
+        update-dots
+        apply-user-mac
+        apply-system-mac
+      ];
 }

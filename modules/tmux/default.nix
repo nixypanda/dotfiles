@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.tmux = {
     terminal = "screen-256color";
     shell = "${pkgs.nushell}/bin/nu";

@@ -1,8 +1,13 @@
-{ pkgs, colorscheme, ... }: {
+{ pkgs, colorscheme, ... }:
+{
   programs.rofi = {
     enable = true;
     package = pkgs.rofi.override {
-      plugins = [ pkgs.rofi-emoji pkgs.rofi-calc pkgs.rofi-file-browser ];
+      plugins = [
+        pkgs.rofi-emoji
+        pkgs.rofi-calc
+        pkgs.rofi-file-browser
+      ];
     };
     font = "hack 10";
   };

@@ -1,5 +1,9 @@
-{ pkgs, ... }: {
-  home.packages = with pkgs; [ git-crypt difftastic ];
+{ pkgs, ... }:
+{
+  home.packages = with pkgs; [
+    git-crypt
+    difftastic
+  ];
   programs = {
     git = {
       enable = true;

@@ -1,4 +1,9 @@
-{ pkgs, colorscheme, codelldb_fixed_pkgs, ... }:
+{
+  pkgs,
+  colorscheme,
+  codelldb_fixed_pkgs,
+  ...
+}:
 let
   # Using a fixed version of codelldb which works on Mac.
   # We get this from an alternate nixpkgs repo.
@@ -15,7 +20,8 @@ let
     set -e
     exec poetry run mypy "$@"
   '';
-in {
+in
+{
   programs.neovim = {
     enable = true;
     vimAlias = true;
@@ -169,8 +175,8 @@ in {
 
       # Progrmming: Treesitter
       {
-        plugin = (nvim-treesitter.withPlugins (plugins:
-          with plugins; [
+        plugin = nvim-treesitter.withPlugins (
+          plugins: with plugins; [
             bash
             c
             css
@@ -207,7 +213,8 @@ in {
             yaml
 
             tree-sitter-nu.grammar
-          ]));
+          ]
+        );
         type = "lua";
         config = builtins.readFile ./lua/treesitter.lua;
       }
@@ -352,11 +359,16 @@ in {
       deadnix
       statix
       nixd
-      nixfmt
+      nixfmt-rfc-style
 
       # Python
       venv-mypy
-      (python3.withPackages (ps: with ps; [ python-lsp-server pylsp-rope ]))
+      (python3.withPackages (
+        ps: with ps; [
+          python-lsp-server
+          pylsp-rope
+        ]
+      ))
 
       # SQL
       sqls

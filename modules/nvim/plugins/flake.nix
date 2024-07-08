@@ -25,7 +25,8 @@
       flake = false;
     };
   };
-  outputs = inputs:
+  outputs =
+    inputs:
     let
       missingVimPluginsInNixpkgs = pkgs: {
         nvim-regexplainer = pkgs.vimUtils.buildVimPlugin {
@@ -53,9 +54,8 @@
           src = inputs.nvim-dadbod-ssh;
         };
       };
-    in {
-      overlay = _final: prev: {
-        vimPlugins = prev.vimPlugins // (missingVimPluginsInNixpkgs prev.pkgs);
-      };
+    in
+    {
+      overlay = _final: prev: { vimPlugins = prev.vimPlugins // (missingVimPluginsInNixpkgs prev.pkgs); };
     };
 }

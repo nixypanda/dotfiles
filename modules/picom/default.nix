@@ -1,7 +1,8 @@
 let
   # Regex that matches all strings starting with 'eww' that don't end in 'bg'
   non-background-eww-stuff = "^eww(?!.+-bg$).+$";
-in {
+in
+{
   services.picom = {
     enable = true;
     experimentalBackends = true;

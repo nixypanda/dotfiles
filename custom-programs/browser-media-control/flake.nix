@@ -1,19 +1,28 @@
 {
   description = "Browser Media Controls";
-  inputs = { unstable.url = "github:NixOS/nixpkgs/nixos-unstable"; };
+  inputs = {
+    unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+  };
 
-  outputs = inputs:
+  outputs =
+    inputs:
     let
       system = "x86_64-linux";
       pkgs = inputs.unstable.legacyPackages.${system};
-      pythonDeps = ps: with ps; [ pydbus pygobject3 requests ];
+      pythonDeps =
+        ps: with ps; [
+          pydbus
+          pygobject3
+          requests
+        ];
       deps = with pkgs; [
         pkg-config
         cairo
         gobject-introspection
         (python3.withPackages pythonDeps)
       ];
-    in {
+    in
+    {
       devShell."${system}" = pkgs.mkShell { buildInputs = deps; };
       defaultPackage."${system}" = pkgs.stdenv.mkDerivation {
         name = "custom-browsermediacontrol";

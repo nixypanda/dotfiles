@@ -6,8 +6,13 @@ pkgs.stdenv.mkDerivation {
     pkg-config
     cairo
     gobject-introspection
-    (python3.withPackages
-      (python3Packages: with python3Packages; [ pydbus pygobject3 requests ]))
+    (python3.withPackages (
+      python3Packages: with python3Packages; [
+        pydbus
+        pygobject3
+        requests
+      ]
+    ))
   ];
   unpackPhase = ":";
   installPhase = ''

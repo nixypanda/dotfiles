@@ -1,6 +1,8 @@
 { pkgs, ... }:
-let nu_scripts = "${pkgs.nu_scripts}/share/nu_scripts";
-in {
+let
+  nu_scripts = "${pkgs.nu_scripts}/share/nu_scripts";
+in
+{
   programs.nushell = {
     enable = true;
 

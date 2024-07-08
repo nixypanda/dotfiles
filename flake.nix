@@ -14,7 +14,9 @@
       url = "github:bandithedoge/nixpkgs-firefox-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nur = { url = "github:nix-community/NUR"; };
+    nur = {
+      url = "github:nix-community/NUR";
+    };
     taffybar = {
       url = "github:nixypanda/taffybar";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,66 +31,87 @@
 
     # Applying the configuration happens from the .dotfiles directory so the
     # relative path is defined accordingly. This has potential of causing issues.
-    vim-plugins = { url = "path:./modules/nvim/plugins"; };
+    vim-plugins = {
+      url = "path:./modules/nvim/plugins";
+    };
   };
-  outputs = { self, nur, taffybar, vim-plugins, nixpkgs, home-manager, darwin
-    , nixpkgs-firefox-darwin, nixpkgs_codelldb_fixed }:
+  outputs =
+    {
+      self,
+      nur,
+      taffybar,
+      vim-plugins,
+      nixpkgs,
+      home-manager,
+      darwin,
+      nixpkgs-firefox-darwin,
+      nixpkgs_codelldb_fixed,
+    }:
     let
-      home-common = { lib, ... }: {
-        # NOTE: Injecting colorscheme so that it is passed down all the imports
-        _module.args = {
-          colorscheme = import ./colorschemes/tokyonight.nix;
-          codelldb_fixed_pkgs =
-            nixpkgs_codelldb_fixed.legacyPackages."x86_64-darwin";
+      home-common =
+        { lib, ... }:
+        {
+          # NOTE: Injecting colorscheme so that it is passed down all the imports
+          _module.args = {
+            colorscheme = import ./colorschemes/tokyonight.nix;
+            codelldb_fixed_pkgs = nixpkgs_codelldb_fixed.legacyPackages."x86_64-darwin";
+          };
+          nixpkgs.config = {
+
+            allowUnfreePredicate =
+              pkg:
+              builtins.elem (lib.getName pkg) [
+                "zoom"
+                "ngrok"
+                "unrar"
+                "vscode"
+                "vscode-extension-MS-python-vscode-pylance"
+                "codeium"
+                # browser extensions
+                "onepassword-password-manager"
+                "okta-browser-plugin"
+              ];
+          };
+
+          nixpkgs.overlays = [
+            nur.overlay
+            taffybar.overlay
+            vim-plugins.overlay
+          ];
+
+          # Let Home Manager install and manage itself.
+          programs.home-manager.enable = true;
+          home.stateVersion = "22.05";
+
+          imports = [
+            ./modules/aws
+            ./modules/bat
+            ./modules/cli.nix
+            ./modules/direnv
+            ./modules/firefox
+            ./modules/fonts.nix
+            ./modules/git
+            ./modules/helix
+            ./modules/kitty
+            ./modules/nu
+            ./modules/nvim
+            ./modules/programming.nix
+            ./modules/system-management
+            ./modules/zellij
+            ./modules/zsh
+            ./modules/vscode
+          ];
         };
-        nixpkgs.config = {
-
-          allowUnfreePredicate = pkg:
-            builtins.elem (lib.getName pkg) [
-              "zoom"
-              "ngrok"
-              "unrar"
-              "vscode"
-              "vscode-extension-MS-python-vscode-pylance"
-              "codeium"
-              # browser extensions
-              "onepassword-password-manager"
-              "okta-browser-plugin"
-            ];
-        };
-
-        nixpkgs.overlays = [ nur.overlay taffybar.overlay vim-plugins.overlay ];
-
-        # Let Home Manager install and manage itself.
-        programs.home-manager.enable = true;
-        home.stateVersion = "22.05";
-
-        imports = [
-          ./modules/aws
-          ./modules/bat
-          ./modules/cli.nix
-          ./modules/direnv
-          ./modules/firefox
-          ./modules/fonts.nix
-          ./modules/git
-          ./modules/helix
-          ./modules/kitty
-          ./modules/nu
-          ./modules/nvim
-          ./modules/programming.nix
-          ./modules/system-management
-          ./modules/zellij
-          ./modules/zsh
-          ./modules/vscode
-        ];
-      };
 
       home-macbook = {
         # Hack: Firefox does not work on mac so we have to depend on an overlay.
         nixpkgs.overlays = [ nixpkgs-firefox-darwin.overlay ];
         home.homeDirectory = "/Users/sherubthakur";
         home.username = "sherubthakur";
-        imports = [ ./modules/tmux ./modules/mac-symlink-applications.nix ];
+        imports = [
+          ./modules/tmux
+          ./modules/mac-symlink-applications.nix
+        ];
         xdg.configFile."nix/nix.conf".text = ''
           experimental-features = nix-command flakes
         '';
@@ -114,7 +137,8 @@
         ];
       };
 
-    in {
+    in
+    {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [ ./system/configuration.nix ];
@@ -123,18 +147,27 @@
       homeConfigurations = {
         nixos = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
-          modules = [ home-common home-linux ];
+          modules = [
+            home-common
+            home-linux
+          ];
         };
 
         macbook-pro = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-darwin";
-          modules = [ home-common home-macbook ];
+          modules = [
+            home-common
+            home-macbook
+          ];
         };
       };
 
       darwinConfigurations."nixyMac" = darwin.lib.darwinSystem {
         pkgs = nixpkgs.legacyPackages."x86_64-darwin";
-        modules = [ ./modules/system-mac ./modules/homebrew.nix ];
+        modules = [
+          ./modules/system-mac
+          ./modules/homebrew.nix
+        ];
       };
     };
 }

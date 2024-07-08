@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     # common
     gnumake
@@ -42,7 +43,12 @@
     lua
 
     # python
-    (python3.withPackages (ps: with ps; [ setuptools pip ]))
+    (python3.withPackages (
+      ps: with ps; [
+        setuptools
+        pip
+      ]
+    ))
     poetry
     python3Packages.ipython
 

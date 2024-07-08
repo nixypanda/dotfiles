@@ -7,8 +7,14 @@
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
   boot = {
 
-    initrd.availableKernelModules =
-      [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
+    initrd.availableKernelModules = [
+      "nvme"
+      "xhci_pci"
+      "ahci"
+      "usb_storage"
+      "usbhid"
+      "sd_mod"
+    ];
     initrd.kernelModules = [ ];
     kernelModules = [ "kvm-amd" ];
     extraModulePackages = [ ];
@@ -24,7 +30,7 @@
     fsType = "vfat";
   };
 
-  swapDevices = [{ device = "/dev/disk/by-label/NIXSWAP"; }];
+  swapDevices = [ { device = "/dev/disk/by-label/NIXSWAP"; } ];
 
   nix.settings.max-jobs = lib.mkDefault 16;
   hardware.video.hidpi.enable = lib.mkDefault true;

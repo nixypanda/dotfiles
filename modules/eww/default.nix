@@ -4,9 +4,13 @@ let
     #!/${pkgs.stdenv.shell}
     ${builtins.readFile ./scripts/custom-eww-sysinfo.sh}
   '';
-in {
+in
+{
   home = {
-    packages = with pkgs; [ custom-script-eww-sysinfo eww ];
+    packages = with pkgs; [
+      custom-script-eww-sysinfo
+      eww
+    ];
 
     file.".config/eww/eww.scss".source = ./eww.scss;
     file.".config/eww/eww.yuck".source = ./eww.yuck;

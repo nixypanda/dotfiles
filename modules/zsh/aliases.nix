@@ -13,8 +13,7 @@
   dc = "docker-compose";
   dcu = "docker-compose up --build";
   dcl = "docker-compose logs -f";
-  dcisolated =
-    "docker-compose up --build --no-deps consul_common common-redis common_db";
+  dcisolated = "docker-compose up --build --no-deps consul_common common-redis common_db";
 
   # Navigation;
   ".." = "cd ..";
@@ -23,8 +22,7 @@
   "....." = "cd ../../../..";
 
   # git;
-  gl =
-    "git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+  gl = "git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
   gc = "git commit";
   gco = "git checkout";
   gs = "git status";
@@ -39,8 +37,7 @@
 
   # Grep;
   grep = "grep --color=auto";
-  nix-stray-roots = ''
-    nix-store --gc --print-roots | egrep -v "^(/nix/var|/run/w+-system|{memory)"'';
+  nix-stray-roots = ''nix-store --gc --print-roots | egrep -v "^(/nix/var|/run/w+-system|{memory)"'';
 
   # json formatting;
   json = "python3 -m json.tool";

@@ -21,7 +21,11 @@
       };
     };
 
-    kernelModules = [ "i2c-dev" "i2c-piix4" "kvm-amd" ];
+    kernelModules = [
+      "i2c-dev"
+      "i2c-piix4"
+      "kvm-amd"
+    ];
     initrd.kernelModules = [ "amdgpu" ];
   };
 
@@ -52,7 +56,11 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [ openrgb i2c-tools ddccontrol ];
+  environment.systemPackages = with pkgs; [
+    openrgb
+    i2c-tools
+    ddccontrol
+  ];
   environment.pathsToLink = [ "/libexec" ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -76,13 +84,15 @@
         ${pkgs.xorg.xrandr}/bin/xrandr --output DisplayPort-0 --mode 3840x2160 --scale 0.70x0.70 --output DisplayPort-1 --mode 2560x1440 --rotate left --left-of DisplayPort-0
       '';
 
-      desktopManager.session = [{
-        name = "home-manager";
-        start = ''
-          ${pkgs.runtimeShell} $HOME/.hm-xsession &
-          waitPID=$!
-        '';
-      }];
+      desktopManager.session = [
+        {
+          name = "home-manager";
+          start = ''
+            ${pkgs.runtimeShell} $HOME/.hm-xsession &
+            waitPID=$!
+          '';
+        }
+      ];
     };
   };
   hardware = {
@@ -106,7 +116,13 @@
   users.users.sherub = {
     isNormalUser = true;
     # Enable ‘sudo’, 'audio' for the user.
-    extraGroups = [ "wheel" "audio" "docker" "qemu-libvirtd" "libvirtd" ];
+    extraGroups = [
+      "wheel"
+      "audio"
+      "docker"
+      "qemu-libvirtd"
+      "libvirtd"
+    ];
   };
 
   # Switch Pro Controller udev rules

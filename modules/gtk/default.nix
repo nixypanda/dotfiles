@@ -1,4 +1,5 @@
-{ pkgs, colorscheme, ... }: {
+{ pkgs, colorscheme, ... }:
+{
   home.packages = with pkgs; [
     lxappearance
     dracula-theme
@@ -10,8 +11,14 @@
 
   gtk = {
     enable = true;
-    font = { name = "TeX Gyre Heros 10"; };
-    iconTheme = { name = colorscheme.gtk-icon-name; };
-    theme = { name = colorscheme.gtk-name; };
+    font = {
+      name = "TeX Gyre Heros 10";
+    };
+    iconTheme = {
+      name = colorscheme.gtk-icon-name;
+    };
+    theme = {
+      name = colorscheme.gtk-name;
+    };
   };
 }

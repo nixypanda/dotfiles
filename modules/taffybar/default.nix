@@ -21,9 +21,9 @@ let
     custom-taffybar &
     eww open topbar-btw
   '';
-  custom-taffybar =
-    (import ../../custom-programs/taffybar/default.nix) { inherit pkgs; };
-in {
+  custom-taffybar = (import ../../custom-programs/taffybar/default.nix) { inherit pkgs; };
+in
+{
   home = {
     packages = with pkgs; [
       custom-panel-launch
@@ -31,8 +31,7 @@ in {
       haskellPackages.status-notifier-item
     ];
 
-    file.".config/taffybar/taffybar.css".source =
-      ../../custom-programs/taffybar/taffybar.css;
+    file.".config/taffybar/taffybar.css".source = ../../custom-programs/taffybar/taffybar.css;
     file.".config/taffybar/colors.css".text = ''
       @define-color font-color ${colorscheme.fg-primary};
       @define-color accent ${colorscheme.accent-primary};
