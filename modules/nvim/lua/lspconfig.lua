@@ -59,7 +59,13 @@ lspconfig.lua_ls.setup({
 })
 
 -- nix
-lspconfig.nixd.setup({})
+lspconfig.nixd.setup({
+	settings = {
+		nixd = {
+			diagnostic = { suppress = { "sema-escaping-with" } },
+		},
+	},
+})
 
 -- nu
 lspconfig.nushell.setup({})
