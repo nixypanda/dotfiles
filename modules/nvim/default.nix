@@ -416,7 +416,7 @@ in {
       haskellPackages.ghci-dap
 
       # python
-      nodePackages.pyright
+      pyright
       ruff
       mypy
     ];
