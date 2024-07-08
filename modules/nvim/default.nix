@@ -388,7 +388,7 @@ in {
     ];
 
     extraConfig = ''
-      colorscheme catppuccin-macchiato
+      colorscheme ${colorscheme.vim-name}
       luafile ${builtins.toString ./lua/base.lua}
     '';
   };

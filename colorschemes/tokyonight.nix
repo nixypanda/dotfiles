@@ -5,7 +5,7 @@ in rec {
   # Note: This kinda feels like a hack and I am none to happy about it maybe in
   # the future I might make this play nicely to with everything else. That is
   # too much effort though. Creating a whole theme for vim
-  vim-name = "tokyonight";
+  vim-name = "catppuccin-macchiato";
   vim-statusline = "tokyonight";
   gtk-name = "palenight";
   gtk-icon-name = "Moka";
