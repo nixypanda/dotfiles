@@ -20,6 +20,17 @@ let
     set -e
     exec poetry run mypy "$@"
   '';
+  # This sucks
+  # The codeium-nvim plugin works with specific version of the language server
+  # now anytime I update I will need to check if the lanague-server with what it works with
+  # and then update this accordingly.
+  codeium-1-8-25 = pkgs.codeium.overrideAttrs (o: {
+    src = builtins.fetchurl {
+      url = "https://github.com/Exafunction/codeium/releases/download/language-server-v1.8.25/language_server_macos_x64.gz";
+      sha256 = "sha256:08hbh8kddidw46zkqphrpff2qrrkdfq2f2aw4simfq2rvhi62yy8";
+    };
+
+  });
 in
 {
   programs.neovim = {
@@ -260,11 +271,16 @@ in
 
       # Programming: AI shit
       {
-        plugin = codeium-vim;
+        plugin = codeium-nvim;
         type = "lua";
-        config = ''
-          vim.g.codeium_bin = "${pkgs.codeium}/bin/codeium_language_server"
-          ${builtins.readFile ./lua/codeium.lua}'';
+        config = # lua
+          ''
+            require('codeium').setup({
+                tools = {
+                    language_server = "${codeium-1-8-25}/bin/codeium_language_server"
+                }
+            })
+          '';
       }
 
       # Programming: Database support
