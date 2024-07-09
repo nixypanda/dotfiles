@@ -444,38 +444,6 @@
         "type": "github"
       }
     },
-    "nvim-regexplainer-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1717411314,
-        "narHash": "sha256-T67ytABvzhumX9zh2EsYuF5Qm9zuSgrkRlSWbY6vigU=",
-        "owner": "bennypowers",
-        "repo": "nvim-regexplainer",
-        "rev": "bc8d06fecb51148216e7b548217d29d31cee3de9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "bennypowers",
-        "repo": "nvim-regexplainer",
-        "type": "github"
-      }
-    },
-    "nvim-rustaceanvim-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1719658629,
-        "narHash": "sha256-W8cSTcF+xapvpBUZYccwkPmkNkdK3wlbzC5rpbv6HZI=",
-        "owner": "mrcjkb",
-        "repo": "rustaceanvim",
-        "rev": "af4de6a35d128ce71c75a9a7846bf089aea76f50",
-        "type": "github"
-      },
-      "original": {
-        "owner": "mrcjkb",
-        "repo": "rustaceanvim",
-        "type": "github"
-      }
-    },
     "nvim-sqls-src": {
       "flake": false,
       "locked": {
@@ -614,13 +582,11 @@
         "nvim-blame-src": "nvim-blame-src",
         "nvim-dadbod-ssh": "nvim-dadbod-ssh",
         "nvim-lsp-file-operations-src": "nvim-lsp-file-operations-src",
-        "nvim-regexplainer-src": "nvim-regexplainer-src",
-        "nvim-rustaceanvim-src": "nvim-rustaceanvim-src",
         "nvim-sqls-src": "nvim-sqls-src"
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-W09dRkcZTZCRyi+MLbKkUKNflsbSmzaZZvJaCnM2dts=",
+        "narHash": "sha256-/8aFM77tNIR71F50vSmQV/L7BHusorsqFY/dhf2LQxI=",
         "path": "./modules/nvim/plugins",
         "type": "path"
       },

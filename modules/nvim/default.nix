@@ -217,7 +217,6 @@ in
             nix
             python
             regex
-            regex
             ruby
             rust
             scss
@@ -246,7 +245,7 @@ in
         config = ''require("crates").setup()'';
       }
       {
-        plugin = nvim-rustaceanvim;
+        plugin = rustaceanvim;
         type = "lua";
         config = # lua
           ''
