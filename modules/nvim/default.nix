@@ -10,16 +10,22 @@ let
   # Caveat: This requires Xcode.app installed on the system
   # NOTE: https://github.com/NixOS/nixpkgs/pull/211321
   code_lldb = codelldb_fixed_pkgs.vscode-extensions.vadimcn.vscode-lldb;
+
   python_with_debugpy = pkgs.python3.withPackages (ps: with ps; [ debugpy ]);
+
   tree-sitter-nu = pkgs.callPackage ./plugins/nvim-treesitter-nu.nix {
     inherit (pkgs.tree-sitter) buildGrammar;
   };
-  # ropecli = pkgs.callPackage ./custom/ropecli.nix { };
-  venv-mypy = pkgs.writeScriptBin "venv-mypy" ''
-    #!/bin/sh
-    set -e
-    exec poetry run mypy "$@"
-  '';
+
+  venv-mypy =
+    pkgs.writeScriptBin "venv-mypy"
+      # bash
+      ''
+        #!/bin/sh
+        set -e
+        exec poetry run mypy "$@"
+      '';
+
   # This sucks
   # The codeium-nvim plugin works with specific version of the language server
   # now anytime I update I will need to check if the lanague-server with what it works with
@@ -104,12 +110,13 @@ in
       {
         plugin = nvim-dap-python;
         type = "lua";
-        config = ''
-          local dap_python = require("dap-python")
+        config = # lua
+          ''
+            local dap_python = require("dap-python")
 
-          dap_python.setup("${python_with_debugpy}/bin/python")
-          dap_python.test_runner = "pytest"
-        '';
+            dap_python.setup("${python_with_debugpy}/bin/python")
+            dap_python.test_runner = "pytest"
+          '';
       }
       {
         plugin = nvim-dap-go;
@@ -241,12 +248,13 @@ in
       {
         plugin = nvim-rustaceanvim;
         type = "lua";
-        config = ''
-          local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
-          local codelldb_path = extension_path .. 'adapter/codelldb'
-          local liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib'
-          ${builtins.readFile ./lua/rustaceanvim.lua}
-        '';
+        config = # lua
+          ''
+            local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
+            local codelldb_path = extension_path .. 'adapter/codelldb'
+            local liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib'
+            ${builtins.readFile ./lua/rustaceanvim.lua}
+          '';
       }
       {
         plugin = haskell-tools-nvim;
@@ -415,10 +423,11 @@ in
       ltex-ls
     ];
 
-    extraConfig = ''
-      colorscheme ${colorscheme.vim-name}
-      luafile ${builtins.toString ./lua/base.lua}
-    '';
+    extraConfig = # vim
+      ''
+        colorscheme ${colorscheme.vim-name}
+        luafile ${builtins.toString ./lua/base.lua}
+      '';
   };
 
   xdg.configFile = {

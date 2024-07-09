@@ -40,26 +40,27 @@
         right_padding = 5;
         window_gap = 5;
       };
-      extraConfig = ''
-        # rules
-        yabai -m rule --add app="^System Settings$"    manage=off
-        yabai -m rule --add app="^System Information$" manage=off
-        yabai -m rule --add app="^System Preferences$" manage=off
-        yabai -m rule --add title="Preferences$"       manage=off
-        yabai -m rule --add title="Settings$"          manage=off
+      extraConfig = # sh
+        ''
+          # rules
+          yabai -m rule --add app="^System Settings$"    manage=off
+          yabai -m rule --add app="^System Information$" manage=off
+          yabai -m rule --add app="^System Preferences$" manage=off
+          yabai -m rule --add title="Preferences$"       manage=off
+          yabai -m rule --add title="Settings$"          manage=off
 
-        # workspace management
-        yabai -m space 1  --label web-aux
-        yabai -m space 2  --label web-main
-        yabai -m space 3  --label code
-        yabai -m space 4  --label notes
+          # workspace management
+          yabai -m space 1  --label web-aux
+          yabai -m space 2  --label web-main
+          yabai -m space 3  --label code
+          yabai -m space 4  --label notes
 
-        # assign apps to spacess
-        yabai -m rule --add app="^Firefox$" space=web-main
-        yabai -m rule --add app="^Google Chrome$" space=web-aux
-        yabai -m rule --add app="kitty" space=code
-        yabai -m rule --add app="Microsoft OneNote" space=notes
-      '';
+          # assign apps to spacess
+          yabai -m rule --add app="^Firefox$" space=web-main
+          yabai -m rule --add app="^Google Chrome$" space=web-aux
+          yabai -m rule --add app="kitty" space=code
+          yabai -m rule --add app="Microsoft OneNote" space=notes
+        '';
     };
 
     skhd = {
@@ -69,6 +70,7 @@
           yabai = "${pkgs.yabai}/bin/yabai";
           jq = "${pkgs.jq}/bin/jq";
         in
+        # sh
         ''
           # window focus
           alt - h : ${yabai} -m window --focus west

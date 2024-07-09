@@ -1,26 +1,28 @@
 { pkgs, colorscheme, ... }:
 let
-  custom-panel-launch = pkgs.writeScriptBin "custom-panel-launch" ''
-    #!/${pkgs.stdenv.shell}
+  custom-panel-launch =
+    pkgs.writeScriptBin "custom-panel-launch" # sh
+      ''
+        #!/${pkgs.stdenv.shell}
 
-    killall custom-taffybar
-    kill $(pidof pasystray)
-    killall nm-applet
+        killall custom-taffybar
+        kill $(pidof pasystray)
+        killall nm-applet
 
-    eww daemon &
-    deadd-notification-center &
+        eww daemon &
+        deadd-notification-center &
 
-    nm-applet &
-    nm-tray &
-    solaar -w hide &
-    blueman-applet &
-    pasystray &
-    status-notifier-watcher &
+        nm-applet &
+        nm-tray &
+        solaar -w hide &
+        blueman-applet &
+        pasystray &
+        status-notifier-watcher &
 
-    eww close topbar-btw &
-    custom-taffybar &
-    eww open topbar-btw
-  '';
+        eww close topbar-btw &
+        custom-taffybar &
+        eww open topbar-btw
+      '';
   custom-taffybar = (import ../../custom-programs/taffybar/default.nix) { inherit pkgs; };
 in
 {
@@ -32,15 +34,16 @@ in
     ];
 
     file.".config/taffybar/taffybar.css".source = ../../custom-programs/taffybar/taffybar.css;
-    file.".config/taffybar/colors.css".text = ''
-      @define-color font-color ${colorscheme.fg-primary};
-      @define-color accent ${colorscheme.accent-primary};
-      @define-color bg ${colorscheme.bg-primary};
-      @define-color bg-alt ${colorscheme.bright-black};
-      @define-color red ${colorscheme.red};
-      @define-color menu-background-color @bg;
-      @define-color menu-background-color-selected @bg-alt;
-      @define-color menu-font-color @font-color;
-    '';
+    file.".config/taffybar/colors.css".text = # scss
+      ''
+        @define-color font-color ${colorscheme.fg-primary};
+        @define-color accent ${colorscheme.accent-primary};
+        @define-color bg ${colorscheme.bg-primary};
+        @define-color bg-alt ${colorscheme.bright-black};
+        @define-color red ${colorscheme.red};
+        @define-color menu-background-color @bg;
+        @define-color menu-background-color-selected @bg-alt;
+        @define-color menu-font-color @font-color;
+      '';
   };
 }
