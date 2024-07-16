@@ -137,7 +137,7 @@ in
       {
         plugin = gitsigns-nvim;
         type = "lua";
-        config = builtins.readFile ./lua/gitsigns.lua;
+        config = "require('gitsigns').setup()";
       }
       {
         plugin = git-conflict-nvim;

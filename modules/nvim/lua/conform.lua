@@ -10,7 +10,6 @@ require("conform").setup({
 		lua = { "stylua" },
 		markdown = { "prettier", "markdownlint" },
 		nix = { "nixfmt" },
-		terraform = { "terraform_fmt" },
 		yaml = { "prettier" },
 	},
 	format_on_save = {

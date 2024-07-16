@@ -151,7 +151,6 @@ local mappings = {
 	},
 	u = {
 		name = "+Utilities",
-		r = { "<cmd>RegexplainerToggle<cr>", "Explain Regex (Show/Hide)" },
 		s = { '<cmd>let @/ = ""<cr>', "Remove search highlight" },
 		t = { "<cmd>TableModeToggle<cr>", "Start/Stop Table mode" },
 	},
