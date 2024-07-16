@@ -32,8 +32,8 @@ let
   # and then update this accordingly.
   codeium-1-8-25 = pkgs.codeium.overrideAttrs (o: {
     src = builtins.fetchurl {
-      url = "https://github.com/Exafunction/codeium/releases/download/language-server-v1.8.25/language_server_macos_x64.gz";
-      sha256 = "sha256:08hbh8kddidw46zkqphrpff2qrrkdfq2f2aw4simfq2rvhi62yy8";
+      url = "https://github.com/Exafunction/codeium/releases/download/language-server-v1.8.80/language_server_macos_x64.gz";
+      sha256 = "sha256:0j0qgjj267fxhj6dwl15hshav8n6n87kiva6dfrjfnklk9hxxzyh";
     };
 
   });
@@ -44,6 +44,9 @@ in
     vimAlias = true;
 
     plugins = with pkgs.vimPlugins; [
+      # Setup the plugin that can lazy load others
+      lz-n
+
       # Appearance
       {
         plugin = bufferline-nvim;
@@ -65,11 +68,6 @@ in
         type = "lua";
         config = builtins.readFile ./lua/alpha.lua;
       }
-      {
-        plugin = headlines-nvim;
-        type = "lua";
-        config = ''require("headlines").setup()'';
-      }
       nvim-web-devicons
       {
         plugin = noice-nvim;
@@ -90,38 +88,37 @@ in
         plugin = nvim-tree-lua;
         type = "lua";
         config = builtins.readFile ./lua/nvim-tree.lua;
+        optional = true;
       }
 
       # Appearance: Themes
       catppuccin-nvim
 
       # DAP
-      nvim-dap
+      {
+        plugin = nvim-dap;
+        optional = true;
+        type = "lua";
+        config = ''
+          local python_with_debugpy = "${python_with_debugpy}"
+          ${builtins.readFile ./lua/dap.lua}
+        '';
+      }
       {
         plugin = nvim-dap-ui;
-        type = "lua";
-        config = builtins.readFile ./lua/dapui.lua;
+        optional = true;
       }
       {
         plugin = nvim-dap-virtual-text;
-        type = "lua";
-        config = ''require("nvim-dap-virtual-text").setup()'';
+        optional = true;
       }
       {
         plugin = nvim-dap-python;
-        type = "lua";
-        config = # lua
-          ''
-            local dap_python = require("dap-python")
-
-            dap_python.setup("${python_with_debugpy}/bin/python")
-            dap_python.test_runner = "pytest"
-          '';
+        optional = true;
       }
       {
         plugin = nvim-dap-go;
-        type = "lua";
-        config = ''require("dap-go").setup()'';
+        optional = true;
       }
 
       # Fuzzy Finder
@@ -129,9 +126,16 @@ in
         plugin = telescope-nvim;
         type = "lua";
         config = builtins.readFile ./lua/telescope.lua;
+        optional = true;
       }
-      telescope-fzf-native-nvim
-      telescope-ui-select-nvim
+      {
+        plugin = telescope-fzf-native-nvim;
+        optional = true;
+      }
+      {
+        plugin = telescope-ui-select-nvim;
+        optional = true;
+      }
 
       # Git
       {
@@ -147,7 +151,17 @@ in
       {
         plugin = nvim-blame;
         type = "lua";
-        config = "require('blame').setup()";
+        config = # lua
+          ''
+            require("lz.n").load {
+                "blame",
+                keys = {
+                    {"<leader>gb", "<cmd>BlameToggle window<cr>", desc = "[B]lame"},
+                },
+                after = function() require('blame').setup() end
+            }
+          '';
+        optional = true;
       }
 
       # Keymaps
@@ -159,35 +173,35 @@ in
 
       # Programming: LSP
       {
-        plugin = lspkind-nvim;
-        type = "lua";
-        config = "require('lspkind').init({})";
-      }
-      {
-        plugin = nvim-lint;
-        type = "lua";
-        config = builtins.readFile ./lua/lint.lua;
-      }
-      {
         plugin = nvim-lspconfig;
         type = "lua";
         config = builtins.readFile ./lua/lspconfig.lua;
-      }
-      SchemaStore-nvim
-      {
-        plugin = lspsaga-nvim;
-        type = "lua";
-        config = builtins.readFile ./lua/lspsaga.lua;
-      }
-      {
-        plugin = conform-nvim;
-        type = "lua";
-        config = builtins.readFile ./lua/conform.lua;
+        optional = true;
       }
       {
         plugin = nvim-lsp-file-operations;
         type = "lua";
         config = ''require("lsp-file-operations").setup()'';
+      }
+      {
+        plugin = SchemaStore-nvim;
+        optional = true;
+      }
+      {
+        plugin = lspsaga-nvim;
+        optional = true;
+      }
+      {
+        plugin = nvim-lint;
+        type = "lua";
+        config = builtins.readFile ./lua/lint.lua;
+        optional = true;
+      }
+      {
+        plugin = conform-nvim;
+        type = "lua";
+        config = builtins.readFile ./lua/conform.lua;
+        optional = true;
       }
 
       # Progrmming: Treesitter
@@ -239,11 +253,6 @@ in
 
       # Programming: Language support
       {
-        plugin = crates-nvim;
-        type = "lua";
-        config = ''require("crates").setup()'';
-      }
-      {
         plugin = rustaceanvim;
         type = "lua";
         config = # lua
@@ -266,6 +275,7 @@ in
         type = "lua";
         config = builtins.readFile ./lua/cmp.lua;
       }
+
       cmp-buffer
       cmp-calc
       cmp-nvim-lsp
@@ -274,6 +284,7 @@ in
       luasnip
       cmp_luasnip
       friendly-snippets
+      lspkind-nvim
 
       # Programming: AI shit
       {
@@ -281,12 +292,19 @@ in
         type = "lua";
         config = # lua
           ''
-            require('codeium').setup({
-                tools = {
-                    language_server = "${codeium-1-8-25}/bin/codeium_language_server"
-                }
-            })
+            require('lz.n').load{
+              "codeium.nvim",
+              event = "InsertEnter",
+              after = function()
+                require('codeium').setup({
+                  tools = {
+                      language_server = "${codeium-1-8-25}/bin/codeium_language_server"
+                  }
+                })
+                end
+              }
           '';
+        optional = true;
       }
 
       # Programming: Database support
@@ -301,6 +319,7 @@ in
         plugin = neotest;
         type = "lua";
         config = builtins.readFile ./lua/neotest.lua;
+        optional = true;
       }
       neotest-python
       neotest-go
@@ -317,7 +336,17 @@ in
         type = "lua";
         config = builtins.readFile ./lua/venn.lua;
       }
-      vim-table-mode
+      {
+        plugin = vim-table-mode;
+        type = "lua";
+        config = # lua
+          ''
+            require("lz.n").load({
+              "vim-table-mode",
+              keys = { { "<leader>ut", "<cmd>TableModeToggle<cr>", desc = "Toggle [T]able Mode" } }
+            })
+          '';
+      }
 
       # Text objects
       {
@@ -334,6 +363,34 @@ in
         plugin = nvim-surround;
         type = "lua";
         config = "require('nvim-surround').setup {}";
+      }
+
+      # File specific plugins
+      {
+        plugin = headlines-nvim;
+        type = "lua";
+        config = # lua
+          ''
+            require("lz.n").load({
+              "headlines.nvim",
+              ft = "markdown",
+              after = function() require("headlines").setup() end,
+            })
+          '';
+        optional = true;
+      }
+      {
+        plugin = crates-nvim;
+        type = "lua";
+        config = # lua
+          ''
+            require("lz.n").load({
+              "crates.nvim",
+              ft = "toml",
+              after = function() require("crates").setup() end,
+            })
+          '';
+        optional = true;
       }
     ];
 
@@ -452,6 +509,7 @@ in
 
       # python
       pyright
+      basedpyright
       mypy
     ];
 

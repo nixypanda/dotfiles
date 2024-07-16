@@ -1,221 +1,272 @@
--- Basic LSP keybindings
--- Jump to Definition/Implementation
-vim.api.nvim_set_keymap("n", "gd", [[<cmd>lua vim.lsp.buf.definition()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "gi", [[<cmd>lua vim.lsp.buf.implementation()<CR>]], { noremap = true, silent = true })
-
--- Add border to lspconfig info screen
-local lspconfig_window = require("lspconfig.ui.windows")
-local old_defaults = lspconfig_window.default_opts
-
-function lspconfig_window.default_opts(opts)
-	local win_opts = old_defaults(opts)
-	win_opts.border = "rounded"
-	return win_opts
-end
-
-vim.api.nvim_create_autocmd("LspAttach", {
-	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-	callback = function(ev)
-		local client = vim.lsp.get_client_by_id(ev.data.client_id)
-
-		if client == nil then return end
-
-		-- inlay hints
-		if client.server_capabilities.inlayHintProvider then
-			vim.lsp.inlay_hint.enable()
-		else
-			print("no inlay hints available")
-		end
+require("lz.n").load({
+	"nvim-lspconfig",
+	event = { "BufReadPre", "BufNewFile" },
+	load = function(name)
+		vim.cmd.packadd(name)
+		vim.cmd.packadd("cmp-nvim-lsp")
+		vim.cmd.packadd("lspsaga.nvim")
+		vim.cmd.packadd("SchemaStore.nvim")
 	end,
-})
+	after = function()
+		local lspconfig = require("lspconfig")
 
--- Need to add this to the language server to broadcast snippet compatibility
-local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-local lspconfig = require("lspconfig")
+		-- Add border to lspconfig info screen
+		local lspconfig_window = require("lspconfig.ui.windows")
+		local old_defaults = lspconfig_window.default_opts
 
--- go
-lspconfig.gopls.setup({
-	capabilities = capabilities,
-	settings = {
-		gopls = {
-			completeUnimported = true,
-			usePlaceholders = true,
-			analyses = {
-				unusedparams = true,
-			},
-		},
-		hints = {
-			assignVariableTypes = true,
-			compositeLiteralFields = true,
-			compositeLiteralTypes = true,
-			constantValues = true,
-			functionTypeParameters = true,
-			parameterNames = true,
-			rangeVariableTypes = true,
-		},
-	},
-})
+		function lspconfig_window.default_opts(opts)
+			local win_opts = old_defaults(opts)
+			win_opts.border = "rounded"
+			return win_opts
+		end
 
--- grammer
-lspconfig.ltex.setup({
-	capabilities = capabilities,
-	settings = {
-		ltex = {
-			["ltex-ls"] = {
-				logLevel = "warning",
-			},
-		},
-	},
-})
+		require("lspsaga").setup({
+			symbol_in_winbar = { enable = false },
+		})
 
--- Java
-lspconfig.java_language_server.setup({
-	cmd = { "java-language-server" },
-	capabilities = capabilities,
-})
+		local on_attach = function(client, bufnr)
+			-- inlay hints
+			if client.server_capabilities.inlayHintProvider then vim.lsp.inlay_hint.enable() end
 
--- JavaScript/TypeScript
-lspconfig.tsserver.setup({
-	capabilities = capabilities,
-})
+			-- Set keymaps
+			local map = function(keys, func, desc) vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc }) end
 
--- lua
-lspconfig.lua_ls.setup({
-	capabilities = capabilities,
-	settings = {
-		Lua = {
-			runtime = {
-				-- Tell the language server which version of Lua you're using
-				-- (most likely LuaJIT in the case of Neovim)
-				version = "LuaJIT",
-			},
-			hint = { enable = true },
-			diagnostics = {
-				-- Get the language server to recognize the `vim` global
-				globals = { "vim" },
-			},
-			-- Make the server aware of Neovim runtime files
-			workspace = { library = vim.api.nvim_get_runtime_file("", true) },
-			-- Do not send telemetry data containing a randomized but unique identifier
-			telemetry = { enable = false },
-		},
-	},
-})
+			map("gd", "<cmd>lua vim.lsp.buf.definition()<cr>", "[G]oto [D]efinition")
+			map("gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", "[G]oto [I]mplementation")
+			-- Lspconfig utils
+			map("<leader>lI", "<cmd>LspInfo<cr>", "[I]nfo")
+			map("<leader>lu", "<cmd>LspRestart<cr>", "Restart LSP")
+			map("<leader>lU", "<cmd>LspStart<cr>", "Start LSP")
+			-- Telescope
+			map("<leader>ld", "<cmd>Telescope diagnostics bufnr=0<cr>", "Document [D]iagnostics")
+			map("<leader>lD", "<cmd>Telescope diagnostics<cr>", "Workspace [D]iagnostics")
+			map("<leader>ls", "<cmd>Telescope document_symbols<cr>", "Document [S]ymbols")
+			map("<leader>lS", "<cmd>Telescope sp_dynamic_workspace_symbols<cr>", "Workspace [S]ymbols")
 
--- nix
-lspconfig.nixd.setup({
-	capabilities = capabilities,
-	settings = {
-		nixd = {
-			diagnostic = { suppress = { "sema-escaping-with" } },
-			options = {
-				nixos = {
-					expr = '(builtins.getFlake ("~/.dotfiles")).nixosConfigurations.nixos.options',
+			-- Lspsaga
+			map("<leader>la", "<cmd>Lspsaga code_action<cr>", "Code [A]ction")
+			map("<leader>lc", "<cmd>Lspsaga show_cursor_diagnostics<cr>", "[C]ursor Diagnostics")
+			map("<leader>lf", "<cmd>Lspsaga finder<cr>", "[F]inder: Refrences and implementations")
+			map("<leader>li", "<cmd>Lspsaga incoming_calls<cr>", "[I]ncoming Calls")
+			map("<leader>lj", "<cmd>Lspsaga diagnostic_jump_next<cr>", "Next Action")
+			map("<leader>lk", "<cmd>Lspsaga diagnostic_jump_prev<cr>", "Previous Action")
+			map("<leader>ll", "<cmd>Lspsaga show_line_diagnostics<cr>", "[L]ine Diagnostics")
+			map("<leader>lo", "<cmd>Lspsaga outgoing_calls<cr>", "[O]utgoing Calls")
+			map("<leader>lO", "<cmd>Lspsaga outline<cr>", "Toggle Document Symbols [O]utline")
+			map("<leader>lp", "<cmd>Lspsaga hover_doc<cr>", "[P]review Definition")
+			map("<leader>lr", "<cmd>Lspsaga rename<cr>", "[R]ename")
+
+			-- Other mode keymaps
+			vim.keymap.set(
+				"v",
+				"<leader>la",
+				"<cmd>LspSaga code_action<cr>",
+				{ buffer = bufnr, desc = "Code [A]ction" }
+			)
+		end
+
+		-- Need to add this to the language server to broadcast snippet compatibility
+		local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+		-- go
+		lspconfig.gopls.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			settings = {
+				gopls = {
+					completeUnimported = true,
+					usePlaceholders = true,
+					analyses = {
+						unusedparams = true,
+					},
 				},
-				home_manager = {
-					expr = '(builtins.getFlake ("~/.dotfiles")).homeConfigurations."macbook-pro".options',
+				hints = {
+					assignVariableTypes = true,
+					compositeLiteralFields = true,
+					compositeLiteralTypes = true,
+					constantValues = true,
+					functionTypeParameters = true,
+					parameterNames = true,
+					rangeVariableTypes = true,
 				},
 			},
-		},
-	},
-})
+		})
 
--- nu
-lspconfig.nushell.setup({
-	capabilities = capabilities,
-})
-
--- Python
-lspconfig.ruff.setup({
-	capabilities = capabilities,
-})
-lspconfig.pyright.setup({
-	capabilities = capabilities,
-})
--- We are primarily using pyright for everything. Only using pylsp for rope refactors.
--- lspconfig.pylsp.setup({
--- 	settings = {
--- 		pylsp = {
--- 			plugins = {
--- 				autopep8 = { enabled = false },
--- 				jedi_completion = { enabled = false },
--- 				jedi_definition = { enabled = false },
--- 				jedi_hover = { enabled = false },
--- 				jedi_references = { enabled = false },
--- 				jedi_signature_help = { enabled = false },
--- 				jedi_symbols = { enabled = false },
--- 				maccabe = { enabled = false },
--- 				preload = { enabled = false },
--- 				pycodestyle = { enabled = false },
--- 				pydocstyle = { enabled = false },
--- 				pyflakes = { enabled = false },
--- 				pylint = { enabled = false },
--- 				rope_completion = { enabled = false },
--- 				yapf = { enabled = false },
--- 				-- using a fork of ropify for renameing modules etc,
--- 				-- pyright already offers renaming capabilities that pylsp-rope offers at the moment
--- 				pylsp_rope = { enabled = true, rename = false },
--- 			},
--- 		},
--- 	},
--- })
-
--- SQL
-lspconfig.sqls.setup({
-	cmd = { "sqls", "-config", "~/.dotfiles/.secrets/nvim-sqls-config.yml" },
-	capabilities = capabilities,
-	on_attach = function(client, bufnr) require("sqls").on_attach(client, bufnr) end,
-})
-
--- Terraform
-lspconfig.terraform_lsp.setup({
-	capabilities = capabilities,
-})
-
--- shit you need to deal with
-lspconfig.bashls.setup({
-	capabilities = capabilities,
-})
-lspconfig.cmake.setup({
-	capabilities = capabilities,
-})
-lspconfig.cssls.setup({
-	capabilities = capabilities,
-})
-lspconfig.dockerls.setup({
-	capabilities = capabilities,
-})
-lspconfig.html.setup({
-	capabilities = capabilities,
-})
-
--- json/yaml/toml configs
-lspconfig.jsonls.setup({
-	capabilities = capabilities,
-	settings = {
-		json = {
-			schemas = require("schemastore").json.schemas(),
-			validate = { enable = true },
-		},
-	},
-})
-
-lspconfig.yamlls.setup({
-	capabilities = capabilities,
-	settings = {
-		yaml = {
-			schemaStore = {
-				-- You must disable built-in schemaStore support if you want to use
-				-- this plugin and its advanced options like `ignore`.
-				enable = false,
-				-- Avoid TypeError: Cannot read properties of undefined (reading 'length')
-				url = "",
+		-- grammer
+		lspconfig.ltex.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			settings = {
+				ltex = {
+					["ltex-ls"] = {
+						logLevel = "warning",
+					},
+				},
 			},
-			schemas = require("schemastore").yaml.schemas(),
-		},
-	},
-})
--- already has SchemaStore configured
-lspconfig.taplo.setup({
-	capabilities = capabilities,
+		})
+
+		-- Java
+		lspconfig.java_language_server.setup({
+			cmd = { "java-language-server" },
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+
+		-- JavaScript/TypeScript
+		lspconfig.tsserver.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+
+		-- lua
+		lspconfig.lua_ls.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			settings = {
+				Lua = {
+					runtime = {
+						-- Tell the language server which version of Lua you're using
+						-- (most likely LuaJIT in the case of Neovim)
+						version = "LuaJIT",
+					},
+					hint = { enable = true },
+					diagnostics = {
+						-- Get the language server to recognize the `vim` global
+						globals = { "vim" },
+					},
+					-- Make the server aware of Neovim runtime files
+					workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+					-- Do not send telemetry data containing a randomized but unique identifier
+					telemetry = { enable = false },
+				},
+			},
+		})
+
+		-- nix
+		lspconfig.nixd.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			settings = {
+				nixd = {
+					diagnostic = { suppress = { "sema-escaping-with" } },
+					options = {
+						nixos = {
+							expr = '(builtins.getFlake ("~/.dotfiles")).nixosConfigurations.nixos.options',
+						},
+						home_manager = {
+							expr = '(builtins.getFlake ("~/.dotfiles")).homeConfigurations."macbook-pro".options',
+						},
+					},
+				},
+			},
+		})
+
+		-- nu
+		lspconfig.nushell.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+
+		-- Python
+		lspconfig.ruff.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+		lspconfig.pyright.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+		-- lspconfig.basedpyright.setup({
+		-- 	capabilities = capabilities,
+		-- })
+		-- We are primarily using pyright for everything. Only using pylsp for rope refactors.
+		-- lspconfig.pylsp.setup({
+		-- 	settings = {
+		-- 		pylsp = {
+		-- 			plugins = {
+		-- 				autopep8 = { enabled = false },
+		-- 				jedi_completion = { enabled = false },
+		-- 				jedi_definition = { enabled = false },
+		-- 				jedi_hover = { enabled = false },
+		-- 				jedi_references = { enabled = false },
+		-- 				jedi_signature_help = { enabled = false },
+		-- 				jedi_symbols = { enabled = false },
+		-- 				maccabe = { enabled = false },
+		-- 				preload = { enabled = false },
+		-- 				pycodestyle = { enabled = false },
+		-- 				pydocstyle = { enabled = false },
+		-- 				pyflakes = { enabled = false },
+		-- 				pylint = { enabled = false },
+		-- 				rope_completion = { enabled = false },
+		-- 				yapf = { enabled = false },
+		-- 				-- using a fork of ropify for renameing modules etc,
+		-- 				-- pyright already offers renaming capabilities that pylsp-rope offers at the moment
+		-- 				pylsp_rope = { enabled = true, rename = false },
+		-- 			},
+		-- 		},
+		-- 	},
+		-- })
+
+		-- Terraform
+		lspconfig.terraform_lsp.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+
+		-- shit you need to deal with
+		lspconfig.bashls.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+		lspconfig.cmake.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+		lspconfig.cssls.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+		lspconfig.dockerls.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+		lspconfig.html.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+
+		-- json/yaml/toml configs
+		lspconfig.jsonls.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			settings = {
+				json = {
+					schemas = require("schemastore").json.schemas(),
+					validate = { enable = true },
+				},
+			},
+		})
+
+		lspconfig.yamlls.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			settings = {
+				yaml = {
+					schemaStore = {
+						-- You must disable built-in schemaStore support if you want to use
+						-- this plugin and its advanced options like `ignore`.
+						enable = false,
+						-- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+						url = "",
+					},
+					schemas = require("schemastore").yaml.schemas(),
+				},
+			},
+		})
+		-- already has SchemaStore configured
+		lspconfig.taplo.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+	end,
 })
