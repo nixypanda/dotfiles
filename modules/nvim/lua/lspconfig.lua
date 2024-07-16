@@ -1,5 +1,36 @@
+-- Basic LSP keybindings
+-- Jump to Definition/Implementation
+vim.api.nvim_set_keymap("n", "gd", [[<cmd>lua vim.lsp.buf.definition()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "gi", [[<cmd>lua vim.lsp.buf.implementation()<CR>]], { noremap = true, silent = true })
+
+-- Add border to lspconfig info screen
+local lspconfig_window = require("lspconfig.ui.windows")
+local old_defaults = lspconfig_window.default_opts
+
+function lspconfig_window.default_opts(opts)
+	local win_opts = old_defaults(opts)
+	win_opts.border = "rounded"
+	return win_opts
+end
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+	callback = function(ev)
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
+		if client == nil then return end
+
+		-- inlay hints
+		if client.server_capabilities.inlayHintProvider then
+			vim.lsp.inlay_hint.enable()
+		else
+			print("no inlay hints available")
+		end
+	end,
+})
+
 -- Need to add this to the language server to broadcast snippet compatibility
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require("lspconfig")
 
 -- go
@@ -13,11 +44,21 @@ lspconfig.gopls.setup({
 				unusedparams = true,
 			},
 		},
+		hints = {
+			assignVariableTypes = true,
+			compositeLiteralFields = true,
+			compositeLiteralTypes = true,
+			constantValues = true,
+			functionTypeParameters = true,
+			parameterNames = true,
+			rangeVariableTypes = true,
+		},
 	},
 })
 
 -- grammer
 lspconfig.ltex.setup({
+	capabilities = capabilities,
 	settings = {
 		ltex = {
 			["ltex-ls"] = {
@@ -28,13 +69,19 @@ lspconfig.ltex.setup({
 })
 
 -- Java
-lspconfig.java_language_server.setup({ cmd = { "java-language-server" } })
+lspconfig.java_language_server.setup({
+	cmd = { "java-language-server" },
+	capabilities = capabilities,
+})
 
 -- JavaScript/TypeScript
-lspconfig.tsserver.setup({})
+lspconfig.tsserver.setup({
+	capabilities = capabilities,
+})
 
 -- lua
 lspconfig.lua_ls.setup({
+	capabilities = capabilities,
 	settings = {
 		Lua = {
 			runtime = {
@@ -42,37 +89,49 @@ lspconfig.lua_ls.setup({
 				-- (most likely LuaJIT in the case of Neovim)
 				version = "LuaJIT",
 			},
+			hint = { enable = true },
 			diagnostics = {
 				-- Get the language server to recognize the `vim` global
 				globals = { "vim" },
 			},
-			workspace = {
-				-- Make the server aware of Neovim runtime files
-				library = vim.api.nvim_get_runtime_file("", true),
-			},
+			-- Make the server aware of Neovim runtime files
+			workspace = { library = vim.api.nvim_get_runtime_file("", true) },
 			-- Do not send telemetry data containing a randomized but unique identifier
-			telemetry = {
-				enable = false,
-			},
+			telemetry = { enable = false },
 		},
 	},
 })
 
 -- nix
 lspconfig.nixd.setup({
+	capabilities = capabilities,
 	settings = {
 		nixd = {
 			diagnostic = { suppress = { "sema-escaping-with" } },
+			options = {
+				nixos = {
+					expr = '(builtins.getFlake ("~/.dotfiles")).nixosConfigurations.nixos.options',
+				},
+				home_manager = {
+					expr = '(builtins.getFlake ("~/.dotfiles")).homeConfigurations."macbook-pro".options',
+				},
+			},
 		},
 	},
 })
 
 -- nu
-lspconfig.nushell.setup({})
+lspconfig.nushell.setup({
+	capabilities = capabilities,
+})
 
 -- Python
-lspconfig.ruff.setup({})
-lspconfig.pyright.setup({ capabilities = capabilities })
+lspconfig.ruff.setup({
+	capabilities = capabilities,
+})
+lspconfig.pyright.setup({
+	capabilities = capabilities,
+})
 -- We are primarily using pyright for everything. Only using pylsp for rope refactors.
 -- lspconfig.pylsp.setup({
 -- 	settings = {
@@ -104,37 +163,35 @@ lspconfig.pyright.setup({ capabilities = capabilities })
 -- SQL
 lspconfig.sqls.setup({
 	cmd = { "sqls", "-config", "~/.dotfiles/.secrets/nvim-sqls-config.yml" },
-
+	capabilities = capabilities,
 	on_attach = function(client, bufnr) require("sqls").on_attach(client, bufnr) end,
 })
 
 -- Terraform
-lspconfig.terraform_lsp.setup({})
+lspconfig.terraform_lsp.setup({
+	capabilities = capabilities,
+})
 
 -- shit you need to deal with
-lspconfig.bashls.setup({})
-lspconfig.cmake.setup({})
-lspconfig.cssls.setup({ capabilities = capabilities })
-lspconfig.dockerls.setup({})
-lspconfig.html.setup({ capabilities = capabilities })
-
--- Basic LSP keybindings
--- Jump to Definition/Implementation
-vim.api.nvim_set_keymap("n", "gd", [[<cmd>lua vim.lsp.buf.definition()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "gi", [[<cmd>lua vim.lsp.buf.implementation()<CR>]], { noremap = true, silent = true })
-
--- Add border to lspconfig info screen
-local lspconfig_window = require("lspconfig.ui.windows")
-local old_defaults = lspconfig_window.default_opts
-
-function lspconfig_window.default_opts(opts)
-	local win_opts = old_defaults(opts)
-	win_opts.border = "rounded"
-	return win_opts
-end
+lspconfig.bashls.setup({
+	capabilities = capabilities,
+})
+lspconfig.cmake.setup({
+	capabilities = capabilities,
+})
+lspconfig.cssls.setup({
+	capabilities = capabilities,
+})
+lspconfig.dockerls.setup({
+	capabilities = capabilities,
+})
+lspconfig.html.setup({
+	capabilities = capabilities,
+})
 
 -- json/yaml/toml configs
 lspconfig.jsonls.setup({
+	capabilities = capabilities,
 	settings = {
 		json = {
 			schemas = require("schemastore").json.schemas(),
@@ -144,6 +201,7 @@ lspconfig.jsonls.setup({
 })
 
 lspconfig.yamlls.setup({
+	capabilities = capabilities,
 	settings = {
 		yaml = {
 			schemaStore = {
@@ -158,4 +216,6 @@ lspconfig.yamlls.setup({
 	},
 })
 -- already has SchemaStore configured
-lspconfig.taplo.setup({})
+lspconfig.taplo.setup({
+	capabilities = capabilities,
+})
