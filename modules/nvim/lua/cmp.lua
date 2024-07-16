@@ -11,10 +11,7 @@ require("luasnip.loaders.from_vscode").lazy_load()
 
 cmp.setup({
 	snippet = {
-		-- REQUIRED - you must specify a snippet engine
-		expand = function(args)
-			luasnip.lsp_expand(args.body) -- For `luasnip` users.
-		end,
+		expand = function(args) luasnip.lsp_expand(args.body) end,
 	},
 	formatting = { format = require("lspkind").cmp_format({ with_text = true, maxwidth = 50 }) },
 	mapping = {
@@ -49,12 +46,10 @@ cmp.setup({
 		end, { "i", "s" }),
 	},
 	sources = cmp.config.sources({
-        { name = "codeium", max_item_count = 3 },
+		{ name = "codeium", max_item_count = 3 },
 		{ name = "nvim_lsp", max_item_count = 25 },
 		{ name = "luasnip" },
-		{ name = "nvim_lua" },
 		{ name = "calc" },
-		{ name = "crates" },
 	}, {
 		{ name = "path" },
 		{ name = "buffer", max_item_count = 5, keyword_length = 3 },
@@ -63,6 +58,31 @@ cmp.setup({
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
+})
+
+-- Use buffer source for `/` and `?`
+cmp.setup.cmdline({ "/", "?" }, {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = {
+		{ name = "buffer" },
+	},
+})
+
+vim.api.nvim_create_autocmd("BufRead", {
+	group = vim.api.nvim_create_augroup("CmpSourceCargo", { clear = true }),
+	pattern = "Cargo.toml",
+	callback = function() cmp.setup.buffer({ sources = { { name = "crates" } } }) end,
+})
+
+vim.api.nvim_create_autocmd("BufRead", {
+	group = vim.api.nvim_create_augroup("CmpSourceLua", { clear = true }),
+	pattern = "*.lua",
+	callback = function() cmp.setup.buffer({ sources = { { name = "nvim_lua" } } }) end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "sql", "mysql", "plsql" },
+	callback = function() cmp.setup.buffer({ sources = { { name = "vim-dadbod-completion" } } }) end,
 })
 
 -- Completion (default setting)

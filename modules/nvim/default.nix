@@ -179,7 +179,6 @@ in
         type = "lua";
         config = builtins.readFile ./lua/lspsaga.lua;
       }
-      nvim-sqls
       {
         plugin = conform-nvim;
         type = "lua";
@@ -294,6 +293,7 @@ in
       vim-dotenv
       vim-dadbod
       vim-dadbod-ui
+      vim-dadbod-completion
       nvim-dadbod-ssh
 
       # Programming: Testing
@@ -394,7 +394,6 @@ in
       ))
 
       # SQL
-      sqls
       postgresql
 
       # terraform
