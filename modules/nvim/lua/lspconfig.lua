@@ -31,30 +31,30 @@ require("lz.n").load({
 			-- Set keymaps
 			local map = function(keys, func, desc) vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc }) end
 
-			map("gd", "<cmd>lua vim.lsp.buf.definition()<cr>", "[G]oto [D]efinition")
-			map("gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", "[G]oto [I]mplementation")
+			map("gd", "<cmd>lua vim.lsp.buf.definition()<cr>", "Goto Definition")
+			map("gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", "Goto Implementation")
 			-- Lspconfig utils
-			map("<leader>lI", "<cmd>LspInfo<cr>", "[I]nfo")
+			map("<leader>lI", "<cmd>LspInfo<cr>", "Info")
 			map("<leader>lu", "<cmd>LspRestart<cr>", "Restart LSP")
 			map("<leader>lU", "<cmd>LspStart<cr>", "Start LSP")
 			-- Telescope
-			map("<leader>ld", "<cmd>Telescope diagnostics bufnr=0<cr>", "Document [D]iagnostics")
-			map("<leader>lD", "<cmd>Telescope diagnostics<cr>", "Workspace [D]iagnostics")
-			map("<leader>ls", "<cmd>Telescope document_symbols<cr>", "Document [S]ymbols")
-			map("<leader>lS", "<cmd>Telescope sp_dynamic_workspace_symbols<cr>", "Workspace [S]ymbols")
+			map("<leader>ld", "<cmd>Telescope diagnostics bufnr=0<cr>", "Document Diagnostics")
+			map("<leader>lD", "<cmd>Telescope diagnostics<cr>", "Workspace Diagnostics")
+			map("<leader>ls", "<cmd>Telescope document_symbols<cr>", "Document Symbols")
+			map("<leader>lS", "<cmd>Telescope sp_dynamic_workspace_symbols<cr>", "Workspace Symbols")
 
 			-- Lspsaga
-			map("<leader>la", "<cmd>Lspsaga code_action<cr>", "Code [A]ction")
-			map("<leader>lc", "<cmd>Lspsaga show_cursor_diagnostics<cr>", "[C]ursor Diagnostics")
-			map("<leader>lf", "<cmd>Lspsaga finder<cr>", "[F]inder: Refrences and implementations")
-			map("<leader>li", "<cmd>Lspsaga incoming_calls<cr>", "[I]ncoming Calls")
+			map("<leader>la", "<cmd>Lspsaga code_action<cr>", "Code Action")
+			map("<leader>lc", "<cmd>Lspsaga show_cursor_diagnostics<cr>", "Cursor Diagnostics")
+			map("<leader>lf", "<cmd>Lspsaga finder<cr>", "Finder: Refrences and implementations")
+			map("<leader>li", "<cmd>Lspsaga incoming_calls<cr>", "Incoming Calls")
 			map("<leader>lj", "<cmd>Lspsaga diagnostic_jump_next<cr>", "Next Action")
 			map("<leader>lk", "<cmd>Lspsaga diagnostic_jump_prev<cr>", "Previous Action")
-			map("<leader>ll", "<cmd>Lspsaga show_line_diagnostics<cr>", "[L]ine Diagnostics")
-			map("<leader>lo", "<cmd>Lspsaga outgoing_calls<cr>", "[O]utgoing Calls")
-			map("<leader>lO", "<cmd>Lspsaga outline<cr>", "Toggle Document Symbols [O]utline")
-			map("<leader>lp", "<cmd>Lspsaga hover_doc<cr>", "[P]review Definition")
-			map("<leader>lr", "<cmd>Lspsaga rename<cr>", "[R]ename")
+			map("<leader>ll", "<cmd>Lspsaga show_line_diagnostics<cr>", "Line Diagnostics")
+			map("<leader>lo", "<cmd>Lspsaga outgoing_calls<cr>", "Outgoing Calls")
+			map("<leader>lO", "<cmd>Lspsaga outline<cr>", "Toggle Document Symbols Outline")
+			map("<leader>lp", "<cmd>Lspsaga hover_doc<cr>", "Preview Definition")
+			map("<leader>lr", "<cmd>Lspsaga rename<cr>", "Rename")
 
 			-- Other mode keymaps
 			vim.keymap.set(

@@ -1,10 +1,10 @@
 require("lz.n").load({
 	"rustaceanvim",
 	keys = {
-		{ "<leader>prd", "<cmd>RustLsp debuggables<cr>", desc = "[D]ebugables" },
-		{ "<leader>pre", "<cmd>RustLsp explainError<cr>", desc = "[E]xplain Error" },
-		{ "<leader>prr", "<cmd>RustLsp runnables<cr>", desc = "[R]unnables" },
-		{ "<leader>prt", "<cmd>RustLsp testables<cr>", desc = "[T]estables" },
+		{ "<leader>prd", "<cmd>RustLsp debuggables<cr>", desc = "Debugables" },
+		{ "<leader>pre", "<cmd>RustLsp explainError<cr>", desc = "Explain Error" },
+		{ "<leader>prr", "<cmd>RustLsp runnables<cr>", desc = "Runnables" },
+		{ "<leader>prt", "<cmd>RustLsp testables<cr>", desc = "Testables" },
 	},
 	before = function()
 		local capabilities = require("cmp_nvim_lsp").default_capabilities()

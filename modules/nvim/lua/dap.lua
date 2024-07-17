@@ -15,21 +15,21 @@ require("lz.n").load({
 		local widgets = require("dap.ui.widgets")
 
 		-- Setup keymaps
-		vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle [b]reakpoint" })
-		vim.keymap.set("n", "<leader>df", dap.close, { desc = "[F]inish debugging" })
-		vim.keymap.set("n", "<leader>di", widgets.hover, { desc = "[I]nspect variable under cursor" })
-		vim.keymap.set("n", "<leader>dI", dap.step_into, { desc = "Step [i]nto" })
-		vim.keymap.set("n", "<leader>dj", dap.down, { desc = "Go [down] in call stack" })
-		vim.keymap.set("n", "<leader>dk", dap.up, { desc = "Go [up] in call stack" })
-		vim.keymap.set("n", "<leader>do", dap.step_over, { desc = "Step [o]ver" })
-		vim.keymap.set("n", "<leader>dO", dap.step_out, { desc = "Step [o]ut" })
-		vim.keymap.set("n", "<leader>ds", dap.continue, { desc = "[S]tart debugging" })
-		vim.keymap.set("n", "<leader>dt", dap.terminate, { desc = "[T]erminate debugging" })
+		vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
+		vim.keymap.set("n", "<leader>df", dap.close, { desc = "Finish debugging" })
+		vim.keymap.set("n", "<leader>di", widgets.hover, { desc = "Inspect variable under cursor" })
+		vim.keymap.set("n", "<leader>dI", dap.step_into, { desc = "Step into" })
+		vim.keymap.set("n", "<leader>dj", dap.down, { desc = "Go down in call stack" })
+		vim.keymap.set("n", "<leader>dk", dap.up, { desc = "Go up in call stack" })
+		vim.keymap.set("n", "<leader>do", dap.step_over, { desc = "Step over" })
+		vim.keymap.set("n", "<leader>dO", dap.step_out, { desc = "Step out" })
+		vim.keymap.set("n", "<leader>ds", dap.continue, { desc = "Start debugging" })
+		vim.keymap.set("n", "<leader>dt", dap.terminate, { desc = "Terminate debugging" })
 		vim.keymap.set(
 			"n",
 			"<leader>dS",
 			function() widgets.centered_float(widgets.scopes) end,
-			{ desc = "Show [S]copes" }
+			{ desc = "Show Scopes" }
 		)
 
 		dapui.setup()

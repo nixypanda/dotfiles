@@ -141,12 +141,12 @@ in
       {
         plugin = gitsigns-nvim;
         type = "lua";
-        config = "require('gitsigns').setup()";
+        config = builtins.readFile ./lua/gitsigns.lua;
       }
       {
         plugin = git-conflict-nvim;
         type = "lua";
-        config = "require('git-conflict').setup()";
+        config = builtins.readFile ./lua/git_conflict.lua;
       }
       {
         plugin = nvim-blame;
@@ -310,7 +310,15 @@ in
       # Programming: Database support
       vim-dotenv
       vim-dadbod
-      vim-dadbod-ui
+      {
+        plugin = vim-dadbod-ui;
+        type = "lua";
+        config = # lua
+          ''
+            vim.keymap.set("n", "<leader>Da",  "<cmd>DBUIAddConnection<cr>",{ desc = "[A]dd new connection" })
+            vim.keymap.set("n", "<leader>Dt",  "<cmd>DBUIToggle<cr>",{ desc = "Toggle DBUI" })
+          '';
+      }
       vim-dadbod-completion
       nvim-dadbod-ssh
 
@@ -329,7 +337,11 @@ in
       {
         plugin = todo-comments-nvim;
         type = "lua";
-        config = "require 'todo-comments'.setup();";
+        config = # lua
+          ''
+            require 'todo-comments'.setup()
+            vim.keymap.set("n", "<leader>sT", "<cmd>TodoTelescope<cr>", { desc = "Todo comments" })
+          '';
       }
       {
         plugin = venn-nvim;
@@ -341,9 +353,10 @@ in
         type = "lua";
         config = # lua
           ''
+            vim.g.table_mode_disable_mappings = 1
             require("lz.n").load({
               "vim-table-mode",
-              keys = { { "<leader>ut", "<cmd>TableModeToggle<cr>", desc = "Toggle [T]able Mode" } }
+              keys = { { "<leader>ut", "<cmd>TableModeToggle<cr>", desc = "Toggle Table Mode" } }
             })
           '';
       }

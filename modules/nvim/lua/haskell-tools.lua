@@ -1,18 +1,17 @@
 require("lz.n").load({
 	"haskell-tools.nvim",
 	keys = {
-
 		{
 			"<leader>phe",
 			function() require("haskell-tools").lsp.buf_eval_all() end,
-			desc = "[E]val code snippets in buffer",
+			desc = "Eval code snippets in buffer",
 		},
-		{ "<leader>phl", vim.lsp.codelens.run, desc = "Code[L]ens" },
-		{ "<leader>phr", function() require("haskell-tools").repl.toggle() end, desc = "[R]epl for current package" },
+		{ "<leader>phl", vim.lsp.codelens.run, desc = "CodeLens" },
+		{ "<leader>phr", function() require("haskell-tools").repl.toggle() end, desc = "Repl for current package" },
 		{
 			"<leader>phR",
 			function() require("haskell-tools").repl.toggle(vim.api.nvim_buf_get_name(0)) end,
-			desc = "[R]epl for current buffer",
+			desc = "Repl for current buffer",
 		},
 	},
 	before = function()

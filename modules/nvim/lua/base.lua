@@ -123,3 +123,15 @@ end
 vim.g.tokyonight_colors = {
 	border = "#1f2335",
 }
+
+-- helpful buffer operations
+vim.keymap.set("n", "<leader>bA", "<cmd>bufdo bd<cr>", { desc = "Close all buffers" })
+vim.keymap.set("n", "<leader>bc", "<cmd>BufferClose<cr>", { desc = "Close this buffer" })
+vim.keymap.set("n", "<leader>bC", "<cmd>w | %bd | e#<cr>", { desc = "Close all other buffers" })
+vim.keymap.set("n", "<leader>bj", "<cmd>bnext<cr>", { desc = "Next buffer" })
+vim.keymap.set("n", "<leader>bk", "<cmd>bperv<cr>", { desc = "Previous buffer" })
+vim.keymap.set("n", "<leader>bs", "<cmd>tab split<cr>", { desc = "Split to tab" })
+vim.keymap.set("n", "<leader>bS", "<cmd>tab close<cr>", { desc = "Close tab split" })
+
+-- utilities
+vim.keymap.set("n", "<leader>us", '<cmd>let @/ = ""<cr>', { desc = "Remove search highlight" })

@@ -8,16 +8,16 @@ require("lz.n").load({
 	end,
 	keys = {
 		-- Searching
-		{ "<leader>sb", "<cmd>Telescope buffers<cr>", desc = "Open [B]uffers" },
-		{ "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "Previous [c]ommands" },
-		{ "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Available [C]ommands" },
-		{ "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "[F]iles" },
-		{ "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "[H]elp Tags" },
-		{ "<leader>sj", "<cmd>Telescope jumplist<cr>", desc = "[J]ump List" },
-		{ "<leader>sm", "<cmd>Telescope marks<cr>", desc = "[M]arks" },
-		{ "<leader>sr", "<cmd>Telescope resume<cr>", desc = "[R]esume" },
-		{ "<leader>sR", "<cmd>Telescope registers<cr>", desc = "[R]egisters" },
-		{ "<leader>st", "<cmd>Telescope live_grep<cr>", desc = "[T]ext" },
+		{ "<leader>sb", "<cmd>Telescope buffers<cr>", desc = "Open Buffers" },
+		{ "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "Previous commands" },
+		{ "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Available Commands" },
+		{ "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "Files" },
+		{ "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Tags" },
+		{ "<leader>sj", "<cmd>Telescope jumplist<cr>", desc = "Jump List" },
+		{ "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Marks" },
+		{ "<leader>sr", "<cmd>Telescope resume<cr>", desc = "Resume" },
+		{ "<leader>sR", "<cmd>Telescope registers<cr>", desc = "Registers" },
+		{ "<leader>st", "<cmd>Telescope live_grep<cr>", desc = "Text" },
 	},
 	after = function()
 		require("telescope").setup({

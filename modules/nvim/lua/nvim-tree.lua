@@ -5,9 +5,9 @@ vim.g.loaded_netrwPlugin = 1
 require("lz.n").load({
 	"nvim-tree.lua",
 	keys = {
-		{ "<leader>ec", "<cmd>NvimTreeCollapse<cr>", desc = "[C]ollapse" },
-		{ "<leader>ee", "<cmd>NvimTreeToggle<cr>", desc = "Toggl[e]" },
-		{ "<leader>er", "<cmd>NvimTreeRefresh<cr>", desc = "[R]efresh" },
+		{ "<leader>ec", "<cmd>NvimTreeCollapse<cr>", desc = "Collapse" },
+		{ "<leader>ee", "<cmd>NvimTreeToggle<cr>", desc = "Toggle" },
+		{ "<leader>er", "<cmd>NvimTreeRefresh<cr>", desc = "Refresh" },
 	},
 	after = function()
 		require("nvim-tree").setup({
