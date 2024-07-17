@@ -17,15 +17,6 @@ let
     inherit (pkgs.tree-sitter) buildGrammar;
   };
 
-  venv-mypy =
-    pkgs.writeScriptBin "venv-mypy"
-      # bash
-      ''
-        #!/bin/sh
-        set -e
-        exec poetry run mypy "$@"
-      '';
-
   # This sucks
   # The codeium-nvim plugin works with specific version of the language server
   # now anytime I update I will need to check if the lanague-server with what it works with
@@ -455,7 +446,6 @@ in
       nixfmt-rfc-style
 
       # Python
-      venv-mypy
       (python3.withPackages (
         ps: with ps; [
           python-lsp-server
@@ -523,7 +513,6 @@ in
       # python
       pyright
       basedpyright
-      mypy
     ];
 
     file.".vale.ini".source = ./vale.ini;
