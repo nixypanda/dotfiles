@@ -63,27 +63,12 @@ cmp.setup({
 -- Use buffer source for `/` and `?`
 cmp.setup.cmdline({ "/", "?" }, {
 	mapping = cmp.mapping.preset.cmdline(),
-	sources = {
-		{ name = "buffer" },
-	},
+	sources = { { name = "buffer" } },
 })
 
-vim.api.nvim_create_autocmd("BufRead", {
-	group = vim.api.nvim_create_augroup("CmpSourceCargo", { clear = true }),
-	pattern = "Cargo.toml",
-	callback = function() cmp.setup.buffer({ sources = { { name = "crates" } } }) end,
-})
-
-vim.api.nvim_create_autocmd("BufRead", {
-	group = vim.api.nvim_create_augroup("CmpSourceLua", { clear = true }),
-	pattern = "*.lua",
-	callback = function() cmp.setup.buffer({ sources = { { name = "nvim_lua" } } }) end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "sql", "mysql", "plsql" },
-	callback = function() cmp.setup.buffer({ sources = { { name = "vim-dadbod-completion" } } }) end,
-})
+cmp.setup.filetype("Cargo.toml", { sources = { { name = "crates" } } })
+cmp.setup.filetype("lua", { sources = { { name = "nvim_lua" } } })
+cmp.setup.filetype({ "sql", "mysql", "plsql" }, { sources = { { name = "vim-dadbod-completion" } } })
 
 -- Completion (default setting)
 vim.o.completeopt = "menuone,noselect"
