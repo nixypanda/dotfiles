@@ -13,7 +13,15 @@ cmp.setup({
 	snippet = {
 		expand = function(args) luasnip.lsp_expand(args.body) end,
 	},
-	formatting = { format = require("lspkind").cmp_format({ with_text = true, maxwidth = 50 }) },
+	formatting = {
+		format = require("lspkind").cmp_format({
+			mode = "symbol_text",
+			maxwidth = 50,
+			symbol_map = {
+				Codeium = "",
+			},
+		}),
+	},
 	mapping = {
 		["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
 		["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
