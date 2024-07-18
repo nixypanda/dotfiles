@@ -258,36 +258,67 @@ in
       {
         plugin = nvim-cmp;
         type = "lua";
-        config = builtins.readFile ./lua/cmp.lua;
+        config = ''
+          local codeium_language_server = "${codeium-1-8-25}/bin/codeium_language_server"
+          ${builtins.readFile ./lua/cmp.lua}
+        '';
+        optional = true;
       }
-      cmp-buffer
-      cmp-calc
-      cmp-nvim-lsp
-      cmp-nvim-lua
-      cmp-path
-      luasnip
-      cmp_luasnip
-      friendly-snippets
+      {
+        plugin = cmp-buffer;
+        optional = true;
+      }
+      {
+        plugin = cmp-calc;
+        optional = true;
+      }
+      {
+        plugin = cmp-nvim-lsp;
+        optional = true;
+      }
+      {
+        plugin = cmp-nvim-lua;
+        optional = true;
+      }
+      {
+        plugin = cmp-path;
+        optional = true;
+      }
+      {
+        plugin = luasnip;
+        optional = true;
+        # config = # lua
+        #   ''
+        #     require("lz.n").load({
+        #         "luasnip",
+        #         load = function(name)
+        #             vim.cmd.packadd(name)
+        #             vim.cmd.packadd("friendly-snippets")
+        #         end,
+        #         event = "InsertEnter",
+        #         after = function()
+        #             require("luasnip.loaders.from_vscode").lazy_load()
+        #         end
+        #     })
+        #   '';
+      }
+      {
+        plugin = cmp_luasnip;
+        optional = true;
+      }
+      {
+        plugin = friendly-snippets;
+        optional = true;
+      }
+      {
+        plugin = vim-dadbod-completion;
+        optional = true;
+      }
       lspkind-nvim
 
       # Programming: AI shit
       {
         plugin = codeium-nvim;
-        type = "lua";
-        config = # lua
-          ''
-            require('lz.n').load{
-              "codeium.nvim",
-              event = "InsertEnter",
-              after = function()
-                require('codeium').setup({
-                  tools = {
-                      language_server = "${codeium-1-8-25}/bin/codeium_language_server"
-                  }
-                })
-                end
-              }
-          '';
         optional = true;
       }
 
@@ -303,7 +334,6 @@ in
             vim.keymap.set("n", "<leader>Dt",  "<cmd>DBUIToggle<cr>",{ desc = "Toggle DBUI" })
           '';
       }
-      vim-dadbod-completion
       nvim-dadbod-ssh
 
       # Programming: Testing
