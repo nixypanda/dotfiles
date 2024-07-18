@@ -2,10 +2,11 @@ local wk = require("which-key")
 wk.setup({})
 
 local mappings = {
-	{ "<leader>D", group = "database" },
 	{ "<leader>b", group = "buffers" },
+	{ "<leader>c", group = "code (coverage)" },
+	{ "<leader>D", group = "database" },
 	{ "<leader>d", group = "debug" },
-	{ "<leader>e", group = "explorer" },
+	{ "<leader>e", group = "explorer (neo-tree)" },
 	{ "<leader>g", group = "git" },
 	{ "<leader>gc", group = "conflict" },
 	{ "<leader>l", group = "code (lsp)" },
@@ -13,7 +14,7 @@ local mappings = {
 	{ "<leader>ph", group = "Haskell" },
 	{ "<leader>pr", group = "Rust" },
 	{ "<leader>s", group = "search" },
-	{ "<leader>t", group = "test" },
+	{ "<leader>t", group = "test (neotest)" },
 	{ "<leader>u", group = "utilities" },
 }
 

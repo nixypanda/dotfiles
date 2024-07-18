@@ -81,6 +81,11 @@ in
         config = builtins.readFile ./lua/nvim-tree.lua;
         optional = true;
       }
+      {
+        plugin = marks-nvim;
+        type = "lua";
+        config = "require('marks').setup({})";
+      }
 
       # Appearance: Themes
       catppuccin-nvim
@@ -233,7 +238,6 @@ in
         type = "lua";
         config = builtins.readFile ./lua/treesitter.lua;
       }
-      nvim-treesitter-refactor
       nvim-treesitter-textobjects
 
       # Programming: Language support
@@ -316,6 +320,11 @@ in
       neotest-python
       neotest-go
       FixCursorHold-nvim
+      {
+        plugin = nvim-coverage;
+        type = "lua";
+        config = builtins.readFile ./lua/coverage.lua;
+      }
 
       # Text Helpers
       {
