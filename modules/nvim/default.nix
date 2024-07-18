@@ -144,15 +144,9 @@ in
         type = "lua";
         config = # lua
           ''
-            require("lz.n").load {
-                "blame",
-                keys = {
-                    {"<leader>gb", "<cmd>BlameToggle window<cr>", desc = "[B]lame"},
-                },
-                after = function() require('blame').setup() end
-            }
+            require('blame').setup()
+            vim.keymap.set("n", "<leader>gb", "<cmd>BlameToggle window<cr>", {desc = "Git blame"})
           '';
-        optional = true;
       }
 
       # Keymaps
@@ -266,7 +260,6 @@ in
         type = "lua";
         config = builtins.readFile ./lua/cmp.lua;
       }
-
       cmp-buffer
       cmp-calc
       cmp-nvim-lsp
@@ -345,6 +338,7 @@ in
         config = # lua
           ''
             vim.g.table_mode_disable_mappings = 1
+            vim.g.table_mode_disable_tableize_mappings = 1
             require("lz.n").load({
               "vim-table-mode",
               keys = { { "<leader>ut", "<cmd>TableModeToggle<cr>", desc = "Toggle Table Mode" } }
