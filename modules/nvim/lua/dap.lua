@@ -1,6 +1,10 @@
 require("lz.n").load({
 	"nvim-dap",
-	keys = { "<leader>db", "<leader>ds" },
+	keys = {
+		{ "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle breakpoint" },
+		{ "<leader>ds", function() require("dap").continue() end, desc = "Start debugging" },
+		{ "<leader>dt", function() require("dapui").toggle() end, desc = "Toggle debugging UI" },
+	},
 	load = function(name)
 		vim.cmd.packadd(name)
 		vim.cmd.packadd("nvim-dap-ui")
@@ -15,7 +19,6 @@ require("lz.n").load({
 		local widgets = require("dap.ui.widgets")
 
 		-- Setup keymaps
-		vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
 		vim.keymap.set("n", "<leader>df", dap.close, { desc = "Finish debugging" })
 		vim.keymap.set("n", "<leader>di", widgets.hover, { desc = "Inspect variable under cursor" })
 		vim.keymap.set("n", "<leader>dI", dap.step_into, { desc = "Step into" })
@@ -23,8 +26,8 @@ require("lz.n").load({
 		vim.keymap.set("n", "<leader>dk", dap.up, { desc = "Go up in call stack" })
 		vim.keymap.set("n", "<leader>do", dap.step_over, { desc = "Step over" })
 		vim.keymap.set("n", "<leader>dO", dap.step_out, { desc = "Step out" })
-		vim.keymap.set("n", "<leader>ds", dap.continue, { desc = "Start debugging" })
-		vim.keymap.set("n", "<leader>dt", dap.terminate, { desc = "Terminate debugging" })
+		vim.keymap.set("n", "<leader>dr", function() dapui.open({ reset = true }) end, { desc = "Reset dbugging UI" })
+		vim.keymap.set("n", "<leader>dT", dap.terminate, { desc = "Terminate debugging" })
 		vim.keymap.set(
 			"n",
 			"<leader>dS",
@@ -39,15 +42,18 @@ require("lz.n").load({
 		dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
 
 		require("nvim-dap-virtual-text").setup()
+
+		-- Programming language specific plugins
+		-- Go
 		require("dap-go").setup()
 
+		-- python
 		local dap_python = require("dap-python")
 		-- Injected via nix
 		dap_python.setup(python_with_debugpy .. "/bin/python")
 		dap_python.test_runner = "pytest"
 
-		-- TODO: Find a nice way to do this, so it picks up theme colors
+		-- UI Icons
 		vim.fn.sign_define("DapBreakpoint", { text = "⊕", texthl = "Error", linehl = "", numhl = "" })
-		vim.fn.sign_define("DapStopped", { text = "→", texthl = "Info", linehl = "Info", numhl = "" })
 	end,
 })
