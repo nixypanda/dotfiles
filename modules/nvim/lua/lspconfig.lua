@@ -113,10 +113,7 @@ require("lz.n").load({
 		})
 
 		-- JavaScript/TypeScript
-		lspconfig.tsserver.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
+		lspconfig.tsserver.setup({ capabilities = capabilities, on_attach = on_attach })
 
 		-- lua
 		lspconfig.lua_ls.setup({
@@ -162,23 +159,13 @@ require("lz.n").load({
 		})
 
 		-- nu
-		lspconfig.nushell.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
+		lspconfig.nushell.setup({ capabilities = capabilities, on_attach = on_attach })
 
 		-- Python
-		lspconfig.ruff.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
-		lspconfig.pyright.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
-		-- lspconfig.basedpyright.setup({
-		-- 	capabilities = capabilities,
-		-- })
+		lspconfig.ruff.setup({ capabilities = capabilities, on_attach = on_attach })
+		lspconfig.pyright.setup({ capabilities = capabilities, on_attach = on_attach })
+		-- lspconfig.basedpyright.setup({ capabilities = capabilities, })
+		--
 		-- We are primarily using pyright for everything. Only using pylsp for rope refactors.
 		-- lspconfig.pylsp.setup({
 		-- 	settings = {
@@ -208,32 +195,14 @@ require("lz.n").load({
 		-- })
 
 		-- Terraform
-		lspconfig.terraform_lsp.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
+		lspconfig.terraform_lsp.setup({ capabilities = capabilities, on_attach = on_attach })
 
 		-- shit you need to deal with
-		lspconfig.bashls.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
-		lspconfig.cmake.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
-		lspconfig.cssls.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
-		lspconfig.dockerls.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
-		lspconfig.html.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
+		lspconfig.bashls.setup({ capabilities = capabilities, on_attach = on_attach })
+		lspconfig.cmake.setup({ capabilities = capabilities, on_attach = on_attach })
+		lspconfig.cssls.setup({ capabilities = capabilities, on_attach = on_attach })
+		lspconfig.dockerls.setup({ capabilities = capabilities, on_attach = on_attach })
+		lspconfig.html.setup({ capabilities = capabilities, on_attach = on_attach })
 
 		-- json/yaml/toml configs
 		lspconfig.jsonls.setup({
@@ -264,9 +233,6 @@ require("lz.n").load({
 			},
 		})
 		-- already has SchemaStore configured
-		lspconfig.taplo.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
+		lspconfig.taplo.setup({ capabilities = capabilities, on_attach = on_attach })
 	end,
 })
