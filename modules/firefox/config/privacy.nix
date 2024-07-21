@@ -15,7 +15,8 @@
   # article</a> or install the <a
   # href="https://addons.mozilla.org/firefox/addon/refcontrol/) extension for per
   # domain settings.
-  "network.http.referer.spoofSource" = true;
+  # NOTE: Websites stop working after enabling this (google [sheets, etc])
+  "network.http.referer.spoofSource" = false;
   # Disable DOM storage
   # Disables DOM storage, which enables so called "supercookies". Some modern sites
   # will not work (i.e. missing "save" functions).
@@ -64,7 +65,8 @@
   # href="https://isc.sans.edu/forums/diary/Time+to+disable+WebGL/10867). WebGL is
   # part of some fingerprinting scripts used in the wild. Some interactive websites
   # will not work, which are mostly games.
-  "webgl.disabled" = true;
+  # NOTE: Need webgl to access figma
+  "webgl.disabled" = false;
   # Override graphics card vendor and model strings in the WebGL API
   # Websites can read the graphics card vendor and model using a WebGL API. This
   # setting overrides both with " " without disabling WebGL.
@@ -74,7 +76,8 @@
   # Disables the WebRTC function, which gives away your local ips. Some addons like
   # uBlock origin provide settings to prevent WebRTC from exposing local ips without
   # disabling WebRTC.
-  "media.peerconnection.enabled" = false;
+  # NOTE: Breaks google meet
+  "media.peerconnection.enabled" = true;
   # Disable the clipboardevents.
   # Disable that websites can get notifications if you copy, paste, or cut something
   # from a web page, and it lets them know which part of the page had been selected.

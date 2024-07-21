@@ -28,7 +28,8 @@
   # Disable Browser Pings
   # Firefox sends "ping" requests (http://kb.mozillazine.org/Browser.send_pings),
   # when a website requests to be informed when a user clicks on a link.
-  "browser.send_pings" = false;
+  # NOTE: This breaks google meet camera
+  "browser.send_pings" = true;
   # Disable TLS session identifiers
   # TLS allows for session identifiers, which speed up the session resumption when a
   # connection was lost. These identifiers can be used for tracking

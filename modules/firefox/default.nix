@@ -19,38 +19,15 @@ in
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           clearurls
           darkreader
-          df-youtube
           facebook-container
           octotree
-          okta-browser-plugin
           onepassword-password-manager
-          plasma-integration
           return-youtube-dislikes
           sponsorblock
           ublock-origin
           vimium
-        ];
-      };
-      # This does not have as strict privacy settings as the default profile.
-      # It uses the default firefox settings. Useful when something is not
-      # working using the default profile
-      shit = {
-        name = "trade-privacy-for-convenience";
-        id = 1;
-        settings = merge [ (import ./config/annoyances.nix) ];
-        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          clearurls
-          darkreader
-          df-youtube
-          facebook-container
-          octotree
-          okta-browser-plugin
-          onepassword-password-manager
-          plasma-integration
-          return-youtube-dislikes
-          sponsorblock
-          ublock-origin
-          vimium
+          temporary-containers
+          multi-account-containers
         ];
       };
     };
