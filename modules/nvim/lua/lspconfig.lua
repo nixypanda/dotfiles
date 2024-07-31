@@ -44,13 +44,24 @@ require("lz.n").load({
 			map("<leader>lS", "<cmd>Telescope sp_dynamic_workspace_symbols<cr>", "Workspace Symbols")
 
 			-- Lspsaga
+
 			map("<leader>la", "<cmd>Lspsaga code_action<cr>", "Code Action")
 			map("<leader>lc", "<cmd>Lspsaga show_cursor_diagnostics<cr>", "Cursor Diagnostics")
 			map("<leader>lf", "<cmd>Lspsaga finder<cr>", "Finder: Refrences and implementations")
 			map("<leader>li", "<cmd>Lspsaga incoming_calls<cr>", "Incoming Calls")
-			map("<leader>lj", "<cmd>Lspsaga diagnostic_jump_next<cr>", "Next Action")
-			map("<leader>lk", "<cmd>Lspsaga diagnostic_jump_prev<cr>", "Previous Action")
-			map("<leader>ll", "<cmd>Lspsaga show_line_diagnostics<cr>", "Line Diagnostics")
+			map(
+				"<leader>lj",
+				function() require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR }) end,
+				"Next error diagnostic"
+			)
+			map(
+				"<leader>lk",
+				function() require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR }) end,
+				"Previous error diagnostic"
+			)
+			map("<leader>lL", "<cmd>Lspsaga show_line_diagnostics<cr>", "Line Diagnostics")
+			map("<leader>ll", "<cmd>Lspsaga diagnostic_jump_next<cr>", "Next diagnostic")
+			map("<leader>lh", "<cmd>Lspsaga diagnostic_jump_prev<cr>", "Previous diagnostic")
 			map("<leader>lo", "<cmd>Lspsaga outgoing_calls<cr>", "Outgoing Calls")
 			map("<leader>lO", "<cmd>Lspsaga outline<cr>", "Toggle Document Symbols Outline")
 			map("<leader>lp", "<cmd>Lspsaga hover_doc<cr>", "Preview Definition")
