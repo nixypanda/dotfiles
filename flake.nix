@@ -22,13 +22,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # NOTE: https://github.com/NixOS/nixpkgs/pull/211321
-    # Using alternate nixpkgs which has a fixed version of codelldb which works on Mac
-    # Caveat: This requires Xcode.app installed on the system
-    nixpkgs_codelldb_fixed = {
-      url = "github:nixypanda/nixpkgs/171e2c61fb27dadc865a5fe623c5d2eca4cfd4b9";
-    };
-
     # Applying the configuration happens from the .dotfiles directory so the
     # relative path is defined accordingly. This has potential of causing issues.
     vim-plugins = {
@@ -45,7 +38,6 @@
       home-manager,
       darwin,
       nixpkgs-firefox-darwin,
-      nixpkgs_codelldb_fixed,
     }:
     let
       home-common =
@@ -54,7 +46,6 @@
           # NOTE: Injecting colorscheme so that it is passed down all the imports
           _module.args = {
             colorscheme = import ./colorschemes/tokyonight.nix;
-            codelldb_fixed_pkgs = nixpkgs_codelldb_fixed.legacyPackages."x86_64-darwin";
           };
           nixpkgs.config = {
 

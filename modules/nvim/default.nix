@@ -1,15 +1,8 @@
-{
-  pkgs,
-  colorscheme,
-  codelldb_fixed_pkgs,
-  ...
-}:
+{ pkgs, colorscheme, ... }:
 let
-  # Using a fixed version of codelldb which works on Mac.
-  # We get this from an alternate nixpkgs repo.
   # Caveat: This requires Xcode.app installed on the system
-  # NOTE: https://github.com/NixOS/nixpkgs/pull/211321
-  code_lldb = codelldb_fixed_pkgs.vscode-extensions.vadimcn.vscode-lldb;
+  # https://github.com/NixOS/nixpkgs/pull/211321
+  code_lldb = pkgs.vscode-extensions.vadimcn.vscode-lldb;
 
   python_with_debugpy = pkgs.python3.withPackages (ps: with ps; [ debugpy ]);
 
@@ -165,7 +158,13 @@ in
       {
         plugin = nvim-lspconfig;
         type = "lua";
-        config = builtins.readFile ./lua/lspconfig.lua;
+        config = # lua
+          ''
+            local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
+            local codelldb_path = extension_path .. 'adapter/codelldb'
+            local liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib'
+            ${builtins.readFile ./lua/lspconfig.lua}
+          '';
         optional = true;
       }
       {
@@ -241,22 +240,8 @@ in
       nvim-treesitter-textobjects
 
       # Programming: Language support
-      {
-        plugin = rustaceanvim;
-        type = "lua";
-        config = # lua
-          ''
-            local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
-            local codelldb_path = extension_path .. 'adapter/codelldb'
-            local liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib'
-            ${builtins.readFile ./lua/rustaceanvim.lua}
-          '';
-      }
-      {
-        plugin = haskell-tools-nvim;
-        type = "lua";
-        config = builtins.readFile ./lua/haskell-tools.lua;
-      }
+      rustaceanvim
+      haskell-tools-nvim
 
       # Programming: Autocompletion setup
       {
