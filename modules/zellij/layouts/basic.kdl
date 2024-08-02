@@ -1,0 +1,9 @@
+layout {
+    pane size=1 borderless=true {
+        plugin location="zjstatus"
+    }
+    pane
+    pane size=1 borderless=true {
+        plugin location="zellij:status-bar"
+    }
+}
