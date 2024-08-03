@@ -5,11 +5,11 @@ require("lualine").setup({
 		disabled_filetypes = { "NvimTree" },
 		iconsEnabled = true,
 		component_separators = "",
-		section_separators = { left = "", right = "" },
+		section_separators = { left = "", right = "" },
 	},
 	sections = {
-		lualine_a = { { "mode", upper = true } },
-		lualine_b = { "filename" },
+		lualine_a = { { "mode", separator = { left = "" }, right_padding = 2 } },
+		lualine_b = { "filename", "branch" },
 		lualine_c = {
 			{
 				"diagnostics",
@@ -17,8 +17,20 @@ require("lualine").setup({
 				symbols = { error = "☠ ", warn = " ", info = "", hint = "☛ " },
 			},
 		},
-		lualine_x = { "diff", "branch" },
-		lualine_y = { "progress" },
+		lualine_x = { "diff" },
+		lualine_y = { "filetype", "progress" },
+		lualine_z = {
+			{ "location", separator = { right = "" }, left_padding = 2 },
+		},
+	},
+	inactive_sections = {
+		lualine_a = { "filename" },
+		lualine_b = {},
+		lualine_c = {},
+		lualine_x = {},
+		lualine_y = {},
 		lualine_z = { "location" },
 	},
+	tabline = {},
+	extensions = {},
 })
