@@ -128,8 +128,6 @@
     border_format   "#[bg=$surface0]{char}"
     border_position "top"
 
-    hide_frame_for_single_pane "true"
-
     mode_normal        "#[bg=$green,fg=$crust,bold] NORMAL#[bg=$surface0,fg=$green]"
     mode_tmux          "#[bg=$mauve,fg=$crust,bold] TMUX#[bg=$surface0,fg=$mauve]"
     mode_locked        "#[bg=$red,fg=$crust,bold] LOCKED#[bg=$surface0,fg=$red]"
