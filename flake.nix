@@ -6,6 +6,16 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nur = {
+      url = "github:nix-community/NUR";
+    };
+    # Applying the configuration happens from the .dotfiles directory so the
+    # relative path is defined accordingly. This has potential of causing issues.
+    vim-plugins = {
+      url = "path:./modules/nvim/plugins";
+    };
+
+    # MacOS specific inputs
     darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -14,14 +24,9 @@
       url = "github:bandithedoge/nixpkgs-firefox-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nur = {
-      url = "github:nix-community/NUR";
-    };
-
-    # Applying the configuration happens from the .dotfiles directory so the
-    # relative path is defined accordingly. This has potential of causing issues.
-    vim-plugins = {
-      url = "path:./modules/nvim/plugins";
+    mac-app-util = {
+      url = "github:hraban/mac-app-util";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs =
@@ -31,8 +36,10 @@
       vim-plugins,
       nixpkgs,
       home-manager,
+
       darwin,
       nixpkgs-firefox-darwin,
+      mac-app-util,
     }:
     let
       home-common =
@@ -88,7 +95,7 @@
         nixpkgs.overlays = [ nixpkgs-firefox-darwin.overlay ];
         home.homeDirectory = "/Users/sherubthakur";
         home.username = "sherubthakur";
-        imports = [ ./modules/mac/mac-symlink-applications.nix ];
+        imports = [ mac-app-util.homeManagerModules.default ];
         xdg.configFile."nix/nix.conf".text = ''
           experimental-features = nix-command flakes
         '';
