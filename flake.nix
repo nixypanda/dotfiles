@@ -17,10 +17,6 @@
     nur = {
       url = "github:nix-community/NUR";
     };
-    taffybar = {
-      url = "github:nixypanda/taffybar";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     # Applying the configuration happens from the .dotfiles directory so the
     # relative path is defined accordingly. This has potential of causing issues.
@@ -32,7 +28,6 @@
     {
       self,
       nur,
-      taffybar,
       vim-plugins,
       nixpkgs,
       home-manager,
@@ -53,10 +48,7 @@
               pkg:
               builtins.elem (lib.getName pkg) [
                 "zoom"
-                "ngrok"
                 "unrar"
-                "vscode"
-                "vscode-extension-MS-python-vscode-pylance"
                 "codeium"
                 # browser extensions
                 "onepassword-password-manager"
@@ -66,7 +58,6 @@
 
           nixpkgs.overlays = [
             nur.overlay
-            taffybar.overlay
             vim-plugins.overlay
           ];
 
@@ -82,7 +73,6 @@
             ./modules/firefox
             ./modules/fonts.nix
             ./modules/git
-            ./modules/helix
             ./modules/kitty
             ./modules/nu
             ./modules/nvim
@@ -90,7 +80,6 @@
             ./modules/system-management
             ./modules/zellij
             ./modules/zsh
-            ./modules/vscode
           ];
         };
 
@@ -99,10 +88,7 @@
         nixpkgs.overlays = [ nixpkgs-firefox-darwin.overlay ];
         home.homeDirectory = "/Users/sherubthakur";
         home.username = "sherubthakur";
-        imports = [
-          ./modules/tmux
-          ./modules/mac-symlink-applications.nix
-        ];
+        imports = [ ./modules/mac/mac-symlink-applications.nix ];
         xdg.configFile."nix/nix.conf".text = ''
           experimental-features = nix-command flakes
         '';
@@ -113,18 +99,18 @@
         home.username = "sherub";
         imports = [
           # Desktop Environment
-          ./modules/desktop-environment.nix
-          ./modules/betterlockscreen
-          ./modules/colorscheme-based-background
-          ./modules/deadd
-          ./modules/eww
-          ./modules/gtk
-          ./modules/picom
-          ./modules/plasma-browser-integration
-          ./modules/rofi
-          ./modules/taffybar
-          ./modules/xidlehook
-          ./modules/xmonad
+          ./modules/linux/desktop-environment.nix
+          ./modules/linux/betterlockscreen
+          ./modules/linux/colorscheme-based-background
+          ./modules/linux/deadd
+          ./modules/linux/eww
+          ./modules/linux/gtk
+          ./modules/linux/picom
+          ./modules/linux/plasma-browser-integration
+          ./modules/linux/rofi
+          ./modules/linux/taffybar
+          ./modules/linux/xidlehook
+          ./modules/linux/xmonad
         ];
       };
 
@@ -132,7 +118,7 @@
     {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./system/configuration.nix ];
+        modules = [ ./system/nixos/configuration.nix ];
       };
 
       homeConfigurations = {
@@ -144,7 +130,7 @@
           ];
         };
 
-        macbook-pro = home-manager.lib.homeManagerConfiguration {
+        nixyMac = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-darwin";
           modules = [
             home-common
@@ -156,8 +142,10 @@
       darwinConfigurations."nixyMac" = darwin.lib.darwinSystem {
         pkgs = nixpkgs.legacyPackages."x86_64-darwin";
         modules = [
-          ./modules/system-mac
-          ./modules/homebrew.nix
+          ./modules/mac/configuration.nix
+          ./modules/mac/yabai.nix
+          ./modules/mac/skhd.nix
+          ./modules/mac/homebrew.nix
         ];
       };
     };

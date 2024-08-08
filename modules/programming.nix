@@ -1,21 +1,6 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    # common
-    gnumake
-
-    # C
-    gcc
-
-    # Clojure
-    clojure
-    leiningen
-
-    # dhall
-    dhall
-    haskellPackages.dhall-json
-    haskellPackages.dhall-yaml
-
     # docker
     docker
     docker-compose
@@ -29,15 +14,6 @@
     ghc
     haskellPackages.cabal-install
     haskellPackages.stack
-
-    # Java
-    jdk17
-    maven
-
-    # JavaScript
-    nodejs
-    yarn
-    nodePackages.prettier
 
     # lua
     lua
@@ -57,8 +33,5 @@
     cargo-tarpaulin
     perl # this is required by rust
     rustc
-
-    # shell
-    shfmt
   ];
 }

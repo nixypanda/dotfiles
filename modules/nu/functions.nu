@@ -87,6 +87,14 @@ def "from flake8" [] {
       | upsert column {|row| ($row.column | into int) }
 }
 
+def "from ifconfig" []: string -> record {
+    jc --ifconfig | from json | each { |entry| $entry | transpose | rename key value }
+}
+
+def "from dig" []: string -> record {
+    jc --dig | from json | transpose | table -e
+}
+
 def whatismyip [] {
     curl -s ipinfo.io/what-is-my-ip | from json
 }

@@ -20,7 +20,6 @@ in
           clearurls
           darkreader
           facebook-container
-          octotree
           onepassword-password-manager
           return-youtube-dislikes
           sponsorblock
