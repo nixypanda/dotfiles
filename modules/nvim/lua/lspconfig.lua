@@ -76,6 +76,11 @@ require("lz.n").load({
 		-- Need to add this to the language server to broadcast snippet compatibility
 		local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+		lspconfig.gleam.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+
 		-- go
 		lspconfig.gopls.setup({
 			capabilities = capabilities,

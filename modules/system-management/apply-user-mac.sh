@@ -2,10 +2,6 @@
 
 set -e
 
-if [[ -d "$HOME/Applications/Home Manager Apps.backup" ]]; then
-    rm -rf "$HOME/Applications/Home Manager Apps.backup"
-fi
-
 pushd ~/.dotfiles
-home-manager switch --flake "./#nixyMac" -b backup
+home-manager switch --flake "./#srt-l02-sekhmet" -b backup
 popd

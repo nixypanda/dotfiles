@@ -204,6 +204,7 @@ in
             dockerfile
             elixir
             elm
+            gleam
             go
             haskell
             hcl
@@ -397,6 +398,9 @@ in
       # Docker
       nodePackages.dockerfile-language-server-nodejs
       hadolint
+
+      # Gleam
+      gleam
 
       # grammer
       vale

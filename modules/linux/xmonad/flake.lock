@@ -342,20 +342,18 @@
         "git-ignore-nix": "git-ignore-nix",
         "gtk-sni-tray": "gtk-sni-tray",
         "gtk-strut": "gtk-strut",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": ["nixpkgs"]
       },
       "locked": {
         "lastModified": 1653379678,
         "narHash": "sha256-WpuI+cqTZZ704rarUTVM9rrXiYagj6ZWRtxA4cpdAPA=",
-        "owner": "sherubthakur",
+        "owner": "nixypanda",
         "repo": "taffybar",
         "rev": "644616c54cb460c28bcac4cd6c70206de0018a34",
         "type": "github"
       },
       "original": {
-        "owner": "sherubthakur",
+        "owner": "nixypanda",
         "repo": "taffybar",
         "type": "github"
       }

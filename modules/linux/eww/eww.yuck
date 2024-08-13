@@ -1,5 +1,5 @@
 ;;  Profile vars 
-(defvar NAME "Sherub Thakur")
+(defvar NAME "nixypanda")
 (defpoll DOTFILES :interval "10m" "echo \"/home/sherub/.dotfiles\"")
 (defpoll UNAME :interval "5m"  "whoami")
 

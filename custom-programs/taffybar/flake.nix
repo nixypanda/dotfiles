@@ -3,7 +3,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     taffybar-flake = {
-      url = "github:sherubthakur/taffybar";
+      url = "github:nixypanda/taffybar";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-utils = {

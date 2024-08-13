@@ -137,7 +137,7 @@
           ];
         };
 
-        nixyMac = home-manager.lib.homeManagerConfiguration {
+        srt-l02-sekhmet = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-darwin";
           modules = [
             home-common
@@ -146,7 +146,7 @@
         };
       };
 
-      darwinConfigurations."nixyMac" = darwin.lib.darwinSystem {
+      darwinConfigurations."srt-l02-sekhmet" = darwin.lib.darwinSystem {
         pkgs = nixpkgs.legacyPackages."x86_64-darwin";
         modules = [
           ./modules/mac/configuration.nix

@@ -23,4 +23,5 @@
     enableKeyMapping = true;
     remapCapsLockToEscape = true;
   };
+  networking.hostName = "srt-l02-sekhmet";
 }

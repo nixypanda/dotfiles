@@ -7,7 +7,7 @@
   programs = {
     git = {
       enable = true;
-      userName = "Sherub Thakur";
+      userName = "nixypanda";
       userEmail = "sherub.thakur@gmail.com";
 
       # difftastic = { enable = true; };
