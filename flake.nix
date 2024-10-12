@@ -12,7 +12,7 @@
     # Applying the configuration happens from the .dotfiles directory so the
     # relative path is defined accordingly. This has potential of causing issues.
     vim-plugins = {
-      url = "path:./modules/nvim/plugins";
+      url = "path:/Users/nixypanda/.dotfiles/modules/nvim/plugins";
     };
 
     # MacOS specific inputs
@@ -94,8 +94,8 @@
       home-macbook = {
         # Hack: Firefox does not work on mac so we have to depend on an overlay.
         nixpkgs.overlays = [ nixpkgs-firefox-darwin.overlay ];
-        home.homeDirectory = "/Users/sherubthakur";
-        home.username = "sherubthakur";
+        home.homeDirectory = "/Users/nixypanda";
+        home.username = "nixypanda";
         imports = [ mac-app-util.homeManagerModules.default ];
         xdg.configFile."nix/nix.conf".text = ''
           experimental-features = nix-command flakes

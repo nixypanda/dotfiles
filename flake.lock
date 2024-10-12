@@ -261,13 +261,13 @@
         "nvim-sqls-src": "nvim-sqls-src"
       },
       "locked": {
-        "lastModified": 1,
+        "lastModified": 1728759857,
         "narHash": "sha256-/8aFM77tNIR71F50vSmQV/L7BHusorsqFY/dhf2LQxI=",
-        "path": "./modules/nvim/plugins",
+        "path": "/Users/nixypanda/.dotfiles/modules/nvim/plugins",
         "type": "path"
       },
       "original": {
-        "path": "./modules/nvim/plugins",
+        "path": "/Users/nixypanda/.dotfiles/modules/nvim/plugins",
         "type": "path"
       }
     }
