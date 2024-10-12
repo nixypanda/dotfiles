@@ -57,6 +57,7 @@
                 "zoom"
                 "unrar"
                 "codeium"
+                "terraform"
                 # browser extensions
                 "onepassword-password-manager"
                 "okta-browser-plugin"

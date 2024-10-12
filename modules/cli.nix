@@ -28,6 +28,8 @@
     neofetch
     carapace
 
+    terraform
+
     # Nix itself
     nixVersions.nix_2_21
   ];
