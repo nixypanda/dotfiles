@@ -507,14 +507,14 @@ $env.config = {
             event: {
               send: executehostcommand
               cmd: "
-                history 
+                commandline edit -r (history 
                   | each { |it| $it.command } 
                   | uniq 
                   | reverse 
                   | str join (char -i 0) 
                   | fzf --read0 --tiebreak=chunk --layout=reverse  --multi --preview='bat --style=numbers {..}' --preview-window='bottom:hidden' --bind shift-tab:up,tab:down --height=50% -q (commandline)
                   | decode utf-8 
-                  | str trim
+                  | str trim)
               "
             }
         }
