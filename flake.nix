@@ -14,6 +14,10 @@
     vim-plugins = {
       url = "path:/Users/nixypanda/.dotfiles/modules/nvim/plugins";
     };
+    zjstatus = {
+      url = "github:dj95/zjstatus";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # MacOS specific inputs
     darwin = {
@@ -28,6 +32,7 @@
       url = "github:hraban/mac-app-util";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
   };
   outputs =
     {
@@ -36,6 +41,7 @@
       vim-plugins,
       nixpkgs,
       home-manager,
+      zjstatus,
 
       darwin,
       nixpkgs-firefox-darwin,
@@ -67,6 +73,7 @@
           nixpkgs.overlays = [
             nur.overlay
             vim-plugins.overlay
+            (final: prev: { zjstatus = zjstatus.packages.${prev.system}.default; })
           ];
 
           # Let Home Manager install and manage itself.

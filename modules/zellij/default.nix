@@ -17,21 +17,21 @@ let
     '';
   };
 
-  zjstatus = pkgs.stdenv.mkDerivation rec {
-    pname = "zjstatus";
-    version = "v0.17.0";
-
-    src = builtins.fetchurl {
-      url = "https://github.com/dj95/zjstatus/releases/download/${version}/zjstatus.wasm";
-      sha256 = "sha256:1rbvazam9qdj2z21fgzjvbyp5mcrxw28nprqsdzal4dqbm5dy112";
-    };
-    phases = [ "installPhase" ];
-
-    installPhase = ''
-      mkdir -p $out/bin
-      cp $src $out/bin/zjstatus.wasm
-    '';
-  };
+  # zjstatus = pkgs.stdenv.mkDerivation rec {
+  #   pname = "zjstatus";
+  #   version = "v0.17.0";
+  #
+  #   src = builtins.fetchurl {
+  #     url = "https://github.com/dj95/zjstatus/releases/download/${version}/zjstatus.wasm";
+  #     sha256 = "sha256:1rbvazam9qdj2z21fgzjvbyp5mcrxw28nprqsdzal4dqbm5dy112";
+  #   };
+  #   phases = [ "installPhase" ];
+  #
+  #   installPhase = ''
+  #     mkdir -p $out/bin
+  #     cp $src $out/bin/zjstatus.wasm
+  #   '';
+  # };
 
 in
 {
@@ -64,7 +64,7 @@ in
         }
 
         plugins {
-          zjstatus location="file:${zjstatus}/bin/zjstatus.wasm" {
+          zjstatus location="file:${pkgs.zjstatus}/bin/zjstatus.wasm" {
               ${builtins.readFile ./zjstatus/themes/catpuccin.kdl}
           }
         }
