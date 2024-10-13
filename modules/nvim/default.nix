@@ -16,8 +16,8 @@ let
   # and then update this accordingly.
   codeium-1-8-25 = pkgs.codeium.overrideAttrs (o: {
     src = builtins.fetchurl {
-      url = "https://github.com/Exafunction/codeium/releases/download/language-server-v1.8.80/language_server_macos_x64.gz";
-      sha256 = "sha256:0j0qgjj267fxhj6dwl15hshav8n6n87kiva6dfrjfnklk9hxxzyh";
+      url = "https://github.com/Exafunction/codeium/releases/download/language-server-v1.20.9/language_server_macos_x64.gz";
+      sha256 = "sha256:0c8gjx47ddi29lgzrziafx68q2y962lyy8agnaylnlic8jhaaqmg";
     };
 
   });
