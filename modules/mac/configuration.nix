@@ -23,5 +23,7 @@
     enableKeyMapping = true;
     remapCapsLockToEscape = true;
   };
+  system.stateVersion = 5;
+  services.nix-daemon.enable = true;
   networking.hostName = "srt-l02-sekhmet";
 }
