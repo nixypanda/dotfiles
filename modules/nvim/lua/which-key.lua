@@ -7,6 +7,7 @@ local mappings = {
 	{ "<leader>D", group = "database" },
 	{ "<leader>d", group = "debug" },
 	{ "<leader>e", group = "explorer (neo-tree)" },
+	{ "<leader>f", group = "code (formatting)" },
 	{ "<leader>g", group = "git" },
 	{ "<leader>gc", group = "conflict" },
 	{ "<leader>l", group = "code (lsp)" },

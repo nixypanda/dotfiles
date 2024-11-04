@@ -238,6 +238,12 @@ in
         type = "lua";
         config = builtins.readFile ./lua/treesitter.lua;
       }
+      {
+        plugin = treesj;
+        type = "lua";
+        config = builtins.readFile ./lua/treesj.lua;
+        optional = true;
+      }
       nvim-treesitter-textobjects
 
       # Programming: Language support
