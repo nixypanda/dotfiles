@@ -10,15 +10,14 @@
       brewfile = true;
       lockfiles = false;
     };
-    taps = [ "homebrew/cask-drivers" ];
+    taps = [ ];
     casks = [
       "google-chrome"
       "1password"
       "docker"
       "microsoft-onenote"
-      "wireshark"
-      "signal"
       "zoom"
+      "protonvpn"
     ];
   };
 }
