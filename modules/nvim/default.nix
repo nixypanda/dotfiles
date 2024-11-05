@@ -254,17 +254,56 @@ in
       {
         plugin = nvim-cmp;
         type = "lua";
-        config = builtins.readFile ./lua/cmp.lua;
+        config = ''
+          local cmp_source_path = {
+            ["cmp-buffer"] = "${cmp-buffer}",
+            ["cmp-calc"] = "${cmp-calc}",
+            ["cmp-nvim-lsp"] = "${cmp-nvim-lsp}",
+            ["cmp-nvim-lua"] = "${cmp-nvim-lua}",
+            ["cmp-path"] = "${cmp-path}",
+            ["cmp_luasnip"] = "${cmp_luasnip}"
+          }
+          ${builtins.readFile ./lua/cmp.lua}
+        '';
+        optional = true;
       }
-      cmp-buffer
-      cmp-calc
-      cmp-nvim-lsp
-      cmp-nvim-lua
-      cmp-path
-      luasnip
-      cmp_luasnip
-      friendly-snippets
-      lspkind-nvim
+      rtp-nvim
+      {
+        plugin = cmp-buffer;
+        optional = true;
+      }
+      {
+        plugin = cmp-calc;
+        optional = true;
+      }
+      {
+        plugin = cmp-nvim-lsp;
+        optional = true;
+      }
+      {
+        plugin = cmp-nvim-lua;
+        optional = true;
+      }
+      {
+        plugin = cmp-path;
+        optional = true;
+      }
+      {
+        plugin = luasnip;
+        optional = true;
+      }
+      {
+        plugin = cmp_luasnip;
+        optional = true;
+      }
+      {
+        plugin = friendly-snippets;
+        optional = true;
+      }
+      {
+        plugin = lspkind-nvim;
+        optional = true;
+      }
 
       # Programming: AI shit
       {
