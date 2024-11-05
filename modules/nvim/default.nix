@@ -495,7 +495,7 @@ in
   };
 
   home = {
-
+    sessionVariables.NIXD_FLAGS = "-log=error";
     packages = with pkgs; [
       nodePackages.livedown
       # Rust
