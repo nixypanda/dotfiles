@@ -6,12 +6,5 @@ require("lz.n").load({
 		{ "<leader>cl", "<cmd>CoverageLoadLcov ./coverage.lcov<cr>", desc = "Load ./coverage.lcov file" },
 		{ "<leader>cs", "<cmd>CoverageSummary<cr>", desc = "Show summary of coverage" },
 	},
-	after = function()
-		require("coverage").setup({
-			signs = {
-				-- use your own highlight groups or text markers
-				covered = { hl = "CoverageCovered", text = "" },
-			},
-		})
-	end,
+	after = function() require("coverage").setup({}) end,
 })
