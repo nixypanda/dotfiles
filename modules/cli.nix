@@ -27,6 +27,7 @@
 
     neofetch
     carapace
+    vim-startuptime
 
     terraform
 
