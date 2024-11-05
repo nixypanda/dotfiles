@@ -126,7 +126,7 @@ require("lz.n").load({
 		})
 
 		-- JavaScript/TypeScript
-		lspconfig.tsserver.setup({ capabilities = capabilities, on_attach = on_attach })
+		lspconfig.ts_ls.setup({ capabilities = capabilities, on_attach = on_attach })
 
 		-- lua
 		lspconfig.lua_ls.setup({
