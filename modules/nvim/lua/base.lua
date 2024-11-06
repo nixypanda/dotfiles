@@ -135,3 +135,7 @@ vim.keymap.set("n", "<leader>bS", "<cmd>tab close<cr>", { desc = "Close tab spli
 
 -- utilities
 vim.keymap.set("n", "<leader>us", '<cmd>let @/ = ""<cr>', { desc = "Remove search highlight" })
+
+-- helpful window operations
+vim.keymap.set("n", "<leader>wv", "<C-w>t<C-w>H", { desc = "Horizontally split windows to vertical" })
+vim.keymap.set("n", "<leader>wv", "<C-w>t<C-w>K", { desc = "Vertically split windows to horizontal" })

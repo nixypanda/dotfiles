@@ -6,5 +6,7 @@ require("lz.n").load({
 		{ "<leader>cl", "<cmd>CoverageLoadLcov ./coverage.lcov<cr>", desc = "Load ./coverage.lcov file" },
 		{ "<leader>cs", "<cmd>CoverageSummary<cr>", desc = "Show summary of coverage" },
 	},
-	after = function() require("coverage").setup({}) end,
+	after = function()
+        require("coverage").setup({})
+    end,
 })

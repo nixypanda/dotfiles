@@ -143,7 +143,7 @@ in
         config = # lua
           ''
             require('blame').setup()
-            vim.keymap.set("n", "<leader>gb", "<cmd>BlameToggle window<cr>", {desc = "Git blame"})
+            vim.keymap.set("n", "<leader>gB", "<cmd>BlameToggle window<cr>", {desc = "Git blame"})
           '';
       }
 

@@ -13,7 +13,6 @@ require("lz.n").load({
 		vim.cmd.packadd("nvim-dap-go")
 	end,
 	after = function()
-		-- General Setup
 		local dap = require("dap")
 		local dapui = require("dapui")
 		local widgets = require("dap.ui.widgets")
@@ -41,7 +40,7 @@ require("lz.n").load({
 		dap.listeners.before.event_terminated.dapui_config = function() dapui.close() end
 		dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
 
-		require("nvim-dap-virtual-text").setup()
+		require("nvim-dap-virtual-text").setup({})
 
 		-- Programming language specific plugins
 		-- Go
@@ -49,7 +48,7 @@ require("lz.n").load({
 
 		-- python
 		local dap_python = require("dap-python")
-		-- Injected via nix
+		-- Injected via nix: python_with_debugpy (location of python install with debugpy)
 		dap_python.setup(python_with_debugpy .. "/bin/python")
 		dap_python.test_runner = "pytest"
 

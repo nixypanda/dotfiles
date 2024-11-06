@@ -1,4 +1,4 @@
-vim.api.nvim_set_option("laststatus", 3)
+vim.api.nvim_set_option_value("laststatus", 3, {})
 
 require("lualine").setup({
 	options = {

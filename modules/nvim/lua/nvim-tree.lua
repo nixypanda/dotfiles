@@ -22,7 +22,10 @@ require("lz.n").load({
 		-- Workaround to make the global statusline look shifted over when nvim tree is
 		-- active
 		local nvim_tree_shift = {
-			function() return string.rep(" ", vim.api.nvim_win_get_width(require("nvim-tree.view").get_winnr()) - 2) end,
+			function()
+				local nvim_tree_window_number = require("nvim-tree.view").get_winnr() or 0
+				return string.rep(" ", vim.api.nvim_win_get_width(nvim_tree_window_number) - 2)
+			end,
 			cond = require("nvim-tree.view").is_visible,
 			color = "NvimTreeNormal",
 		}

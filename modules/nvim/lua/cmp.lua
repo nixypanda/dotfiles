@@ -99,11 +99,22 @@ lz.load({
 		})
 
 		cmp.setup.filetype("Cargo.toml", { sources = { { name = "crates" } } })
-		cmp.setup.filetype("lua", { sources = { { name = "nvim_lua" } } })
-		cmp.setup.filetype(
-			{ "sql", "mysql", "plsql" },
-			{ sources = { { name = "vim-dadbod-completion" }, { name = "buffer" } } }
-		)
+		cmp.setup.filetype("lua", {
+			sources = {
+				{ name = "codeium", max_item_count = 3 },
+				{ name = "nvim_lua" },
+				{ name = "luasnip" },
+				{ name = "buffer", max_item_count = 5, keyword_length = 3 },
+			},
+		})
+		cmp.setup.filetype({ "sql", "mysql", "plsql" }, {
+			sources = {
+				{ name = "codeium", max_item_count = 3 },
+				{ name = "vim-dadbod-completion" },
+				{ name = "buffer" },
+				{ name = "buffer", max_item_count = 5, keyword_length = 3 },
+			},
+		})
 
 		vim.o.completeopt = "menuone,noselect"
 	end,

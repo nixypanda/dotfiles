@@ -11,9 +11,6 @@ require("statuscol").setup({
 		{ text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
 	},
 	clickhandlers = {
-		DiagnosticSignError = show_line_diagnostics,
-		DiagnosticSignHint = show_line_diagnostics,
-		DiagnosticSignInfo = show_line_diagnostics,
-		DiagnosticSignWarn = show_line_diagnostics,
+		["diagnostic/signs"] = show_line_diagnostics,
 	},
 })

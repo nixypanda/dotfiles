@@ -1,4 +1,4 @@
-require("git-conflict").setup()
+require("git-conflict").setup({})
 
 vim.keymap.set("n", "<leader>gcb", "<cmd>GitConflictChooseBoth<cr>", { desc = "Choose both" })
 vim.keymap.set("n", "<leader>gch", "<cmd>GitConflictChooseOurs<cr>", { desc = "Choose ours" })

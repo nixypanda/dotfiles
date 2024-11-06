@@ -6,6 +6,10 @@ require("nvim-treesitter.configs").setup({
 		-- so we don't really need to specify anything there.
 		-- https://github.com/NixOS/nixpkgs/issues/189838
 	},
+	sync_install = false,
+	auto_install = false,
+	ignore_install = {},
+
 	highlight = { enable = true },
 	incremental_selection = {
 		enable = true,
