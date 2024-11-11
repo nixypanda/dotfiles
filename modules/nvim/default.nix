@@ -6,10 +6,6 @@ let
 
   python_with_debugpy = pkgs.python3.withPackages (ps: with ps; [ debugpy ]);
 
-  tree-sitter-nu = pkgs.callPackage ./plugins/nvim-treesitter-nu.nix {
-    inherit (pkgs.tree-sitter) buildGrammar;
-  };
-
   # This sucks
   # The codeium-nvim plugin works with specific version of the language server
   # now anytime I update I will need to check if the lanague-server with what it works with
@@ -218,6 +214,7 @@ in
             markdown
             markdown-inline
             nix
+            nu
             python
             regex
             ruby
@@ -231,8 +228,6 @@ in
             vim
             vimdoc
             yaml
-
-            tree-sitter-nu.grammar
           ]
         );
         type = "lua";
@@ -513,11 +508,6 @@ in
         set shell=zsh
         luafile ${builtins.toString ./lua/base.lua}
       '';
-  };
-
-  xdg.configFile = {
-    "nvim/queries/nu/highlights.scm".text = tree-sitter-nu.highlights;
-    "nvim/queries/nu/injections.scm".text = tree-sitter-nu.injections;
   };
 
   home = {
