@@ -22,7 +22,6 @@
         "aws"
         "terraform"
         "nomad"
-        "vault"
       ];
     };
 

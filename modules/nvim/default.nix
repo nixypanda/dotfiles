@@ -263,6 +263,7 @@ in
             ["cmp-path"] = "${cmp-path}",
             ["cmp_luasnip"] = "${cmp_luasnip}"
           }
+          local codeium_language_server_bin = "${codeium-1-8-25}/bin/codeium_language_server"
           ${builtins.readFile ./lua/cmp.lua}
         '';
         optional = true;
@@ -306,23 +307,9 @@ in
       }
 
       # Programming: AI shit
+      # config in nvim-cmp
       {
         plugin = codeium-nvim;
-        type = "lua";
-        config = # lua
-          ''
-            require('lz.n').load{
-              "codeium.nvim",
-              event = "InsertEnter",
-              after = function()
-                require('codeium').setup({
-                  tools = {
-                      language_server = "${codeium-1-8-25}/bin/codeium_language_server"
-                  }
-                })
-                end
-              }
-          '';
         optional = true;
       }
 

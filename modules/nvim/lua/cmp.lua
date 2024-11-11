@@ -9,6 +9,7 @@ lz.load({
 		vim.cmd.packadd("LuaSnip")
 		vim.cmd.packadd("lspkind.nvim")
 		vim.cmd.packadd("friendly-snippets")
+		vim.cmd.packadd("codeium.nvim")
 
 		-- cmp_source_path is injected from nix
 		for plugin_name in pairs(cmp_source_path) do
@@ -22,9 +23,13 @@ lz.load({
 		end
 
 		local cmp = require("cmp")
-
 		local luasnip = require("luasnip")
 		require("luasnip.loaders.from_vscode").lazy_load()
+		require("codeium").setup({
+			tools = {
+				language_server = codeium_language_server_bin,
+			},
+		})
 
 		local key_mappings = cmp.mapping.preset.insert({
 			["<C-d>"] = cmp.mapping.scroll_docs(-4),
