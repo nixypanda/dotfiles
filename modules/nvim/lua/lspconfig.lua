@@ -158,13 +158,16 @@ require("lz.n").load({
 			on_attach = on_attach,
 			settings = {
 				nixd = {
+					nixpkgs = {
+						expr = 'import (builtins.getFlake ("/Users/nixypanda/.dotfiles")).inputs.nixpkgs {}',
+					},
 					diagnostic = { suppress = { "sema-escaping-with" } },
 					options = {
 						nixos = {
-							expr = '(builtins.getFlake ("~/.dotfiles")).nixosConfigurations.nixos.options',
+							expr = '(builtins.getFlake ("/Users/nixypanda/.dotfiles")).nixosConfigurations.nixos.options',
 						},
 						home_manager = {
-							expr = '(builtins.getFlake ("~/.dotfiles")).homeConfigurations."macbook-pro".options',
+							expr = '(builtins.getFlake ("/Users/nixypanda/.dotfiles")).homeConfigurations."srt-l02-sekhmet".options',
 						},
 					},
 				},

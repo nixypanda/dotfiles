@@ -5,11 +5,6 @@
     dig
     unrar
     unzip
-    # Build failing on MacOS
-    # wireshark
-
-    # Broken for macos (from the looks of it)
-    # mitmproxy
 
     # Better alternatives
     bottom # top
@@ -25,14 +20,11 @@
     jc
     jq
 
-    neofetch
     carapace
     vim-startuptime
 
-    terraform
-
     # Nix itself
-    nixVersions.nix_2_21
+    nixVersions.latest
   ];
 
   programs.starship = {
