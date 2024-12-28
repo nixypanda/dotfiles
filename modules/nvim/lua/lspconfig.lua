@@ -3,7 +3,7 @@ require("lz.n").load({
 	event = { "BufReadPre", "BufNewFile" },
 	load = function(name)
 		vim.cmd.packadd(name)
-		vim.cmd.packadd("cmp-nvim-lsp")
+		vim.cmd.packadd("blink.cmp")
 		vim.cmd.packadd("lspsaga.nvim")
 		vim.cmd.packadd("SchemaStore.nvim")
 	end,
@@ -74,7 +74,7 @@ require("lz.n").load({
 		end
 
 		-- Need to add this to the language server to broadcast snippet compatibility
-		local capabilities = require("cmp_nvim_lsp").default_capabilities()
+		local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 		lspconfig.gleam.setup({
 			capabilities = capabilities,
