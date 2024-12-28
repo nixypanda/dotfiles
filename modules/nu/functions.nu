@@ -23,7 +23,7 @@ use std
 #     insert lines {|row| $row.blanks + $row.code + $row.comments}
 # }
 
-def _create_bar [percentage: int] -> str {
+def _create_bar [percentage] {
     let max_length = 20   # Length of the bar
     let filled_length = ($max_length * $percentage / 100) | into int
 
@@ -33,7 +33,7 @@ def _create_bar [percentage: int] -> str {
     $bar
 }
 
-def _into-filesize [in_half_kb] -> filesize {
+def _into-filesize [in_half_kb] {
     let f_size = $in_half_kb * 512 |  into filesize 
     $f_size
 }
