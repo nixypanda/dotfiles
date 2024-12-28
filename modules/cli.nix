@@ -12,7 +12,6 @@
     fd # find
     ripgrep # grep
     tokei # cloc, sloc, etc
-    zoxide # cd with jumping
     hyperfine # benchmarking (time)
 
     # Structured data
@@ -20,14 +19,24 @@
     jc
     jq
 
-    carapace
     vim-startuptime
 
     # Nix itself
     nixVersions.latest
   ];
 
-  programs.starship = {
-    enable = true;
+  programs = {
+    carapace = {
+      enable = true;
+      enableNushellIntegration = true;
+    };
+    zoxide = {
+      enable = true;
+      enableNushellIntegration = true;
+    };
+    starship = {
+      enable = true;
+      enableNushellIntegration = true;
+    };
   };
 }

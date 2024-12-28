@@ -2,7 +2,8 @@
 let
   # Caveat: This requires Xcode.app installed on the system
   # https://github.com/NixOS/nixpkgs/pull/211321
-  code_lldb = pkgs.vscode-extensions.vadimcn.vscode-lldb;
+  # TODO: Broken
+  # code_lldb = pkgs.vscode-extensions.vadimcn.vscode-lldb;
 
   python_with_debugpy = pkgs.python3.withPackages (ps: with ps; [ debugpy ]);
 
@@ -10,9 +11,10 @@ let
   # The codeium-nvim plugin works with specific version of the language server
   # now anytime I update I will need to check if the lanague-server with what it works with
   # and then update this accordingly.
-  codeium-1-8-25 = pkgs.codeium.overrideAttrs (o: {
+  codeium-server = pkgs.codeium.overrideAttrs (o: rec {
+    version = "1.20.9";
     src = builtins.fetchurl {
-      url = "https://github.com/Exafunction/codeium/releases/download/language-server-v1.20.9/language_server_macos_x64.gz";
+      url = "https://github.com/Exafunction/codeium/releases/download/language-server-v${version}/language_server_macos_x64.gz";
       sha256 = "sha256:0c8gjx47ddi29lgzrziafx68q2y962lyy8agnaylnlic8jhaaqmg";
     };
 
@@ -155,18 +157,15 @@ in
         plugin = nvim-lspconfig;
         type = "lua";
         config = # lua
+          # local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
           ''
-            local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
+            -- TODO: Dummy path to avoid the broken dep
+            local extension_path = 'code_lldb'
             local codelldb_path = extension_path .. 'adapter/codelldb'
             local liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib'
             ${builtins.readFile ./lua/lspconfig.lua}
           '';
         optional = true;
-      }
-      {
-        plugin = nvim-lsp-file-operations;
-        type = "lua";
-        config = ''require("lsp-file-operations").setup()'';
       }
       {
         plugin = SchemaStore-nvim;
@@ -258,7 +257,7 @@ in
             ["cmp-path"] = "${cmp-path}",
             ["cmp_luasnip"] = "${cmp_luasnip}"
           }
-          local codeium_language_server_bin = "${codeium-1-8-25}/bin/codeium_language_server"
+          local codeium_language_server_bin = "${codeium-server}/bin/codeium_language_server"
           ${builtins.readFile ./lua/cmp.lua}
         '';
         optional = true;

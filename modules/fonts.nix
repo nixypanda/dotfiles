@@ -1,6 +1,6 @@
 { pkgs, colorscheme, ... }:
 {
-  home.packages = with pkgs; [ (nerdfonts.override { fonts = [ "Hack" ]; }) ];
+  home.packages = with pkgs; [ nerd-fonts.hack ];
 
   xresources = {
     properties = {
