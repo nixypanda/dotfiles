@@ -38,5 +38,15 @@
       enable = true;
       enableNushellIntegration = true;
     };
+    atuin = {
+      enable = true;
+      enableNushellIntegration = true;
+      settings = {
+        auto_sync = false;
+        update_check = false;
+        search_mode = "fuzzy";
+        cwd_filter = [ "shit" ];
+      };
+    };
   };
 }

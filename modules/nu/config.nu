@@ -27,26 +27,3 @@ $env.config.completions.external.completer = {|spans|
 $env.config.cursor_shape.vi_insert = "line"
 $env.config.cursor_shape.vi_normal = "block"
 $env.config.edit_mode = "vi"
-
-# fuzzy history searching
-$env.config.keybindings ++= [
-        {
-            name: fuzzy_history_fzf
-            modifier: control
-            keycode: char_r
-            mode: [emacs , vi_normal, vi_insert]
-            event: {
-              send: executehostcommand
-              cmd: "
-                commandline edit -r (history 
-                  | each { |it| $it.command } 
-                  | uniq 
-                  | reverse 
-                  | str join (char -i 0) 
-                  | fzf --read0 --tiebreak=chunk --layout=reverse  --multi --preview='bat --style=numbers {..}' --preview-window='bottom:hidden' --bind shift-tab:up,tab:down --height=50% -q (commandline)
-                  | decode utf-8 
-                  | str trim)
-              "
-            }
-        }
-]
