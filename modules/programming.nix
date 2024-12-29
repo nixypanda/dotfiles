@@ -5,14 +5,6 @@
     docker
     docker-compose
 
-    # gleam
-    gleam
-    erlang
-
-    # go
-    go
-    golangci-lint
-
     # Haskell
     cabal2nix
     ghc

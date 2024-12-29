@@ -26,7 +26,6 @@ require("lz.n").load({
 	after = function()
 		require("neotest").setup({
 			adapters = {
-				require("neotest-go"),
 				require("neotest-python")({
 					dap = { justMyCode = true },
 				}),

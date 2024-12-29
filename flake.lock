@@ -274,22 +274,6 @@
         "type": "github"
       }
     },
-    "nvim-lsp-file-operations-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1729769589,
-        "narHash": "sha256-c56N0E6NA3g58IRgnTtvGmpJ+uZemdmoIsQmPcvbrHY=",
-        "owner": "antosha417",
-        "repo": "nvim-lsp-file-operations",
-        "rev": "9744b738183a5adca0f916527922078a965515ed",
-        "type": "github"
-      },
-      "original": {
-        "owner": "antosha417",
-        "repo": "nvim-lsp-file-operations",
-        "type": "github"
-      }
-    },
     "nvim-sqls-src": {
       "flake": false,
       "locked": {
@@ -394,12 +378,11 @@
       "inputs": {
         "nvim-blame-src": "nvim-blame-src",
         "nvim-dadbod-ssh": "nvim-dadbod-ssh",
-        "nvim-lsp-file-operations-src": "nvim-lsp-file-operations-src",
         "nvim-sqls-src": "nvim-sqls-src"
       },
       "locked": {
-        "lastModified": 1731344549,
-        "narHash": "sha256-f94WWBhDSBjT19FvZmciNNSIEw5dkrcJREQoKEBDLxg=",
+        "lastModified": 1735457264,
+        "narHash": "sha256-+OmkZ4Lcybj8y0geAbi7OGxO/mLAcgRdhVxpK8cnNtY=",
         "path": "/Users/nixypanda/.dotfiles/modules/nvim/plugins",
         "type": "path"
       },
