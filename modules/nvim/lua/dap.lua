@@ -10,7 +10,6 @@ require("lz.n").load({
 		vim.cmd.packadd("nvim-dap-ui")
 		vim.cmd.packadd("nvim-dap-virtual-text")
 		vim.cmd.packadd("nvim-dap-python")
-		vim.cmd.packadd("nvim-dap-go")
 	end,
 	after = function()
 		local dap = require("dap")
@@ -43,8 +42,6 @@ require("lz.n").load({
 		require("nvim-dap-virtual-text").setup({})
 
 		-- Programming language specific plugins
-		-- Go
-		require("dap-go").setup()
 
 		-- python
 		local dap_python = require("dap-python")
