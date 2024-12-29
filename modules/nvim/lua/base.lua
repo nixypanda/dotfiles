@@ -139,3 +139,10 @@ vim.keymap.set("n", "<leader>us", '<cmd>let @/ = ""<cr>', { desc = "Remove searc
 -- helpful window operations
 vim.keymap.set("n", "<leader>wv", "<C-w>t<C-w>H", { desc = "Horizontally split windows to vertical" })
 vim.keymap.set("n", "<leader>wv", "<C-w>t<C-w>K", { desc = "Vertically split windows to horizontal" })
+
+-- quickfix
+vim.keymap.set("n", "<leader>co", "<cmd>copen<cr>", { desc = "Open quickfix list" })
+vim.keymap.set("n", "<leader>cj", "<cmd>cnext<cr>", { desc = "Next quickfix item" })
+vim.keymap.set("n", "<leader>ck", "<cmd>cprev<cr>", { desc = "Previous quickfix item" })
+vim.keymap.set("n", "<leader>cl", "<cmd>colder<cr>", { desc = "Older quickfix list" })
+vim.keymap.set("n", "<leader>ch", "<cmd>cnewer<cr>", { desc = "Newer quickfix list" })

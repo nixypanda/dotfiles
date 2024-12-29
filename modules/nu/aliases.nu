@@ -1,8 +1,6 @@
 ## ALIASES ##
 
 # I don't like the default but my hand just types it
-alias vi = nvim
-alias vim = nvim
 alias top = btm
 alias htop = btm
 alias ytop = btm

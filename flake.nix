@@ -81,10 +81,7 @@
           home.stateVersion = "22.05";
 
           imports = [
-            ./modules/aws
-            ./modules/bat
             ./modules/cli.nix
-            ./modules/direnv
             ./modules/firefox
             ./modules/fonts.nix
             ./modules/git

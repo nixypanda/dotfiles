@@ -3,7 +3,8 @@ wk.setup({})
 
 local mappings = {
 	{ "<leader>b", group = "buffers" },
-	{ "<leader>c", group = "code (coverage)" },
+	{ "<leader>c", group = "quickfix" },
+	{ "<leader>C", group = "code (coverage)" },
 	{ "<leader>D", group = "database" },
 	{ "<leader>d", group = "debug" },
 	{ "<leader>e", group = "explorer (neo-tree)" },

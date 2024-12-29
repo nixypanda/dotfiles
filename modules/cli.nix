@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, colorscheme, ... }:
 {
   home.packages = with pkgs; [
     # CLI tools / Terminal facification
@@ -8,7 +8,6 @@
 
     # Better alternatives
     bottom # top
-    dua # disk usage analyzer
     fd # find
     ripgrep # grep
     tokei # cloc, sloc, etc
@@ -18,8 +17,6 @@
     fx
     jc
     jq
-
-    vim-startuptime
 
     # Nix itself
     nixVersions.latest
@@ -45,8 +42,17 @@
         auto_sync = false;
         update_check = false;
         search_mode = "fuzzy";
-        cwd_filter = [ "shit" ];
+        history_filter = [ "shit" ];
       };
+    };
+    bat = {
+      enable = true;
+      config.theme = colorscheme.bat-theme-name;
+    };
+    direnv = {
+      enable = true;
+      enableNushellIntegration = true;
+      nix-direnv.enable = true;
     };
   };
 }

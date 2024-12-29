@@ -23,7 +23,7 @@ in
 {
   programs.neovim = {
     enable = true;
-    vimAlias = true;
+    viAlias = true;
 
     plugins = with pkgs.vimPlugins; [
       # Setup the plugin that can lazy load others
@@ -103,10 +103,6 @@ in
         plugin = nvim-dap-python;
         optional = true;
       }
-      {
-        plugin = nvim-dap-go;
-        optional = true;
-      }
 
       # Fuzzy Finder
       {
@@ -152,6 +148,18 @@ in
         config = builtins.readFile ./lua/which-key.lua;
       }
 
+      # navigation
+      {
+        plugin = nvim-bqf;
+        type = "lua";
+        config = ''require("bqf").setup()'';
+      }
+      {
+        plugin = nvim-pqf;
+        type = "lua";
+        config = ''require("pqf").setup()'';
+      }
+
       # Programming: LSP
       {
         plugin = nvim-lspconfig;
@@ -187,27 +195,25 @@ in
         config = builtins.readFile ./lua/conform.lua;
         optional = true;
       }
+      # {
+      #   plugin = nvim-lsp-file-operations;
+      #   type = "lua";
+      #   optional = true;
+      #   config = ''require("lsp-file-operations").setup()'';
+      # }
 
       # Progrmming: Treesitter
       {
         plugin = nvim-treesitter.withPlugins (
           plugins: with plugins; [
             bash
-            c
             css
-            dhall
             dockerfile
-            elixir
-            elm
-            gleam
-            go
             haskell
             hcl
             html
-            java
             javascript
             json
-            latex
             kdl
             lua
             markdown
@@ -216,7 +222,6 @@ in
             nu
             python
             regex
-            ruby
             rust
             scss
             sql
@@ -224,7 +229,6 @@ in
             toml
             tsx
             typescript
-            vim
             vimdoc
             yaml
           ]
@@ -296,7 +300,6 @@ in
         optional = true;
       }
       neotest-python
-      neotest-go
       FixCursorHold-nvim
       {
         plugin = nvim-coverage;
@@ -389,24 +392,14 @@ in
       nodePackages.dockerfile-language-server-nodejs
       hadolint
 
-      # Gleam
-      gleam
-
       # grammer
       vale
 
       # Git
       gitlint
 
-      # Go
-      gopls
-      delve
-
       # HTML/CSS/JS
       nodePackages.vscode-langservers-extracted
-
-      # Java
-      java-language-server
 
       # JavaScript
       nodePackages.typescript-language-server
@@ -446,9 +439,6 @@ in
       # TOML
       taplo
 
-      # Vimscript
-      nodePackages.vim-language-server
-
       # YAML
       nodePackages.yaml-language-server
       yamllint
@@ -461,8 +451,6 @@ in
       # telescope
       ripgrep
       fd
-
-      ltex-ls
     ];
 
     extraConfig = # vim
@@ -476,6 +464,8 @@ in
   home = {
     sessionVariables.NIXD_FLAGS = "-log=error";
     packages = with pkgs; [
+      vim-startuptime
+
       nodePackages.livedown
       # Rust
       rust-analyzer
