@@ -64,6 +64,8 @@
                 "unrar"
                 "codeium"
                 "terraform"
+                "vscode"
+                "vscode-extension-MS-python-vscode-pylance"
                 # browser extensions
                 "onepassword-password-manager"
                 "okta-browser-plugin"
@@ -90,6 +92,7 @@
             ./modules/nvim
             ./modules/programming.nix
             ./modules/system-management
+            ./modules/vscode
             ./modules/zellij
             ./modules/zsh
           ];
