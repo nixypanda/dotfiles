@@ -195,6 +195,12 @@ in
         config = builtins.readFile ./lua/conform.lua;
         optional = true;
       }
+      {
+        plugin = lsp_lines-nvim;
+        type = "lua";
+        config = builtins.readFile ./lua/lsp_lines.lua;
+        optional = true;
+      }
       # {
       #   plugin = nvim-lsp-file-operations;
       #   type = "lua";
