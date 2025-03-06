@@ -17,7 +17,7 @@ in
           (import ./config/tracking.nix)
           (import ./config/security.nix)
         ];
-        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
           clearurls
           darkreader
           facebook-container

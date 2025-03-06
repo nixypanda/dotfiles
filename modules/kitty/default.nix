@@ -2,18 +2,6 @@
 {
   programs.kitty = {
     enable = true;
-    # temp: kitty 0.38 is broken on nixpkgs
-    package = (
-      pkgs.kitty.overrideDerivation (o: rec {
-        version = "0.38.1";
-        src = pkgs.fetchFromGitHub {
-          owner = "kovidgoyal";
-          repo = "kitty";
-          rev = "refs/tags/v${version}";
-          hash = "sha256-0M4Bvhh3j9vPedE/d+8zaiZdET4mXcrSNUgLllhaPJw=";
-        };
-      })
-    );
     settings = {
       font_size = 10;
       shell = "zsh";
