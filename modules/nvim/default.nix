@@ -275,6 +275,19 @@ in
       }
 
       # Programming: AI shit
+      {
+        plugin = avante-nvim;
+        type = "lua";
+        optional = true;
+        config = builtins.readFile ./lua/avante.lua;
+      }
+      {
+        plugin = img-clip-nvim;
+        type = "lua";
+        config = ''
+          require("img-clip").setup()
+        '';
+      }
       # config in blink-cmp
       {
         plugin = codeium-nvim;
@@ -361,14 +374,14 @@ in
 
       # File specific plugins
       {
-        plugin = headlines-nvim;
+        plugin = render-markdown-nvim;
         type = "lua";
         config = # lua
           ''
             require("lz.n").load({
-              "headlines.nvim",
-              ft = "markdown",
-              after = function() require("headlines").setup() end,
+              "render-markdown.nvim",
+              ft = {"markdown", "Avante"},
+              after = function() require('render-markdown').setup({file_types = { 'markdown', 'Avante' }}) end,
             })
           '';
         optional = true;
