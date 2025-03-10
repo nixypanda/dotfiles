@@ -1,9 +1,7 @@
 { pkgs, colorscheme, ... }:
 let
   # Caveat: This requires Xcode.app installed on the system
-  # https://github.com/NixOS/nixpkgs/pull/211321
-  # TODO: Broken
-  # code_lldb = pkgs.vscode-extensions.vadimcn.vscode-lldb;
+  code_lldb = pkgs.vscode-extensions.vadimcn.vscode-lldb;
 
   python_with_debugpy = pkgs.python3.withPackages (ps: with ps; [ debugpy ]);
 
@@ -165,10 +163,8 @@ in
         plugin = nvim-lspconfig;
         type = "lua";
         config = # lua
-          # local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
           ''
-            -- TODO: Dummy path to avoid the broken dep
-            local extension_path = 'code_lldb'
+            local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
             local codelldb_path = extension_path .. 'adapter/codelldb'
             local liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib'
             ${builtins.readFile ./lua/lspconfig.lua}
