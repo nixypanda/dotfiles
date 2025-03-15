@@ -30,6 +30,7 @@ require("lz.n").load({
 					dap = { justMyCode = true },
 				}),
 				require("rustaceanvim.neotest"),
+                require("neotest-haskell")
 			},
 		})
 	end,

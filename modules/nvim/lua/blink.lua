@@ -58,7 +58,6 @@ lz.load({
 					auto_show_delay_ms = 0,
 					window = { border = "rounded" },
 				},
-				ghost_text = { enabled = true },
 			},
 			signature = { window = { border = "single" } },
 			fuzzy = {

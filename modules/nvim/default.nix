@@ -315,6 +315,7 @@ in
         optional = true;
       }
       neotest-python
+      neotest-haskell
       FixCursorHold-nvim
       {
         plugin = nvim-coverage;
