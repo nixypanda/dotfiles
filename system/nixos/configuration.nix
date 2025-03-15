@@ -113,7 +113,7 @@
   sound.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.sherub = {
+  users.users.nixypanda = {
     isNormalUser = true;
     # Enable ‘sudo’, 'audio' for the user.
     extraGroups = [
@@ -139,7 +139,7 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.09"; # Did you read the comment?
 
-  users.extraGroups.vboxusers.members = [ "sherub" ];
+  users.extraGroups.vboxusers.members = [ "nixypanda" ];
   virtualisation = {
     virtualbox.host.enable = true;
     libvirtd.enable = true;

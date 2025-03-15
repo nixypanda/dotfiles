@@ -1,4 +1,4 @@
-#!/home/sherub/.nix-profile/bin/python3
+#!/home/nixypanda/.nix-profile/bin/python3
 
 # Taken from https://github.com/haideralipunjabi/polybar-browsermediacontrol
 import argparse

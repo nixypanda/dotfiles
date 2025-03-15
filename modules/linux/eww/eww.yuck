@@ -1,6 +1,6 @@
 ;;  Profile vars 
 (defvar NAME "nixypanda")
-(defpoll DOTFILES :interval "10m" "echo \"/home/sherub/.dotfiles\"")
+(defpoll DOTFILES :interval "10m" "echo \"/home/nixypanda/.dotfiles\"")
 (defpoll UNAME :interval "5m"  "whoami")
 
 ;;  System vars 

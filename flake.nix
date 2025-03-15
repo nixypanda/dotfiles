@@ -107,8 +107,8 @@
       };
 
       home-linux = {
-        home.homeDirectory = "/home/sherub";
-        home.username = "sherub";
+        home.homeDirectory = "/home/nixypanda";
+        home.username = "nixypanda";
         imports = [
           # Desktop Environment
           ./modules/linux/desktop-environment.nix
