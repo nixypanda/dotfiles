@@ -53,7 +53,7 @@ require("lz.n").load({
 			map("<leader>li", "<cmd>Telescope lsp_incoming_calls<cr>", "Incoming Calls")
 			map("<leader>lo", "<cmd>Telescope lsp_outgoing_calls<cr>", "Outgoing Calls")
 			map("<leader>lr", "<cmd>Telescope lsp_references<cr>", "Refrences")
-			map("<leader>ls", "<cmd>Telescope document_symbols<cr>", "Document Symbols")
+			map("<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols")
 			map("<leader>lp", "<cmd>Lspsaga hover_doc<cr>", "Preview Definition")
 
 			-- diagnostics
