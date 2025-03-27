@@ -4,7 +4,6 @@
     enable = true;
     settings = {
       font_size = 10;
-      shell = "zsh";
       scrollback_lines = 10000;
       input_delay = 1;
 

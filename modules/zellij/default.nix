@@ -1,7 +1,6 @@
 {
   programs.zellij = {
     enable = true;
-    enableZshIntegration = true;
   };
   xdg.configFile = {
     "zellij/config.kdl".text = # kdl

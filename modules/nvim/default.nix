@@ -471,7 +471,6 @@ in
     extraConfig = # vim
       ''
         colorscheme ${colorscheme.vim-name}
-        set shell=zsh
         luafile ${builtins.toString ./lua/base.lua}
       '';
   };
