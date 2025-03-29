@@ -410,6 +410,7 @@ in
 
       # grammer
       vale
+      harper
 
       # Git
       gitlint

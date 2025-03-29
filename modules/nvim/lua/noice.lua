@@ -15,20 +15,6 @@ require("noice").setup({
 		inc_rename = false, -- enables an input dialog for inc-rename.nvim
 		lsp_doc_border = false, -- add a border to hover docs and signature help
 	},
-	routes = {
-		{
-			-- skip progress messages from noisy servers
-			filter = {
-				event = "lsp",
-				kind = "progress",
-				cond = function(message)
-					local client = vim.tbl_get(message.opts, "progress", "client")
-					return client == "ltex"
-				end,
-			},
-			opts = { skip = true },
-		},
-	},
 })
 
 vim.keymap.set("n", "<leader>sn", "<cmd>Noice telescope<cr>", { desc = "Noice message history" })

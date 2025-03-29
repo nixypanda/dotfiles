@@ -28,7 +28,7 @@ require("lz.n").load({
 			-- inlay hints
 			if client.server_capabilities.inlayHintProvider then vim.lsp.inlay_hint.enable() end
 
-			-- Set keymaps
+			-- Set keymap
 			local map = function(keys, func, desc) vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc }) end
 
 			map("gd", "<cmd>lua vim.lsp.buf.definition()<cr>", "Goto Definition")
@@ -72,7 +72,7 @@ require("lz.n").load({
 			map("<leader>lu", "<cmd>LspRestart<cr>", "Restart LSP")
 			map("<leader>lU", "<cmd>LspStart<cr>", "Start LSP")
 
-			-- Other mode keymaps
+			-- Other mode keymap
 			vim.keymap.set(
 				"v",
 				"<leader>la",
@@ -84,14 +84,13 @@ require("lz.n").load({
 		-- Need to add this to the language server to broadcast snippet compatibility
 		local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-		-- grammer
-		lspconfig.ltex.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
+		-- grammar
+		lspconfig.harper_ls.setup({
 			settings = {
-				ltex = {
-					["ltex-ls"] = {
-						logLevel = "warning",
+				["harper-ls"] = {
+					linters = {
+						SpellCheck = false,
+						SentenceCapitalization = false,
 					},
 				},
 			},
@@ -100,7 +99,7 @@ require("lz.n").load({
 		-- JavaScript/TypeScript
 		lspconfig.ts_ls.setup({ capabilities = capabilities, on_attach = on_attach })
 
-		-- lua
+		-- Lua
 		lspconfig.lua_ls.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
@@ -152,47 +151,18 @@ require("lz.n").load({
 		-- Python
 		lspconfig.ruff.setup({ capabilities = capabilities, on_attach = on_attach })
 		lspconfig.pyright.setup({ capabilities = capabilities, on_attach = on_attach })
-		-- lspconfig.basedpyright.setup({ capabilities = capabilities, })
-		--
-		-- We are primarily using pyright for everything. Only using pylsp for rope refactors.
-		-- lspconfig.pylsp.setup({
-		-- 	settings = {
-		-- 		pylsp = {
-		-- 			plugins = {
-		-- 				autopep8 = { enabled = false },
-		-- 				jedi_completion = { enabled = false },
-		-- 				jedi_definition = { enabled = false },
-		-- 				jedi_hover = { enabled = false },
-		-- 				jedi_references = { enabled = false },
-		-- 				jedi_signature_help = { enabled = false },
-		-- 				jedi_symbols = { enabled = false },
-		-- 				maccabe = { enabled = false },
-		-- 				preload = { enabled = false },
-		-- 				pycodestyle = { enabled = false },
-		-- 				pydocstyle = { enabled = false },
-		-- 				pyflakes = { enabled = false },
-		-- 				pylint = { enabled = false },
-		-- 				rope_completion = { enabled = false },
-		-- 				yapf = { enabled = false },
-		-- 				-- using a fork of ropify for renameing modules etc,
-		-- 				-- pyright already offers renaming capabilities that pylsp-rope offers at the moment
-		-- 				pylsp_rope = { enabled = true, rename = false },
-		-- 			},
-		-- 		},
-		-- 	},
-		-- })
 
 		-- Terraform
 		lspconfig.terraform_lsp.setup({ capabilities = capabilities, on_attach = on_attach })
 
-		-- shit you need to deal with
+		-- Shit you need to deal with
 		lspconfig.bashls.setup({ capabilities = capabilities, on_attach = on_attach })
 		lspconfig.cmake.setup({ capabilities = capabilities, on_attach = on_attach })
 		lspconfig.cssls.setup({ capabilities = capabilities, on_attach = on_attach })
 		lspconfig.dockerls.setup({ capabilities = capabilities, on_attach = on_attach })
 		lspconfig.html.setup({ capabilities = capabilities, on_attach = on_attach })
 
-		-- json/yaml/toml configs
+		-- json/yaml/TOML configs
 		lspconfig.jsonls.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
@@ -279,7 +249,7 @@ require("lz.n").load({
 				default_settings = {
 					["rust-analyzer"] = {
 						checkOnSave = { command = "clippy" },
-						-- RA will scan .direnv correspondingly entire nixpkgs repository
+						-- Rust Analyzer will scan .direnv correspondingly entire nixpkgs repository
 						files = { excludeDirs = { ".direnv" } },
 					},
 				},
