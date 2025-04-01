@@ -6,9 +6,6 @@ $env.config.completions.external.completer = {|spans|
 		carapace $spans.0 nushell ...$spans
 		| from json
 	}
-	let zoxide_completer = {|spans|
-		$spans | skip 1 | zoxide query -l $in | lines | where {|x| $x != $env.PWD}
-	}
 
 	let expanded_alias = scope aliases | where name == $spans.0 | get -i 0 | get -i expansion
 	let spans = if $expanded_alias != null  {
@@ -17,10 +14,7 @@ $env.config.completions.external.completer = {|spans|
 		$spans
 	}
 
-	match $spans.0 {
-		__zoxide_z | __zoxide_zi => $zoxide_completer,
-		_ => $carapace_completer
-	} | do $in $spans
+    $carapace_completer | do $in $spans
 }
 
 
