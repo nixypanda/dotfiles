@@ -29,12 +29,20 @@ lz.load({
 				["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
 			},
 			sources = {
-				default = { "lsp", "path", "codeium", "snippets", "buffer", "dadbod" },
+				default = { "codeium", "lsp", "path", "snippets", "buffer" },
+				per_filetype = { sql = { "dadbod" } },
 				providers = {
 					codeium = {
 						name = "codeium", -- IMPORTANT: use the same name as you would for nvim-cmp
 						module = "blink.compat.source",
-						score_offset = 5,
+						transform_items = function(_, items)
+							for _, item in ipairs(items) do
+								item.kind_icon = " "
+								item.kind_name = "codeium"
+							end
+							return items
+						end,
+						score_offset = 100,
 						async = true,
 						max_items = 3,
 						min_keyword_length = 3,
