@@ -22,6 +22,7 @@
       ]
     ))
     poetry
+    uv
     python3Packages.ipython
 
     # rust
