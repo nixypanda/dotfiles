@@ -61,8 +61,8 @@
               pkg:
               builtins.elem (lib.getName pkg) [
                 "zoom"
-                "unrar"
                 "codeium"
+                "windsurf"
                 "terraform"
                 # browser extensions
                 "onepassword-password-manager"

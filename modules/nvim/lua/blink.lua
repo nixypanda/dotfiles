@@ -7,7 +7,7 @@ lz.load({
 		vim.cmd.packadd(name)
 		vim.cmd.packadd("friendly-snippets")
 		vim.cmd.packadd("blink.compat")
-		vim.cmd.packadd("codeium.nvim")
+		vim.cmd.packadd("windsurf.nvim")
 	end,
 	after = function()
 		require("codeium").setup({
@@ -20,7 +20,7 @@ lz.load({
 				use_nvim_cmp_as_default = true,
 				nerd_font_variant = "mono",
 				kind_icons = {
-					codeium = "",
+					windsurf = "",
 				},
 			},
 			keymap = {
@@ -29,16 +29,16 @@ lz.load({
 				["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
 			},
 			sources = {
-				default = { "codeium", "lsp", "path", "snippets", "buffer" },
+				default = { "windsurf", "lsp", "path", "snippets", "buffer" },
 				per_filetype = { sql = { "dadbod" } },
 				providers = {
-					codeium = {
-						name = "codeium", -- IMPORTANT: use the same name as you would for nvim-cmp
+					windsurf = {
+						name = "windsurf", -- IMPORTANT: use the same name as you would for nvim-cmp
 						module = "blink.compat.source",
 						transform_items = function(_, items)
 							for _, item in ipairs(items) do
 								item.kind_icon = " "
-								item.kind_name = "codeium"
+								item.kind_name = "windsurf"
 							end
 							return items
 						end,
