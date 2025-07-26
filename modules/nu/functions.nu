@@ -151,7 +151,7 @@ def is-ruff-pylint-yet [--detailed] {
         $data
         | parse "- [{exists}] {feature}"
         | histogram exists
-        | filter {|row| $row.exists == "x"}
+        | where {|row| $row.exists == "x"}
         | get percentage
     }
 
@@ -159,9 +159,9 @@ def is-ruff-pylint-yet [--detailed] {
     | from json
     | get body
 
-    let issue_structured = $issue_str | lines | filter { |row| $row != "" }
+    let issue_structured = $issue_str | lines | where { |row| $row != "" }
     let split_by_type = $issue_structured | split list -r '^#' | skip 1
-    let types = $issue_structured | filter { |row| $row | str starts-with "#" } | str trim --char '#' | str trim
+    let types = $issue_structured | where { |row| $row | str starts-with "#" } | str trim --char '#' | str trim
 
     if $detailed {
         let completion_by_type = $split_by_type | each { |row| _how_much_is_done $row} | flatten | wrap "%"

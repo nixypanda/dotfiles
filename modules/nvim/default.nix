@@ -440,12 +440,7 @@ in
       nixfmt-rfc-style
 
       # Python
-      (python3.withPackages (
-        ps: with ps; [
-          python-lsp-server
-          pylsp-rope
-        ]
-      ))
+      python3
 
       # SQL
       postgresql
