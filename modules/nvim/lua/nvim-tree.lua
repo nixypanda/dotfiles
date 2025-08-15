@@ -23,10 +23,10 @@ require("lz.n").load({
 		-- active
 		local nvim_tree_shift = {
 			function()
-				local nvim_tree_window_number = require("nvim-tree.view").get_winnr() or 0
+				local nvim_tree_window_number = require("nvim-tree.api").tree.winid() or 0
 				return string.rep(" ", vim.api.nvim_win_get_width(nvim_tree_window_number) - 2)
 			end,
-			cond = require("nvim-tree.view").is_visible,
+			cond = require("nvim-tree.api").tree.is_visible,
 			color = "NvimTreeNormal",
 		}
 
