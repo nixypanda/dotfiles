@@ -70,11 +70,6 @@ in
         config = builtins.readFile ./lua/nvim-tree.lua;
         optional = true;
       }
-      {
-        plugin = marks-nvim;
-        type = "lua";
-        config = "require('marks').setup({})";
-      }
 
       # Appearance: Themes
       catppuccin-nvim
