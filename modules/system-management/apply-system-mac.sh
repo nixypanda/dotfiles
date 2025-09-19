@@ -2,6 +2,6 @@
 
 pushd ~/.dotfiles
 
-nix run nix-darwin -- switch --flake ~/.dotfiles/.#srt-l02-sekhmet
+sudo darwin-rebuild switch --flake ~/.dotfiles/.#srt-l02-sekhmet
 
 popd

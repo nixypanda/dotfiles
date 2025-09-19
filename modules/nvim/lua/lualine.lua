@@ -9,7 +9,7 @@ require("lualine").setup({
 	},
 	sections = {
 		lualine_a = { "mode" },
-		lualine_b = { "filename", "branch" },
+		lualine_b = { { "filename", path = 4 }, "branch" },
 		lualine_c = {
 			{
 				"diagnostics",

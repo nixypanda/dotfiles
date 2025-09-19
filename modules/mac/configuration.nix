@@ -1,4 +1,5 @@
 {
+  system.primaryUser = "nixypanda";
   system.defaults = {
     SoftwareUpdate.AutomaticallyInstallMacOSUpdates = false;
     NSGlobalDomain = {
