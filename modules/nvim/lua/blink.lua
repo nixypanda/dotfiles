@@ -17,11 +17,7 @@ lz.load({
 		})
 		require("blink.cmp").setup({
 			appearance = {
-				use_nvim_cmp_as_default = true,
 				nerd_font_variant = "mono",
-				kind_icons = {
-					windsurf = "",
-				},
 			},
 			keymap = {
 				preset = "default",
@@ -29,24 +25,10 @@ lz.load({
 				["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
 			},
 			sources = {
-				default = { "windsurf", "lsp", "path", "snippets", "buffer" },
+				default = { "codeium", "lsp", "path", "snippets", "buffer" },
 				per_filetype = { sql = { "dadbod" } },
 				providers = {
-					windsurf = {
-						name = "windsurf", -- IMPORTANT: use the same name as you would for nvim-cmp
-						module = "blink.compat.source",
-						transform_items = function(_, items)
-							for _, item in ipairs(items) do
-								item.kind_icon = " "
-								item.kind_name = "windsurf"
-							end
-							return items
-						end,
-						score_offset = 100,
-						async = true,
-						max_items = 3,
-						min_keyword_length = 3,
-					},
+					codeium = { name = "Codeium", module = "codeium.blink", async = true },
 					dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
 				},
 			},
