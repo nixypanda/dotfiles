@@ -3,13 +3,10 @@ require("lz.n").load({
 	event = { "BufReadPre", "BufNewFile" },
 	load = function(name)
 		vim.cmd.packadd(name)
-		vim.cmd.packadd("blink.cmp")
 		vim.cmd.packadd("lspsaga.nvim")
 		vim.cmd.packadd("SchemaStore.nvim")
 	end,
 	after = function()
-		local lspconfig = require("lspconfig")
-
 		-- Add border to lspconfig info screen
 		local lspconfig_window = require("lspconfig.ui.windows")
 		local old_defaults = lspconfig_window.default_opts
@@ -25,6 +22,7 @@ require("lz.n").load({
 		})
 
 		local on_attach = function(client, bufnr)
+			print("LSP started:", client.name)
 			-- inlay hints
 			if client.server_capabilities.inlayHintProvider then vim.lsp.inlay_hint.enable() end
 
@@ -81,11 +79,8 @@ require("lz.n").load({
 			)
 		end
 
-		-- Need to add this to the language server to broadcast snippet compatibility
-		local capabilities = require("blink.cmp").get_lsp_capabilities()
-
 		-- grammar
-		lspconfig.harper_ls.setup({
+		vim.lsp.config("harper_ls", {
 			settings = {
 				["harper-ls"] = {
 					linters = {
@@ -97,11 +92,10 @@ require("lz.n").load({
 		})
 
 		-- JavaScript/TypeScript
-		lspconfig.ts_ls.setup({ capabilities = capabilities, on_attach = on_attach })
+		vim.lsp.config("ts_ls", { on_attach = on_attach })
 
 		-- Lua
-		lspconfig.lua_ls.setup({
-			capabilities = capabilities,
+		vim.lsp.config("lua_ls", {
 			on_attach = on_attach,
 			settings = {
 				Lua = {
@@ -124,8 +118,7 @@ require("lz.n").load({
 		})
 
 		-- nix
-		lspconfig.nixd.setup({
-			capabilities = capabilities,
+		vim.lsp.config("nixd", {
 			on_attach = on_attach,
 			settings = {
 				nixd = {
@@ -146,25 +139,24 @@ require("lz.n").load({
 		})
 
 		-- nu
-		lspconfig.nushell.setup({ capabilities = capabilities, on_attach = on_attach })
+		vim.lsp.config("nushell", { on_attach = on_attach })
 
 		-- Python
-		lspconfig.ruff.setup({ capabilities = capabilities, on_attach = on_attach })
-		lspconfig.pyright.setup({ capabilities = capabilities, on_attach = on_attach })
+		vim.lsp.config("ruff", { on_attach = on_attach })
+		vim.lsp.config("pyright", { on_attach = on_attach })
 
 		-- Terraform
-		lspconfig.terraform_lsp.setup({ capabilities = capabilities, on_attach = on_attach })
+		vim.lsp.config("terraform_lsp", { on_attach = on_attach })
 
 		-- Shit you need to deal with
-		lspconfig.bashls.setup({ capabilities = capabilities, on_attach = on_attach })
-		lspconfig.cmake.setup({ capabilities = capabilities, on_attach = on_attach })
-		lspconfig.cssls.setup({ capabilities = capabilities, on_attach = on_attach })
-		lspconfig.dockerls.setup({ capabilities = capabilities, on_attach = on_attach })
-		lspconfig.html.setup({ capabilities = capabilities, on_attach = on_attach })
+		vim.lsp.config("bashls", { on_attach = on_attach })
+		vim.lsp.config("cmake", { on_attach = on_attach })
+		vim.lsp.config("cssls", { on_attach = on_attach })
+		vim.lsp.config("dockerls", { on_attach = on_attach })
+		vim.lsp.config("html", { on_attach = on_attach })
 
 		-- json/yaml/TOML configs
-		lspconfig.jsonls.setup({
-			capabilities = capabilities,
+		vim.lsp.config("jsonls", {
 			on_attach = on_attach,
 			settings = {
 				json = {
@@ -174,8 +166,7 @@ require("lz.n").load({
 			},
 		})
 
-		lspconfig.yamlls.setup({
-			capabilities = capabilities,
+		vim.lsp.config("yamlls", {
 			on_attach = on_attach,
 			settings = {
 				yaml = {
@@ -191,12 +182,27 @@ require("lz.n").load({
 			},
 		})
 		-- already has SchemaStore configured
-		lspconfig.taplo.setup({ capabilities = capabilities, on_attach = on_attach })
+		vim.lsp.config("taplo", { on_attach = on_attach })
 
-		-- Stuff outside of lspconfig
+		vim.lsp.enable("harper_ls")
+		vim.lsp.enable("ts_ls")
+		vim.lsp.enable("lua_ls")
+		vim.lsp.enable("nixd")
+		vim.lsp.enable("nushell")
+		vim.lsp.enable("ruff")
+		vim.lsp.enable("pyright")
+		vim.lsp.enable("cssls")
+		vim.lsp.enable("terraform_lsp")
+		vim.lsp.enable("bashls")
+		vim.lsp.enable("cmake")
+		vim.lsp.enable("dockerls")
+		vim.lsp.enable("html")
+		vim.lsp.enable("jsonls")
+		vim.lsp.enable("yamlls")
+		vim.lsp.enable("taplo")
+
 		vim.g.haskell_tools = {
 			hls = {
-				capabilities = capabilities,
 				on_attach = function(client, bufnr)
 					on_attach(client, bufnr)
 
@@ -230,7 +236,6 @@ require("lz.n").load({
 				test_executor = "neotest",
 			},
 			server = {
-				capabilities = capabilities,
 				on_attach = function(client, bufnr)
 					on_attach(client, bufnr)
 
