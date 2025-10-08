@@ -20,6 +20,16 @@ let
 in
 {
   xdg.configFile."nvim/lua/common.lua".source = ./lua/common.lua;
+  xdg.configFile."nvim/lua/nix_injected.lua".text = ''
+    local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
+    return {
+         dap_python_with_debugpy  = "${python_with_debugpy}",
+         rustaceanvim_codelldb_path  = extension_path .. 'adapter/codelldb',
+         rustaceanvim_liblldb_path  = extension_path .. 'lldb/lib/liblldb.dylib',
+         treesitter_kulala_grammer_location  = "${pkgs.vimPlugins.nvim-treesitter-kulala-http}",
+         blink_codeium_language_server_bin = "${codeium-server}/bin/codeium_language_server",
+    }
+  '';
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -80,10 +90,7 @@ in
         plugin = nvim-dap;
         optional = true;
         type = "lua";
-        config = ''
-          local python_with_debugpy = "${python_with_debugpy}"
-          ${builtins.readFile ./lua/dap.lua}
-        '';
+        config = builtins.readFile ./lua/dap.lua;
       }
       {
         plugin = nvim-dap-ui;
@@ -128,11 +135,8 @@ in
       {
         plugin = nvim-blame;
         type = "lua";
-        config = # lua
-          ''
-            require('blame').setup()
-            vim.keymap.set("n", "<leader>gB", "<cmd>BlameToggle window<cr>", {desc = "Git blame"})
-          '';
+        config = builtins.readFile ./lua/blame.lua;
+        optional = true;
       }
 
       # Keymaps
@@ -227,10 +231,7 @@ in
           ]
         );
         type = "lua";
-        config = ''
-          local kulala_location = "${nvim-treesitter-kulala-http}"
-          ${builtins.readFile ./lua/treesitter.lua};
-        '';
+        config = builtins.readFile ./lua/treesitter.lua;
       }
       {
         plugin = treesj;
@@ -244,13 +245,7 @@ in
       {
         plugin = rustaceanvim;
         type = "lua";
-        config = # lua
-          ''
-            local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
-            local codelldb_path = extension_path .. 'adapter/codelldb'
-            local liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib'
-            ${builtins.readFile ./lua/rustaceanvim.lua}
-          '';
+        config = builtins.readFile ./lua/rustaceanvim.lua;
       }
       {
         plugin = haskell-tools-nvim;
@@ -262,10 +257,7 @@ in
       {
         plugin = blink-cmp;
         type = "lua";
-        config = ''
-          local codeium_language_server_bin = "${codeium-server}/bin/codeium_language_server"
-           ${builtins.readFile ./lua/blink.lua};
-        '';
+        config = builtins.readFile ./lua/blink.lua;
         optional = true;
       }
       {
@@ -304,13 +296,7 @@ in
       {
         plugin = vim-dadbod-ui;
         type = "lua";
-        config = # lua
-          ''
-            vim.g.db_ui_use_nerd_fonts = 1
-            vim.g.db_ui_win_position = "right"
-            vim.keymap.set("n", "<leader>Da",  "<cmd>DBUIAddConnection<cr>",{ desc = "Add new connection" })
-            vim.keymap.set("n", "<leader>Do",  "<cmd>:tab DBUI<cr>",{ desc = "Open DBUI" })
-          '';
+        config = builtins.readFile ./lua/dadbod.lua;
       }
       vim-dadbod-completion
       nvim-dadbod-ssh
@@ -322,8 +308,16 @@ in
         config = builtins.readFile ./lua/neotest.lua;
         optional = true;
       }
-      neotest-python
-      neotest-haskell
+      {
+        plugin = neotest-python;
+        type = "lua";
+        optional = true;
+      }
+      {
+        plugin = neotest-haskell;
+        type = "lua";
+        optional = true;
+      }
       FixCursorHold-nvim
       {
         plugin = nvim-coverage;
@@ -342,11 +336,7 @@ in
       {
         plugin = todo-comments-nvim;
         type = "lua";
-        config = # lua
-          ''
-            require 'todo-comments'.setup()
-            vim.keymap.set("n", "<leader>sT", "<cmd>TodoTelescope<cr>", { desc = "Todo comments" })
-          '';
+        config = builtins.readFile ./lua/todo_comments.lua;
       }
       {
         plugin = venn-nvim;
@@ -356,15 +346,8 @@ in
       {
         plugin = vim-table-mode;
         type = "lua";
-        config = # lua
-          ''
-            vim.g.table_mode_disable_mappings = 1
-            vim.g.table_mode_disable_tableize_mappings = 1
-            require("lz.n").load({
-              "vim-table-mode",
-              keys = { { "<leader>ut", "<cmd>TableModeToggle<cr>", desc = "Toggle Table Mode" } }
-            })
-          '';
+        config = builtins.readFile ./lua/table_mode.lua;
+        optional = true;
       }
 
       # Text objects
@@ -388,27 +371,13 @@ in
       {
         plugin = render-markdown-nvim;
         type = "lua";
-        config = # lua
-          ''
-            require("lz.n").load({
-              "render-markdown.nvim",
-              ft = {"markdown", "Avante"},
-              after = function() require('render-markdown').setup({file_types = { 'markdown', 'Avante' }}) end,
-            })
-          '';
+        config = builtins.readFile ./lua/render_markdown.lua;
         optional = true;
       }
       {
         plugin = crates-nvim;
         type = "lua";
-        config = # lua
-          ''
-            require("lz.n").load({
-              "crates.nvim",
-              ft = "toml",
-              after = function() require("crates").setup() end,
-            })
-          '';
+        config = builtins.readFile ./lua/crates.lua;
         optional = true;
       }
     ];

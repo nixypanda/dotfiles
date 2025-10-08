@@ -27,6 +27,9 @@ vim.g.rustaceanvim = {
 	},
 	dap = {
 		-- Injected by nix: codelldb_path and liblldb_path
-		adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb_path, liblldb_path),
+		adapter = require("rustaceanvim.config").get_codelldb_adapter(
+			require("nix_injected").codelldb_path,
+			require("nix_injected").liblldb_path
+		),
 	},
 }

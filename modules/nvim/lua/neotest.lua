@@ -23,6 +23,12 @@ require("lz.n").load({
 		{ "<leader>tr", function() require("neotest").run.run() end, desc = "Run nearest test" },
 		{ "<leader>tt", function() require("neotest").summary.toggle() end, desc = "Toggle summary" },
 	},
+	load = function(name)
+		vim.cmd.packadd(name)
+		vim.cmd.packadd("neotest-python")
+		vim.cmd.packadd("rustaceanvim")
+		vim.cmd.packadd("neotest-haskell")
+	end,
 	after = function()
 		require("neotest").setup({
 			adapters = {

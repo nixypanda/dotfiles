@@ -46,7 +46,7 @@ require("lz.n").load({
 		-- python
 		local dap_python = require("dap-python")
 		-- Injected via nix: python_with_debugpy (location of python install with debugpy)
-		dap_python.setup(python_with_debugpy .. "/bin/python")
+		dap_python.setup(require("nix_injected").dap_python_with_debugpy .. "/bin/python")
 		dap_python.test_runner = "pytest"
 
 		-- UI Icons

@@ -48,11 +48,9 @@ require("nvim-treesitter.configs").setup({
 	},
 })
 
-local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
--- change the following as needed
-parser_config.kulala_http = {
+require("nvim-treesitter.parsers").get_parser_configs().kulala_http = {
 	install_info = {
-		url = kulala_location,
+		url = require("nix_injected").treesitter_kulala_grammer_location,
 		files = { "src/parser.c" },
 	},
 	filetype = "kulala_http",

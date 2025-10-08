@@ -1,6 +1,4 @@
-local lz = require("lz.n")
-
-lz.load({
+require("lz.n").load({
 	"blink.cmp",
 	event = "InsertEnter",
 	load = function(name)
@@ -12,7 +10,7 @@ lz.load({
 	after = function()
 		require("codeium").setup({
 			tools = {
-				language_server = codeium_language_server_bin,
+				language_server = require("nix_injected").blink_codeium_language_server_bin,
 			},
 		})
 		require("blink.cmp").setup({
