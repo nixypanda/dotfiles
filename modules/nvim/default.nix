@@ -223,10 +223,14 @@ in
             typescript
             vimdoc
             yaml
+            nvim-treesitter-kulala-http
           ]
         );
         type = "lua";
-        config = builtins.readFile ./lua/treesitter.lua;
+        config = ''
+          local kulala_location = "${nvim-treesitter-kulala-http}"
+          ${builtins.readFile ./lua/treesitter.lua};
+        '';
       }
       {
         plugin = treesj;
@@ -325,6 +329,13 @@ in
         plugin = nvim-coverage;
         type = "lua";
         config = builtins.readFile ./lua/coverage.lua;
+      }
+
+      {
+        plugin = kulala-nvim;
+        type = "lua";
+        config = builtins.readFile ./lua/kulala.lua;
+        optional = true;
       }
 
       # Text Helpers

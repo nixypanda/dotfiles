@@ -12,6 +12,10 @@
       url = "github:pbogut/vim-dadbod-ssh";
       flake = false;
     };
+    nvim-treesitter-kulala-http-src = {
+      url = "github:mistweaverco/kulala.nvim";
+      flake = false;
+    };
   };
   outputs =
     inputs:
@@ -28,6 +32,12 @@
         nvim-dadbod-ssh = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-dadbod-ssh";
           src = inputs.nvim-dadbod-ssh;
+        };
+        nvim-treesitter-kulala-http = pkgs.tree-sitter.buildGrammar {
+          language = "kulala_http";
+          version = "5.3.1"; # <- this can be anything I ususally do like, inputs.kulala-grammar.shortRev
+          src = inputs.nvim-treesitter-kulala-http-src;
+          location = "lua/tree-sitter";
         };
       };
     in

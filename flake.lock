@@ -261,11 +261,11 @@
     "nvim-blame-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1744800184,
-        "narHash": "sha256-v4ieZ7NIWP1khvrcyzTSGX6IHHn0kjZICbyRqS2xqHM=",
+        "lastModified": 1758699249,
+        "narHash": "sha256-IP+KIwAANoRdZmSzAAtjLgeYOADc2t8Ld1ru0sNq/G0=",
         "owner": "FabijanZulj",
         "repo": "blame.nvim",
-        "rev": "b87b8c820e4cec06fbbd2f946b7b35c45906ee0c",
+        "rev": "d5f4ad5c8ebca3caecc773dda5983709c5a5da8f",
         "type": "github"
       },
       "original": {
@@ -293,16 +293,32 @@
     "nvim-sqls-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1743031563,
-        "narHash": "sha256-bQKO5Kq4Jc8v7d6OSkkzjqYHzt8c5C71xzHHABErlsg=",
+        "lastModified": 1756851335,
+        "narHash": "sha256-PLt4SjPBgTtxAghwffsNICQ0b5AQRrdCrZ7tEHccXIc=",
         "owner": "nanotee",
         "repo": "sqls.nvim",
-        "rev": "d1bc5421ef3e8edc5101e37edbb7de6639207a09",
+        "rev": "bfb7b4090268f6163c408577070da4cc9d7450fd",
         "type": "github"
       },
       "original": {
         "owner": "nanotee",
         "repo": "sqls.nvim",
+        "type": "github"
+      }
+    },
+    "nvim-treesitter-kulala-http-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1759075458,
+        "narHash": "sha256-4wAZ9ZYK1SfsSuo7TFrm0tHcaahBkwRYNaKVzS8wTXU=",
+        "owner": "mistweaverco",
+        "repo": "kulala.nvim",
+        "rev": "0d50e9ce5c992fe507743d8641b36125e668aad4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mistweaverco",
+        "repo": "kulala.nvim",
         "type": "github"
       }
     },
@@ -391,11 +407,12 @@
       "inputs": {
         "nvim-blame-src": "nvim-blame-src",
         "nvim-dadbod-ssh": "nvim-dadbod-ssh",
-        "nvim-sqls-src": "nvim-sqls-src"
+        "nvim-sqls-src": "nvim-sqls-src",
+        "nvim-treesitter-kulala-http-src": "nvim-treesitter-kulala-http-src"
       },
       "locked": {
-        "lastModified": 1735457264,
-        "narHash": "sha256-+OmkZ4Lcybj8y0geAbi7OGxO/mLAcgRdhVxpK8cnNtY=",
+        "lastModified": 1759921149,
+        "narHash": "sha256-Zgk5IKvwaOE2WAMebsa0ncy90c2a6gEgfMQtsUFTMQ4=",
         "path": "/Users/nixypanda/.dotfiles/modules/nvim/plugins",
         "type": "path"
       },
