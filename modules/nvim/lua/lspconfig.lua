@@ -19,65 +19,10 @@ require("lz.n").load({
 
 		require("lspsaga").setup({
 			symbol_in_winbar = { enable = false },
+			lightbulb = { ignore = { clients = { "kulala" } } },
 		})
 
-		local on_attach = function(client, bufnr)
-			print("LSP started:", client.name)
-			-- inlay hints
-			if client.server_capabilities.inlayHintProvider then vim.lsp.inlay_hint.enable() end
-
-			-- Set keymap
-			local map = function(keys, func, desc) vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc }) end
-
-			map("gd", "<cmd>lua vim.lsp.buf.definition()<cr>", "Goto Definition")
-			map("gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", "Goto Implementation")
-
-			local jump_to_next_error = function()
-				require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
-			end
-			local jump_to_prev_error = function()
-				require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })
-			end
-
-			-- mutations
-			map("<leader>lC", vim.lsp.codelens.run, "Code Lens")
-			map("<leader>lR", "<cmd>Lspsaga rename<cr>", "Rename")
-			map("<leader>la", "<cmd>Lspsaga code_action<cr>", "Code Action")
-
-			-- finding stuff
-			map("<leader>lO", "<cmd>Lspsaga outline<cr>", "Toggle Document Symbols Outline")
-			map("<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols")
-			map("<leader>lf", "<cmd>Lspsaga finder<cr>", "Finder: Refrences and implementations")
-			map("<leader>li", "<cmd>Telescope lsp_incoming_calls<cr>", "Incoming Calls")
-			map("<leader>lo", "<cmd>Telescope lsp_outgoing_calls<cr>", "Outgoing Calls")
-			map("<leader>lr", "<cmd>Telescope lsp_references<cr>", "Refrences")
-			map("<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols")
-			map("<leader>lp", "<cmd>Lspsaga hover_doc<cr>", "Preview Definition")
-
-			-- diagnostics
-			map("<leader>lc", "<cmd>Lspsaga show_cursor_diagnostics<cr>", "Cursor Diagnostics")
-			map("<leader>ld", "<cmd>Telescope diagnostics bufnr=0<cr>", "Document Diagnostics")
-			map("<leader>lD", "<cmd>Telescope diagnostics<cr>", "Workspace Diagnostics")
-			map("<leader>lL", "<cmd>Lspsaga show_line_diagnostics<cr>", "Line Diagnostics")
-			-- diagnostics navigation
-			map("<leader>lh", "<cmd>Lspsaga diagnostic_jump_prev<cr>", "Previous diagnostic")
-			map("<leader>ll", "<cmd>Lspsaga diagnostic_jump_next<cr>", "Next diagnostic")
-			map("<leader>lj", jump_to_next_error, "Next error diagnostic")
-			map("<leader>lk", jump_to_prev_error, "Previous error diagnostic")
-
-			-- auxiliary
-			map("<leader>lI", "<cmd>LspInfo<cr>", "Info")
-			map("<leader>lu", "<cmd>LspRestart<cr>", "Restart LSP")
-			map("<leader>lU", "<cmd>LspStart<cr>", "Start LSP")
-
-			-- Other mode keymap
-			vim.keymap.set(
-				"v",
-				"<leader>la",
-				"<cmd>LspSaga code_action<cr>",
-				{ buffer = bufnr, desc = "Code [A]ction" }
-			)
-		end
+		local on_attach = require("common").lsp_on_attach
 
 		-- grammar
 		vim.lsp.config("harper_ls", {
@@ -200,69 +145,5 @@ require("lz.n").load({
 		vim.lsp.enable("jsonls")
 		vim.lsp.enable("yamlls")
 		vim.lsp.enable("taplo")
-
-		vim.g.haskell_tools = {
-			hls = {
-				on_attach = function(client, bufnr)
-					on_attach(client, bufnr)
-
-					local map = function(keys, func, desc)
-						vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
-					end
-					local ht = require("haskell-tools")
-
-					map("<leader>ps", ht.hoogle.hoogle_signature, "Hoogle search type signature")
-					map("<leader>pe", ht.lsp.buf_eval_all, "Evaluate all code snippets")
-					map("<leader>pr", ht.repl.toggle, "Toggle GHCi repl (package)")
-					map(
-						"<leader>pR",
-						function() ht.repl.toggle(vim.api.nvim_buf_get_name(0)) end,
-						"Toggle GHCi repl (buffer)"
-					)
-				end,
-				debug = true,
-				cmd = {
-					"haskell-language-server-wrapper",
-					"--lsp",
-					"--logfile",
-					vim.fn.stdpath("log") .. "/" .. "haskell-language-server.log",
-				},
-			},
-		}
-
-		vim.g.rustaceanvim = {
-			tools = {
-				hover_actions = { auto_focus = true },
-				test_executor = "neotest",
-			},
-			server = {
-				on_attach = function(client, bufnr)
-					on_attach(client, bufnr)
-
-					local map = function(keys, func, desc)
-						vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
-					end
-
-					map("<leader>pd", "<cmd>RustLsp debug<cr>", "Debug target")
-					map("<leader>pD", "<cmd>RustLsp debuggables<cr>", "Debug available targets")
-					map("<leader>pr", "<cmd>RustLsp run<cr>", "Run target")
-					map("<leader>pR", "<cmd>RustLsp runnables<cr>", "Run available targets")
-					map("<leader>pt", "<cmd>RustLsp testables<cr>", "Test available targets")
-					map("<leader>pT", "<cmd>RustLsp workspaceSymbol onlyTypes<cr>", "Search types")
-					map("<leader>pm", "<cmd>RustLsp expandMacro<cr>", "Expand macro")
-				end,
-				default_settings = {
-					["rust-analyzer"] = {
-						checkOnSave = { command = "clippy" },
-						-- Rust Analyzer will scan .direnv correspondingly entire nixpkgs repository
-						files = { excludeDirs = { ".direnv" } },
-					},
-				},
-			},
-			dap = {
-				-- Injected by nix: codelldb_path and liblldb_path
-				adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb_path, liblldb_path),
-			},
-		}
 	end,
 })

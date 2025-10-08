@@ -19,6 +19,7 @@ let
   });
 in
 {
+  xdg.configFile."nvim/lua/common.lua".source = ./lua/common.lua;
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -157,13 +158,7 @@ in
       {
         plugin = nvim-lspconfig;
         type = "lua";
-        config = # lua
-          ''
-            local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
-            local codelldb_path = extension_path .. 'adapter/codelldb'
-            local liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib'
-            ${builtins.readFile ./lua/lspconfig.lua}
-          '';
+        config = builtins.readFile ./lua/lspconfig.lua;
         optional = true;
       }
       {
@@ -242,8 +237,22 @@ in
       nvim-treesitter-textobjects
 
       # Programming: Language support
-      rustaceanvim
-      haskell-tools-nvim
+      {
+        plugin = rustaceanvim;
+        type = "lua";
+        config = # lua
+          ''
+            local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
+            local codelldb_path = extension_path .. 'adapter/codelldb'
+            local liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib'
+            ${builtins.readFile ./lua/rustaceanvim.lua}
+          '';
+      }
+      {
+        plugin = haskell-tools-nvim;
+        type = "lua";
+        config = builtins.readFile ./lua/haskell-tools.lua;
+      }
 
       # Programming: Autocompletion setup
       {
