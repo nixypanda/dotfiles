@@ -1,6 +1,6 @@
 require("lz.n").load({
 	"nvim-lint",
-	event = { "BufReadPre", "BufNewFile" },
+	event = { "BufReadPost", "BufNewFile" },
 	after = function()
 		require("lint").linters_by_ft = {
 			markdown = { "vale", "markdownlint" },

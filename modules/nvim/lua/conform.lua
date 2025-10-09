@@ -1,6 +1,6 @@
 require("lz.n").load({
 	"conform.nvim",
-	event = "BufWritePost",
+	event = "BufWritePre",
 	after = function()
 		require("conform").setup({
 			formatters_by_ft = {

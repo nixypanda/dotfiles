@@ -1,6 +1,6 @@
 require("lz.n").load({
 	"nvim-lspconfig",
-	event = { "BufReadPre", "BufNewFile" },
+	event = { "BufReadPost", "BufNewFile" },
 	load = function(name)
 		vim.cmd.packadd(name)
 		vim.cmd.packadd("lspsaga.nvim")
