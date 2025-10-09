@@ -128,14 +128,15 @@ in
         config = builtins.readFile ./lua/gitsigns.lua;
       }
       {
-        plugin = git-conflict-nvim;
-        type = "lua";
-        config = builtins.readFile ./lua/git_conflict.lua;
-      }
-      {
         plugin = nvim-blame;
         type = "lua";
         config = builtins.readFile ./lua/blame.lua;
+        optional = true;
+      }
+      {
+        plugin = diffview-nvim;
+        type = "lua";
+        config = builtins.readFile ./lua/diffview.lua;
         optional = true;
       }
 
