@@ -11,13 +11,14 @@ local mappings = {
 	{ "<leader>e", group = "explorer (neo-tree)" },
 	{ "<leader>f", group = "code (formatting)" },
 	{ "<leader>g", group = "git" },
-	{ "<leader>gc", group = "conflict" },
+	{ "<leader>k", group = "kulala (http)" },
 	{ "<leader>l", group = "code (lsp)" },
 	{ "<leader>m", group = "motions" },
 	{ "<leader>p", group = "code (language specific)" },
 	{ "<leader>s", group = "search" },
 	{ "<leader>t", group = "test (neotest)" },
 	{ "<leader>u", group = "utilities" },
+	{ "<leader>w", group = "layout (windows)" },
 }
 
 wk.add(mappings)

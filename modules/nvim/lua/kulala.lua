@@ -1,7 +1,7 @@
 require("lz.n").load({
 	"kulala.nvim",
 	keys = {
-		{ "<leader>hl", "<cmd>lua require('kulala').run()<cr>", desc = "Run kulala call" },
+		{ "<leader>kl", "<cmd>lua require('kulala').run()<cr>", desc = "Run kulala call" },
 	},
 	ft = { "http" },
 	after = function()
