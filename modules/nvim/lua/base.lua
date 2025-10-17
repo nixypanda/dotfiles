@@ -77,6 +77,8 @@ vim.opt.fillchars = {
 vim.wo.number = true
 vim.wo.relativenumber = true
 
+local _border = "rounded"
+
 -- require "look-lsp"
 vim.diagnostic.config({
 	virtual_text = false,
@@ -84,6 +86,7 @@ vim.diagnostic.config({
 	underline = true,
 	update_in_insert = false,
 	severity_sort = false,
+	float = { border = _border },
 })
 
 local diagnostic_symbol_map = {

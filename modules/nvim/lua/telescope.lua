@@ -21,6 +21,7 @@ require("lz.n").load({
 	},
 	after = function()
 		require("telescope").setup({
+			defaults = require("telescope.themes").get_ivy(),
 			extensions = {
 				fzf = {
 					fuzzy = true,
