@@ -4,6 +4,7 @@
     # CLI tools / Terminal facification
     dig
     unzip
+    qpdf
 
     # Better alternatives
     bottom # top
