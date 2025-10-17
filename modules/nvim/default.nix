@@ -34,354 +34,156 @@ in
     enable = true;
     viAlias = true;
 
-    plugins = with pkgs.vimPlugins; [
-      # Setup the plugin that can lazy load others
-      lz-n
+    plugins =
+      let
+        plug = name: config: {
+          plugin = name;
+          type = "lua";
+          config =
+            if builtins.typeOf config == "string" then
+              config
+            else if builtins.typeOf config == "path" then
+              builtins.readFile config
+            else
+              builtins.throw "invalid config type";
+        };
+        plug_dep = name: {
+          plugin = name;
+          optional = true;
+        };
+        lazy_plug = name: config: (plug name config) // { optional = true; };
+      in
+      with pkgs.vimPlugins;
+      [
+        # Setup the plugin that can lazy load others
+        lz-n
 
-      # Appearance
-      {
-        plugin = bufferline-nvim;
-        type = "lua";
-        config = builtins.readFile ./lua/bufferline.lua;
-      }
-      {
-        plugin = indent-blankline-nvim;
-        type = "lua";
-        config = builtins.readFile ./lua/indent-blankline.lua;
-      }
-      {
-        plugin = lualine-nvim;
-        type = "lua";
-        config = builtins.readFile ./lua/lualine.lua;
-      }
-      {
-        plugin = alpha-nvim;
-        type = "lua";
-        config = builtins.readFile ./lua/alpha.lua;
-      }
-      nvim-web-devicons
-      {
-        plugin = noice-nvim;
-        type = "lua";
-        config = builtins.readFile ./lua/noice.lua;
-      }
-      {
-        plugin = statuscol-nvim;
-        type = "lua";
-        config = builtins.readFile ./lua/statuscol.lua;
-      }
-      {
-        plugin = nvim-ufo;
-        type = "lua";
-        config = builtins.readFile ./lua/ufo.lua;
-      }
-      {
-        plugin = nvim-tree-lua;
-        type = "lua";
-        config = builtins.readFile ./lua/nvim-tree.lua;
-        optional = true;
-      }
+        # Appearance
+        (plug bufferline-nvim ./lua/bufferline.lua)
+        (plug indent-blankline-nvim ./lua/indent-blankline.lua)
+        (plug lualine-nvim ./lua/lualine.lua)
+        (plug alpha-nvim ./lua/alpha.lua)
+        nvim-web-devicons
+        (plug noice-nvim ./lua/noice.lua)
+        (plug statuscol-nvim ./lua/statuscol.lua)
+        (plug nvim-ufo ./lua/ufo.lua)
+        (lazy_plug nvim-tree-lua ./lua/nvim-tree.lua)
+        catppuccin-nvim # theme
 
-      # Appearance: Themes
-      catppuccin-nvim
+        # DAP
+        (lazy_plug nvim-dap ./lua/dap.lua)
+        (plug_dep nvim-dap-ui)
+        (plug_dep nvim-dap-virtual-text)
+        (plug_dep nvim-dap-python)
 
-      # DAP
-      {
-        plugin = nvim-dap;
-        optional = true;
-        type = "lua";
-        config = builtins.readFile ./lua/dap.lua;
-      }
-      {
-        plugin = nvim-dap-ui;
-        optional = true;
-      }
-      {
-        plugin = nvim-dap-virtual-text;
-        optional = true;
-      }
-      {
-        plugin = nvim-dap-python;
-        optional = true;
-      }
+        # Fuzzy Finder
+        (lazy_plug telescope-nvim ./lua/telescope.lua)
+        (plug_dep telescope-fzf-native-nvim)
+        (plug_dep telescope-ui-select-nvim)
 
-      # Fuzzy Finder
-      {
-        plugin = telescope-nvim;
-        type = "lua";
-        config = builtins.readFile ./lua/telescope.lua;
-        optional = true;
-      }
-      {
-        plugin = telescope-fzf-native-nvim;
-        optional = true;
-      }
-      {
-        plugin = telescope-ui-select-nvim;
-        optional = true;
-      }
+        # Git
+        (plug gitsigns-nvim ./lua/gitsigns.lua)
+        (lazy_plug nvim-blame ./lua/blame.lua)
+        (lazy_plug diffview-nvim ./lua/diffview.lua)
 
-      # Git
-      {
-        plugin = gitsigns-nvim;
-        type = "lua";
-        config = builtins.readFile ./lua/gitsigns.lua;
-      }
-      {
-        plugin = nvim-blame;
-        type = "lua";
-        config = builtins.readFile ./lua/blame.lua;
-        optional = true;
-      }
-      {
-        plugin = diffview-nvim;
-        type = "lua";
-        config = builtins.readFile ./lua/diffview.lua;
-        optional = true;
-      }
+        # Keymaps
+        (plug which-key-nvim ./lua/which-key.lua)
 
-      # Keymaps
-      {
-        plugin = which-key-nvim;
-        type = "lua";
-        config = builtins.readFile ./lua/which-key.lua;
-      }
+        # navigation
+        (plug nvim-bqf ''require("bqf").setup()'')
+        (plug nvim-pqf ''require("pqf").setup()'')
 
-      # navigation
-      {
-        plugin = nvim-bqf;
-        type = "lua";
-        config = ''require("bqf").setup()'';
-      }
-      {
-        plugin = nvim-pqf;
-        type = "lua";
-        config = ''require("pqf").setup()'';
-      }
+        # Programming: LSP
+        (lazy_plug nvim-lspconfig ./lua/lspconfig.lua)
+        (plug_dep SchemaStore-nvim)
+        (plug_dep lspsaga-nvim)
+        (lazy_plug nvim-lint ./lua/lint.lua)
+        (lazy_plug conform-nvim ./lua/conform.lua)
+        (lazy_plug lsp_lines-nvim ./lua/lsp_lines.lua)
+        # (plug nvim-lsp-file-operations ''require("lsp-file-operations").setup()'')
 
-      # Programming: LSP
-      {
-        plugin = nvim-lspconfig;
-        type = "lua";
-        config = builtins.readFile ./lua/lspconfig.lua;
-        optional = true;
-      }
-      {
-        plugin = SchemaStore-nvim;
-        optional = true;
-      }
-      {
-        plugin = lspsaga-nvim;
-        optional = true;
-      }
-      {
-        plugin = nvim-lint;
-        type = "lua";
-        config = builtins.readFile ./lua/lint.lua;
-        optional = true;
-      }
-      {
-        plugin = conform-nvim;
-        type = "lua";
-        config = builtins.readFile ./lua/conform.lua;
-        optional = true;
-      }
-      {
-        plugin = lsp_lines-nvim;
-        type = "lua";
-        config = builtins.readFile ./lua/lsp_lines.lua;
-        optional = true;
-      }
-      # {
-      #   plugin = nvim-lsp-file-operations;
-      #   type = "lua";
-      #   optional = true;
-      #   config = ''require("lsp-file-operations").setup()'';
-      # }
+        # Progrmming: Treesitter
+        {
+          plugin = nvim-treesitter.withPlugins (
+            plugins: with plugins; [
+              bash
+              css
+              dockerfile
+              haskell
+              hcl
+              html
+              javascript
+              json
+              kdl
+              lua
+              markdown
+              markdown-inline
+              nix
+              nu
+              python
+              regex
+              rust
+              scss
+              sql
+              terraform
+              toml
+              tsx
+              typescript
+              vimdoc
+              yaml
+              nvim-treesitter-kulala-http
+            ]
+          );
+          type = "lua";
+          config = builtins.readFile ./lua/treesitter.lua;
+        }
+        (lazy_plug treesj ./lua/treesj.lua)
+        nvim-treesitter-textobjects
 
-      # Progrmming: Treesitter
-      {
-        plugin = nvim-treesitter.withPlugins (
-          plugins: with plugins; [
-            bash
-            css
-            dockerfile
-            haskell
-            hcl
-            html
-            javascript
-            json
-            kdl
-            lua
-            markdown
-            markdown-inline
-            nix
-            nu
-            python
-            regex
-            rust
-            scss
-            sql
-            terraform
-            toml
-            tsx
-            typescript
-            vimdoc
-            yaml
-            nvim-treesitter-kulala-http
-          ]
-        );
-        type = "lua";
-        config = builtins.readFile ./lua/treesitter.lua;
-      }
-      {
-        plugin = treesj;
-        type = "lua";
-        config = builtins.readFile ./lua/treesj.lua;
-        optional = true;
-      }
-      nvim-treesitter-textobjects
+        # Programming: Language support
+        (plug rustaceanvim ./lua/rustaceanvim.lua)
+        (plug haskell-tools-nvim ./lua/haskell-tools.lua)
 
-      # Programming: Language support
-      {
-        plugin = rustaceanvim;
-        type = "lua";
-        config = builtins.readFile ./lua/rustaceanvim.lua;
-      }
-      {
-        plugin = haskell-tools-nvim;
-        type = "lua";
-        config = builtins.readFile ./lua/haskell-tools.lua;
-      }
+        # Programming: Autocompletion setup
+        (lazy_plug blink-cmp ./lua/blink.lua)
+        (plug_dep blink-compat)
+        (plug_dep friendly-snippets)
 
-      # Programming: Autocompletion setup
-      {
-        plugin = blink-cmp;
-        type = "lua";
-        config = builtins.readFile ./lua/blink.lua;
-        optional = true;
-      }
-      {
-        plugin = blink-compat;
-        type = "lua";
-        optional = true;
-      }
-      {
-        plugin = friendly-snippets;
-        optional = true;
-      }
+        # Programming: AI shit
+        (lazy_plug avante-nvim ./lua/avante.lua)
+        (plug img-clip-nvim ''require("img-clip").setup()'')
+        (plug_dep windsurf-nvim) # config in blink-cmp
 
-      # Programming: AI shit
-      {
-        plugin = avante-nvim;
-        type = "lua";
-        optional = true;
-        config = builtins.readFile ./lua/avante.lua;
-      }
-      {
-        plugin = img-clip-nvim;
-        type = "lua";
-        config = ''
-          require("img-clip").setup()
-        '';
-      }
-      # config in blink-cmp
-      {
-        plugin = windsurf-nvim;
-        optional = true;
-      }
+        # Programming: Testing
+        (lazy_plug neotest ./lua/neotest.lua)
+        (plug_dep neotest-python)
+        (plug_dep neotest-haskell)
+        FixCursorHold-nvim
+        (plug nvim-coverage ./lua/coverage.lua)
 
-      # Programming: Database support
-      vim-dotenv
-      vim-dadbod
-      {
-        plugin = vim-dadbod-ui;
-        type = "lua";
-        config = builtins.readFile ./lua/dadbod.lua;
-      }
-      vim-dadbod-completion
-      nvim-dadbod-ssh
+        # Text Helpers
+        (plug todo-comments-nvim ./lua/todo-comments.lua)
+        (plug venn-nvim ./lua/venn.lua)
+        (lazy_plug vim-table-mode ./lua/table-mode.lua)
 
-      # Programming: Testing
-      {
-        plugin = neotest;
-        type = "lua";
-        config = builtins.readFile ./lua/neotest.lua;
-        optional = true;
-      }
-      {
-        plugin = neotest-python;
-        type = "lua";
-        optional = true;
-      }
-      {
-        plugin = neotest-haskell;
-        type = "lua";
-        optional = true;
-      }
-      FixCursorHold-nvim
-      {
-        plugin = nvim-coverage;
-        type = "lua";
-        config = builtins.readFile ./lua/coverage.lua;
-      }
+        # Text objects
+        (plug nvim-autopairs "require('nvim-autopairs').setup {}")
+        (plug nvim-surround "require('nvim-surround').setup {}")
 
-      {
-        plugin = kulala-nvim;
-        type = "lua";
-        config = builtins.readFile ./lua/kulala.lua;
-        optional = true;
-      }
+        # Webdev: Database
+        vim-dotenv
+        vim-dadbod
+        (plug vim-dadbod-ui ./lua/dadbod.lua)
+        vim-dadbod-completion
+        nvim-dadbod-ssh
 
-      # Text Helpers
-      {
-        plugin = todo-comments-nvim;
-        type = "lua";
-        config = builtins.readFile ./lua/todo_comments.lua;
-      }
-      {
-        plugin = venn-nvim;
-        type = "lua";
-        config = builtins.readFile ./lua/venn.lua;
-      }
-      {
-        plugin = vim-table-mode;
-        type = "lua";
-        config = builtins.readFile ./lua/table_mode.lua;
-        optional = true;
-      }
+        # Webdev: API
+        (lazy_plug kulala-nvim ./lua/kulala.lua)
 
-      # Text objects
-      {
-        plugin = nvim-autopairs;
-        type = "lua";
-        config = "require('nvim-autopairs').setup {}";
-      }
-      {
-        plugin = nvim-comment;
-        type = "lua";
-        config = "require('nvim_comment').setup {}";
-      }
-      {
-        plugin = nvim-surround;
-        type = "lua";
-        config = "require('nvim-surround').setup {}";
-      }
-
-      # File specific plugins
-      {
-        plugin = render-markdown-nvim;
-        type = "lua";
-        config = builtins.readFile ./lua/render_markdown.lua;
-        optional = true;
-      }
-      {
-        plugin = crates-nvim;
-        type = "lua";
-        config = builtins.readFile ./lua/crates.lua;
-        optional = true;
-      }
-    ];
+        # File specific plugins
+        (lazy_plug render-markdown-nvim ./lua/render-markdown.lua)
+        (lazy_plug crates-nvim ./lua/crates.lua)
+      ];
 
     extraPackages = with pkgs; [
       # Bash
