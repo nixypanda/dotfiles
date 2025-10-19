@@ -1,6 +1,5 @@
 -- require "base-sane"
 vim.o.mouse = "a"
--- vim.o.encoding = "UTF-8" -- redundant
 vim.o.cursorline = true
 vim.g.mapleader = " "
 
@@ -24,11 +23,10 @@ vim.o.termguicolors = true
 --  displayed in the statusline.
 vim.o.showmode = false
 
--- " COC recommended defaults
--- " if hidden is not set, TextEdit might fail.
+-- allow hidden buffers so we can have unsaved worked that’s not displayed on your screen
 vim.o.hidden = true
 
--- Some language servers have issues with backup files
+-- Some language servers have issues with back-up files
 vim.o.backup = false
 vim.o.writebackup = false
 
@@ -44,9 +42,6 @@ vim.o.shortmess = vim.o.shortmess .. "c"
 -- " always show signcolumns
 vim.o.signcolumn = "yes"
 
--- " Vertical split in conflict resolution / NOTE: Causes config to break
--- vim.g.diffopt = vim.g.diffopt .. 'vertical'
-
 -- Setup whitespace chars
 vim.opt.listchars = {
 	eol = "¬",
@@ -56,9 +51,6 @@ vim.opt.listchars = {
 	precedes = "<",
 	space = ".",
 }
-
--- " Add line length end indicator
--- vim.o.colorcolumn = '88'
 
 vim.o.shell = "nu"
 
@@ -77,46 +69,36 @@ vim.opt.fillchars = {
 vim.wo.number = true
 vim.wo.relativenumber = true
 
-local _border = "rounded"
-
 -- require "look-lsp"
 vim.diagnostic.config({
-	virtual_text = false,
-	signs = true,
-	underline = true,
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = " ",
+			[vim.diagnostic.severity.WARN] = " ",
+			[vim.diagnostic.severity.INFO] = " ",
+			[vim.diagnostic.severity.HINT] = " ",
+		},
+	},
 	update_in_insert = false,
 	severity_sort = false,
-	float = { border = _border },
+	float = { source = "if_many", border = "rounded" },
+	jump = { float = true },
 })
 
-local diagnostic_symbol_map = {
-	{ name = "DiagnosticSignError", symbol = "☠ " },
-	{ name = "DiagnosticSignWarn", symbol = " " },
-	{ name = "DiagnosticSignInfo", symbol = "" },
-	{ name = "DiagnosticSignHint", symbol = "☛ " },
-}
-
-for _, elm in ipairs(diagnostic_symbol_map) do
-	vim.fn.sign_define(elm.name, { texthl = elm.name, text = elm.symbol, numhl = elm.name })
-end
-
 -- require "look-theme"
-local file_syntax_map = {
-	{ pattern = "*.rasi", syntax = "scss" },
-	{ pattern = "flake.lock", syntax = "json" },
-	{ pattern = "*.tfstate", syntax = "json" },
-	{ pattern = "*.nomad", syntax = "hcl" },
-	{ pattern = "manifest", syntax = "hcl" },
-	{ pattern = "lotus58.keymap", syntax = "c" },
-	{ pattern = "lotus58.conf", syntax = "c" },
-}
-
-for _, elm in ipairs(file_syntax_map) do
-	vim.api.nvim_create_autocmd(
-		{ "BufNewFile", "BufRead" },
-		{ pattern = elm.pattern, command = "set syntax=" .. elm.syntax }
-	)
-end
+vim.filetype.add({
+	extension = {
+		rasi = "scss",
+		tfstate = "json",
+		nomad = "hcl",
+	},
+	filename = {
+		["flake.lock"] = "json",
+		["manifest"] = "hcl",
+		["lotus58.keymap"] = "c",
+		["lotus58.conf"] = "c",
+	},
+})
 
 -- This is a very specific setting which sets the color of border to be the
 -- dark background of the tokyonight theme. This is done because we want to

@@ -17,6 +17,9 @@ require("lz.n").load({
 			appearance = {
 				nerd_font_variant = "mono",
 			},
+			enabled = function()
+				return vim.bo.buftype ~= "prompt" and vim.b.completion ~= false and vim.bo.filetype ~= "NvimTree"
+			end,
 			keymap = {
 				preset = "default",
 				["<Tab>"] = { "select_next", "snippet_forward", "fallback" },

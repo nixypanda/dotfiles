@@ -3,5 +3,5 @@ require("lz.n").load({
 	keys = {
 		{ "<leader>lm", function() require("lsp_lines").toggle() end, desc = "Multi-line diagnostics view" },
 	},
-	after = function() require("lsp_lines").setup({}) end,
+	after = function() require("lsp_lines").setup() end,
 })

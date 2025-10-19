@@ -129,21 +129,23 @@ require("lz.n").load({
 		-- already has SchemaStore configured
 		vim.lsp.config("taplo", { on_attach = on_attach })
 
-		vim.lsp.enable("harper_ls")
-		vim.lsp.enable("ts_ls")
-		vim.lsp.enable("lua_ls")
-		vim.lsp.enable("nixd")
-		vim.lsp.enable("nushell")
-		vim.lsp.enable("ruff")
-		vim.lsp.enable("pyright")
-		vim.lsp.enable("cssls")
-		vim.lsp.enable("terraform_lsp")
-		vim.lsp.enable("bashls")
-		vim.lsp.enable("cmake")
-		vim.lsp.enable("dockerls")
-		vim.lsp.enable("html")
-		vim.lsp.enable("jsonls")
-		vim.lsp.enable("yamlls")
-		vim.lsp.enable("taplo")
+		vim.lsp.enable({
+			"harper_ls",
+			"ts_ls",
+			"lua_ls",
+			"nixd",
+			"nushell",
+			"ruff",
+			"pyright",
+			"cssls",
+			"terraform_lsp",
+			"bashls",
+			"cmake",
+			"dockerls",
+			"html",
+			"jsonls",
+			"yamlls",
+			"taplo",
+		})
 	end,
 })
