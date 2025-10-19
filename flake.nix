@@ -8,24 +8,17 @@
     };
     nur = {
       url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Applying the configuration happens from the .dotfiles directory so the
+    # Applying the configuration happens from the.dotfiles directory so the
     # relative path is defined accordingly. This has potential of causing issues.
     vim-plugins = {
       url = "path:/Users/nixypanda/.dotfiles/modules/nvim/plugins";
-    };
-    zjstatus = {
-      url = "github:dj95/zjstatus";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # MacOS specific inputs
     darwin = {
       url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixpkgs-firefox-darwin = {
-      url = "github:bandithedoge/nixpkgs-firefox-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     mac-app-util = {
@@ -41,10 +34,8 @@
       vim-plugins,
       nixpkgs,
       home-manager,
-      zjstatus,
 
       darwin,
-      nixpkgs-firefox-darwin,
       mac-app-util,
     }:
     let
@@ -73,7 +64,6 @@
           nixpkgs.overlays = [
             nur.overlay
             vim-plugins.overlay
-            (final: prev: { zjstatus = zjstatus.packages.${prev.system}.default; })
           ];
 
           # Let Home Manager install and manage itself.
@@ -96,7 +86,7 @@
 
       home-macbook = {
         # Hack: Firefox does not work on mac so we have to depend on an overlay.
-        nixpkgs.overlays = [ nixpkgs-firefox-darwin.overlay ];
+        nixpkgs.overlays = [ ];
         home.homeDirectory = "/Users/nixypanda";
         home.username = "nixypanda";
         imports = [ mac-app-util.homeManagerModules.default ];
