@@ -89,6 +89,28 @@ require("lz.n").load({
 		-- Python
 		vim.lsp.config("ruff", { on_attach = on_attach })
 		vim.lsp.config("pyright", { on_attach = on_attach })
+		vim.lsp.config("basedpyright", {
+			on_attach = on_attach,
+			settings = {
+				basedpyright = {
+					analysis = {
+						autoSearchPaths = true,
+						diagnosticMode = "workspace",
+						useLibraryCodeForTypes = true,
+						autoImportCompletion = true,
+					},
+					disableOrganizeImports = true,
+				},
+				python = {
+					analysis = {
+						autoSearchPaths = true,
+						diagnosticMode = "workspace",
+						useLibraryCodeForTypes = true,
+						typeCheckingMode = "off",
+					},
+				},
+			},
+		})
 
 		-- Terraform
 		vim.lsp.config("terraform_lsp", { on_attach = on_attach })
@@ -136,7 +158,8 @@ require("lz.n").load({
 			"nixd",
 			"nushell",
 			"ruff",
-			"pyright",
+			-- "pyright",
+			"basedpyright",
 			"cssls",
 			"terraform_lsp",
 			"bashls",
