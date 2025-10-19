@@ -1,4 +1,9 @@
-{ pkgs, colorscheme, ... }:
+{
+  pkgs,
+  nixpkgs-pinned,
+  colorscheme,
+  ...
+}:
 let
   # Caveat: This requires Xcode.app installed on the system
   code_lldb = pkgs.vscode-extensions.vadimcn.vscode-lldb;
@@ -274,8 +279,8 @@ in
       haskellPackages.haskell-language-server
       haskellPackages.hoogle
       haskellPackages.fast-tags
-      haskellPackages.haskell-debug-adapter
-      haskellPackages.ghci-dap
+      nixpkgs-pinned.haskellPackages.haskell-debug-adapter
+      nixpkgs-pinned.haskellPackages.ghci-dap
 
       # python
       pyright

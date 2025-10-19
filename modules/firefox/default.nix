@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  nixpkgs-pinned,
+  lib,
+  ...
+}:
 let
   merge = lib.foldr (a: b: a // b) { };
 in
@@ -6,7 +11,7 @@ in
   programs.firefox = {
     enable = true;
     # package = if pkgs.stdenv.isLinux then pkgs.firefox else pkgs.firefox-bin;
-    # package = pkgs.firefox-unwrapped;
+    package = nixpkgs-pinned.firefox;
     profiles = {
       default = {
         name = "privacy-friendly";

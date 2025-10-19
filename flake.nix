@@ -2,6 +2,7 @@
   description = "Home manager flake";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs-pinned.url = "github:nixos/nixpkgs/c73522789a3c7552b1122773d6eaa34e1491cc1c";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -33,6 +34,7 @@
       nur,
       vim-plugins,
       nixpkgs,
+      nixpkgs-pinned,
       home-manager,
 
       darwin,
@@ -45,6 +47,7 @@
           # NOTE: Injecting colorscheme so that it is passed down all the imports
           _module.args = {
             colorscheme = import ./colorschemes/tokyonight.nix;
+            nixpkgs-pinned = nixpkgs-pinned.legacyPackages."x86_64-darwin";
           };
           nixpkgs.config = {
 
