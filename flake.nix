@@ -2,6 +2,7 @@
   description = "Home manager flake";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    # WARN: Pointing to the older nixpkgs version so I can use non-borken firefox
     nixpkgs-pinned.url = "github:nixos/nixpkgs/c73522789a3c7552b1122773d6eaa34e1491cc1c";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -24,7 +25,8 @@
     };
     mac-app-util = {
       url = "github:hraban/mac-app-util";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # WARN: Pointing to the older nixpkgs version so I don't have to build sbcl locally to use it.
+      inputs.nixpkgs.follows = "nixpkgs-pinned";
     };
 
   };

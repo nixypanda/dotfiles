@@ -273,14 +273,14 @@ in
       rust-analyzer
       rustfmt
       clippy
-      evcxr
+      # evcxr
 
       # Haskell
       haskellPackages.haskell-language-server
       haskellPackages.hoogle
       haskellPackages.fast-tags
-      nixpkgs-pinned.haskellPackages.haskell-debug-adapter
-      nixpkgs-pinned.haskellPackages.ghci-dap
+      # nixpkgs-pinned.haskellPackages.haskell-debug-adapter
+      # nixpkgs-pinned.haskellPackages.ghci-dap
 
       # python
       pyright
