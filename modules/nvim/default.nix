@@ -22,6 +22,24 @@ let
     };
 
   });
+  # WARN: Remove this once https://github.com/nvim-neotest/neotest/issues/531 is fixed
+  nvim-neotest = pkgs.lua51Packages.buildLuarocksPackage {
+    pname = "neotest";
+    version = "5.13.0-1";
+    knownRockspec =
+      (pkgs.fetchurl {
+        url = "mirror://luarocks/neotest-5.13.0-1.rockspec";
+        sha256 = "05jajrfvlh6phn8dblwymb17j6zm3g8cmibdzyqgxfivqm748q03";
+      }).outPath;
+    src = pkgs.fetchzip {
+      url = "https://github.com/nvim-neotest/neotest/archive/7166dc36af2760a76479e021e0521e23f62165f1.zip";
+      sha256 = "1mfdlns4y4dxf1im7rwcq264jqwm3814dlnf37c41yq13pc7fd13";
+    };
+    propagatedBuildInputs = [
+      pkgs.vimPlugins.nvim-nio
+      pkgs.vimPlugins.plenary-nvim
+    ];
+  };
 in
 {
   xdg.configFile."nvim/lua/common.lua".source = ./lua/common.lua;
@@ -160,7 +178,7 @@ in
         (plug_dep windsurf-nvim) # config in blink-cmp
 
         # Programming: Testing
-        (lazy_plug neotest ./lua/neotest.lua)
+        (lazy_plug nvim-neotest ./lua/neotest.lua)
         (plug_dep neotest-python)
         (plug_dep neotest-haskell)
         FixCursorHold-nvim
