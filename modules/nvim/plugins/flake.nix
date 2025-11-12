@@ -16,22 +16,34 @@
       url = "github:mistweaverco/kulala.nvim";
       flake = false;
     };
+    nvim-cronex-src = {
+      url = "github:fabridamicelli/cronex.nvim";
+      flake = false;
+    };
   };
   outputs =
     inputs:
     let
       missingVimPluginsInNixpkgs = pkgs: {
         nvim-sqls = pkgs.vimUtils.buildVimPlugin {
-          name = "nvim-sqls";
+          pname = "nvim-sqls";
+          version = "custom";
           src = inputs.nvim-sqls-src;
         };
         nvim-blame = pkgs.vimUtils.buildVimPlugin {
-          name = "nvim-blame";
+          pname = "blame.nvim";
+          version = "custom";
           src = inputs.nvim-blame-src;
         };
         nvim-dadbod-ssh = pkgs.vimUtils.buildVimPlugin {
-          name = "nvim-dadbod-ssh";
+          pname = "nvim-dadbod-ssh";
+          version = "custom";
           src = inputs.nvim-dadbod-ssh;
+        };
+        nvim-cronex = pkgs.vimUtils.buildVimPlugin {
+          pname = "cronex.nvim";
+          version = "custom";
+          src = inputs.nvim-cronex-src;
         };
         nvim-treesitter-kulala-http = pkgs.tree-sitter.buildGrammar {
           language = "kulala_http";

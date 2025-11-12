@@ -40,19 +40,33 @@ let
       pkgs.vimPlugins.plenary-nvim
     ];
   };
+
+  cron_describe =
+    pkgs.writeScriptBin "cron-describe" # python
+      ''
+        #!${pkgs.python3.withPackages (p: [ p.cron-descriptor ])}/bin/python3
+        from cron_descriptor import get_description
+        import sys
+        if len(sys.argv) != 2:
+            print("Usage: cron-describe '<cron_expression>'")
+            sys.exit(1)
+        print(get_description(sys.argv[1]))
+      '';
 in
 {
   xdg.configFile."nvim/lua/common.lua".source = ./lua/common.lua;
-  xdg.configFile."nvim/lua/nix_injected.lua".text = ''
-    local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
-    return {
-         dap_python_with_debugpy  = "${python_with_debugpy}",
-         rustaceanvim_codelldb_path  = extension_path .. 'adapter/codelldb',
-         rustaceanvim_liblldb_path  = extension_path .. 'lldb/lib/liblldb.dylib',
-         treesitter_kulala_grammer_location  = "${pkgs.vimPlugins.nvim-treesitter-kulala-http}",
-         blink_codeium_language_server_bin = "${codeium-server}/bin/codeium_language_server",
-    }
-  '';
+  xdg.configFile."nvim/lua/nix_injected.lua".text = # lua
+    ''
+      local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
+      return {
+           dap_python_with_debugpy  = "${python_with_debugpy}",
+           rustaceanvim_codelldb_path  = extension_path .. 'adapter/codelldb',
+           rustaceanvim_liblldb_path  = extension_path .. 'lldb/lib/liblldb.dylib',
+           treesitter_kulala_grammer_location  = "${pkgs.vimPlugins.nvim-treesitter-kulala-http}",
+           blink_codeium_language_server_bin = "${codeium-server}/bin/codeium_language_server",
+           cronex_explainer = "${cron_describe}/bin/cron-describe",
+      }
+    '';
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -206,6 +220,7 @@ in
         # File specific plugins
         (lazy_plug render-markdown-nvim ./lua/render-markdown.lua)
         (lazy_plug crates-nvim ./lua/crates.lua)
+        (lazy_plug nvim-cronex ./lua/cronex.lua)
       ];
 
     extraPackages = with pkgs; [

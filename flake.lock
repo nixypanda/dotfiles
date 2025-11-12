@@ -210,16 +210,32 @@
     "nvim-blame-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1758699249,
-        "narHash": "sha256-IP+KIwAANoRdZmSzAAtjLgeYOADc2t8Ld1ru0sNq/G0=",
+        "lastModified": 1761041286,
+        "narHash": "sha256-CY768BvqU8zJ2qZKVC9s1lLctBzam1GeZD7UnD7nBBc=",
         "owner": "FabijanZulj",
         "repo": "blame.nvim",
-        "rev": "d5f4ad5c8ebca3caecc773dda5983709c5a5da8f",
+        "rev": "f3f6153ea94e1120f2776f22bbbd63c4aeebaf32",
         "type": "github"
       },
       "original": {
         "owner": "FabijanZulj",
         "repo": "blame.nvim",
+        "type": "github"
+      }
+    },
+    "nvim-cronex-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1762911036,
+        "narHash": "sha256-yeYvFMVGy4LKU2bgrAhMKGq3pQ+AHSS0bPJeHTI1ZR0=",
+        "owner": "fabridamicelli",
+        "repo": "cronex.nvim",
+        "rev": "958a1462e7a0d65936d6e65ddb8be5f6ba9d534b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "fabridamicelli",
+        "repo": "cronex.nvim",
         "type": "github"
       }
     },
@@ -258,11 +274,11 @@
     "nvim-treesitter-kulala-http-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1759075458,
-        "narHash": "sha256-4wAZ9ZYK1SfsSuo7TFrm0tHcaahBkwRYNaKVzS8wTXU=",
+        "lastModified": 1762842180,
+        "narHash": "sha256-TXbcy4Pjth9FfBcgnESuSQzdqRsRI5nPUocbNbpV8g4=",
         "owner": "mistweaverco",
         "repo": "kulala.nvim",
-        "rev": "0d50e9ce5c992fe507743d8641b36125e668aad4",
+        "rev": "8676a4ffc654d9f9404b343982390bea568da737",
         "type": "github"
       },
       "original": {
@@ -318,13 +334,14 @@
     "vim-plugins": {
       "inputs": {
         "nvim-blame-src": "nvim-blame-src",
+        "nvim-cronex-src": "nvim-cronex-src",
         "nvim-dadbod-ssh": "nvim-dadbod-ssh",
         "nvim-sqls-src": "nvim-sqls-src",
         "nvim-treesitter-kulala-http-src": "nvim-treesitter-kulala-http-src"
       },
       "locked": {
-        "lastModified": 1759921149,
-        "narHash": "sha256-Zgk5IKvwaOE2WAMebsa0ncy90c2a6gEgfMQtsUFTMQ4=",
+        "lastModified": 1762951155,
+        "narHash": "sha256-S8xAjhHmNfaJmYLNOF/5ooI+mOXPlOHLI4/5yWuKIvQ=",
         "path": "/Users/nixypanda/.dotfiles/modules/nvim/plugins",
         "type": "path"
       },
