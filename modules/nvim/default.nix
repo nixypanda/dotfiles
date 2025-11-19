@@ -22,24 +22,6 @@ let
     };
 
   });
-  # WARN: Remove this once https://github.com/nvim-neotest/neotest/issues/531 is fixed
-  nvim-neotest = pkgs.lua51Packages.buildLuarocksPackage {
-    pname = "neotest";
-    version = "5.13.0-1";
-    knownRockspec =
-      (pkgs.fetchurl {
-        url = "mirror://luarocks/neotest-5.13.0-1.rockspec";
-        sha256 = "05jajrfvlh6phn8dblwymb17j6zm3g8cmibdzyqgxfivqm748q03";
-      }).outPath;
-    src = pkgs.fetchzip {
-      url = "https://github.com/nvim-neotest/neotest/archive/7166dc36af2760a76479e021e0521e23f62165f1.zip";
-      sha256 = "1mfdlns4y4dxf1im7rwcq264jqwm3814dlnf37c41yq13pc7fd13";
-    };
-    propagatedBuildInputs = [
-      pkgs.vimPlugins.nvim-nio
-      pkgs.vimPlugins.plenary-nvim
-    ];
-  };
 
   cron_describe =
     pkgs.writeScriptBin "cron-describe" # python
@@ -94,6 +76,8 @@ in
       [
         # Setup the plugin that can lazy load others
         lz-n
+        nvim-nio
+        plenary-nvim
 
         # Appearance
         (plug bufferline-nvim ./lua/bufferline.lua)
@@ -178,7 +162,7 @@ in
         nvim-treesitter-textobjects
 
         # Programming: Language support
-        (plug rustaceanvim ./lua/rustaceanvim.lua)
+        # (plug rustaceanvim ./lua/rustaceanvim.lua)
         (plug haskell-tools-nvim ./lua/haskell-tools.lua)
 
         # Programming: Autocompletion setup
@@ -192,11 +176,11 @@ in
         (plug_dep windsurf-nvim) # config in blink-cmp
 
         # Programming: Testing
-        (lazy_plug nvim-neotest ./lua/neotest.lua)
+        (lazy_plug neotest ./lua/neotest.lua)
         (plug_dep neotest-python)
         (plug_dep neotest-haskell)
         FixCursorHold-nvim
-        (plug nvim-coverage ./lua/coverage.lua)
+        # (plug nvim-coverage ./lua/coverage.lua)
 
         # Text Helpers
         (plug todo-comments-nvim ./lua/todo-comments.lua)
@@ -291,7 +275,6 @@ in
 
     extraConfig = # vim
       ''
-        colorscheme ${colorscheme.vim-name}
         luafile ${builtins.toString ./lua/base.lua}
       '';
   };
@@ -312,6 +295,7 @@ in
       haskellPackages.haskell-language-server
       haskellPackages.hoogle
       haskellPackages.fast-tags
+      haskellPackages.cabal-gild
       # nixpkgs-pinned.haskellPackages.haskell-debug-adapter
       # nixpkgs-pinned.haskellPackages.ghci-dap
 
