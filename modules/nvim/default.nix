@@ -271,9 +271,17 @@ in
       fd
     ];
 
-    extraConfig = # vim
+    extraLuaConfig = # lua
       ''
-        luafile ${builtins.toString ./lua/base.lua}
+        ${builtins.readFile ./lua/base.lua}
+        -- vim.cmd { cmd = 'colorscheme', args = { "tokyonight" }}
+        vim.api.nvim_create_autocmd("VimEnter", {
+          pattern = "*",
+          callback = function()
+            vim.cmd("colorscheme tokyonight")
+          end,
+        })
+
       '';
   };
 
