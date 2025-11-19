@@ -226,11 +226,11 @@
     "nvim-cronex-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1763515847,
-        "narHash": "sha256-Tz7Gk0zcG/hh+aTON3xk8A6E1eryv2hMl2a7KU5FLo8=",
+        "lastModified": 1763557918,
+        "narHash": "sha256-blfkIp+DZ3A0U3aE6OyS+fIzQvIKq2Yupj9LjSkETG8=",
         "owner": "fabridamicelli",
         "repo": "cronex.nvim",
-        "rev": "2223e5b5824959a9446a55c5f63681d0144c0e48",
+        "rev": "9fd06b54162e3d97b5bf79fdab93be4fe329433f",
         "type": "github"
       },
       "original": {
@@ -301,6 +301,22 @@
         "owner": "appaquet",
         "ref": "fix/add-subprocess-default-init-back",
         "repo": "neotest",
+        "type": "github"
+      }
+    },
+    "nvim-rustacenvim-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1763539887,
+        "narHash": "sha256-aMyjQEEY6MlTBMMxjR6NxNhdbWmvRhOcfpgE1w712nE=",
+        "owner": "mrcjkb",
+        "repo": "rustaceanvim",
+        "rev": "6b7e0e18ad8fa0598bc038aef7bb6bba288adbad",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mrcjkb",
+        "repo": "rustaceanvim",
         "type": "github"
       }
     },
@@ -388,12 +404,13 @@
         "nvim-neotest-haskell-src": "nvim-neotest-haskell-src",
         "nvim-neotest-python-src": "nvim-neotest-python-src",
         "nvim-neotest-src": "nvim-neotest-src",
+        "nvim-rustacenvim-src": "nvim-rustacenvim-src",
         "nvim-sqls-src": "nvim-sqls-src",
         "nvim-treesitter-kulala-http-src": "nvim-treesitter-kulala-http-src"
       },
       "locked": {
-        "lastModified": 1763537026,
-        "narHash": "sha256-SWhSfPtCtayNdsT7sAEYhT6xXOGCSqBStbqYc43AcnU=",
+        "lastModified": 1763560467,
+        "narHash": "sha256-qWrhK/y22WGB/O8/61QXklARfcthqCYoxIDcRYQrjf0=",
         "path": "/Users/nixypanda/.dotfiles/modules/nvim/plugins",
         "type": "path"
       },

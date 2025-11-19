@@ -20,6 +20,7 @@
       url = "github:fabridamicelli/cronex.nvim";
       flake = false;
     };
+
     nvim-neotest-src = {
       url = "github:appaquet/neotest/fix/add-subprocess-default-init-back";
       flake = false;
@@ -30,6 +31,10 @@
     };
     nvim-neotest-haskell-src = {
       url = "github:mrcjkb/neotest-haskell";
+      flake = false;
+    };
+    nvim-rustacenvim-src = {
+      url = "github:mrcjkb/rustaceanvim";
       flake = false;
     };
   };
@@ -78,6 +83,15 @@
           pname = "neotest-python";
           version = "2025-11-04";
           src = inputs.nvim-neotest-python-src;
+          propagatedBuildInputs = [
+            final.vimPlugins.neotest
+          ];
+          doCheck = false;
+        };
+        rustaceanvim = prev.vimUtils.buildVimPlugin {
+          pname = "rustaceanvim";
+          version = "2025-11-04";
+          src = inputs.nvim-rustacenvim-src;
           propagatedBuildInputs = [
             final.vimPlugins.neotest
           ];
