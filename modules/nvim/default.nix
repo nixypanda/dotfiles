@@ -1,9 +1,4 @@
-{
-  pkgs,
-  nixpkgs-pinned,
-  colorscheme,
-  ...
-}:
+{ pkgs, ... }:
 let
   # Caveat: This requires Xcode.app installed on the system
   code_lldb = pkgs.vscode-extensions.vadimcn.vscode-lldb;
@@ -89,7 +84,10 @@ in
         (plug statuscol-nvim ./lua/statuscol.lua)
         (plug nvim-ufo ./lua/ufo.lua)
         (lazy_plug nvim-tree-lua ./lua/nvim-tree.lua)
-        catppuccin-nvim # theme
+
+        # themes
+        catppuccin-nvim
+        tokyonight-nvim
 
         # DAP
         (lazy_plug nvim-dap ./lua/dap.lua)

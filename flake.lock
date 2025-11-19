@@ -409,7 +409,7 @@
         "nvim-treesitter-kulala-http-src": "nvim-treesitter-kulala-http-src"
       },
       "locked": {
-        "lastModified": 1763560467,
+        "lastModified": 1763561928,
         "narHash": "sha256-qWrhK/y22WGB/O8/61QXklARfcthqCYoxIDcRYQrjf0=",
         "path": "/Users/nixypanda/.dotfiles/modules/nvim/plugins",
         "type": "path"
