@@ -160,7 +160,7 @@ in
         nvim-treesitter-textobjects
 
         # Programming: Language support
-        # (plug rustaceanvim ./lua/rustaceanvim.lua)
+        (plug rustaceanvim ./lua/rustaceanvim.lua)
         (plug haskell-tools-nvim ./lua/haskell-tools.lua)
 
         # Programming: Autocompletion setup
@@ -168,7 +168,7 @@ in
         (plug_dep blink-compat)
         (plug_dep friendly-snippets)
 
-        # Programming: AI shit
+        # Programming: AI crap
         (lazy_plug avante-nvim ./lua/avante.lua)
         (plug img-clip-nvim ''require("img-clip").setup()'')
         (plug_dep windsurf-nvim) # config in blink-cmp

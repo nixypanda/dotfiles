@@ -7,7 +7,7 @@
       ''
         default_shell "nu"
         pane_frames false
-        theme "catppuccin-macchiato"
+        theme "tokyo-night"
         simplified_ui true
 
         keybinds clear-defaults=true {
