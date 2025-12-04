@@ -30,5 +30,8 @@
     cargo-tarpaulin
     perl # this is required by rust
     rustc
+
+    # js
+    nodejs
   ];
 }
