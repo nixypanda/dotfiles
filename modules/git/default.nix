@@ -7,24 +7,9 @@
   programs = {
     git = {
       enable = true;
-      userName = "nixypanda";
-      userEmail = "sherub.thakur@gmail.com";
-
-      # difftastic = { enable = true; };
-
-      delta = {
-        enable = true;
-        options = {
-          features = "side-by-side line-numbers decorations";
-          decorations = {
-            commit-decoration-style = "bold yellow box ul";
-            file-style = "bold yellow";
-            file-decoration-style = "none";
-          };
-        };
-      };
-
-      extraConfig = {
+      settings = {
+        user.email = "sherub.thakur@gmail.com";
+        user.name = "nixypanda";
         pull.ff = "only";
         init.defaultBranch = "main";
         merge.conflictstyle = "diff3";
@@ -35,11 +20,26 @@
         # So you have choose between rust or go (Or find a solution for this)
         # url."ssh://git@github.com/".insteadOf = "https://github.com/";
       };
+
     };
 
     gh = {
       enable = true;
       settings.git_protocol = "ssh";
+    };
+    # difftastic = { enable = true; };
+    delta = {
+      enable = true;
+      enableGitIntegration = true;
+      options = {
+        features = "side-by-side line-numbers decorations";
+        decorations = {
+          commit-decoration-style = "bold yellow box ul";
+          file-style = "bold yellow";
+          file-decoration-style = "none";
+        };
+      };
+
     };
 
     gpg.enable = pkgs.stdenv.isLinux;

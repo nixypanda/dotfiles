@@ -290,7 +290,6 @@ in
     packages = with pkgs; [
       vim-startuptime
 
-      nodePackages.livedown
       # Rust
       rust-analyzer
       rustfmt

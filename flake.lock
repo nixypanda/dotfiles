@@ -22,11 +22,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1760721282,
-        "narHash": "sha256-aAHphQbU9t/b2RRy2Eb8oMv+I08isXv2KUGFAFn7nCo=",
+        "lastModified": 1766038392,
+        "narHash": "sha256-ht/GuKaw5NT3M12xM+mkUtkSBVtzjJ8IHIy6R/ncv9g=",
         "owner": "LnL7",
         "repo": "nix-darwin",
-        "rev": "c3211fcd0c56c11ff110d346d4487b18f7365168",
+        "rev": "5fb45ece6129bd7ad8f7310df0ae9c00bae7c562",
         "type": "github"
       },
       "original": {
@@ -100,11 +100,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1760809591,
-        "narHash": "sha256-OxGcFcQdfOK8veZkPdQuqXIotFYiy4sBQB58dMNLeHY=",
+        "lastModified": 1766282146,
+        "narHash": "sha256-0V/nKU93KdYGi+5LB/MVo355obBJw/2z9b2xS3bPJxY=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "870883ba11ba1c84f756c0c1f9fa74cdb2a16c1e",
+        "rev": "61fcc9de76b88e55578eb5d79fc80f2b236df707",
         "type": "github"
       },
       "original": {
@@ -172,11 +172,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1760782043,
-        "narHash": "sha256-+4A1SFln9wOCoUZM0mQfKefP1uRVmjz6bV5SPbl1Q/4=",
+        "lastModified": 1766125104,
+        "narHash": "sha256-l/YGrEpLromL4viUo5GmFH3K5M1j0Mb9O+LiaeCPWEM=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "36226520e9f7a35bf341cbe3b6a1ff9047bec6d9",
+        "rev": "7d853e518814cca2a657b72eeba67ae20ebf7059",
         "type": "github"
       },
       "original": {
@@ -194,11 +194,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1760866007,
-        "narHash": "sha256-TOIyVLghMucFFp6qZqot7oxwxiR3VGtTttKv3CPe5xI=",
+        "lastModified": 1766256167,
+        "narHash": "sha256-KEaIZT5R9KftLGaZHJxJgR7M/XLwYGpvbgwIIPoJFu8=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "68f4e0f40dfafa9bc9ae50b18685befac76ebcd4",
+        "rev": "51d3347e63a34996f35275c77372eeafaa11e0ed",
         "type": "github"
       },
       "original": {
@@ -226,11 +226,11 @@
     "nvim-cronex-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1763557918,
-        "narHash": "sha256-blfkIp+DZ3A0U3aE6OyS+fIzQvIKq2Yupj9LjSkETG8=",
+        "lastModified": 1766322595,
+        "narHash": "sha256-plFnty7GIYMJzpZWp7CVCJXvFTngUdxXVG8g0xikEXE=",
         "owner": "fabridamicelli",
         "repo": "cronex.nvim",
-        "rev": "9fd06b54162e3d97b5bf79fdab93be4fe329433f",
+        "rev": "64bcbddb213c9aba492e3a273c0baf38532c6c55",
         "type": "github"
       },
       "original": {
@@ -258,11 +258,11 @@
     "nvim-neotest-haskell-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1763252950,
-        "narHash": "sha256-Ja+QzYFmTGcOk+3xXpu5FGZl8V0Qri4D7TafiPoHE6g=",
+        "lastModified": 1766277225,
+        "narHash": "sha256-Q2C+4zDHX+m2XU4YoTgZ6wExLngR52CTgmOOFnVvlbQ=",
         "owner": "mrcjkb",
         "repo": "neotest-haskell",
-        "rev": "ef31b4fb7181b7418e6cc6c8ce0ffc8f33b7ca44",
+        "rev": "ed163c4fb296df558abae9a883a65d348b025e40",
         "type": "github"
       },
       "original": {
@@ -307,11 +307,11 @@
     "nvim-rustacenvim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1763539887,
-        "narHash": "sha256-aMyjQEEY6MlTBMMxjR6NxNhdbWmvRhOcfpgE1w712nE=",
+        "lastModified": 1766276825,
+        "narHash": "sha256-dcXnh5SYPh1VRctTuCnuVPKFQuAI4XEvQasolCOv+Xw=",
         "owner": "mrcjkb",
         "repo": "rustaceanvim",
-        "rev": "6b7e0e18ad8fa0598bc038aef7bb6bba288adbad",
+        "rev": "0fa0462a2d6c9629e0bd03d1902e6a1472ceac3e",
         "type": "github"
       },
       "original": {
@@ -339,11 +339,11 @@
     "nvim-treesitter-kulala-http-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1762842180,
-        "narHash": "sha256-TXbcy4Pjth9FfBcgnESuSQzdqRsRI5nPUocbNbpV8g4=",
+        "lastModified": 1765874200,
+        "narHash": "sha256-YRHPx4KPrVtXbYinKOFQmO3SI1cC/+siUtzNWjfTCf8=",
         "owner": "mistweaverco",
         "repo": "kulala.nvim",
-        "rev": "8676a4ffc654d9f9404b343982390bea568da737",
+        "rev": "9fc4831a116fb32b0fd420ed483f5102a873446a",
         "type": "github"
       },
       "original": {

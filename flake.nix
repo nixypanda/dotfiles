@@ -67,7 +67,7 @@
           };
 
           nixpkgs.overlays = [
-            nur.overlay
+            nur.overlays.default
             vim-plugins.overlay
           ];
 
