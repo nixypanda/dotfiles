@@ -11,12 +11,5 @@ vim.g.haskell_tools = {
 			map("<leader>pr", ht.repl.toggle, "Toggle GHCi repl (package)")
 			map("<leader>pR", function() ht.repl.toggle(vim.api.nvim_buf_get_name(0)) end, "Toggle GHCi repl (buffer)")
 		end,
-		debug = true,
-		cmd = {
-			"haskell-language-server-wrapper",
-			"--lsp",
-			"--logfile",
-			vim.fn.stdpath("log") .. "/" .. "haskell-language-server.log",
-		},
 	},
 }

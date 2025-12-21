@@ -302,6 +302,7 @@ in
       haskellPackages.hoogle
       haskellPackages.fast-tags
       haskellPackages.cabal-gild
+      haskellPackages.hlint
       # nixpkgs-pinned.haskellPackages.haskell-debug-adapter
       # nixpkgs-pinned.haskellPackages.ghci-dap
 
