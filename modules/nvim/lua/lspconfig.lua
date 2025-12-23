@@ -88,6 +88,7 @@ require("lz.n").load({
 
 		-- Python
 		vim.lsp.config("ruff", { on_attach = on_attach })
+		vim.lsp.config("ty", { on_attach = on_attach })
 		vim.lsp.config("pyright", { on_attach = on_attach })
 		vim.lsp.config("basedpyright", {
 			on_attach = on_attach,
@@ -159,7 +160,8 @@ require("lz.n").load({
 			"nushell",
 			"ruff",
 			-- "pyright",
-			"basedpyright",
+			-- "basedpyright",
+			"ty",
 			"cssls",
 			"terraform_lsp",
 			"bashls",

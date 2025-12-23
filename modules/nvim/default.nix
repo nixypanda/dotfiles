@@ -308,6 +308,7 @@ in
       # python
       pyright
       basedpyright
+      ty
     ];
 
     file.".vale.ini".source = ./vale.ini;
