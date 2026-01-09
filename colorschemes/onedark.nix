@@ -3,6 +3,8 @@ let
 in
 rec {
   name = "onedark";
+  kitty-name-light = "OneHalfLight";
+  kitty-name-dark = "OneHalfDark";
 
   # Note: This kinda feels like a hack and I am none to happy about it maybe in
   # the future I might make this play nicely to with everything else. That is
