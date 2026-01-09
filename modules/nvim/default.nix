@@ -111,6 +111,7 @@ in
         # navigation
         (plug nvim-bqf ''require("bqf").setup()'')
         (plug nvim-pqf ''require("pqf").setup()'')
+        (plug vim-tmux-navigator ./lua/vim-tmux-navigator.lua)
 
         # Programming: LSP
         (lazy_plug nvim-lspconfig ./lua/lspconfig.lua)
