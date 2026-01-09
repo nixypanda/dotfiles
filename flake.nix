@@ -102,42 +102,9 @@
         '';
       };
 
-      home-linux = {
-        home.homeDirectory = "/home/nixypanda";
-        home.username = "nixypanda";
-        imports = [
-          # Desktop Environment
-          ./modules/linux/desktop-environment.nix
-          ./modules/linux/betterlockscreen
-          ./modules/linux/colorscheme-based-background
-          ./modules/linux/deadd
-          ./modules/linux/eww
-          ./modules/linux/gtk
-          ./modules/linux/picom
-          ./modules/linux/plasma-browser-integration
-          ./modules/linux/rofi
-          ./modules/linux/taffybar
-          ./modules/linux/xidlehook
-          ./modules/linux/xmonad
-        ];
-      };
-
     in
     {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [ ./system/nixos/configuration.nix ];
-      };
-
       homeConfigurations = {
-        nixos = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."x86_64-linux";
-          modules = [
-            home-common
-            home-linux
-          ];
-        };
-
         srt-l02-sekhmet = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-darwin";
           modules = [

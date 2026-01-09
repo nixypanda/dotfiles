@@ -72,9 +72,6 @@ require("lz.n").load({
 					},
 					diagnostic = { suppress = { "sema-escaping-with" } },
 					options = {
-						nixos = {
-							expr = '(builtins.getFlake ("/Users/nixypanda/.dotfiles")).nixosConfigurations.nixos.options',
-						},
 						home_manager = {
 							expr = '(builtins.getFlake ("/Users/nixypanda/.dotfiles")).homeConfigurations."srt-l02-sekhmet".options',
 						},

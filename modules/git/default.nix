@@ -41,8 +41,5 @@
       };
 
     };
-
-    gpg.enable = pkgs.stdenv.isLinux;
   };
-  services.gpg-agent.enable = pkgs.stdenv.isLinux;
 }
