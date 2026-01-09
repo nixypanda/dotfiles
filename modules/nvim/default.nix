@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, colorscheme, ... }:
 let
   # Caveat: This requires Xcode.app installed on the system
   code_lldb = pkgs.vscode-extensions.vadimcn.vscode-lldb;
@@ -274,11 +274,10 @@ in
     extraLuaConfig = # lua
       ''
         ${builtins.readFile ./lua/base.lua}
-        -- vim.cmd { cmd = 'colorscheme', args = { "tokyonight" }}
         vim.api.nvim_create_autocmd("VimEnter", {
           pattern = "*",
           callback = function()
-            vim.cmd("colorscheme tokyonight")
+            vim.cmd("colorscheme ${colorscheme.vim-name}")
           end,
         })
 

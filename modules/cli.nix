@@ -48,7 +48,10 @@
     };
     bat = {
       enable = true;
-      config.theme = colorscheme.bat-theme-name;
+      config = {
+        theme-dark = "${colorscheme.bat-name-dark}";
+        theme-light = "${colorscheme.bat-name-light}";
+      };
     };
     direnv = {
       enable = true;

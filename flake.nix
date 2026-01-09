@@ -87,6 +87,7 @@
             ./modules/nvim
             ./modules/programming.nix
             ./modules/system-management
+            ./modules/tmux
             ./modules/zellij
           ];
         };
