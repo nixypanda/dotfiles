@@ -6,23 +6,16 @@ Here lies the `dotfiles` crafted with much care
 
 A glance at what is present in this lair.
 
-| Name                     | What I am using (NixOS)                                                  | What I am using (Mac)                                |
-| ------------------------ | ------------------------------------------------------------------------ | ---------------------------------------------------- |
-| OS                       | [NixOS](https://nixos.org/)                                              | macOS                                                |
-| Terminal Emulator        | [Kitty](https://sw.kovidgoyal.net/kitty/)                                | [Kitty](https://sw.kovidgoyal.net/kitty/)            |
-| Shell                    | [Nu Shell](https://www.nushell.sh/)                                      | [Nu Shell](https://www.nushell.sh/)                  |
-| Font                     | Hack Nerd Font Mono                                                      | Hack Nerd Font Mono                                  |
-| Editor                   | [Neovim](https://neovim.io/)                                             | [Neovim](https://neovim.io/)                         |
-|                          | [XMonad](https://xmonad.org/),                                           |                                                      |
-|                          | [Taffybar](https://github.com/taffybar/taffybar),                        |                                                      |
-|                          | [picom](https://github.com/yshui/picom),                                 |                                                      |
-| Desktop Environment      | [betterlockscreen](https://github.com/betterlockscreen/betterlockscreen) | Whatever comes with Mac                              |
-|                          | [rofi](https://github.com/davatorium/rofi),                              |                                                      |
-|                          | [deadd](https://github.com/phuhl/linux_notification_center),             |                                                      |
-|                          | [eww](https://github.com/elkowar/eww),                                   |                                                      |
-|                          | etc                                                                      |                                                      |
-| Browser                  | [Firefox](https://www.mozilla.org/en-US/firefox/)                        | [Firefox](https://www.mozilla.org/en-US/firefox/)    |
-| User environment manager | [Home Manager](https://nixos.wiki/wiki/Home_Manager)                     | [Home Manager](https://nixos.wiki/wiki/Home_Manager) |
+| Name                     | What I am using (Mac)                                |
+| ------------------------ | ---------------------------------------------------- |
+| OS                       | macOS                                                |
+| Terminal Emulator        | [Kitty](https://sw.kovidgoyal.net/kitty/)            |
+| Shell                    | [Nu Shell](https://www.nushell.sh/)                  |
+| Font                     | Hack Nerd Font Mono                                  |
+| Editor                   | [Neovim](https://neovim.io/)                         |
+| Desktop Environment      | Whatever comes with Mac                              |
+| Browser                  | [Firefox](https://www.mozilla.org/en-US/firefox/)    |
+| User environment manager | [Home Manager](https://nixos.wiki/wiki/Home_Manager) |
 
 ## Well these look different from normal `dotfiles` mate
 
@@ -53,9 +46,6 @@ helpful links that you can visit to know more about it.
   [this brilliant playlist](https://www.youtube.com/watch?v=QKoQ1gKJY5A&list=PL-saUBvIJzOkjAw_vOac75v-x6EzNzZq-)
   might just be the perfect place to start.
 
-**Note: This distro of Linux is quite different from others, so please do spend
-some time with it.**
-
 ## Setup
 
 Here is a walkthrough of what are the steps one need to take to get this config
@@ -72,28 +62,7 @@ or parts of it setup on any system.
 - Get contents of this repo onto your system to `~/.dotfiles`
 - `cd` into `~/.dotfiles`
 - Execute:
-  `nix run home-manager --no-write-lock-file -- switch --flake "./#nixos"`
-
-### Full Setup of NixOS (first time)
-
-#### Requirements
-
-- Some way to install NixOS
-- Ability to connect to the internet
-- Boot drive with label `NIXBOOT`
-- Root drive where the OS will go `NIXROOT`
-- Swap partition `NIXSWAP`
-
-#### Steps
-
-- Install NixOS
-  - Make sure you have a way to get this repo. `curl`, `git`, etc.
-  - Make sure you enable internet
-- Get contents of this repo onto your system to `~/.dotfiles`
-- `cd` into `~/.dotfiles`
-- Execute: `sudo nixos-rebuild switch --flake './#nixos'`
-- Execute:
-  `nix run home-manager --no-write-lock-file -- switch --flake "./#nixos"`
+  `nix run home-manager --no-write-lock-file -- switch --flake "./#srt-l02-sekhmet"`
 
 ### Caveat
 
@@ -109,6 +78,8 @@ from the codebase.
   `flake.nix` file and start reading it from the top.
 
 ## Here are a few screenshots to showcase this config in action
+
+Note: These were taken on the NixOS system, I haven't been using it now. I use nix on mac now.
 
 ### Tokyonight
 
