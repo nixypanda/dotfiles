@@ -7,3 +7,5 @@ result
 **/$XDG_CACHE_HOME/
 
 **.luarc.json
+
+PLAN_*

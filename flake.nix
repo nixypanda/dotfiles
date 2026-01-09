@@ -60,6 +60,8 @@
                 "codeium"
                 "windsurf"
                 "terraform"
+                "cursor"
+                "cursor-cli"
                 # browser extensions
                 "onepassword-password-manager"
                 "okta-browser-plugin"

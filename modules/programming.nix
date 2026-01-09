@@ -33,5 +33,9 @@
 
     # js
     nodejs
+
+    # AI slop
+    code-cursor
+    cursor-cli
   ];
 }
