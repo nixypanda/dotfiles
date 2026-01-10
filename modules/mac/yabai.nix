@@ -26,16 +26,11 @@
           yabai -m rule --add title="Settings$"          manage=off
 
           # workspace management
-          yabai -m space 1  --label web-aux
-          yabai -m space 2  --label web-main
-          yabai -m space 3  --label code
-          yabai -m space 4  --label notes
+          yabai -m space 1  --label web
 
           # assign apps to spacess
-          yabai -m rule --add app="^Firefox$" space=web-main
-          yabai -m rule --add app="^Google Chrome$" space=web-aux
-          yabai -m rule --add app="kitty" space=code
-          yabai -m rule --add app="Microsoft OneNote" space=notes
+          yabai -m rule --add app="^Firefox$" space=web
+          yabai -m rule --add app="kitty" manage=on fullscreen=on
         '';
     };
   };

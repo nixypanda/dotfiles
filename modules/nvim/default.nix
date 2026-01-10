@@ -44,6 +44,12 @@ in
            cronex_explainer = "${cron_describe}/bin/cron-describe",
       }
     '';
+  xdg.configFile."nvim/ftplugin/nix.lua".text = # lua
+    ''
+      vim.opt_local.tabstop = 2
+      vim.opt_local.shiftwidth = 2
+      vim.opt_local.expandtab = true
+    '';
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -75,7 +81,6 @@ in
         plenary-nvim
 
         # Appearance
-        (plug bufferline-nvim ./lua/bufferline.lua)
         (plug indent-blankline-nvim ./lua/indent-blankline.lua)
         (plug lualine-nvim ./lua/lualine.lua)
         (plug alpha-nvim ./lua/alpha.lua)
@@ -111,7 +116,6 @@ in
         # navigation
         (plug nvim-bqf ''require("bqf").setup()'')
         (plug nvim-pqf ''require("pqf").setup()'')
-        (plug vim-tmux-navigator ./lua/vim-tmux-navigator.lua)
 
         # Programming: LSP
         (lazy_plug nvim-lspconfig ./lua/lspconfig.lua)
@@ -181,6 +185,9 @@ in
         FixCursorHold-nvim
         # (plug nvim-coverage ./lua/coverage.lua)
 
+        # sessions
+        (plug auto-session ./lua/auto-session.lua)
+
         # Text Helpers
         (plug todo-comments-nvim ./lua/todo-comments.lua)
         (plug venn-nvim ./lua/venn.lua)
@@ -189,6 +196,9 @@ in
         # Text objects
         (plug nvim-autopairs "require('nvim-autopairs').setup {}")
         (plug nvim-surround "require('nvim-surround').setup {}")
+
+        # terminal
+        (lazy_plug floaterm ./lua/floaterm.lua)
 
         # Webdev: Database
         vim-dotenv

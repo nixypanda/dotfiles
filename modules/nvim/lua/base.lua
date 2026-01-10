@@ -119,7 +119,7 @@ vim.keymap.set("n", "<leader>bs", "<cmd>tab split<cr>", { desc = "Split to tab" 
 vim.keymap.set("n", "<leader>bS", "<cmd>tab close<cr>", { desc = "Close tab split" })
 
 -- utilities
-vim.keymap.set("n", "<leader>us", '<cmd>let @/ = ""<cr>', { desc = "Remove search highlight" })
+vim.keymap.set("n", "<leader>uh", '<cmd>let @/ = ""<cr>', { desc = "Remove search highlight" })
 
 -- helpful window operations
 vim.keymap.set("n", "<leader>wv", "<C-w>t<C-w>H", { desc = "Horizontally split windows to vertical" })
