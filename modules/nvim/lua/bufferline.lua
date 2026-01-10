@@ -1,7 +1,7 @@
 require("bufferline").setup({
 	options = {
 		offsets = {
-			{ filetype = "NvimTree", text = "", separator = false, highlight = "NvimTreeNormal" },
+			{ filetype = "NvimTree", text = "", separator_style = "slope", highlight = "NvimTreeNormal" },
 		},
 	},
 })

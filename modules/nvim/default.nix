@@ -44,6 +44,12 @@ in
            cronex_explainer = "${cron_describe}/bin/cron-describe",
       }
     '';
+  xdg.configFile."nvim/ftplugin/nix.lua".text = # lua
+    ''
+      vim.opt_local.tabstop = 2
+      vim.opt_local.shiftwidth = 2
+      vim.opt_local.expandtab = true
+    '';
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -111,7 +117,6 @@ in
         # navigation
         (plug nvim-bqf ''require("bqf").setup()'')
         (plug nvim-pqf ''require("pqf").setup()'')
-        (plug vim-tmux-navigator ./lua/vim-tmux-navigator.lua)
 
         # Programming: LSP
         (lazy_plug nvim-lspconfig ./lua/lspconfig.lua)
@@ -189,6 +194,9 @@ in
         # Text objects
         (plug nvim-autopairs "require('nvim-autopairs').setup {}")
         (plug nvim-surround "require('nvim-surround').setup {}")
+
+        # terminal
+        (lazy_plug floaterm ./lua/floaterm.lua)
 
         # Webdev: Database
         vim-dotenv
