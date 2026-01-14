@@ -21,7 +21,8 @@
       tab_powerline_style = "slanted";
       tab_bar_min_tabs = 1;
       tab_bar_filter = "session:~ or session:^$";
-      tab_title_template = " {session_name} ┊ 󰆍 {index} → {title} ┊ 󰕮 ‹{layout_name}› ";
+      tab_title_template = " 󰆍 {index} → {title} ";
+      active_tab_title_template = " {session_name} ┊ 󰆍 {index} → {title} ┊ 󰕮 ‹{layout_name}› ";
 
       macos_option_as_alt = "left";
       macos_show_window_title_in = "none";
@@ -54,12 +55,10 @@
       "cmd+n" = "next_layout";
       "cmd+f" = "toggle_layout stack";
       # sessions
-      "cmd+s" = "goto_session";
+      "cmd+s" = "goto_session ~/.local/state/kitty/sessions";
       "cmd+shift+s" = "save_as_session --use-foreground-process --base-dir ~/.local/state/kitty/session/";
       "cmd+1" = "goto_session ~/.local/state/kitty/sessions/reproducible-me.kitty-session";
       "cmd+2" = "goto_session ~/.local/state/kitty/sessions/monadic-trials.kitty-session";
-      "cmd+3" = "goto_session ~/.local/state/kitty/sessions/uplifting.kitty-session";
-      "cmd+4" = "goto_session ~/.local/state/kitty/sessions/uplifting-feature.kitty-session";
       "cmd+w" =
         "combine : save_as_session --use-foreground-process --save-only --base-dir ~/.local/state/kitty/sessions : quit";
       # scrollback
@@ -87,13 +86,13 @@
     '';
 
     "${config.xdg.configHome}/kitty/dark-theme.auto.conf" = {
-      text = ''include ${pkgs.kitty-themes}/share/kitty-themes/themes/${colorscheme.kitty-name-dark}.conf'';
+      text = "include ${pkgs.kitty-themes}/share/kitty-themes/themes/${colorscheme.kitty-name-dark}.conf";
     };
     "${config.xdg.configHome}/kitty/light-theme.auto.conf" = {
-      text = ''include ${pkgs.kitty-themes}/share/kitty-themes/themes/${colorscheme.kitty-name-light}.conf'';
+      text = "include ${pkgs.kitty-themes}/share/kitty-themes/themes/${colorscheme.kitty-name-light}.conf";
     };
     "${config.xdg.configHome}/kitty/no-preference-theme.auto.conf" = {
-      text = ''include ${pkgs.kitty-themes}/share/kitty-themes/themes/${colorscheme.kitty-name-dark}.conf'';
+      text = "include ${pkgs.kitty-themes}/share/kitty-themes/themes/${colorscheme.kitty-name-dark}.conf";
     };
   };
 }
