@@ -1,4 +1,4 @@
-require("nvim-treesitter.configs").setup({
+require("nvim-treesitter").setup({
 	ensure_installed = {
 		-- This needs to be empty otherwise treesitter complains about
 		-- directory being not being writable. All the installation of the
@@ -6,52 +6,50 @@ require("nvim-treesitter.configs").setup({
 		-- so we don't really need to specify anything there.
 		-- https://github.com/NixOS/nixpkgs/issues/189838
 	},
-	sync_install = false,
 	auto_install = false,
-	ignore_install = {},
-
-	highlight = { enable = true },
-	incremental_selection = {
+	highlight = {
 		enable = true,
-		keymaps = {
-			init_selection = "gnn",
-			node_incremental = "grn",
-			scope_incremental = "grc",
-			node_decremental = "grm",
-		},
+		additional_vim_regex_highlighting = false,
 	},
 	indent = { enable = true },
-	refactor = { highlight_definitions = { enable = true } },
-	textobjects = {
-		select = {
-			enable = true,
-			keymaps = {
-				["af"] = "@function.outer",
-				["if"] = "@function.inner",
-				["ac"] = "@class.outer",
-				["ic"] = "@class.inner",
-				["ab"] = "@block.outer",
-				["ib"] = "@block.inner",
-				["aa"] = "@parameter.outer",
-				["ia"] = "@parameter.inner",
-			},
-		},
-		swap = {
-			enable = true,
-			swap_next = {
-				["<leader>mp"] = "@parameter.inner",
-			},
-			swap_previous = {
-				["<leader>mP"] = "@parameter.inner",
-			},
-		},
+	incremental_selection = {
+		enable = true,
 	},
 })
 
-require("nvim-treesitter.parsers").get_parser_configs().kulala_http = {
+function register_ts_bullshit(filetype)
+	local group = vim.api.nvim_create_augroup("FUTreesitter_" .. filetype, { clear = true })
+
+	vim.api.nvim_create_autocmd("FileType", {
+		group = group,
+		pattern = filetype,
+		callback = function() vim.treesitter.start() end,
+	})
+end
+
+-- FIXME: broken
+require("nvim-treesitter.parsers").kulala_http = {
 	install_info = {
-		url = require("nix_injected").treesitter_kulala_grammer_location,
-		files = { "src/parser.c" },
+		path = require("nix_injected").treesitter_kulala_grammer_location,
 	},
-	filetype = "kulala_http",
 }
+vim.treesitter.language.register("kulala_http", { "http" })
+
+register_ts_bullshit("bash")
+register_ts_bullshit("dockerfile")
+register_ts_bullshit("haskell")
+register_ts_bullshit("json")
+register_ts_bullshit("kdl")
+register_ts_bullshit("lua")
+register_ts_bullshit("markdown")
+register_ts_bullshit("markdown-inline")
+register_ts_bullshit("nix")
+register_ts_bullshit("nu")
+register_ts_bullshit("python")
+register_ts_bullshit("regex")
+register_ts_bullshit("rust")
+register_ts_bullshit("sql")
+register_ts_bullshit("toml")
+register_ts_bullshit("vimdoc")
+register_ts_bullshit("yaml")
+register_ts_bullshit("kulala_http")

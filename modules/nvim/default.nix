@@ -31,25 +31,27 @@ let
       '';
 in
 {
-  xdg.configFile."nvim/lua/common.lua".source = ./lua/common.lua;
-  xdg.configFile."nvim/lua/nix_injected.lua".text = # lua
-    ''
-      local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
-      return {
-           dap_python_with_debugpy  = "${python_with_debugpy}",
-           rustaceanvim_codelldb_path  = extension_path .. 'adapter/codelldb',
-           rustaceanvim_liblldb_path  = extension_path .. 'lldb/lib/liblldb.dylib',
-           treesitter_kulala_grammer_location  = "${pkgs.vimPlugins.nvim-treesitter-kulala-http}",
-           blink_codeium_language_server_bin = "${codeium-server}/bin/codeium_language_server",
-           cronex_explainer = "${cron_describe}/bin/cron-describe",
-      }
-    '';
-  xdg.configFile."nvim/ftplugin/nix.lua".text = # lua
-    ''
-      vim.opt_local.tabstop = 2
-      vim.opt_local.shiftwidth = 2
-      vim.opt_local.expandtab = true
-    '';
+  xdg.configFile = {
+    "nvim/lua/common.lua".source = ./lua/common.lua;
+    # local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
+    "nvim/lua/nix_injected.lua".text = # lua
+      ''
+        return {
+             dap_python_with_debugpy  = "${python_with_debugpy}",
+             -- rustaceanvim_codelldb_path  = extension_path .. 'adapter/codelldb',
+             -- rustaceanvim_liblldb_path  = extension_path .. 'lldb/lib/liblldb.dylib',
+             treesitter_kulala_grammer_location  = "${pkgs.vimPlugins.nvim-treesitter-kulala-http}",
+             blink_codeium_language_server_bin = "${codeium-server}/bin/codeium_language_server",
+             cronex_explainer = "${cron_describe}/bin/cron-describe",
+        }
+      '';
+    "nvim/ftplugin/nix.lua".text = # lua
+      ''
+        vim.opt_local.tabstop = 2
+        vim.opt_local.shiftwidth = 2
+        vim.opt_local.expandtab = true
+      '';
+  };
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -131,12 +133,8 @@ in
           plugin = nvim-treesitter.withPlugins (
             plugins: with plugins; [
               bash
-              css
               dockerfile
               haskell
-              hcl
-              html
-              javascript
               json
               kdl
               lua
@@ -147,12 +145,8 @@ in
               python
               regex
               rust
-              scss
               sql
-              terraform
               toml
-              tsx
-              typescript
               vimdoc
               yaml
               nvim-treesitter-kulala-http
@@ -223,7 +217,7 @@ in
       shfmt
 
       # Docker
-      nodePackages.dockerfile-language-server-nodejs
+      dockerfile-language-server
       hadolint
 
       # grammer
@@ -255,7 +249,7 @@ in
       deadnix
       statix
       nixd
-      nixfmt-rfc-style
+      nixfmt
 
       # Python
       python3
@@ -304,7 +298,6 @@ in
       rust-analyzer
       rustfmt
       clippy
-      # evcxr
 
       # Haskell
       haskellPackages.haskell-language-server
@@ -312,12 +305,11 @@ in
       haskellPackages.fast-tags
       haskellPackages.cabal-gild
       haskellPackages.hlint
-      # nixpkgs-pinned.haskellPackages.haskell-debug-adapter
-      # nixpkgs-pinned.haskellPackages.ghci-dap
+      # haskellPackages.haskell-debugger
 
       # python
       pyright
-      basedpyright
+      # basedpyright # compiler-rt-libc broken
       ty
     ];
 
