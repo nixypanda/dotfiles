@@ -171,3 +171,18 @@ def is-ruff-pylint-yet [--detailed] {
     }
 
 }
+
+def wc-parse [] {
+  parse -r '(?P<lines>\d+)\s+(?P<words>\d+)\s+(?P<bytes>\d+)\s+(?P<file>.+)'
+  | update lines { into int }
+  | update words { into int }
+  | update bytes { into int }
+}
+
+def wc-table [files?: list<string>] {
+  if ($files | is-empty) {
+    wc | wc-parse
+  } else {
+    $files | each {|f| wc $f } | wc-parse
+  }
+}
