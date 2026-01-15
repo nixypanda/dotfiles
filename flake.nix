@@ -2,8 +2,6 @@
   description = "Home manager flake";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    # WARN: Pointing to the older nixpkgs version so I can use non-borken firefox
-    nixpkgs-pinned.url = "github:nixos/nixpkgs/c73522789a3c7552b1122773d6eaa34e1491cc1c";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -17,18 +15,11 @@
     vim-plugins = {
       url = "path:/Users/nixypanda/.dotfiles/modules/nvim/plugins";
     };
-
     # MacOS specific inputs
     darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    mac-app-util = {
-      url = "github:hraban/mac-app-util";
-      # WARN: Pointing to the older nixpkgs version so I don't have to build sbcl locally to use it.
-      inputs.nixpkgs.follows = "nixpkgs-pinned";
-    };
-
   };
   outputs =
     {
@@ -36,11 +27,8 @@
       nur,
       vim-plugins,
       nixpkgs,
-      nixpkgs-pinned,
       home-manager,
-
       darwin,
-      mac-app-util,
     }:
     let
       home-common =
@@ -49,7 +37,6 @@
           # NOTE: Injecting colorscheme so that it is passed down all the imports
           _module.args = {
             colorscheme = import ./colorschemes/tokyonight.nix;
-            nixpkgs-pinned = nixpkgs-pinned.legacyPackages."x86_64-darwin";
           };
           nixpkgs.config = {
 
@@ -59,12 +46,9 @@
                 "zoom"
                 "codeium"
                 "windsurf"
-                "terraform"
                 "cursor"
                 "cursor-cli"
-                # browser extensions
-                "onepassword-password-manager"
-                "okta-browser-plugin"
+                "google-chrome"
               ];
           };
 
@@ -95,7 +79,13 @@
         nixpkgs.overlays = [ ];
         home.homeDirectory = "/Users/nixypanda";
         home.username = "nixypanda";
-        imports = [ mac-app-util.homeManagerModules.default ];
+
+        targets.darwin.copyApps.enable = true;
+        targets.darwin.linkApps.enable = false;
+
+        imports = [
+          ./modules/mac/gui-apps.nix
+        ];
         xdg.configFile."nix/nix.conf".text = ''
           experimental-features = nix-command flakes
         '';

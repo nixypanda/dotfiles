@@ -12,10 +12,7 @@
     };
     taps = [ ];
     casks = [
-      "google-chrome"
-      "1password"
       "docker"
-      "microsoft-onenote"
       "zoom"
       "protonvpn"
     ];

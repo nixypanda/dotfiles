@@ -1,16 +1,10 @@
-{
-  pkgs,
-  nixpkgs-pinned,
-  lib,
-  ...
-}:
+{ pkgs, lib, ... }:
 let
   merge = lib.foldr (a: b: a // b) { };
 in
 {
   programs.firefox = {
     enable = true;
-    package = nixpkgs-pinned.firefox;
     profiles = {
       default = {
         name = "privacy-friendly";
