@@ -22,16 +22,16 @@ in
           (import ./config/security.nix)
         ];
         extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
+          bitwarden
           clearurls
           darkreader
           facebook-container
-          onepassword-password-manager
+          multi-account-containers
           return-youtube-dislikes
           sponsorblock
+          temporary-containers
           ublock-origin
           vimium
-          temporary-containers
-          multi-account-containers
         ];
       };
     };
