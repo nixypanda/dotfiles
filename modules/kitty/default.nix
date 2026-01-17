@@ -29,7 +29,7 @@
     };
     keybindings = {
       "cmd+enter" = "new_window_with_cwd";
-      "cmd+tab" = "new_tab_with_cwd";
+      "cmd+t" = "new_tab_with_cwd";
       "cmd+shift+r" = "set_tab_title";
       "cmd+g" = "swap_with_window";
       # closing
