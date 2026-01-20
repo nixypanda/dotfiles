@@ -37,5 +37,15 @@
     # AI slop
     code-cursor
     cursor-cli
+    opencode
   ];
+
+  programs = {
+    opencode = {
+      enable = true;
+      settings = {
+        theme = "system";
+      };
+    };
+  };
 }

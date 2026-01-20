@@ -168,7 +168,7 @@ in
         (plug_dep friendly-snippets)
 
         # Programming: AI crap
-        (lazy_plug avante-nvim ./lua/avante.lua)
+        (lazy_plug opencode-nvim ./lua/ai.lua)
         (plug img-clip-nvim ''require("img-clip").setup()'')
         (plug_dep windsurf-nvim) # config in blink-cmp
 
