@@ -19,8 +19,9 @@
     jc
     jq
 
-    # Nix itself
+    # Nix related
     nixVersions.latest
+    nix-forecast
   ];
 
   programs = {

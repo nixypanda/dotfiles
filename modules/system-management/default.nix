@@ -9,11 +9,15 @@ let
   update-dots = pkgs.writeScriptBin "update-dots" ''
     ${builtins.readFile ./update-dots.sh}
   '';
+  build-forecast-user = pkgs.writeScriptBin "build-forecast" ''
+    ${builtins.readFile ./build-forecast-user.sh})
+  '';
 in
 {
   home.packages = [
     update-dots
     apply-user-mac
     apply-system-mac
+    build-forecast-user
   ];
 }

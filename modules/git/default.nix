@@ -14,6 +14,7 @@
         init.defaultBranch = "main";
         merge.conflictstyle = "diff3";
         core.editor = "vi";
+        http.sslCAInfo = "/etc/ssl/cert.pem";
 
         # NOTE: Required so that `go get` can fetch private repos
         # NOTE: cargo breaks if this is present in the config
