@@ -150,7 +150,7 @@ require("lz.n").load({
 		vim.lsp.config("taplo", { on_attach = on_attach })
 
 		vim.lsp.enable({
-			"harper_ls",
+			-- "harper_ls",
 			"ts_ls",
 			"lua_ls",
 			"nixd",
