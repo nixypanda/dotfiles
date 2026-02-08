@@ -6,13 +6,7 @@
     docker-compose
 
     # Haskell
-    cabal2nix
     ghc
-    haskellPackages.cabal-install
-    haskellPackages.stack
-
-    # lua
-    lua
 
     # python
     (python3.withPackages (
@@ -21,23 +15,6 @@
         pip
       ]
     ))
-    poetry
-    uv
-    python3Packages.ipython
-
-    # rust
-    cargo
-    cargo-tarpaulin
-    perl # this is required by rust
-    rustc
-
-    # js
-    nodejs
-
-    # AI slop
-    code-cursor
-    cursor-cli
-    opencode
   ];
 
   programs = {

@@ -309,7 +309,6 @@ in
 
       # python
       pyright
-      # basedpyright # compiler-rt-libc broken
       ty
     ];
 

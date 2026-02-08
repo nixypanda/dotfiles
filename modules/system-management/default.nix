@@ -10,7 +10,7 @@ let
     ${builtins.readFile ./update-dots.sh}
   '';
   build-forecast-user = pkgs.writeScriptBin "build-forecast" ''
-    ${builtins.readFile ./build-forecast-user.sh})
+    ${builtins.readFile ./build-forecast-user.sh}
   '';
 in
 {
