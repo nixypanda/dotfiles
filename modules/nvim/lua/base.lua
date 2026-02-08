@@ -91,6 +91,7 @@ vim.filetype.add({
 		rasi = "scss",
 		tfstate = "json",
 		nomad = "hcl",
+		["kitty-session"] = "conf",
 	},
 	filename = {
 		["flake.lock"] = "json",

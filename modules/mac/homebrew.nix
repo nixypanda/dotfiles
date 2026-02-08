@@ -12,9 +12,10 @@
     };
     taps = [ ];
     casks = [
-      "docker"
+      "docker-desktop"
       "zoom"
       "protonvpn"
+      # "stremio"
     ];
   };
 }

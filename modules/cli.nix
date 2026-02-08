@@ -5,7 +5,6 @@
     dig
     unzip
     qpdf
-    nodePackages.localtunnel
 
     # Better alternatives
     bottom # top

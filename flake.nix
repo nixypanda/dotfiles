@@ -46,8 +46,6 @@
                 "zoom"
                 "codeium"
                 "windsurf"
-                "cursor"
-                "cursor-cli"
                 "google-chrome"
               ];
           };
