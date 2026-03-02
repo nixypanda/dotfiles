@@ -137,6 +137,7 @@ in
               haskell
               json
               kdl
+              ledger
               lua
               markdown
               markdown-inline
@@ -276,7 +277,7 @@ in
       fd
     ];
 
-    extraLuaConfig = # lua
+    initLua = # lua
       ''
         ${builtins.readFile ./lua/base.lua}
         vim.api.nvim_create_autocmd("VimEnter", {

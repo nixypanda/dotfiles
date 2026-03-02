@@ -5,6 +5,9 @@
     dig
     unzip
     qpdf
+    hledger
+    hledger-ui
+    just
 
     # Better alternatives
     bottom # top
@@ -14,7 +17,6 @@
     hyperfine # benchmarking (time)
 
     # Structured data
-    fx
     jc
     jq
 

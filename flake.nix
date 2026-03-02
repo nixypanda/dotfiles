@@ -47,6 +47,8 @@
                 "codeium"
                 "windsurf"
                 "google-chrome"
+                "firefox-bin"
+                "firefox-bin-unwrapped"
               ];
           };
 

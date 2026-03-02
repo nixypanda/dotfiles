@@ -15,7 +15,7 @@
       "docker-desktop"
       "zoom"
       "protonvpn"
-      # "stremio"
+      "stremio"
     ];
   };
 }
