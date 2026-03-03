@@ -2,8 +2,31 @@
   pkgs,
   colorscheme,
   config,
+  lib,
   ...
 }:
+let
+  kittySessionPicker = pkgs.writeShellScript "kitty-session-picker" (
+    lib.replaceStrings
+      [
+        "@find@"
+        "@sort@"
+        "@basename@"
+        "@cut@"
+        "@fzf@"
+        "@kitty@"
+      ]
+      [
+        "${pkgs.findutils}/bin/find"
+        "${pkgs.coreutils}/bin/sort"
+        "${pkgs.coreutils}/bin/basename"
+        "${pkgs.coreutils}/bin/cut"
+        "${pkgs.fzf}/bin/fzf"
+        "${pkgs.kitty}/bin/kitty"
+      ]
+      (builtins.readFile ./kitty-session-picker.sh)
+  );
+in
 {
   programs.kitty = {
     enable = true;
@@ -33,7 +56,8 @@
     };
     keybindings = {
       "cmd+enter" = "new_window_with_cwd";
-      "cmd+t" = "new_tab_with_cwd";
+      "cmd+t" = "new_tab";
+      "cmd+shift+t" = "new_tab_with_cwd";
       "cmd+shift+r" = "set_tab_title";
       "cmd+g" = "swap_with_window";
       # closing
@@ -59,8 +83,8 @@
       "cmd+n" = "next_layout";
       "cmd+f" = "toggle_layout stack";
       # sessions
-      "cmd+s" = "goto_session ~/.local/state/kitty/sessions";
-      "cmd+shift+s" = "save_as_session --use-foreground-process --base-dir ~/.local/state/kitty/session/";
+      "cmd+shift+s" = "goto_session ~/.local/state/kitty/sessions";
+      "cmd+s" = "launch --type=overlay --cwd=current ~/.local/bin/kitty-session-picker";
       "cmd+1" = "goto_session ~/.local/state/kitty/sessions/reproducible-me.kitty-session";
       "cmd+2" = "goto_session ~/.local/state/kitty/sessions/monadic-trials.kitty-session";
       "cmd+w" =
@@ -74,10 +98,10 @@
 
   home.file = {
     "${config.xdg.configHome}/kitty/quick-access-terminal.conf".text = ''
-      lines 80
+      lines 40
       columns 200
       background_opacity 0.95
-      edge center-sized
+      edge top
     '';
     "${config.xdg.configHome}/kitty/open-actions.conf".text = ''
       protocol file
@@ -88,6 +112,11 @@
       mime text/*
       action launch --type=tab $EDITOR $FILE_PATH
     '';
+
+    "${config.home.homeDirectory}/.local/bin/kitty-session-picker" = {
+      executable = true;
+      source = kittySessionPicker;
+    };
 
     "${config.xdg.configHome}/kitty/dark-theme.auto.conf" = {
       text = "include ${pkgs.kitty-themes}/share/kitty-themes/themes/${colorscheme.kitty-name-dark}.conf";
