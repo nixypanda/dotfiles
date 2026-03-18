@@ -61,6 +61,27 @@
         "type": "github"
       }
     },
+    "kitty-upstream": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1773769781,
+        "narHash": "sha256-nEgWEU9R+uhJlEcJT5lSM3WE1soJP0qYIcPRE0YE9Os=",
+        "owner": "nixypanda",
+        "repo": "kitty",
+        "rev": "d756e9991b3284e26c3ea5afdbad8e4ea8132039",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixypanda",
+        "ref": "floating-pane-experiment",
+        "repo": "kitty",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1772736753,
@@ -247,6 +268,7 @@
       "inputs": {
         "darwin": "darwin",
         "home-manager": "home-manager",
+        "kitty-upstream": "kitty-upstream",
         "nixpkgs": "nixpkgs",
         "nur": "nur",
         "vim-plugins": "vim-plugins"

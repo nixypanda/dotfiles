@@ -20,6 +20,10 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    kitty-upstream = {
+      url = "github:nixypanda/kitty/floating-pane-experiment";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     {
@@ -29,8 +33,34 @@
       nixpkgs,
       home-manager,
       darwin,
+      kitty-upstream,
     }:
     let
+      kitty-dev-build-overlay = final: prev: {
+        kitty-dev = prev.kitty.overrideAttrs (
+          old:
+          let
+            version = "floating-pane-experiment-${kitty-upstream.shortRev or kitty-upstream.rev}";
+            src = kitty-upstream;
+          in
+          {
+            inherit src version;
+            goModules =
+              (final.buildGo126Module {
+                pname = "kitty-go-modules";
+                inherit src version;
+                vendorHash = "sha256-FaSWBeQJlvw9vXcHJ/OaFd48K8d7X86X8w7wpG84Ltw=";
+              }).goModules;
+            nativeBuildInputs = map (
+              pkg: if pkg == prev.go_1_24 then final.go_1_26 else pkg
+            ) old.nativeBuildInputs;
+            env = old.env // {
+              GOTOOLCHAIN = "local";
+            };
+          }
+        );
+      };
+
       home-common =
         { lib, ... }:
         {
@@ -53,6 +83,7 @@
           };
 
           nixpkgs.overlays = [
+            kitty-dev-build-overlay
             nur.overlays.default
             vim-plugins.overlay
           ];

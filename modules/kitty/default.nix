@@ -26,10 +26,37 @@ let
       ]
       (builtins.readFile ./kitty-session-picker.sh)
   );
+
+  kittyDevApp = pkgs.runCommand "kitty-dev-app" { } ''
+    mkdir -p "$out/Applications"
+    cp -R "${pkgs.kitty-dev}/Applications/kitty.app" "$out/Applications/kitty-dev.app"
+    chmod -R u+w "$out/Applications/kitty-dev.app"
+
+    "${pkgs.python3}/bin/python3" - <<PY
+import plistlib
+from pathlib import Path
+
+plist_path = Path("$out/Applications/kitty-dev.app/Contents/Info.plist")
+with plist_path.open("rb") as f:
+    info = plistlib.load(f)
+
+info["CFBundleIdentifier"] = "net.kovidgoyal.kitty.dev"
+info["CFBundleName"] = "kitty-dev"
+info["CFBundleDisplayName"] = "kitty-dev"
+
+with plist_path.open("wb") as f:
+    plistlib.dump(info, f)
+PY
+  '';
+
+  kittyDevBin = pkgs.writeShellScriptBin "kitty-dev" ''
+    exec "${pkgs.kitty-dev}/bin/kitty" "$@"
+  '';
 in
 {
   programs.kitty = {
     enable = true;
+    package = pkgs.kitty;
     settings = {
       font_size = 12;
       scrollback_lines = 10000;
@@ -95,6 +122,22 @@ in
       "cmd+p" = "show_last_command_output";
     };
   };
+
+  home.activation.kittyCodesign = lib.hm.dag.entryAfter [ "copyApps" ] (
+    lib.optionalString pkgs.stdenv.hostPlatform.isDarwin ''
+      for app in "$HOME/Applications/Home Manager Apps/kitty.app" "$HOME/Applications/Home Manager Apps/kitty-dev.app"; do
+        if [ -d "$app" ]; then
+          /usr/bin/codesign --force --deep --sign - "$app"
+          /usr/bin/codesign --verify --deep --strict --verbose=2 "$app"
+        fi
+      done
+    ''
+  );
+
+  home.packages = [
+    kittyDevApp
+    kittyDevBin
+  ];
 
   home.file = {
     "${config.xdg.configHome}/kitty/quick-access-terminal.conf".text = ''
