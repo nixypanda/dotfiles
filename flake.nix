@@ -90,7 +90,7 @@
 
           # Let Home Manager install and manage itself.
           programs.home-manager.enable = true;
-          home.stateVersion = "22.05";
+          home.stateVersion = "25.11";
 
           imports = [
             ./modules/cli.nix
@@ -110,9 +110,6 @@
         nixpkgs.overlays = [ ];
         home.homeDirectory = "/Users/nixypanda";
         home.username = "nixypanda";
-
-        targets.darwin.copyApps.enable = true;
-        targets.darwin.linkApps.enable = false;
 
         imports = [
           ./modules/mac/gui-apps.nix

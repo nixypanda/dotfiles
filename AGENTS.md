@@ -87,6 +87,19 @@ Build Home Manager activation package:
 Build nix-darwin system derivation:
 - `nix build .#darwinConfigurations.srt-l02-sekhmet.system`
 
+### Tool timeouts (for agentic CLI runs)
+Many agent CLIs default to a ~2 minute command timeout. That is fine for `nix eval`, but it is often too short for `nix build` (especially after updating flake inputs, when caches may miss and local builds kick in).
+
+Recommended timeouts:
+- `nix eval ...`: 2 minutes (120s)
+- `nix build .#homeConfigurations.srt-l02-sekhmet.activationPackage`: 10 minutes (600s)
+- `nix build .#darwinConfigurations.srt-l02-sekhmet.system`: 10 minutes (600s)
+- After `nix flake update` / lockfile updates: consider 20 minutes (1200s) for builds if large deps rebuild
+
+If your tool takes timeouts in milliseconds, use:
+- eval: `timeout=120000`
+- build: `timeout=600000` (or `timeout=1200000` after input bumps)
+
 ### “Single file” sanity checks
 - If you changed only Nix formatting/structure: run `nixfmt` + `statix`/`deadnix` on that file.
 - If you changed only Lua: run `stylua` on that file and do a quick Neovim open/load.
