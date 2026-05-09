@@ -15,6 +15,7 @@
         pip
       ]
     ))
+    claude-code
   ];
 
   programs = {

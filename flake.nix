@@ -76,6 +76,7 @@
                 "zoom"
                 "codeium"
                 "windsurf"
+                "claude-code"
                 "google-chrome"
                 "firefox-bin"
                 "firefox-bin-unwrapped"
