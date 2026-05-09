@@ -51,6 +51,13 @@ Preferred:
 Script equivalent:
 - `./modules/system-management/update-dots.sh`
 
+When removing a flake input manually:
+- Remove it from `inputs` in `flake.nix`.
+- Remove it from the `outputs` argument pattern and any overlays/modules that reference it.
+- Remove the node from `flake.lock`.
+- Remove the corresponding entry from `nodes.root.inputs` in `flake.lock`.
+- Verify with `rg -n -i "<name>|<name variants>" .`.
+
 ### “What will build?” forecast (optional)
 - `./modules/system-management/build-forecast-user.sh`
 
@@ -87,6 +94,13 @@ Build Home Manager activation package:
 Build nix-darwin system derivation:
 - `nix build .#darwinConfigurations.srt-l02-sekhmet.system`
 
+For validation builds, prefer avoiding `result` symlink churn:
+- `nix build --no-link .#homeConfigurations.srt-l02-sekhmet.activationPackage`
+- `nix build --no-link .#darwinConfigurations.srt-l02-sekhmet.system`
+
+Sandbox note:
+- `nix eval` / `nix build` may need access to `~/.cache/nix` and the Nix store. If evaluation fails with an SQLite cache error under `~/.cache/nix`, rerun with the appropriate sandbox escalation rather than changing project files.
+
 ### Tool timeouts (for agentic CLI runs)
 Many agent CLIs default to a ~2 minute command timeout. That is fine for `nix eval`, but it is often too short for `nix build` (especially after updating flake inputs, when caches may miss and local builds kick in).
 
@@ -112,13 +126,29 @@ Tools are generally expected to be available via a Nix-managed environment.
 If a tool is missing, run it ad-hoc via:
 - `nix shell nixpkgs#<tool> -c <tool> ...`
 
+On this machine, Nix tools may already exist in `/nix/store` even when they are not on `PATH`.
+Before falling back to `nix shell`, search for existing binaries and use the newest matching version:
+- `zsh -lc 'for p in /nix/store/*/bin/{nixfmt,statix,deadnix,nixd}(N); do print -- $p; done'`
+- `zsh -lc 'for p in /nix/store/*{nixfmt,statix,deadnix,nixd}*/bin/*(N); do print -- $p; done'`
+
+Known-good examples from this repo:
+- `nixfmt 1.2.0`
+- `statix 0-unstable-2026-05-03`
+- `deadnix 1.3.1`
+- `nixd 2.9.0`
+
+`nixd` is a language server here, not a standalone repository checker. Use `nixd --version` to verify the binary, and use `nix eval` / `nix build` for actual flake validation.
+
 ### Nix
 Format:
 - `nixfmt <file-or-dir>`
+- Whole repo: `rg --files -g '*.nix' -0 | xargs -0 nixfmt`
 
 Static analysis:
 - `statix check <file-or-dir>`
+- Whole repo: `statix check .`
 - `deadnix <file-or-dir>`
+- Whole repo with failure on findings: `deadnix --fail .`
 
 Suggested single-target runs:
 - `nixfmt flake.nix`
@@ -171,6 +201,13 @@ Repo provides:
 - Prefer `let ... in` for local bindings; keep bindings close to usage.
 - Keep attribute sets readable; group related options together.
 - Prefer explicit names over cleverness.
+- Avoid repeated top-level attribute prefixes in the same module when practical. Prefer `home = { activation...; packages = ...; file = ...; };` over separate `home.activation`, `home.packages`, and `home.file` assignments when `statix` flags repeated keys.
+- Prefer `inherit (expr) attr;` when `statix` flags `attr = expr.attr;`.
+- For unused lambda args in overrides, use `_:` instead of naming the argument.
+- For modules that need no arguments, use `_:` instead of `{ ... }:` if `statix` flags an empty pattern.
+- In flake `outputs`, keep `...` in the argument pattern if omitting unused inputs like `self`; flakes still pass `self`, and without `...` evaluation fails with “unexpected argument 'self'”.
+- Be careful running `nixfmt` on shell heredocs embedded in Nix strings. If formatting changes heredoc indentation, verify the generated script still has the same semantics.
+- If moving shell-expanded code into a generated script, do not leave shell variables like `$out` as string literals. Read them explicitly from the environment, e.g. `os.environ["out"]`, when the Nix builder provides them.
 
 **Imports / module structure**
 - Keep `imports = [ ... ]` lists stable and grouped by area.
