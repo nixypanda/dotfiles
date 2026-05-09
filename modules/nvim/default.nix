@@ -249,12 +249,7 @@ in
     initLua = # lua
       ''
         ${builtins.readFile ./lua/base.lua}
-        vim.api.nvim_create_autocmd("VimEnter", {
-          pattern = "*",
-          callback = function()
-            vim.cmd("colorscheme ${colorscheme.vim-name}")
-          end,
-        })
+        vim.cmd("colorscheme ${colorscheme.vim-name}")
 
       '';
   };

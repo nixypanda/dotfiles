@@ -9,9 +9,19 @@ require("lz.n").load({
 	},
 	load = function(name)
 		vim.cmd.packadd("vim-dotenv")
+		vim.cmd("silent! Dotenv")
 		vim.cmd.packadd("vim-dadbod")
 		vim.cmd.packadd(name)
 		vim.cmd.packadd("vim-dadbod-completion")
 		vim.cmd.packadd("nvim-dadbod-ssh")
+	end,
+	after = function()
+		vim.api.nvim_create_autocmd("User", {
+			pattern = "DBUIOpened",
+			callback = function()
+				vim.cmd("silent! Dotenv")
+				vim.cmd("silent! normal R")
+			end,
+		})
 	end,
 })
