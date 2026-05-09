@@ -63,17 +63,39 @@ require("lz.n").load({
 		})
 
 		-- nix
+		local dotfiles_flake = 'builtins.getFlake "/Users/nixypanda/.dotfiles"'
+		local nixpkgs_expr = "let flake = "
+			.. dotfiles_flake
+			.. '; in import flake.inputs.nixpkgs { system = "x86_64-darwin"; }'
+		local darwin_options_expr = "let flake = "
+			.. dotfiles_flake
+			.. '; in flake.darwinConfigurations."srt-l02-sekhmet".options'
+		local home_manager_options_expr = "let flake = "
+			.. dotfiles_flake
+			.. '; in flake.homeConfigurations."srt-l02-sekhmet".options'
+
 		vim.lsp.config("nixd", {
+			cmd = {
+				"nixd",
+				"--log",
+				"error",
+				"--nixpkgs-expr",
+				nixpkgs_expr,
+				"--nixos-options-expr",
+				darwin_options_expr,
+			},
 			on_attach = on_attach,
 			settings = {
 				nixd = {
 					nixpkgs = {
-						expr = 'import (builtins.getFlake ("/Users/nixypanda/.dotfiles")).inputs.nixpkgs {}',
+						expr = nixpkgs_expr,
 					},
-					diagnostic = { suppress = { "sema-escaping-with" } },
 					options = {
-						home_manager = {
-							expr = '(builtins.getFlake ("/Users/nixypanda/.dotfiles")).homeConfigurations."srt-l02-sekhmet".options',
+						nixos = {
+							expr = darwin_options_expr,
+						},
+						["home-manager"] = {
+							expr = home_manager_options_expr,
 						},
 					},
 				},
