@@ -1,4 +1,6 @@
-vim.g.rustaceanvim = {
+local injected = require("nix_injected")
+
+local config = {
 	tools = {
 		hover_actions = { auto_focus = true },
 	},
@@ -24,11 +26,15 @@ vim.g.rustaceanvim = {
 			},
 		},
 	},
-	dap = {
-		-- Injected by nix: codelldb_path and liblldb_path
-		adapter = require("rustaceanvim.config").get_codelldb_adapter(
-			require("nix_injected").rustaceanvim_codelldb_path,
-			require("nix_injected").rustaceanvim_liblldb_path
-		),
-	},
 }
+
+if injected.rustaceanvim_codelldb_path and injected.rustaceanvim_liblldb_path then
+	config.dap = {
+		adapter = require("rustaceanvim.config").get_codelldb_adapter(
+			injected.rustaceanvim_codelldb_path,
+			injected.rustaceanvim_liblldb_path
+		),
+	}
+end
+
+vim.g.rustaceanvim = config

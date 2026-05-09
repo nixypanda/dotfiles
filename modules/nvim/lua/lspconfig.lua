@@ -113,7 +113,7 @@ require("lz.n").load({
 		-- Terraform
 		vim.lsp.config("terraform_lsp", { on_attach = on_attach })
 
-		-- Shit you need to deal with
+		-- General language servers
 		vim.lsp.config("bashls", { on_attach = on_attach })
 		vim.lsp.config("cmake", { on_attach = on_attach })
 		vim.lsp.config("cssls", { on_attach = on_attach })

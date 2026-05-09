@@ -6,6 +6,7 @@ require("lz.n").load({
 		vim.cmd.packadd("friendly-snippets")
 		vim.cmd.packadd("blink.compat")
 		vim.cmd.packadd("windsurf.nvim")
+		vim.cmd.packadd("vim-dadbod-completion")
 	end,
 	after = function()
 		require("codeium").setup({

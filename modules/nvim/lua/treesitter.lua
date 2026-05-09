@@ -17,7 +17,7 @@ require("nvim-treesitter").setup({
 	},
 })
 
-function register_ts_bullshit(filetype)
+local function register_treesitter_filetype(filetype)
 	local group = vim.api.nvim_create_augroup("FUTreesitter_" .. filetype, { clear = true })
 
 	vim.api.nvim_create_autocmd("FileType", {
@@ -30,27 +30,27 @@ end
 -- FIXME: broken
 require("nvim-treesitter.parsers").kulala_http = {
 	install_info = {
-		path = require("nix_injected").treesitter_kulala_grammer_location,
+		path = require("nix_injected").treesitter_kulala_grammar_location,
 	},
 }
 vim.treesitter.language.register("kulala_http", { "http" })
 
-register_ts_bullshit("bash")
-register_ts_bullshit("dockerfile")
-register_ts_bullshit("haskell")
-register_ts_bullshit("json")
-register_ts_bullshit("kdl")
-register_ts_bullshit("lua")
-register_ts_bullshit("markdown")
-register_ts_bullshit("markdown-inline")
-register_ts_bullshit("nix")
-register_ts_bullshit("nu")
-register_ts_bullshit("python")
-register_ts_bullshit("regex")
-register_ts_bullshit("rust")
-register_ts_bullshit("sql")
-register_ts_bullshit("toml")
-register_ts_bullshit("vimdoc")
-register_ts_bullshit("yaml")
-register_ts_bullshit("kulala_http")
-register_ts_bullshit("ledger")
+register_treesitter_filetype("bash")
+register_treesitter_filetype("dockerfile")
+register_treesitter_filetype("haskell")
+register_treesitter_filetype("json")
+register_treesitter_filetype("kdl")
+register_treesitter_filetype("lua")
+register_treesitter_filetype("markdown")
+register_treesitter_filetype("markdown-inline")
+register_treesitter_filetype("nix")
+register_treesitter_filetype("nu")
+register_treesitter_filetype("python")
+register_treesitter_filetype("regex")
+register_treesitter_filetype("rust")
+register_treesitter_filetype("sql")
+register_treesitter_filetype("toml")
+register_treesitter_filetype("vimdoc")
+register_treesitter_filetype("yaml")
+register_treesitter_filetype("kulala_http")
+register_treesitter_filetype("ledger")

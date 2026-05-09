@@ -1,5 +1,10 @@
 local show_line_diagnostics = function(arg)
-	require("lspsaga.diagnostic.show"):show_diagnostics({ line = true, arg = arg })
+	local ok, diagnostic_show = pcall(require, "lspsaga.diagnostic.show")
+	if ok then
+		diagnostic_show:show_diagnostics({ line = true, arg = arg })
+	else
+		vim.diagnostic.open_float(nil, { scope = "line" })
+	end
 end
 
 local builtin = require("statuscol.builtin")

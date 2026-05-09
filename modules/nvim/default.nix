@@ -6,17 +6,14 @@
 let
   python_with_debugpy = pkgs.python3.withPackages (ps: with ps; [ debugpy ]);
 
-  # This sucks
-  # The windsurf-nvim plugin works with specific version of the language server
-  # now anytime I update I will need to check if the lanague-server with what it works with
-  # and then update this accordingly.
-  codeium-server = pkgs.codeium.overrideAttrs (_: rec {
+  # windsurf.nvim currently expects a specific Codeium language-server build.
+  # Recheck this pin whenever the plugin is updated.
+  codeium_server = pkgs.codeium.overrideAttrs (_: rec {
     version = "1.20.9";
     src = builtins.fetchurl {
       url = "https://github.com/Exafunction/windsurf/releases/download/language-server-v${version}/language_server_macos_x64.gz";
       sha256 = "sha256:0c8gjx47ddi29lgzrziafx68q2y962lyy8agnaylnlic8jhaaqmg";
     };
-
   });
 
   cron_describe =
@@ -33,15 +30,14 @@ let
 in
 {
   xdg.configFile = {
+    "nvim/lua/core".source = ./lua/core;
     "nvim/lua/common.lua".source = ./lua/common.lua;
     "nvim/lua/nix_injected.lua".text = # lua
       ''
         return {
              dap_python_with_debugpy  = "${python_with_debugpy}",
-             -- rustaceanvim_codelldb_path  = extension_path .. 'adapter/codelldb',
-             -- rustaceanvim_liblldb_path  = extension_path .. 'lldb/lib/liblldb.dylib',
-             treesitter_kulala_grammer_location  = "${pkgs.vimPlugins.nvim-treesitter-kulala-http}",
-             blink_codeium_language_server_bin = "${codeium-server}/bin/codeium_language_server",
+             treesitter_kulala_grammar_location  = "${pkgs.vimPlugins.nvim-treesitter-kulala-http}",
+             blink_codeium_language_server_bin = "${codeium_server}/bin/codeium_language_server",
              cronex_explainer = "${cron_describe}/bin/cron-describe",
         }
       '';
@@ -130,7 +126,7 @@ in
         (lazy_plug lsp_lines-nvim ./lua/lsp_lines.lua)
         # (plug nvim-lsp-file-operations ''require("lsp-file-operations").setup()'')
 
-        # Progrmming: Treesitter
+        # Programming: Treesitter
         {
           plugin = nvim-treesitter.withPlugins (
             plugins: with plugins; [
@@ -185,7 +181,7 @@ in
         (plug auto-session ./lua/auto-session.lua)
 
         # Text Helpers
-        (plug todo-comments-nvim ./lua/todo-comments.lua)
+        (lazy_plug todo-comments-nvim ./lua/todo-comments.lua)
         (plug venn-nvim ./lua/venn.lua)
         (lazy_plug vim-table-mode ./lua/table-mode.lua)
 
@@ -197,11 +193,11 @@ in
         (lazy_plug floaterm ./lua/floaterm.lua)
 
         # Webdev: Database
-        vim-dotenv
-        vim-dadbod
-        (plug vim-dadbod-ui ./lua/dadbod.lua)
-        vim-dadbod-completion
-        nvim-dadbod-ssh
+        (plug_dep vim-dotenv)
+        (plug_dep vim-dadbod)
+        (lazy_plug vim-dadbod-ui ./lua/dadbod.lua)
+        (plug_dep vim-dadbod-completion)
+        (plug_dep nvim-dadbod-ssh)
 
         # Webdev: API
         (lazy_plug kulala-nvim ./lua/kulala.lua)
@@ -219,7 +215,7 @@ in
       # Docker
       dockerfile-language-server
 
-      # grammer
+      # Grammar
       harper
 
       # HTML/CSS/JS

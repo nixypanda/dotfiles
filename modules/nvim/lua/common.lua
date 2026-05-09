@@ -2,7 +2,7 @@ local M = {}
 
 function M.lsp_on_attach(client, bufnr)
 	-- inlay hints
-	if client.server_capabilities.inlayHintProvider then vim.lsp.inlay_hint.enable() end
+	if client.server_capabilities.inlayHintProvider then vim.lsp.inlay_hint.enable(true, { bufnr = bufnr }) end
 
 	-- Set keymap
 	local map = function(keys, func, desc) vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc }) end
@@ -26,7 +26,7 @@ function M.lsp_on_attach(client, bufnr)
 	map("<leader>lI", "<cmd>Telescope lsp_implementations<cr>", "Implementations")
 	map("<leader>li", "<cmd>Telescope lsp_incoming_calls<cr>", "Incoming Calls")
 	map("<leader>lo", "<cmd>Telescope lsp_outgoing_calls<cr>", "Outgoing Calls")
-	map("<leader>lr", "<cmd>Telescope lsp_references<cr>", "Refrences")
+	map("<leader>lr", "<cmd>Telescope lsp_references<cr>", "References")
 	map("<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols")
 	map("<leader>lp", vim.lsp.buf.hover, "Preview Definition")
 
@@ -42,12 +42,12 @@ function M.lsp_on_attach(client, bufnr)
 	map("<leader>lk", jump_to_prev_error, "Previous error diagnostic")
 
 	-- auxiliary
-	map("<leader>lI", "<cmd>LspInfo<cr>", "Info")
 	map("<leader>lu", "<cmd>LspRestart<cr>", "Restart LSP")
 	map("<leader>lU", "<cmd>LspStart<cr>", "Start LSP")
+	map("<leader>lx", "<cmd>LspInfo<cr>", "Info")
 
 	-- Other mode keymap
-	vim.keymap.set("v", "<leader>la", "<cmd>LspSaga code_action<cr>", { buffer = bufnr, desc = "Code [A]ction" })
+	vim.keymap.set("v", "<leader>la", "<cmd>Lspsaga code_action<cr>", { buffer = bufnr, desc = "Code Action" })
 end
 
 return M
