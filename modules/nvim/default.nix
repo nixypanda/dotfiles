@@ -215,19 +215,12 @@ in
     extraPackages = with pkgs; [
       # Bash
       bash-language-server
-      shellcheck
-      shfmt
 
       # Docker
       dockerfile-language-server
-      hadolint
 
       # grammer
-      vale
       harper
-
-      # Git
-      gitlint
 
       # HTML/CSS/JS
       vscode-langservers-extracted
@@ -236,28 +229,16 @@ in
       typescript-language-server
 
       # lua
-      stylua
       lua-language-server
 
       # Make
       cmake-language-server
 
-      # Markdown
-      markdownlint-cli
-      # This is a cli utility as we can't display all this in cli
-      pandoc
-
       # Nix
-      deadnix
-      statix
       nixd
-      nixfmt
 
       # Python
       python3
-
-      # SQL
-      postgresql
 
       # terraform
       terraform-lsp
@@ -267,15 +248,6 @@ in
 
       # YAML
       yaml-language-server
-      yamllint
-
-      # general purpose / multiple langs
-      prettier
-
-      # utilities used by various programs
-      # telescope
-      ripgrep
-      fd
     ];
 
     initLua = # lua
@@ -312,6 +284,39 @@ in
       # python
       pyright
       ty
+
+      # Shell
+      shellcheck
+      shfmt
+
+      # Docker
+      hadolint
+
+      # Prose / Markdown
+      vale
+      markdownlint-cli
+      # This is a cli utility as we can't display all this in cli
+      pandoc
+
+      # Git
+      gitlint
+
+      # Lua
+      stylua
+
+      # Nix
+      deadnix
+      statix
+      nixfmt
+
+      # SQL
+      postgresql
+
+      # YAML
+      yamllint
+
+      # General purpose / multiple langs
+      prettier
     ];
 
     file.".vale.ini".source = ./vale.ini;
