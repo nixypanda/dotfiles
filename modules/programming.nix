@@ -19,12 +19,8 @@
     codex
   ];
 
-  programs = {
-    opencode = {
-      enable = true;
-      settings = {
-        theme = "system";
-      };
-    };
+  programs.opencode = {
+    enable = true;
+    tui.theme = "system";
   };
 }

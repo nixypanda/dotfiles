@@ -1,4 +1,8 @@
-{ pkgs, colorscheme, ... }:
+{
+  pkgs,
+  colorscheme,
+  ...
+}:
 let
   # Caveat: This requires Xcode.app installed on the system
   code_lldb = pkgs.vscode-extensions.vadimcn.vscode-lldb;
@@ -55,6 +59,8 @@ in
   programs.neovim = {
     enable = true;
     viAlias = true;
+    withRuby = true;
+    withPython3 = true;
 
     plugins =
       let
@@ -169,7 +175,6 @@ in
         (plug_dep friendly-snippets)
 
         # Programming: AI crap
-        (lazy_plug opencode-nvim ./lua/ai.lua)
         (plug img-clip-nvim ''require("img-clip").setup()'')
         (plug_dep windsurf-nvim) # config in blink-cmp
 
@@ -213,7 +218,7 @@ in
 
     extraPackages = with pkgs; [
       # Bash
-      nodePackages.bash-language-server
+      bash-language-server
       shellcheck
       shfmt
 
@@ -229,10 +234,10 @@ in
       gitlint
 
       # HTML/CSS/JS
-      nodePackages.vscode-langservers-extracted
+      vscode-langservers-extracted
 
       # JavaScript
-      nodePackages.typescript-language-server
+      typescript-language-server
 
       # lua
       stylua
@@ -242,7 +247,7 @@ in
       cmake-language-server
 
       # Markdown
-      nodePackages.markdownlint-cli
+      markdownlint-cli
       # This is a cli utility as we can't display all this in cli
       pandoc
 
@@ -265,11 +270,11 @@ in
       taplo
 
       # YAML
-      nodePackages.yaml-language-server
+      yaml-language-server
       yamllint
 
       # general purpose / multiple langs
-      nodePackages.prettier
+      prettier
 
       # utilities used by various programs
       # telescope
