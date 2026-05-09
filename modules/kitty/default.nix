@@ -91,6 +91,9 @@ in
       # closing
       "cmd+x" = "close_window";
       "cmd+shift+x" = "close_tab";
+      # floating
+      "cmd+i" = "toggle_floating_window";
+      "cmd+shift+i" = "toggle_floating_window_size";
       # vim-like keybinds for navigation
       "cmd+j" = "next_tab";
       "cmd+k" = "previous_tab";

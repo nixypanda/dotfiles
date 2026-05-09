@@ -68,11 +68,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1775625873,
-        "narHash": "sha256-WfjXrX2DenLq2b5HoMrRnmqRSGSK8BRZXIgluatwvfY=",
+        "lastModified": 1778345139,
+        "narHash": "sha256-zzo5sx53UjKYS9ZbSOUar3pIHd+SaQXHybyyoMin2fY=",
         "owner": "nixypanda",
         "repo": "kitty",
-        "rev": "ec3da85f3a96a5d2e9a78e4cdcb52939f0b0dafa",
+        "rev": "8b092be11126f0e7e0fa7a6019c160dbf79662bb",
         "type": "github"
       },
       "original": {
