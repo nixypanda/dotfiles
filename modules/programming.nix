@@ -16,6 +16,7 @@
       ]
     ))
     claude-code
+    codex
   ];
 
   programs = {

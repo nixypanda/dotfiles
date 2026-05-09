@@ -10,12 +10,14 @@
       brewfile = true;
       lockfiles = false;
     };
-    taps = [ ];
+    taps = [
+    ];
     casks = [
       "docker-desktop"
       "zoom"
       "protonvpn"
       "stremio"
+      "steipete/tap/codexbar"
     ];
   };
 }
