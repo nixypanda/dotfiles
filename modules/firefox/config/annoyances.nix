@@ -35,7 +35,7 @@
   # time about their experience with Firefox.
   "browser.selfsupport.url" = "";
   # Content of the new tab page
-  # 
+  #
   "browser.newtabpage.enhanced" = false;
   # Disable autoplay of <code>&lt;video&gt;</code> tags.
   # Per default, <code>&lt;video&gt;</code> tags are allowed to start automatically.

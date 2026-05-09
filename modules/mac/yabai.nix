@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+_: {
   services = {
     yabai = {
       enable = true;

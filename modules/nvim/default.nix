@@ -4,16 +4,13 @@
   ...
 }:
 let
-  # Caveat: This requires Xcode.app installed on the system
-  code_lldb = pkgs.vscode-extensions.vadimcn.vscode-lldb;
-
   python_with_debugpy = pkgs.python3.withPackages (ps: with ps; [ debugpy ]);
 
   # This sucks
   # The windsurf-nvim plugin works with specific version of the language server
   # now anytime I update I will need to check if the lanague-server with what it works with
   # and then update this accordingly.
-  codeium-server = pkgs.codeium.overrideAttrs (o: rec {
+  codeium-server = pkgs.codeium.overrideAttrs (_: rec {
     version = "1.20.9";
     src = builtins.fetchurl {
       url = "https://github.com/Exafunction/windsurf/releases/download/language-server-v${version}/language_server_macos_x64.gz";
@@ -37,7 +34,6 @@ in
 {
   xdg.configFile = {
     "nvim/lua/common.lua".source = ./lua/common.lua;
-    # local extension_path = '${code_lldb}/share/vscode/extensions/vadimcn.vscode-lldb/'
     "nvim/lua/nix_injected.lua".text = # lua
       ''
         return {

@@ -1,6 +1,6 @@
 { fetchFromGitHub, python310Packages, ... }:
 let
-  old_setuptools = python310Packages.setuptools.overrideAttrs (o: rec {
+  old_setuptools = python310Packages.setuptools.overrideAttrs (_: rec {
     pname = "setuptools";
     version = "68.2.2";
     src = python310Packages.fetchPypi {

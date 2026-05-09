@@ -27,26 +27,29 @@ let
       (builtins.readFile ./kitty-session-picker.sh)
   );
 
+  kittyDevInfoPlistPatch = pkgs.writeText "kitty-dev-info-plist-patch.py" ''
+    import plistlib
+    import os
+    from pathlib import Path
+
+    plist_path = Path(os.environ["out"]) / "Applications/kitty-dev.app/Contents/Info.plist"
+    with plist_path.open("rb") as f:
+        info = plistlib.load(f)
+
+    info["CFBundleIdentifier"] = "net.kovidgoyal.kitty.dev"
+    info["CFBundleName"] = "kitty-dev"
+    info["CFBundleDisplayName"] = "kitty-dev"
+
+    with plist_path.open("wb") as f:
+        plistlib.dump(info, f)
+  '';
+
   kittyDevApp = pkgs.runCommand "kitty-dev-app" { } ''
     mkdir -p "$out/Applications"
     cp -R "${pkgs.kitty-dev}/Applications/kitty.app" "$out/Applications/kitty-dev.app"
     chmod -R u+w "$out/Applications/kitty-dev.app"
 
-    "${pkgs.python3}/bin/python3" - <<PY
-import plistlib
-from pathlib import Path
-
-plist_path = Path("$out/Applications/kitty-dev.app/Contents/Info.plist")
-with plist_path.open("rb") as f:
-    info = plistlib.load(f)
-
-info["CFBundleIdentifier"] = "net.kovidgoyal.kitty.dev"
-info["CFBundleName"] = "kitty-dev"
-info["CFBundleDisplayName"] = "kitty-dev"
-
-with plist_path.open("wb") as f:
-    plistlib.dump(info, f)
-PY
+    "${pkgs.python3}/bin/python3" "${kittyDevInfoPlistPatch}"
   '';
 
   kittyDevBin = pkgs.writeShellScriptBin "kitty-dev" ''
@@ -121,52 +124,54 @@ in
     };
   };
 
-  home.activation.kittyCodesign = lib.hm.dag.entryAfter [ "copyApps" ] (
-    lib.optionalString pkgs.stdenv.hostPlatform.isDarwin ''
-      for app in "$HOME/Applications/Home Manager Apps/kitty.app" "$HOME/Applications/Home Manager Apps/kitty-dev.app"; do
-        if [ -d "$app" ]; then
-          /usr/bin/codesign --force --deep --sign - "$app"
-          /usr/bin/codesign --verify --deep --strict --verbose=2 "$app"
-        fi
-      done
-    ''
-  );
+  home = {
+    activation.kittyCodesign = lib.hm.dag.entryAfter [ "copyApps" ] (
+      lib.optionalString pkgs.stdenv.hostPlatform.isDarwin ''
+        for app in "$HOME/Applications/Home Manager Apps/kitty.app" "$HOME/Applications/Home Manager Apps/kitty-dev.app"; do
+          if [ -d "$app" ]; then
+            /usr/bin/codesign --force --deep --sign - "$app"
+            /usr/bin/codesign --verify --deep --strict --verbose=2 "$app"
+          fi
+        done
+      ''
+    );
 
-  home.packages = [
-    kittyDevApp
-    kittyDevBin
-  ];
+    packages = [
+      kittyDevApp
+      kittyDevBin
+    ];
 
-  home.file = {
-    "${config.xdg.configHome}/kitty/quick-access-terminal.conf".text = ''
-      lines 40
-      columns 200
-      background_opacity 0.95
-      edge top
-    '';
-    "${config.xdg.configHome}/kitty/open-actions.conf".text = ''
-      protocol file
-      mime image/*
-      action launch --type=overlay kitten icat --hold -- $FILE_PATH
+    file = {
+      "${config.xdg.configHome}/kitty/quick-access-terminal.conf".text = ''
+        lines 40
+        columns 200
+        background_opacity 0.95
+        edge top
+      '';
+      "${config.xdg.configHome}/kitty/open-actions.conf".text = ''
+        protocol file
+        mime image/*
+        action launch --type=overlay kitten icat --hold -- $FILE_PATH
 
-      protocol file
-      mime text/*
-      action launch --type=tab $EDITOR $FILE_PATH
-    '';
+        protocol file
+        mime text/*
+        action launch --type=tab $EDITOR $FILE_PATH
+      '';
 
-    "${config.home.homeDirectory}/.local/bin/kitty-session-picker" = {
-      executable = true;
-      source = kittySessionPicker;
-    };
+      "${config.home.homeDirectory}/.local/bin/kitty-session-picker" = {
+        executable = true;
+        source = kittySessionPicker;
+      };
 
-    "${config.xdg.configHome}/kitty/dark-theme.auto.conf" = {
-      text = "include ${pkgs.kitty-themes}/share/kitty-themes/themes/${colorscheme.kitty-name-dark}.conf";
-    };
-    "${config.xdg.configHome}/kitty/light-theme.auto.conf" = {
-      text = "include ${pkgs.kitty-themes}/share/kitty-themes/themes/${colorscheme.kitty-name-light}.conf";
-    };
-    "${config.xdg.configHome}/kitty/no-preference-theme.auto.conf" = {
-      text = "include ${pkgs.kitty-themes}/share/kitty-themes/themes/${colorscheme.kitty-name-dark}.conf";
+      "${config.xdg.configHome}/kitty/dark-theme.auto.conf" = {
+        text = "include ${pkgs.kitty-themes}/share/kitty-themes/themes/${colorscheme.kitty-name-dark}.conf";
+      };
+      "${config.xdg.configHome}/kitty/light-theme.auto.conf" = {
+        text = "include ${pkgs.kitty-themes}/share/kitty-themes/themes/${colorscheme.kitty-name-light}.conf";
+      };
+      "${config.xdg.configHome}/kitty/no-preference-theme.auto.conf" = {
+        text = "include ${pkgs.kitty-themes}/share/kitty-themes/themes/${colorscheme.kitty-name-dark}.conf";
+      };
     };
   };
 }

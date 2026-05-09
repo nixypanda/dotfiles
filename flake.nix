@@ -27,13 +27,13 @@
   };
   outputs =
     {
-      self,
       nur,
       vim-plugins,
       nixpkgs,
       home-manager,
       darwin,
       kitty-upstream,
+      ...
     }:
     let
       kitty-dev-build-overlay = final: prev: {
@@ -45,12 +45,14 @@
           in
           {
             inherit src version;
-            goModules =
+            inherit
               (final.buildGo126Module {
                 pname = "kitty-go-modules";
                 inherit src version;
                 vendorHash = "sha256-FaSWBeQJlvw9vXcHJ/OaFd48K8d7X86X8w7wpG84Ltw=";
-              }).goModules;
+              })
+              goModules
+              ;
             nativeBuildInputs = map (
               pkg: if (pkg.pname or "") == "go" then final.go_1_26 else pkg
             ) old.nativeBuildInputs;
