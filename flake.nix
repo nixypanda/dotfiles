@@ -10,9 +10,6 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs-opencode = {
-      url = "github:nixos/nixpkgs/c6ff76d0c43994b6fc78eaa7eef316fd741a2610";
-    };
     # Applying the configuration happens from the.dotfiles directory so the
     # relative path is defined accordingly. This has potential of causing issues.
     vim-plugins = {
@@ -34,7 +31,6 @@
       nur,
       vim-plugins,
       nixpkgs,
-      nixpkgs-opencode,
       home-manager,
       darwin,
       kitty-upstream,
@@ -65,20 +61,6 @@
         );
       };
 
-      opencode-intel-overlay = final: _: {
-        opencode =
-          nixpkgs-opencode.legacyPackages.${final.stdenv.hostPlatform.system}.opencode.overrideAttrs
-            (_: {
-              version = "1.2.27";
-              src = final.fetchFromGitHub {
-                owner = "anomalyco";
-                repo = "opencode";
-                tag = "v1.2.27";
-                hash = "sha256-JUlFfILzcUCME3mOxdxDbcCXphNVEfVGIKhwAwtJPl8=";
-              };
-            });
-      };
-
       home-common =
         { lib, ... }:
         {
@@ -104,7 +86,6 @@
 
           nixpkgs.overlays = [
             kitty-dev-build-overlay
-            opencode-intel-overlay
             nur.overlays.default
             vim-plugins.overlay
           ];

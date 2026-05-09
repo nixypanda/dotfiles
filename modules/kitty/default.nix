@@ -76,8 +76,6 @@ in
 
       macos_option_as_alt = "left";
       macos_show_window_title_in = "none";
-
-      # opencode requires remote control
       allow_remote_control = "yes";
       listen_on = "unix:/tmp/kitty";
     };

@@ -18,9 +18,4 @@
     claude-code
     codex
   ];
-
-  programs.opencode = {
-    enable = true;
-    tui.theme = "system";
-  };
 }
