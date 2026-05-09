@@ -167,55 +167,6 @@
         "type": "github"
       }
     },
-    "nvim-neotest-haskell-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1778287711,
-        "narHash": "sha256-+bXARREHQwWAC98pKRyOkJ1S4g//FDRO1gyTAGNqBiM=",
-        "owner": "mrcjkb",
-        "repo": "neotest-haskell",
-        "rev": "0d41edf84be8474e79c9e8ecf077c299d41dd0e8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "mrcjkb",
-        "repo": "neotest-haskell",
-        "type": "github"
-      }
-    },
-    "nvim-neotest-python-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1775378354,
-        "narHash": "sha256-TUu50qK97RuBI1eOD0JGtSq3M7o0HwlRKjLz2SCfjlE=",
-        "owner": "nvim-neotest",
-        "repo": "neotest-python",
-        "rev": "e6df4f1892f6137f58135917db24d1655937d831",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nvim-neotest",
-        "repo": "neotest-python",
-        "type": "github"
-      }
-    },
-    "nvim-neotest-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1762781168,
-        "narHash": "sha256-UVXje4ENyKtLbL8lWrnacYdHFqE/rEiHkOhGzdwpN1U=",
-        "owner": "appaquet",
-        "repo": "neotest",
-        "rev": "60adc368cf05d2079dd4f4f3139227d5e3f3a4a7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "appaquet",
-        "ref": "fix/add-subprocess-default-init-back",
-        "repo": "neotest",
-        "type": "github"
-      }
-    },
     "nvim-rustacenvim-src": {
       "flake": false,
       "locked": {
@@ -279,16 +230,13 @@
         "nvim-blame-src": "nvim-blame-src",
         "nvim-cronex-src": "nvim-cronex-src",
         "nvim-dadbod-ssh": "nvim-dadbod-ssh",
-        "nvim-neotest-haskell-src": "nvim-neotest-haskell-src",
-        "nvim-neotest-python-src": "nvim-neotest-python-src",
-        "nvim-neotest-src": "nvim-neotest-src",
         "nvim-rustacenvim-src": "nvim-rustacenvim-src",
         "nvim-sqls-src": "nvim-sqls-src",
         "nvim-treesitter-kulala-http-src": "nvim-treesitter-kulala-http-src"
       },
       "locked": {
-        "lastModified": 1763561928,
-        "narHash": "sha256-qWrhK/y22WGB/O8/61QXklARfcthqCYoxIDcRYQrjf0=",
+        "lastModified": 1778353207,
+        "narHash": "sha256-eIXkUnTMoIEYf7sAki3pXCKGTxMKIQW/KZFyYgVpPNM=",
         "path": "/Users/nixypanda/.dotfiles/modules/nvim/plugins",
         "type": "path"
       },

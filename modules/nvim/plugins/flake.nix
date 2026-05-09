@@ -21,18 +21,6 @@
       flake = false;
     };
 
-    nvim-neotest-src = {
-      url = "github:appaquet/neotest/fix/add-subprocess-default-init-back";
-      flake = false;
-    };
-    nvim-neotest-python-src = {
-      url = "github:nvim-neotest/neotest-python";
-      flake = false;
-    };
-    nvim-neotest-haskell-src = {
-      url = "github:mrcjkb/neotest-haskell";
-      flake = false;
-    };
     nvim-rustacenvim-src = {
       url = "github:mrcjkb/rustaceanvim";
       flake = false;
@@ -68,39 +56,10 @@
           src = inputs.nvim-treesitter-kulala-http-src;
           location = "lua/tree-sitter";
         };
-        # WARN: Remove this once https://github.com/nvim-neotest/neotest/issues/531 is fixed
-        neotest = prev.vimUtils.buildVimPlugin {
-          pname = "neotest";
-          version = "5.13.1-patched2";
-          src = inputs.nvim-neotest-src;
-          propagatedBuildInputs = with prev.vimPlugins; [
-            nvim-nio
-            plenary-nvim
-          ];
-          doCheck = false;
-        };
-        neotest-python = prev.vimUtils.buildVimPlugin {
-          pname = "neotest-python";
-          version = "2025-11-04";
-          src = inputs.nvim-neotest-python-src;
-          propagatedBuildInputs = [
-            final.vimPlugins.neotest
-          ];
-          doCheck = false;
-        };
         rustaceanvim = prev.vimUtils.buildVimPlugin {
           pname = "rustaceanvim";
           version = "2025-11-04";
           src = inputs.nvim-rustacenvim-src;
-          propagatedBuildInputs = [
-            final.vimPlugins.neotest
-          ];
-          doCheck = false;
-        };
-        neotest-haskell = prev.vimUtils.buildVimPlugin {
-          pname = "neotest-haskell";
-          version = "2025-11-04";
-          src = inputs.nvim-neotest-haskell-src;
           propagatedBuildInputs = [
             final.vimPlugins.neotest
           ];
