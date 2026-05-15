@@ -106,8 +106,20 @@ require("lz.n").load({
 		vim.lsp.config("nushell", { on_attach = on_attach })
 
 		-- Python
-		vim.lsp.config("ruff", { on_attach = on_attach })
-		vim.lsp.config("ty", { on_attach = on_attach })
+		vim.lsp.config("ruff", {
+			on_attach = on_attach,
+			init_options = {
+				settings = {
+					logLevel = "warn",
+				},
+			},
+		})
+		vim.lsp.config("ty", {
+			on_attach = on_attach,
+			init_options = {
+				logLevel = "warn",
+			},
+		})
 		vim.lsp.config("pyright", { on_attach = on_attach })
 		vim.lsp.config("basedpyright", {
 			on_attach = on_attach,

@@ -7,6 +7,7 @@
     qpdf
     hledger
     hledger-ui
+    hledger-web
     just
 
     # Better alternatives
@@ -29,6 +30,7 @@
   programs = {
     carapace = {
       enable = true;
+
       enableNushellIntegration = true;
     };
     zoxide = {

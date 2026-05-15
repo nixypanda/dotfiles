@@ -27,6 +27,17 @@ let
             sys.exit(1)
         print(get_description(sys.argv[1]))
       '';
+
+  vale_styles = pkgs.runCommand "vale-styles" {
+    buildInputs = with pkgs.valeStyles; [ alex proselint write-good ];
+  } ''
+    mkdir -p $out/config/vocabularies/Base
+    touch $out/config/vocabularies/Base/accept.txt
+    touch $out/config/vocabularies/Base/reject.txt
+    for pkg in $buildInputs; do
+      cp -rs "$pkg/share/vale/styles/"* "$out/"
+    done
+  '';
 in
 {
   xdg.configFile = {
@@ -311,6 +322,7 @@ in
     ];
 
     file.".vale.ini".source = ./vale.ini;
+    file.".local/share/vale/styles".source = vale_styles;
     file.".markdownlintrc".source = ./markdown_lint.json;
   };
 }

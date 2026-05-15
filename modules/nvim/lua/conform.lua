@@ -9,7 +9,7 @@ require("lz.n").load({
 				javascript = { "prettier" },
 				json = { "prettier" },
 				lua = { "stylua" },
-				markdown = { "prettier", "markdownlint" },
+				markdown = { "prettier" },
 				nix = { "nixfmt" },
 				yaml = { "prettier" },
 			},
