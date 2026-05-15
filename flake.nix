@@ -76,8 +76,6 @@
               pkg:
               builtins.elem (lib.getName pkg) [
                 "zoom"
-                "codeium"
-                "windsurf"
                 "claude-code"
                 "google-chrome"
                 "firefox-bin"

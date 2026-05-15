@@ -6,16 +6,6 @@
 let
   python_with_debugpy = pkgs.python3.withPackages (ps: with ps; [ debugpy ]);
 
-  # windsurf.nvim currently expects a specific Codeium language-server build.
-  # Recheck this pin whenever the plugin is updated.
-  codeium_server = pkgs.codeium.overrideAttrs (_: rec {
-    version = "1.20.9";
-    src = builtins.fetchurl {
-      url = "https://github.com/Exafunction/windsurf/releases/download/language-server-v${version}/language_server_macos_x64.gz";
-      sha256 = "sha256:0c8gjx47ddi29lgzrziafx68q2y962lyy8agnaylnlic8jhaaqmg";
-    };
-  });
-
   cron_describe =
     pkgs.writeScriptBin "cron-describe" # python
       ''
@@ -48,7 +38,6 @@ in
         return {
              dap_python_with_debugpy  = "${python_with_debugpy}",
              treesitter_kulala_grammar_location  = "${pkgs.vimPlugins.nvim-treesitter-kulala-http}",
-             blink_codeium_language_server_bin = "${codeium_server}/bin/codeium_language_server",
              cronex_explainer = "${cron_describe}/bin/cron-describe",
         }
       '';
@@ -177,9 +166,7 @@ in
         (plug_dep blink-compat)
         (plug_dep friendly-snippets)
 
-        # Programming: AI crap
         (plug img-clip-nvim ''require("img-clip").setup()'')
-        (plug_dep windsurf-nvim) # config in blink-cmp
 
         # Programming: Testing
         (lazy_plug neotest ./lua/neotest.lua)

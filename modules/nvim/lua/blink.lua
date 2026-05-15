@@ -5,15 +5,9 @@ require("lz.n").load({
 		vim.cmd.packadd(name)
 		vim.cmd.packadd("friendly-snippets")
 		vim.cmd.packadd("blink.compat")
-		vim.cmd.packadd("windsurf.nvim")
 		vim.cmd.packadd("vim-dadbod-completion")
 	end,
 	after = function()
-		require("codeium").setup({
-			tools = {
-				language_server = require("nix_injected").blink_codeium_language_server_bin,
-			},
-		})
 		require("blink.cmp").setup({
 			appearance = {
 				nerd_font_variant = "mono",
@@ -27,10 +21,9 @@ require("lz.n").load({
 				["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
 			},
 			sources = {
-				default = { "codeium", "lsp", "path", "snippets", "buffer" },
+				default = { "lsp", "path", "snippets", "buffer" },
 				per_filetype = { sql = { "dadbod" } },
 				providers = {
-					codeium = { name = "Codeium", module = "codeium.blink", async = true },
 					dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
 				},
 			},
