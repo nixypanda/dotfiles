@@ -96,6 +96,7 @@
 
           imports = [
             ./modules/cli.nix
+            ./modules/env.nix
             ./modules/firefox
             ./modules/fonts.nix
             ./modules/git

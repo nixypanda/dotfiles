@@ -308,8 +308,8 @@ in
       prettier
     ];
 
-    file.".vale.ini".source = ./vale.ini;
+    file.".config/vale/config.ini".source = ./vale.ini;
     file.".local/share/vale/styles".source = vale_styles;
-    file.".markdownlintrc".source = ./markdown_lint.json;
+    file.".config/markdownlint/config.json".source = ./markdown_lint.json;
   };
 }

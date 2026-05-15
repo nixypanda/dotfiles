@@ -11,6 +11,13 @@ require("lz.n").load({
 			yaml = { "yamllint" },
 		}
 
+		local xdg_config = os.getenv("XDG_CONFIG_HOME") or vim.fn.expand("~/.config")
+
+		require("lint").linters.markdownlint.args = {
+			"--config", xdg_config .. "/markdownlint/config.json",
+			"--json"
+		}
+
 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
 			callback = function() require("lint").try_lint() end,
 		})

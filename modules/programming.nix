@@ -1,4 +1,8 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
+
+let
+  inherit (config) xdg;
+in
 {
   home.packages = with pkgs; [
     # docker
@@ -15,7 +19,14 @@
         pip
       ]
     ))
-    claude-code
-    codex
   ];
+
+  # Codex — HM module auto-manages CODEX_HOME via preferXdgDirectories
+  programs.codex.enable = true;
+
+  # Claude Code — HM module auto-manages CLAUDE_CONFIG_DIR when configDir ≠ ~/.claude
+  programs.claude-code = {
+    enable = true;
+    configDir = "${xdg.configHome}/claude";
+  };
 }
