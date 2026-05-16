@@ -27,12 +27,6 @@ local function register_treesitter_filetype(filetype)
 	})
 end
 
--- FIXME: broken
-require("nvim-treesitter.parsers").kulala_http = {
-	install_info = {
-		path = require("nix_injected").treesitter_kulala_grammar_location,
-	},
-}
 vim.treesitter.language.register("kulala_http", { "http" })
 
 register_treesitter_filetype("bash")
@@ -52,5 +46,5 @@ register_treesitter_filetype("sql")
 register_treesitter_filetype("toml")
 register_treesitter_filetype("vimdoc")
 register_treesitter_filetype("yaml")
-register_treesitter_filetype("kulala_http")
+register_treesitter_filetype("http")
 register_treesitter_filetype("ledger")

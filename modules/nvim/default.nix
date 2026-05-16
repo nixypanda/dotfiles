@@ -37,7 +37,6 @@ in
       ''
         return {
              dap_python_with_debugpy  = "${python_with_debugpy}",
-             treesitter_kulala_grammar_location  = "${pkgs.vimPlugins.nvim-treesitter-kulala-http}",
              cronex_explainer = "${cron_describe}/bin/cron-describe",
         }
       '';
@@ -83,7 +82,6 @@ in
         # Appearance
         (plug indent-blankline-nvim ./lua/indent-blankline.lua)
         (plug lualine-nvim ./lua/lualine.lua)
-        (plug alpha-nvim ./lua/alpha.lua)
         nvim-web-devicons
         (plug noice-nvim ./lua/noice.lua)
         (plug statuscol-nvim ./lua/statuscol.lua)
