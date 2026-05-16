@@ -90,9 +90,7 @@ in
         (plug indent-blankline-nvim ./lua/indent-blankline.lua)
         (plug lualine-nvim ./lua/lualine.lua)
         nvim-web-devicons
-        (plug noice-nvim ./lua/noice.lua)
         (plug statuscol-nvim ./lua/statuscol.lua)
-        (plug nvim-ufo ./lua/ufo.lua)
         (lazy_plug nvim-tree-lua ./lua/nvim-tree.lua)
 
         # themes
@@ -128,7 +126,6 @@ in
         (lazy_plug nvim-lint ./lua/lint.lua)
         (lazy_plug conform-nvim ./lua/conform.lua)
         (lazy_plug lsp_lines-nvim ./lua/lsp_lines.lua)
-        # (plug nvim-lsp-file-operations ''require("lsp-file-operations").setup()'')
 
         # Programming: Treesitter
         {
@@ -159,7 +156,6 @@ in
           config = builtins.readFile ./lua/treesitter.lua;
         }
         (lazy_plug treesj ./lua/treesj.lua)
-        nvim-treesitter-textobjects
 
         # Programming: Language support
         (plug rustaceanvim ./lua/rustaceanvim.lua)
@@ -169,8 +165,6 @@ in
         (lazy_plug blink-cmp ./lua/blink.lua)
         (plug_dep blink-compat)
         (plug_dep friendly-snippets)
-
-        (plug img-clip-nvim ''require("img-clip").setup()'')
 
         # Programming: Testing
         (lazy_plug neotest ./lua/neotest.lua)
@@ -188,9 +182,6 @@ in
         # Text objects
         (plug nvim-autopairs "require('nvim-autopairs').setup {}")
         (plug nvim-surround "require('nvim-surround').setup {}")
-
-        # terminal
-        (lazy_plug floaterm ./lua/floaterm.lua)
 
         # Webdev: Database
         (plug_dep vim-dotenv)

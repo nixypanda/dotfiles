@@ -30,6 +30,13 @@ vim.opt.listchars = {
 	space = ".",
 }
 
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr"
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+vim.o.foldcolumn = "1"
+
 vim.opt.fillchars = {
 	vert = "█",
 	horiz = "▀",
@@ -46,3 +53,6 @@ vim.wo.relativenumber = true
 vim.g.tokyonight_colors = {
 	border = "#1f2335",
 }
+
+vim.opt.winborder = "rounded"
+require("vim._core.ui2").enable()

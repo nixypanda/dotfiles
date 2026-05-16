@@ -16,3 +16,5 @@ vim.keymap.set("n", "<leader>cj", "<cmd>cnext<cr>", { desc = "Next quickfix item
 vim.keymap.set("n", "<leader>ck", "<cmd>cprev<cr>", { desc = "Previous quickfix item" })
 vim.keymap.set("n", "<leader>cl", "<cmd>colder<cr>", { desc = "Older quickfix list" })
 vim.keymap.set("n", "<leader>ch", "<cmd>cnewer<cr>", { desc = "Newer quickfix list" })
+
+vim.keymap.set("n", "<leader>sn", "<cmd>messages<cr>", { desc = "Message history" })

@@ -20,7 +20,7 @@ local config = {
 		end,
 		default_settings = {
 			["rust-analyzer"] = {
-				checkOnSave = { command = "clippy" },
+				-- checkOnSave = { command = "clippy" },
 				-- Rust Analyzer will scan .direnv correspondingly entire nixpkgs repository
 				files = { excludeDirs = { ".direnv" } },
 			},

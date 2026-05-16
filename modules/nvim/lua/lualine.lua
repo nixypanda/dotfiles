@@ -35,7 +35,7 @@ require("lualine").setup({
 			},
 		},
 		lualine_x = { "diff" },
-		lualine_y = { "filetype", "progress" },
+		lualine_y = { "lsp_status", "filetype" },
 		lualine_z = { "location" },
 	},
 })
