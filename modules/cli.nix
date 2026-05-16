@@ -8,7 +8,6 @@
     hledger
     hledger-ui
     hledger-web
-    just
 
     # Better alternatives
     bottom # top
@@ -25,6 +24,9 @@
     # Nix related
     nixVersions.latest
     nix-forecast
+
+    # Document conversion
+    pandoc
   ];
 
   programs = {

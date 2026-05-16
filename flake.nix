@@ -103,7 +103,7 @@
             ./modules/kitty
             ./modules/nu
             ./modules/nvim
-            ./modules/programming.nix
+            ./modules/programming
             ./modules/system-management
           ];
         };

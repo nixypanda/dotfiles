@@ -18,23 +18,6 @@ let
         print(get_description(sys.argv[1]))
       '';
 
-  vale_styles =
-    pkgs.runCommand "vale-styles"
-      {
-        buildInputs = with pkgs.valeStyles; [
-          alex
-          proselint
-          write-good
-        ];
-      }
-      ''
-        mkdir -p $out/config/vocabularies/Base
-        touch $out/config/vocabularies/Base/accept.txt
-        touch $out/config/vocabularies/Base/reject.txt
-        for pkg in $buildInputs; do
-          cp -rs "$pkg/share/vale/styles/"* "$out/"
-        done
-      '';
 in
 {
   xdg.configFile = {
@@ -199,41 +182,6 @@ in
         (lazy_plug nvim-cronex ./lua/cronex.lua)
       ];
 
-    extraPackages = with pkgs; [
-      # Bash
-      bash-language-server
-
-      # Docker
-      dockerfile-language-server
-
-      # HTML/CSS/JS
-      vscode-langservers-extracted
-
-      # JavaScript
-      typescript-language-server
-
-      # lua
-      lua-language-server
-
-      # Make
-      cmake-language-server
-
-      # Nix
-      nixd
-
-      # Python
-      python3
-
-      # terraform
-      terraform-lsp
-
-      # TOML
-      taplo
-
-      # YAML
-      yaml-language-server
-    ];
-
     initLua = # lua
       ''
         ${builtins.readFile ./lua/base.lua}
@@ -246,60 +194,7 @@ in
     sessionVariables.NIXD_FLAGS = "-log=error";
     packages = with pkgs; [
       vim-startuptime
-
-      # Rust
-      rust-analyzer
-      rustfmt
-      clippy
-
-      # Haskell
-      haskellPackages.haskell-language-server
-      haskellPackages.hoogle
-      haskellPackages.fast-tags
-      haskellPackages.cabal-gild
-      haskellPackages.hlint
-      # haskellPackages.haskell-debugger
-
-      # python
-      pyright
-      ty
-
-      # Shell
-      shellcheck
-      shfmt
-
-      # Docker
-      hadolint
-
-      # Prose / Markdown
-      vale
-      markdownlint-cli
-      # This is a cli utility as we can't display all this in cli
-      pandoc
-
-      # Git
-      gitlint
-
-      # Lua
-      stylua
-
-      # Nix
-      deadnix
-      statix
-      nixfmt
-
-      # SQL
-      postgresql
-
-      # YAML
-      yamllint
-
-      # General purpose / multiple langs
-      prettier
     ];
 
-    file.".config/vale/config.ini".source = ./vale.ini;
-    file.".local/share/vale/styles".source = vale_styles;
-    file.".config/markdownlint/config.json".source = ./markdown_lint.json;
   };
 }
