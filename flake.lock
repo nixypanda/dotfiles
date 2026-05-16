@@ -119,30 +119,14 @@
         "type": "github"
       }
     },
-    "nvim-blame-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1770907480,
-        "narHash": "sha256-R1Iz9Cr8F3uTyi3HfDvfnQ9vfxLKfypUt4DXKmu+lSQ=",
-        "owner": "FabijanZulj",
-        "repo": "blame.nvim",
-        "rev": "179da7aaacce7c52874af636255ede72dd6fe796",
-        "type": "github"
-      },
-      "original": {
-        "owner": "FabijanZulj",
-        "repo": "blame.nvim",
-        "type": "github"
-      }
-    },
     "nvim-cronex-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1778851984,
-        "narHash": "sha256-Z/MDODx+2PYnQJhuaE89L+AfR9udNJaIykbLJvuPaqU=",
+        "lastModified": 1778895228,
+        "narHash": "sha256-E7ImwQgbxEmXnhxrk9Y6jMXZ036Sp6Ciym0nFFjIXqI=",
         "owner": "fabridamicelli",
         "repo": "cronex.nvim",
-        "rev": "7949adf4f5aea1cf287add95c077a217c8508351",
+        "rev": "0f2e30e86db63796dab1c6d273577df75f48dfdc",
         "type": "github"
       },
       "original": {
@@ -164,22 +148,6 @@
       "original": {
         "owner": "pbogut",
         "repo": "vim-dadbod-ssh",
-        "type": "github"
-      }
-    },
-    "nvim-rustacenvim-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1778806743,
-        "narHash": "sha256-0sgEDblZ8uife3ML7SAhobp7p70r4iOWKWMsASKBB+Q=",
-        "owner": "mrcjkb",
-        "repo": "rustaceanvim",
-        "rev": "f5c1bf138571442bfda96a2bf45239e009264a6e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "mrcjkb",
-        "repo": "rustaceanvim",
         "type": "github"
       }
     },
@@ -227,16 +195,14 @@
     },
     "vim-plugins": {
       "inputs": {
-        "nvim-blame-src": "nvim-blame-src",
         "nvim-cronex-src": "nvim-cronex-src",
         "nvim-dadbod-ssh": "nvim-dadbod-ssh",
-        "nvim-rustacenvim-src": "nvim-rustacenvim-src",
         "nvim-sqls-src": "nvim-sqls-src",
         "nvim-treesitter-kulala-http-src": "nvim-treesitter-kulala-http-src"
       },
       "locked": {
-        "lastModified": 1778840565,
-        "narHash": "sha256-eIXkUnTMoIEYf7sAki3pXCKGTxMKIQW/KZFyYgVpPNM=",
+        "lastModified": 1778910852,
+        "narHash": "sha256-mZ2MjsYWOEjw3eO81OJzxzozmET7fec5UMh+Y9mXBW4=",
         "path": "/Users/nixypanda/.dotfiles/modules/nvim/plugins",
         "type": "path"
       },

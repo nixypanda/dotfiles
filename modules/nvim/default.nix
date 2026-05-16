@@ -18,16 +18,23 @@ let
         print(get_description(sys.argv[1]))
       '';
 
-  vale_styles = pkgs.runCommand "vale-styles" {
-    buildInputs = with pkgs.valeStyles; [ alex proselint write-good ];
-  } ''
-    mkdir -p $out/config/vocabularies/Base
-    touch $out/config/vocabularies/Base/accept.txt
-    touch $out/config/vocabularies/Base/reject.txt
-    for pkg in $buildInputs; do
-      cp -rs "$pkg/share/vale/styles/"* "$out/"
-    done
-  '';
+  vale_styles =
+    pkgs.runCommand "vale-styles"
+      {
+        buildInputs = with pkgs.valeStyles; [
+          alex
+          proselint
+          write-good
+        ];
+      }
+      ''
+        mkdir -p $out/config/vocabularies/Base
+        touch $out/config/vocabularies/Base/accept.txt
+        touch $out/config/vocabularies/Base/reject.txt
+        for pkg in $buildInputs; do
+          cp -rs "$pkg/share/vale/styles/"* "$out/"
+        done
+      '';
 in
 {
   xdg.configFile = {
@@ -105,7 +112,7 @@ in
 
         # Git
         (plug gitsigns-nvim ./lua/gitsigns.lua)
-        (lazy_plug nvim-blame ./lua/blame.lua)
+        (lazy_plug blame-nvim ./lua/blame.lua)
         (lazy_plug diffview-nvim ./lua/diffview.lua)
 
         # Keymaps
@@ -171,8 +178,6 @@ in
         (plug_dep neotest-python)
         (plug_dep neotest-haskell)
         FixCursorHold-nvim
-        # (plug nvim-coverage ./lua/coverage.lua)
-
         # sessions
         (plug auto-session ./lua/auto-session.lua)
 
@@ -210,9 +215,6 @@ in
 
       # Docker
       dockerfile-language-server
-
-      # Grammar
-      harper
 
       # HTML/CSS/JS
       vscode-langservers-extracted

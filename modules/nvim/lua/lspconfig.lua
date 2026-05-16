@@ -24,18 +24,6 @@ require("lz.n").load({
 
 		local on_attach = require("common").lsp_on_attach
 
-		-- grammar
-		vim.lsp.config("harper_ls", {
-			settings = {
-				["harper-ls"] = {
-					linters = {
-						SpellCheck = false,
-						SentenceCapitalization = false,
-					},
-				},
-			},
-		})
-
 		-- JavaScript/TypeScript
 		vim.lsp.config("ts_ls", { on_attach = on_attach })
 
@@ -184,7 +172,6 @@ require("lz.n").load({
 		vim.lsp.config("taplo", { on_attach = on_attach })
 
 		vim.lsp.enable({
-			-- "harper_ls",
 			"ts_ls",
 			"lua_ls",
 			"nixd",

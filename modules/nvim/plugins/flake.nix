@@ -4,10 +4,6 @@
       url = "github:nanotee/sqls.nvim";
       flake = false;
     };
-    nvim-blame-src = {
-      url = "github:FabijanZulj/blame.nvim";
-      flake = false;
-    };
     nvim-dadbod-ssh = {
       url = "github:pbogut/vim-dadbod-ssh";
       flake = false;
@@ -21,10 +17,6 @@
       flake = false;
     };
 
-    nvim-rustacenvim-src = {
-      url = "github:mrcjkb/rustaceanvim";
-      flake = false;
-    };
   };
   outputs =
     inputs:
@@ -34,11 +26,6 @@
           pname = "nvim-sqls";
           version = "custom";
           src = inputs.nvim-sqls-src;
-        };
-        nvim-blame = prev.vimUtils.buildVimPlugin {
-          pname = "blame.nvim";
-          version = "custom";
-          src = inputs.nvim-blame-src;
         };
         nvim-dadbod-ssh = prev.vimUtils.buildVimPlugin {
           pname = "nvim-dadbod-ssh";
@@ -55,15 +42,6 @@
           version = "5.3.1"; # <- this can be anything I ususally do like, inputs.kulala-grammar.shortRev
           src = inputs.nvim-treesitter-kulala-http-src;
           location = "lua/tree-sitter";
-        };
-        rustaceanvim = prev.vimUtils.buildVimPlugin {
-          pname = "rustaceanvim";
-          version = "2025-11-04";
-          src = inputs.nvim-rustacenvim-src;
-          propagatedBuildInputs = [
-            final.vimPlugins.neotest
-          ];
-          doCheck = false;
         };
       };
     in
