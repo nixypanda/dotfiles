@@ -3,17 +3,15 @@ require("lz.n").load({
 	keys = {
 		{ "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle breakpoint" },
 		{ "<leader>ds", function() require("dap").continue() end, desc = "Start debugging" },
-		{ "<leader>dt", function() require("dapui").toggle() end, desc = "Toggle debugging UI" },
+		{ "<leader>dt", function() require("dap-view").toggle() end, desc = "Toggle debugging UI" },
 	},
 	load = function(name)
 		vim.cmd.packadd(name)
-		vim.cmd.packadd("nvim-dap-ui")
-		vim.cmd.packadd("nvim-dap-virtual-text")
+		vim.cmd.packadd("nvim-dap-view")
 		vim.cmd.packadd("nvim-dap-python")
 	end,
 	after = function()
 		local dap = require("dap")
-		local dapui = require("dapui")
 		local widgets = require("dap.ui.widgets")
 
 		-- Setup keymaps
@@ -24,7 +22,7 @@ require("lz.n").load({
 		vim.keymap.set("n", "<leader>dk", dap.up, { desc = "Go up in call stack" })
 		vim.keymap.set("n", "<leader>do", dap.step_over, { desc = "Step over" })
 		vim.keymap.set("n", "<leader>dO", dap.step_out, { desc = "Step out" })
-		vim.keymap.set("n", "<leader>dr", function() dapui.open({ reset = true }) end, { desc = "Reset dbugging UI" })
+		vim.keymap.set("n", "<leader>dr", function() require("dap-view").open() end, { desc = "Open debugging UI" })
 		vim.keymap.set("n", "<leader>dT", dap.terminate, { desc = "Terminate debugging" })
 		vim.keymap.set(
 			"n",
@@ -33,13 +31,17 @@ require("lz.n").load({
 			{ desc = "Show Scopes" }
 		)
 
-		dapui.setup()
-		dap.listeners.before.attach.dapui_config = function() dapui.open() end
-		dap.listeners.before.launch.dapui_config = function() dapui.open() end
-		dap.listeners.before.event_terminated.dapui_config = function() dapui.close() end
-		dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
-
-		require("nvim-dap-virtual-text").setup({})
+		require("dap-view").setup({
+			winbar = {
+				controls = {
+					enabled = true,
+				},
+			},
+			auto_toggle = true,
+			virtual_text = {
+				enabled = true,
+			},
+		})
 
 		-- Programming language specific plugins
 

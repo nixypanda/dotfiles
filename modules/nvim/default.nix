@@ -101,8 +101,7 @@ in
 
         # DAP
         (lazy_plug nvim-dap ./lua/dap.lua)
-        (plug_dep nvim-dap-ui)
-        (plug_dep nvim-dap-virtual-text)
+        (plug_dep nvim-dap-view)
         (plug_dep nvim-dap-python)
 
         # Fuzzy Finder
