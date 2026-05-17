@@ -52,6 +52,7 @@ in
       ]
     ))
     pyright
+    ruff
     ty
 
     # Shell

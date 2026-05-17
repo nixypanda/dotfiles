@@ -169,7 +169,11 @@ require("lz.n").load({
 			},
 		})
 		-- already has SchemaStore configured
-		vim.lsp.config("taplo", { on_attach = on_attach })
+		vim.lsp.config("taplo", {
+			on_attach = on_attach,
+			cmd = { "taplo", "lsp", "stdio" },
+			cmd_env = { RUST_LOG = "warn" },
+		})
 
 		vim.lsp.enable({
 			"ts_ls",

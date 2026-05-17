@@ -1,5 +1,15 @@
 vim.g.haskell_tools = {
 	hls = {
+		cmd = {
+			"haskell-language-server-wrapper",
+			"--lsp",
+			"--log-level",
+			"Warning",
+			"--log-file",
+			vim.fn.stdpath("log") .. "/haskell-language-server.log",
+			"--log-stderr",
+			"False",
+		},
 		on_attach = function(client, bufnr)
 			require("common").lsp_on_attach(client, bufnr)
 
