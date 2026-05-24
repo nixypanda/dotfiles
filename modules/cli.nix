@@ -4,10 +4,12 @@
     # CLI tools / Terminal facification
     dig
     unzip
+    py7zr
     qpdf
     hledger
     hledger-ui
     hledger-web
+    paisa
 
     # Better alternatives
     bottom # top

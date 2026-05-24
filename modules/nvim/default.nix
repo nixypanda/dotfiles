@@ -129,6 +129,7 @@ in
               regex
               rust
               sql
+              swift
               toml
               vimdoc
               yaml
