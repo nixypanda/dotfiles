@@ -27,6 +27,7 @@ in
       "https://${tailnetHost}:9446".extraConfig = proxy 7878;
       "https://${tailnetHost}:9447".extraConfig = proxy 9696;
       "https://${tailnetHost}:9448".extraConfig = proxy 8081;
+      "https://${tailnetHost}:9449".extraConfig = proxy 8989;
     };
   };
 
@@ -52,7 +53,7 @@ in
         serviceConfig = {
           Type = "oneshot";
           StateDirectory = "caddy/tailscale-certs";
-          StateDirectoryMode = "0750";
+          StateDirectoryMode = "0755";
           UMask = "0077";
         };
         script = ''

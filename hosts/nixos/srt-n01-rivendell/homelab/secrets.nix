@@ -8,7 +8,9 @@ _: {
     secrets = {
       qbittorrentPassword = {
         file = ./secrets/qbittorrent-password.age;
-        owner = "radarr";
+        group = "arr-secrets";
+        mode = "0440";
+        owner = "root";
       };
     };
   };

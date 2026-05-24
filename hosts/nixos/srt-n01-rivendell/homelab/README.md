@@ -6,6 +6,7 @@ inside each application's state directory.
 ## Paths
 
 - Movies: `/srv/media/movies`
+- TV: `/srv/media/tv`
 - Torrent downloads: `/srv/downloads/torrents`
 - Completed torrents: `/srv/downloads/torrents/complete`
 - Incomplete torrents: `/srv/downloads/torrents/incomplete`
@@ -17,6 +18,7 @@ The active paths are also written to `/etc/homelab/media-paths`.
 - Homepage: `http://srt-n01-rivendell:8082`
 - Jellyfin: `http://192.168.1.76:8096`
 - Radarr: `http://192.168.1.76:7878`
+- Sonarr: `http://192.168.1.76:8989`
 - Prowlarr: `http://192.168.1.76:9696`
 - qBittorrent: `http://192.168.1.76:8080`
 - Seerr: `http://192.168.1.76:5055`
@@ -32,7 +34,7 @@ Nix currently declares:
 - service ports
 - qBittorrent download paths and Web UI password (PBKDF2 hash, not plaintext)
 - Prowlarr app sync (settings-sync)
-- Radarr download client (qBittorrent) via settings-sync
+- Radarr and Sonarr download client (qBittorrent) via settings-sync
 - Pi-hole upstreams and local DNS records
 
 Nixarr also handles:
@@ -50,8 +52,8 @@ first setup.
 
 The qBittorrent Web UI password is encrypted with agenix and decrypted at
 runtime to `/run/agenix/qbittorrentPassword`. It is used both as the qBittorrent
-login credential and by Radarr's settings-sync to authenticate as a download
-client.
+login credential and by the Radarr/Sonarr settings-sync jobs to authenticate as
+a download client.
 
 The repository also contains encrypted `radarr.env.age` and `prowlarr.env.age`
 files reserved for future service environment secrets. They are not currently
@@ -79,12 +81,14 @@ API keys for the *arr stack are managed internally by nixarr. Use
 The following still needs one-time manual setup in the web UI:
 
 1. Radarr — Settings → Media Management → add root folder `/srv/media/movies`
-2. Jellyfin — first-run wizard: create admin user, add `/srv/media/movies` as Movies
-3. Seerr — first-run wizard: connect Jellyfin URL, connect Radarr (API key from `sudo nixarr list-api-keys`)
-4. Prowlarr indexers — add them via the web UI, or add declarative settings to `media.nix`
+2. Sonarr — Settings → Media Management → add root folder `/srv/media/tv`
+3. Jellyfin — first-run wizard: create admin user, add `/srv/media/movies` as Movies and `/srv/media/tv` as TV Shows
+4. Seerr — first-run wizard: connect Jellyfin URL, connect Radarr/Sonarr (API keys from `sudo nixarr list-api-keys`)
+5. Prowlarr indexers — add them via the web UI, or add declarative settings to `media.nix`
 
 The following is handled automatically by nixarr on deploy:
 
 - qBittorrent added as Radarr's download client
-- Radarr synced to Prowlarr as an application
+- qBittorrent added as Sonarr's download client
+- Radarr and Sonarr synced to Prowlarr as applications
 - State directories under `/srv/.state/nixarr/`

@@ -48,7 +48,7 @@ _: {
             Jellyfin = {
               icon = "jellyfin.png";
               href = "https://${tailnetHost}:9443";
-              description = "Movies and TV";
+              description = "Movies, TV, and anime";
               siteMonitor = "http://127.0.0.1:8096";
             };
           }
@@ -82,6 +82,14 @@ _: {
               href = "https://${tailnetHost}:9446";
               description = "Movie automation";
               siteMonitor = "http://127.0.0.1:7878";
+            };
+          }
+          {
+            Sonarr = {
+              icon = "sonarr.png";
+              href = "https://${tailnetHost}:9449";
+              description = "TV and anime automation";
+              siteMonitor = "http://127.0.0.1:8989";
             };
           }
           {

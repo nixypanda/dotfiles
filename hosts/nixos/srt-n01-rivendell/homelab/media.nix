@@ -4,7 +4,18 @@ let
   mediaRoot = "/srv/media";
   downloadsRoot = "/srv/downloads";
   movieLibrary = "${mediaRoot}/movies";
+  tvLibrary = "${mediaRoot}/tv";
   torrentRoot = "${downloadsRoot}/torrents";
+  qBittorrentDownloadClient = {
+    name = "qBittorrent";
+    implementation = "QBittorrent";
+    fields = {
+      host = "localhost";
+      port = 8085;
+      username = "admin";
+      password.secret = config.age.secrets.qbittorrentPassword.path;
+    };
+  };
 in
 {
   nixarr = {
@@ -21,18 +32,13 @@ in
     radarr = {
       enable = true;
       openFirewall = true;
-      settings-sync.downloadClients = [
-        {
-          name = "qBittorrent";
-          implementation = "QBittorrent";
-          fields = {
-            host = "localhost";
-            port = 8085;
-            username = "admin";
-            password.secret = config.age.secrets.qbittorrentPassword.path;
-          };
-        }
-      ];
+      settings-sync.downloadClients = [ qBittorrentDownloadClient ];
+    };
+
+    sonarr = {
+      enable = true;
+      openFirewall = true;
+      settings-sync.downloadClients = [ qBittorrentDownloadClient ];
     };
 
     prowlarr = {
@@ -41,6 +47,7 @@ in
       settings-sync = {
         enable-nixarr-apps = true;
         radarr.enable = true;
+        sonarr.enable = true;
 
       };
     };
@@ -81,6 +88,14 @@ in
         mechanism = "external";
       };
     };
+    sonarr.settings = {
+      auth.required = "DisabledForLocalAddresses";
+      log.analyticsEnabled = false;
+      update = {
+        automatically = false;
+        mechanism = "external";
+      };
+    };
     prowlarr.settings = {
       auth.required = "DisabledForLocalAddresses";
       log.analyticsEnabled = false;
@@ -100,10 +115,27 @@ in
       assertion = movieLibrary != torrentRoot;
       message = "Media library and torrent download paths must be separated.";
     }
+    {
+      assertion = tvLibrary != torrentRoot;
+      message = "TV library and torrent download paths must be separated.";
+    }
+    {
+      assertion = movieLibrary != tvLibrary;
+      message = "Movie and TV libraries must be separated.";
+    }
   ];
+
+  users = {
+    groups.arr-secrets = { };
+    users = {
+      radarr.extraGroups = [ "arr-secrets" ];
+      sonarr.extraGroups = [ "arr-secrets" ];
+    };
+  };
 
   environment.etc."homelab/media-paths".text = lib.generators.toKeyValue { } {
     movie_library = movieLibrary;
+    tv_library = tvLibrary;
     torrent_downloads = torrentRoot;
     torrent_complete = "${torrentRoot}/complete";
     torrent_incomplete = "${torrentRoot}/incomplete";

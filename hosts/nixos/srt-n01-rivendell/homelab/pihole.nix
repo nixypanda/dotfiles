@@ -19,6 +19,7 @@ _: {
             "192.168.1.76 srt-n01-rivendell rivendell"
             "192.168.1.76 jellyfin"
             "192.168.1.76 radarr"
+            "192.168.1.76 sonarr"
             "192.168.1.76 prowlarr"
             "192.168.1.76 qbittorrent"
             "192.168.1.76 jellyseerr seerr"
