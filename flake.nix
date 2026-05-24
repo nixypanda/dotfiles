@@ -6,6 +6,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,6 +28,10 @@
       url = "github:nixypanda/kitty/floating-pane-experiment";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixarr = {
+      url = "github:nix-media-server/nixarr";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     {
@@ -31,8 +39,10 @@
       vim-plugins,
       nixpkgs,
       home-manager,
+      agenix,
       darwin,
       kitty-upstream,
+      nixarr,
       ...
     }:
     let
@@ -182,6 +192,8 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/nixos/srt-n01-rivendell/configuration.nix
+          agenix.nixosModules.default
+          nixarr.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager = {

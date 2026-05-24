@@ -1,21 +1,30 @@
 # `dotfiles`
 
-Here lies the `dotfiles` crafted with much care
+Nix flake-based dotfiles for my Mac and home server.
 
-## Configuration
+## Current Setup
 
-A glance at what is present in this lair.
+| Area                  | Current setup                                                 |
+| --------------------- | ------------------------------------------------------------- |
+| Mac host              | `srt-l02-sekhmet`                                             |
+| Home server           | `srt-n01-rivendell`                                           |
+| User config           | [Home Manager](https://nixos.wiki/wiki/Home_Manager)          |
+| macOS system config   | [nix-darwin](https://github.com/LnL7/nix-darwin)              |
+| NixOS server config   | NixOS flake output with Home Manager and nixarr               |
+| Terminal emulator     | [Kitty](https://sw.kovidgoyal.net/kitty/) plus `kitty-dev`    |
+| Shell                 | [Nushell](https://www.nushell.sh/) in Kitty                   |
+| Server login shell    | Bash, with Nushell installed for interactive use              |
+| Font                  | Hack Nerd Font Mono                                           |
+| Editor                | [Neovim](https://neovim.io/)                                  |
+| Browser               | Firefox via Home Manager, Google Chrome via Mac GUI packages  |
+| macOS window manager  | yabai + skhd                                                  |
+| Home server services  | Jellyfin, Radarr, Prowlarr, qBittorrent, Seerr, and Pi-hole   |
 
-| Name                     | What I am using (Mac)                                |
-| ------------------------ | ---------------------------------------------------- |
-| OS                       | macOS                                                |
-| Terminal Emulator        | [Kitty](https://sw.kovidgoyal.net/kitty/)            |
-| Shell                    | [Nu Shell](https://www.nushell.sh/)                  |
-| Font                     | Hack Nerd Font Mono                                  |
-| Editor                   | [Neovim](https://neovim.io/)                         |
-| Desktop Environment      | Whatever comes with Mac                              |
-| Browser                  | [Firefox](https://www.mozilla.org/en-US/firefox/)    |
-| User environment manager | [Home Manager](https://nixos.wiki/wiki/Home_Manager) |
+The main flake outputs are:
+
+- `homeConfigurations.srt-l02-sekhmet`
+- `darwinConfigurations.srt-l02-sekhmet`
+- `nixosConfigurations.srt-n01-rivendell`
 
 ## Well these look different from normal `dotfiles` mate
 
@@ -48,38 +57,109 @@ helpful links that you can visit to know more about it.
 
 ## Setup
 
-Here is a walkthrough of what are the steps one need to take to get this config
-or parts of it setup on any system.
+These commands assume the repo lives at `~/.dotfiles`.
 
-### User config setup
+### Mac user config
 
-#### Requirements
+Requirements:
 
 - nix with flake support is available
 
-#### Steps
+Apply the Home Manager config:
 
-- Get contents of this repo onto your system to `~/.dotfiles`
-- `cd` into `~/.dotfiles`
-- Execute:
-  `nix run home-manager --no-write-lock-file -- switch --flake "./#srt-l02-sekhmet"`
+```sh
+cd ~/.dotfiles
+home-manager switch --flake "./#srt-l02-sekhmet" -b backup
+```
+
+The Home Manager config also installs an `apply-user` helper that runs the same
+switch from `~/.dotfiles`.
+
+### Mac system config
+
+Apply the nix-darwin config:
+
+```sh
+sudo darwin-rebuild switch --flake ~/.dotfiles/.#srt-l02-sekhmet
+```
+
+The Home Manager config also installs an `apply-system` helper for this.
+
+### Home server config
+
+The NixOS server flake output is `nixosConfigurations.srt-n01-rivendell`.
+The host config lives under `hosts/nixos/srt-n01-rivendell/`.
+
+The normal remote switch from the Mac builds and deploys over Tailscale:
+
+```sh
+env NIX_SSHOPTS='-i /Users/nixypanda/.ssh/github-key -o StrictHostKeyChecking=accept-new' \
+  nix run nixpkgs#nixos-rebuild -- switch \
+  --flake .#srt-n01-rivendell \
+  --build-host nixypanda@100.127.3.54 \
+  --target-host nixypanda@100.127.3.54 \
+  --no-reexec \
+  --use-substitutes \
+  --ask-sudo-password
+```
+
+On the server itself, the equivalent is:
+
+```sh
+sudo nixos-rebuild switch --flake ~/.dotfiles#srt-n01-rivendell
+```
+
+### Updating inputs
+
+```sh
+cd ~/.dotfiles
+nix flake update --flake .
+```
+
+The Home Manager config also installs an `update-dots` helper for this.
+
+### Validation
+
+Fast evaluation checks:
+
+```sh
+nix eval --raw .#homeConfigurations.srt-l02-sekhmet.activationPackage.drvPath
+nix eval --raw .#darwinConfigurations.srt-l02-sekhmet.system.drvPath
+nix eval --raw .#nixosConfigurations.srt-n01-rivendell.config.system.build.toplevel.drvPath
+```
+
+Build checks without changing the `result` symlink:
+
+```sh
+nix build --no-link .#homeConfigurations.srt-l02-sekhmet.activationPackage
+nix build --no-link .#darwinConfigurations.srt-l02-sekhmet.system
+```
+
+Build the NixOS server output on the server or with a Linux remote builder; the
+Mac is `x86_64-darwin` and cannot build Linux-only derivations locally.
 
 ### Caveat
 
-I make use of [git-crypt](https://github.com/AGWA/git-crypt) on files in the
-`.secrets` folder. If you plan to use these dotfiles then you will either have
-to replace those files with what you need or remove references to these files
+I use [git-crypt](https://github.com/AGWA/git-crypt) for files under
+`.secrets/`, and agenix for Rivendell homelab secrets under
+`hosts/nixos/srt-n01-rivendell/homelab/secrets/`. If you plan to use these
+dotfiles, replace those files with your own secrets or remove the references
 from the codebase.
 
 ## Code Structure
 
-- The top level folder is a flake
-- After that it's just a matter of following the code really. So just open that
-  `flake.nix` file and start reading it from the top.
+- `flake.nix` wires the Mac Home Manager output, Mac nix-darwin output, and the
+  NixOS home server output.
+- Home Manager modules live under `modules/`.
+- macOS system modules live under `modules/mac/`.
+- NixOS host modules live under `hosts/nixos/`.
+- Neovim Lua config lives under `modules/nvim/lua/`.
+- Homelab service docs live in `hosts/nixos/srt-n01-rivendell/homelab/`.
 
 ## Here are a few screenshots to showcase this config in action
 
-Note: These were taken on the NixOS system, I haven't been using it now. I use nix on mac now.
+Note: these are legacy screenshots from an older NixOS desktop setup. The
+current desktop target is macOS, while NixOS is used for the home server.
 
 ### Tokyonight
 

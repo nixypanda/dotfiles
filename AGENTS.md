@@ -216,8 +216,8 @@ Vale:
 - `vale <file-or-dir>`
 
 Repo provides:
-- `modules/nvim/markdown_lint.json`
-- `modules/nvim/vale.ini`
+- `modules/programming/markdown_lint.json`
+- `modules/programming/vale.ini`
 
 ### Git (optional)
 - `gitlint`
