@@ -12,10 +12,12 @@ This file is written for agentic coding tools working in this repo.
 - Flake entrypoint: `flake.nix`
 - Home Manager host: `homeConfigurations.srt-l02-sekhmet`
 - nix-darwin host: `darwinConfigurations.srt-l02-sekhmet`
+- NixOS home server: `nixosConfigurations.srt-n01-rivendell`
 
 Key module roots:
 - Home Manager modules: `modules/*` (mix of `default.nix` modules and single-file modules)
 - macOS (nix-darwin) modules: `modules/mac/*.nix`
+- NixOS host modules: `hosts/nixos/*`
 - Neovim Lua configs: `modules/nvim/lua/*.lua`
 
 Notes:
@@ -43,6 +45,30 @@ Preferred:
 
 Script equivalent:
 - `./modules/system-management/apply-system-mac.sh`
+
+### Apply home server (NixOS)
+Host:
+- Hostname: `srt-n01-rivendell`
+- Flake output: `nixosConfigurations.srt-n01-rivendell`
+- Host config root: `hosts/nixos/srt-n01-rivendell/`
+- Normal remote access: SSH over Tailscale, `ssh nixypanda@srt-n01-rivendell`
+- Current known Tailscale IP: `100.127.3.54`
+- Current known LAN IP: `192.168.1.76`
+
+Preferred remote switch from the Mac:
+- `env NIX_SSHOPTS='-i /Users/nixypanda/.ssh/github-key -o StrictHostKeyChecking=accept-new' nix run nixpkgs#nixos-rebuild -- switch --flake .#srt-n01-rivendell --build-host nixypanda@100.127.3.54 --target-host nixypanda@100.127.3.54 --no-reexec --use-substitutes --ask-sudo-password`
+
+Build only on the server over SSH:
+- `env NIX_SSHOPTS='-i /Users/nixypanda/.ssh/github-key -o StrictHostKeyChecking=accept-new' nix run nixpkgs#nixos-rebuild -- build --flake .#srt-n01-rivendell --build-host nixypanda@100.127.3.54 --target-host nixypanda@100.127.3.54 --no-reexec --use-substitutes`
+
+Local on-server equivalent:
+- `sudo nixos-rebuild switch --flake ~/.dotfiles#srt-n01-rivendell`
+
+Server notes:
+- Tailscale is enabled declaratively on both the Mac and NixOS server.
+- The server keeps XFCE/LightDM enabled for local monitor/keyboard recovery.
+- The `nixypanda` login shell on the server should remain Bash. Nushell is installed and configured, but making it the login shell breaks ordinary SSH remote commands such as `ssh host 'echo ---; hostname'`.
+- `usbutils` and `usb-modeswitch` are Linux-only packages in `modules/cli.nix`; keep them guarded with `lib.optionals stdenv.hostPlatform.isLinux`.
 
 ### Update flake lockfile
 Preferred:
@@ -84,6 +110,9 @@ Home Manager activation derivation path:
 nix-darwin system derivation path:
 - `nix eval --raw .#darwinConfigurations.srt-l02-sekhmet.system.drvPath`
 
+NixOS server system derivation path:
+- `nix eval --raw .#nixosConfigurations.srt-n01-rivendell.config.system.build.toplevel.drvPath`
+
 If evaluation fails, re-run with:
 - `--show-trace`
 
@@ -94,9 +123,16 @@ Build Home Manager activation package:
 Build nix-darwin system derivation:
 - `nix build .#darwinConfigurations.srt-l02-sekhmet.system`
 
+Build NixOS server system derivation:
+- On the server or with a Linux remote builder:
+  `nix build .#nixosConfigurations.srt-n01-rivendell.config.system.build.toplevel`
+- From the Mac, prefer `nixos-rebuild --build-host nixypanda@100.127.3.54`
+  because local `x86_64-darwin` cannot build Linux-only derivations.
+
 For validation builds, prefer avoiding `result` symlink churn:
 - `nix build --no-link .#homeConfigurations.srt-l02-sekhmet.activationPackage`
 - `nix build --no-link .#darwinConfigurations.srt-l02-sekhmet.system`
+- `nix build --no-link .#nixosConfigurations.srt-n01-rivendell.config.system.build.toplevel`
 
 Sandbox note:
 - `nix eval` / `nix build` may need access to `~/.cache/nix` and the Nix store. If evaluation fails with an SQLite cache error under `~/.cache/nix`, rerun with the appropriate sandbox escalation rather than changing project files.
@@ -108,6 +144,7 @@ Recommended timeouts:
 - `nix eval ...`: 2 minutes (120s)
 - `nix build .#homeConfigurations.srt-l02-sekhmet.activationPackage`: 10 minutes (600s)
 - `nix build .#darwinConfigurations.srt-l02-sekhmet.system`: 10 minutes (600s)
+- `nix build .#nixosConfigurations.srt-n01-rivendell.config.system.build.toplevel`: 10 minutes (600s) when run on Linux or with a Linux build host
 - After `nix flake update` / lockfile updates: consider 20 minutes (1200s) for builds if large deps rebuild
 
 If your tool takes timeouts in milliseconds, use:

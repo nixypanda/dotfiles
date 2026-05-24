@@ -111,8 +111,10 @@
       home-macbook = {
         # Hack: Firefox does not work on mac so we have to depend on an overlay.
         nixpkgs.overlays = [ ];
-        home.homeDirectory = "/Users/nixypanda";
-        home.username = "nixypanda";
+        home = {
+          homeDirectory = "/Users/nixypanda";
+          username = "nixypanda";
+        };
 
         imports = [
           ./modules/mac/gui-apps.nix
@@ -120,6 +122,38 @@
         xdg.configFile."nix/nix.conf".text = ''
           experimental-features = nix-command flakes
         '';
+      };
+
+      home-server = {
+        _module.args = {
+          colorscheme = import ./colorschemes/tokyonight.nix;
+        };
+
+        programs.home-manager.enable = true;
+        home = {
+          homeDirectory = "/home/nixypanda";
+          username = "nixypanda";
+          stateVersion = "25.11";
+        };
+
+        programs.git = {
+          enable = true;
+          settings = {
+            user.email = "sherub.thakur@gmail.com";
+            user.name = "nixypanda";
+            pull.ff = "only";
+            init.defaultBranch = "main";
+            merge.conflictstyle = "diff3";
+            core.editor = "vi";
+          };
+        };
+
+        imports = [
+          ./modules/cli.nix
+          ./modules/env.nix
+          ./modules/nu
+          ./modules/nvim/minimal.nix
+        ];
       };
 
     in
@@ -141,6 +175,21 @@
           ./modules/mac/yabai.nix
           ./modules/mac/skhd.nix
           ./modules/mac/homebrew.nix
+        ];
+      };
+
+      nixosConfigurations."srt-n01-rivendell" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/nixos/srt-n01-rivendell/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.nixypanda = home-server;
+            };
+          }
         ];
       };
     };

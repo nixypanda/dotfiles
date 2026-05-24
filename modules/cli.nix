@@ -1,35 +1,47 @@
-{ pkgs, colorscheme, ... }:
 {
-  home.packages = with pkgs; [
-    # CLI tools / Terminal facification
-    dig
-    unzip
-    py7zr
-    qpdf
-    hledger
-    hledger-ui
-    hledger-web
-    paisa
+  lib,
+  pkgs,
+  colorscheme,
+  ...
+}:
+{
+  home.packages =
+    with pkgs;
+    [
+      # CLI tools / Terminal facification
+      dig
+      unzip
+      py7zr
+      qpdf
+      hledger
+      hledger-ui
+      hledger-web
+      paisa
 
-    # Better alternatives
-    bottom # top
-    fd # find
-    ripgrep # grep
-    tokei # cloc, sloc, etc
-    hyperfine # benchmarking (time)
-    gh
+      # Better alternatives
+      bottom # top
+      fd # find
+      ripgrep # grep
+      tokei # cloc, sloc, etc
+      hyperfine # benchmarking (time)
+      gh
 
-    # Structured data
-    jc
-    jq
+      # Structured data
+      jc
+      jq
 
-    # Nix related
-    nixVersions.latest
-    nix-forecast
+      # Nix related
+      nixVersions.latest
+      nix-forecast
 
-    # Document conversion
-    pandoc
-  ];
+      # Document conversion
+      pandoc
+    ]
+    ++ lib.optionals stdenv.hostPlatform.isLinux [
+      # USB tooling
+      usbutils
+      usb-modeswitch
+    ];
 
   programs = {
     carapace = {

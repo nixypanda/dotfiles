@@ -27,5 +27,6 @@
     };
     stateVersion = 5;
   };
+  services.tailscale.enable = true;
   networking.hostName = "srt-l02-sekhmet";
 }

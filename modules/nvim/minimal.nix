@@ -2,6 +2,8 @@
 {
   programs.neovim = {
     enable = true;
+    withRuby = true;
+    withPython3 = true;
     plugins = with pkgs.vimPlugins; [
       nvim-nio
       neotest-python
