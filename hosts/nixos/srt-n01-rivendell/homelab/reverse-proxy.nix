@@ -64,8 +64,6 @@ in
 
           chown caddy:caddy ${certFile} ${keyFile}
           chmod 0640 ${certFile} ${keyFile}
-
-          systemctl try-reload-or-restart caddy.service
         '';
       };
     };
