@@ -46,134 +46,21 @@
       ...
     }:
     let
-      kitty-dev-build-overlay = final: prev: {
-        kitty-dev = prev.kitty.overrideAttrs (
-          old:
-          let
-            version = "floating-pane-experiment-${kitty-upstream.shortRev or kitty-upstream.rev}";
-            src = kitty-upstream;
-          in
-          {
-            inherit src version;
-            inherit
-              (final.buildGo126Module {
-                pname = "kitty-go-modules";
-                inherit src version;
-                vendorHash = "sha256-FaSWBeQJlvw9vXcHJ/OaFd48K8d7X86X8w7wpG84Ltw=";
-              })
-              goModules
-              ;
-            nativeBuildInputs = map (
-              pkg: if (pkg.pname or "") == "go" then final.go_1_26 else pkg
-            ) old.nativeBuildInputs;
-            env = old.env // {
-              GOTOOLCHAIN = "local";
-            };
-          }
-        );
-      };
+      inherit (nixpkgs) lib;
+      kitty-dev-build-overlay = import ./modules/kitty/overlay.nix { inherit kitty-upstream; };
 
-      home-common =
-        { lib, ... }:
-        {
-          # NOTE: Injecting colorscheme so that it is passed down all the imports
-          _module.args = {
-            colorscheme = import ./colorschemes/tokyonight.nix;
-          };
-          nixpkgs.config = {
-
-            allowUnfreePredicate =
-              pkg:
-              builtins.elem (lib.getName pkg) [
-                "zoom"
-                "claude-code"
-                "google-chrome"
-                "firefox-bin"
-                "firefox-bin-unwrapped"
-                "vim-table-mode"
-              ];
-          };
-
-          nixpkgs.overlays = [
-            kitty-dev-build-overlay
-            nur.overlays.default
-            vim-plugins.overlay
-          ];
-
-          # Let Home Manager install and manage itself.
-          programs.home-manager.enable = true;
-          home.stateVersion = "25.11";
-
-          imports = [
-            ./modules/cli.nix
-            ./modules/env.nix
-            ./modules/firefox
-            ./modules/fonts.nix
-            ./modules/git
-            ./modules/kitty
-            ./modules/nu
-            ./modules/nvim
-            ./modules/programming
-            ./modules/system-management
-          ];
-        };
-
-      home-macbook = {
-        # Hack: Firefox does not work on mac so we have to depend on an overlay.
-        nixpkgs.overlays = [ ];
-        home = {
-          homeDirectory = "/Users/nixypanda";
-          username = "nixypanda";
-        };
-
-        imports = [
-          ./modules/mac/gui-apps.nix
-        ];
-        xdg.configFile."nix/nix.conf".text = ''
-          experimental-features = nix-command flakes
-        '';
-      };
-
-      home-server = {
-        _module.args = {
-          colorscheme = import ./colorschemes/tokyonight.nix;
-        };
-
-        programs.home-manager.enable = true;
-        home = {
-          homeDirectory = "/home/nixypanda";
-          username = "nixypanda";
-          stateVersion = "25.11";
-        };
-
-        programs.git = {
-          enable = true;
-          settings = {
-            user.email = "sherub.thakur@gmail.com";
-            user.name = "nixypanda";
-            pull.ff = "only";
-            init.defaultBranch = "main";
-            merge.conflictstyle = "diff3";
-            core.editor = "vi";
-          };
-        };
-
-        imports = [
-          ./modules/cli.nix
-          ./modules/env.nix
-          ./modules/nu
-          ./modules/nvim/minimal.nix
-        ];
-      };
-
+      macOverlays = [
+        kitty-dev-build-overlay
+        nur.overlays.default
+        vim-plugins.overlay
+      ];
     in
     {
       homeConfigurations = {
         srt-l02-sekhmet = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."x86_64-darwin";
+          pkgs = nixpkgs.legacyPackages."x86_64-darwin".extend (lib.composeManyExtensions macOverlays);
           modules = [
-            home-common
-            home-macbook
+            ./hosts/srt-l02-sekhmet/home.nix
           ];
         };
       };
@@ -181,17 +68,15 @@
       darwinConfigurations."srt-l02-sekhmet" = darwin.lib.darwinSystem {
         pkgs = nixpkgs.legacyPackages."x86_64-darwin";
         modules = [
-          ./modules/mac/configuration.nix
-          ./modules/mac/yabai.nix
-          ./modules/mac/skhd.nix
-          ./modules/mac/homebrew.nix
+          ./hosts/srt-l02-sekhmet/system/configuration.nix
+          ./hosts/srt-l02-sekhmet/system/homebrew.nix
         ];
       };
 
       nixosConfigurations."srt-n01-rivendell" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hosts/nixos/srt-n01-rivendell/configuration.nix
+          ./hosts/srt-n01-rivendell/configuration.nix
           agenix.nixosModules.default
           nixarr.nixosModules.default
           home-manager.nixosModules.home-manager
@@ -199,7 +84,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.nixypanda = home-server;
+              users.nixypanda = import ./hosts/srt-n01-rivendell/home.nix;
             };
           }
         ];

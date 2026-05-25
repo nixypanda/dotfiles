@@ -1,27 +1,31 @@
 { pkgs, ... }:
 let
-  apply-system-mac = pkgs.writeScriptBin "apply-system" ''
-    ${builtins.readFile ./apply-system-mac.sh}
+  apply-darwin = pkgs.writeScriptBin "apply-darwin" ''
+    ${builtins.readFile ./apply-darwin.sh}
   '';
-  apply-user-mac = pkgs.writeScriptBin "apply-user" ''
-    ${builtins.readFile ./apply-user-mac.sh}
+  apply-user = pkgs.writeScriptBin "apply-user" ''
+    ${builtins.readFile ./apply-user.sh}
   '';
-  update-dots = pkgs.writeScriptBin "update-dots" ''
-    ${builtins.readFile ./update-dots.sh}
+  apply-rivendell = pkgs.writeScriptBin "apply-rivendell" ''
+    ${builtins.readFile ./apply-rivendell.sh}
   '';
-  build-forecast-user = pkgs.writeScriptBin "build-forecast" ''
-    ${builtins.readFile ./build-forecast-user.sh}
+  update-flake = pkgs.writeScriptBin "update-flake" ''
+    ${builtins.readFile ./update-flake.sh}
   '';
-  sync-hledger-rivendell = pkgs.writeScriptBin "sync-hledger-rivendell" ''
-    ${builtins.readFile ./sync-hledger-rivendell.sh}
+  forecast-build = pkgs.writeScriptBin "forecast-build" ''
+    ${builtins.readFile ./forecast-build.sh}
+  '';
+  sync-hledger = pkgs.writeScriptBin "sync-hledger" ''
+    ${builtins.readFile ./sync-hledger.sh}
   '';
 in
 {
   home.packages = [
-    update-dots
-    apply-user-mac
-    apply-system-mac
-    build-forecast-user
-    sync-hledger-rivendell
+    apply-darwin
+    apply-user
+    apply-rivendell
+    update-flake
+    forecast-build
+    sync-hledger
   ];
 }

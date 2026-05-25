@@ -125,7 +125,7 @@
   };
 
   environment = {
-    shells = [ pkgs.nushell ];
+    shells = [ ];
     systemPackages = with pkgs; [
       git
       vim

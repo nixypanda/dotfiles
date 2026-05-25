@@ -3,7 +3,7 @@ set -eu
 
 source_dir="/Users/nixypanda/Library/Mobile Documents/com~apple~CloudDocs/Money/ledger"
 years_dir="${source_dir}/journals/years"
-remote="nixypanda@100.127.3.54"
+remote="nixypanda@srt-n01-rivendell"
 remote_dir="/srv/hledger"
 remote_paisa_dir="${remote_dir}/paisa"
 remote_years_dir="${remote_dir}/journals/years"
