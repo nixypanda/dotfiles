@@ -14,6 +14,10 @@
     };
   };
 
+  # The Realtek USB Wi-Fi dongle initially presents as a virtual CD-ROM
+  # device (0bda:1a2b); usb-modeswitch flips it into NIC mode at boot.
+  hardware.usb-modeswitch.enable = true;
+
   networking = {
     hostName = "srt-n01-rivendell";
     networkmanager.enable = true;
