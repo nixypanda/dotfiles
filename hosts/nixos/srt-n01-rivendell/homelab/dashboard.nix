@@ -114,6 +114,74 @@ _: {
           }
         ];
       }
+      {
+        Finance = [
+          {
+            "hledger Mine" = {
+              icon = "hledger.png";
+              href = "https://${tailnetHost}:9450";
+              description = "Mine ledger API";
+              siteMonitor = "http://127.0.0.1:5001";
+            };
+          }
+          {
+            "hledger Wife" = {
+              icon = "hledger.png";
+              href = "https://${tailnetHost}:9451";
+              description = "Wife ledger API";
+              siteMonitor = "http://127.0.0.1:5002";
+            };
+          }
+          {
+            "hledger Combined" = {
+              icon = "hledger.png";
+              href = "https://${tailnetHost}:9452";
+              description = "Combined ledger API";
+              siteMonitor = "http://127.0.0.1:5003";
+            };
+          }
+          {
+            "hledger Dummy" = {
+              icon = "hledger.png";
+              href = "https://${tailnetHost}:9453";
+              description = "Dummy ledger API";
+              siteMonitor = "http://127.0.0.1:5004";
+            };
+          }
+          {
+            "Paisa Mine" = {
+              icon = "mdi-finance";
+              href = "https://${tailnetHost}:9460";
+              description = "Mine finance dashboard";
+              siteMonitor = "http://127.0.0.1:5101";
+            };
+          }
+          {
+            "Paisa Wife" = {
+              icon = "mdi-finance";
+              href = "https://${tailnetHost}:9461";
+              description = "Wife finance dashboard";
+              siteMonitor = "http://127.0.0.1:5102";
+            };
+          }
+          {
+            "Paisa Combined" = {
+              icon = "mdi-finance";
+              href = "https://${tailnetHost}:9462";
+              description = "Combined finance dashboard";
+              siteMonitor = "http://127.0.0.1:5103";
+            };
+          }
+          {
+            "Paisa Dummy" = {
+              icon = "mdi-finance";
+              href = "https://${tailnetHost}:9463";
+              description = "Dummy finance dashboard";
+              siteMonitor = "http://127.0.0.1:5104";
+            };
+          }
+        ];
+      }
     ];
   };
 }

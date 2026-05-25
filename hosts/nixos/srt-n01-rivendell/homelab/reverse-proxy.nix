@@ -28,6 +28,14 @@ in
       "https://${tailnetHost}:9447".extraConfig = proxy 9696;
       "https://${tailnetHost}:9448".extraConfig = proxy 8081;
       "https://${tailnetHost}:9449".extraConfig = proxy 8989;
+      "https://${tailnetHost}:9450".extraConfig = proxy 5001;
+      "https://${tailnetHost}:9451".extraConfig = proxy 5002;
+      "https://${tailnetHost}:9452".extraConfig = proxy 5003;
+      "https://${tailnetHost}:9453".extraConfig = proxy 5004;
+      "https://${tailnetHost}:9460".extraConfig = proxy 5101;
+      "https://${tailnetHost}:9461".extraConfig = proxy 5102;
+      "https://${tailnetHost}:9462".extraConfig = proxy 5103;
+      "https://${tailnetHost}:9463".extraConfig = proxy 5104;
     };
   };
 

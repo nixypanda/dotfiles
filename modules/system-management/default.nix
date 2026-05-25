@@ -12,6 +12,9 @@ let
   build-forecast-user = pkgs.writeScriptBin "build-forecast" ''
     ${builtins.readFile ./build-forecast-user.sh}
   '';
+  sync-hledger-rivendell = pkgs.writeScriptBin "sync-hledger-rivendell" ''
+    ${builtins.readFile ./sync-hledger-rivendell.sh}
+  '';
 in
 {
   home.packages = [
@@ -19,5 +22,6 @@ in
     apply-user-mac
     apply-system-mac
     build-forecast-user
+    sync-hledger-rivendell
   ];
 }
