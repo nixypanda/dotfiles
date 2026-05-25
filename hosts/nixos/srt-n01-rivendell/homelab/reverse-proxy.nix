@@ -47,6 +47,7 @@ in
         wants = [ "network-online.target" ];
         path = [
           pkgs.coreutils
+          pkgs.jq
           pkgs.systemd
           pkgs.tailscale
         ];
@@ -57,13 +58,24 @@ in
           UMask = "0077";
         };
         script = ''
-          tailscale cert \
-            --cert-file ${certFile} \
-            --key-file ${keyFile} \
-            ${tailnetHost}
+          # tailscaled.service can be active before Tailscale has a usable
+          # netmap; wait for that before asking Tailscale for TLS certs.
+          for _ in $(seq 1 30); do
+            if tailscale status --json \
+              | jq -e '.BackendState == "Running" and (.Self.Online // false)' \
+              >/dev/null; then
+              tailscale cert --cert-file ${certFile} --key-file ${keyFile} ${tailnetHost}
 
-          chown caddy:caddy ${certFile} ${keyFile}
-          chmod 0640 ${certFile} ${keyFile}
+              chown caddy:caddy ${certFile} ${keyFile}
+              chmod 0640 ${certFile} ${keyFile}
+              exit 0
+            fi
+
+            sleep 2
+          done
+
+          echo "Tailscale did not become ready within 60 seconds"
+          exit 1
         '';
       };
     };
