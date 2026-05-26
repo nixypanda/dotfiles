@@ -2,6 +2,8 @@
 
 let
   tailnetHost = "srt-n01-rivendell.taila65e7f.ts.net";
+  # Caddy serves this host only on the tailnet. Tailscale owns the certificate
+  # lifecycle, so a systemd unit fetches cert files with `tailscale cert`.
   certDir = "/var/lib/caddy/tailscale-certs";
   certFile = "${certDir}/${tailnetHost}.crt";
   keyFile = "${certDir}/${tailnetHost}.key";
@@ -20,6 +22,8 @@ in
     enable = true;
     openFirewall = false;
     virtualHosts = {
+      # Tailnet-facing ports are stable aliases for services listening on local
+      # ports, which keeps the services bound to localhost while exposing HTTPS.
       "${tailnetHost}".extraConfig = proxy 8082;
       "https://${tailnetHost}:9443".extraConfig = proxy 8096;
       "https://${tailnetHost}:9444".extraConfig = proxy 5055;
@@ -42,6 +46,8 @@ in
   systemd = {
     services = {
       caddy = {
+        # Caddy reads static cert files, so it must wait until the Tailscale cert
+        # fetch has populated /var/lib/caddy/tailscale-certs.
         after = [ "tailscale-cert-rivendell.service" ];
         requires = [ "tailscale-cert-rivendell.service" ];
       };

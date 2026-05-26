@@ -49,6 +49,8 @@
       inherit (nixpkgs) lib;
       kitty-dev-build-overlay = import ./modules/kitty/overlay.nix { inherit kitty-upstream; };
 
+      # These overlays are scoped to the Home Manager package set. nix-darwin
+      # intentionally keeps plain nixpkgs for system configuration.
       macOverlays = [
         kitty-dev-build-overlay
         nur.overlays.default

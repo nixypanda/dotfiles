@@ -6,10 +6,6 @@
       cleanup = "zap";
       upgrade = true;
     };
-    global = {
-      brewfile = true;
-      lockfiles = false;
-    };
     taps = [
     ];
     casks = [

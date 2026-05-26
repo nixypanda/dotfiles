@@ -3,8 +3,12 @@
 let
   inherit (config) xdg;
 
+  # Personal CLI wrapper over Rope for Python refactors.
   ropify = pkgs.callPackage ./ropecli.nix { };
 
+  # Build one immutable Vale styles tree from packaged style sets. Vale expects
+  # vocabulary files to exist, so create empty Base vocab files instead of
+  # relying on mutable setup under $HOME.
   vale_styles =
     pkgs.runCommand "vale-styles"
       {

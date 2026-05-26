@@ -67,6 +67,8 @@ in
           };
           WebUI = {
             LocalHostAuth = false;
+            # qBittorrent stores the WebUI password in its PBKDF2 config format;
+            # automation clients use the age-managed secret above.
             Password_PBKDF2 = "@ByteArray(oaZn1TWvluvmROj2WQSsbg==:ASs3XhI21VWkpP0EGEQRTBe97oJkUEvYkcS1zEiyuZb/+g7eZg3y+Q5LUzYsKwvlumNsj1lVWnHxL0Dosrc86w==)";
           };
         };
@@ -80,6 +82,8 @@ in
   };
 
   services = {
+    # These apps are reached locally or through the tailnet Caddy proxy, not
+    # directly from the public internet.
     radarr.settings = {
       auth.required = "DisabledForLocalAddresses";
       log.analyticsEnabled = false;
