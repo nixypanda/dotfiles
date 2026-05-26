@@ -26,35 +26,6 @@ let
       ]
       (builtins.readFile ./kitty-session-picker.sh)
   );
-
-  kittyDevInfoPlistPatch = pkgs.writeText "kitty-dev-info-plist-patch.py" ''
-    import plistlib
-    import os
-    from pathlib import Path
-
-    plist_path = Path(os.environ["out"]) / "Applications/kitty-dev.app/Contents/Info.plist"
-    with plist_path.open("rb") as f:
-        info = plistlib.load(f)
-
-    info["CFBundleIdentifier"] = "net.kovidgoyal.kitty.dev"
-    info["CFBundleName"] = "kitty-dev"
-    info["CFBundleDisplayName"] = "kitty-dev"
-
-    with plist_path.open("wb") as f:
-        plistlib.dump(info, f)
-  '';
-
-  kittyDevApp = pkgs.runCommand "kitty-dev-app" { } ''
-    mkdir -p "$out/Applications"
-    cp -R "${pkgs.kitty-dev}/Applications/kitty.app" "$out/Applications/kitty-dev.app"
-    chmod -R u+w "$out/Applications/kitty-dev.app"
-
-    "${pkgs.python3}/bin/python3" "${kittyDevInfoPlistPatch}"
-  '';
-
-  kittyDevBin = pkgs.writeShellScriptBin "kitty-dev" ''
-    exec "${pkgs.kitty-dev}/bin/kitty" "$@"
-  '';
 in
 {
   programs.kitty = {
@@ -79,6 +50,8 @@ in
 
       macos_option_as_alt = "left";
       macos_show_window_title_in = "none";
+      # The session picker uses `kitty @ action goto_session`, which needs
+      # remote control enabled and a known socket.
       allow_remote_control = "yes";
       listen_on = "unix:/tmp/kitty";
     };
@@ -128,22 +101,6 @@ in
   };
 
   home = {
-    activation.kittyCodesign = lib.hm.dag.entryAfter [ "copyApps" ] (
-      lib.optionalString pkgs.stdenv.hostPlatform.isDarwin ''
-        for app in "$HOME/Applications/Home Manager Apps/kitty.app" "$HOME/Applications/Home Manager Apps/kitty-dev.app"; do
-          if [ -d "$app" ]; then
-            /usr/bin/codesign --force --deep --sign - "$app"
-            /usr/bin/codesign --verify --deep --strict --verbose=2 "$app"
-          fi
-        done
-      ''
-    );
-
-    packages = [
-      kittyDevApp
-      kittyDevBin
-    ];
-
     file = {
       "${config.xdg.configHome}/kitty/quick-access-terminal.conf".text = ''
         lines 40
@@ -163,6 +120,8 @@ in
 
       "${config.home.homeDirectory}/.local/bin/kitty-session-picker" = {
         executable = true;
+        # Keep the source script readable while replacing tool placeholders with
+        # absolute Nix store paths in the generated script.
         source = kittySessionPicker;
       };
 

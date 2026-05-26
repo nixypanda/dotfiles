@@ -33,6 +33,7 @@
     ../../modules/fonts.nix
     ../../modules/git
     ../../modules/kitty
+    ../../modules/kitty/dev.nix
     ../../modules/nu
     ../../modules/nvim
     ../../modules/programming
