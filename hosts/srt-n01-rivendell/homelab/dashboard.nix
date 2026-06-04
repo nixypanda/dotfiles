@@ -29,6 +29,7 @@ _: {
           cpu = true;
           memory = true;
           disk = "/";
+          network = "wlp0s20f0u4i2";
           uptime = true;
           units = "metric";
         };

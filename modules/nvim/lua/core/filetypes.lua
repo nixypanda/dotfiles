@@ -1,7 +1,9 @@
 vim.filetype.add({
 	extension = {
+		csv = "csv",
 		rasi = "scss",
 		tfstate = "json",
+		tsv = "tsv",
 		nomad = "hcl",
 		["kitty-session"] = "conf",
 	},

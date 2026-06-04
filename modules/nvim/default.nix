@@ -185,6 +185,7 @@ in
         (lazy_plug render-markdown-nvim ./lua/render-markdown.lua)
         (lazy_plug crates-nvim ./lua/crates.lua)
         (lazy_plug nvim-cronex ./lua/cronex.lua)
+        (lazy_plug csvview-nvim ./lua/csvview.lua)
       ];
 
     initLua = # lua
