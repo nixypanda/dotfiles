@@ -33,6 +33,7 @@
       # Nix related
       nixVersions.latest
       nix-forecast
+      age
 
       # Document conversion
       pandoc

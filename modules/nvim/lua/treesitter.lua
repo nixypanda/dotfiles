@@ -31,6 +31,7 @@ vim.treesitter.language.register("kulala_http", { "http" })
 
 register_treesitter_filetype("bash")
 register_treesitter_filetype("dockerfile")
+register_treesitter_filetype("elm")
 register_treesitter_filetype("haskell")
 register_treesitter_filetype("json")
 register_treesitter_filetype("kdl")

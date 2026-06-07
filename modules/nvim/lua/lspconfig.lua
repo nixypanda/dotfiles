@@ -50,6 +50,9 @@ require("lz.n").load({
 			},
 		})
 
+		-- Elm
+		vim.lsp.config("elmls", { on_attach = on_attach })
+
 		-- nix
 		local dotfiles_flake = 'builtins.getFlake "/Users/nixypanda/.dotfiles"'
 		local nixpkgs_expr = "let flake = "
@@ -177,6 +180,7 @@ require("lz.n").load({
 
 		vim.lsp.enable({
 			"ts_ls",
+			"elmls",
 			"lua_ls",
 			"nixd",
 			"nushell",

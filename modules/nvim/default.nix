@@ -120,6 +120,7 @@ in
             plugins: with plugins; [
               bash
               dockerfile
+              elm
               haskell
               json
               kdl

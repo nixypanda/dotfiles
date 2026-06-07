@@ -5,6 +5,7 @@ require("lz.n").load({
 		require("conform").setup({
 			formatters_by_ft = {
 				css = { "prettier" },
+				elm = { "elm_format" },
 				html = { "prettier" },
 				javascript = { "prettier" },
 				json = { "prettier" },
