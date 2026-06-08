@@ -53,6 +53,7 @@
       # intentionally keeps plain nixpkgs for system configuration.
       macOverlays = [
         kitty-dev-build-overlay
+        (final: prev: { agenix = agenix.packages.${prev.system}.default; })
         nur.overlays.default
         vim-plugins.overlay
       ];
@@ -88,6 +89,11 @@
               useUserPackages = true;
               users.nixypanda = import ./hosts/srt-n01-rivendell/home.nix;
             };
+          }
+          {
+            nixpkgs.overlays = [
+              (final: prev: { agenix = agenix.packages.${final.system}.default; })
+            ];
           }
         ];
       };

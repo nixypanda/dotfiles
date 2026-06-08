@@ -55,9 +55,8 @@ runtime to `/run/agenix/qbittorrentPassword`. It is used both as the qBittorrent
 login credential and by the Radarr/Sonarr settings-sync jobs to authenticate as
 a download client.
 
-The repository also contains encrypted `radarr.env.age` and `prowlarr.env.age`
-files reserved for future service environment secrets. They are not currently
-wired into `secrets.nix`.
+The secrets directory also contains `radarr.env.age` and `prowlarr.env.age`
+files reserved for future service environment secrets. Create them when needed.
 
 The PBKDF2-SHA512 hash in `media.nix` is what qBittorrent stores — this is a
 one-way hash, not a plaintext secret, and is safe in the Nix store.

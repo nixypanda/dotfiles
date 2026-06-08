@@ -34,6 +34,7 @@
       nixVersions.latest
       nix-forecast
       age
+      agenix
 
       # Document conversion
       pandoc

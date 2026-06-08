@@ -15,8 +15,6 @@ Current secrets:
 
 - `qbittorrent-password.age`: wired as `age.secrets.qbittorrentPassword` and
   owned by the `radarr` user so Radarr settings-sync can read it.
-- `radarr.env.age`: present but not currently wired into `secrets.nix`.
-- `prowlarr.env.age`: present but not currently wired into `secrets.nix`.
 
 Plaintext generation scratch files live outside the repository under
 `/private/tmp/rivendell-homelab-secrets` while this setup is being worked on.
