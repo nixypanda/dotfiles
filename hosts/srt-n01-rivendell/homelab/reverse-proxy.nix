@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 let
   tailnetHost = "srt-n01-rivendell.taila65e7f.ts.net";
@@ -40,6 +40,17 @@ in
       "https://${tailnetHost}:9461".extraConfig = proxy 5102;
       "https://${tailnetHost}:9462".extraConfig = proxy 5103;
       "https://${tailnetHost}:9463".extraConfig = proxy 5104;
+      "https://${tailnetHost}:9464".extraConfig = ''
+        ${tlsConfig}
+        handle /api* {
+          reverse_proxy 127.0.0.1:3002
+        }
+        handle {
+          root * ${config.services.calco.frontendPackage}/share/calco/web
+          try_files {path} /index.html
+          file_server
+        }
+      '';
     };
   };
 

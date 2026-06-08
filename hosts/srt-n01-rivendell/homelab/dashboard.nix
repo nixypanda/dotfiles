@@ -183,6 +183,18 @@ _: {
           }
         ];
       }
+      {
+        Tracking = [
+          {
+            "CalCo" = {
+              icon = "mdi-food-apple";
+              href = "https://${tailnetHost}:9464";
+              description = "Food and nutrition tracker";
+              siteMonitor = "http://127.0.0.1:3002/api/health";
+            };
+          }
+        ];
+      }
     ];
   };
 }

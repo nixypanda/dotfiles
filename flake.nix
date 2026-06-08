@@ -32,6 +32,10 @@
       url = "github:nix-media-server/nixarr";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    calco = {
+      url = "git+ssh://git@github.com/nixypanda/calco.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     {
@@ -43,6 +47,7 @@
       darwin,
       kitty-upstream,
       nixarr,
+      calco,
       ...
     }:
     let
@@ -82,6 +87,7 @@
           ./hosts/srt-n01-rivendell/configuration.nix
           agenix.nixosModules.default
           nixarr.nixosModules.default
+          calco.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager = {
