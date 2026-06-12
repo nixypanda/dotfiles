@@ -38,6 +38,7 @@
 
       # Document conversion
       pandoc
+      msoffcrypto-tool
     ]
     ++ lib.optionals stdenv.hostPlatform.isLinux [
       # USB tooling

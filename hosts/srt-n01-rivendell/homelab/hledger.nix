@@ -44,6 +44,7 @@ let
         "--serve-api"
         "--allow=view"
         "--host=127.0.0.1"
+        "--cors=*"
         "--port=${toString hledgerPort}"
         "--file=${journalsDir}/${journal}"
       ];

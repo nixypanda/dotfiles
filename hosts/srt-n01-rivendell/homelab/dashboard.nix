@@ -1,9 +1,21 @@
+{ pkgs, ... }:
 let
   tailnetHost = "srt-n01-rivendell.taila65e7f.ts.net";
+
+  homepagePkg = pkgs.homepage-dashboard.override {
+    enableLocalIcons = true;
+  };
+
+  homepageWithPaisa = homepagePkg.overrideAttrs (old: {
+    postInstall = (old.postInstall or "") + ''
+      cp ${pkgs.paisa.src}/brand/logo.svg $out/share/homepage/public/icons/paisa.svg
+    '';
+  });
 in
-_: {
+{
   services.homepage-dashboard = {
     enable = true;
+    package = homepageWithPaisa;
     listenPort = 8082;
     openFirewall = false;
     allowedHosts = builtins.concatStringsSep "," [
@@ -151,7 +163,7 @@ _: {
           }
           {
             "Paisa Mine" = {
-              icon = "mdi-finance";
+              icon = "/icons/paisa.svg";
               href = "https://${tailnetHost}:9460";
               description = "Mine finance dashboard";
               siteMonitor = "http://127.0.0.1:5101";
@@ -159,7 +171,7 @@ _: {
           }
           {
             "Paisa Wife" = {
-              icon = "mdi-finance";
+              icon = "/icons/paisa.svg";
               href = "https://${tailnetHost}:9461";
               description = "Wife finance dashboard";
               siteMonitor = "http://127.0.0.1:5102";
@@ -167,7 +179,7 @@ _: {
           }
           {
             "Paisa Combined" = {
-              icon = "mdi-finance";
+              icon = "/icons/paisa.svg";
               href = "https://${tailnetHost}:9462";
               description = "Combined finance dashboard";
               siteMonitor = "http://127.0.0.1:5103";
@@ -175,7 +187,7 @@ _: {
           }
           {
             "Paisa Dummy" = {
-              icon = "mdi-finance";
+              icon = "/icons/paisa.svg";
               href = "https://${tailnetHost}:9463";
               description = "Dummy finance dashboard";
               siteMonitor = "http://127.0.0.1:5104";
@@ -187,7 +199,7 @@ _: {
         Tracking = [
           {
             "CalCo" = {
-              icon = "mdi-food-apple";
+              icon = "https://${tailnetHost}:9464/favicon-32x32.png";
               href = "https://${tailnetHost}:9464";
               description = "Food and nutrition tracker";
               siteMonitor = "http://127.0.0.1:3002/api/health";
