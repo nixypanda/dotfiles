@@ -130,6 +130,7 @@
       git
       vim
       wget
+      kitty.terminfo
     ];
   };
 
