@@ -41,7 +41,7 @@ in
           cpu = true;
           memory = true;
           disk = "/";
-          network = "wlp0s20f0u4i2";
+          network = "eno1";
           uptime = true;
           units = "metric";
         };
@@ -55,78 +55,6 @@ in
     ];
 
     services = [
-      {
-        Media = [
-          {
-            Jellyfin = {
-              icon = "jellyfin.png";
-              href = "https://${tailnetHost}:9443";
-              description = "Movies, TV, and anime";
-              siteMonitor = "http://127.0.0.1:8096";
-            };
-          }
-          {
-            Seerr = {
-              icon = "jellyseerr.png";
-              href = "https://${tailnetHost}:9444";
-              description = "Media requests";
-              siteMonitor = "http://127.0.0.1:5055";
-            };
-          }
-        ];
-      }
-      {
-        Downloads = [
-          {
-            qBittorrent = {
-              icon = "qbittorrent.png";
-              href = "https://${tailnetHost}:9445";
-              description = "Torrent client";
-              siteMonitor = "http://127.0.0.1:8080";
-            };
-          }
-        ];
-      }
-      {
-        Automation = [
-          {
-            Radarr = {
-              icon = "radarr.png";
-              href = "https://${tailnetHost}:9446";
-              description = "Movie automation";
-              siteMonitor = "http://127.0.0.1:7878";
-            };
-          }
-          {
-            Sonarr = {
-              icon = "sonarr.png";
-              href = "https://${tailnetHost}:9449";
-              description = "TV and anime automation";
-              siteMonitor = "http://127.0.0.1:8989";
-            };
-          }
-          {
-            Prowlarr = {
-              icon = "prowlarr.png";
-              href = "https://${tailnetHost}:9447";
-              description = "Indexer management";
-              siteMonitor = "http://127.0.0.1:9696";
-            };
-          }
-        ];
-      }
-      {
-        Network = [
-          {
-            "Pi-hole" = {
-              icon = "pi-hole.png";
-              href = "https://${tailnetHost}:9448";
-              description = "DNS and ad blocking";
-              siteMonitor = "http://127.0.0.1:8081";
-            };
-          }
-        ];
-      }
       {
         Finance = [
           {
@@ -196,13 +124,85 @@ in
         ];
       }
       {
-        Tracking = [
+        Health = [
           {
             "CalCo" = {
               icon = "https://${tailnetHost}:9464/favicon-32x32.png";
               href = "https://${tailnetHost}:9464";
               description = "Food and nutrition tracker";
               siteMonitor = "http://127.0.0.1:3002/api/health";
+            };
+          }
+        ];
+      }
+      {
+        Media = [
+          {
+            Jellyfin = {
+              icon = "jellyfin.png";
+              href = "https://${tailnetHost}:9443";
+              description = "Movies, TV, and anime";
+              siteMonitor = "http://127.0.0.1:8096";
+            };
+          }
+          {
+            Seerr = {
+              icon = "jellyseerr.png";
+              href = "https://${tailnetHost}:9444";
+              description = "Media requests";
+              siteMonitor = "http://127.0.0.1:5055";
+            };
+          }
+        ];
+      }
+      {
+        Network = [
+          {
+            "Pi-hole" = {
+              icon = "pi-hole.png";
+              href = "https://${tailnetHost}:9448";
+              description = "DNS and ad blocking";
+              siteMonitor = "http://127.0.0.1:8081";
+            };
+          }
+        ];
+      }
+      {
+        Downloads = [
+          {
+            qBittorrent = {
+              icon = "qbittorrent.png";
+              href = "https://${tailnetHost}:9445";
+              description = "Torrent client";
+              siteMonitor = "http://127.0.0.1:8080";
+            };
+          }
+        ];
+      }
+      {
+        Automation = [
+          {
+            Radarr = {
+              icon = "radarr.png";
+              href = "https://${tailnetHost}:9446";
+              description = "Movie automation";
+              siteMonitor = "http://127.0.0.1:7878";
+            };
+          }
+          {
+            Sonarr = {
+              icon = "sonarr.png";
+              href = "https://${tailnetHost}:9449";
+              description = "TV and anime automation";
+              siteMonitor = "http://127.0.0.1:8989";
+            };
+          }
+          {
+            Prowlarr = {
+              icon = "prowlarr.png";
+              href = "https://${tailnetHost}:9447";
+              description = "Indexer management";
+              siteMonitor = "http://127.0.0.1:9696";
             };
           }
         ];
