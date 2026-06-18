@@ -45,10 +45,9 @@ in
       enable = true;
       openFirewall = true;
       settings-sync = {
-        enable-nixarr-apps = true;
-        radarr.enable = true;
-        sonarr.enable = true;
-
+        enable-nixarr-apps = false;
+        radarr.enable = false;
+        sonarr.enable = false;
       };
     };
 
@@ -85,7 +84,7 @@ in
     # These apps are reached locally or through the tailnet Caddy proxy, not
     # directly from the public internet.
     radarr.settings = {
-      auth.required = "DisabledForLocalAddresses";
+      auth.required = "Enabled";
       log.analyticsEnabled = false;
       update = {
         automatically = false;
@@ -93,7 +92,7 @@ in
       };
     };
     sonarr.settings = {
-      auth.required = "DisabledForLocalAddresses";
+      auth.required = "Enabled";
       log.analyticsEnabled = false;
       update = {
         automatically = false;
@@ -101,7 +100,7 @@ in
       };
     };
     prowlarr.settings = {
-      auth.required = "DisabledForLocalAddresses";
+      auth.required = "Enabled";
       log.analyticsEnabled = false;
       update = {
         automatically = false;
