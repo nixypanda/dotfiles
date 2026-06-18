@@ -6,6 +6,13 @@ let
   # Personal CLI wrapper over Rope for Python refactors.
   ropify = pkgs.callPackage ./ropecli.nix { };
 
+  # OpenCode — pre-built binary for Intel Mac (nixpkgs doesn't support x86_64-darwin).
+  opencode =
+    if pkgs.stdenv.hostPlatform.system == "x86_64-darwin" then
+      pkgs.callPackage ./opencode.nix { }
+    else
+      pkgs.opencode;
+
   # Build one immutable Vale styles tree from packaged style sets. Vale expects
   # vocabulary files to exist, so create empty Base vocab files instead of
   # relying on mutable setup under $HOME.
@@ -107,6 +114,9 @@ in
     # Git / Build tools
     gitlint
     just
+
+    # AI coding assistant (pre-built binary from GitHub releases)
+    opencode
 
     # Prose / Markdown
     vale
