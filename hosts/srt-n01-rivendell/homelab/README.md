@@ -7,11 +7,14 @@ inside each application's state directory.
 
 - Movies: `/srv/media/movies`
 - TV: `/srv/media/tv`
+- Books: `/srv/media/books`
+- Manga: `/srv/media/manga`
 - Torrent downloads: `/srv/downloads/torrents`
 - Completed torrents: `/srv/downloads/torrents/complete`
 - Incomplete torrents: `/srv/downloads/torrents/incomplete`
 
-The active paths are also written to `/etc/homelab/media-paths`.
+The active paths are also written to `/etc/homelab/media-paths` and
+`/etc/homelab/ebook-paths`.
 
 ## Services
 
@@ -22,6 +25,7 @@ The active paths are also written to `/etc/homelab/media-paths`.
 - Prowlarr: `http://192.168.1.76:9696`
 - qBittorrent: `http://192.168.1.76:8080`
 - Seerr: `http://192.168.1.76:5055`
+- Kavita: `https://srt-n01-rivendell.taila65e7f.ts.net:9465`
 - Pi-hole: `http://192.168.1.76:8081`
 
 ## Declarative State
@@ -33,6 +37,7 @@ Nix currently declares:
 - firewall ports
 - service ports
 - qBittorrent download paths and Web UI password (PBKDF2 hash, not plaintext)
+- Kavita service settings, token key secret, and library directories
 - Prowlarr app sync (settings-sync)
 - Radarr and Sonarr download client (qBittorrent) via settings-sync
 - Pi-hole upstreams and local DNS records
@@ -54,6 +59,10 @@ The qBittorrent Web UI password is encrypted with agenix and decrypted at
 runtime to `/run/agenix/qbittorrentPassword`. It is used both as the qBittorrent
 login credential and by the Radarr/Sonarr settings-sync jobs to authenticate as
 a download client.
+
+Kavita's token key is encrypted with agenix and decrypted at runtime to
+`/run/agenix/kavitaTokenKey`. It must remain stable across restarts because
+Kavita uses it for token signing.
 
 The secrets directory also contains `radarr.env.age` and `prowlarr.env.age`
 files reserved for future service environment secrets. Create them when needed.
@@ -83,7 +92,8 @@ The following still needs one-time manual setup in the web UI:
 2. Sonarr — Settings → Media Management → add root folder `/srv/media/tv`
 3. Jellyfin — first-run wizard: create admin user, add `/srv/media/movies` as Movies and `/srv/media/tv` as TV Shows
 4. Seerr — first-run wizard: connect Jellyfin URL, connect Radarr/Sonarr (API keys from `sudo nixarr list-api-keys`)
-5. Prowlarr indexers — add them via the web UI, or add declarative settings to `media.nix`
+5. Kavita — first-run wizard: create admin user, add `/srv/media/books` as Books and `/srv/media/manga` as Manga
+6. Prowlarr indexers — add them via the web UI, or add declarative settings to `media.nix`
 
 The following is handled automatically by nixarr on deploy:
 

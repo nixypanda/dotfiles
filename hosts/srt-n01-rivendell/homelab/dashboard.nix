@@ -153,6 +153,14 @@ in
               siteMonitor = "http://127.0.0.1:5055";
             };
           }
+          {
+            Kavita = {
+              icon = "kavita.png";
+              href = "https://${tailnetHost}:9465";
+              description = "Books and manga";
+              siteMonitor = "http://127.0.0.1:5000";
+            };
+          }
         ];
       }
       {

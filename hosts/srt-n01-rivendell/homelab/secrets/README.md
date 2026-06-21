@@ -13,6 +13,9 @@ The NixOS config uses `/etc/ssh/ssh_host_ed25519_key` and
 
 Current secrets:
 
+- `calco.env.age`: wired as `age.secrets.calcoEnv` for the CalCo service.
+- `kavita-token-key.age`: wired as `age.secrets.kavitaTokenKey` for Kavita
+  token signing. Its plaintext must not include a trailing newline.
 - `qbittorrent-password.age`: wired as `age.secrets.qbittorrentPassword` and
   owned by the `radarr` user so Radarr settings-sync can read it.
 

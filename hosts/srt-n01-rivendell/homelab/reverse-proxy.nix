@@ -51,6 +51,7 @@ in
           file_server
         }
       '';
+      "https://${tailnetHost}:9465".extraConfig = proxy 5000;
     };
   };
 
