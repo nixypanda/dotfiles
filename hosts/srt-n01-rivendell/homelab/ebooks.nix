@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, homelab, ... }:
 
 let
   booksLibrary = "/srv/media/books";
@@ -17,7 +17,7 @@ in
     dataDir = "/srv/.state/kavita";
     tokenKeyFile = config.age.secrets.kavitaTokenKey.path;
     settings = {
-      Port = 5000;
+      Port = homelab.services.kavita.local;
       IpAddresses = "127.0.0.1";
     };
   };

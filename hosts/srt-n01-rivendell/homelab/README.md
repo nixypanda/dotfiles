@@ -18,15 +18,8 @@ The active paths are also written to `/etc/homelab/media-paths` and
 
 ## Services
 
-- Homepage: `http://srt-n01-rivendell:8082`
-- Jellyfin: `http://192.168.1.76:8096`
-- Radarr: `http://192.168.1.76:7878`
-- Sonarr: `http://192.168.1.76:8989`
-- Prowlarr: `http://192.168.1.76:9696`
-- qBittorrent: `http://192.168.1.76:8080`
-- Seerr: `http://192.168.1.76:5055`
-- Kavita: `https://srt-n01-rivendell.taila65e7f.ts.net:9465`
-- Pi-hole: `http://192.168.1.76:8081`
+Service ports, tailnet-facing aliases, and the tailnet host are defined in
+`ports.nix`. The Homepage dashboard uses that file to publish service links.
 
 ## Declarative State
 

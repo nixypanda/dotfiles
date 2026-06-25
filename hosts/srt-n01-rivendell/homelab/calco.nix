@@ -1,7 +1,8 @@
-{ config, lib, pkgs, ... }:
-let
-  cfg = config.services.calco;
-in
+{
+  config,
+  homelab,
+  ...
+}:
 {
   age.secrets.calcoEnv = {
     file = ./secrets/calco.env.age;
@@ -11,7 +12,7 @@ in
   };
   services.calco = {
     enable = true;
-    port = 3002;
+    port = homelab.services.calco.local;
     secretsFile = config.age.secrets.calcoEnv.path;
   };
 }

@@ -1,7 +1,15 @@
-{ config, pkgs, ... }:
+{
+  config,
+  homelab,
+  pkgs,
+  ...
+}:
 
 let
-  tailnetHost = "srt-n01-rivendell.taila65e7f.ts.net";
+  inherit (homelab) tailnetHost;
+  inherit (homelab) finance services;
+
+  calcoWebRoot = "${config.services.calco.frontendPackage}/share/calco/web";
   # Caddy serves this host only on the tailnet. Tailscale owns the certificate
   # lifecycle, so a systemd unit fetches cert files with `tailscale cert`.
   certDir = "/var/lib/caddy/tailscale-certs";
@@ -16,43 +24,54 @@ let
     ${tlsConfig}
     reverse_proxy 127.0.0.1:${toString port}
   '';
+
+  tailnetUrl = port: "https://${tailnetHost}:${toString port}";
+
+  proxiedHosts = {
+    "${tailnetHost}".extraConfig = proxy services.homepage.local;
+    "${tailnetUrl services.jellyfin.tailnet}".extraConfig = proxy services.jellyfin.local;
+    "${tailnetUrl services.seerr.tailnet}".extraConfig = proxy services.seerr.local;
+    "${tailnetUrl services.qbittorrent.tailnet}".extraConfig = proxy services.qbittorrent.webui;
+    "${tailnetUrl services.radarr.tailnet}".extraConfig = proxy services.radarr.local;
+    "${tailnetUrl services.prowlarr.tailnet}".extraConfig = proxy services.prowlarr.local;
+    "${tailnetUrl services.pihole.tailnet}".extraConfig = proxy services.pihole.web;
+    "${tailnetUrl services.sonarr.tailnet}".extraConfig = proxy services.sonarr.local;
+    "${tailnetUrl services.kavita.tailnet}".extraConfig = proxy services.kavita.local;
+  };
+
+  financeHosts = builtins.listToAttrs (
+    builtins.concatLists (
+      builtins.attrValues (
+        builtins.mapAttrs (_: instance: [
+          {
+            name = tailnetUrl instance.hledgerTailnet;
+            value.extraConfig = proxy instance.hledger;
+          }
+          {
+            name = tailnetUrl instance.paisaTailnet;
+            value.extraConfig = proxy instance.paisa;
+          }
+        ]) finance
+      )
+    )
+  );
+
+  calcoHost = {
+    "${tailnetUrl services.calco.tailnet}".extraConfig = ''
+      ${tlsConfig}
+      handle /api* {
+        reverse_proxy 127.0.0.1:${toString services.calco.local}
+      }
+    '';
+  };
 in
 {
   services.caddy = {
     enable = true;
     openFirewall = false;
-    virtualHosts = {
-      # Tailnet-facing ports are stable aliases for services listening on local
-      # ports, which keeps the services bound to localhost while exposing HTTPS.
-      "${tailnetHost}".extraConfig = proxy 8082;
-      "https://${tailnetHost}:9443".extraConfig = proxy 8096;
-      "https://${tailnetHost}:9444".extraConfig = proxy 5055;
-      "https://${tailnetHost}:9445".extraConfig = proxy 8080;
-      "https://${tailnetHost}:9446".extraConfig = proxy 7878;
-      "https://${tailnetHost}:9447".extraConfig = proxy 9696;
-      "https://${tailnetHost}:9448".extraConfig = proxy 8081;
-      "https://${tailnetHost}:9449".extraConfig = proxy 8989;
-      "https://${tailnetHost}:9450".extraConfig = proxy 5001;
-      "https://${tailnetHost}:9451".extraConfig = proxy 5002;
-      "https://${tailnetHost}:9452".extraConfig = proxy 5003;
-      "https://${tailnetHost}:9453".extraConfig = proxy 5004;
-      "https://${tailnetHost}:9460".extraConfig = proxy 5101;
-      "https://${tailnetHost}:9461".extraConfig = proxy 5102;
-      "https://${tailnetHost}:9462".extraConfig = proxy 5103;
-      "https://${tailnetHost}:9463".extraConfig = proxy 5104;
-      "https://${tailnetHost}:9464".extraConfig = ''
-        ${tlsConfig}
-        handle /api* {
-          reverse_proxy 127.0.0.1:3002
-        }
-        handle {
-          root * ${config.services.calco.frontendPackage}/share/calco/web
-          try_files {path} /index.html
-          file_server
-        }
-      '';
-      "https://${tailnetHost}:9465".extraConfig = proxy 5000;
-    };
+    # Tailnet-facing ports are stable aliases for services listening on local
+    # ports, which keeps the services bound to localhost while exposing HTTPS.
+    virtualHosts = proxiedHosts // financeHosts // calcoHost;
   };
 
   systemd = {

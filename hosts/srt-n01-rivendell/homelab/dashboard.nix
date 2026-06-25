@@ -1,6 +1,7 @@
-{ pkgs, ... }:
+{ homelab, pkgs, ... }:
 let
-  tailnetHost = "srt-n01-rivendell.taila65e7f.ts.net";
+  inherit (homelab) tailnetHost;
+  inherit (homelab) finance services;
 
   homepagePkg = pkgs.homepage-dashboard.override {
     enableLocalIcons = true;
@@ -11,20 +12,23 @@ let
       cp ${pkgs.paisa.src}/brand/logo.svg $out/share/homepage/public/icons/paisa.svg
     '';
   });
+
+  tailnetUrl = port: "https://${tailnetHost}:${toString port}";
+  localUrl = port: "http://127.0.0.1:${toString port}";
 in
 {
   services.homepage-dashboard = {
     enable = true;
     package = homepageWithPaisa;
-    listenPort = 8082;
+    listenPort = services.homepage.local;
     openFirewall = false;
     allowedHosts = builtins.concatStringsSep "," [
-      "localhost:8082"
-      "127.0.0.1:8082"
-      "srt-n01-rivendell:8082"
-      "100.127.3.54:8082"
+      "localhost:${toString services.homepage.local}"
+      "127.0.0.1:${toString services.homepage.local}"
+      "srt-n01-rivendell:${toString services.homepage.local}"
+      "100.127.3.54:${toString services.homepage.local}"
       tailnetHost
-      "${tailnetHost}:8082"
+      "${tailnetHost}:${toString services.homepage.local}"
     ];
 
     settings = {
@@ -60,65 +64,65 @@ in
           {
             "hledger Mine" = {
               icon = "hledger.png";
-              href = "https://${tailnetHost}:9450";
+              href = tailnetUrl finance.mine.hledgerTailnet;
               description = "Mine ledger API";
-              siteMonitor = "http://127.0.0.1:5001";
+              siteMonitor = localUrl finance.mine.hledger;
             };
           }
           {
             "hledger Wife" = {
               icon = "hledger.png";
-              href = "https://${tailnetHost}:9451";
+              href = tailnetUrl finance.wife.hledgerTailnet;
               description = "Wife ledger API";
-              siteMonitor = "http://127.0.0.1:5002";
+              siteMonitor = localUrl finance.wife.hledger;
             };
           }
           {
             "hledger Combined" = {
               icon = "hledger.png";
-              href = "https://${tailnetHost}:9452";
+              href = tailnetUrl finance.combined.hledgerTailnet;
               description = "Combined ledger API";
-              siteMonitor = "http://127.0.0.1:5003";
+              siteMonitor = localUrl finance.combined.hledger;
             };
           }
           {
             "hledger Dummy" = {
               icon = "hledger.png";
-              href = "https://${tailnetHost}:9453";
+              href = tailnetUrl finance.dummy.hledgerTailnet;
               description = "Dummy ledger API";
-              siteMonitor = "http://127.0.0.1:5004";
+              siteMonitor = localUrl finance.dummy.hledger;
             };
           }
           {
             "Paisa Mine" = {
               icon = "/icons/paisa.svg";
-              href = "https://${tailnetHost}:9460";
+              href = tailnetUrl finance.mine.paisaTailnet;
               description = "Mine finance dashboard";
-              siteMonitor = "http://127.0.0.1:5101";
+              siteMonitor = localUrl finance.mine.paisa;
             };
           }
           {
             "Paisa Wife" = {
               icon = "/icons/paisa.svg";
-              href = "https://${tailnetHost}:9461";
+              href = tailnetUrl finance.wife.paisaTailnet;
               description = "Wife finance dashboard";
-              siteMonitor = "http://127.0.0.1:5102";
+              siteMonitor = localUrl finance.wife.paisa;
             };
           }
           {
             "Paisa Combined" = {
               icon = "/icons/paisa.svg";
-              href = "https://${tailnetHost}:9462";
+              href = tailnetUrl finance.combined.paisaTailnet;
               description = "Combined finance dashboard";
-              siteMonitor = "http://127.0.0.1:5103";
+              siteMonitor = localUrl finance.combined.paisa;
             };
           }
           {
             "Paisa Dummy" = {
               icon = "/icons/paisa.svg";
-              href = "https://${tailnetHost}:9463";
+              href = tailnetUrl finance.dummy.paisaTailnet;
               description = "Dummy finance dashboard";
-              siteMonitor = "http://127.0.0.1:5104";
+              siteMonitor = localUrl finance.dummy.paisa;
             };
           }
         ];
@@ -127,10 +131,10 @@ in
         Health = [
           {
             "CalCo" = {
-              icon = "https://${tailnetHost}:9464/favicon-32x32.png";
-              href = "https://${tailnetHost}:9464";
+              icon = "${tailnetUrl services.calco.tailnet}/favicon-32x32.png";
+              href = tailnetUrl services.calco.tailnet;
               description = "Food and nutrition tracker";
-              siteMonitor = "http://127.0.0.1:3002/api/health";
+              siteMonitor = "${localUrl services.calco.local}/api/health";
             };
           }
         ];
@@ -140,25 +144,25 @@ in
           {
             Jellyfin = {
               icon = "jellyfin.png";
-              href = "https://${tailnetHost}:9443";
+              href = tailnetUrl services.jellyfin.tailnet;
               description = "Movies, TV, and anime";
-              siteMonitor = "http://127.0.0.1:8096";
+              siteMonitor = localUrl services.jellyfin.local;
             };
           }
           {
             Seerr = {
               icon = "jellyseerr.png";
-              href = "https://${tailnetHost}:9444";
+              href = tailnetUrl services.seerr.tailnet;
               description = "Media requests";
-              siteMonitor = "http://127.0.0.1:5055";
+              siteMonitor = localUrl services.seerr.local;
             };
           }
           {
             Kavita = {
               icon = "kavita.png";
-              href = "https://${tailnetHost}:9465";
+              href = tailnetUrl services.kavita.tailnet;
               description = "Books and manga";
-              siteMonitor = "http://127.0.0.1:5000";
+              siteMonitor = localUrl services.kavita.local;
             };
           }
         ];
@@ -168,9 +172,9 @@ in
           {
             "Pi-hole" = {
               icon = "pi-hole.png";
-              href = "https://${tailnetHost}:9448";
+              href = tailnetUrl services.pihole.tailnet;
               description = "DNS and ad blocking";
-              siteMonitor = "http://127.0.0.1:8081";
+              siteMonitor = localUrl services.pihole.web;
             };
           }
         ];
@@ -180,9 +184,9 @@ in
           {
             qBittorrent = {
               icon = "qbittorrent.png";
-              href = "https://${tailnetHost}:9445";
+              href = tailnetUrl services.qbittorrent.tailnet;
               description = "Torrent client";
-              siteMonitor = "http://127.0.0.1:8080";
+              siteMonitor = localUrl services.qbittorrent.webui;
             };
           }
         ];
@@ -192,25 +196,25 @@ in
           {
             Radarr = {
               icon = "radarr.png";
-              href = "https://${tailnetHost}:9446";
+              href = tailnetUrl services.radarr.tailnet;
               description = "Movie automation";
-              siteMonitor = "http://127.0.0.1:7878";
+              siteMonitor = localUrl services.radarr.local;
             };
           }
           {
             Sonarr = {
               icon = "sonarr.png";
-              href = "https://${tailnetHost}:9449";
+              href = tailnetUrl services.sonarr.tailnet;
               description = "TV and anime automation";
-              siteMonitor = "http://127.0.0.1:8989";
+              siteMonitor = localUrl services.sonarr.local;
             };
           }
           {
             Prowlarr = {
               icon = "prowlarr.png";
-              href = "https://${tailnetHost}:9447";
+              href = tailnetUrl services.prowlarr.tailnet;
               description = "Indexer management";
-              siteMonitor = "http://127.0.0.1:9696";
+              siteMonitor = localUrl services.prowlarr.local;
             };
           }
         ];

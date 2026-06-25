@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  homelab,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   dataDir = "/srv/hledger";
@@ -7,26 +12,26 @@ let
 
   instances = {
     mine = {
-      hledgerPort = 5001;
-      paisaPort = 5101;
+      hledgerPort = homelab.finance.mine.hledger;
+      paisaPort = homelab.finance.mine.paisa;
       journal = "main-mine.journal";
       paisaConfig = "paisa-mine.yaml";
     };
     wife = {
-      hledgerPort = 5002;
-      paisaPort = 5102;
+      hledgerPort = homelab.finance.wife.hledger;
+      paisaPort = homelab.finance.wife.paisa;
       journal = "main-wife.journal";
       paisaConfig = "paisa-wife.yaml";
     };
     combined = {
-      hledgerPort = 5003;
-      paisaPort = 5103;
+      hledgerPort = homelab.finance.combined.hledger;
+      paisaPort = homelab.finance.combined.paisa;
       journal = "main-combined.journal";
       paisaConfig = "paisa-combined.yaml";
     };
     dummy = {
-      hledgerPort = 5004;
-      paisaPort = 5104;
+      hledgerPort = homelab.finance.dummy.hledger;
+      paisaPort = homelab.finance.dummy.paisa;
       journal = "main-dummy.journal";
       paisaConfig = "paisa-dummy.yaml";
     };

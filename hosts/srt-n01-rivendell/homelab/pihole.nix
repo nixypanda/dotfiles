@@ -1,5 +1,6 @@
 {
   config,
+  homelab,
   lib,
   pkgs,
   ...
@@ -49,7 +50,7 @@ in
     pihole-web = {
       enable = true;
       hostName = "pi.hole";
-      ports = [ 8081 ];
+      ports = [ homelab.services.pihole.web ];
     };
   };
 

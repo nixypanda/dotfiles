@@ -1,6 +1,11 @@
 { pkgs, ... }:
 
+let
+  homelab = import ./homelab/ports.nix;
+in
 {
+  _module.args.homelab = homelab;
+
   imports = [
     ./hardware-configuration.nix
     ./storage.nix
@@ -24,7 +29,7 @@
     networkmanager.enable = true;
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 22 ];
+      allowedTCPPorts = [ homelab.firewall.ssh ];
       trustedInterfaces = [ "tailscale0" ];
     };
   };

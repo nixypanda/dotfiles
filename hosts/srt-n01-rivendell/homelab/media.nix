@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  homelab,
+  lib,
+  ...
+}:
 
 let
   mediaRoot = "/srv/media";
@@ -6,12 +11,13 @@ let
   movieLibrary = "${mediaRoot}/movies";
   tvLibrary = "${mediaRoot}/tv";
   torrentRoot = "${downloadsRoot}/torrents";
+  ports = homelab.services;
   qBittorrentDownloadClient = {
     name = "qBittorrent";
     implementation = "QBittorrent";
     fields = {
       host = "localhost";
-      port = 8085;
+      port = ports.qbittorrent.syncApi;
       username = "admin";
       password.secret = config.age.secrets.qbittorrentPassword.path;
     };
@@ -54,8 +60,8 @@ in
     qbittorrent = {
       enable = true;
       openFirewall = true;
-      webuiPort = 8080;
-      peerPort = 58181;
+      webuiPort = ports.qbittorrent.webui;
+      peerPort = ports.qbittorrent.peer;
       extraConfig = {
         LegalNotice.Accepted = true;
         Preferences = {
@@ -77,6 +83,7 @@ in
     seerr = {
       enable = true;
       openFirewall = true;
+      port = ports.seerr.local;
     };
   };
 
@@ -86,6 +93,7 @@ in
     radarr.settings = {
       auth.required = "Enabled";
       log.analyticsEnabled = false;
+      server.port = ports.radarr.local;
       update = {
         automatically = false;
         mechanism = "external";
@@ -94,6 +102,7 @@ in
     sonarr.settings = {
       auth.required = "Enabled";
       log.analyticsEnabled = false;
+      server.port = ports.sonarr.local;
       update = {
         automatically = false;
         mechanism = "external";
@@ -102,6 +111,7 @@ in
     prowlarr.settings = {
       auth.required = "Enabled";
       log.analyticsEnabled = false;
+      server.port = ports.prowlarr.local;
       update = {
         automatically = false;
         mechanism = "external";
@@ -110,7 +120,7 @@ in
   };
 
   networking.firewall.allowedUDPPorts = [
-    58181
+    ports.qbittorrent.peer
   ];
 
   assertions = [
