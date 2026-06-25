@@ -62,6 +62,32 @@ let
       handle /api* {
         reverse_proxy 127.0.0.1:${toString services.calco.local}
       }
+      handle /assets/* {
+        root * ${calcoWebRoot}
+        header Cache-Control "public, max-age=31536000, immutable"
+        file_server
+      }
+      handle /version.json {
+        root * ${calcoWebRoot}
+        header Cache-Control "no-store"
+        file_server
+      }
+      handle /site.webmanifest {
+        root * ${calcoWebRoot}
+        header Cache-Control "no-cache"
+        file_server
+      }
+      handle /index.html {
+        root * ${calcoWebRoot}
+        header Cache-Control "no-cache"
+        file_server
+      }
+      handle {
+        root * ${calcoWebRoot}
+        header Cache-Control "no-cache"
+        try_files {path} /index.html
+        file_server
+      }
     '';
   };
 in
