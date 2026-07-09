@@ -8,10 +8,6 @@
       url = "github:pbogut/vim-dadbod-ssh";
       flake = false;
     };
-    nvim-treesitter-kulala-http-src = {
-      url = "github:mistweaverco/kulala.nvim";
-      flake = false;
-    };
     nvim-cronex-src = {
       url = "github:fabridamicelli/cronex.nvim";
       flake = false;
@@ -36,12 +32,6 @@
           pname = "cronex.nvim";
           version = "custom";
           src = inputs.nvim-cronex-src;
-        };
-        nvim-treesitter-kulala-http = prev.tree-sitter.buildGrammar {
-          language = "kulala_http";
-          version = "5.3.1"; # <- this can be anything I ususally do like, inputs.kulala-grammar.shortRev
-          src = inputs.nvim-treesitter-kulala-http-src;
-          location = "lua/tree-sitter";
         };
       };
     in

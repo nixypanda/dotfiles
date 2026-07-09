@@ -138,7 +138,6 @@ in
               toml
               vimdoc
               yaml
-              nvim-treesitter-kulala-http
             ]
           );
           type = "lua";

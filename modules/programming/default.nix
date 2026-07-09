@@ -64,7 +64,7 @@ in
     ))
     pyright
     ruff
-    ty
+    # ty
 
     # Shell
     shellcheck
