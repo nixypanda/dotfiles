@@ -19,11 +19,9 @@ usage() {
 }
 
 refresh_paisa() {
-  for name in mine wife combined dummy; do
-    ${ssh_cmd} "${remote}" "cd '${remote_paisa_dir}' && PATH=/run/current-system/sw/bin:\$PATH paisa --config 'paisa-${name}.yaml' update --journal"
-  done
+  ${ssh_cmd} "${remote}" "cd '${remote_paisa_dir}' && PATH=/run/current-system/sw/bin:\$PATH paisa --config 'paisa-mine.yaml' update --journal"
 
-  ${ssh_interactive_cmd} "${remote}" "sudo systemctl restart paisa-mine paisa-wife paisa-combined paisa-dummy"
+  ${ssh_interactive_cmd} "${remote}" "sudo systemctl restart paisa-mine"
 }
 
 sync_bootstrap_files() {

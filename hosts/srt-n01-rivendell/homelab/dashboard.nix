@@ -101,30 +101,6 @@ in
               siteMonitor = localUrl finance.mine.paisa;
             };
           }
-          {
-            "Paisa Wife" = {
-              icon = "/icons/paisa.svg";
-              href = tailnetUrl finance.wife.paisaTailnet;
-              description = "Wife finance dashboard";
-              siteMonitor = localUrl finance.wife.paisa;
-            };
-          }
-          {
-            "Paisa Combined" = {
-              icon = "/icons/paisa.svg";
-              href = tailnetUrl finance.combined.paisaTailnet;
-              description = "Combined finance dashboard";
-              siteMonitor = localUrl finance.combined.paisa;
-            };
-          }
-          {
-            "Paisa Dummy" = {
-              icon = "/icons/paisa.svg";
-              href = tailnetUrl finance.dummy.paisaTailnet;
-              description = "Dummy finance dashboard";
-              siteMonitor = localUrl finance.dummy.paisa;
-            };
-          }
         ];
       }
       {

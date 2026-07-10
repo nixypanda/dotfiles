@@ -13,27 +13,26 @@ let
   instances = {
     mine = {
       hledgerPort = homelab.finance.mine.hledger;
-      paisaPort = homelab.finance.mine.paisa;
       journal = "main-mine.journal";
-      paisaConfig = "paisa-mine.yaml";
     };
     wife = {
       hledgerPort = homelab.finance.wife.hledger;
-      paisaPort = homelab.finance.wife.paisa;
       journal = "main-wife.journal";
-      paisaConfig = "paisa-wife.yaml";
     };
     combined = {
       hledgerPort = homelab.finance.combined.hledger;
-      paisaPort = homelab.finance.combined.paisa;
       journal = "main-combined.journal";
-      paisaConfig = "paisa-combined.yaml";
     };
     dummy = {
       hledgerPort = homelab.finance.dummy.hledger;
-      paisaPort = homelab.finance.dummy.paisa;
       journal = "main-dummy.journal";
-      paisaConfig = "paisa-dummy.yaml";
+    };
+  };
+
+  paisaInstances = {
+    mine = {
+      paisaPort = homelab.finance.mine.paisa;
+      paisaConfig = "paisa-mine.yaml";
     };
   };
 
@@ -135,7 +134,7 @@ in
   };
 
   systemd = {
-    services = lib.mapAttrs' mkHledgerService instances // lib.mapAttrs' mkPaisaService instances;
+    services = lib.mapAttrs' mkHledgerService instances // lib.mapAttrs' mkPaisaService paisaInstances;
 
     tmpfiles.rules = [
       "d ${dataDir} 2775 hledger hledger - -"

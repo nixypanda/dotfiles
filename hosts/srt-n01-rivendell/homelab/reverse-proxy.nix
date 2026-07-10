@@ -47,13 +47,15 @@ let
             name = tailnetUrl instance.hledgerTailnet;
             value.extraConfig = proxy instance.hledger;
           }
-          {
-            name = tailnetUrl instance.paisaTailnet;
-            value.extraConfig = proxy instance.paisa;
-          }
         ]) finance
       )
     )
+    ++ [
+      {
+        name = tailnetUrl finance.mine.paisaTailnet;
+        value.extraConfig = proxy finance.mine.paisa;
+      }
+    ]
   );
 
   calcoHost = {
