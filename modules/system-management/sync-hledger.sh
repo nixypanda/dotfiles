@@ -3,19 +3,22 @@ set -eu
 
 source_dir="/Users/nixypanda/Library/Mobile Documents/com~apple~CloudDocs/Money/ledger"
 years_dir="${source_dir}/journals/years"
+prices_dir="${source_dir}/prices"
 remote="nixypanda@srt-n01-rivendell"
 remote_dir="/srv/hledger"
 remote_paisa_dir="${remote_dir}/paisa"
 remote_years_dir="${remote_dir}/journals/years"
+remote_prices_dir="${remote_dir}/prices"
 ssh_key="/Users/nixypanda/.ssh/github-key"
 ssh_cmd="ssh -i ${ssh_key} -o StrictHostKeyChecking=accept-new"
 ssh_interactive_cmd="ssh -tt -i ${ssh_key} -o StrictHostKeyChecking=accept-new"
 
 usage() {
-  printf '%s\n' "usage: sync-hledger-rivendell [--years|--bootstrap|--all]"
+  printf '%s\n' "usage: sync-hledger [--years|--prices|--bootstrap|--all]"
   printf '%s\n' "  --years      sync only years/ (default)"
+  printf '%s\n' "  --prices     sync only prices/"
   printf '%s\n' "  --bootstrap  copy everything except years/"
-  printf '%s\n' "  --all        run bootstrap, then years sync"
+  printf '%s\n' "  --all        sync years/ and prices/"
 }
 
 refresh_paisa() {
@@ -36,9 +39,19 @@ sync_years_files() {
     "${remote}:${remote_years_dir}/"
 }
 
+sync_prices_files() {
+  rsync -rltD --delete --omit-dir-times --no-perms --no-owner --no-group -e "${ssh_cmd}" \
+    "${prices_dir}/" \
+    "${remote}:${remote_prices_dir}/"
+}
+
 case "${1:---years}" in
   --years)
     sync_years_files
+    refresh_paisa
+    ;;
+  --prices)
+    sync_prices_files
     refresh_paisa
     ;;
   --bootstrap)
@@ -46,8 +59,8 @@ case "${1:---years}" in
     refresh_paisa
     ;;
   --all)
-    sync_bootstrap_files
     sync_years_files
+    sync_prices_files
     refresh_paisa
     ;;
   -h|--help)

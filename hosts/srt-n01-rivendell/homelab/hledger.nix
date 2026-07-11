@@ -8,6 +8,7 @@
 let
   dataDir = "/srv/hledger";
   journalsDir = "${dataDir}/journals";
+  pricesDir = "${dataDir}/prices";
   paisaDir = "${dataDir}/paisa";
 
   instances = {
@@ -48,7 +49,6 @@ let
         "--serve-api"
         "--allow=view"
         "--host=127.0.0.1"
-        "--cors=*"
         "--port=${toString hledgerPort}"
         "--file=${journalsDir}/${journal}"
       ];
@@ -140,6 +140,7 @@ in
       "d ${dataDir} 2775 hledger hledger - -"
       "d ${journalsDir} 2775 hledger hledger - -"
       "d ${journalsDir}/years 2775 hledger hledger - -"
+      "d ${pricesDir} 2775 hledger hledger - -"
       "d ${paisaDir} 2775 nixypanda hledger - -"
     ];
   };

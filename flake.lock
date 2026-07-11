@@ -32,11 +32,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1783701495,
-        "narHash": "sha256-Z+jGSLIjGGZCG68u/Bf4cLmoKiizVlaLgsZcfPxtEeI=",
+        "lastModified": 1783774152,
+        "narHash": "sha256-bV0GpHMs9kMIit6qhsHrjObxfKnrtUijH0MSUxAttII=",
         "ref": "refs/heads/main",
-        "rev": "b0cf78d535ae74b7cbc5e35745f5057382cec8f2",
-        "revCount": 248,
+        "rev": "dc121adec7b73e01c50979867b05e000d058976e",
+        "revCount": 249,
         "type": "git",
         "url": "ssh://git@github.com/nixypanda/calco.git"
       },
@@ -87,6 +87,27 @@
         "type": "github"
       }
     },
+    "eledger": {
+      "inputs": {
+        "flake-utils": "flake-utils_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1784079486,
+        "narHash": "sha256-fHYcxivUi0McVZpZDPppzaSTemwvkWpZqG5NyLetkXY=",
+        "ref": "refs/heads/main",
+        "rev": "32056148b4bbca7654aa9948e5c644238b95de51",
+        "revCount": 65,
+        "type": "git",
+        "url": "ssh://git@github.com/nixypanda/eledger.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/nixypanda/eledger.git"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -111,6 +132,24 @@
     "flake-utils": {
       "inputs": {
         "systems": "systems_2"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_2": {
+      "inputs": {
+        "systems": "systems_3"
       },
       "locked": {
         "lastModified": 1731533236,
@@ -317,6 +356,7 @@
         "agenix": "agenix",
         "calco": "calco",
         "darwin": "darwin_2",
+        "eledger": "eledger",
         "home-manager": "home-manager_2",
         "kitty-upstream": "kitty-upstream",
         "nixarr": "nixarr",
@@ -359,6 +399,21 @@
       }
     },
     "systems_2": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_3": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",

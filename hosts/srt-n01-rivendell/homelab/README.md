@@ -21,6 +21,20 @@ The active paths are also written to `/etc/homelab/media-paths` and
 Service ports, tailnet-facing aliases, and the tailnet host are defined in
 `ports.nix`. The Homepage dashboard uses that file to publish service links.
 
+Ports 9450-9453 serve eLedger over the tailnet:
+
+- 9450: eLedger Mine
+- 9451: eLedger Wife
+- 9452: eLedger Combined
+- 9453: eLedger Dummy
+
+All four eLedger instances share one immutable frontend build. Each instance
+proxies `/api/*` to its matching localhost-only hledger-web backend, and Caddy
+strips the `/api` prefix before forwarding because hledger-web serves API
+endpoints such as `/version`, `/accounts`, and `/transactions` at the root.
+Raw hledger-web APIs are no longer directly exposed on the public tailnet ports.
+Browser access is same-origin through eLedger, so CORS is unnecessary.
+
 ## Declarative State
 
 Nix currently declares:

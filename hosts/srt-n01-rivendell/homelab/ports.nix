@@ -61,28 +61,28 @@
   finance = {
     mine = {
       hledger = 5001;
-      hledgerTailnet = 9450;
+      eledgerTailnet = 9450;
       paisa = 5101;
       paisaTailnet = 9460;
     };
 
     wife = {
       hledger = 5002;
-      hledgerTailnet = 9451;
+      eledgerTailnet = 9451;
       paisa = 5102;
       paisaTailnet = 9461;
     };
 
     combined = {
       hledger = 5003;
-      hledgerTailnet = 9452;
+      eledgerTailnet = 9452;
       paisa = 5103;
       paisaTailnet = 9462;
     };
 
     dummy = {
       hledger = 5004;
-      hledgerTailnet = 9453;
+      eledgerTailnet = 9453;
       paisa = 5104;
       paisaTailnet = 9463;
     };

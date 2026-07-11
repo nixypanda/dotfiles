@@ -34,10 +34,10 @@ Preferred:
 - `home-manager switch --flake "./#srt-l02-sekhmet" -b backup`
 
 Readme-compatible:
-- `nix run home-manager --no-write-lock-file -- switch --flake "./#srt-l02-sekhmet"`
+- `nix run --no-write-lock-file --inputs-from . home-manager#home-manager -- switch --flake "./#srt-l02-sekhmet"`
 
 Script equivalent:
-- `./modules/system-management/apply-user-mac.sh`
+- `./modules/system-management/apply-user.sh`
 
 ### Apply system (nix-darwin)
 Preferred:

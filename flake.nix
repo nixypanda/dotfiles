@@ -36,6 +36,10 @@
       url = "git+ssh://git@github.com/nixypanda/calco.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    eledger = {
+      url = "git+ssh://git@github.com/nixypanda/eledger.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     {
@@ -48,6 +52,7 @@
       kitty-upstream,
       nixarr,
       calco,
+      eledger,
       ...
     }:
     let
@@ -58,7 +63,7 @@
       # intentionally keeps plain nixpkgs for system configuration.
       macOverlays = [
         kitty-dev-build-overlay
-        (final: prev: { agenix = agenix.packages.${prev.system}.default; })
+        (_: prev: { agenix = agenix.packages.${prev.system}.default; })
         nur.overlays.default
         vim-plugins.overlay
       ];
@@ -83,6 +88,7 @@
 
       nixosConfigurations."srt-n01-rivendell" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit eledger; };
         modules = [
           ./hosts/srt-n01-rivendell/configuration.nix
           agenix.nixosModules.default
@@ -98,7 +104,7 @@
           }
           {
             nixpkgs.overlays = [
-              (final: prev: { agenix = agenix.packages.${final.system}.default; })
+              (final: _: { agenix = agenix.packages.${final.system}.default; })
             ];
           }
         ];
