@@ -3,5 +3,5 @@
 set -e
 
 pushd ~/.dotfiles
-nix run home-manager --no-write-lock-file -- switch --flake "./#srt-l02-sekhmet" -b backup
+nix run --no-write-lock-file --inputs-from . home-manager#home-manager -- switch --flake "./#srt-l02-sekhmet" -b backup
 popd
