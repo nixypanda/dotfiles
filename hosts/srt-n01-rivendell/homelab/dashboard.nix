@@ -141,6 +141,22 @@ in
               siteMonitor = localUrl services.kavita.local;
             };
           }
+          {
+            Audiobookshelf = {
+              icon = "audiobookshelf.png";
+              href = tailnetUrl services.audiobookshelf.tailnet;
+              description = "Audiobooks and podcasts";
+              siteMonitor = localUrl services.audiobookshelf.local;
+            };
+          }
+          {
+            Shelfmark = {
+              icon = "mdi-book-search";
+              href = tailnetUrl services.shelfmark.tailnet;
+              description = "Book and audiobook discovery";
+              siteMonitor = "${localUrl services.shelfmark.local}/api/health";
+            };
+          }
         ];
       }
       {

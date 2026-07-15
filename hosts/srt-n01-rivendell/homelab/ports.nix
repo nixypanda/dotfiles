@@ -56,6 +56,16 @@
       local = 5000;
       tailnet = 9465;
     };
+
+    audiobookshelf = {
+      local = 8000;
+      tailnet = 9466;
+    };
+
+    shelfmark = {
+      local = 8084;
+      tailnet = 9467;
+    };
   };
 
   finance = {

@@ -80,6 +80,8 @@ let
     "${tailnetUrl services.pihole.tailnet}".extraConfig = proxy services.pihole.web;
     "${tailnetUrl services.sonarr.tailnet}".extraConfig = proxy services.sonarr.local;
     "${tailnetUrl services.kavita.tailnet}".extraConfig = proxy services.kavita.local;
+    "${tailnetUrl services.audiobookshelf.tailnet}".extraConfig = proxy services.audiobookshelf.local;
+    "${tailnetUrl services.shelfmark.tailnet}".extraConfig = proxy services.shelfmark.local;
   };
 
   financeHosts = builtins.listToAttrs (

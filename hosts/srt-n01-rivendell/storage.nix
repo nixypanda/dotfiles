@@ -2,9 +2,11 @@
 
 let
   mediaServices = [
+    "audiobookshelf"
     "jellyfin"
     "kavita"
     "radarr"
+    "shelfmark"
     "sonarr"
   ];
 
