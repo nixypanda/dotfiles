@@ -36,8 +36,8 @@
       url = "git+ssh://git@github.com/nixypanda/calco.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    eledger = {
-      url = "git+ssh://git@github.com/nixypanda/eledger.git";
+    hedger = {
+      url = "git+ssh://git@github.com/nixypanda/hedger.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -52,7 +52,7 @@
       kitty-upstream,
       nixarr,
       calco,
-      eledger,
+      hedger,
       ...
     }:
     let
@@ -88,12 +88,12 @@
 
       nixosConfigurations."srt-n01-rivendell" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit eledger; };
         modules = [
           ./hosts/srt-n01-rivendell/configuration.nix
           agenix.nixosModules.default
           nixarr.nixosModules.default
           calco.nixosModules.default
+          hedger.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager = {

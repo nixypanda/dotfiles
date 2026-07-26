@@ -52,6 +52,10 @@
       tailnet = 9464;
     };
 
+    hedger = {
+      local = 8083;
+    };
+
     kavita = {
       local = 5000;
       tailnet = 9465;
@@ -70,29 +74,29 @@
 
   finance = {
     mine = {
-      hledger = 5001;
-      eledgerTailnet = 9450;
+      hedger = 5001;
+      hedgerTailnet = 9450;
       paisa = 5101;
       paisaTailnet = 9460;
     };
 
     wife = {
-      hledger = 5002;
-      eledgerTailnet = 9451;
+      hedger = 5002;
+      hedgerTailnet = 9451;
       paisa = 5102;
       paisaTailnet = 9461;
     };
 
     combined = {
-      hledger = 5003;
-      eledgerTailnet = 9452;
+      hedger = 5003;
+      hedgerTailnet = 9452;
       paisa = 5103;
       paisaTailnet = 9462;
     };
 
     dummy = {
-      hledger = 5004;
-      eledgerTailnet = 9453;
+      hedger = 5004;
+      hedgerTailnet = 9453;
       paisa = 5104;
       paisaTailnet = 9463;
     };

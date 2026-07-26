@@ -1,6 +1,5 @@
 {
   config,
-  eledger,
   homelab,
   pkgs,
   ...
@@ -11,7 +10,6 @@ let
   inherit (homelab) finance services;
 
   calcoWebRoot = "${config.services.calco.frontendPackage}/share/calco/web";
-  eledgerWebRoot = "${eledger.packages.${pkgs.system}.default}/share/eledger";
   # Caddy serves this host only on the tailnet. Tailscale owns the certificate
   # lifecycle, so a systemd unit fetches cert files with `tailscale cert`.
   certDir = "/var/lib/caddy/tailscale-certs";
@@ -27,44 +25,10 @@ let
     reverse_proxy 127.0.0.1:${toString port}
   '';
 
-  eledgerProxy = port: ''
+  hedgerProxy = hostName: ''
     ${tlsConfig}
-    encode zstd gzip
-
-    handle_path /api/* {
-      header Cache-Control "no-store"
-      reverse_proxy 127.0.0.1:${toString port}
-    }
-
-    handle /assets/* {
-      root * ${eledgerWebRoot}
-      header Cache-Control "public, max-age=31536000, immutable"
-      file_server
-    }
-
-    handle /sw.js {
-      root * ${eledgerWebRoot}
-      header Cache-Control "no-cache"
-      file_server
-    }
-
-    handle /manifest.json {
-      root * ${eledgerWebRoot}
-      header Cache-Control "no-cache"
-      file_server
-    }
-
-    handle /index.html {
-      root * ${eledgerWebRoot}
-      header Cache-Control "no-cache"
-      file_server
-    }
-
-    handle {
-      root * ${eledgerWebRoot}
-      header Cache-Control "no-cache"
-      try_files {path} /index.html
-      file_server
+    reverse_proxy 127.0.0.1:${toString services.hedger.local} {
+      header_up Host ${hostName}
     }
   '';
 
@@ -87,10 +51,10 @@ let
   financeHosts = builtins.listToAttrs (
     builtins.concatLists (
       builtins.attrValues (
-        builtins.mapAttrs (_: instance: [
+        builtins.mapAttrs (name: instance: [
           {
-            name = tailnetUrl instance.eledgerTailnet;
-            value.extraConfig = eledgerProxy instance.hledger;
+            name = tailnetUrl instance.hedgerTailnet;
+            value.extraConfig = hedgerProxy config.services.hedger.instances.${name}.hostName;
           }
         ]) finance
       )

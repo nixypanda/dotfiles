@@ -10,22 +10,24 @@ let
   journalsDir = "${dataDir}/journals";
   pricesDir = "${dataDir}/prices";
   paisaDir = "${dataDir}/paisa";
+  hedgerDir = "${dataDir}/hedger";
 
   instances = {
     mine = {
-      hledgerPort = homelab.finance.mine.hledger;
+      configFile = "${hedgerDir}/hedger-mine.yaml";
+      hedgerPort = homelab.finance.mine.hedger;
       journal = "main-mine.journal";
     };
     wife = {
-      hledgerPort = homelab.finance.wife.hledger;
+      hedgerPort = homelab.finance.wife.hedger;
       journal = "main-wife.journal";
     };
     combined = {
-      hledgerPort = homelab.finance.combined.hledger;
+      hedgerPort = homelab.finance.combined.hedger;
       journal = "main-combined.journal";
     };
     dummy = {
-      hledgerPort = homelab.finance.dummy.hledger;
+      hedgerPort = homelab.finance.dummy.hedger;
       journal = "main-dummy.journal";
     };
   };
@@ -37,39 +39,25 @@ let
     };
   };
 
-  mkHledgerService =
+  mkHedgerInstance =
     name:
     {
-      hledgerPort,
+      configFile ? null,
+      hedgerPort,
       journal,
       ...
     }:
-    let
-      args = lib.escapeShellArgs [
-        "--serve-api"
-        "--allow=view"
-        "--host=127.0.0.1"
-        "--port=${toString hledgerPort}"
-        "--file=${journalsDir}/${journal}"
-      ];
-    in
     {
-      name = "hledger-web-${name}";
-      value = {
-        description = "hledger-web JSON API for ${name}";
-        wantedBy = [ "multi-user.target" ];
-        after = [ "network.target" ];
-
-        serviceConfig = {
-          ExecStart = "${pkgs.hledger-web}/bin/hledger-web ${args}";
-          Restart = "always";
-          WorkingDirectory = dataDir;
-          User = "hledger";
-          Group = "hledger";
-          PrivateTmp = true;
-          NoNewPrivileges = true;
-        };
-      };
+      enable = true;
+      hostName = "${name}.hedger.internal";
+      journalPath = "${journalsDir}/${journal}";
+      port = hedgerPort;
+      defaultCommodity = "INR";
+      fiscalYearStartMonth = 4;
+      supplementaryGroups = [ "hledger" ];
+    }
+    // lib.optionalAttrs (configFile != null) {
+      inherit configFile;
     };
 
   mkPaisaService =
@@ -114,6 +102,20 @@ let
     };
 in
 {
+  services = {
+    hedger = {
+      openFirewall = false;
+      instances = lib.mapAttrs mkHedgerInstance instances;
+    };
+
+    nginx.defaultListen = [
+      {
+        addr = "127.0.0.1";
+        port = homelab.services.hedger.local;
+      }
+    ];
+  };
+
   environment.systemPackages = [
     pkgs.hledger
     pkgs.paisa
@@ -134,7 +136,7 @@ in
   };
 
   systemd = {
-    services = lib.mapAttrs' mkHledgerService instances // lib.mapAttrs' mkPaisaService paisaInstances;
+    services = lib.mapAttrs' mkPaisaService paisaInstances;
 
     tmpfiles.rules = [
       "d ${dataDir} 2775 hledger hledger - -"
@@ -142,6 +144,7 @@ in
       "d ${journalsDir}/years 2775 hledger hledger - -"
       "d ${pricesDir} 2775 hledger hledger - -"
       "d ${paisaDir} 2775 nixypanda hledger - -"
+      "d ${hedgerDir} 2775 nixypanda hledger - -"
     ];
   };
 }

@@ -62,35 +62,35 @@ in
       {
         Finance = [
           {
-            "eLedger Mine" = {
-              icon = "${tailnetUrl finance.mine.eledgerTailnet}/favicon-32x32.png";
-              href = tailnetUrl finance.mine.eledgerTailnet;
+            "Hedger Mine" = {
+              icon = "${tailnetUrl finance.mine.hedgerTailnet}/icon.svg";
+              href = tailnetUrl finance.mine.hedgerTailnet;
               description = "Mine ledger dashboard";
-              siteMonitor = tailnetUrl finance.mine.eledgerTailnet;
+              siteMonitor = "${tailnetUrl finance.mine.hedgerTailnet}/api/v1/health/ready";
             };
           }
           {
-            "eLedger Wife" = {
-              icon = "${tailnetUrl finance.wife.eledgerTailnet}/favicon-32x32.png";
-              href = tailnetUrl finance.wife.eledgerTailnet;
+            "Hedger Wife" = {
+              icon = "${tailnetUrl finance.wife.hedgerTailnet}/icon.svg";
+              href = tailnetUrl finance.wife.hedgerTailnet;
               description = "Wife ledger dashboard";
-              siteMonitor = tailnetUrl finance.wife.eledgerTailnet;
+              siteMonitor = "${tailnetUrl finance.wife.hedgerTailnet}/api/v1/health/ready";
             };
           }
           {
-            "eLedger Combined" = {
-              icon = "${tailnetUrl finance.combined.eledgerTailnet}/favicon-32x32.png";
-              href = tailnetUrl finance.combined.eledgerTailnet;
+            "Hedger Combined" = {
+              icon = "${tailnetUrl finance.combined.hedgerTailnet}/icon.svg";
+              href = tailnetUrl finance.combined.hedgerTailnet;
               description = "Combined ledger dashboard";
-              siteMonitor = tailnetUrl finance.combined.eledgerTailnet;
+              siteMonitor = "${tailnetUrl finance.combined.hedgerTailnet}/api/v1/health/ready";
             };
           }
           {
-            "eLedger Dummy" = {
-              icon = "${tailnetUrl finance.dummy.eledgerTailnet}/favicon-32x32.png";
-              href = tailnetUrl finance.dummy.eledgerTailnet;
+            "Hedger Dummy" = {
+              icon = "${tailnetUrl finance.dummy.hedgerTailnet}/icon.svg";
+              href = tailnetUrl finance.dummy.hedgerTailnet;
               description = "Dummy ledger dashboard";
-              siteMonitor = tailnetUrl finance.dummy.eledgerTailnet;
+              siteMonitor = "${tailnetUrl finance.dummy.hedgerTailnet}/api/v1/health/ready";
             };
           }
           {

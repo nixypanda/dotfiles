@@ -2,72 +2,30 @@
 set -eu
 
 source_dir="/Users/nixypanda/Library/Mobile Documents/com~apple~CloudDocs/Money/ledger"
-years_dir="${source_dir}/journals/years"
-prices_dir="${source_dir}/prices"
 remote="nixypanda@srt-n01-rivendell"
 remote_dir="/srv/hledger"
 remote_paisa_dir="${remote_dir}/paisa"
-remote_years_dir="${remote_dir}/journals/years"
-remote_prices_dir="${remote_dir}/prices"
 ssh_key="/Users/nixypanda/.ssh/github-key"
 ssh_cmd="ssh -i ${ssh_key} -o StrictHostKeyChecking=accept-new"
 ssh_interactive_cmd="ssh -tt -i ${ssh_key} -o StrictHostKeyChecking=accept-new"
 
-usage() {
-  printf '%s\n' "usage: sync-hledger [--years|--prices|--bootstrap|--all]"
-  printf '%s\n' "  --years      sync only years/ (default)"
-  printf '%s\n' "  --prices     sync only prices/"
-  printf '%s\n' "  --bootstrap  copy everything except years/"
-  printf '%s\n' "  --all        sync years/ and prices/"
-}
-
-refresh_paisa() {
+refresh_services() {
   ${ssh_cmd} "${remote}" "cd '${remote_paisa_dir}' && PATH=/run/current-system/sw/bin:\$PATH paisa --config 'paisa-mine.yaml' update --journal"
 
-  ${ssh_interactive_cmd} "${remote}" "sudo systemctl restart paisa-mine"
+  ${ssh_interactive_cmd} "${remote}" "
+    if systemctl cat hedger-mine.service >/dev/null 2>&1; then
+      sudo systemctl reload hedger-mine hedger-wife hedger-combined hedger-dummy
+    fi
+    sudo systemctl restart paisa-mine
+  "
 }
 
-sync_bootstrap_files() {
-  rsync -rltD --omit-dir-times --no-perms --no-owner --no-group --exclude '/journals/years/' -e "${ssh_cmd}" \
+sync_tracked_files() {
+  git -C "${source_dir}" ls-files |
+    rsync -rltD --files-from=- --omit-dir-times --no-perms --no-owner --no-group -e "${ssh_cmd}" \
     "${source_dir}/" \
     "${remote}:${remote_dir}/"
 }
 
-sync_years_files() {
-  rsync -rltD --delete --omit-dir-times --no-perms --no-owner --no-group -e "${ssh_cmd}" \
-    "${years_dir}/" \
-    "${remote}:${remote_years_dir}/"
-}
-
-sync_prices_files() {
-  rsync -rltD --delete --omit-dir-times --no-perms --no-owner --no-group -e "${ssh_cmd}" \
-    "${prices_dir}/" \
-    "${remote}:${remote_prices_dir}/"
-}
-
-case "${1:---years}" in
-  --years)
-    sync_years_files
-    refresh_paisa
-    ;;
-  --prices)
-    sync_prices_files
-    refresh_paisa
-    ;;
-  --bootstrap)
-    sync_bootstrap_files
-    refresh_paisa
-    ;;
-  --all)
-    sync_years_files
-    sync_prices_files
-    refresh_paisa
-    ;;
-  -h|--help)
-    usage
-    ;;
-  *)
-    usage >&2
-    exit 2
-    ;;
-esac
+sync_tracked_files
+refresh_services

@@ -26,12 +26,12 @@ The active paths are also written to `/etc/homelab/media-paths` and
 Service ports, tailnet-facing aliases, and the tailnet host are defined in
 `ports.nix`. The Homepage dashboard uses that file to publish service links.
 
-Ports 9450-9453 serve eLedger over the tailnet:
+Ports 9450-9453 serve Hedger over the tailnet:
 
-- 9450: eLedger Mine
-- 9451: eLedger Wife
-- 9452: eLedger Combined
-- 9453: eLedger Dummy
+- 9450: Hedger Mine
+- 9451: Hedger Wife
+- 9452: Hedger Combined
+- 9453: Hedger Dummy
 
 The audiobook services are available only through Caddy on the tailnet:
 
@@ -41,12 +41,23 @@ The audiobook services are available only through Caddy on the tailnet:
 Their application ports (`127.0.0.1:8000` and `127.0.0.1:8084`) stay bound to
 localhost and are not opened in the firewall.
 
-All four eLedger instances share one immutable frontend build. Each instance
-proxies `/api/*` to its matching localhost-only hledger-web backend, and Caddy
-strips the `/api` prefix before forwarding because hledger-web serves API
-endpoints such as `/version`, `/accounts`, and `/transactions` at the root.
-Raw hledger-web APIs are no longer directly exposed on the public tailnet ports.
-Browser access is same-origin through eLedger, so CORS is unnecessary.
+All four Hedger instances use the existing journals under
+`/srv/hledger/journals`. Caddy terminates Tailscale TLS on ports 9450-9453 and
+proxies to Hedger's module-managed nginx listener on `127.0.0.1:8083`. nginx
+selects the matching ledger by its internal hostname, serves the shared
+frontend, and proxies `/api/*` to the matching localhost-only Hedger backend on
+ports 5001-5004.
+
+The Mine instance also reads
+`/srv/hledger/hedger/hedger-mine.yaml`. Journal paths, backend ports, display
+commodity, and fiscal-year settings are supplied as command-line arguments by
+the NixOS module and override matching YAML values. The other instances do not
+use a Hedger YAML configuration.
+
+Hedger loads each journal into an immutable snapshot at startup. The
+`sync-hledger` command reloads all four `hedger-*` services after synchronizing
+journals or prices. `sync-hledger --all` also copies
+`hedger/hedger-mine.yaml`; bootstrap copies it with the rest of the ledger root.
 
 ## Declarative State
 
