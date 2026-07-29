@@ -1,8 +1,8 @@
 { config, homelab, ... }:
 
 let
-  booksLibrary = "/srv/media/books";
-  mangaLibrary = "/srv/media/manga";
+  booksLibrary = "/srv/media/library/books";
+  mangaLibrary = "/srv/media/library/manga";
 in
 {
   age.secrets.kavitaTokenKey = {

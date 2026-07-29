@@ -5,11 +5,11 @@ inside each application's state directory.
 
 ## Paths
 
-- Movies: `/srv/media/movies`
-- TV: `/srv/media/tv`
-- Books: `/srv/media/books`
-- Manga: `/srv/media/manga`
-- Audiobooks: `/srv/media/audiobooks`
+- Movies: `/srv/media/library/movies`
+- TV: `/srv/media/library/shows`
+- Books: `/srv/media/library/books`
+- Manga: `/srv/media/library/manga`
+- Audiobooks: `/srv/media/library/audiobooks`
 - Audiobook downloads: `/srv/media/downloads/audiobooks`
 - Torrent downloads: `/srv/downloads/torrents`
 - Completed torrents: `/srv/downloads/torrents/complete`
@@ -69,7 +69,7 @@ Nix currently declares:
 - service ports
 - qBittorrent download paths and Web UI password (PBKDF2 hash, not plaintext)
 - Kavita service settings, token key secret, and library directories
-- Audiobookshelf through the locked Nixpkgs native service module
+- Audiobookshelf through the nixarr module
 - Shelfmark through the nixarr module and locked Nixpkgs package
 - Prowlarr app sync (settings-sync)
 - Radarr and Sonarr download client (qBittorrent) via settings-sync
@@ -87,7 +87,8 @@ setup state under `/srv/.state/nixarr/`; Audiobookshelf and Shelfmark use the
 state paths listed above. Back up all three state locations after first setup
 and before application upgrades. The Audiobookshelf and Shelfmark backups
 contain their databases, configuration, and application metadata, but the
-audiobook files under `/srv/media/audiobooks` need a separate media backup.
+audiobook files under `/srv/media/library/audiobooks` need a separate media
+backup.
 
 ## Secrets
 
@@ -124,25 +125,31 @@ API keys for the *arr stack are managed internally by nixarr. Use
 
 The following still needs one-time manual setup in the web UI:
 
-1. Radarr — Settings → Media Management → add root folder `/srv/media/movies`
-2. Sonarr — Settings → Media Management → add root folder `/srv/media/tv`
-3. Jellyfin — first-run wizard: create admin user, add `/srv/media/movies` as Movies and `/srv/media/tv` as TV Shows
+1. Radarr — Settings → Media Management → add root folder
+   `/srv/media/library/movies`
+2. Sonarr — Settings → Media Management → add root folder
+   `/srv/media/library/shows`
+3. Jellyfin — first-run wizard: create an administrator, then add
+   `/srv/media/library/movies` as Movies and `/srv/media/library/shows` as TV
+   Shows
 4. Seerr — first-run wizard: connect Jellyfin URL, connect Radarr/Sonarr (API keys from `sudo nixarr list-api-keys`)
-5. Kavita — first-run wizard: create admin user, add `/srv/media/books` as Books and `/srv/media/manga` as Manga
+5. Kavita — first-run wizard: create admin user, add
+   `/srv/media/library/books` as Books and `/srv/media/library/manga` as Manga
 6. Audiobookshelf — create the administrator, then create an Audiobooks library
-   whose folder is `/srv/media/audiobooks`
+   whose folder is `/srv/media/library/audiobooks`
 7. Shelfmark — create the administrator or enable authentication, then:
    - keep Universal search enabled and use Open Library for metadata discovery
    - keep `/srv/media/downloads/audiobooks` as the ingest/download directory
    - configure file processing to prefer M4B for audiobook results
-   - move reviewed completed downloads into `/srv/media/audiobooks` for
-     Audiobookshelf to scan
+   - move reviewed completed downloads into `/srv/media/library/audiobooks`
+     for Audiobookshelf to scan
    - configure only download sources whose terms and rights metadata permit
      the intended use; do not add private trackers or Usenet providers
    - for Internet Archive or LibriVox material, verify rights in the browser
      and import the downloaded files manually because Shelfmark does not
      document a direct Internet Archive/LibriVox source
-8. Prowlarr indexers — add them via the web UI, or add declarative settings to `media.nix`
+8. Prowlarr indexers — add them via the web UI, or declare them under
+   `nixarr.prowlarr.settings-sync.indexers` in `media.nix`
 
 Internet Archive and LibriVox labels are useful signals, not a universal legal
 determination. Check each item's rights metadata and whether its public-domain

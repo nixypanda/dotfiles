@@ -8,8 +8,8 @@
 let
   mediaRoot = "/srv/media";
   downloadsRoot = "/srv/downloads";
-  movieLibrary = "${mediaRoot}/movies";
-  tvLibrary = "${mediaRoot}/tv";
+  movieLibrary = "${mediaRoot}/library/movies";
+  tvLibrary = "${mediaRoot}/library/shows";
   torrentRoot = "${downloadsRoot}/torrents";
   ports = homelab.services;
   qBittorrentDownloadClient = {
@@ -38,23 +38,22 @@ in
     radarr = {
       enable = true;
       openFirewall = true;
+      port = ports.radarr.local;
       settings-sync.downloadClients = [ qBittorrentDownloadClient ];
     };
 
     sonarr = {
       enable = true;
       openFirewall = true;
+      port = ports.sonarr.local;
       settings-sync.downloadClients = [ qBittorrentDownloadClient ];
     };
 
     prowlarr = {
       enable = true;
       openFirewall = true;
-      settings-sync = {
-        enable-nixarr-apps = false;
-        radarr.enable = false;
-        sonarr.enable = false;
-      };
+      port = ports.prowlarr.local;
+      settings-sync.enable-nixarr-apps = true;
     };
 
     qbittorrent = {
@@ -91,27 +90,24 @@ in
     # These apps are reached locally or through the tailnet Caddy proxy, not
     # directly from the public internet.
     radarr.settings = {
-      auth.required = "Enabled";
+      auth.required = "DisabledForLocalAddresses";
       log.analyticsEnabled = false;
-      server.port = ports.radarr.local;
       update = {
         automatically = false;
         mechanism = "external";
       };
     };
     sonarr.settings = {
-      auth.required = "Enabled";
+      auth.required = "DisabledForLocalAddresses";
       log.analyticsEnabled = false;
-      server.port = ports.sonarr.local;
       update = {
         automatically = false;
         mechanism = "external";
       };
     };
     prowlarr.settings = {
-      auth.required = "Enabled";
+      auth.required = "DisabledForLocalAddresses";
       log.analyticsEnabled = false;
-      server.port = ports.prowlarr.local;
       update = {
         automatically = false;
         mechanism = "external";
