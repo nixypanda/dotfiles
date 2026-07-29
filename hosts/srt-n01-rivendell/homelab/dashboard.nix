@@ -66,7 +66,7 @@ in
               icon = "${tailnetUrl finance.mine.hedgerTailnet}/icon.svg";
               href = tailnetUrl finance.mine.hedgerTailnet;
               description = "Mine ledger dashboard";
-              siteMonitor = "${tailnetUrl finance.mine.hedgerTailnet}/api/v1/health/ready";
+              siteMonitor = "${localUrl finance.mine.hedger}/api/v1/health/ready";
             };
           }
           {
@@ -74,7 +74,7 @@ in
               icon = "${tailnetUrl finance.wife.hedgerTailnet}/icon.svg";
               href = tailnetUrl finance.wife.hedgerTailnet;
               description = "Wife ledger dashboard";
-              siteMonitor = "${tailnetUrl finance.wife.hedgerTailnet}/api/v1/health/ready";
+              siteMonitor = "${localUrl finance.wife.hedger}/api/v1/health/ready";
             };
           }
           {
@@ -82,7 +82,7 @@ in
               icon = "${tailnetUrl finance.combined.hedgerTailnet}/icon.svg";
               href = tailnetUrl finance.combined.hedgerTailnet;
               description = "Combined ledger dashboard";
-              siteMonitor = "${tailnetUrl finance.combined.hedgerTailnet}/api/v1/health/ready";
+              siteMonitor = "${localUrl finance.combined.hedger}/api/v1/health/ready";
             };
           }
           {
@@ -90,7 +90,7 @@ in
               icon = "${tailnetUrl finance.dummy.hedgerTailnet}/icon.svg";
               href = tailnetUrl finance.dummy.hedgerTailnet;
               description = "Dummy ledger dashboard";
-              siteMonitor = "${tailnetUrl finance.dummy.hedgerTailnet}/api/v1/health/ready";
+              siteMonitor = "${localUrl finance.dummy.hedger}/api/v1/health/ready";
             };
           }
           {

@@ -55,6 +55,9 @@ in
     haskellPackages.cabal-gild
     haskellPackages.hlint
 
+    # Hledger
+    hledger-fmt
+
     # Python
     (python3.withPackages (
       ps: with ps; [

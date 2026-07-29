@@ -27,6 +27,13 @@ in
   networking = {
     hostName = "srt-n01-rivendell";
     networkmanager.enable = true;
+    # Pi-hole provides the local resolver. Keep direct upstreams as fallbacks so
+    # the host can still rebuild if Pi-hole is temporarily unavailable.
+    nameservers = [
+      "127.0.0.1"
+      "1.1.1.1"
+      "9.9.9.9"
+    ];
     firewall = {
       enable = true;
       allowedTCPPorts = [ homelab.firewall.ssh ];
@@ -95,6 +102,9 @@ in
     tailscale = {
       enable = true;
       openFirewall = true;
+      # Without a tailnet-wide global resolver, accepting Tailscale DNS makes
+      # 100.100.100.100 recursively depend on itself and external lookups fail.
+      extraSetFlags = [ "--accept-dns=false" ];
     };
 
     logind.settings.Login = {

@@ -133,11 +133,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1785076698,
-        "narHash": "sha256-inGSaVHeT8ihRWDzikXUDqhwgZzirwAwktmMCyrCMN8=",
+        "lastModified": 1785152998,
+        "narHash": "sha256-ebW0SgE+ynwHF9TQP6B5KVRGBc7Ej0dFNlwof5W/K8w=",
         "ref": "refs/heads/main",
-        "rev": "a3a7137e8e46a9d912537a52d910e829b526ea8e",
-        "revCount": 69,
+        "rev": "ffe2ebfc794e88cf5bc577c0938a7e5da368507c",
+        "revCount": 72,
         "type": "git",
         "url": "ssh://git@github.com/nixypanda/hedger.git"
       },
