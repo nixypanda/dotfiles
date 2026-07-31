@@ -6,6 +6,7 @@ _: {
     ./ebooks.nix
     ./hledger.nix
     ./media.nix
+    ./observability.nix
     ./pihole.nix
     ./reverse-proxy.nix
     ./secrets.nix

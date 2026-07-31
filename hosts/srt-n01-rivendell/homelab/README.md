@@ -81,6 +81,63 @@ Nixarr also handles:
 - state management under `/srv/.state/nixarr/`
 - Prometheus exporters (optional)
 
+## Observability
+
+The native LGTM stack is declared in `observability.nix`. Its design,
+integration discovery, privacy boundaries, and future approval checkpoints are
+recorded in `observability-plan.md`.
+
+Grafana is the only observability component exposed through Caddy:
+
+- Grafana: `https://srt-n01-rivendell.taila65e7f.ts.net:9468`
+
+Loki, Tempo, Prometheus, the systemd exporter, and both OTLP endpoints listen
+only on `127.0.0.1`. No observability firewall ports are opened.
+
+The currently approved collection scope is limited to:
+
+- coarse host CPU, load, memory, disk, filesystem, network, paging, and system
+  metrics
+- health and restart counts for an explicit allowlist of core systemd and
+  observability units
+- Grafana, Loki, Tempo, Prometheus, and OpenTelemetry Collector self-metrics
+
+No journal messages or application-specific telemetry are collected.
+
+Runtime state uses the native systemd-managed directories:
+
+- Grafana: `/var/lib/grafana`
+- Loki: `/var/lib/loki`
+- Tempo: `/var/lib/tempo`
+- Prometheus: `/var/lib/prometheus2`
+- OpenTelemetry Collector: `/var/lib/opentelemetry-collector`
+
+Back up Grafana and both encrypted Grafana secret files. Prometheus, Loki, and
+Tempo contain disposable operational telemetry unless longer-term history is
+important. Stop the relevant service or use an upstream-supported snapshot
+mechanism before copying a live telemetry database.
+
+After an authorized deployment, retrieve Grafana's initial admin password
+locally on Rivendell:
+
+```sh
+sudo cat /run/agenix/grafanaAdminPassword
+```
+
+Then verify:
+
+```sh
+systemctl --failed
+systemctl status grafana loki tempo prometheus opentelemetry-collector
+ss -lntp
+curl --fail http://127.0.0.1:9090/-/ready
+curl --fail http://127.0.0.1:3100/ready
+curl --fail http://127.0.0.1:3200/ready
+curl --fail http://127.0.0.1:3000/api/health
+curl --fail http://127.0.0.1:8888/metrics
+curl --fail http://127.0.0.1:8889/metrics
+```
+
 Nix intentionally does not declare first-run database state for Jellyfin,
 Seerr, Radarr, Prowlarr, Audiobookshelf, or Shelfmark. The nixarr apps store
 setup state under `/srv/.state/nixarr/`; Audiobookshelf and Shelfmark use the

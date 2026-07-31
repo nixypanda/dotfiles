@@ -46,6 +46,8 @@ let
     "${tailnetUrl services.kavita.tailnet}".extraConfig = proxy services.kavita.local;
     "${tailnetUrl services.audiobookshelf.tailnet}".extraConfig = proxy services.audiobookshelf.local;
     "${tailnetUrl services.shelfmark.tailnet}".extraConfig = proxy services.shelfmark.local;
+    "${tailnetUrl services.observability.grafana.tailnet}".extraConfig =
+      proxy services.observability.grafana.local;
   };
 
   financeHosts = builtins.listToAttrs (

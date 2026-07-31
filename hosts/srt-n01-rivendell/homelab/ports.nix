@@ -70,6 +70,31 @@
       local = 8084;
       tailnet = 9467;
     };
+
+    observability = {
+      grafana = {
+        local = 3000;
+        tailnet = 9468;
+      };
+      loki = {
+        http = 3100;
+        grpc = 9096;
+      };
+      tempo = {
+        http = 3200;
+        grpc = 9095;
+        otlpGrpc = 14317;
+        otlpHttp = 14318;
+      };
+      prometheus.local = 9090;
+      otel = {
+        otlpGrpc = 4317;
+        otlpHttp = 4318;
+        metrics = 8889;
+        telemetry = 8888;
+      };
+      systemdExporter.local = 9558;
+    };
   };
 
   finance = {

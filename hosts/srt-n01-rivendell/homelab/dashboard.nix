@@ -106,6 +106,14 @@ in
       {
         Health = [
           {
+            Grafana = {
+              icon = "grafana.png";
+              href = tailnetUrl services.observability.grafana.tailnet;
+              description = "Metrics, logs, and traces";
+              siteMonitor = "${localUrl services.observability.grafana.local}/api/health";
+            };
+          }
+          {
             "CalCo" = {
               icon = "${tailnetUrl services.calco.tailnet}/favicon-32x32.png";
               href = tailnetUrl services.calco.tailnet;
