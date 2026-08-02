@@ -7,7 +7,7 @@
 
 let
   mediaRoot = "/srv/media";
-  downloadsRoot = "/srv/downloads";
+  downloadsRoot = "${mediaRoot}/downloads";
   movieLibrary = "${mediaRoot}/library/movies";
   tvLibrary = "${mediaRoot}/library/shows";
   torrentRoot = "${downloadsRoot}/torrents";
@@ -117,6 +117,12 @@ in
 
   networking.firewall.allowedUDPPorts = [
     ports.qbittorrent.peer
+  ];
+
+  systemd.tmpfiles.rules = [
+    "d ${torrentRoot} 2775 qbittorrent media - -"
+    "d ${torrentRoot}/complete 2775 qbittorrent media - -"
+    "d ${torrentRoot}/incomplete 2775 qbittorrent media - -"
   ];
 
   assertions = [
