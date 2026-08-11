@@ -15,7 +15,7 @@ final: prev: {
         (final.buildGo126Module {
           pname = "kitty-go-modules";
           inherit src version;
-          vendorHash = "sha256-o9S5KFT+9DRQ+OcZ5Wh8ZwtWE/19DYR810zCk+yUIr4=";
+          vendorHash = "sha256-BZudfNfREwNrgalaimC5Lp+UIdFS+jHFLl9mEXcHYMI=";
         })
         goModules
         ;

@@ -1,14 +1,25 @@
 {
   description = "Home manager flake";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    # The Mac is the primary machine, so the default package set follows the
+    # current stable Darwin channel. Other machines opt into unstable below.
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    agenix-unstable = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nur = {
       url = "github:nix-community/NUR";
@@ -21,7 +32,7 @@
     };
     # MacOS specific inputs
     darwin = {
-      url = "github:LnL7/nix-darwin";
+      url = "github:nix-darwin/nix-darwin/nix-darwin-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     kitty-upstream = {
@@ -30,15 +41,15 @@
     };
     nixarr = {
       url = "github:nix-media-server/nixarr";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     calco = {
       url = "git+ssh://git@github.com/nixypanda/calco.git";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     hedger = {
       url = "git+ssh://git@github.com/nixypanda/hedger.git";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
   outputs =
@@ -46,8 +57,11 @@
       nur,
       vim-plugins,
       nixpkgs,
+      nixpkgs-unstable,
       home-manager,
+      home-manager-unstable,
       agenix,
+      agenix-unstable,
       darwin,
       kitty-upstream,
       nixarr,
@@ -86,15 +100,15 @@
         ];
       };
 
-      nixosConfigurations."srt-n01-rivendell" = nixpkgs.lib.nixosSystem {
+      nixosConfigurations."srt-n01-rivendell" = nixpkgs-unstable.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./hosts/srt-n01-rivendell/configuration.nix
-          agenix.nixosModules.default
+          agenix-unstable.nixosModules.default
           nixarr.nixosModules.default
           calco.nixosModules.default
           hedger.nixosModules.default
-          home-manager.nixosModules.home-manager
+          home-manager-unstable.nixosModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
@@ -104,7 +118,7 @@
           }
           {
             nixpkgs.overlays = [
-              (final: _: { agenix = agenix.packages.${final.system}.default; })
+              (final: _: { agenix = agenix-unstable.packages.${final.system}.default; })
             ];
           }
         ];
