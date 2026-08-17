@@ -86,6 +86,9 @@
       homeConfigurations = {
         srt-l02-sekhmet = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-darwin".extend (lib.composeManyExtensions macOverlays);
+          extraSpecialArgs = {
+            inherit nixpkgs-unstable;
+          };
           modules = [
             ./hosts/srt-l02-sekhmet/home.nix
           ];

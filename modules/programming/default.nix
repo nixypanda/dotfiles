@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  nixpkgs-unstable,
+  pkgs,
+  ...
+}:
 
 let
   inherit (config) xdg;
@@ -8,6 +13,21 @@ let
 
   # Personal CLI wrapper over Rope for Python refactors.
   ropify = pkgs.callPackage ./ropecli.nix { };
+
+  # The upstream GitHub bundle avoids a long source build on Intel Darwin.
+  unstable_codex = pkgs.callPackage ./codex-bin.nix { };
+
+  # Unstable no longer evaluates its package set for Intel Darwin. Reuse the
+  # current Claude recipe with the supported 26.05 Darwin package set.
+  unstable_claude_code =
+    (pkgs.callPackage (nixpkgs-unstable + "/pkgs/by-name/cl/claude-code/package.nix") { }).overrideAttrs
+      (old: {
+        # The unstable manifest still publishes a darwin-x64 binary, even
+        # though x86_64-darwin was removed from the package metadata.
+        meta = old.meta // {
+          platforms = old.meta.platforms ++ [ "x86_64-darwin" ];
+        };
+      });
 
   # OpenCode — pre-built binary for Intel Mac (nixpkgs doesn't support x86_64-darwin).
   opencode =
@@ -139,11 +159,15 @@ in
   };
 
   # Codex — HM module auto-manages CODEX_HOME via preferXdgDirectories
-  programs.codex.enable = true;
+  programs.codex = {
+    enable = true;
+    package = unstable_codex;
+  };
 
   # Claude Code — HM module auto-manages CLAUDE_CONFIG_DIR when configDir ≠ ~/.claude
   programs.claude-code = {
     enable = true;
     configDir = "${xdg.configHome}/claude";
+    package = unstable_claude_code;
   };
 }
