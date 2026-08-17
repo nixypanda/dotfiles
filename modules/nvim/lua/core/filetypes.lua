@@ -1,6 +1,9 @@
 vim.filetype.add({
 	extension = {
 		csv = "csv",
+		hledger = "hledger",
+		journal = "hledger",
+		prices = "hledger",
 		rasi = "scss",
 		tfstate = "json",
 		tsv = "tsv",

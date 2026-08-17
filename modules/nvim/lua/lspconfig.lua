@@ -53,6 +53,15 @@ require("lz.n").load({
 		-- Elm
 		vim.lsp.config("elmls", { on_attach = on_attach })
 
+		-- hledger
+		vim.lsp.config("hledger_lsp", {
+			cmd = { "hledger-lsp" },
+			filetypes = { "hledger", "journal", "ledger" },
+			root_markers = { ".git", "*.journal" },
+			single_file_support = true,
+			on_attach = on_attach,
+		})
+
 		-- nix
 		local dotfiles_flake = 'builtins.getFlake "/Users/nixypanda/.dotfiles"'
 		local nixpkgs_expr = "let flake = "
@@ -181,6 +190,7 @@ require("lz.n").load({
 		vim.lsp.enable({
 			"ts_ls",
 			"elmls",
+			"hledger_lsp",
 			"lua_ls",
 			"nixd",
 			"nushell",

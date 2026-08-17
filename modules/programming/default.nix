@@ -3,6 +3,9 @@
 let
   inherit (config) xdg;
 
+  # hledger-lsp is not packaged in nixpkgs yet.
+  hledger-lsp = pkgs.callPackage ./hledger-lsp.nix { };
+
   # Personal CLI wrapper over Rope for Python refactors.
   ropify = pkgs.callPackage ./ropecli.nix { };
 
@@ -57,6 +60,7 @@ in
 
     # Hledger
     hledger-fmt
+    hledger-lsp
 
     # Python
     (python3.withPackages (

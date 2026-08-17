@@ -28,11 +28,13 @@ local function register_treesitter_filetype(filetype)
 end
 
 vim.treesitter.language.register("kulala_http", { "http" })
+vim.treesitter.language.register("ledger", { "hledger", "journal" })
 
 register_treesitter_filetype("bash")
 register_treesitter_filetype("dockerfile")
 register_treesitter_filetype("elm")
 register_treesitter_filetype("haskell")
+register_treesitter_filetype("hledger")
 register_treesitter_filetype("json")
 register_treesitter_filetype("kdl")
 register_treesitter_filetype("lua")
