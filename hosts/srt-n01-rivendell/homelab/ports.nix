@@ -47,6 +47,10 @@
       tailnet = 9449;
     };
 
+    onepacerr = {
+      local = 3010;
+    };
+
     calco = {
       local = 3002;
       tailnet = 9464;

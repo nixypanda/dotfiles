@@ -11,6 +11,12 @@ _: {
         mode = "0440";
         owner = "root";
       };
+      onepacerrJellyfinPassword = {
+        file = ./secrets/onepacerr-jellyfin-password.age;
+        group = "arr-secrets";
+        mode = "0440";
+        owner = "root";
+      };
       grafanaAdminPassword = {
         file = ./secrets/grafana-admin-password.age;
         group = "grafana";

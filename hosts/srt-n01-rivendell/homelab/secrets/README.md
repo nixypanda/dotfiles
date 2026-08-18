@@ -23,6 +23,9 @@ Current secrets:
   uses it to encrypt data-source settings.
 - `kavita-token-key.age`: wired as `age.secrets.kavitaTokenKey` for Kavita
   token signing. Its plaintext must not include a trailing newline.
+- `onepacerr-jellyfin-password.age`: wired as
+  `age.secrets.onepacerrJellyfinPassword` for the dedicated `onepacerr`
+  Jellyfin service account.
 - `qbittorrent-password.age`: wired as `age.secrets.qbittorrentPassword` and
   readable by the `arr-secrets` group so Radarr and Sonarr settings-sync can
   read it.

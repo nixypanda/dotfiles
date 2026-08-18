@@ -115,6 +115,10 @@ in
     };
   };
 
+  # Jellyfin and the media automation services share the media group. Keep
+  # artwork and metadata writable so OnePacerr can refresh them in place.
+  systemd.services.jellyfin.serviceConfig.UMask = lib.mkForce "0002";
+
   networking.firewall.allowedUDPPorts = [
     ports.qbittorrent.peer
   ];

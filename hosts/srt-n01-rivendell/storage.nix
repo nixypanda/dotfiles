@@ -8,6 +8,7 @@ let
     "audiobookshelf"
     "jellyfin"
     "kavita"
+    "onepacerr"
     "prowlarr-sync-config"
     "qbittorrent"
     "radarr"
@@ -39,7 +40,7 @@ in
   environment.systemPackages = [ pkgs.smartmontools ];
 
   fileSystems.${mediaMount} = {
-    device = "/dev/disk/by-id/ata-geonix_gold_edition_2022092600288-part1";
+    device = "/dev/disk/by-id/ata-WDC_WD40EZZX-00CPBB0_WD-WX32DA557PKC-part1";
     fsType = "ext4";
     options = [
       "noatime"

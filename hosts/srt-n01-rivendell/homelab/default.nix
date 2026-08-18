@@ -7,6 +7,7 @@ _: {
     ./hledger.nix
     ./media.nix
     ./observability.nix
+    ./onepacerr.nix
     ./pihole.nix
     ./reverse-proxy.nix
     ./secrets.nix

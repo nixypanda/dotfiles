@@ -154,6 +154,13 @@ runtime to `/run/agenix/qbittorrentPassword`. It is used both as the qBittorrent
 login credential and by the Radarr/Sonarr settings-sync jobs to authenticate as
 a download client.
 
+OnePacerr runs directly as a native Node.js systemd service. It monitors One
+Pace releases, queues missing or updated episodes in qBittorrent, and hard-links
+completed downloads into the Jellyfin shows library. Its dedicated Jellyfin
+account password is decrypted to
+`/run/agenix/onepacerrJellyfinPassword`; neither credential is copied into the
+Nix store.
+
 Kavita's token key is encrypted with agenix and decrypted at runtime to
 `/run/agenix/kavitaTokenKey`. It must remain stable across restarts because
 Kavita uses it for token signing.
