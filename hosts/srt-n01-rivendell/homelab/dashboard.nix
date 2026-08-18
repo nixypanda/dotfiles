@@ -60,6 +60,18 @@ in
 
     services = [
       {
+        Health = [
+          {
+            "CalCo" = {
+              icon = "${tailnetUrl services.calco.tailnet}/favicon-32x32.png";
+              href = tailnetUrl services.calco.tailnet;
+              description = "Food and nutrition tracker";
+              siteMonitor = "${localUrl services.calco.local}/api/health";
+            };
+          }
+        ];
+      }
+      {
         Finance = [
           {
             "Hedger Mine" = {
@@ -104,43 +116,7 @@ in
         ];
       }
       {
-        Health = [
-          {
-            Grafana = {
-              icon = "grafana.png";
-              href = tailnetUrl services.observability.grafana.tailnet;
-              description = "Metrics, logs, and traces";
-              siteMonitor = "${localUrl services.observability.grafana.local}/api/health";
-            };
-          }
-          {
-            "CalCo" = {
-              icon = "${tailnetUrl services.calco.tailnet}/favicon-32x32.png";
-              href = tailnetUrl services.calco.tailnet;
-              description = "Food and nutrition tracker";
-              siteMonitor = "${localUrl services.calco.local}/api/health";
-            };
-          }
-        ];
-      }
-      {
-        Media = [
-          {
-            Jellyfin = {
-              icon = "jellyfin.png";
-              href = tailnetUrl services.jellyfin.tailnet;
-              description = "Movies, TV, and anime";
-              siteMonitor = localUrl services.jellyfin.local;
-            };
-          }
-          {
-            Seerr = {
-              icon = "jellyseerr.png";
-              href = tailnetUrl services.seerr.tailnet;
-              description = "Media requests";
-              siteMonitor = localUrl services.seerr.local;
-            };
-          }
+        Books = [
           {
             Kavita = {
               icon = "kavita.png";
@@ -168,6 +144,26 @@ in
         ];
       }
       {
+        Media = [
+          {
+            Jellyfin = {
+              icon = "jellyfin.png";
+              href = tailnetUrl services.jellyfin.tailnet;
+              description = "Movies, TV, and anime";
+              siteMonitor = localUrl services.jellyfin.local;
+            };
+          }
+          {
+            Seerr = {
+              icon = "jellyseerr.png";
+              href = tailnetUrl services.seerr.tailnet;
+              description = "Media requests";
+              siteMonitor = localUrl services.seerr.local;
+            };
+          }
+        ];
+      }
+      {
         Network = [
           {
             "Pi-hole" = {
@@ -187,6 +183,18 @@ in
               href = tailnetUrl services.qbittorrent.tailnet;
               description = "Torrent client";
               siteMonitor = localUrl services.qbittorrent.webui;
+            };
+          }
+        ];
+      }
+      {
+        System = [
+          {
+            Grafana = {
+              icon = "grafana.png";
+              href = tailnetUrl services.observability.grafana.tailnet;
+              description = "Metrics, logs, and traces";
+              siteMonitor = "${localUrl services.observability.grafana.local}/api/health";
             };
           }
         ];
