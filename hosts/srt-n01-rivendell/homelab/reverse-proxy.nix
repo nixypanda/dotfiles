@@ -1,6 +1,7 @@
 {
   config,
   homelab,
+  onepacerr-ui,
   pkgs,
   ...
 }:
@@ -8,8 +9,10 @@
 let
   inherit (homelab) tailnetHost;
   inherit (homelab) finance services;
+  system = pkgs.stdenv.hostPlatform.system;
 
   calcoWebRoot = "${config.services.calco.frontendPackage}/share/calco/web";
+  onepacerrWebRoot = "${onepacerr-ui.packages.${system}.frontend}/share/onepacerr-ui";
   # Caddy serves this host only on the tailnet. Tailscale owns the certificate
   # lifecycle, so a systemd unit fetches cert files with `tailscale cert`.
   certDir = "/var/lib/caddy/tailscale-certs";
@@ -103,6 +106,27 @@ let
       }
     '';
   };
+
+  onepacerrHost = {
+    "${tailnetUrl services.onepacerr.tailnet}".extraConfig = ''
+      ${tlsConfig}
+      handle /api/* {
+        uri replace /api/ /api/v1/
+        reverse_proxy 127.0.0.1:${toString services.onepacerr.local}
+      }
+      handle /assets/* {
+        root * ${onepacerrWebRoot}
+        header Cache-Control "public, max-age=31536000, immutable"
+        file_server
+      }
+      handle {
+        root * ${onepacerrWebRoot}
+        header Cache-Control "no-cache"
+        try_files {path} /index.html
+        file_server
+      }
+    '';
+  };
 in
 {
   services.caddy = {
@@ -110,7 +134,7 @@ in
     openFirewall = false;
     # Tailnet-facing ports are stable aliases for services listening on local
     # ports, which keeps the services bound to localhost while exposing HTTPS.
-    virtualHosts = proxiedHosts // financeHosts // calcoHost;
+    virtualHosts = proxiedHosts // financeHosts // calcoHost // onepacerrHost;
   };
 
   systemd = {

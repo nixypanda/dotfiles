@@ -225,6 +225,14 @@ in
               siteMonitor = localUrl services.prowlarr.local;
             };
           }
+          {
+            OnePacerr = {
+              icon = "onepacerr.png";
+              href = tailnetUrl services.onepacerr.tailnet;
+              description = "One Pace automatic downloader and Jellyfin organizer";
+              siteMonitor = "${localUrl services.onepacerr.local}/api/v1/healthz";
+            };
+          }
         ];
       }
     ];

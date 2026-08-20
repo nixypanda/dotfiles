@@ -49,6 +49,7 @@
 
     onepacerr = {
       local = 3010;
+      tailnet = 9469;
     };
 
     calco = {

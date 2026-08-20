@@ -47,6 +47,10 @@
       url = "git+ssh://git@github.com/nixypanda/calco.git";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    onepacerr-ui = {
+      url = "git+ssh://git@github.com/nixypanda/onepacerr-ui.git";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     hedger = {
       url = "git+ssh://git@github.com/nixypanda/hedger.git";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -66,6 +70,7 @@
       kitty-upstream,
       nixarr,
       calco,
+      onepacerr-ui,
       hedger,
       ...
     }:
@@ -105,6 +110,7 @@
 
       nixosConfigurations."srt-n01-rivendell" = nixpkgs-unstable.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit onepacerr-ui; };
         modules = [
           ./hosts/srt-n01-rivendell/configuration.nix
           agenix-unstable.nixosModules.default
