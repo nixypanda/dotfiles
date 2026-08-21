@@ -2,6 +2,7 @@
   config,
   homelab,
   lib,
+  pkgs,
   ...
 }:
 
@@ -21,6 +22,46 @@ let
       username = "admin";
       password.secret = config.age.secrets.qbittorrentPassword.path;
     };
+  };
+  mediaUnlinked = pkgs.writeShellApplication {
+    name = "media-unlinked";
+    runtimeInputs = [
+      pkgs.coreutils
+      pkgs.findutils
+    ];
+    text = ''
+      if [ "''${1:-}" = "-h" ] || [ "''${1:-}" = "--help" ]; then
+        echo "Usage: media-unlinked [ROOT] [MIN_SIZE]"
+        echo
+        echo "List regular files with one hardlink and a size above MIN_SIZE."
+        echo "ROOT defaults to /srv/media; MIN_SIZE defaults to 50M (50 MiB)."
+        exit 0
+      fi
+
+      root="''${1:-/srv/media}"
+      minimum_size="''${2:-50M}"
+
+      if [ ! -d "$root" ]; then
+        echo "media-unlinked: directory does not exist: $root" >&2
+        exit 1
+      fi
+
+      printf "%-10s\t%-14s\t%-5s\t%-10s\t%-16s\t%-16s\t%-10s\t%-12s\t%-25s\t%s\n" \
+        SIZE BYTES LINKS MODE OWNER GROUP DEVICE INODE MODIFIED PATH
+
+      find "$root" -xdev \
+        -path "$root/lost+found" -prune -o \
+        -type f -size "+$minimum_size" -links 1 \
+        -printf '%s\t%n\t%M\t%u\t%g\t%D\t%i\t%TY-%Tm-%TdT%TH:%TM:%TS%Tz\t%p\n' \
+        | sort --numeric-sort --reverse \
+        | while IFS=$'\t' read -r bytes links mode owner group device inode modified path; do
+          human_size=$(numfmt --to=iec-i --suffix=B "$bytes")
+          printf "%-10s\t%-14s\t%-5s\t%-10s\t%-16s\t%-16s\t%-10s\t%-12s\t%-25s\t%s\n" \
+            "$human_size" "$bytes" "$links" "$mode" "$owner" "$group" \
+            "$device" "$inode" "$modified" "$path"
+        done
+    '';
+    meta.description = "List large files in a media tree that have no hardlinks";
   };
 in
 {
@@ -161,13 +202,16 @@ in
       webuiPort = ports.qbittorrent.webui;
       peerPort = ports.qbittorrent.peer;
       extraConfig = {
+        BitTorrent = {
+          "Session\\DefaultSavePath" = "${torrentRoot}/complete";
+          "Session\\TempPath" = "${torrentRoot}/incomplete";
+          "Session\\TempPathEnabled" = true;
+        };
         LegalNotice.Accepted = true;
         Preferences = {
-          Downloads = {
-            SavePath = "${torrentRoot}/complete";
-            TempPath = "${torrentRoot}/incomplete";
-            TempPathEnabled = true;
-          };
+          "Downloads\\SavePath" = "${torrentRoot}/complete";
+          "Downloads\\TempPath" = "${torrentRoot}/incomplete";
+          "Downloads\\TempPathEnabled" = true;
           WebUI = {
             LocalHostAuth = false;
             # qBittorrent stores the WebUI password in its PBKDF2 config format;
@@ -214,13 +258,20 @@ in
     };
   };
 
-  # Jellyfin and the media automation services share the media group. Keep
-  # artwork and metadata writable so OnePacerr can refresh them in place.
-  systemd.services.jellyfin.serviceConfig.UMask = lib.mkForce "0002";
+  systemd.services = {
+    # Jellyfin and the media automation services share the media group. Keep
+    # downloaded media, artwork, and metadata group-writable so the separate
+    # service users can create hardlinks and refresh files in place.
+    jellyfin.serviceConfig.UMask = lib.mkForce "0002";
+    qbittorrent.serviceConfig.UMask = lib.mkForce "0002";
+
+  };
 
   networking.firewall.allowedUDPPorts = [
     ports.qbittorrent.peer
   ];
+
+  environment.systemPackages = [ mediaUnlinked ];
 
   systemd.tmpfiles.rules = [
     "d ${torrentRoot} 2775 qbittorrent media - -"

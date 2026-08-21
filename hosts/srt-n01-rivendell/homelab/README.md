@@ -11,15 +11,19 @@ inside each application's state directory.
 - Manga: `/srv/media/library/manga`
 - Audiobooks: `/srv/media/library/audiobooks`
 - Audiobook downloads: `/srv/media/downloads/audiobooks`
-- Torrent downloads: `/srv/downloads/torrents`
-- Completed torrents: `/srv/downloads/torrents/complete`
-- Incomplete torrents: `/srv/downloads/torrents/incomplete`
+- Torrent downloads: `/srv/media/downloads/torrents`
+- Completed torrents: `/srv/media/downloads/torrents/complete`
+- Incomplete torrents: `/srv/media/downloads/torrents/incomplete`
 - Audiobookshelf state: `/srv/.state/audiobookshelf`
 - Shelfmark state: `/srv/.state/shelfmark`
 
 The active paths are also written to `/etc/homelab/media-paths` and
 `/etc/homelab/ebook-paths`. Audiobook paths are written to
 `/etc/homelab/audiobook-paths`.
+
+Run `media-unlinked` on Rivendell to list files larger than 50 MiB under
+`/srv/media` whose hardlink count is one. It accepts optional root and minimum
+size arguments, for example `media-unlinked /srv/media/library 100M`.
 
 ## Services
 
