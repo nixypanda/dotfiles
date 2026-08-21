@@ -73,6 +73,8 @@ Nix currently declares:
 - Shelfmark through the nixarr module and locked Nixpkgs package
 - Prowlarr app sync (settings-sync)
 - Radarr and Sonarr download client (qBittorrent) via settings-sync
+- Radarr and Sonarr quality profiles, custom formats, quality sizes, and
+  Jellyfin naming via a daily Recyclarr sync
 - Pi-hole upstreams and local DNS records
 
 Nixarr also handles:
@@ -214,6 +216,11 @@ The following still needs one-time manual setup in the web UI:
      document a direct Internet Archive/LibriVox source
 8. Prowlarr indexers — add them via the web UI, or declare them under
    `nixarr.prowlarr.settings-sync.indexers` in `media.nix`
+9. After Recyclarr's first sync, select `[SQP] SQP-1 WEB (2160p)` as Seerr's
+   Radarr quality profile and `WEB-2160p + 1080p fallback` as its Sonarr quality
+   profile. Bulk-edit existing movies and series in Radarr and Sonarr to use the
+   corresponding profiles; Recyclarr manages profiles but does not assign them
+   to library items.
 
 Internet Archive and LibriVox labels are useful signals, not a universal legal
 determination. Check each item's rights metadata and whether its public-domain
@@ -227,4 +234,6 @@ The following is handled automatically by nixarr on deploy:
 - qBittorrent added as Radarr's download client
 - qBittorrent added as Sonarr's download client
 - Radarr and Sonarr synced to Prowlarr as applications
+- Radarr and Sonarr streaming-optimised 2160p-with-1080p-fallback policies
+  synced daily by Recyclarr
 - State directories under `/srv/.state/nixarr/`
