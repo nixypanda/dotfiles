@@ -1,25 +1,17 @@
 {
   description = "Home manager flake";
   inputs = {
-    # The Mac is the primary machine, so the default package set follows the
-    # current stable Darwin channel. Other machines opt into unstable below.
+    # Use the current stable package set by default on both macOS and NixOS.
+    # Individual packages can still opt into unstable where needed.
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    home-manager-unstable = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    agenix-unstable = {
-      url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nur = {
       url = "github:nix-community/NUR";
@@ -41,19 +33,19 @@
     };
     nixarr = {
       url = "github:nix-media-server/nixarr";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     calco = {
       url = "git+ssh://git@github.com/nixypanda/calco.git";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     onepacerr-ui = {
       url = "git+ssh://git@github.com/nixypanda/onepacerr-ui.git";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     hedger = {
       url = "git+ssh://git@github.com/nixypanda/hedger.git";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs =
@@ -63,9 +55,7 @@
       nixpkgs,
       nixpkgs-unstable,
       home-manager,
-      home-manager-unstable,
       agenix,
-      agenix-unstable,
       darwin,
       kitty-upstream,
       nixarr,
@@ -108,16 +98,16 @@
         ];
       };
 
-      nixosConfigurations."srt-n01-rivendell" = nixpkgs-unstable.lib.nixosSystem {
+      nixosConfigurations."srt-n01-rivendell" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit onepacerr-ui; };
         modules = [
           ./hosts/srt-n01-rivendell/configuration.nix
-          agenix-unstable.nixosModules.default
+          agenix.nixosModules.default
           nixarr.nixosModules.default
           calco.nixosModules.default
           hedger.nixosModules.default
-          home-manager-unstable.nixosModules.home-manager
+          home-manager.nixosModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
@@ -127,7 +117,7 @@
           }
           {
             nixpkgs.overlays = [
-              (final: _: { agenix = agenix-unstable.packages.${final.system}.default; })
+              (final: _: { agenix = agenix.packages.${final.system}.default; })
             ];
           }
         ];
