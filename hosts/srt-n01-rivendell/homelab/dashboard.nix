@@ -218,6 +218,14 @@ in
             };
           }
           {
+            Bazarr = {
+              icon = "bazarr.png";
+              href = tailnetUrl services.bazarr.tailnet;
+              description = "Subtitle automation";
+              siteMonitor = localUrl services.bazarr.local;
+            };
+          }
+          {
             Prowlarr = {
               icon = "prowlarr.png";
               href = tailnetUrl services.prowlarr.tailnet;

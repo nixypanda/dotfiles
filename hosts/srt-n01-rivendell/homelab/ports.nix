@@ -6,6 +6,11 @@
   };
 
   services = {
+    bazarr = {
+      local = 6767;
+      tailnet = 9470;
+    };
+
     homepage = {
       local = 8082;
     };

@@ -39,6 +39,7 @@ let
 
   proxiedHosts = {
     "${tailnetHost}".extraConfig = proxy services.homepage.local;
+    "${tailnetUrl services.bazarr.tailnet}".extraConfig = proxy services.bazarr.local;
     "${tailnetUrl services.jellyfin.tailnet}".extraConfig = proxy services.jellyfin.local;
     "${tailnetUrl services.seerr.tailnet}".extraConfig = proxy services.seerr.local;
     "${tailnetUrl services.qbittorrent.tailnet}".extraConfig = proxy services.qbittorrent.webui;

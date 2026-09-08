@@ -6,11 +6,14 @@ let
   mediaMountUnit = "srv-media.mount";
   mediaServices = [
     "audiobookshelf"
+    "bazarr"
+    "bazarr-sync-config"
     "jellyfin"
     "kavita"
     "onepacerr"
     "prowlarr-sync-config"
     "qbittorrent"
+    "qui"
     "radarr"
     "radarr-sync-config"
     "shelfmark"

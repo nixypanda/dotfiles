@@ -23,6 +23,51 @@ let
       password.secret = config.age.secrets.qbittorrentPassword.path;
     };
   };
+  bazarrSyncArrSettings = pkgs.writers.writePython3Bin "bazarr-sync-arr-settings" { } ''
+    import pathlib
+    import urllib.parse
+    import urllib.request
+
+
+    secrets_dir = pathlib.Path("${config.nixarr.stateDir}/secrets")
+
+
+    def read_secret(name):
+        return (secrets_dir / name).read_text(encoding="utf-8").strip()
+
+
+    settings = {
+        "settings-general-use_sonarr": "true",
+        "settings-sonarr-ip": "127.0.0.1",
+        "settings-sonarr-port": "${toString ports.sonarr.local}",
+        "settings-sonarr-base_url": "",
+        "settings-sonarr-ssl": "false",
+        "settings-sonarr-apikey": read_secret("sonarr.api-key"),
+        "settings-sonarr-only_monitored": "true",
+        "settings-sonarr-series_sync": "60",
+        "settings-sonarr-episodes_sync": "60",
+        "settings-general-use_radarr": "true",
+        "settings-radarr-ip": "127.0.0.1",
+        "settings-radarr-port": "${toString ports.radarr.local}",
+        "settings-radarr-base_url": "",
+        "settings-radarr-ssl": "false",
+        "settings-radarr-apikey": read_secret("radarr.api-key"),
+        "settings-radarr-only_monitored": "true",
+        "settings-radarr-movies_sync": "60",
+    }
+    request = urllib.request.Request(
+        "http://127.0.0.1:${toString ports.bazarr.local}/api/system/settings",
+        data=urllib.parse.urlencode(settings).encode("utf-8"),
+        headers={
+            "Content-Type": "application/x-www-form-urlencoded",
+            "X-API-KEY": read_secret("bazarr.api-key"),
+        },
+        method="POST",
+    )
+    with urllib.request.urlopen(request, timeout=30) as response:
+        if not 200 <= response.status < 300:
+            raise RuntimeError(f"Bazarr settings sync failed: HTTP {response.status}")
+  '';
   mediaUnlinked = pkgs.writeShellApplication {
     name = "media-unlinked";
     runtimeInputs = [
@@ -74,6 +119,25 @@ in
     jellyfin = {
       enable = true;
       openFirewall = true;
+    };
+
+    bazarr = {
+      enable = true;
+      openFirewall = true;
+      port = ports.bazarr.local;
+      settings-sync = {
+        radarr = {
+          enable = true;
+          config.sync_only_monitored_movies = true;
+        };
+        sonarr = {
+          enable = true;
+          config = {
+            sync_only_monitored_series = true;
+            sync_only_monitored_episodes = true;
+          };
+        };
+      };
     };
 
     radarr = {
@@ -264,6 +328,11 @@ in
     # service users can create hardlinks and refresh files in place.
     jellyfin.serviceConfig.UMask = lib.mkForce "0002";
     qbittorrent.serviceConfig.UMask = lib.mkForce "0002";
+
+    # The pinned nixarr helper sends JSON, but Bazarr 1.6 only reads form data
+    # on this endpoint. Keep nixarr's ordering and credential groups while
+    # replacing only the incompatible command.
+    bazarr-sync-config.serviceConfig.ExecStart = lib.mkForce "${lib.getExe bazarrSyncArrSettings}";
 
   };
 

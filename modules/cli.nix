@@ -35,6 +35,7 @@
       nix-forecast
       age
       agenix
+      home-manager
 
       # Document conversion
       pandoc
