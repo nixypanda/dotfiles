@@ -20,6 +20,16 @@
       tailnet = 9443;
     };
 
+    lidarr = {
+      local = 8686;
+      tailnet = 9471;
+    };
+
+    navidrome = {
+      local = 4533;
+      tailnet = 9472;
+    };
+
     seerr = {
       local = 5055;
       tailnet = 9444;

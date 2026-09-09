@@ -154,6 +154,14 @@ in
             };
           }
           {
+            Navidrome = {
+              icon = "navidrome.png";
+              href = tailnetUrl services.navidrome.tailnet;
+              description = "Music streaming";
+              siteMonitor = localUrl services.navidrome.local;
+            };
+          }
+          {
             Seerr = {
               icon = "jellyseerr.png";
               href = tailnetUrl services.seerr.tailnet;
@@ -215,6 +223,14 @@ in
               href = tailnetUrl services.sonarr.tailnet;
               description = "TV and anime automation";
               siteMonitor = localUrl services.sonarr.local;
+            };
+          }
+          {
+            Lidarr = {
+              icon = "lidarr.png";
+              href = tailnetUrl services.lidarr.tailnet;
+              description = "Music automation";
+              siteMonitor = localUrl services.lidarr.local;
             };
           }
           {

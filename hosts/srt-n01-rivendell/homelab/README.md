@@ -7,6 +7,7 @@ inside each application's state directory.
 
 - Movies: `/srv/media/library/movies`
 - TV: `/srv/media/library/shows`
+- Music: `/srv/media/library/music`
 - Books: `/srv/media/library/books`
 - Manga: `/srv/media/library/manga`
 - Audiobooks: `/srv/media/library/audiobooks`
@@ -15,6 +16,7 @@ inside each application's state directory.
 - Completed torrents: `/srv/media/downloads/torrents/complete`
 - Incomplete torrents: `/srv/media/downloads/torrents/incomplete`
 - Audiobookshelf state: `/srv/.state/audiobookshelf`
+- Navidrome state: `/srv/.state/navidrome`
 - Shelfmark state: `/srv/.state/shelfmark`
 
 The active paths are also written to `/etc/homelab/media-paths` and
@@ -44,6 +46,15 @@ The audiobook services are available only through Caddy on the tailnet:
 
 Their application ports (`127.0.0.1:8000` and `127.0.0.1:8084`) stay bound to
 localhost and are not opened in the firewall.
+
+The music services are also available only through Caddy on the tailnet:
+
+- Lidarr: `https://srt-n01-rivendell.taila65e7f.ts.net:9471`
+- Navidrome: `https://srt-n01-rivendell.taila65e7f.ts.net:9472`
+
+Their application ports (`127.0.0.1:8686` and `127.0.0.1:4533`) stay bound to
+localhost and are not opened in the firewall. Amperfy connects to the Navidrome
+HTTPS URL.
 
 All four Hedger instances use the existing journals under
 `/srv/hledger/journals`. Caddy terminates Tailscale TLS on ports 9450-9453 and
@@ -75,6 +86,8 @@ Nix currently declares:
 - Kavita service settings, token key secret, and library directories
 - Audiobookshelf through the nixarr module
 - Shelfmark through the nixarr module and locked Nixpkgs package
+- Lidarr through the nixarr module and its registration in Prowlarr
+- Navidrome through the native NixOS module
 - Prowlarr app sync (settings-sync)
 - Radarr and Sonarr download client (qBittorrent) via settings-sync
 - Bazarr connections to Radarr and Sonarr via settings-sync
@@ -200,15 +213,24 @@ The following still needs one-time manual setup in the web UI:
    `/srv/media/library/movies`
 2. Sonarr — Settings → Media Management → add root folder
    `/srv/media/library/shows`
-3. Jellyfin — first-run wizard: create an administrator, then add
+3. Lidarr — open `https://srt-n01-rivendell.taila65e7f.ts.net:9471`, then:
+   - add `/srv/media/library/music` as the root folder
+   - add qBittorrent as the download client at `localhost:8085`, using username
+     `admin` and the password from
+     `sudo cat /run/agenix/qbittorrentPassword`; use the `lidarr` category
+   - choose the desired metadata profile and quality profile before adding artists
+4. Navidrome — open `https://srt-n01-rivendell.taila65e7f.ts.net:9472` and create
+   the initial administrator account, then use the same URL and credentials to
+   add a Subsonic account in Amperfy
+5. Jellyfin — first-run wizard: create an administrator, then add
    `/srv/media/library/movies` as Movies and `/srv/media/library/shows` as TV
    Shows
-4. Seerr — first-run wizard: connect Jellyfin URL, connect Radarr/Sonarr (API keys from `sudo nixarr list-api-keys`)
-5. Kavita — first-run wizard: create admin user, add
+6. Seerr — first-run wizard: connect Jellyfin URL, connect Radarr/Sonarr (API keys from `sudo nixarr list-api-keys`)
+7. Kavita — first-run wizard: create admin user, add
    `/srv/media/library/books` as Books and `/srv/media/library/manga` as Manga
-6. Audiobookshelf — create the administrator, then create an Audiobooks library
+8. Audiobookshelf — create the administrator, then create an Audiobooks library
    whose folder is `/srv/media/library/audiobooks`
-7. Shelfmark — create the administrator or enable authentication, then:
+9. Shelfmark — create the administrator or enable authentication, then:
    - keep Universal search enabled and use Open Library for metadata discovery
    - keep `/srv/media/downloads/audiobooks` as the ingest/download directory
    - configure file processing to prefer M4B for audiobook results
@@ -219,9 +241,9 @@ The following still needs one-time manual setup in the web UI:
    - for Internet Archive or LibriVox material, verify rights in the browser
      and import the downloaded files manually because Shelfmark does not
      document a direct Internet Archive/LibriVox source
-8. Prowlarr indexers — add them via the web UI, or declare them under
+10. Prowlarr indexers — add them via the web UI, or declare them under
    `nixarr.prowlarr.settings-sync.indexers` in `media.nix`
-9. Bazarr — open `https://srt-n01-rivendell.taila65e7f.ts.net:9470`, then:
+11. Bazarr — open `https://srt-n01-rivendell.taila65e7f.ts.net:9470`, then:
    - add the desired subtitle languages and create default language profiles
      for movies and series
    - enable subtitle providers such as OpenSubtitles.com
@@ -230,7 +252,7 @@ The following still needs one-time manual setup in the web UI:
      profile
    - leave `Use Original Format` disabled in the language profiles to save
      downloaded text subtitles as SRT
-10. After Recyclarr's first sync, select `[SQP] SQP-1 WEB (2160p)` as Seerr's
+12. After Recyclarr's first sync, select `[SQP] SQP-1 WEB (2160p)` as Seerr's
    Radarr quality profile and `WEB-2160p + 1080p fallback` as its Sonarr quality
    profile. Bulk-edit existing movies and series in Radarr and Sonarr to use the
    corresponding profiles; Recyclarr manages profiles but does not assign them

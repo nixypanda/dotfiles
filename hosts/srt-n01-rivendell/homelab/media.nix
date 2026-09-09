@@ -11,6 +11,7 @@ let
   downloadsRoot = "${mediaRoot}/downloads";
   movieLibrary = "${mediaRoot}/library/movies";
   tvLibrary = "${mediaRoot}/library/shows";
+  musicLibrary = "${mediaRoot}/library/music";
   torrentRoot = "${downloadsRoot}/torrents";
   ports = homelab.services;
   qBittorrentDownloadClient = {
@@ -66,7 +67,8 @@ let
     )
     with urllib.request.urlopen(request, timeout=30) as response:
         if not 200 <= response.status < 300:
-            raise RuntimeError(f"Bazarr settings sync failed: HTTP {response.status}")
+            message = f"Bazarr settings sync failed: HTTP {response.status}"
+            raise RuntimeError(message)
   '';
   mediaUnlinked = pkgs.writeShellApplication {
     name = "media-unlinked";
@@ -358,6 +360,10 @@ in
       message = "TV library and torrent download paths must be separated.";
     }
     {
+      assertion = musicLibrary != torrentRoot;
+      message = "Music library and torrent download paths must be separated.";
+    }
+    {
       assertion = movieLibrary != tvLibrary;
       message = "Movie and TV libraries must be separated.";
     }
@@ -374,6 +380,7 @@ in
   environment.etc."homelab/media-paths".text = lib.generators.toKeyValue { } {
     movie_library = movieLibrary;
     tv_library = tvLibrary;
+    music_library = musicLibrary;
     torrent_downloads = torrentRoot;
     torrent_complete = "${torrentRoot}/complete";
     torrent_incomplete = "${torrentRoot}/incomplete";

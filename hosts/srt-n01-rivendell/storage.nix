@@ -10,6 +10,8 @@ let
     "bazarr-sync-config"
     "jellyfin"
     "kavita"
+    "lidarr"
+    "navidrome"
     "onepacerr"
     "prowlarr-sync-config"
     "qbittorrent"

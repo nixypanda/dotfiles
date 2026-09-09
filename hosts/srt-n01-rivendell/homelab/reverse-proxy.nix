@@ -41,6 +41,8 @@ let
     "${tailnetHost}".extraConfig = proxy services.homepage.local;
     "${tailnetUrl services.bazarr.tailnet}".extraConfig = proxy services.bazarr.local;
     "${tailnetUrl services.jellyfin.tailnet}".extraConfig = proxy services.jellyfin.local;
+    "${tailnetUrl services.lidarr.tailnet}".extraConfig = proxy services.lidarr.local;
+    "${tailnetUrl services.navidrome.tailnet}".extraConfig = proxy services.navidrome.local;
     "${tailnetUrl services.seerr.tailnet}".extraConfig = proxy services.seerr.local;
     "${tailnetUrl services.qbittorrent.tailnet}".extraConfig = proxy services.qbittorrent.webui;
     "${tailnetUrl services.radarr.tailnet}".extraConfig = proxy services.radarr.local;

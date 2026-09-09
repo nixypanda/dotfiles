@@ -6,6 +6,7 @@ _: {
     ./ebooks.nix
     ./hledger.nix
     ./media.nix
+    ./music.nix
     ./observability.nix
     ./onepacerr.nix
     ./pihole.nix
