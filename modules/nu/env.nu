@@ -7,6 +7,13 @@ $env.XDG_DATA_HOME = $"($env.HOME)/.local/share"
 $env.XDG_STATE_HOME = $"($env.HOME)/.local/state"
 $env.XDG_RUNTIME_DIR = $"($env.TMPDIR)"
 
+# Home Manager only exports this via hm-session-vars.sh, which nushell never
+# sources (issue 6507 below), so programs.claude-code.configDir has no effect
+# without it. Set only this one variable: sourcing hm-session-vars.sh wholesale
+# would also set CODEX_HOME, and Codex keeps its file-based auth.json and seven
+# sqlite databases in ~/.codex, so relocating it logs you out.
+$env.CLAUDE_CONFIG_DIR = $"($env.XDG_CONFIG_HOME)/claude"
+
 # https://github.com/nix-community/home-manager/issues/6507
 # https://github.com/nushell/nushell/issues/8230
 use std/util "path add"

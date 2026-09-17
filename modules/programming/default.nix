@@ -1,4 +1,5 @@
 {
+  agent-skills,
   config,
   nixpkgs-unstable,
   pkgs,
@@ -7,6 +8,10 @@
 
 let
   inherit (config) xdg;
+
+  elmcraft = agent-skills + "/elmcraft";
+  grill-me = agent-skills + "/grill-me";
+  cut-the-crap = agent-skills + "/cut-the-crap";
 
   # hledger-lsp is not packaged in nixpkgs yet.
   hledger-lsp = pkgs.callPackage ./hledger-lsp.nix { };
@@ -142,8 +147,9 @@ in
     gitlint
     just
 
-    # AI coding assistant (pre-built binary from GitHub releases)
+    # AI coding assistants (pre-built binaries from GitHub releases)
     opencode
+    unstable_codex
 
     # Prose / Markdown
     vale
@@ -156,18 +162,62 @@ in
     ".config/vale/config.ini".source = ./vale.ini;
     ".local/share/vale/styles".source = vale_styles;
     ".config/markdownlint/config.json".source = ./markdown_lint.json;
+    ".config/opencode/skills/elmcraft".source = elmcraft;
+    ".config/opencode/commands/elmcraft.md".source = elmcraft + "/shims/opencode-command.md";
+    ".config/opencode/skills/grill-me".source = grill-me;
+    ".config/opencode/commands/grill-me.md".source = grill-me + "/shims/opencode-command.md";
+
+    # Codex resolves this from $HOME, not $CODEX_HOME, and treats
+    # $CODEX_HOME/skills as deprecated (codex-rs/ext/skills/src/host_roots.rs).
+    # programs.codex.skills writes the deprecated path, so bypass the module.
+    ".agents/skills/elmcraft".source = elmcraft;
+    ".agents/skills/grill-me".source = grill-me;
   };
 
-  # Codex — HM module auto-manages CODEX_HOME via preferXdgDirectories
-  programs.codex = {
-    enable = true;
-    package = unstable_codex;
-  };
+  # Codex deliberately keeps its default ~/.codex. Its auth is a file
+  # ($CODEX_HOME/auth.json, unlike Claude Code which uses the macOS Keychain)
+  # and it holds seven sqlite databases, so pointing CODEX_HOME elsewhere logs
+  # you out and hides all local state. Upstream has no XDG support to migrate
+  # toward, so programs.codex is skipped entirely and the package is installed
+  # plainly above: the module's only remaining effect here would be exporting
+  # that CODEX_HOME.
 
-  # Claude Code — HM module auto-manages CLAUDE_CONFIG_DIR when configDir ≠ ~/.claude
   programs.claude-code = {
     enable = true;
     configDir = "${xdg.configHome}/claude";
     package = unstable_claude_code;
+
+    skills = {
+      inherit elmcraft grill-me cut-the-crap;
+    };
+
+    context = ./claude/CLAUDE.md;
+
+    # Written into a synthetic plugin dir passed as --plugin-dir, not into
+    # .claude.json, so this coexists with the state file Claude Code mutates.
+    mcpServers = {
+      sentry = {
+        type = "http";
+        url = "https://mcp.sentry.dev/mcp";
+      };
+      atlassian = {
+        type = "sse";
+        url = "https://mcp.atlassian.com/v1/sse";
+      };
+    };
+
+    # Whole-file store symlink, so Claude Code can no longer persist anything
+    # here: /model, /fast and /config stop sticking. Change them by editing
+    # this and rebuilding.
+    settings = {
+      includeCoAuthoredBy = false;
+      permissions.allow = [ "Bash(*)" ];
+      model = "opus[1m]";
+      enabledPlugins = {
+        "typescript-lsp@claude-plugins-official" = true;
+      };
+      effortLevel = "medium";
+      tui = "fullscreen";
+    };
   };
 }

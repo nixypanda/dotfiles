@@ -21,6 +21,10 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agent-skills = {
+      url = "git+ssh://git@github.com/nixypanda/agent-skills.git";
+      flake = false;
+    };
     # Applying the configuration happens from the.dotfiles directory so the
     # relative path is defined accordingly. This has potential of causing issues.
     vim-plugins = {
@@ -52,6 +56,7 @@
   outputs =
     {
       nur,
+      agent-skills,
       vim-plugins,
       nixpkgs,
       nixpkgs-unstable,
@@ -83,7 +88,7 @@
         srt-l02-sekhmet = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-darwin".extend (lib.composeManyExtensions macOverlays);
           extraSpecialArgs = {
-            inherit nixpkgs-unstable;
+            inherit agent-skills nixpkgs-unstable;
           };
           modules = [
             ./hosts/srt-l02-sekhmet/home.nix
