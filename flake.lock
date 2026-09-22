@@ -429,15 +429,15 @@
       "locked": {
         "lastModified": 1790067082,
         "narHash": "sha256-IfbBvXPGL90EO7EAABZnsA98A5qEoam7b4HNPDRPYEc=",
-        "ref": "refs/heads/feat/semantic-lenses",
+        "ref": "refs/heads/main",
         "rev": "cf84b48d9b7fd0ab457b65bd1349866ad48570a0",
         "revCount": 54,
         "type": "git",
-        "url": "file:///Users/nixypanda/Documents/open-source/ownai"
+        "url": "ssh://git@github.com/nixypanda/ownai.git"
       },
       "original": {
         "type": "git",
-        "url": "file:///Users/nixypanda/Documents/open-source/ownai"
+        "url": "ssh://git@github.com/nixypanda/ownai.git"
       }
     },
     "root": {

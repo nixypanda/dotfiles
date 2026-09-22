@@ -1,32 +1,11 @@
+# Only what is specific to this host. Shared Mac config lives in
+# modules/mac/.
+{ ... }:
 {
-  system = {
-    primaryUser = "nixypanda";
-    defaults = {
-      SoftwareUpdate.AutomaticallyInstallMacOSUpdates = false;
-      NSGlobalDomain = {
-        InitialKeyRepeat = 10;
-        KeyRepeat = 1;
-        AppleInterfaceStyle = "Dark";
-        NSAutomaticCapitalizationEnabled = false;
-        NSAutomaticDashSubstitutionEnabled = false;
-        NSAutomaticPeriodSubstitutionEnabled = false;
-        NSAutomaticQuoteSubstitutionEnabled = false;
-        NSAutomaticSpellingCorrectionEnabled = false;
-        NSAutomaticWindowAnimationsEnabled = false;
+  imports = [
+    ../../../modules/mac/system.nix
+    ../../../modules/mac/homebrew.nix
+  ];
 
-      };
-      dock = {
-        autohide = true;
-        mru-spaces = false;
-        show-recents = false;
-      };
-    };
-    keyboard = {
-      enableKeyMapping = true;
-      remapCapsLockToEscape = true;
-    };
-    stateVersion = 5;
-  };
-  services.tailscale.enable = true;
   networking.hostName = "srt-l02-sekhmet";
 }

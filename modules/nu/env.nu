@@ -17,7 +17,11 @@ $env.CLAUDE_CONFIG_DIR = $"($env.XDG_CONFIG_HOME)/claude"
 # https://github.com/nix-community/home-manager/issues/6507
 # https://github.com/nushell/nushell/issues/8230
 use std/util "path add"
-path add $"($env.XDG_STATE_HOME)/nix/profile/bin"
+# `~/.nix-profile` is the stable symlink to the active Nix profile. The XDG
+# path is where standalone/Determinate Nix actually stores it (`profiles`,
+# plural). Add both so this works regardless of the Nix installation.
+path add $"($env.HOME)/.nix-profile/bin"
+path add $"($env.XDG_STATE_HOME)/nix/profiles/profile/bin"
 path add "/run/current-system/sw/bin"
 path add "/nix/var/nix/profiles/default/bin"
 path add "/usr/local/bin"

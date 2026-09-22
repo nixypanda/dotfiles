@@ -2,7 +2,6 @@
   lib,
   pkgs,
   colorscheme,
-  ownai,
   ...
 }:
 {
@@ -16,9 +15,11 @@
       qpdf
       hledger
       hledger-ui
-      hledger-web
+      # `hledger-web` and `haskell-language-server` both install
+      # `lib/links/libHSbase64-*.dylib`, which collides in the home-manager
+      # buildEnv. Give hledger-web priority so buildEnv resolves it.
+      (lib.hiPrio hledger-web)
       paisa
-      ownai.packages.${pkgs.system}.default
 
       # Better alternatives
       bottom # top

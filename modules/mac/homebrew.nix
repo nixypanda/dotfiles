@@ -1,3 +1,4 @@
+# Homebrew casks shared by the Macs.
 {
   homebrew = {
     enable = true;
@@ -15,6 +16,7 @@
       "stremio"
       "steipete/tap/codexbar"
       "colemak-dh"
+      "obsidian"
     ];
   };
 }

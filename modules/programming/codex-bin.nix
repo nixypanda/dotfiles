@@ -7,15 +7,30 @@
   versionCheckHook,
 }:
 
-stdenvNoCC.mkDerivation (finalAttrs: {
-  pname = "codex";
+let
   version = "0.155.1";
 
-  src = fetchzip {
-    url = "https://github.com/openai/codex/releases/download/rust-v${finalAttrs.version}/codex-package-x86_64-apple-darwin.tar.gz";
-    hash = "sha256-bPOcSuSn9DTflW8Y+6zqnGoNKid+apzmTxR1JzR6BTM=";
-    stripRoot = false;
+  # Prebuilt release archives, keyed by host platform.
+  platformSources = {
+    x86_64-darwin = {
+      url = "https://github.com/openai/codex/releases/download/rust-v${version}/codex-package-x86_64-apple-darwin.tar.gz";
+      hash = "sha256-bPOcSuSn9DTflW8Y+6zqnGoNKid+apzmTxR1JzR6BTM=";
+    };
+    aarch64-darwin = {
+      url = "https://github.com/openai/codex/releases/download/rust-v${version}/codex-package-aarch64-apple-darwin.tar.gz";
+      hash = "sha256-xvNrGiVBenuiDU+gqVmvqW5EIWhFObtMXIxofUnOOvE=";
+    };
   };
+
+  source =
+    platformSources.${stdenvNoCC.hostPlatform.system}
+      or (throw "codex-bin: unsupported platform ${stdenvNoCC.hostPlatform.system}");
+in
+stdenvNoCC.mkDerivation (finalAttrs: {
+  pname = "codex";
+  inherit version;
+
+  src = fetchzip (source // { stripRoot = false; });
 
   nativeBuildInputs = [
     installShellFiles
@@ -48,7 +63,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     changelog = "https://github.com/openai/codex/releases/tag/rust-v${finalAttrs.version}";
     license = lib.licenses.asl20;
     mainProgram = "codex";
-    platforms = [ "x86_64-darwin" ];
+    platforms = builtins.attrNames platformSources;
     sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
   };
 })

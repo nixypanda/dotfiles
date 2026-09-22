@@ -53,7 +53,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     ownai = {
-      url = "git+file:///Users/nixypanda/Documents/open-source/ownai";
+      url = "git+ssh://git@github.com/nixypanda/ownai.git";
     };
   };
   outputs =
@@ -86,27 +86,36 @@
         nur.overlays.default
         vim-plugins.overlay
       ];
-    in
-    {
-      homeConfigurations = {
-        srt-l02-sekhmet = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."x86_64-darwin".extend (lib.composeManyExtensions macOverlays);
-          extraSpecialArgs = {
-            inherit agent-skills nixpkgs-unstable ownai;
-          };
-          modules = [
-            ./hosts/srt-l02-sekhmet/home.nix
-          ];
-        };
+
+      # Mac hosts mapped to the system each builds for. Everything the Macs
+      # share lives in modules/mac/; a host directory only holds what is
+      # genuinely host-specific (see hosts/<host>/system/configuration.nix).
+      macHosts = {
+        srt-l02-sekhmet = "x86_64-darwin";
+        srt-l03-shire = "aarch64-darwin";
       };
 
-      darwinConfigurations."srt-l02-sekhmet" = darwin.lib.darwinSystem {
-        pkgs = nixpkgs.legacyPackages."x86_64-darwin";
+      mkMacHome = _name: system: home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${system}.extend (lib.composeManyExtensions macOverlays);
+        extraSpecialArgs = {
+          inherit agent-skills nixpkgs-unstable ownai;
+        };
         modules = [
-          ./hosts/srt-l02-sekhmet/system/configuration.nix
-          ./hosts/srt-l02-sekhmet/system/homebrew.nix
+          ./modules/mac/home.nix
         ];
       };
+
+      mkMacSystem = name: system: darwin.lib.darwinSystem {
+        pkgs = nixpkgs.legacyPackages.${system};
+        modules = [
+          ./hosts/${name}/system/configuration.nix
+        ];
+      };
+    in
+    {
+      homeConfigurations = lib.mapAttrs mkMacHome macHosts;
+
+      darwinConfigurations = lib.mapAttrs mkMacSystem macHosts;
 
       nixosConfigurations."srt-n01-rivendell" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
