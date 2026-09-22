@@ -14,6 +14,7 @@
       "protonvpn"
       "stremio"
       "steipete/tap/codexbar"
+      "colemak-dh"
     ];
   };
 }
