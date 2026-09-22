@@ -2,6 +2,7 @@
   lib,
   pkgs,
   colorscheme,
+  ownai,
   ...
 }:
 {
@@ -17,6 +18,7 @@
       hledger-ui
       hledger-web
       paisa
+      ownai.packages.${pkgs.system}.default
 
       # Better alternatives
       bottom # top

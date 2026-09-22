@@ -52,6 +52,9 @@
       url = "git+ssh://git@github.com/nixypanda/hedger.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    ownai = {
+      url = "git+file:///Users/nixypanda/Documents/open-source/ownai";
+    };
   };
   outputs =
     {
@@ -68,6 +71,7 @@
       calco,
       onepacerr-ui,
       hedger,
+      ownai,
       ...
     }:
     let
@@ -88,7 +92,7 @@
         srt-l02-sekhmet = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-darwin".extend (lib.composeManyExtensions macOverlays);
           extraSpecialArgs = {
-            inherit agent-skills nixpkgs-unstable;
+            inherit agent-skills nixpkgs-unstable ownai;
           };
           modules = [
             ./hosts/srt-l02-sekhmet/home.nix

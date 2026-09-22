@@ -48,11 +48,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1789469795,
-        "narHash": "sha256-1zjCqRADKHW9VWILSrG4WBQpvN3yBCWZaTXbz1c7024=",
+        "lastModified": 1789928059,
+        "narHash": "sha256-1k8t5T1c5F/2kE60TwO4jgj2xWINb3f25nsExUSL/rs=",
         "ref": "refs/heads/main",
-        "rev": "260b69dc579d9cc69276e148e6c040eb4f14eafc",
-        "revCount": 436,
+        "rev": "b5e3ed30acdc47febd29daa2c854df241e44b77c",
+        "revCount": 476,
         "type": "git",
         "url": "ssh://git@github.com/nixypanda/calco.git"
       },
@@ -315,6 +315,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1789885152,
+        "narHash": "sha256-mDNo95riUw8k0MA2Btzj/OuiMcfLKofqIliLYsLbrSY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "6d663c0533ff269008fb84e45930151e37c99db9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-26.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nur": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -405,6 +421,25 @@
         "url": "ssh://git@github.com/nixypanda/onepacerr-ui.git"
       }
     },
+    "ownai": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3",
+        "rust-overlay": "rust-overlay_2"
+      },
+      "locked": {
+        "lastModified": 1790067082,
+        "narHash": "sha256-IfbBvXPGL90EO7EAABZnsA98A5qEoam7b4HNPDRPYEc=",
+        "ref": "refs/heads/feat/semantic-lenses",
+        "rev": "cf84b48d9b7fd0ab457b65bd1349866ad48570a0",
+        "revCount": 54,
+        "type": "git",
+        "url": "file:///Users/nixypanda/Documents/open-source/ownai"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:///Users/nixypanda/Documents/open-source/ownai"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -419,6 +454,7 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
         "onepacerr-ui": "onepacerr-ui",
+        "ownai": "ownai",
         "vim-plugins": "vim-plugins"
       }
     },
@@ -432,6 +468,27 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "rev": "8e596a8430f2ce54d55c742198187d6945a5501e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "rust-overlay_2": {
+      "inputs": {
+        "nixpkgs": [
+          "ownai",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1789977098,
+        "narHash": "sha256-fKY4BedarKx4aR0+UOHk65hhDW8pxFytFkaUi0VYDYk=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "2776e42828203ec89511699c8dcdedec69ab98e1",
         "type": "github"
       },
       "original": {
