@@ -10,14 +10,14 @@ This file is written for agentic coding tools working in this repo.
 ## Repository entrypoints
 
 - Flake entrypoint: `flake.nix`
-- Home Manager host: `homeConfigurations.srt-l02-sekhmet`
-- nix-darwin host: `darwinConfigurations.srt-l02-sekhmet`
+- Home Manager host: `homeConfigurations.srt-l03-shire`
+- nix-darwin host: `darwinConfigurations.srt-l03-shire`
 - NixOS home server: `nixosConfigurations.srt-n01-rivendell`
 
 Key module roots:
 - Home Manager modules: `modules/*` (mix of `default.nix` modules and single-file modules)
 - macOS (nix-darwin) modules: `modules/mac/*.nix`
-- NixOS host modules: `hosts/nixos/*`
+- NixOS host modules: `hosts/srt-n01-rivendell/*`
 - Neovim Lua configs: `modules/nvim/lua/*.lua`
 
 Notes:
@@ -31,26 +31,26 @@ Notes:
 
 ### Apply user (Home Manager)
 Preferred:
-- `home-manager switch --flake "./#srt-l02-sekhmet" -b backup`
+- `home-manager switch --flake "./#srt-l03-shire" -b backup`
 
 Readme-compatible:
-- `nix run --no-write-lock-file --inputs-from . home-manager#home-manager -- switch --flake "./#srt-l02-sekhmet"`
+- `nix run --no-write-lock-file --inputs-from . home-manager#home-manager -- switch --flake "./#srt-l03-shire"`
 
 Script equivalent:
 - `./modules/system-management/apply-user.sh`
 
 ### Apply system (nix-darwin)
 Preferred:
-- `sudo darwin-rebuild switch --flake ~/.dotfiles/.#srt-l02-sekhmet`
+- `sudo darwin-rebuild switch --flake ~/.dotfiles/.#srt-l03-shire`
 
 Script equivalent:
-- `./modules/system-management/apply-system-mac.sh`
+- `./modules/system-management/apply-darwin.sh`
 
 ### Apply home server (NixOS)
 Host:
 - Hostname: `srt-n01-rivendell`
 - Flake output: `nixosConfigurations.srt-n01-rivendell`
-- Host config root: `hosts/nixos/srt-n01-rivendell/`
+- Host config root: `hosts/srt-n01-rivendell/`
 - Normal remote access: SSH over Tailscale, `ssh nixypanda@srt-n01-rivendell`
 - Current known Tailscale IP: `100.127.3.54`
 - Current known LAN IP: `192.168.1.76`
@@ -75,7 +75,7 @@ Preferred:
 - `nix flake update --flake .`
 
 Script equivalent:
-- `./modules/system-management/update-dots.sh`
+- `./modules/system-management/update-flake.sh`
 
 When removing a flake input manually:
 - Remove it from `inputs` in `flake.nix`.
@@ -85,14 +85,9 @@ When removing a flake input manually:
 - Verify with `rg -n -i "<name>|<name variants>" .`.
 
 ### “What will build?” forecast (optional)
-- `./modules/system-management/build-forecast-user.sh`
+- `./modules/system-management/forecast-build.sh`
 
 This uses `nix-forecast` and writes full output to `/tmp/nix-forecast.txt`.
-
-### Dangerous cleanup script (do not run unless asked)
-- `./modules/system-management/clean-system.sh`
-
-This prunes docker volumes/images, deletes caches, and runs Nix garbage collection.
 
 ---
 
@@ -105,10 +100,10 @@ Treat “tests” as:
 
 ### Fastest: evaluate only (preferred for small changes)
 Home Manager activation derivation path:
-- `nix eval --raw .#homeConfigurations.srt-l02-sekhmet.activationPackage.drvPath`
+- `nix eval --raw .#homeConfigurations.srt-l03-shire.activationPackage.drvPath`
 
 nix-darwin system derivation path:
-- `nix eval --raw .#darwinConfigurations.srt-l02-sekhmet.system.drvPath`
+- `nix eval --raw .#darwinConfigurations.srt-l03-shire.system.drvPath`
 
 NixOS server system derivation path:
 - `nix eval --raw .#nixosConfigurations.srt-n01-rivendell.config.system.build.toplevel.drvPath`
@@ -118,20 +113,20 @@ If evaluation fails, re-run with:
 
 ### Build only what you need
 Build Home Manager activation package:
-- `nix build .#homeConfigurations.srt-l02-sekhmet.activationPackage`
+- `nix build .#homeConfigurations.srt-l03-shire.activationPackage`
 
 Build nix-darwin system derivation:
-- `nix build .#darwinConfigurations.srt-l02-sekhmet.system`
+- `nix build .#darwinConfigurations.srt-l03-shire.system`
 
 Build NixOS server system derivation:
 - On the server or with a Linux remote builder:
   `nix build .#nixosConfigurations.srt-n01-rivendell.config.system.build.toplevel`
 - From the Mac, prefer `nixos-rebuild --build-host nixypanda@100.127.3.54`
-  because local `x86_64-darwin` cannot build Linux-only derivations.
+  because local `aarch64-darwin` cannot build Linux-only derivations.
 
 For validation builds, prefer avoiding `result` symlink churn:
-- `nix build --no-link .#homeConfigurations.srt-l02-sekhmet.activationPackage`
-- `nix build --no-link .#darwinConfigurations.srt-l02-sekhmet.system`
+- `nix build --no-link .#homeConfigurations.srt-l03-shire.activationPackage`
+- `nix build --no-link .#darwinConfigurations.srt-l03-shire.system`
 - `nix build --no-link .#nixosConfigurations.srt-n01-rivendell.config.system.build.toplevel`
 
 Sandbox note:
@@ -142,8 +137,8 @@ Many agent CLIs default to a ~2 minute command timeout. That is fine for `nix ev
 
 Recommended timeouts:
 - `nix eval ...`: 2 minutes (120s)
-- `nix build .#homeConfigurations.srt-l02-sekhmet.activationPackage`: 10 minutes (600s)
-- `nix build .#darwinConfigurations.srt-l02-sekhmet.system`: 10 minutes (600s)
+- `nix build .#homeConfigurations.srt-l03-shire.activationPackage`: 10 minutes (600s)
+- `nix build .#darwinConfigurations.srt-l03-shire.system`: 10 minutes (600s)
 - `nix build .#nixosConfigurations.srt-n01-rivendell.config.system.build.toplevel`: 10 minutes (600s) when run on Linux or with a Linux build host
 - After `nix flake update` / lockfile updates: consider 20 minutes (1200s) for builds if large deps rebuild
 

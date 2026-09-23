@@ -66,13 +66,13 @@ require("lz.n").load({
 		local dotfiles_flake = 'builtins.getFlake "/Users/nixypanda/.dotfiles"'
 		local nixpkgs_expr = "let flake = "
 			.. dotfiles_flake
-			.. '; in import flake.inputs.nixpkgs { system = "x86_64-darwin"; }'
+			.. '; in import flake.inputs.nixpkgs { system = "aarch64-darwin"; }'
 		local darwin_options_expr = "let flake = "
 			.. dotfiles_flake
-			.. '; in flake.darwinConfigurations."srt-l02-sekhmet".options'
+			.. '; in flake.darwinConfigurations."srt-l03-shire".options'
 		local home_manager_options_expr = "let flake = "
 			.. dotfiles_flake
-			.. '; in flake.homeConfigurations."srt-l02-sekhmet".options'
+			.. '; in flake.homeConfigurations."srt-l03-shire".options'
 
 		vim.lsp.config("nixd", {
 			cmd = {

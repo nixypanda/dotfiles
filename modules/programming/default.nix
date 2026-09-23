@@ -1,7 +1,6 @@
 {
   agent-skills,
   config,
-  nixpkgs-unstable,
   pkgs,
   ...
 }:
@@ -19,23 +18,8 @@ let
   # Personal CLI wrapper over Rope for Python refactors.
   ropify = pkgs.callPackage ./ropecli.nix { };
 
-  # The upstream GitHub bundle avoids a long source build on Intel Darwin.
-  unstable_codex = pkgs.callPackage ./codex-bin.nix { };
-
-  # Unstable no longer evaluates its package set for Intel Darwin. Reuse the
-  # current Claude recipe with the supported 26.05 Darwin package set.
-  unstable_claude_code =
-    (pkgs.callPackage (nixpkgs-unstable + "/pkgs/by-name/cl/claude-code/package.nix") { }).overrideAttrs
-      (old: {
-        # The unstable manifest still publishes a darwin-x64 binary, even
-        # though x86_64-darwin was removed from the package metadata.
-        meta = old.meta // {
-          platforms = old.meta.platforms ++ [ "x86_64-darwin" ];
-        };
-      });
-
-  # OpenCode — nixpkgs only packages the V1 CLI, so both Darwin hosts build the
-  # V2 binary from opencode.ai (see opencode.nix); Linux hosts keep pkgs.opencode.
+  # OpenCode — nixpkgs only packages the V1 CLI, so Darwin hosts build the V2
+  # binary from opencode.ai (see opencode.nix); Linux hosts keep pkgs.opencode.
   opencode =
     if pkgs.stdenv.hostPlatform.isDarwin then pkgs.callPackage ./opencode.nix { } else pkgs.opencode;
 
@@ -145,9 +129,9 @@ in
     gitlint
     just
 
-    # AI coding assistants (pre-built binaries from GitHub releases)
+    # AI coding assistants
     opencode
-    unstable_codex
+    codex
 
     # Prose / Markdown
     vale
@@ -183,7 +167,6 @@ in
   programs.claude-code = {
     enable = true;
     configDir = "${xdg.configHome}/claude";
-    package = unstable_claude_code;
 
     skills = {
       inherit elmcraft grill-me cut-the-crap;

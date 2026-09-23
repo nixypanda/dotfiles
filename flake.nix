@@ -1,12 +1,10 @@
 {
   description = "Home manager flake";
   inputs = {
-    # Use the current stable package set by default on both macOS and NixOS.
-    # Individual packages can still opt into unstable where needed.
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # Track nixpkgs unstable for both macOS and NixOS.
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-26.05";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nur = {
@@ -32,7 +30,7 @@
     };
     # MacOS specific inputs
     darwin = {
-      url = "github:nix-darwin/nix-darwin/nix-darwin-26.05";
+      url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # my stuff
@@ -62,7 +60,6 @@
       agent-skills,
       vim-plugins,
       nixpkgs,
-      nixpkgs-unstable,
       home-manager,
       agenix,
       darwin,
@@ -91,26 +88,29 @@
       # share lives in modules/mac/; a host directory only holds what is
       # genuinely host-specific (see hosts/<host>/system/configuration.nix).
       macHosts = {
-        srt-l02-sekhmet = "x86_64-darwin";
         srt-l03-shire = "aarch64-darwin";
       };
 
-      mkMacHome = _name: system: home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system}.extend (lib.composeManyExtensions macOverlays);
-        extraSpecialArgs = {
-          inherit agent-skills nixpkgs-unstable ownai;
+      mkMacHome =
+        _name: system:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.${system}.extend (lib.composeManyExtensions macOverlays);
+          extraSpecialArgs = {
+            inherit agent-skills ownai;
+          };
+          modules = [
+            ./modules/mac/home.nix
+          ];
         };
-        modules = [
-          ./modules/mac/home.nix
-        ];
-      };
 
-      mkMacSystem = name: system: darwin.lib.darwinSystem {
-        pkgs = nixpkgs.legacyPackages.${system};
-        modules = [
-          ./hosts/${name}/system/configuration.nix
-        ];
-      };
+      mkMacSystem =
+        name: system:
+        darwin.lib.darwinSystem {
+          pkgs = nixpkgs.legacyPackages.${system};
+          modules = [
+            ./hosts/${name}/system/configuration.nix
+          ];
+        };
     in
     {
       homeConfigurations = lib.mapAttrs mkMacHome macHosts;

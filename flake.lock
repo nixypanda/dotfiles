@@ -48,11 +48,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1789928059,
-        "narHash": "sha256-1k8t5T1c5F/2kE60TwO4jgj2xWINb3f25nsExUSL/rs=",
+        "lastModified": 1790112113,
+        "narHash": "sha256-9XCQJBPmK+17jOE0jNP30hGqhUSSAW++lX+nRKWA/2M=",
         "ref": "refs/heads/main",
-        "rev": "b5e3ed30acdc47febd29daa2c854df241e44b77c",
-        "revCount": 476,
+        "rev": "4c4bfe9b1be306b962917c1fd66fc33ba86bdb8a",
+        "revCount": 495,
         "type": "git",
         "url": "ssh://git@github.com/nixypanda/calco.git"
       },
@@ -90,16 +90,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1783744694,
-        "narHash": "sha256-2cp6N3rrwnGYLTx9l6N+NI+kwrCWxvJUbj5WJhvB29A=",
+        "lastModified": 1786845137,
+        "narHash": "sha256-oQFip+v0luP8NIxJzmiW4Wu8bILsbFWom5l0zonl8hQ=",
         "owner": "nix-darwin",
         "repo": "nix-darwin",
-        "rev": "c3e90c89649b07d1a96e4b9dd6cd0d6e44b91a74",
+        "rev": "4cff07de74b50e64bdd68cd4e722ab5b6b35ee48",
         "type": "github"
       },
       "original": {
         "owner": "nix-darwin",
-        "ref": "nix-darwin-26.05",
+        "ref": "master",
         "repo": "nix-darwin",
         "type": "github"
       }
@@ -168,11 +168,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1788180012,
-        "narHash": "sha256-C3p74jp/KRHw1vn7RSNCV2yGNtsPbclJ9J7RCtnmA4k=",
+        "lastModified": 1790112114,
+        "narHash": "sha256-9YUVTYbsmomjq7hBmK8lh5qty3HJOglfhhYx54ArsM8=",
         "ref": "refs/heads/main",
-        "rev": "3e4da4380602afce9ff60e324be072bcfa334a56",
-        "revCount": 136,
+        "rev": "5fdea5ab335aa198d0aafa9bc77eda1ef08039a7",
+        "revCount": 166,
         "type": "git",
         "url": "ssh://git@github.com/nixypanda/hedger.git"
       },
@@ -209,16 +209,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1788642154,
-        "narHash": "sha256-sPpQFVaFTDqO/4vvCAhuAhqTgqN/ygu+9eJcs5eB0js=",
+        "lastModified": 1790080548,
+        "narHash": "sha256-u4sa7RCbwvk8cZmAGs35F7o0h4IqDc3wsrrnjQvMumk=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "fd0956c99c41ae3c13a73a638f1f7e963aebc4ab",
+        "rev": "cbcbfa2778e0c5653ef349df3ebae8288efac3c0",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
-        "ref": "release-26.05",
+        "ref": "master",
         "repo": "home-manager",
         "type": "github"
       }
@@ -254,11 +254,11 @@
         "website-builder": "website-builder"
       },
       "locked": {
-        "lastModified": 1784997863,
-        "narHash": "sha256-oTMag4I9MW3bstuOKqzc0F1OqxO49lLa9jkSkRe3EqA=",
+        "lastModified": 1790060119,
+        "narHash": "sha256-OIUx17w60LTC8rky7XswJ58MNSDO3N1HM3iFu/zwM7g=",
         "owner": "nix-media-server",
         "repo": "nixarr",
-        "rev": "282ce99b31d52d72cca281e3d26d3dd267946800",
+        "rev": "0f960a27ec132b8ca87d210489f77f847d27836a",
         "type": "github"
       },
       "original": {
@@ -283,34 +283,18 @@
         "type": "github"
       }
     },
-    "nixpkgs-unstable": {
+    "nixpkgs_2": {
       "locked": {
-        "lastModified": 1789724158,
-        "narHash": "sha256-nlKgrm0dsVhOSopKheVBCcOpiIticufPPVLdVOI0euA=",
+        "lastModified": 1790055231,
+        "narHash": "sha256-QpXotokGh5eeMG1Njiuh27oP0rK6t5+cMp7ymXSs7mc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "0a3468a402c449992505b6a9fc5b06580141b750",
+        "rev": "b6c98e9e6633ee64753b594ff4a5febf0367fc00",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
         "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1788334797,
-        "narHash": "sha256-nskSa8kDimM7F0VFSP8IdoSNo4G0vKzOtxwvOFpoGDI=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "c19db427a1fdfc7591c0b0baeb4665dcef2c61da",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixpkgs-26.05-darwin",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -408,11 +392,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1787218156,
-        "narHash": "sha256-UFvCQUHD61LxCwju0Tv6SPu8Vs1Jdz5p3s/rJhl1yic=",
+        "lastModified": 1790112114,
+        "narHash": "sha256-evz80iOxGLHs/0yicacswZZo3Gotj1ib1ow2Zhoda4w=",
         "ref": "refs/heads/main",
-        "rev": "d610c7ae52232391cedaad2b6306f24adee9a946",
-        "revCount": 2,
+        "rev": "111fa312aec1d31dd8d2a51c0266d5f705d2178e",
+        "revCount": 3,
         "type": "git",
         "url": "ssh://git@github.com/nixypanda/onepacerr-ui.git"
       },
@@ -451,7 +435,6 @@
         "kitty-upstream": "kitty-upstream",
         "nixarr": "nixarr",
         "nixpkgs": "nixpkgs_2",
-        "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
         "onepacerr-ui": "onepacerr-ui",
         "ownai": "ownai",

@@ -6,7 +6,7 @@ Nix flake-based dotfiles for my Mac and home server.
 
 | Area                  | Current setup                                                 |
 | --------------------- | ------------------------------------------------------------- |
-| Mac host              | `srt-l02-sekhmet`                                             |
+| Mac host              | `srt-l03-shire`                                             |
 | Home server           | `srt-n01-rivendell`                                           |
 | User config           | [Home Manager](https://nixos.wiki/wiki/Home_Manager)          |
 | macOS system config   | [nix-darwin](https://github.com/LnL7/nix-darwin)              |
@@ -22,8 +22,8 @@ Nix flake-based dotfiles for my Mac and home server.
 
 The main flake outputs are:
 
-- `homeConfigurations.srt-l02-sekhmet`
-- `darwinConfigurations.srt-l02-sekhmet`
+- `homeConfigurations.srt-l03-shire`
+- `darwinConfigurations.srt-l03-shire`
 - `nixosConfigurations.srt-n01-rivendell`
 
 ## Well these look different from normal `dotfiles` mate
@@ -69,7 +69,7 @@ Apply the Home Manager config:
 
 ```sh
 cd ~/.dotfiles
-home-manager switch --flake "./#srt-l02-sekhmet" -b backup
+home-manager switch --flake "./#srt-l03-shire" -b backup
 ```
 
 The Home Manager config also installs an `apply-user` helper that runs the same
@@ -80,15 +80,15 @@ switch from `~/.dotfiles`.
 Apply the nix-darwin config:
 
 ```sh
-sudo darwin-rebuild switch --flake ~/.dotfiles/.#srt-l02-sekhmet
+sudo darwin-rebuild switch --flake ~/.dotfiles/.#srt-l03-shire
 ```
 
-The Home Manager config also installs an `apply-system` helper for this.
+The Home Manager config also installs an `apply-darwin` helper for this.
 
 ### Home server config
 
 The NixOS server flake output is `nixosConfigurations.srt-n01-rivendell`.
-The host config lives under `hosts/nixos/srt-n01-rivendell/`.
+The host config lives under `hosts/srt-n01-rivendell/`.
 
 The normal remote switch from the Mac builds and deploys over Tailscale:
 
@@ -116,33 +116,33 @@ cd ~/.dotfiles
 nix flake update --flake .
 ```
 
-The Home Manager config also installs an `update-dots` helper for this.
+The Home Manager config also installs an `update-flake` helper for this.
 
 ### Validation
 
 Fast evaluation checks:
 
 ```sh
-nix eval --raw .#homeConfigurations.srt-l02-sekhmet.activationPackage.drvPath
-nix eval --raw .#darwinConfigurations.srt-l02-sekhmet.system.drvPath
+nix eval --raw .#homeConfigurations.srt-l03-shire.activationPackage.drvPath
+nix eval --raw .#darwinConfigurations.srt-l03-shire.system.drvPath
 nix eval --raw .#nixosConfigurations.srt-n01-rivendell.config.system.build.toplevel.drvPath
 ```
 
 Build checks without changing the `result` symlink:
 
 ```sh
-nix build --no-link .#homeConfigurations.srt-l02-sekhmet.activationPackage
-nix build --no-link .#darwinConfigurations.srt-l02-sekhmet.system
+nix build --no-link .#homeConfigurations.srt-l03-shire.activationPackage
+nix build --no-link .#darwinConfigurations.srt-l03-shire.system
 ```
 
 Build the NixOS server output on the server or with a Linux remote builder; the
-Mac is `x86_64-darwin` and cannot build Linux-only derivations locally.
+Mac is `aarch64-darwin` and cannot build Linux-only derivations locally.
 
 ### Caveat
 
 I use [git-crypt](https://github.com/AGWA/git-crypt) for files under
 `.secrets/`, and agenix for Rivendell homelab secrets under
-`hosts/nixos/srt-n01-rivendell/homelab/secrets/`. If you plan to use these
+`hosts/srt-n01-rivendell/homelab/secrets/`. If you plan to use these
 dotfiles, replace those files with your own secrets or remove the references
 from the codebase.
 
@@ -152,9 +152,9 @@ from the codebase.
   NixOS home server output.
 - Home Manager modules live under `modules/`.
 - macOS system modules live under `modules/mac/`.
-- NixOS host modules live under `hosts/nixos/`.
+- NixOS host modules live under `hosts/srt-n01-rivendell/`.
 - Neovim Lua config lives under `modules/nvim/lua/`.
-- Homelab service docs live in `hosts/nixos/srt-n01-rivendell/homelab/`.
+- Homelab service docs live in `hosts/srt-n01-rivendell/homelab/`.
 
 ## Here are a few screenshots to showcase this config in action
 
