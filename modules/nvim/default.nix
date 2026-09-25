@@ -1,6 +1,7 @@
 {
   pkgs,
   colorscheme,
+  ownai,
   ...
 }:
 let
@@ -65,6 +66,7 @@ in
           optional = true;
         };
         lazy_plug = name: config: (plug name config) // { optional = true; };
+        ownai-nvim = ownai.packages.${pkgs.system}.ownai-nvim;
       in
       with pkgs.vimPlugins;
       [
@@ -98,6 +100,9 @@ in
         (plug gitsigns-nvim ./lua/gitsigns.lua)
         (lazy_plug blame-nvim ./lua/blame.lua)
         (lazy_plug diffview-nvim ./lua/diffview.lua)
+
+        # Semantic views (ownai)
+        (plug ownai-nvim ./lua/ownai.lua)
 
         # Keymaps
         (plug which-key-nvim ./lua/which-key.lua)

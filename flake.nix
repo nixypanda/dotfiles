@@ -50,8 +50,11 @@
       url = "git+ssh://git@github.com/nixypanda/hedger.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Local checkout while the Neovim plugin lives on an unmerged branch.
+    # `git+file` (not `path`) so Nix copies only tracked files; a `path` input
+    # would drag the multi-gigabyte `target/` directory into the store.
     ownai = {
-      url = "git+ssh://git@github.com/nixypanda/ownai.git";
+      url = "git+file:///Users/nixypanda/Documents/open-source/ownai?ref=feat/nvim-show";
     };
   };
   outputs =

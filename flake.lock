@@ -411,17 +411,18 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1790067082,
-        "narHash": "sha256-IfbBvXPGL90EO7EAABZnsA98A5qEoam7b4HNPDRPYEc=",
-        "ref": "refs/heads/main",
-        "rev": "cf84b48d9b7fd0ab457b65bd1349866ad48570a0",
-        "revCount": 54,
+        "lastModified": 1790276103,
+        "narHash": "sha256-D7DjvxsmlgeN039yrYULpP/Q61FG53YGxogOMudQBA4=",
+        "ref": "feat/nvim-show",
+        "rev": "03f21c522a7323d2d0d2fff68406a45c1d427280",
+        "revCount": 73,
         "type": "git",
-        "url": "ssh://git@github.com/nixypanda/ownai.git"
+        "url": "file:///Users/nixypanda/Documents/open-source/ownai"
       },
       "original": {
+        "ref": "feat/nvim-show",
         "type": "git",
-        "url": "ssh://git@github.com/nixypanda/ownai.git"
+        "url": "file:///Users/nixypanda/Documents/open-source/ownai"
       }
     },
     "root": {

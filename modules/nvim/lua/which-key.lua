@@ -13,6 +13,7 @@ local mappings = {
 	{ "<leader>k", group = "kulala (http)" },
 	{ "<leader>l", group = "code (lsp)" },
 	{ "<leader>m", group = "motions" },
+	{ "<leader>o", group = "ownai" },
 	{ "<leader>p", group = "code (language specific)" },
 	{ "<leader>s", group = "search" },
 	{ "<leader>t", group = "test (neotest)" },
