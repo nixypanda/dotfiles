@@ -1,10 +1,18 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 let
   homelab = import ./homelab/ports.nix;
+  allRegisteredPorts = lib.collect builtins.isInt homelab;
 in
 {
   _module.args.homelab = homelab;
+
+  assertions = [
+    {
+      assertion = builtins.length allRegisteredPorts == builtins.length (lib.unique allRegisteredPorts);
+      message = "Rivendell's central homelab port registry contains a duplicate port.";
+    }
+  ];
 
   imports = [
     ./hardware-configuration.nix
