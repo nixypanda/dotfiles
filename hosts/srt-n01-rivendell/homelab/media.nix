@@ -329,7 +329,14 @@ in
     # downloaded media, artwork, and metadata group-writable so the separate
     # service users can create hardlinks and refresh files in place.
     jellyfin.serviceConfig.UMask = lib.mkForce "0002";
-    qbittorrent.serviceConfig.UMask = lib.mkForce "0002";
+    # qBittorrent can exit cleanly right after boot (for example while the
+    # media mount settles) and then stays down, which breaks every *arr app
+    # and qui. The exit status is 0, so "on-failure" would not catch it.
+    qbittorrent.serviceConfig = {
+      UMask = lib.mkForce "0002";
+      Restart = "always";
+      RestartSec = 5;
+    };
 
     # The pinned nixarr helper sends JSON, but Bazarr 1.6 only reads form data
     # on this endpoint. Keep nixarr's ordering and credential groups while
