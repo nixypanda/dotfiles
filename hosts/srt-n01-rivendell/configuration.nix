@@ -28,6 +28,15 @@ in
     };
   };
 
+  # A swapfile gives systemd-oomd room to act and absorbs memory spikes from the
+  # media stack instead of letting the machine thrash or hang under pressure.
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 8192;
+    }
+  ];
+
   # The Realtek USB Wi-Fi dongle initially presents as a virtual CD-ROM
   # device (0bda:1a2b); usb-modeswitch flips it into NIC mode at boot.
   hardware.usb-modeswitch.enable = true;
