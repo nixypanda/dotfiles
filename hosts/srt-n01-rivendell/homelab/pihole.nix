@@ -1,13 +1,10 @@
 {
-  config,
   homelab,
-  lib,
   pkgs,
   ...
 }:
 
 let
-  pihole = config.services.pihole-ftl.piholePackage;
   blocklists = [
     {
       url = "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts";
@@ -168,80 +165,10 @@ in
     };
   };
 
-  # Remove this override once nixpkgs includes
-  # 8f960c365db087e2712b4c383146802be339095d, which fixes the Pi-hole v6
-  # lists API call to pass the list type as a query parameter.
-  systemd.services.pihole-ftl-setup = {
-    # Do not make Pi-hole's setup traffic depend on the local resolver while
-    # Pi-hole itself is being restarted during activation.
-    serviceConfig.BindReadOnlyPaths = [ "${setupResolvConf}:/etc/resolv.conf" ];
-
-    script =
-      lib.mkForce # bash
-        ''
-          set -eo pipefail
-
-          pihole="${lib.getExe pihole}"
-          jq="${lib.getExe pkgs.jq}"
-
-          ${lib.getExe pkgs.curl} --retry 3 --retry-delay 5 \
-            "${config.services.pihole-ftl.macvendorURL}" \
-            -o "${config.services.pihole-ftl.settings.files.macvendor}" \
-            || echo "Failed to download MAC database"
-
-          if [ ! -f '${config.services.pihole-ftl.settings.files.gravity}' ]; then
-            $pihole -g
-            ${lib.getExe' pkgs.procps "kill"} -s SIGRTMIN "$(${lib.getExe' pkgs.systemd "systemctl"} show --property MainPID --value pihole-ftl.service)"
-          fi
-
-          source ${pihole}/share/pihole/advanced/Scripts/api.sh
-          source ${pihole}/share/pihole/advanced/Scripts/utils.sh
-
-          for i in 1 2 3; do
-            (TestAPIAvailability) && break
-            echo "Retrying API shortly..."
-            ${lib.getExe' pkgs.coreutils "sleep"} .5s
-          done
-
-          LoginAPI
-
-          add_blocklist() {
-            description="$1"
-            payload="$2"
-            result=$(PostFTLData "lists?type=block" "$payload")
-            error="$($jq '.error' <<< "$result")"
-            if [[ "$error" != "null" ]]; then
-              error_key="$($jq -r '.error.key // ""' <<< "$result")"
-              error_message="$($jq -r '.error.message // ""' <<< "$result")"
-              error_hint="$($jq -r '.error.hint // ""' <<< "$result")"
-              duplicate_constraint="UNIQUE constraint failed: adlist.address, adlist.type"
-              already_present="The item is already present"
-
-              if [[ "$error_key" == "database_error" ]] \
-                && [[ "$error_hint" == *"$duplicate_constraint"* || "$error_hint" == "$already_present" ]]; then
-                echo "$description blocklist already exists"
-              else
-                echo "Error adding $description blocklist: key=$error_key message=$error_message hint=$error_hint"
-                exit 1
-              fi
-            else
-              echo "Added $description blocklist"
-            fi
-          }
-
-          ${lib.concatMapStringsSep "\n" (list: ''
-            add_blocklist ${lib.escapeShellArg list.description} ${
-              lib.escapeShellArg (
-                builtins.toJSON {
-                  address = [ list.url ];
-                  comment = list.description;
-                  groups = [ 0 ];
-                }
-              )
-            }
-          '') blocklists}
-
-          $pihole -g
-        '';
-  };
+  # Pi-hole's nixpkgs module loads services.pihole-ftl.lists through the FTL v6
+  # API on startup. Only override the resolver binding so setup traffic does not
+  # depend on the local resolver while Pi-hole is being restarted.
+  systemd.services.pihole-ftl-setup.serviceConfig.BindReadOnlyPaths = [
+    "${setupResolvConf}:/etc/resolv.conf"
+  ];
 }
