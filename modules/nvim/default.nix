@@ -97,12 +97,11 @@ in
         (plug_dep telescope-ui-select-nvim)
 
         # Git
+        # Semantic views (ownai)
+        (plug ownai-nvim ./lua/ownai.lua)
         (plug gitsigns-nvim ./lua/gitsigns.lua)
         (lazy_plug blame-nvim ./lua/blame.lua)
         (lazy_plug diffview-nvim ./lua/diffview.lua)
-
-        # Semantic views (ownai)
-        (plug ownai-nvim ./lua/ownai.lua)
 
         # Keymaps
         (plug which-key-nvim ./lua/which-key.lua)

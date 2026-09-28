@@ -209,11 +209,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790080548,
-        "narHash": "sha256-u4sa7RCbwvk8cZmAGs35F7o0h4IqDc3wsrrnjQvMumk=",
+        "lastModified": 1790292277,
+        "narHash": "sha256-z+knvdMItRrMonmG4RIsqKYIa/hwYUzKjotDTfC5DDc=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "cbcbfa2778e0c5653ef349df3ebae8288efac3c0",
+        "rev": "4b9add8645d5e2b0f7de18f7a442d08fe2bdcc91",
         "type": "github"
       },
       "original": {
@@ -230,16 +230,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1785695257,
-        "narHash": "sha256-vIaba78QSIfnxYqmME4gzMzsTxXIdcX4zhxr2brjdIY=",
+        "lastModified": 1790330088,
+        "narHash": "sha256-gRIWOXZK893RiGL2SXo6/PG8GQz6JXBNPeyQge+JNcg=",
         "owner": "nixypanda",
         "repo": "kitty",
-        "rev": "b9c6c1e5ed9fba5adf56308660f1211759f29609",
+        "rev": "2383edaefd8debcd7d82021e7f0c20de2158950d",
         "type": "github"
       },
       "original": {
         "owner": "nixypanda",
-        "ref": "floating-pane-experiment",
+        "ref": "floating-pane-clean",
         "repo": "kitty",
         "type": "github"
       }
@@ -285,11 +285,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1790055231,
-        "narHash": "sha256-QpXotokGh5eeMG1Njiuh27oP0rK6t5+cMp7ymXSs7mc=",
+        "lastModified": 1790238896,
+        "narHash": "sha256-ym4BG18Pu2awiJIehla1Lo9xiB2QYRcCzW3SB74gEBY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b6c98e9e6633ee64753b594ff4a5febf0367fc00",
+        "rev": "34ca302a9572963c02e385c056be37c85ff51b77",
         "type": "github"
       },
       "original": {
@@ -323,11 +323,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1788710271,
-        "narHash": "sha256-vYCSS4wX21otwEAtfC5x8GHj/g4bthyhdFDswCEYcRA=",
+        "lastModified": 1790323842,
+        "narHash": "sha256-dY7jZBhF//pY4Inf/WjU1nyZr7WforkJvYTOd7YjfX0=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "a3b5045eb802fde1701e1394f1e81fd00442c642",
+        "rev": "71f701865e9345f6484598930e336483f06f4be7",
         "type": "github"
       },
       "original": {
@@ -339,11 +339,11 @@
     "nvim-cronex-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1788699902,
-        "narHash": "sha256-8YsNjk4s3rX864/h1T3gTG/AIPLmyyJpSMW7farcv+U=",
+        "lastModified": 1790299064,
+        "narHash": "sha256-r43YZi5olobnUt6+L8zFuJyG+Ek6mCKZlms+ZLXZOZ4=",
         "owner": "fabridamicelli",
         "repo": "cronex.nvim",
-        "rev": "9c6d5939192b51b9b84a810b0037c0c185dfc93b",
+        "rev": "1c1246ae815ecadbd2f2f2bebede8eceab9e023c",
         "type": "github"
       },
       "original": {
@@ -411,11 +411,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1790276103,
-        "narHash": "sha256-D7DjvxsmlgeN039yrYULpP/Q61FG53YGxogOMudQBA4=",
+        "lastModified": 1790540222,
+        "narHash": "sha256-BTwa3oL7erH3FRTAb1lhOkZlxY9HnmiaFv15IgYIMcc=",
         "ref": "feat/nvim-show",
-        "rev": "03f21c522a7323d2d0d2fff68406a45c1d427280",
-        "revCount": 73,
+        "rev": "40d701d3074192f3d66f42251d4ed77e30a0f14a",
+        "revCount": 80,
         "type": "git",
         "url": "file:///Users/nixypanda/Documents/open-source/ownai"
       },
@@ -554,7 +554,6 @@
         "nvim-sqls-src": "nvim-sqls-src"
       },
       "locked": {
-        "lastModified": 1783331397,
         "narHash": "sha256-YbH0mHLjEM/uhpe+EqeStzC5sYMlMd1UsrSb10fIkGw=",
         "path": "/Users/nixypanda/.dotfiles/modules/nvim/plugins",
         "type": "path"

@@ -35,7 +35,7 @@
     };
     # my stuff
     kitty-upstream = {
-      url = "github:nixypanda/kitty/floating-pane-experiment";
+      url = "github:nixypanda/kitty/floating-pane-clean";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     calco = {
