@@ -61,6 +61,27 @@
         "url": "ssh://git@github.com/nixypanda/calco.git"
       }
     },
+    "codect": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay_2"
+      },
+      "locked": {
+        "lastModified": 1790774007,
+        "narHash": "sha256-DaoHa27ZJR1UFbXDk+HLzfPxHB0At0gwNe8Jd9horFs=",
+        "ref": "refs/heads/main",
+        "rev": "91788d34b40fa2c50af1b0ef6cd609010d83fc35",
+        "revCount": 151,
+        "type": "git",
+        "url": "ssh://git@github.com/nixypanda/codect.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/nixypanda/codect.git"
+      }
+    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -299,22 +320,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
-      "locked": {
-        "lastModified": 1789885152,
-        "narHash": "sha256-mDNo95riUw8k0MA2Btzj/OuiMcfLKofqIliLYsLbrSY=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "6d663c0533ff269008fb84e45930151e37c99db9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-26.05",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nur": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -405,31 +410,12 @@
         "url": "ssh://git@github.com/nixypanda/onepacerr-ui.git"
       }
     },
-    "ownai": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_3",
-        "rust-overlay": "rust-overlay_2"
-      },
-      "locked": {
-        "lastModified": 1790540222,
-        "narHash": "sha256-BTwa3oL7erH3FRTAb1lhOkZlxY9HnmiaFv15IgYIMcc=",
-        "ref": "feat/nvim-show",
-        "rev": "40d701d3074192f3d66f42251d4ed77e30a0f14a",
-        "revCount": 80,
-        "type": "git",
-        "url": "file:///Users/nixypanda/Documents/open-source/ownai"
-      },
-      "original": {
-        "ref": "feat/nvim-show",
-        "type": "git",
-        "url": "file:///Users/nixypanda/Documents/open-source/ownai"
-      }
-    },
     "root": {
       "inputs": {
         "agenix": "agenix",
         "agent-skills": "agent-skills",
         "calco": "calco",
+        "codect": "codect",
         "darwin": "darwin_2",
         "hedger": "hedger",
         "home-manager": "home-manager_2",
@@ -438,7 +424,6 @@
         "nixpkgs": "nixpkgs_2",
         "nur": "nur",
         "onepacerr-ui": "onepacerr-ui",
-        "ownai": "ownai",
         "vim-plugins": "vim-plugins"
       }
     },
@@ -463,7 +448,7 @@
     "rust-overlay_2": {
       "inputs": {
         "nixpkgs": [
-          "ownai",
+          "codect",
           "nixpkgs"
         ]
       },

@@ -1,7 +1,7 @@
 {
   pkgs,
   colorscheme,
-  ownai,
+  codect,
   ...
 }:
 let
@@ -66,7 +66,7 @@ in
           optional = true;
         };
         lazy_plug = name: config: (plug name config) // { optional = true; };
-        ownai-nvim = ownai.packages.${pkgs.system}.ownai-nvim;
+        codect-nvim = codect.packages.${pkgs.system}.codect-nvim;
       in
       with pkgs.vimPlugins;
       [
@@ -97,8 +97,8 @@ in
         (plug_dep telescope-ui-select-nvim)
 
         # Git
-        # Semantic views (ownai)
-        (plug ownai-nvim ./lua/ownai.lua)
+        # Semantic views (codect)
+        (plug codect-nvim ./lua/codect.lua)
         (plug gitsigns-nvim ./lua/gitsigns.lua)
         (lazy_plug blame-nvim ./lua/blame.lua)
         (lazy_plug diffview-nvim ./lua/diffview.lua)

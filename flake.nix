@@ -19,16 +19,6 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    agent-skills = {
-      url = "git+ssh://git@github.com/nixypanda/agent-skills.git";
-      flake = false;
-    };
-    # Applying the configuration happens from the.dotfiles directory so the
-    # relative path is defined accordingly. This has potential of causing issues.
-    vim-plugins = {
-      url = "path:/Users/nixypanda/.dotfiles/modules/nvim/plugins";
-    };
-    # MacOS specific inputs
     darwin = {
       url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,11 +40,18 @@
       url = "git+ssh://git@github.com/nixypanda/hedger.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Local checkout while the Neovim plugin lives on an unmerged branch.
-    # `git+file` (not `path`) so Nix copies only tracked files; a `path` input
-    # would drag the multi-gigabyte `target/` directory into the store.
-    ownai = {
-      url = "git+file:///Users/nixypanda/Documents/open-source/ownai?ref=feat/nvim-show";
+    codect = {
+      url = "git+ssh://git@github.com/nixypanda/codect.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    agent-skills = {
+      url = "git+ssh://git@github.com/nixypanda/agent-skills.git";
+      flake = false;
+    };
+    # Applying the configuration happens from the.dotfiles directory so the
+    # relative path is defined accordingly. This has potential of causing issues.
+    vim-plugins = {
+      url = "path:/Users/nixypanda/.dotfiles/modules/nvim/plugins";
     };
   };
   outputs =
@@ -71,7 +68,7 @@
       calco,
       onepacerr-ui,
       hedger,
-      ownai,
+      codect,
       ...
     }:
     let
@@ -99,7 +96,7 @@
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system}.extend (lib.composeManyExtensions macOverlays);
           extraSpecialArgs = {
-            inherit agent-skills ownai;
+            inherit agent-skills codect;
           };
           modules = [
             ./modules/mac/home.nix

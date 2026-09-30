@@ -1,7 +1,7 @@
 {
   lib,
   pkgs,
-  ownai,
+  codect,
   ...
 }:
 let
@@ -31,7 +31,7 @@ in
       opencode-desktop
       # Personal app, intentionally Mac-only; not expected to build on the
       # Linux hosts.
-      ownai.packages.${pkgs.system}.default
+      codect.packages.${pkgs.system}.default
     ];
   };
 
