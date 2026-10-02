@@ -3,19 +3,12 @@ require("lz.n").load({
 	event = { "BufReadPost", "BufNewFile" },
 	after = function()
 		require("lint").linters_by_ft = {
-			markdown = { "vale", "markdownlint" },
+			markdown = { "vale", "rumdl" },
 			nix = { "statix" },
 			bash = { "shellcheck" },
 			sh = { "shellcheck" },
 			dockerfile = { "hadolint" },
 			yaml = { "yamllint" },
-		}
-
-		local xdg_config = os.getenv("XDG_CONFIG_HOME") or vim.fn.expand("~/.config")
-
-		require("lint").linters.markdownlint.args = {
-			"--config", xdg_config .. "/markdownlint/config.json",
-			"--json"
 		}
 
 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {

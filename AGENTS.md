@@ -205,17 +205,17 @@ Format (if desired/available):
 
 ### Markdown / Prose
 Markdown lint:
-- `markdownlint <file-or-dir>`
+- `rumdl check <file-or-dir>`
 
 Vale:
 - `vale <file-or-dir>`
 
 Repo provides:
-- `modules/programming/markdown_lint.json`
+- `modules/programming/rumdl.toml`
 - `modules/programming/vale.ini`
 
 ### Git (optional)
-- `gitlint`
+- `committed` (commit message linting)
 
 ---
 
@@ -305,9 +305,11 @@ Neovim config wires these tools:
 - Format on save via `conform.nvim` (`modules/nvim/lua/conform.lua`)
   - lua: `stylua`
   - nix: `nixfmt`
-  - markdown: `prettier`, `markdownlint`
+  - css/html/javascript/typescript/json: `biome`
+  - markdown: `rumdl`
+  - yaml: `yamlfmt`
 - Linting via `nvim-lint` (`modules/nvim/lua/lint.lua`)
-  - markdown: `vale`, `markdownlint`
+  - markdown: `vale`, `rumdl`
   - nix: `statix`
   - sh/bash: `shellcheck`
   - dockerfile: `hadolint`

@@ -76,7 +76,6 @@ in
         pip
       ]
     ))
-    pyright
     ruff
     # ty
 
@@ -89,24 +88,20 @@ in
     dockerfile-language-server
 
     # HTML/CSS/JS
-    vscode-langservers-extracted
-    typescript-language-server
+    biome # vscode-langservers-extracted, typescript-language-server, prettier
 
     # Lua
     lua-language-server
     stylua
 
     # Make
-    cmake-language-server
+    neocmakelsp # cmake-language-server
 
     # Nix
     nixd
     deadnix
     statix
     nixfmt
-
-    # Terraform
-    terraform-lsp
 
     # Elm
     # elmPackages.elm
@@ -121,12 +116,13 @@ in
     # YAML
     yaml-language-server
     yamllint
+    yamlfmt # prettier (yaml)
 
     # SQL
     postgresql
 
     # Git / Build tools
-    gitlint
+    committed # gitlint
     just
 
     # AI coding assistants
@@ -135,15 +131,13 @@ in
 
     # Prose / Markdown
     vale
-    markdownlint-cli
-    # General purpose / multiple langs
-    prettier
+    rumdl # markdownlint-cli, prettier (markdown)
   ];
 
   home.file = {
     ".config/vale/config.ini".source = ./vale.ini;
     ".local/share/vale/styles".source = vale_styles;
-    ".config/markdownlint/config.json".source = ./markdown_lint.json;
+    ".config/rumdl/rumdl.toml".source = ./rumdl.toml;
     ".config/opencode/skills/elmcraft".source = elmcraft;
     ".config/opencode/commands/elmcraft.md".source = elmcraft + "/shims/opencode-command.md";
     ".config/opencode/skills/grill-me".source = grill-me;

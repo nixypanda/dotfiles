@@ -1,0 +1,11 @@
+# rumdl configuration (replaces the old markdownlint JSON).
+# Loaded from $XDG_CONFIG_HOME/rumdl/rumdl.toml.
+# See: https://rumdl.dev
+
+# MD013/line-length
+[MD013]
+line-length = 800
+
+# MD033/no-inline-html
+[MD033]
+allowed-elements = ["summary", "details"]

@@ -14,7 +14,7 @@ archive="$(
   NIX_SSHOPTS="${ssh_options}" \
     nix flake archive --json --to "ssh://${remote}" "${repo}"
 )"
-flake_path="$(printf '%s\n' "${archive}" | jq -er '.path')"
+flake_path="$(printf '%s\n' "${archive}" | jaq -er '.path')"
 
 ssh -t \
   -i "${ssh_key}" \

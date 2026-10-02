@@ -24,8 +24,15 @@ require("lz.n").load({
 
 		local on_attach = require("common").lsp_on_attach
 
-		-- JavaScript/TypeScript
-		vim.lsp.config("ts_ls", { on_attach = on_attach })
+		-- JavaScript/TypeScript/CSS/JSON/HTML (Biome)
+		vim.lsp.config("biome", {
+			on_attach = on_attach,
+			workspace_required = false,
+			root_dir = function(bufnr, on_dir)
+				local root = vim.fs.root(bufnr, { "biome.json", "biome.jsonc", "package.json", ".git" })
+				on_dir(root or vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)))
+			end,
+		})
 
 		-- Lua
 		vim.lsp.config("lua_ls", {
@@ -120,7 +127,6 @@ require("lz.n").load({
 				logLevel = "warn",
 			},
 		})
-		vim.lsp.config("pyright", { on_attach = on_attach })
 		vim.lsp.config("basedpyright", {
 			on_attach = on_attach,
 			settings = {
@@ -144,27 +150,12 @@ require("lz.n").load({
 			},
 		})
 
-		-- Terraform
-		vim.lsp.config("terraform_lsp", { on_attach = on_attach })
-
 		-- General language servers
 		vim.lsp.config("bashls", { on_attach = on_attach })
-		vim.lsp.config("cmake", { on_attach = on_attach })
-		vim.lsp.config("cssls", { on_attach = on_attach })
+		vim.lsp.config("neocmake", { on_attach = on_attach })
 		vim.lsp.config("dockerls", { on_attach = on_attach })
-		vim.lsp.config("html", { on_attach = on_attach })
 
-		-- json/yaml/TOML configs
-		vim.lsp.config("jsonls", {
-			on_attach = on_attach,
-			settings = {
-				json = {
-					schemas = require("schemastore").json.schemas(),
-					validate = { enable = true },
-				},
-			},
-		})
-
+		-- yaml/TOML configs
 		vim.lsp.config("yamlls", {
 			on_attach = on_attach,
 			settings = {
@@ -188,7 +179,7 @@ require("lz.n").load({
 		})
 
 		vim.lsp.enable({
-			"ts_ls",
+			"biome",
 			"elmls",
 			"hledger_lsp",
 			"lua_ls",
@@ -198,13 +189,9 @@ require("lz.n").load({
 			-- "pyright",
 			-- "basedpyright",
 			"ty",
-			"cssls",
-			"terraform_lsp",
 			"bashls",
-			"cmake",
+			"neocmake",
 			"dockerls",
-			"html",
-			"jsonls",
 			"yamlls",
 			"taplo",
 		})

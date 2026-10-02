@@ -10,8 +10,7 @@
     [
       # CLI tools / Terminal facification
       dig
-      unzip
-      py7zr
+      ouch # unzip, py7zr
       qpdf
       hledger
       hledger-ui
@@ -31,7 +30,7 @@
 
       # Structured data
       jc
-      jq
+      jaq # jq
 
       # Nix related
       nixVersions.latest
