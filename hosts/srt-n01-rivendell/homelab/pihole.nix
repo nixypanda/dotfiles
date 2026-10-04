@@ -120,6 +120,16 @@ let
       description = "CyberHost.uk Malware Domains";
     }
   ];
+  allowlistFile = pkgs.writeText "pihole-allowlist.txt" ''
+    fc.yahoo.com
+  '';
+  allowlists = [
+    {
+      url = "file://${allowlistFile}";
+      type = "allow";
+      description = "Local allowlist";
+    }
+  ];
   setupResolvConf = pkgs.writeText "pihole-ftl-setup-resolv.conf" ''
     nameserver 1.1.1.1
     nameserver 9.9.9.9
@@ -132,7 +142,7 @@ in
       openFirewallDNS = true;
       openFirewallWebserver = true;
       queryLogDeleter.enable = true;
-      lists = blocklists;
+      lists = blocklists ++ allowlists;
       settings = {
         misc.readOnly = false;
         webserver.api.cli_pw = true;
