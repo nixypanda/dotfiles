@@ -64,6 +64,20 @@ in
     # Official signed/notarized Electron shell, installed from the pinned
     # nightly-channel ZIP; see ../programming/dsh/desktop.nix.
     desktop.enable = true;
+
+    # Codect sidebar plugin: focused projection (Show) and focused diff
+    # (Diff) tabs in the right sidebar. The bundle is built by the codect flake
+    # (`packages.<system>.codect-dsh`) and installed into the desktop profile.
+    # `binary` is pinned to the Nix store path because the Desktop app does not
+    # inherit the login shell's PATH.
+    plugins."@nixypanda/dsh-codect" = {
+      spec = "${codect.packages.${pkgs.system}.codect-dsh}/codect-dsh.tgz";
+      id = "codect";
+      profiles = [ "desktop" ];
+      config = {
+        binary = "${codect.packages.${pkgs.system}.default}/bin/codect";
+      };
+    };
   };
 
   nixpkgs.config = {
