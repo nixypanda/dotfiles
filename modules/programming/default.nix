@@ -45,6 +45,10 @@ let
       '';
 in
 {
+  imports = [
+    ./dsh.nix
+  ];
+
   home.packages = with pkgs; [
     # Docker
     docker

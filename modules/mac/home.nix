@@ -35,6 +35,37 @@ in
     ];
   };
 
+  programs.dsh = {
+    enable = true;
+
+    # Home-level DSH operator patch layer. DSH composes a profile tree from, in
+    # order: each bundle's patch, the profile's own cordis.patch.yml (the file
+    # the Models UI writes), this home-level layer, then any --patch overlays.
+    # Because a later layer replaces the whole entry config, this restates the
+    # full llm-pi-ai provider.
+    #
+    # OpenCode Go is a built-in `dsh-llm-pi-ai` catalog route, so the installed
+    # pi-ai catalog already supplies the base URL, wire protocol, and model
+    # list. We only add the credential reference and the session header OpenCode
+    # Go uses to route and prompt-cache requests. Without x-opencode-session the
+    # adapter sends no session id, so Go cannot cache the conversation prefix
+    # and monthly usage is consumed roughly 20x faster than the published
+    # estimates.
+    patch = [
+      {
+        id = "llm-pi-ai";
+        config.providers.opencode-go = {
+          apiKeyEnv = "OPENCODE_GO_API_KEY";
+          headers.x-opencode-session = "e277fced-b8d2-4a41-9162-c71d8692c04d";
+        };
+      }
+    ];
+
+    # Official signed/notarized Electron shell, installed from the pinned
+    # nightly-channel ZIP; see ../programming/dsh/desktop.nix.
+    desktop.enable = true;
+  };
+
   nixpkgs.config = {
     allowUnfreePredicate =
       pkg:
