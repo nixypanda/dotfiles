@@ -5,10 +5,6 @@
   ...
 }:
 {
-  _module.args = {
-    colorscheme = import ../../colorschemes/tokyonight.nix;
-  };
-
   home = {
     homeDirectory = "/Users/nixypanda";
     username = "nixypanda";
@@ -82,21 +78,7 @@
   };
 
   imports = [
-    ../../modules/claude
-    ../../modules/cli.nix
-    ../../modules/dsh
-    ../../modules/env.nix
-    ../../modules/firefox
-    ../../modules/git.nix
-    ../../modules/hledger.nix
-    ../../modules/kitty
-    ../../modules/kitty/dev.nix
-    ../../modules/nu
-    ../../modules/nvim
-    ../../modules/programming.nix
-    ../../modules/rumdl
-    ../../modules/vale
-    ../../modules/system-management
+    ../../profiles/workstation/home.nix
   ];
 
   xdg.configFile."nix/nix.conf".text = ''

@@ -1,9 +1,16 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
+let
+  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
+in
 {
-  home.packages = with pkgs; [
-    git-crypt
-    difftastic
-  ];
+  home.packages = lib.optionals isDarwin (
+    with pkgs;
+    [
+      git-crypt
+      difftastic
+    ]
+  );
+
   programs = {
     git = {
       enable = true;
@@ -14,21 +21,22 @@
         init.defaultBranch = "main";
         merge.conflictstyle = "diff3";
         core.editor = "vi";
-        http.sslCAInfo = "/etc/ssl/cert.pem";
 
         # NOTE: Required so that `go get` can fetch private repos
         # NOTE: cargo breaks if this is present in the config
         # So you have choose between rust or go (Or find a solution for this)
         # url."ssh://git@github.com/".insteadOf = "https://github.com/";
+      }
+      // lib.optionalAttrs isDarwin {
+        http.sslCAInfo = "/etc/ssl/cert.pem";
       };
-
     };
-
+  }
+  // lib.optionalAttrs isDarwin {
     gh = {
       enable = true;
       settings.git_protocol = "ssh";
     };
-    # difftastic = { enable = true; };
     delta = {
       enable = true;
       enableGitIntegration = true;
@@ -40,7 +48,6 @@
           file-decoration-style = "none";
         };
       };
-
     };
   };
 }

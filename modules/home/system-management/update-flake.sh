@@ -2,6 +2,5 @@
 
 set -e
 
-pushd ~/.dotfiles
+cd ~/.dotfiles
 nix flake update --flake .
-popd

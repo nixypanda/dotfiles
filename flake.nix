@@ -72,45 +72,45 @@
 
       # These overlays are scoped to the Home Manager package set. nix-darwin
       # intentionally keeps plain nixpkgs for system configuration.
-      macOverlays = [
+      darwinOverlays = [
         kitty-dev-build-overlay
         (_: prev: { agenix = agenix.packages.${prev.system}.default; })
         nur.overlays.default
         vim-plugins.overlay
       ];
 
-      # Mac hosts mapped to the system each builds for. Everything the Macs
-      # share lives in modules/mac/; a host directory only holds what is
-      # genuinely host-specific (see hosts/<host>/system/configuration.nix).
-      macHosts = {
+      # Darwin hosts mapped to the system each builds for. Shared config lives
+      # in modules/, composed by the workstation profile; a host directory
+      # holds only what is genuinely host-specific.
+      darwinHosts = {
         srt-l03-shire = "aarch64-darwin";
       };
 
-      mkMacHome =
-        _name: system:
+      mkDarwinHome =
+        name: system:
         home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.${system}.extend (lib.composeManyExtensions macOverlays);
+          pkgs = nixpkgs.legacyPackages.${system}.extend (lib.composeManyExtensions darwinOverlays);
           extraSpecialArgs = {
             inherit codect;
           };
           modules = [
-            ./modules/mac/home.nix
+            ./hosts/${name}/home.nix
           ];
         };
 
-      mkMacSystem =
+      mkDarwinSystem =
         name: system:
         darwin.lib.darwinSystem {
           pkgs = nixpkgs.legacyPackages.${system};
           modules = [
-            ./hosts/${name}/system/configuration.nix
+            ./hosts/${name}/configuration.nix
           ];
         };
     in
     {
-      homeConfigurations = lib.mapAttrs mkMacHome macHosts;
+      homeConfigurations = lib.mapAttrs mkDarwinHome darwinHosts;
 
-      darwinConfigurations = lib.mapAttrs mkMacSystem macHosts;
+      darwinConfigurations = lib.mapAttrs mkDarwinSystem darwinHosts;
 
       nixosConfigurations."srt-n01-rivendell" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

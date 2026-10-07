@@ -15,10 +15,10 @@ rec {
   # DSH boots through node-addon-require-builtin, which pattern-matches the
   # running Node binary's machine code. That probe only recognises official
   # nodejs.org builds, so the wrapper runs under nodejs-official rather than
-  # pkgs.nodejs; see ../../pkgs/nodejs-official.nix.
+  # pkgs.nodejs; see ../../../pkgs/nodejs-official.nix.
   #
   # pnpm is installed because profile/plugin operations forward to it.
-  nodejsOfficial = pkgs.callPackage ../../pkgs/nodejs-official.nix {
+  nodejsOfficial = pkgs.callPackage ../../../pkgs/nodejs-official.nix {
     version = cfg.cli.nodejsVersion;
   };
 
@@ -28,7 +28,7 @@ rec {
     version = cfg.cli.version;
   };
 
-  dshDesktop = pkgs.callPackage ../../pkgs/deepseek-harness-desktop.nix {
+  dshDesktop = pkgs.callPackage ../../../pkgs/deepseek-harness-desktop.nix {
     version = cfg.desktop.version;
   };
 
