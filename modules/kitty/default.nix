@@ -2,30 +2,10 @@
   pkgs,
   colorscheme,
   config,
-  lib,
   ...
 }:
 let
-  kittySessionPicker = pkgs.writeShellScript "kitty-session-picker" (
-    lib.replaceStrings
-      [
-        "@find@"
-        "@sort@"
-        "@basename@"
-        "@cut@"
-        "@fzf@"
-        "@kitty@"
-      ]
-      [
-        "${pkgs.findutils}/bin/find"
-        "${pkgs.coreutils}/bin/sort"
-        "${pkgs.coreutils}/bin/basename"
-        "${pkgs.coreutils}/bin/cut"
-        "${pkgs.fzf}/bin/fzf"
-        "${pkgs.kitty}/bin/kitty"
-      ]
-      (builtins.readFile ./kitty-session-picker.sh)
-  );
+  kittySessionPicker = import ../../scripts/kitty-session-picker.nix { inherit pkgs; };
 in
 {
   programs.kitty = {
