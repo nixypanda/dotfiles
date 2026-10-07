@@ -5,7 +5,7 @@ _: {
     ./dashboard.nix
     ./ebooks.nix
     ./hledger.nix
-    ./media.nix
+    ./media
     ./music.nix
     ./onepacerr.nix
     ./pihole.nix

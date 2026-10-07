@@ -24,14 +24,14 @@ let
       password.secret = config.age.secrets.qbittorrentPassword.path;
     };
   };
-  bazarrSyncArrSettings = import ../../../scripts/media/bazarr-sync-arr-settings.nix {
+  bazarrSyncArrSettings = import ./bazarr-sync-arr-settings.nix {
     inherit pkgs;
     stateDir = config.nixarr.stateDir;
     sonarrPort = ports.sonarr.local;
     radarrPort = ports.radarr.local;
     bazarrPort = ports.bazarr.local;
   };
-  mediaUnlinked = import ../../../scripts/media/media-unlinked.nix { inherit pkgs; };
+  mediaUnlinked = import ./media-unlinked.nix { inherit pkgs; };
 in
 {
   nixarr = {
