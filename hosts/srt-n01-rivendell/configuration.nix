@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 
 let
-  homelab = import ./homelab/ports.nix;
+  homelab = import ../../services/ports.nix;
   allRegisteredPorts = lib.collect builtins.isInt homelab;
 in
 {
@@ -17,7 +17,8 @@ in
   imports = [
     ./hardware-configuration.nix
     ./storage.nix
-    ./homelab
+    ../../modules/system/nixos
+    ../../services
   ];
 
   boot = {
@@ -54,35 +55,10 @@ in
     firewall = {
       enable = true;
       allowedTCPPorts = [ homelab.firewall.ssh ];
-      trustedInterfaces = [ "tailscale0" ];
     };
-  };
-
-  nix = {
-    settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
   };
 
   nixpkgs.config.allowUnfree = true;
-
-  time.timeZone = "Asia/Kolkata";
-
-  i18n = {
-    defaultLocale = "en_IN";
-    extraLocaleSettings = {
-      LC_ADDRESS = "en_IN";
-      LC_IDENTIFICATION = "en_IN";
-      LC_MEASUREMENT = "en_IN";
-      LC_MONETARY = "en_IN";
-      LC_NAME = "en_IN";
-      LC_NUMERIC = "en_IN";
-      LC_PAPER = "en_IN";
-      LC_TELEPHONE = "en_IN";
-      LC_TIME = "en_IN";
-    };
-  };
 
   services = {
     xserver = {
@@ -105,23 +81,6 @@ in
         support32Bit = true;
       };
       pulse.enable = true;
-    };
-
-    openssh = {
-      enable = true;
-      settings = {
-        KbdInteractiveAuthentication = false;
-        PasswordAuthentication = false;
-        PermitRootLogin = "no";
-      };
-    };
-
-    tailscale = {
-      enable = true;
-      openFirewall = true;
-      # Without a tailnet-wide global resolver, accepting Tailscale DNS makes
-      # 100.100.100.100 recursively depend on itself and external lookups fail.
-      extraSetFlags = [ "--accept-dns=false" ];
     };
 
     logind.settings.Login = {

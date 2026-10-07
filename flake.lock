@@ -23,22 +23,6 @@
         "type": "github"
       }
     },
-    "agent-skills": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1789626453,
-        "narHash": "sha256-9d0SGgLgOPb6Rn+KTcnovhXGONk0MFGAQ6g3Uuy6EgI=",
-        "ref": "refs/heads/main",
-        "rev": "5ab62e31a069da17b0b8d2caab467436c7fad9fa",
-        "revCount": 3,
-        "type": "git",
-        "url": "ssh://git@github.com/nixypanda/agent-skills.git"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/nixypanda/agent-skills.git"
-      }
-    },
     "calco": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -414,7 +398,6 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
-        "agent-skills": "agent-skills",
         "calco": "calco",
         "codect": "codect",
         "darwin": "darwin_2",
@@ -541,11 +524,11 @@
       },
       "locked": {
         "narHash": "sha256-YbH0mHLjEM/uhpe+EqeStzC5sYMlMd1UsrSb10fIkGw=",
-        "path": "/Users/nixypanda/.dotfiles/modules/nvim/plugins",
+        "path": "/Users/nixypanda/.dotfiles/pkgs/vim-plugins",
         "type": "path"
       },
       "original": {
-        "path": "/Users/nixypanda/.dotfiles/modules/nvim/plugins",
+        "path": "/Users/nixypanda/.dotfiles/pkgs/vim-plugins",
         "type": "path"
       }
     },
