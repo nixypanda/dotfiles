@@ -28,15 +28,10 @@ let
     version = cfg.cli.nodejsVersion;
   };
 
-  dshCli = pkgs.writeShellApplication {
-    name = "dsh";
-    runtimeInputs = [
-      nodejsOfficial
-      pkgs.pnpm
-    ];
-    text = ''
-      exec npx --yes "@deepseek-ai/dsh@${cfg.cli.version}" "$@"
-    '';
+  dshCli = import ../../scripts/dsh/cli.nix {
+    inherit pkgs;
+    nodejs = nodejsOfficial;
+    version = cfg.cli.version;
   };
 
   dshDesktop = pkgs.callPackage ../../pkgs/deepseek-harness-desktop.nix {
