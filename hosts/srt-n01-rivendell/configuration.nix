@@ -17,7 +17,8 @@ in
   imports = [
     ./hardware-configuration.nix
     ./storage.nix
-    ../../profiles/homelab/system.nix
+    ../../modules/system/nixos
+    ../../services
   ];
 
   boot = {

@@ -152,7 +152,6 @@ from the codebase.
   NixOS home server output.
 - Reusable user/program modules live under `modules/home/`; shared system
   modules live under `modules/system/`.
-- Reusable machine roles live under `profiles/` (`workstation/`, `homelab/`).
 - NixOS service modules live under `services/`.
 - Per-host configuration lives under `hosts/<host>/`.
 - Neovim Lua config lives under `modules/home/nvim/lua/`.
