@@ -4,9 +4,6 @@
   codect,
   ...
 }:
-let
-  opencode-desktop = import ../../scripts/opencode-desktop-env.nix { inherit pkgs; };
-in
 {
   _module.args = {
     colorscheme = import ../../colorschemes/tokyonight.nix;
@@ -20,7 +17,6 @@ in
       bitwarden-desktop
       google-chrome
       nerd-fonts.hack
-      opencode-desktop
       # Personal app, intentionally Mac-only; not expected to build on the
       # Linux hosts.
       codect.packages.${pkgs.system}.default
