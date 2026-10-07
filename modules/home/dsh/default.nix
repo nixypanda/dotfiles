@@ -1,156 +1,56 @@
 {
-  config,
-  lib,
   pkgs,
+  codect,
   ...
 }:
-
-let
-  cfg = config.programs.dsh;
-
-  packages = import ./packages.nix { inherit pkgs lib cfg; };
-in
 {
-  imports = [ ./home.nix ];
+  imports = [
+    ./home.nix
+    ./options.nix
+  ];
 
-  options.programs.dsh = {
-    enable = lib.mkEnableOption "DeepSeek Harness (dsh)";
+  programs.dsh = {
+    enable = true;
 
-    cli = {
-      version = lib.mkOption {
-        type = lib.types.str;
-        default = "0.2.0-rc.2";
-        description = "npm version of `@deepseek-ai/dsh` the `dsh` wrapper runs.";
+    # Home-level DSH operator patch layer. DSH composes a profile tree from, in
+    # order: each bundle's patch, the profile's own cordis.patch.yml (the file
+    # the Models UI writes), this home-level layer, then any --patch overlays.
+    # Because a later layer replaces the whole entry config, this restates the
+    # full llm-pi-ai provider.
+    #
+    # OpenCode Go is a built-in `dsh-llm-pi-ai` catalog route, so the installed
+    # pi-ai catalog already supplies the base URL, wire protocol, and model
+    # list. We only add the credential reference and the session header OpenCode
+    # Go uses to route and prompt-cache requests. Without x-opencode-session the
+    # adapter sends no session id, so Go cannot cache the conversation prefix
+    # and monthly usage is consumed roughly 20x faster than the published
+    # estimates.
+    patch = [
+      {
+        id = "llm-pi-ai";
+        config.providers.opencode-go = {
+          apiKeyEnv = "OPENCODE_GO_API_KEY";
+          headers.x-opencode-session = "e277fced-b8d2-4a41-9162-c71d8692c04d";
+        };
+      }
+    ];
+
+    # Official signed/notarized Electron shell, installed from the pinned
+    # nightly-channel ZIP; see ../../../pkgs/deepseek-harness-desktop.nix.
+    desktop.enable = true;
+
+    # Codect sidebar plugin: focused projection (Show) and focused diff
+    # (Diff) tabs in the right sidebar. The bundle is built by the codect flake
+    # (`packages.<system>.codect-dsh`) and installed into the desktop profile.
+    # `binary` is pinned to the Nix store path because the Desktop app does not
+    # inherit the login shell's PATH.
+    plugins."@nixypanda/dsh-codect" = {
+      spec = "${codect.packages.${pkgs.system}.codect-dsh}/codect-dsh.tgz";
+      id = "codect";
+      profiles = [ "desktop" ];
+      config = {
+        binary = "${codect.packages.${pkgs.system}.default}/bin/codect";
       };
-
-      nodejsVersion = lib.mkOption {
-        type = lib.types.str;
-        default = "24.21.0";
-        description = ''
-          Official nodejs.org build DSH runs under. DSH's native addon probe
-          rejects nixpkgs Node, so this must be an official build.
-        '';
-      };
-
-      package = lib.mkOption {
-        type = lib.types.package;
-        default = packages.dshCli;
-        defaultText = lib.literalExpression "the `dsh` npm-launcher wrapper";
-        description = "Package providing the `dsh` command.";
-      };
-    };
-
-    desktop = {
-      enable = lib.mkEnableOption "DeepSeek Harness Desktop (macOS app)";
-
-      profileName = lib.mkOption {
-        type = lib.types.str;
-        default = "desktop";
-        description = "DSH profile owned by the desktop app.";
-      };
-
-      version = lib.mkOption {
-        type = lib.types.str;
-        default = "0.2.0-rc.2";
-        description = ''
-          Desktop release to install. Its artifact URL and sha512 are read from
-          the Nightly update feed; see ../../../pkgs/deepseek-harness-desktop.nix for how to bump.
-        '';
-      };
-
-      package = lib.mkOption {
-        type = lib.types.package;
-        default = packages.dshDesktop;
-        defaultText = lib.literalExpression "pinned DeepSeek Harness Desktop app";
-        description = "The DeepSeek Harness Desktop application bundle.";
-      };
-    };
-
-    profiles = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = [ "web" ];
-      description = "DSH profiles that plugins install into unless they override `profiles`.";
-    };
-
-    patch = lib.mkOption {
-      type = lib.types.listOf lib.types.attrs;
-      default = [ ];
-      example = lib.literalExpression ''
-        [
-          {
-            id = "llm-pi-ai";
-            config.providers.example = {
-              apiKeyEnv = "EXAMPLE_API_KEY";
-            };
-          }
-        ]
-      '';
-      description = ''
-        Entries for the home-level `$DSH_HOME/cordis.patch.yml`. This is the
-        highest-priority DSH layer: a later layer replaces an entry's whole
-        `config`, so an id-targeted patch restates the fields it keeps. Values
-        must be plain data (no `!!js` expressions).
-      '';
-    };
-
-    plugins = lib.mkOption {
-      type = lib.types.attrsOf (
-        lib.types.submodule (
-          { name, ... }: {
-            options = {
-              enable = lib.mkOption {
-                type = lib.types.bool;
-                default = true;
-                description = "Whether this plugin declaration is active.";
-              };
-
-              install = lib.mkOption {
-                type = lib.types.bool;
-                default = true;
-                description = ''
-                  Install the package into the target profiles with
-                  `dsh plugin add` and select it as a bundle. Set false for a
-                  config-only declaration over a built-in entry.
-                '';
-              };
-
-              spec = lib.mkOption {
-                type = lib.types.str;
-                default = name;
-                defaultText = lib.literalExpression "the attribute name";
-                description = "pnpm spec passed to `dsh plugin add` (name, range, tag, git or file URL).";
-              };
-
-              bundle = lib.mkOption {
-                type = lib.types.bool;
-                default = true;
-                description = "Select the package in the profile's `dsh.profile.bundles`.";
-              };
-
-              id = lib.mkOption {
-                type = lib.types.nullOr lib.types.str;
-                default = null;
-                defaultText = lib.literalExpression "the attribute name";
-                description = "Cordis entry id to patch when `config` is set.";
-              };
-
-              config = lib.mkOption {
-                type = lib.types.attrs;
-                default = { };
-                description = "Config for the entry `id`, written into the home patch.";
-              };
-
-              profiles = lib.mkOption {
-                type = lib.types.listOf lib.types.str;
-                default = config.programs.dsh.profiles;
-                description = "Profiles to install into. `desktop` needs `desktop.enable`.";
-              };
-            };
-          }
-        )
-      );
-      default = { };
-      description = "Declarative DSH plugins: package installation plus home-patch config.";
     };
   };
 }
