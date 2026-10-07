@@ -541,11 +541,11 @@
       },
       "locked": {
         "narHash": "sha256-YbH0mHLjEM/uhpe+EqeStzC5sYMlMd1UsrSb10fIkGw=",
-        "path": "/Users/nixypanda/.dotfiles/modules/nvim/plugins",
+        "path": "/Users/nixypanda/.dotfiles/pkgs/vim-plugins",
         "type": "path"
       },
       "original": {
-        "path": "/Users/nixypanda/.dotfiles/modules/nvim/plugins",
+        "path": "/Users/nixypanda/.dotfiles/pkgs/vim-plugins",
         "type": "path"
       }
     },
