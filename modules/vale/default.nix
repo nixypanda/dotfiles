@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  vale_styles = import ../../scripts/vale-styles.nix { inherit pkgs; };
+  vale_styles = import ./vale-styles.nix { inherit pkgs; };
 in
 {
   home = {
