@@ -7,8 +7,6 @@
       cleanup = "zap";
       upgrade = true;
     };
-    taps = [
-    ];
     casks = [
       "docker-desktop"
       "zoom"
