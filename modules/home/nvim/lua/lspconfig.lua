@@ -86,10 +86,6 @@ require("lz.n").load({
 				"nixd",
 				"--log",
 				"error",
-				"--nixpkgs-expr",
-				nixpkgs_expr,
-				"--nixos-options-expr",
-				darwin_options_expr,
 			},
 			on_attach = on_attach,
 			settings = {
