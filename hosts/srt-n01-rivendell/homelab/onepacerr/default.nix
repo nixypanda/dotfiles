@@ -7,10 +7,10 @@
 }:
 
 let
-  onepacerr = pkgs.callPackage ../../../pkgs/onepacerr { };
+  onepacerr = pkgs.callPackage ../../../../pkgs/onepacerr { };
   ports = homelab.services;
 
-  startOnepacerr = import ../../../scripts/onepacerr/start-onepacerr.nix {
+  startOnepacerr = import ./start-onepacerr.nix {
     inherit pkgs onepacerr;
     torrentPassword = config.age.secrets.qbittorrentPassword.path;
     jellyfinPassword = config.age.secrets.onepacerrJellyfinPassword.path;

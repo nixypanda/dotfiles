@@ -7,7 +7,7 @@ _: {
     ./hledger.nix
     ./media
     ./music.nix
-    ./onepacerr.nix
+    ./onepacerr
     ./pihole.nix
     ./reverse-proxy.nix
     ./secrets.nix
