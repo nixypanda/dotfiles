@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, colorscheme, ... }:
 {
   programs.neovim = {
     enable = true;
@@ -8,7 +8,7 @@
       nvim-nio
       neotest-python
       plenary-nvim
-      tokyonight-nvim
+      pkgs.vimPlugins.${colorscheme.vim-plugin}
 
       {
         plugin = nvim-treesitter.withPlugins (
@@ -32,6 +32,6 @@
         type = "lua";
       }
     ];
-    # extraConfig = "colorscheme tokyonight";
+    extraConfig = "colorscheme ${colorscheme.vim-name}";
   };
 }
