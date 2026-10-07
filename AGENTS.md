@@ -20,6 +20,33 @@ Key module roots:
 - NixOS host modules: `hosts/srt-n01-rivendell/*`
 - Neovim Lua configs: `modules/nvim/lua/*.lua`
 
+## Repo layout (top-level segregation)
+
+Top-level directories are split by provenance:
+
+- `pkgs/` — packages this repo builds from upstream sources (custom derivations,
+  repacked binaries, fork overlays). Never imports `modules/`, `scripts/`, or
+  `hosts/`.
+- `scripts/` — helpers and wrappers authored in this repo (shell, `writeShell*`,
+  `runCommand`, `buildEnv`). Config-dependent builders take their values as
+  arguments; they never import `modules/` or `hosts/`.
+- `modules/`, `hosts/` — configuration of packages that come from elsewhere
+  (nixpkgs, home-manager, `calco`, `onepacerr-ui`, `hedger`, `codect`, etc.).
+- `colorschemes/` — authored data; `builtins` only.
+
+Dependency direction (`A → B` means "A may import B"):
+
+```
+pkgs ──► scripts ──► modules ──► hosts
+                        ▲
+colorschemes ───────────┘
+```
+
+Invariants: `pkgs/` and `colorschemes/` never import `modules/`, `scripts/`, or
+`hosts/`; `scripts/` never imports `modules/` or `hosts/`; `modules/` never
+imports `hosts/`. Enforce with `sh scripts/system-management/check-layout.sh`
+(or the installed `check-layout` command).
+
 Notes:
 - `.secrets` is expected to be git-crypt’d (see `Readme.md`). Avoid editing/committing secrets.
 - A `result` path may exist as a Nix build output/symlink; it may be broken/missing.
@@ -37,14 +64,14 @@ Readme-compatible:
 - `nix run --no-write-lock-file --inputs-from . home-manager#home-manager -- switch --flake "./#srt-l03-shire"`
 
 Script equivalent:
-- `./modules/system-management/apply-user.sh`
+- `./scripts/system-management/apply-user.sh`
 
 ### Apply system (nix-darwin)
 Preferred:
 - `sudo darwin-rebuild switch --flake ~/.dotfiles/.#srt-l03-shire`
 
 Script equivalent:
-- `./modules/system-management/apply-darwin.sh`
+- `./scripts/system-management/apply-darwin.sh`
 
 ### Apply home server (NixOS)
 Host:
@@ -75,7 +102,7 @@ Preferred:
 - `nix flake update --flake .`
 
 Script equivalent:
-- `./modules/system-management/update-flake.sh`
+- `./scripts/system-management/update-flake.sh`
 
 When removing a flake input manually:
 - Remove it from `inputs` in `flake.nix`.
@@ -85,7 +112,7 @@ When removing a flake input manually:
 - Verify with `rg -n -i "<name>|<name variants>" .`.
 
 ### “What will build?” forecast (optional)
-- `./modules/system-management/forecast-build.sh`
+- `./scripts/system-management/forecast-build.sh`
 
 This uses `nix-forecast` and writes full output to `/tmp/nix-forecast.txt`.
 
