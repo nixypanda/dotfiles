@@ -95,7 +95,7 @@ in
     ../../modules/nu
     ../../modules/nvim
     ../../modules/programming
-    ../../modules/system-management
+    ../../scripts/system-management
   ];
 
   xdg.configFile."nix/nix.conf".text = ''
