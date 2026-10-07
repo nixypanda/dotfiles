@@ -19,9 +19,12 @@ let
   ropify = pkgs.callPackage ../../pkgs/ropecli.nix { };
 
   # OpenCode — nixpkgs only packages the V1 CLI, so Darwin hosts build the V2
-  # binary from opencode.ai (see opencode.nix); Linux hosts keep pkgs.opencode.
+  # binary from opencode.ai (see ../../pkgs/opencode.nix); Linux hosts keep pkgs.opencode.
   opencode =
-    if pkgs.stdenv.hostPlatform.isDarwin then pkgs.callPackage ./opencode.nix { } else pkgs.opencode;
+    if pkgs.stdenv.hostPlatform.isDarwin then
+      pkgs.callPackage ../../pkgs/opencode.nix { }
+    else
+      pkgs.opencode;
 
   # Build one immutable Vale styles tree from packaged style sets. Vale expects
   # vocabulary files to exist, so create empty Base vocab files instead of
