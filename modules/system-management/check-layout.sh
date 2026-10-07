@@ -1,8 +1,7 @@
 #!/bin/sh
 # Enforce the top-level dependency direction (see AGENTS.md, "Repo layout"):
-#   pkgs/ and scripts/ are the lower layers and must never reach up into
-#   modules/ or hosts/ (nor pkgs/ into scripts/); modules/ must not reach
-#   into hosts/.
+#   pkgs/ and colorschemes/ are leaves; modules/ sits above them and hosts/ on
+#   top. A lower layer must never import a higher one.
 # Heuristic: scans .nix files for relative paths that climb into a higher layer.
 set -eu
 
@@ -19,8 +18,8 @@ scan() {
   fi
 }
 
-scan pkgs '\.\.(/\.\.)*/(modules|hosts|scripts)/'
-scan scripts '\.\.(/\.\.)*/(modules|hosts)/'
+scan pkgs '\.\.(/\.\.)*/(modules|hosts)/'
+scan colorschemes '\.\.(/\.\.)*/(modules|hosts)/'
 scan modules '\.\.(/\.\.)*/hosts/'
 
 if [ "$fail" -ne 0 ]; then
