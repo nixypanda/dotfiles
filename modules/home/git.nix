@@ -6,7 +6,6 @@ in
   home.packages = lib.optionals isDarwin (
     with pkgs;
     [
-      git-crypt
       difftastic
     ]
   );

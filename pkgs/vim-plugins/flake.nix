@@ -17,7 +17,7 @@
   outputs =
     inputs:
     let
-      missingVimPluginsInNixpkgs = final: prev: {
+      missingVimPluginsInNixpkgs = _: prev: {
         nvim-sqls = prev.vimUtils.buildVimPlugin {
           pname = "nvim-sqls";
           version = "custom";
