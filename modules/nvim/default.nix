@@ -7,7 +7,7 @@
 let
   python_with_debugpy = pkgs.python3.withPackages (ps: with ps; [ debugpy ]);
 
-  cron_describe = import ../../scripts/cron-describe.nix { inherit pkgs; };
+  cron_describe = import ./cron-describe.nix { inherit pkgs; };
 in
 {
   xdg.configFile = {
