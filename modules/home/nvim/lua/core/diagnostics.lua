@@ -9,6 +9,6 @@ vim.diagnostic.config({
 	},
 	update_in_insert = false,
 	severity_sort = false,
-	float = { source = "if_many", border = "rounded" },
+	float = { source = "if_many" },
 	jump = { float = true },
 })

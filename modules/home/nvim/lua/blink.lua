@@ -29,7 +29,6 @@ require("lz.n").load({
 			},
 			completion = {
 				menu = {
-					border = "rounded",
 					max_height = 25,
 					draw = {
 						columns = {
@@ -41,7 +40,6 @@ require("lz.n").load({
 				documentation = {
 					auto_show = true,
 					auto_show_delay_ms = 0,
-					window = { border = "rounded" },
 				},
 			},
 			signature = { window = { border = "single" } },

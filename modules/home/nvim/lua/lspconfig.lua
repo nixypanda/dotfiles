@@ -7,16 +7,6 @@ require("lz.n").load({
 		vim.cmd.packadd("SchemaStore.nvim")
 	end,
 	after = function()
-		-- Add border to lspconfig info screen
-		local lspconfig_window = require("lspconfig.ui.windows")
-		local old_defaults = lspconfig_window.default_opts
-
-		function lspconfig_window.default_opts(opts)
-			local win_opts = old_defaults(opts)
-			win_opts.border = "rounded"
-			return win_opts
-		end
-
 		require("lspsaga").setup({
 			symbol_in_winbar = { enable = false },
 			lightbulb = { ignore = { clients = { "kulala" } } },
