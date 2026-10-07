@@ -18,6 +18,9 @@ let
   sync-hledger = pkgs.writeScriptBin "sync-hledger" ''
     ${builtins.readFile ./sync-hledger.sh}
   '';
+  check-layout = pkgs.writeScriptBin "check-layout" ''
+    ${builtins.readFile ./check-layout.sh}
+  '';
 in
 {
   home.packages = [
@@ -27,5 +30,6 @@ in
     update-flake
     forecast-build
     sync-hledger
+    check-layout
   ];
 }
