@@ -123,28 +123,6 @@ require("lz.n").load({
 				logLevel = "warn",
 			},
 		})
-		vim.lsp.config("basedpyright", {
-			on_attach = on_attach,
-			settings = {
-				basedpyright = {
-					analysis = {
-						autoSearchPaths = true,
-						diagnosticMode = "workspace",
-						useLibraryCodeForTypes = true,
-						autoImportCompletion = true,
-					},
-					disableOrganizeImports = true,
-				},
-				python = {
-					analysis = {
-						autoSearchPaths = true,
-						diagnosticMode = "workspace",
-						useLibraryCodeForTypes = true,
-						typeCheckingMode = "off",
-					},
-				},
-			},
-		})
 
 		-- General language servers
 		vim.lsp.config("bashls", { on_attach = on_attach })
@@ -182,8 +160,6 @@ require("lz.n").load({
 			"nixd",
 			"nushell",
 			"ruff",
-			-- "pyright",
-			-- "basedpyright",
 			"ty",
 			"bashls",
 			"neocmake",
