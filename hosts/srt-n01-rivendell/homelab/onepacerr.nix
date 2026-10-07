@@ -7,7 +7,7 @@
 }:
 
 let
-  onepacerr = pkgs.callPackage ./onepacerr/package.nix { };
+  onepacerr = pkgs.callPackage ../../../pkgs/onepacerr { };
   ports = homelab.services;
 
   startOnepacerr = pkgs.writeShellScript "start-onepacerr" ''
