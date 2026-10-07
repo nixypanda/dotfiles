@@ -50,9 +50,5 @@ vim.opt.fillchars = {
 vim.wo.number = true
 vim.wo.relativenumber = true
 
-vim.g.tokyonight_colors = {
-	border = "#1f2335",
-}
-
 vim.opt.winborder = "rounded"
 require("vim._core.ui2").enable()
