@@ -140,11 +140,10 @@ Mac is `aarch64-darwin` and cannot build Linux-only derivations locally.
 
 ### Caveat
 
-I use [git-crypt](https://github.com/AGWA/git-crypt) for files under
-`.secrets/`, and agenix for Rivendell homelab secrets under
-`services/secrets/`. If you plan to use these
-dotfiles, replace those files with your own secrets or remove the references
-from the codebase.
+Rivendell homelab secrets under `services/secrets/` are encrypted with
+[agenix](https://github.com/ryantm/agenix). If you plan to use these dotfiles,
+replace those files with your own secrets or remove the references from the
+codebase.
 
 ## Code Structure
 
@@ -156,37 +155,3 @@ from the codebase.
 - Per-host configuration lives under `hosts/<host>/`.
 - Neovim Lua config lives under `modules/home/nvim/lua/`.
 - Homelab service docs live in `services/README.md`.
-
-## Here are a few screenshots to showcase this config in action
-
-Note: these are legacy screenshots from an older NixOS desktop setup. The
-current desktop target is macOS, while NixOS is used for the home server.
-
-### Tokyonight
-
-![System Info](./screenshots/tokyonight/sysinfo.png?raw=true "System Info")
-![Widgets](./screenshots/tokyonight/widgets.png?raw=true "Wallpaper")
-![App-Launcher](./screenshots/tokyonight/rofi-search.png?raw=true "App Launcher")
-![Ricing](./screenshots/tokyonight/in-action.png?raw=true "Ricing in progress")
-![Locked](./screenshots/tokyonight/locked.png?raw=true "Locked")
-
-<details>
-<summary>Click to see more screenshots from the past</summary>
-
-### Dracula
-
-![System Info](./screenshots/dracula/sysinfo.png?raw=true "System Info")
-![Wall](./screenshots/dracula/wallpaper.png?raw=true "Wallpaper")
-![App-Launcher](./screenshots/dracula/rofi-search.png?raw=true "App Launcher")
-![Ricing](./screenshots/dracula/in-action.png?raw=true "Ricing in progress")
-![Locked](./screenshots/dracula/locked.png?raw=true "Locked")
-
-### Onedark
-
-![System Info](./screenshots/onedark/sysinfo.png?raw=true "System Info")
-![Wall](./screenshots/onedark/wallpaper.png?raw=true "Wallpaper")
-![App-Launcher](./screenshots/onedark/rofi-search.png?raw=true "App Launcher")
-![Ricing](./screenshots/onedark/in-action.png?raw=true "Ricing in progress")
-![Locked](./screenshots/onedark/locked.png?raw=true "Locked")
-
-</details>

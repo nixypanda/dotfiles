@@ -53,7 +53,7 @@ Enforce with `sh modules/home/system-management/check-layout.sh` (or the install
 `check-layout` command).
 
 Notes:
-- `.secrets` is expected to be git-crypt’d (see `Readme.md`). Avoid editing/committing secrets.
+- Avoid editing/committing secrets (agenix `.age` files under `services/secrets/`, tokens, credentials).
 - A `result` path may exist as a Nix build output/symlink; it may be broken/missing.
 - Avoid committing machine-local artifacts (e.g. `.DS_Store`).
 
@@ -257,7 +257,7 @@ Repo provides:
 - Prefer small, reviewable diffs; do not reformat unrelated files.
 - Prefer editing existing modules/scripts over adding new tooling.
 - Avoid changing hostnames/paths unless explicitly requested.
-- Avoid editing/committing secrets (`.secrets`, tokens, credentials).
+- Avoid editing/committing secrets (agenix `.age` files, tokens, credentials).
 
 ### Nix style
 - Format with `nixfmt`.
@@ -298,9 +298,6 @@ Repo provides:
 
 **Error handling**
 - Guard optional plugin requires with `pcall(require, "...")` only when necessary.
-
-**Diagnostics / types**
-- Lua Language Server globals are configured in `modules/home/nvim/lua/.luarc.json`.
 
 ### Shell scripts
 - Prefer `#!/bin/sh` unless bash features are required.

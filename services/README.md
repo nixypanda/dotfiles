@@ -127,9 +127,6 @@ Kavita's token key is encrypted with agenix and decrypted at runtime to
 `/run/agenix/kavitaTokenKey`. It must remain stable across restarts because
 Kavita uses it for token signing.
 
-The secrets directory also contains `radarr.env.age` and `prowlarr.env.age`
-files reserved for future service environment secrets. Create them when needed.
-
 The PBKDF2-SHA512 hash in `services/media/default.nix` is what qBittorrent stores — this is a
 one-way hash, not a plaintext secret, and is safe in the Nix store.
 
