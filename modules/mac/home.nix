@@ -19,6 +19,7 @@ in
     packages = with pkgs; [
       bitwarden-desktop
       google-chrome
+      nerd-fonts.hack
       opencode-desktop
       # Personal app, intentionally Mac-only; not expected to build on the
       # Linux hosts.
@@ -85,16 +86,20 @@ in
   };
 
   imports = [
+    ../../modules/claude
     ../../modules/cli.nix
+    ../../modules/dsh.nix
     ../../modules/env.nix
     ../../modules/firefox
-    ../../modules/fonts.nix
-    ../../modules/git
+    ../../modules/git.nix
+    ../../modules/hledger.nix
     ../../modules/kitty
     ../../modules/kitty/dev.nix
     ../../modules/nu
     ../../modules/nvim
-    ../../modules/programming
+    ../../modules/programming.nix
+    ../../modules/rumdl
+    ../../modules/vale
     ../../scripts/system-management
   ];
 

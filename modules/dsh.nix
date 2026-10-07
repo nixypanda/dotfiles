@@ -21,20 +21,20 @@ let
   # DSH boots through node-addon-require-builtin, which pattern-matches the
   # running Node binary's machine code. That probe only recognises official
   # nodejs.org builds, so the wrapper runs under nodejs-official rather than
-  # pkgs.nodejs; see ../../pkgs/nodejs-official.nix.
+  # pkgs.nodejs; see ../pkgs/nodejs-official.nix.
   #
   # pnpm is installed because profile/plugin operations forward to it.
-  nodejsOfficial = pkgs.callPackage ../../pkgs/nodejs-official.nix {
+  nodejsOfficial = pkgs.callPackage ../pkgs/nodejs-official.nix {
     version = cfg.cli.nodejsVersion;
   };
 
-  dshCli = import ../../scripts/dsh/cli.nix {
+  dshCli = import ../scripts/dsh/cli.nix {
     inherit pkgs;
     nodejs = nodejsOfficial;
     version = cfg.cli.version;
   };
 
-  dshDesktop = pkgs.callPackage ../../pkgs/deepseek-harness-desktop.nix {
+  dshDesktop = pkgs.callPackage ../pkgs/deepseek-harness-desktop.nix {
     version = cfg.desktop.version;
   };
 
@@ -74,7 +74,7 @@ let
 
   desktopRoot = lib.optionalString cfg.desktop.enable (toString cfg.desktop.package);
 
-  dshPluginsSync = import ../../scripts/dsh/plugins-sync.nix {
+  dshPluginsSync = import ../scripts/dsh/plugins-sync.nix {
     inherit pkgs;
     nodejs = nodejsOfficial;
     dsh = dshCli;
@@ -124,7 +124,7 @@ in
         default = "0.2.0-rc.2";
         description = ''
           Desktop release to install. Its artifact URL and sha512 are read from
-          the Nightly update feed; see ../../pkgs/deepseek-harness-desktop.nix for how to bump.
+          the Nightly update feed; see ../pkgs/deepseek-harness-desktop.nix for how to bump.
         '';
       };
 

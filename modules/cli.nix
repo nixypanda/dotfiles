@@ -12,13 +12,6 @@
       dig
       ouch # unzip, py7zr
       qpdf
-      hledger
-      hledger-ui
-      # `hledger-web` and `haskell-language-server` both install
-      # `lib/links/libHSbase64-*.dylib`, which collides in the home-manager
-      # buildEnv. Give hledger-web priority so buildEnv resolves it.
-      (lib.hiPrio hledger-web)
-      paisa
 
       # Better alternatives
       bottom # top

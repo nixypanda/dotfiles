@@ -25,6 +25,7 @@
   imports = [
     ../../modules/cli.nix
     ../../modules/env.nix
+    ../../modules/hledger.nix
     ../../modules/nvim/minimal.nix
   ];
 }

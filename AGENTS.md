@@ -238,8 +238,8 @@ Vale:
 - `vale <file-or-dir>`
 
 Repo provides:
-- `modules/programming/rumdl.toml`
-- `modules/programming/vale.ini`
+- `modules/rumdl/rumdl.toml`
+- `modules/vale/vale.ini`
 
 ### Git (optional)
 - `committed` (commit message linting)

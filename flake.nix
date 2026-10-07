@@ -44,10 +44,6 @@
       url = "git+ssh://git@github.com/nixypanda/codect.git?ref=feat/dsh-editor-plugin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    agent-skills = {
-      url = "git+ssh://git@github.com/nixypanda/agent-skills.git";
-      flake = false;
-    };
     # Applying the configuration happens from the.dotfiles directory so the
     # relative path is defined accordingly. This has potential of causing issues.
     vim-plugins = {
@@ -57,7 +53,6 @@
   outputs =
     {
       nur,
-      agent-skills,
       vim-plugins,
       nixpkgs,
       home-manager,
@@ -96,7 +91,7 @@
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system}.extend (lib.composeManyExtensions macOverlays);
           extraSpecialArgs = {
-            inherit agent-skills codect;
+            inherit codect;
           };
           modules = [
             ./modules/mac/home.nix
