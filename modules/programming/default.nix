@@ -16,7 +16,7 @@ let
   hledger-lsp = pkgs.callPackage ./hledger-lsp.nix { };
 
   # Personal CLI wrapper over Rope for Python refactors.
-  ropify = pkgs.callPackage ./ropecli.nix { };
+  ropify = pkgs.callPackage ../../pkgs/ropecli.nix { };
 
   # OpenCode — nixpkgs only packages the V1 CLI, so Darwin hosts build the V2
   # binary from opencode.ai (see opencode.nix); Linux hosts keep pkgs.opencode.
