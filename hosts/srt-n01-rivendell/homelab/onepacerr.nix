@@ -10,12 +10,11 @@ let
   onepacerr = pkgs.callPackage ../../../pkgs/onepacerr { };
   ports = homelab.services;
 
-  startOnepacerr = pkgs.writeShellScript "start-onepacerr" ''
-    export TORRENT_PASSWORD="$(${lib.getExe' pkgs.coreutils "cat"} ${config.age.secrets.qbittorrentPassword.path})"
-    export JELLYFIN_PASSWORD="$(${lib.getExe' pkgs.coreutils "cat"} ${config.age.secrets.onepacerrJellyfinPassword.path})"
-
-    exec ${lib.getExe onepacerr}
-  '';
+  startOnepacerr = import ../../../scripts/onepacerr/start-onepacerr.nix {
+    inherit pkgs onepacerr;
+    torrentPassword = config.age.secrets.qbittorrentPassword.path;
+    jellyfinPassword = config.age.secrets.onepacerrJellyfinPassword.path;
+  };
 in
 {
   systemd.services = {
