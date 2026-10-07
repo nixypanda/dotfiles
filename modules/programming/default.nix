@@ -13,7 +13,7 @@ let
   cut-the-crap = agent-skills + "/cut-the-crap";
 
   # hledger-lsp is not packaged in nixpkgs yet.
-  hledger-lsp = pkgs.callPackage ./hledger-lsp.nix { };
+  hledger-lsp = pkgs.callPackage ../../pkgs/hledger-lsp.nix { };
 
   # Personal CLI wrapper over Rope for Python refactors.
   ropify = pkgs.callPackage ../../pkgs/ropecli.nix { };
