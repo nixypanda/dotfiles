@@ -2,9 +2,6 @@ require("lz.n").load({
 	"csvview.nvim",
 	cmd = { "CsvViewEnable", "CsvViewDisable", "CsvViewToggle", "CsvViewInfo" },
 	ft = { "csv", "tsv" },
-	keys = {
-		{ "<leader>uc", "<cmd>CsvViewToggle<cr>", desc = "Toggle CSV View" },
-	},
 	after = function()
 		require("csvview").setup({
 			keymaps = {
@@ -12,5 +9,6 @@ require("lz.n").load({
 				textobject_field_outer = { "af", mode = { "o", "x" } },
 			},
 		})
+		vim.keymap.set("n", "<leader>uc", "<cmd>CsvViewToggle<cr>", { buffer = true, desc = "Toggle CSV View" })
 	end,
 })

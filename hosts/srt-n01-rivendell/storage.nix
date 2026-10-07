@@ -1,7 +1,12 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  paths,
+  pkgs,
+  ...
+}:
 
 let
-  mediaMount = "/srv/media";
+  mediaMount = paths.mediaRoot;
   mediaDirectoriesUnit = "media-directories.service";
   mediaMountUnit = "srv-media.mount";
   mediaServices = [

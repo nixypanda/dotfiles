@@ -9,10 +9,7 @@ vim.o.shiftwidth = 4
 vim.o.expandtab = true
 vim.o.termguicolors = true
 vim.o.showmode = false
-vim.o.hidden = true
-vim.o.backup = false
 vim.o.writebackup = false
-vim.o.cmdheight = 1
 vim.o.updatetime = 300
 vim.o.shortmess = vim.o.shortmess .. "c"
 vim.o.signcolumn = "yes"
@@ -49,10 +46,6 @@ vim.opt.fillchars = {
 
 vim.wo.number = true
 vim.wo.relativenumber = true
-
-vim.g.tokyonight_colors = {
-	border = "#1f2335",
-}
 
 vim.opt.winborder = "rounded"
 require("vim._core.ui2").enable()

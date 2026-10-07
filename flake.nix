@@ -69,12 +69,13 @@
     let
       inherit (nixpkgs) lib;
       kitty-dev-build-overlay = import ./pkgs/kitty-fork-overlay.nix { inherit kitty-upstream; };
+      agenixOverlay = final: _: { agenix = agenix.packages.${final.system}.default; };
 
       # These overlays are scoped to the Home Manager package set. nix-darwin
       # intentionally keeps plain nixpkgs for system configuration.
       darwinOverlays = [
         kitty-dev-build-overlay
-        (_: prev: { agenix = agenix.packages.${prev.system}.default; })
+        agenixOverlay
         nur.overlays.default
         vim-plugins.overlay
       ];
@@ -130,9 +131,7 @@
             };
           }
           {
-            nixpkgs.overlays = [
-              (final: _: { agenix = agenix.packages.${final.system}.default; })
-            ];
+            nixpkgs.overlays = [ agenixOverlay ];
           }
         ];
       };

@@ -71,9 +71,8 @@ in
         (plug statuscol-nvim ./lua/statuscol.lua)
         (lazy_plug nvim-tree-lua ./lua/nvim-tree.lua)
 
-        # themes
-        catppuccin-nvim
-        tokyonight-nvim
+        # Theme plugin, selected by `colorscheme` (see modules/home/theme.nix).
+        pkgs.vimPlugins.${colorscheme.vim-plugin}
 
         # DAP
         (lazy_plug nvim-dap ./lua/dap.lua)

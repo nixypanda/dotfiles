@@ -23,12 +23,10 @@
     allowUnfreePredicate =
       pkg:
       builtins.elem (lib.getName pkg) [
-        "zoom"
         "claude-code"
         "google-chrome"
         "firefox-bin"
         "firefox-bin-unwrapped"
-        "vim-table-mode"
       ];
   };
 

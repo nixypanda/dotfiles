@@ -1,5 +1,4 @@
 local wk = require("which-key")
-wk.setup({})
 
 local mappings = {
 	{ "<leader>a", group = "AI" },

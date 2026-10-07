@@ -66,10 +66,6 @@
   "browser.safebrowsing.downloads.remote.enabled" = false;
   "browser.safebrowsing.appRepURL" = "";
   "browser.safebrowsing.malware.enabled" = false;
-  # Disable malware scan
-  # The malware scan sends an unique identifier for each downloaded file to Google.
-  # "browser.safebrowsing.appRepURL" = ""; (Repeated from google safebrowsing)
-  # "browser.safebrowsing.malware.enabled" = false; (Repeated from google safebrowsing)
   # Disable DNS over HTTPS
   # DNS over HTTP (DoH), aka. Trusted Recursive Resolver (TRR)
   # (https://wiki.mozilla.org/Trusted_Recursive_Resolver), uses a server run by

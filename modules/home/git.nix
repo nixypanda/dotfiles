@@ -30,12 +30,12 @@ in
         http.sslCAInfo = "/etc/ssl/cert.pem";
       };
     };
-  }
-  // lib.optionalAttrs isDarwin {
     gh = {
       enable = true;
       settings.git_protocol = "ssh";
     };
+  }
+  // lib.optionalAttrs isDarwin {
     delta = {
       enable = true;
       enableGitIntegration = true;

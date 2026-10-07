@@ -17,7 +17,6 @@ Nix flake-based dotfiles for my Mac and home server.
 | Font                  | Hack Nerd Font Mono                                           |
 | Editor                | [Neovim](https://neovim.io/)                                  |
 | Browser               | Firefox via Home Manager, Google Chrome via Mac GUI packages  |
-| macOS window manager  | yabai + skhd                                                  |
 | Home server services  | Jellyfin, Radarr, Prowlarr, qBittorrent, Seerr, and Pi-hole   |
 
 The main flake outputs are:
@@ -120,23 +119,7 @@ The Home Manager config also installs an `update-flake` helper for this.
 
 ### Validation
 
-Fast evaluation checks:
-
-```sh
-nix eval --raw .#homeConfigurations.srt-l03-shire.activationPackage.drvPath
-nix eval --raw .#darwinConfigurations.srt-l03-shire.system.drvPath
-nix eval --raw .#nixosConfigurations.srt-n01-rivendell.config.system.build.toplevel.drvPath
-```
-
-Build checks without changing the `result` symlink:
-
-```sh
-nix build --no-link .#homeConfigurations.srt-l03-shire.activationPackage
-nix build --no-link .#darwinConfigurations.srt-l03-shire.system
-```
-
-Build the NixOS server output on the server or with a Linux remote builder; the
-Mac is `aarch64-darwin` and cannot build Linux-only derivations locally.
+See `AGENTS.md` → "Tests / Validation" for the evaluation and build checks.
 
 ### Caveat
 

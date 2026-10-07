@@ -2,17 +2,17 @@
   config,
   homelab,
   lib,
+  paths,
   pkgs,
   ...
 }:
 
 let
-  mediaRoot = "/srv/media";
-  downloadsRoot = "${mediaRoot}/downloads";
-  movieLibrary = "${mediaRoot}/library/movies";
-  tvLibrary = "${mediaRoot}/library/shows";
-  musicLibrary = "${mediaRoot}/library/music";
-  torrentRoot = "${downloadsRoot}/torrents";
+  inherit (paths) mediaRoot;
+  movieLibrary = paths.library.movies;
+  tvLibrary = paths.library.shows;
+  musicLibrary = paths.library.music;
+  torrentRoot = paths.downloads.torrents;
   ports = homelab.services;
   qBittorrentDownloadClient = {
     name = "qBittorrent";
@@ -37,7 +37,7 @@ in
   nixarr = {
     enable = true;
     mediaDir = mediaRoot;
-    stateDir = "/srv/.state/nixarr";
+    stateDir = paths.state.nixarr;
     mediaUsers = [ "nixypanda" ];
 
     jellyfin = {

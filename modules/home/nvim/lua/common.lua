@@ -1,11 +1,16 @@
 local M = {}
 
+-- Build a buffer-local `vim.keymap.set` shorthand for `bufnr`.
+function M.buf_map(bufnr)
+	return function(keys, func, desc) vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc }) end
+end
+
 function M.lsp_on_attach(client, bufnr)
 	-- inlay hints
 	if client.server_capabilities.inlayHintProvider then vim.lsp.inlay_hint.enable(true, { bufnr = bufnr }) end
 
 	-- Set keymap
-	local map = function(keys, func, desc) vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc }) end
+	local map = M.buf_map(bufnr)
 
 	map("gd", vim.lsp.buf.definition, "Goto Definition")
 	map("gi", vim.lsp.buf.implementation, "Goto Implementation")

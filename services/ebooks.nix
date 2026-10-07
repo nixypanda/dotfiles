@@ -1,8 +1,13 @@
-{ config, homelab, ... }:
+{
+  config,
+  homelab,
+  paths,
+  ...
+}:
 
 let
-  booksLibrary = "/srv/media/library/books";
-  mangaLibrary = "/srv/media/library/manga";
+  booksLibrary = paths.library.books;
+  mangaLibrary = paths.library.manga;
 in
 {
   age.secrets.kavitaTokenKey = {
@@ -14,7 +19,7 @@ in
 
   services.kavita = {
     enable = true;
-    dataDir = "/srv/.state/kavita";
+    dataDir = paths.state.kavita;
     tokenKeyFile = config.age.secrets.kavitaTokenKey.path;
     settings = {
       Port = homelab.services.kavita.local;

@@ -19,7 +19,6 @@
       ripgrep # grep
       tokei # cloc, sloc, etc
       hyperfine # benchmarking (time)
-      gh
 
       # Structured data
       jc

@@ -1,5 +1,13 @@
-{
+let
   tailnetHost = "srt-n01-rivendell.taila65e7f.ts.net";
+in
+{
+  inherit tailnetHost;
+
+  # Build the tailnet/local URLs from the ports below so callers do not
+  # re-implement the string formatting.
+  tailnetUrl = port: "https://${tailnetHost}:${toString port}";
+  localUrl = port: "http://127.0.0.1:${toString port}";
 
   firewall = {
     ssh = 22;

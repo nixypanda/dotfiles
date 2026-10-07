@@ -7,16 +7,6 @@ require("lz.n").load({
 		vim.cmd.packadd("SchemaStore.nvim")
 	end,
 	after = function()
-		-- Add border to lspconfig info screen
-		local lspconfig_window = require("lspconfig.ui.windows")
-		local old_defaults = lspconfig_window.default_opts
-
-		function lspconfig_window.default_opts(opts)
-			local win_opts = old_defaults(opts)
-			win_opts.border = "rounded"
-			return win_opts
-		end
-
 		require("lspsaga").setup({
 			symbol_in_winbar = { enable = false },
 			lightbulb = { ignore = { clients = { "kulala" } } },
@@ -82,15 +72,6 @@ require("lz.n").load({
 			.. '; in flake.homeConfigurations."srt-l03-shire".options'
 
 		vim.lsp.config("nixd", {
-			cmd = {
-				"nixd",
-				"--log",
-				"error",
-				"--nixpkgs-expr",
-				nixpkgs_expr,
-				"--nixos-options-expr",
-				darwin_options_expr,
-			},
 			on_attach = on_attach,
 			settings = {
 				nixd = {
@@ -125,28 +106,6 @@ require("lz.n").load({
 			on_attach = on_attach,
 			init_options = {
 				logLevel = "warn",
-			},
-		})
-		vim.lsp.config("basedpyright", {
-			on_attach = on_attach,
-			settings = {
-				basedpyright = {
-					analysis = {
-						autoSearchPaths = true,
-						diagnosticMode = "workspace",
-						useLibraryCodeForTypes = true,
-						autoImportCompletion = true,
-					},
-					disableOrganizeImports = true,
-				},
-				python = {
-					analysis = {
-						autoSearchPaths = true,
-						diagnosticMode = "workspace",
-						useLibraryCodeForTypes = true,
-						typeCheckingMode = "off",
-					},
-				},
 			},
 		})
 
@@ -186,8 +145,6 @@ require("lz.n").load({
 			"nixd",
 			"nushell",
 			"ruff",
-			-- "pyright",
-			-- "basedpyright",
 			"ty",
 			"bashls",
 			"neocmake",
