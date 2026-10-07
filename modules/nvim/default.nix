@@ -5,11 +5,9 @@
   ...
 }:
 let
-  inherit (import ../../scripts/nvim-helpers.nix { inherit pkgs; })
-    python_with_debugpy
-    cron_describe
-    ;
+  python_with_debugpy = pkgs.python3.withPackages (ps: with ps; [ debugpy ]);
 
+  cron_describe = import ../../scripts/cron-describe.nix { inherit pkgs; };
 in
 {
   xdg.configFile = {
