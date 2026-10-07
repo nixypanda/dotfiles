@@ -41,7 +41,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     codect = {
-      url = "git+ssh://git@github.com/nixypanda/codect.git";
+      url = "git+ssh://git@github.com/nixypanda/codect.git?ref=feat/dsh-editor-plugin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     agent-skills = {
