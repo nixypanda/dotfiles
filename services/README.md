@@ -5,23 +5,9 @@ inside each application's state directory.
 
 ## Paths
 
-- Movies: `/srv/media/library/movies`
-- TV: `/srv/media/library/shows`
-- Music: `/srv/media/library/music`
-- Books: `/srv/media/library/books`
-- Manga: `/srv/media/library/manga`
-- Audiobooks: `/srv/media/library/audiobooks`
-- Audiobook downloads: `/srv/media/downloads/audiobooks`
-- Torrent downloads: `/srv/media/downloads/torrents`
-- Completed torrents: `/srv/media/downloads/torrents/complete`
-- Incomplete torrents: `/srv/media/downloads/torrents/incomplete`
-- Audiobookshelf state: `/srv/.state/audiobookshelf`
-- Navidrome state: `/srv/.state/navidrome`
-- Shelfmark state: `/srv/.state/shelfmark`
-
-The active paths are also written to `/etc/homelab/media-paths` and
-`/etc/homelab/ebook-paths`. Audiobook paths are written to
-`/etc/homelab/audiobook-paths`.
+The canonical media and state paths are defined in `paths.nix`. Their resolved
+values are also written to `/etc/homelab/media-paths`, `/etc/homelab/ebook-paths`
+and `/etc/homelab/audiobook-paths` on the host.
 
 Run `media-unlinked` on Rivendell to list files larger than 50 MiB under
 `/srv/media` whose hardlink count is one. It accepts optional root and minimum
