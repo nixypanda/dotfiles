@@ -358,22 +358,6 @@
         "type": "github"
       }
     },
-    "nvim-sqls-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1786658517,
-        "narHash": "sha256-wCU6wqFykkUv0dpO9MY8VNjPeyUqV4x0LngSZ2D967s=",
-        "owner": "nanotee",
-        "repo": "sqls.nvim",
-        "rev": "332caa9ab86af1a00259feb01051ea825e8fc461",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nanotee",
-        "repo": "sqls.nvim",
-        "type": "github"
-      }
-    },
     "onepacerr-ui": {
       "inputs": {
         "flake-utils": "flake-utils_2",
@@ -519,8 +503,7 @@
     "vim-plugins": {
       "inputs": {
         "nvim-cronex-src": "nvim-cronex-src",
-        "nvim-dadbod-ssh": "nvim-dadbod-ssh",
-        "nvim-sqls-src": "nvim-sqls-src"
+        "nvim-dadbod-ssh": "nvim-dadbod-ssh"
       },
       "locked": {
         "narHash": "sha256-YbH0mHLjEM/uhpe+EqeStzC5sYMlMd1UsrSb10fIkGw=",
