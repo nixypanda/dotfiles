@@ -96,7 +96,7 @@
     ../../modules/programming.nix
     ../../modules/rumdl
     ../../modules/vale
-    ../../scripts/system-management
+    ../../modules/system-management
   ];
 
   xdg.configFile."nix/nix.conf".text = ''
