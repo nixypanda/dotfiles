@@ -5,7 +5,7 @@
   ...
 }:
 let
-  kittySessionPicker = import ../../scripts/kitty-session-picker.nix { inherit pkgs; };
+  kittySessionPicker = import ./kitty-session-picker.nix { inherit pkgs; };
 in
 {
   programs.kitty = {

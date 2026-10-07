@@ -4,7 +4,7 @@
   ...
 }:
 let
-  inherit (import ../../scripts/kitty-dev.nix { inherit pkgs; })
+  inherit (import ./kitty-dev.nix { inherit pkgs; })
     kittyDevApp
     kittyDevBin
     ;
