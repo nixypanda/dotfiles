@@ -82,11 +82,6 @@ require("lz.n").load({
 			.. '; in flake.homeConfigurations."srt-l03-shire".options'
 
 		vim.lsp.config("nixd", {
-			cmd = {
-				"nixd",
-				"--log",
-				"error",
-			},
 			on_attach = on_attach,
 			settings = {
 				nixd = {
