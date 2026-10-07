@@ -7,7 +7,7 @@
 }:
 
 let
-  inherit (homelab) tailnetHost;
+  inherit (homelab) tailnetHost tailnetUrl;
   inherit (homelab) finance services;
   system = pkgs.stdenv.hostPlatform.system;
 
@@ -34,8 +34,6 @@ let
       header_up Host ${hostName}
     }
   '';
-
-  tailnetUrl = port: "https://${tailnetHost}:${toString port}";
 
   proxiedHosts = {
     "${tailnetHost}".extraConfig = proxy services.homepage.local;

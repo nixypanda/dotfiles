@@ -1,6 +1,6 @@
 { homelab, pkgs, ... }:
 let
-  inherit (homelab) tailnetHost;
+  inherit (homelab) tailnetHost tailnetUrl localUrl;
   inherit (homelab) finance services;
 
   homepagePkg = pkgs.homepage-dashboard.override {
@@ -12,9 +12,6 @@ let
       cp ${pkgs.paisa.src}/brand/logo.svg $out/share/homepage/public/icons/paisa.svg
     '';
   });
-
-  tailnetUrl = port: "https://${tailnetHost}:${toString port}";
-  localUrl = port: "http://127.0.0.1:${toString port}";
 in
 {
   services.homepage-dashboard = {
