@@ -67,13 +67,11 @@ in
       desktopManager.xfce.enable = true;
       xkb = {
         layout = "us";
-        variant = "";
       };
     };
 
     printing.enable = true;
 
-    pulseaudio.enable = false;
     pipewire = {
       enable = true;
       alsa = {
@@ -117,7 +115,6 @@ in
   };
 
   environment = {
-    shells = [ ];
     systemPackages = with pkgs; [
       git
       vim
