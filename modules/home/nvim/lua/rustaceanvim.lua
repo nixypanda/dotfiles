@@ -6,9 +6,9 @@ local config = {
 	},
 	server = {
 		on_attach = function(client, bufnr)
-			require("common").lsp_on_attach(client, bufnr)
-
-			local map = function(keys, func, desc) vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc }) end
+			local common = require("common")
+			common.lsp_on_attach(client, bufnr)
+			local map = common.buf_map(bufnr)
 
 			map("<leader>pd", "<cmd>RustLsp debug<cr>", "Debug target")
 			map("<leader>pD", "<cmd>RustLsp debuggables<cr>", "Debug available targets")

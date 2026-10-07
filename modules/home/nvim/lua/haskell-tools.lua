@@ -11,9 +11,9 @@ vim.g.haskell_tools = {
 			"False",
 		},
 		on_attach = function(client, bufnr)
-			require("common").lsp_on_attach(client, bufnr)
-
-			local map = function(keys, func, desc) vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc }) end
+			local common = require("common")
+			common.lsp_on_attach(client, bufnr)
+			local map = common.buf_map(bufnr)
 			local ht = require("haskell-tools")
 
 			map("<leader>ps", ht.hoogle.hoogle_signature, "Hoogle search type signature")
