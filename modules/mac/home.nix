@@ -84,7 +84,7 @@
   imports = [
     ../../modules/claude
     ../../modules/cli.nix
-    ../../modules/dsh.nix
+    ../../modules/dsh
     ../../modules/env.nix
     ../../modules/firefox
     ../../modules/git.nix
