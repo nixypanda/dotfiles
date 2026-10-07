@@ -1,9 +1,9 @@
-# Only what is specific to this host. The shared workstation role lives in
-# profiles/workstation/.
+# Only what is specific to this host. Shared macOS system config lives in
+# modules/system/darwin/.
 { ... }:
 {
   imports = [
-    ../../profiles/workstation/system.nix
+    ../../modules/system/darwin
   ];
 
   networking.hostName = "srt-l03-shire";

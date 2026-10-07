@@ -18,7 +18,6 @@ Key module roots:
 - Reusable Home Manager modules: `modules/home/*`
 - Reusable system (NixOS/nix-darwin) modules: `modules/system/{darwin,nixos}/`
 - NixOS service modules: `services/*`
-- Machine roles/profiles: `profiles/{workstation,homelab}/`
 - Per-host overrides: `hosts/<host>/`
 - Neovim Lua configs: `modules/home/nvim/lua/*.lua`
 
@@ -32,11 +31,9 @@ Top-level directories are split by provenance:
 - `modules/` — reusable, host-agnostic configuration. `modules/home/` is user
   and program config; `modules/system/{darwin,nixos}/` is machine config.
 - `services/` — NixOS service modules (nixarr, Pi-hole, Caddy, hedger, …).
-  Host-agnostic; enabled through a profile.
-- `profiles/` — composable machine roles (`workstation/`, `homelab/`). Each role
-  has a `home.nix` and a `system.nix`.
+  Host-agnostic; imported by the hosts that run them.
 - `hosts/` — machine instances: identity, hardware, and host-only overrides.
-  A host imports one profile per layer.
+  A host imports the modules and services it needs.
 
 A module's own helpers live beside it in the same folder; a piece with several
 files is a folder with `default.nix`.
@@ -45,15 +42,15 @@ Dependency direction (`A → B` means "A may import B"):
 
 ```
 pkgs         ┐
-             ├─► modules ──► services ──► profiles ──► hosts
+             ├─► modules ──► services ──► hosts
 colorschemes ┘
 ```
 
 Invariants: `pkgs/` and `colorschemes/` never import a higher layer; `modules/`
-never imports `services/`, `profiles/` or `hosts/`; `services/` never imports
-`profiles/` or `hosts/`; `profiles/` never imports `hosts/`; hosts never import
-each other. Enforce with `sh modules/home/system-management/check-layout.sh` (or
-the installed `check-layout` command).
+never imports `services/` or `hosts/`; `services/` never imports `hosts/`; hosts
+never import each other. A host imports `modules/` and `services/` directly.
+Enforce with `sh modules/home/system-management/check-layout.sh` (or the installed
+`check-layout` command).
 
 Notes:
 - `.secrets` is expected to be git-crypt’d (see `Readme.md`). Avoid editing/committing secrets.
