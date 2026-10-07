@@ -62,7 +62,7 @@ in
     ];
 
     # Official signed/notarized Electron shell, installed from the pinned
-    # nightly-channel ZIP; see ../programming/dsh/desktop.nix.
+    # nightly-channel ZIP; see ../../pkgs/deepseek-harness-desktop.nix.
     desktop.enable = true;
 
     # Codect sidebar plugin: focused projection (Show) and focused diff

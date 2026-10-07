@@ -31,7 +31,7 @@ let
     };
   };
 
-  source = sources.${system} or (throw "dsh/desktop.nix: unsupported system ${system}");
+  source = sources.${system} or (throw "deepseek-harness-desktop.nix: unsupported system ${system}");
 in
 stdenvNoCC.mkDerivation {
   pname = "deepseek-harness-desktop";
