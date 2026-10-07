@@ -5,7 +5,10 @@ let
   allRegisteredPorts = lib.collect builtins.isInt homelab;
 in
 {
-  _module.args.homelab = homelab;
+  _module.args = {
+    inherit homelab;
+    paths = import ../../services/paths.nix;
+  };
 
   assertions = [
     {

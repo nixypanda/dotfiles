@@ -2,6 +2,7 @@
   config,
   homelab,
   lib,
+  paths,
   pkgs,
   ...
 }:
@@ -25,15 +26,15 @@ in
       before = [ "onepacerr.service" ];
       requiredBy = [ "onepacerr.service" ];
       unitConfig = {
-        RequiresMountsFor = "/srv/media";
-        ConditionPathIsMountPoint = "/srv/media";
+        RequiresMountsFor = paths.mediaRoot;
+        ConditionPathIsMountPoint = paths.mediaRoot;
       };
       serviceConfig = {
         Type = "oneshot";
         RemainAfterExit = true;
       };
       script = ''
-        one_pace_dir="/srv/media/library/shows/One Pace"
+        one_pace_dir="${paths.library.shows}/One Pace"
         if [ -d "$one_pace_dir" ]; then
           ${lib.getExe' pkgs.coreutils "chgrp"} -R media "$one_pace_dir"
           ${lib.getExe' pkgs.coreutils "chmod"} -R g+rwX "$one_pace_dir"
@@ -110,7 +111,7 @@ in
         ProtectKernelModules = true;
         ProtectKernelTunables = true;
         ProtectSystem = "strict";
-        ReadWritePaths = [ "/srv/media" ];
+        ReadWritePaths = [ paths.mediaRoot ];
         RestrictAddressFamilies = [
           "AF_INET"
           "AF_INET6"

@@ -1,8 +1,8 @@
-{ homelab, ... }:
+{ homelab, paths, ... }:
 
 let
-  musicLibrary = "/srv/media/library/music";
-  navidromeState = "/srv/.state/navidrome";
+  musicLibrary = paths.library.music;
+  navidromeState = paths.state.navidrome;
   ports = homelab.services;
 in
 {

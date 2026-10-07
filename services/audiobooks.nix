@@ -1,10 +1,10 @@
-{ homelab, ... }:
+{ homelab, paths, ... }:
 
 let
-  audiobookLibrary = "/srv/media/library/audiobooks";
-  audiobookDownloads = "/srv/media/downloads/audiobooks";
-  audiobookshelfState = "/srv/.state/audiobookshelf";
-  shelfmarkState = "/srv/.state/shelfmark";
+  audiobookLibrary = paths.library.audiobooks;
+  audiobookDownloads = paths.downloads.audiobooks;
+  audiobookshelfState = paths.state.audiobookshelf;
+  shelfmarkState = paths.state.shelfmark;
 in
 {
   nixarr = {
