@@ -69,11 +69,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1791196391,
-        "narHash": "sha256-ov0s4otylb9OwkRH0UdtGq2tqmc4Di5kYfb474pjJKk=",
+        "lastModified": 1791308844,
+        "narHash": "sha256-H3qE7DEPIVfr2QRzaBoaOS4KLVM3kgcc6PzRUAlOU+Y=",
         "ref": "feat/dsh-editor-plugin",
-        "rev": "6ffeba07e35ec17a311b6245ab10aeeca72478aa",
-        "revCount": 166,
+        "rev": "9f3360743223945b2fbfcef383758717ec680a21",
+        "revCount": 178,
         "type": "git",
         "url": "ssh://git@github.com/nixypanda/codect.git"
       },
