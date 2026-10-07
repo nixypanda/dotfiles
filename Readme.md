@@ -142,7 +142,7 @@ Mac is `aarch64-darwin` and cannot build Linux-only derivations locally.
 
 I use [git-crypt](https://github.com/AGWA/git-crypt) for files under
 `.secrets/`, and agenix for Rivendell homelab secrets under
-`hosts/srt-n01-rivendell/homelab/secrets/`. If you plan to use these
+`services/secrets/`. If you plan to use these
 dotfiles, replace those files with your own secrets or remove the references
 from the codebase.
 
@@ -150,11 +150,13 @@ from the codebase.
 
 - `flake.nix` wires the Mac Home Manager output, Mac nix-darwin output, and the
   NixOS home server output.
-- Home Manager modules live under `modules/`.
-- macOS system modules live under `modules/mac/`.
-- NixOS host modules live under `hosts/srt-n01-rivendell/`.
-- Neovim Lua config lives under `modules/nvim/lua/`.
-- Homelab service docs live in `hosts/srt-n01-rivendell/homelab/`.
+- Reusable user/program modules live under `modules/home/`; shared system
+  modules live under `modules/system/`.
+- Reusable machine roles live under `profiles/` (`workstation/`, `homelab/`).
+- NixOS service modules live under `services/`.
+- Per-host configuration lives under `hosts/<host>/`.
+- Neovim Lua config lives under `modules/home/nvim/lua/`.
+- Homelab service docs live in `services/README.md`.
 
 ## Here are a few screenshots to showcase this config in action
 

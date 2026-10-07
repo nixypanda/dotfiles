@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 let
   # hledger-lsp is not packaged in nixpkgs yet.
-  hledger-lsp = pkgs.callPackage ../pkgs/hledger-lsp.nix { };
+  hledger-lsp = pkgs.callPackage ../../pkgs/hledger-lsp.nix { };
 in
 {
   home.packages = with pkgs; [

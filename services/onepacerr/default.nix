@@ -7,7 +7,7 @@
 }:
 
 let
-  onepacerr = pkgs.callPackage ../../../../pkgs/onepacerr { };
+  onepacerr = pkgs.callPackage ../../pkgs/onepacerr { };
   ports = homelab.services;
 
   startOnepacerr = import ./start-onepacerr.nix {

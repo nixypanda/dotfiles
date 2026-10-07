@@ -2,13 +2,13 @@
 
 let
   # Personal CLI wrapper over Rope for Python refactors.
-  ropify = pkgs.callPackage ../pkgs/ropecli.nix { };
+  ropify = pkgs.callPackage ../../pkgs/ropecli.nix { };
 
   # OpenCode — nixpkgs only packages the V1 CLI, so Darwin hosts build the V2
-  # binary from opencode.ai (see ../pkgs/opencode.nix); Linux hosts keep pkgs.opencode.
+  # binary from opencode.ai (see ../../pkgs/opencode.nix); Linux hosts keep pkgs.opencode.
   opencode =
     if pkgs.stdenv.hostPlatform.isDarwin then
-      pkgs.callPackage ../pkgs/opencode.nix { }
+      pkgs.callPackage ../../pkgs/opencode.nix { }
     else
       pkgs.opencode;
 in

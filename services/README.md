@@ -130,7 +130,7 @@ Kavita uses it for token signing.
 The secrets directory also contains `radarr.env.age` and `prowlarr.env.age`
 files reserved for future service environment secrets. Create them when needed.
 
-The PBKDF2-SHA512 hash in `media.nix` is what qBittorrent stores — this is a
+The PBKDF2-SHA512 hash in `services/media/default.nix` is what qBittorrent stores — this is a
 one-way hash, not a plaintext secret, and is safe in the Nix store.
 
 To generate a new qBittorrent-compatible PBKDF2 hash from a plaintext password,
@@ -184,7 +184,7 @@ The following still needs one-time manual setup in the web UI:
      and import the downloaded files manually because Shelfmark does not
      document a direct Internet Archive/LibriVox source
 10. Prowlarr indexers — add them via the web UI, or declare them under
-   `nixarr.prowlarr.settings-sync.indexers` in `media.nix`
+   `nixarr.prowlarr.settings-sync.indexers` in `services/media/default.nix`
 11. Bazarr — open `https://srt-n01-rivendell.taila65e7f.ts.net:9470`, then:
    - add the desired subtitle languages and create default language profiles
      for movies and series

@@ -54,7 +54,7 @@ in
         default = "0.2.0-rc.2";
         description = ''
           Desktop release to install. Its artifact URL and sha512 are read from
-          the Nightly update feed; see ../../pkgs/deepseek-harness-desktop.nix for how to bump.
+          the Nightly update feed; see ../../../pkgs/deepseek-harness-desktop.nix for how to bump.
         '';
       };
 

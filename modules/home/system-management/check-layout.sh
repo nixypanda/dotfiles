@@ -1,7 +1,8 @@
 #!/bin/sh
 # Enforce the top-level dependency direction (see AGENTS.md, "Repo layout"):
-#   pkgs/ and colorschemes/ are leaves; modules/ sits above them and hosts/ on
-#   top. A lower layer must never import a higher one.
+#   pkgs/ and colorschemes/ are leaves; modules/ sits above them; services/
+#   above modules; profiles/ above services; hosts/ on top. A lower layer must
+#   never import a higher one, and hosts must not import each other.
 # Heuristic: scans .nix files for relative paths that climb into a higher layer.
 set -eu
 
@@ -18,9 +19,12 @@ scan() {
   fi
 }
 
-scan pkgs '\.\.(/\.\.)*/(modules|hosts)/'
-scan colorschemes '\.\.(/\.\.)*/(modules|hosts)/'
-scan modules '\.\.(/\.\.)*/hosts/'
+scan pkgs '\.\.(/\.\.)*/(modules|services|profiles|hosts)/'
+scan colorschemes '\.\.(/\.\.)*/(modules|services|profiles|hosts)/'
+scan modules '\.\.(/\.\.)*/(services|profiles|hosts)/'
+scan services '\.\.(/\.\.)*/(profiles|hosts)/'
+scan profiles '\.\.(/\.\.)*/hosts/'
+scan hosts '\.\.(/\.\.)*/hosts/'
 
 if [ "$fail" -ne 0 ]; then
   echo 'layout: dependency-direction check FAILED' >&2

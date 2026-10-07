@@ -15,35 +15,45 @@ This file is written for agentic coding tools working in this repo.
 - NixOS home server: `nixosConfigurations.srt-n01-rivendell`
 
 Key module roots:
-- Home Manager modules: `modules/*` (mix of `default.nix` modules and single-file modules)
-- macOS (nix-darwin) modules: `modules/mac/*.nix`
-- NixOS host modules: `hosts/srt-n01-rivendell/*`
-- Neovim Lua configs: `modules/nvim/lua/*.lua`
+- Reusable Home Manager modules: `modules/home/*`
+- Reusable system (NixOS/nix-darwin) modules: `modules/system/{darwin,nixos}/`
+- NixOS service modules: `services/*`
+- Machine roles/profiles: `profiles/{workstation,homelab}/`
+- Per-host overrides: `hosts/<host>/`
+- Neovim Lua configs: `modules/home/nvim/lua/*.lua`
 
 ## Repo layout (top-level segregation)
 
 Top-level directories are split by provenance:
 
 - `pkgs/` — packages this repo builds from upstream sources (custom derivations,
-  repacked binaries, fork overlays). Never imports `modules/` or `hosts/`.
-- `modules/`, `hosts/` — configuration of packages that come from elsewhere
-  (nixpkgs, home-manager, `calco`, `onepacerr-ui`, `hedger`, `codect`, etc.).
-  A module's own helpers live beside it in the same folder; a piece with several
-  files is a folder with `default.nix`.
+  repacked binaries, fork overlays). Never imports a higher layer.
 - `colorschemes/` — authored data; `builtins` only.
+- `modules/` — reusable, host-agnostic configuration. `modules/home/` is user
+  and program config; `modules/system/{darwin,nixos}/` is machine config.
+- `services/` — NixOS service modules (nixarr, Pi-hole, Caddy, hedger, …).
+  Host-agnostic; enabled through a profile.
+- `profiles/` — composable machine roles (`workstation/`, `homelab/`). Each role
+  has a `home.nix` and a `system.nix`.
+- `hosts/` — machine instances: identity, hardware, and host-only overrides.
+  A host imports one profile per layer.
+
+A module's own helpers live beside it in the same folder; a piece with several
+files is a folder with `default.nix`.
 
 Dependency direction (`A → B` means "A may import B"):
 
 ```
-pkgs ──► modules ──► hosts
-              ▲
-colorschemes ─┘
+pkgs         ┐
+             ├─► modules ──► services ──► profiles ──► hosts
+colorschemes ┘
 ```
 
-Invariants: `pkgs/` and `colorschemes/` never import `modules/` or `hosts/`;
-`modules/` never imports `hosts/`. Enforce with
-`sh modules/system-management/check-layout.sh` (or the installed `check-layout`
-command).
+Invariants: `pkgs/` and `colorschemes/` never import a higher layer; `modules/`
+never imports `services/`, `profiles/` or `hosts/`; `services/` never imports
+`profiles/` or `hosts/`; `profiles/` never imports `hosts/`; hosts never import
+each other. Enforce with `sh modules/home/system-management/check-layout.sh` (or
+the installed `check-layout` command).
 
 Notes:
 - `.secrets` is expected to be git-crypt’d (see `Readme.md`). Avoid editing/committing secrets.
@@ -62,14 +72,14 @@ Readme-compatible:
 - `nix run --no-write-lock-file --inputs-from . home-manager#home-manager -- switch --flake "./#srt-l03-shire"`
 
 Script equivalent:
-- `./modules/system-management/apply-user.sh`
+- `./modules/home/system-management/apply-user.sh`
 
 ### Apply system (nix-darwin)
 Preferred:
 - `sudo darwin-rebuild switch --flake ~/.dotfiles/.#srt-l03-shire`
 
 Script equivalent:
-- `./modules/system-management/apply-darwin.sh`
+- `./modules/home/system-management/apply-darwin.sh`
 
 ### Apply home server (NixOS)
 Host:
@@ -93,14 +103,14 @@ Server notes:
 - Tailscale is enabled declaratively on both the Mac and NixOS server.
 - The server keeps XFCE/LightDM enabled for local monitor/keyboard recovery.
 - The `nixypanda` login shell on the server should remain Bash. Nushell is installed and configured, but making it the login shell breaks ordinary SSH remote commands such as `ssh host 'echo ---; hostname'`.
-- `usbutils` and `usb-modeswitch` are Linux-only packages in `modules/cli.nix`; keep them guarded with `lib.optionals stdenv.hostPlatform.isLinux`.
+- `usbutils` and `usb-modeswitch` are Linux-only packages in `modules/home/cli.nix`; keep them guarded with `lib.optionals stdenv.hostPlatform.isLinux`.
 
 ### Update flake lockfile
 Preferred:
 - `nix flake update --flake .`
 
 Script equivalent:
-- `./modules/system-management/update-flake.sh`
+- `./modules/home/system-management/update-flake.sh`
 
 When removing a flake input manually:
 - Remove it from `inputs` in `flake.nix`.
@@ -110,7 +120,7 @@ When removing a flake input manually:
 - Verify with `rg -n -i "<name>|<name variants>" .`.
 
 ### “What will build?” forecast (optional)
-- `./modules/system-management/forecast-build.sh`
+- `./modules/home/system-management/forecast-build.sh`
 
 This uses `nix-forecast` and writes full output to `/tmp/nix-forecast.txt`.
 
@@ -214,12 +224,12 @@ Suggested single-target runs:
 
 ### Lua (Neovim config)
 Format all plugin configs:
-- `stylua modules/nvim/lua`
+- `stylua modules/home/nvim/lua`
 
 Format a single file:
-- `stylua modules/nvim/lua/which-key.lua`
+- `stylua modules/home/nvim/lua/which-key.lua`
 
-Stylua config lives at `modules/nvim/lua/stylua.toml`.
+Stylua config lives at `modules/home/nvim/lua/stylua.toml`.
 
 ### Shell
 Lint:
@@ -236,8 +246,8 @@ Vale:
 - `vale <file-or-dir>`
 
 Repo provides:
-- `modules/rumdl/rumdl.toml`
-- `modules/vale/vale.ini`
+- `modules/home/rumdl/rumdl.toml`
+- `modules/home/vale/vale.ini`
 
 ### Git (optional)
 - `committed` (commit message linting)
@@ -275,7 +285,7 @@ Repo provides:
 - Prefer `snake_case` for Nix local bindings when the surrounding file does.
 
 **Error handling**
-- Use `builtins.throw` for hard failures (pattern exists in `modules/nvim/default.nix`).
+- Use `builtins.throw` for hard failures (pattern exists in `modules/home/nvim/default.nix`).
 - When guarding optional inputs, prefer clear failure messages.
 
 ### Lua style (Neovim)
@@ -293,7 +303,7 @@ Repo provides:
 - Guard optional plugin requires with `pcall(require, "...")` only when necessary.
 
 **Diagnostics / types**
-- Lua Language Server globals are configured in `modules/nvim/lua/.luarc.json`.
+- Lua Language Server globals are configured in `modules/home/nvim/lua/.luarc.json`.
 
 ### Shell scripts
 - Prefer `#!/bin/sh` unless bash features are required.
@@ -305,7 +315,7 @@ Repo provides:
 - Repo scripts assume dotfiles live at `~/.dotfiles`.
 
 ### Nushell
-- Files live in `modules/nu/` and are concatenated into `programs.nushell.extraConfig`.
+- Files live in `modules/home/nu/` and are concatenated into `programs.nushell.extraConfig`.
 - Keep changes compatible with nushell scripting; avoid adding non-Nix runtime deps.
 
 ---
@@ -313,27 +323,27 @@ Repo provides:
 ## Neovim-specific notes
 
 ### Where plugin configs live
-- Plugin list + plugin wiring: `modules/nvim/default.nix`
-- Plugin configs (Lua): `modules/nvim/lua/*.lua`
+- Plugin list + plugin wiring: `modules/home/nvim/default.nix`
+- Plugin configs (Lua): `modules/home/nvim/lua/*.lua`
 
 Common plugin config patterns:
 - Immediate setup: `require("plugin").setup(...)`
 - Lazy load via `lz.n`: `require("lz.n").load({ ... after = function() ... end })`
 
 When adding a new plugin:
-- Prefer a Lua config file under `modules/nvim/lua/`.
-- Reference it from `modules/nvim/default.nix` via existing `plug(...)` / `lazy_plug(...)` helpers.
+- Prefer a Lua config file under `modules/home/nvim/lua/`.
+- Reference it from `modules/home/nvim/default.nix` via existing `plug(...)` / `lazy_plug(...)` helpers.
 - Keep plugin list ordering/comments consistent with surrounding entries.
 
 ### Linting/formatting inside Neovim
 Neovim config wires these tools:
-- Format on save via `conform.nvim` (`modules/nvim/lua/conform.lua`)
+- Format on save via `conform.nvim` (`modules/home/nvim/lua/conform.lua`)
   - lua: `stylua`
   - nix: `nixfmt`
   - css/html/javascript/typescript/json: `biome`
   - markdown: `rumdl`
   - yaml: `yamlfmt`
-- Linting via `nvim-lint` (`modules/nvim/lua/lint.lua`)
+- Linting via `nvim-lint` (`modules/home/nvim/lua/lint.lua`)
   - markdown: `vale`, `rumdl`
   - nix: `statix`
   - sh/bash: `shellcheck`

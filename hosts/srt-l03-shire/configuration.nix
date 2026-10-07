@@ -1,10 +1,9 @@
-# Only what is specific to this host. Shared Mac config lives in
-# modules/mac/.
+# Only what is specific to this host. The shared workstation role lives in
+# profiles/workstation/.
 { ... }:
 {
   imports = [
-    ../../../modules/mac/system.nix
-    ../../../modules/mac/homebrew.nix
+    ../../profiles/workstation/system.nix
   ];
 
   networking.hostName = "srt-l03-shire";
