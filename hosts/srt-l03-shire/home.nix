@@ -42,6 +42,7 @@
     ../../modules/home/kitty/dev.nix
     ../../modules/home/nu
     ../../modules/home/nvim
+    ../../modules/home/opencode
     ../../modules/home/programming.nix
     ../../modules/home/rumdl
     ../../modules/home/system-management
