@@ -14,6 +14,11 @@ $env.XDG_RUNTIME_DIR = $"($env.TMPDIR)"
 # sqlite databases in ~/.codex, so relocating it logs you out.
 $env.CLAUDE_CONFIG_DIR = $"($env.XDG_CONFIG_HOME)/claude"
 
+# Same hm-session-vars.sh gap. OpenCode reads CLI-only settings from here and
+# merges them over ~/.config/opencode/cli.json; inline settings stay
+# authoritative, unlike that file, which the running OpenCode service rewrites.
+$env.OPENCODE_CLI_CONFIG_CONTENT = '{"attention":{"notifications":true,"sound":true}}'
+
 # https://github.com/nix-community/home-manager/issues/6507
 # https://github.com/nushell/nushell/issues/8230
 use std/util "path add"

@@ -6,6 +6,16 @@
 }:
 let
   kittySessionPicker = import ./kitty-session-picker.nix { inherit pkgs; };
+
+  # Runs on every BEL (e.g. Claude Code's terminal_bell). KITTY_CHILD_CMDLINE is
+  # the program in the window that rang, so the banner names the agent.
+  bellNotify = pkgs.writeShellScript "kitty-bell-notify" ''
+    exec /usr/bin/osascript - "''${KITTY_CHILD_CMDLINE:-a terminal process}" <<'APPLESCRIPT'
+    on run argv
+      display notification "needs your input or has finished" with title (item 1 of argv)
+    end run
+    APPLESCRIPT
+  '';
 in
 {
   programs.kitty = {
@@ -16,6 +26,15 @@ in
       scrollback_lines = 10000;
       input_delay = 1;
 
+      # Agent attention alerts. Claude Code rings the terminal bell
+      # (preferredNotifChannel = terminal_bell in modules/home/claude); kitty
+      # marks the tab, bounces the dock icon, and shows a banner via the script.
+      bell_on_tab = "🔔";
+      enable_audio_bell = "no";
+      window_alert_on_bell = "yes";
+      macos_dock_badge_on_bell = "yes";
+      command_on_bell = "${bellNotify}";
+
       enabled_layouts = "Tall,Grid,Stack";
       shell = "${pkgs.nushell}/bin/nu";
       editor = "~/.nix-profile/bin/nvim";
@@ -25,7 +44,7 @@ in
       tab_powerline_style = "slanted";
       tab_bar_min_tabs = 1;
       tab_bar_filter = "session:~ or session:^$";
-      tab_title_template = " 󰆍 {index} → {title} ";
+      tab_title_template = "{bell_symbol} 󰆍 {index} → {title} ";
       active_tab_title_template = " {session_name} ┊ 󰆍 {index} → {title} ┊ 󰕮 ‹{layout_name}› ";
 
       macos_option_as_alt = "left";

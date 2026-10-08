@@ -33,6 +33,9 @@ in
         "typescript-lsp@claude-plugins-official" = true;
       };
       effortLevel = "medium";
+      # Ring kitty's bell on completion and permission prompts; kitty turns the
+      # BEL into a tab indicator, dock badge, and banner (modules/home/kitty).
+      preferredNotifChannel = "terminal_bell";
       tui = "fullscreen";
     };
   };
