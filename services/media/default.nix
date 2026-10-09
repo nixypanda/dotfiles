@@ -251,12 +251,19 @@ in
     # downloaded media, artwork, and metadata group-writable so the separate
     # service users can create hardlinks and refresh files in place.
     jellyfin.serviceConfig.UMask = lib.mkForce "0002";
-    # qBittorrent can exit cleanly right after boot (for example while the
-    # media mount settles) and then stays down, which breaks every *arr app
-    # and qui. The exit status is 0, so "on-failure" would not catch it.
+    # qBittorrent's single-instance guard (ApplicationInstanceManager) cannot
+    # create its IPC socket under PrivateUsers=true: the user-namespace setup
+    # makes qBittorrent conclude another instance is already running and exit 0
+    # immediately, before it ever starts the session or WebUI. That clean exit
+    # is what Restart=always was masking. The nixpkgs qbittorrent module sets
+    # PrivateUsers=true; override it to false so the IPC socket can be created.
     qbittorrent.serviceConfig = {
       UMask = lib.mkForce "0002";
-      Restart = "always";
+      PrivateUsers = lib.mkForce false;
+
+      # qBittorrent no longer self-exits, so stop masking clean exits; restart
+      # only on real failures.
+      Restart = "on-failure";
       RestartSec = 5;
     };
 
