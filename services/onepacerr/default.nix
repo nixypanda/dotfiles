@@ -62,14 +62,20 @@ in
         PORT = toString ports.onepacerr.local;
         npm_package_version = onepacerr.version;
 
-        PIPELINE_SKIP_VERIFY_PRESENT_FILES = "false";
-        PIPELINE_SKIP_ORGANIZE_PRESENT_FILES = "false";
-        PIPELINE_SKIP_UPDATE_METADATA_PRESENT_FILES = "false";
+        PIPELINE_SKIP_VERIFY_PRESENT_FILES = "true";
+        PIPELINE_SKIP_ORGANIZE_PRESENT_FILES = "true";
+        PIPELINE_SKIP_UPDATE_METADATA_PRESENT_FILES = "true";
         PIPELINE_SKIP_DOWNLOADS = "false";
         PIPELINE_SKIP_DOWNLOADS_IMPORTS = "false";
         PIPELINE_INCLUDE_SPECIALS = "true";
         PIPELINE_PREFER_EXTENDED = "true";
         PIPELINE_PREFER_ALTERNATE = "true";
+
+        # Poll for metadata changes at most once a day instead of holding a
+        # websocket open and reacting to every upstream push. Each poll only
+        # runs the pipeline when the metadata's lastUpdate is newer.
+        METADATA_DISABLE_WEBSOCKET = "true";
+        METADATA_CHECK_INTERVAL = "86400";
 
         LIBRARY_MEDIA_SERVER = "jellyfin";
         LIBRARY_SERIES_NAME = "One Pace";
