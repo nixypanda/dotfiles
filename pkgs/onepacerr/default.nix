@@ -38,6 +38,19 @@ buildNpmPackage rec {
       --replace-fail \
         $'\t\tcopyFile(source, destination)' \
         $'\t\tif (existsSync(destination)) unlinkSync(destination)\n\t\tcopyFile(source, destination)'
+
+    # Importing is not idempotent: every run deletes the existing library file
+    # and recreates the hardlink/copy, which touches the file and makes the
+    # media server rescan and regenerate trickplay/chapter images on each pass.
+    # Skip the delete+relink when the destination is already the same hardlink
+    # (or an identical-size copy when hardlinks are disabled).
+    substituteInPlace src/torrent/torrent.controller.ts \
+      --replace-fail \
+        "import { existsSync, mkdirSync, readdirSync, unlinkSync } from 'node:fs'" \
+        "import { existsSync, mkdirSync, readdirSync, statSync, unlinkSync } from 'node:fs'" \
+      --replace-fail \
+        "if (!environment.PIPELINE_SKIP_DOWNLOADS_IMPORTS) {" \
+        "if (existsSync(destination) && (() => { try { const sourceStat = statSync(source); const destinationStat = statSync(destination); return environment.LIBRARY_USE_HARDLINKS ? (sourceStat.ino === destinationStat.ino && sourceStat.dev === destinationStat.dev) : (sourceStat.size === destinationStat.size); } catch { return false; } })()) { Logger.debug('File already imported, skipping re-import'); processed = true; continue; } if (!environment.PIPELINE_SKIP_DOWNLOADS_IMPORTS) {"
   '';
 
   nativeBuildInputs = [ makeWrapper ];
