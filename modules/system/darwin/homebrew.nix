@@ -15,6 +15,7 @@
       "steipete/tap/codexbar"
       "colemak-dh"
       "obsidian"
+      "vorssaint"
     ];
   };
 }
