@@ -251,18 +251,24 @@ in
     # downloaded media, artwork, and metadata group-writable so the separate
     # service users can create hardlinks and refresh files in place.
     jellyfin.serviceConfig.UMask = lib.mkForce "0002";
-    # qBittorrent's single-instance guard (ApplicationInstanceManager) cannot
-    # create its IPC socket under PrivateUsers=true: the user-namespace setup
-    # makes qBittorrent conclude another instance is already running and exit 0
-    # immediately, before it ever starts the session or WebUI. That clean exit
-    # is what Restart=always was masking. The nixpkgs qbittorrent module sets
-    # PrivateUsers=true; override it to false so the IPC socket can be created.
+    # qBittorrent's single-instance guard (ApplicationInstanceManager) protects
+    # a PID lock file. To recognise a stale lock left behind by a crashed or
+    # rebooted instance, Qt's QLockFile compares the recorded PID against
+    # /proc/<pid>/exe and checks /proc/sys/kernel/random/boot_id. The nixpkgs
+    # qbittorrent module sets ProcSubset=pid, which hides both of those /proc
+    # entries; Qt then cannot see that the PID was reused or that the host
+    # rebooted, assumes another instance is still running, and exits 0 before
+    # starting the session or WebUI. Because the exit is clean, Restart=
+    # on-failure leaves the service dead. Restore the full /proc view so
+    # stale-lock detection works again. (Disabling PrivateUsers earlier did not
+    # help; the /proc subset was the real cause.)
     qbittorrent.serviceConfig = {
       UMask = lib.mkForce "0002";
       PrivateUsers = lib.mkForce false;
+      ProcSubset = lib.mkForce "all";
 
-      # qBittorrent no longer self-exits, so stop masking clean exits; restart
-      # only on real failures.
+      # Restart only on real failures; a clean exit here is the single-instance
+      # guard giving up, not a healthy shutdown.
       Restart = "on-failure";
       RestartSec = 5;
     };
