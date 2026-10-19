@@ -156,10 +156,13 @@ The following still needs one-time manual setup in the web UI:
    whose folder is `/srv/media/library/audiobooks`
 9. Shelfmark — create the administrator or enable authentication, then:
    - keep Universal search enabled and use Open Library for metadata discovery
-   - keep `/srv/media/downloads/audiobooks` as the ingest/download directory
+   - keep `/srv/media/library/books` as the ebook destination so Kavita scans
+     completed downloads directly
+   - keep `/srv/media/downloads/audiobooks` as the audiobook download directory
+   - restrict supported book formats to `epub,pdf,cbz,cbr`, which Kavita can read
    - configure file processing to prefer M4B for audiobook results
-   - move reviewed completed downloads into `/srv/media/library/audiobooks`
-     for Audiobookshelf to scan
+   - move reviewed completed audiobook downloads into
+     `/srv/media/library/audiobooks` for Audiobookshelf to scan
    - configure only download sources whose terms and rights metadata permit
      the intended use; do not add private trackers or Usenet providers
    - for Internet Archive or LibriVox material, verify rights in the browser
@@ -187,7 +190,9 @@ determination. Check each item's rights metadata and whether its public-domain
 or open-license status applies in the jurisdiction where it will be used.
 
 Shelfmark has no direct Seerr integration. Book and audiobook requests happen
-through Shelfmark's own UI.
+through Shelfmark's own UI. Shelfmark also has no direct Kavita integration:
+ebooks are written into Kavita's books library and picked up by Kavita's normal
+library scan.
 
 The following is handled automatically by nixarr on deploy:
 

@@ -3,6 +3,7 @@
 let
   audiobookLibrary = paths.library.audiobooks;
   audiobookDownloads = paths.downloads.audiobooks;
+  ebookLibrary = paths.library.books;
   audiobookshelfState = paths.state.audiobookshelf;
   shelfmarkState = paths.state.shelfmark;
 in
@@ -25,8 +26,12 @@ in
     };
   };
 
+  # Shelfmark uses INGEST_DIR as the book destination. Point ebooks at Kavita's
+  # library and keep audiobooks in their own download directory for review.
   services.shelfmark.environment = {
-    INGEST_DIR = audiobookDownloads;
+    INGEST_DIR = ebookLibrary;
+    DESTINATION_AUDIOBOOK = audiobookDownloads;
+    SUPPORTED_FORMATS = "epub,pdf,cbz,cbr";
     SEARCH_MODE = "universal";
   };
 
