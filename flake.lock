@@ -32,11 +32,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1791297426,
-        "narHash": "sha256-wiEt+0cXDaApl98w5ZhfYMmDv6ZbDxFhwX5iYzG4qz8=",
+        "lastModified": 1791722881,
+        "narHash": "sha256-/fGe+ZG9rPvGiofUWKe0yD+IGpyX5wrVhJPRk8Za5l8=",
         "ref": "refs/heads/main",
-        "rev": "7c39a0c6c56ee0165de4d7d6100472b2ee26a67b",
-        "revCount": 522,
+        "rev": "d0b0192db77c960758e1d33398456ed224ed4f8b",
+        "revCount": 533,
         "type": "git",
         "url": "ssh://git@github.com/nixypanda/calco.git"
       },
@@ -53,16 +53,15 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1791308844,
-        "narHash": "sha256-H3qE7DEPIVfr2QRzaBoaOS4KLVM3kgcc6PzRUAlOU+Y=",
-        "ref": "feat/dsh-editor-plugin",
-        "rev": "9f3360743223945b2fbfcef383758717ec680a21",
-        "revCount": 178,
+        "lastModified": 1792149774,
+        "narHash": "sha256-36wTElksIU/HUUI/AvPnuLQjI6Y0esfUVuk89zg3+7g=",
+        "ref": "refs/heads/main",
+        "rev": "9034948526d00d90efd6756ba0cb84c822b8a09f",
+        "revCount": 194,
         "type": "git",
         "url": "ssh://git@github.com/nixypanda/codect.git"
       },
       "original": {
-        "ref": "feat/dsh-editor-plugin",
         "type": "git",
         "url": "ssh://git@github.com/nixypanda/codect.git"
       }
@@ -174,11 +173,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790112114,
-        "narHash": "sha256-9YUVTYbsmomjq7hBmK8lh5qty3HJOglfhhYx54ArsM8=",
+        "lastModified": 1792427685,
+        "narHash": "sha256-wV4Q0nZzyHrGYGYy4cDt1QTS4r2rkO5wlbSzZ+2nQ4g=",
         "ref": "refs/heads/main",
-        "rev": "5fdea5ab335aa198d0aafa9bc77eda1ef08039a7",
-        "revCount": 166,
+        "rev": "617fbcb13fc84a7f2c1680b906827af0bfebece2",
+        "revCount": 217,
         "type": "git",
         "url": "ssh://git@github.com/nixypanda/hedger.git"
       },

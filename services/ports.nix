@@ -121,12 +121,5 @@ in
       paisa = 5103;
       paisaTailnet = 9462;
     };
-
-    dummy = {
-      hedger = 5004;
-      hedgerTailnet = 9453;
-      paisa = 5104;
-      paisaTailnet = 9463;
-    };
   };
 }

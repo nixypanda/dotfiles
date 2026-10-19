@@ -14,7 +14,7 @@ refresh_services() {
 
   ${ssh_interactive_cmd} "${remote}" "
     if systemctl cat hedger-mine.service >/dev/null 2>&1; then
-      sudo systemctl reload hedger-mine hedger-wife hedger-combined hedger-dummy
+      sudo systemctl reload hedger-mine hedger-wife hedger-combined
     fi
     sudo systemctl restart paisa-mine
   "

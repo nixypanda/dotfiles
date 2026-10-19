@@ -41,7 +41,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     codect = {
-      url = "git+ssh://git@github.com/nixypanda/codect.git?ref=feat/dsh-editor-plugin";
+      url = "git+ssh://git@github.com/nixypanda/codect.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Applying the configuration happens from the.dotfiles directory so the

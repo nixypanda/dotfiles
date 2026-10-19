@@ -95,14 +95,6 @@ in
             };
           }
           {
-            "Hedger Dummy" = {
-              icon = "${tailnetUrl finance.dummy.hedgerTailnet}/icon.svg";
-              href = tailnetUrl finance.dummy.hedgerTailnet;
-              description = "Dummy ledger dashboard";
-              siteMonitor = "${localUrl finance.dummy.hedger}/api/v1/health/ready";
-            };
-          }
-          {
             "Paisa Mine" = {
               icon = "/icons/paisa.svg";
               href = tailnetUrl finance.mine.paisaTailnet;

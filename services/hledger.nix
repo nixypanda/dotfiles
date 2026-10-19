@@ -26,10 +26,6 @@ let
       hedgerPort = homelab.finance.combined.hedger;
       journal = "main-combined.journal";
     };
-    dummy = {
-      hedgerPort = homelab.finance.dummy.hedger;
-      journal = "main-dummy.journal";
-    };
   };
 
   paisaInstances = {

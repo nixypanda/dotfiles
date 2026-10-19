@@ -18,12 +18,11 @@ size arguments, for example `media-unlinked /srv/media/library 100M`.
 Service ports, tailnet-facing aliases, and the tailnet host are defined in
 `ports.nix`. The Homepage dashboard uses that file to publish service links.
 
-Ports 9450-9453 serve Hedger over the tailnet:
+Ports 9450-9452 serve Hedger over the tailnet:
 
 - 9450: Hedger Mine
 - 9451: Hedger Wife
 - 9452: Hedger Combined
-- 9453: Hedger Dummy
 
 The audiobook services are available only through Caddy on the tailnet:
 
@@ -42,12 +41,12 @@ Their application ports (`127.0.0.1:8686` and `127.0.0.1:4533`) stay bound to
 localhost and are not opened in the firewall. Amperfy connects to the Navidrome
 HTTPS URL.
 
-All four Hedger instances use the existing journals under
-`/srv/hledger/journals`. Caddy terminates Tailscale TLS on ports 9450-9453 and
+All three Hedger instances use the existing journals under
+`/srv/hledger/journals`. Caddy terminates Tailscale TLS on ports 9450-9452 and
 proxies to Hedger's module-managed nginx listener on `127.0.0.1:8083`. nginx
 selects the matching ledger by its internal hostname, serves the shared
 frontend, and proxies `/api/*` to the matching localhost-only Hedger backend on
-ports 5001-5004.
+ports 5001-5003.
 
 The Mine instance also reads
 `/srv/hledger/hedger/hedger-mine.yaml`. Journal paths, backend ports, display
@@ -56,7 +55,7 @@ the NixOS module and override matching YAML values. The other instances do not
 use a Hedger YAML configuration.
 
 Hedger loads each journal into an immutable snapshot at startup. The
-`sync-hledger` command reloads all four `hedger-*` services after synchronizing
+`sync-hledger` command reloads all three `hedger-*` services after synchronizing
 journals or prices. `sync-hledger --all` also copies
 `hedger/hedger-mine.yaml`; bootstrap copies it with the rest of the ledger root.
 
