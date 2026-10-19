@@ -23,7 +23,7 @@ function M.lsp_on_attach(client, bufnr)
 	-- mutations
 	map("<leader>lC", vim.lsp.codelens.run, "Code Lens")
 	map("<leader>lR", vim.lsp.buf.rename, "Rename")
-	map("<leader>la", "<cmd>Lspsaga code_action<cr>", "Code Action") -- shows preview, telescope-ui-select does not
+	map("<leader>la", vim.lsp.buf.code_action, "Code Action")
 
 	-- finding stuff
 	map("<leader>lO", "<cmd>Telescope lsp_document_symbols<cr>", "Toggle Document Symbols Outline")
@@ -36,10 +36,10 @@ function M.lsp_on_attach(client, bufnr)
 	map("<leader>lp", vim.lsp.buf.hover, "Preview Definition")
 
 	-- diagnostics
-	map("<leader>lc", "<cmd>Lspsaga show_cursor_diagnostics<cr>", "Cursor Diagnostics")
+	map("<leader>lc", function() vim.diagnostic.open_float({ scope = "cursor" }) end, "Cursor Diagnostics")
 	map("<leader>ld", "<cmd>Telescope diagnostics bufnr=0<cr>", "Document Diagnostics")
 	map("<leader>lD", "<cmd>Telescope diagnostics<cr>", "Workspace Diagnostics")
-	map("<leader>lL", "<cmd>Lspsaga show_line_diagnostics<cr>", "Line Diagnostics")
+	map("<leader>lL", function() vim.diagnostic.open_float({ scope = "line" }) end, "Line Diagnostics")
 	-- diagnostics navigation
 	map("<leader>lh", jump_to_prev_diagnostic, "Previous diagnostic")
 	map("<leader>ll", jump_to_next_diagnostic, "Next diagnostic")
@@ -52,7 +52,7 @@ function M.lsp_on_attach(client, bufnr)
 	map("<leader>lx", "<cmd>LspInfo<cr>", "Info")
 
 	-- Other mode keymap
-	vim.keymap.set("v", "<leader>la", "<cmd>Lspsaga code_action<cr>", { buffer = bufnr, desc = "Code Action" })
+	vim.keymap.set("v", "<leader>la", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code Action" })
 end
 
 return M

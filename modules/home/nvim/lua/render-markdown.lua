@@ -1,5 +1,5 @@
 require("lz.n").load({
 	"render-markdown.nvim",
-	ft = { "markdown", "Avante" },
+	ft = { "markdown" },
 	after = function() require("render-markdown").setup({}) end,
 })

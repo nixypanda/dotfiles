@@ -27,7 +27,6 @@ local function register_treesitter_filetype(filetype)
 	})
 end
 
-vim.treesitter.language.register("kulala_http", { "http" })
 vim.treesitter.language.register("ledger", { "hledger", "journal" })
 
 register_treesitter_filetype("bash")
@@ -49,5 +48,4 @@ register_treesitter_filetype("sql")
 register_treesitter_filetype("toml")
 register_treesitter_filetype("vimdoc")
 register_treesitter_filetype("yaml")
-register_treesitter_filetype("http")
 register_treesitter_filetype("ledger")

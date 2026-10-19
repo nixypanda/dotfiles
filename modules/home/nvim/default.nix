@@ -6,8 +6,6 @@
 }:
 let
   python_with_debugpy = pkgs.python3.withPackages (ps: with ps; [ debugpy ]);
-
-  cron_describe = import ./cron-describe.nix { inherit pkgs; };
 in
 {
   xdg.configFile = {
@@ -18,8 +16,9 @@ in
     "nvim/lua/nix_injected.lua".text = # lua
       ''
         return {
-             dap_python_with_debugpy  = "${python_with_debugpy}",
-             cronex_explainer = "${cron_describe}/bin/cron-describe",
+             dap_python_with_debugpy = "${python_with_debugpy}",
+             rustaceanvim_codelldb_path = "${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb",
+             rustaceanvim_liblldb_path = "${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb/lldb/lib/liblldb${pkgs.stdenv.hostPlatform.extensions.sharedLibrary}",
         }
       '';
     "nvim/ftplugin/nix.lua".text = # lua
@@ -88,7 +87,6 @@ in
         # Semantic views (codect)
         (plug codect-nvim ./lua/codect.lua)
         (plug gitsigns-nvim ./lua/gitsigns.lua)
-        (lazy_plug blame-nvim ./lua/blame.lua)
         (lazy_plug diffview-nvim ./lua/diffview.lua)
 
         # Keymaps
@@ -96,15 +94,12 @@ in
 
         # navigation
         (plug nvim-bqf ''require("bqf").setup()'')
-        (plug nvim-pqf ''require("pqf").setup()'')
 
         # Programming: LSP
         (lazy_plug nvim-lspconfig ./lua/lspconfig.lua)
         (plug_dep SchemaStore-nvim)
-        (plug_dep lspsaga-nvim)
         (lazy_plug nvim-lint ./lua/lint.lua)
         (lazy_plug conform-nvim ./lua/conform.lua)
-        (lazy_plug lsp_lines-nvim ./lua/lsp_lines.lua)
 
         # Programming: Treesitter
         {
@@ -135,7 +130,6 @@ in
           type = "lua";
           config = builtins.readFile ./lua/treesitter.lua;
         }
-        (lazy_plug treesj ./lua/treesj.lua)
 
         # Programming: Language support
         (plug rustaceanvim ./lua/rustaceanvim.lua)
@@ -150,17 +144,8 @@ in
         (lazy_plug neotest ./lua/neotest.lua)
         (plug_dep neotest-python)
         (plug_dep neotest-haskell)
-        FixCursorHold-nvim
-        # sessions
-        (plug auto-session ./lua/auto-session.lua)
-
-        # Text Helpers
-        (lazy_plug todo-comments-nvim ./lua/todo-comments.lua)
-        (plug venn-nvim ./lua/venn.lua)
-        (lazy_plug vim-table-mode ./lua/table-mode.lua)
 
         # Text objects
-        (plug nvim-autopairs "require('nvim-autopairs').setup {}")
         (plug nvim-surround "require('nvim-surround').setup {}")
 
         # Webdev: Database
@@ -170,14 +155,8 @@ in
         (plug_dep vim-dadbod-completion)
         (plug_dep nvim-dadbod-ssh)
 
-        # Webdev: API
-        (lazy_plug kulala-nvim ./lua/kulala.lua)
-
         # File specific plugins
         (lazy_plug render-markdown-nvim ./lua/render-markdown.lua)
-        (lazy_plug crates-nvim ./lua/crates.lua)
-        (lazy_plug nvim-cronex ./lua/cronex.lua)
-        (lazy_plug csvview-nvim ./lua/csvview.lua)
       ];
 
     initLua = # lua

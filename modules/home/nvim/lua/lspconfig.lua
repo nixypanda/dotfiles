@@ -3,15 +3,9 @@ require("lz.n").load({
 	event = { "BufReadPre", "BufNewFile" },
 	load = function(name)
 		vim.cmd.packadd(name)
-		vim.cmd.packadd("lspsaga.nvim")
 		vim.cmd.packadd("SchemaStore.nvim")
 	end,
 	after = function()
-		require("lspsaga").setup({
-			symbol_in_winbar = { enable = false },
-			lightbulb = { ignore = { clients = { "kulala" } } },
-		})
-
 		local on_attach = require("common").lsp_on_attach
 
 		-- JavaScript/TypeScript/CSS/JSON/HTML (Biome)
