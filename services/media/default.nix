@@ -20,7 +20,7 @@ let
     fields = {
       host = "localhost";
       port = ports.qbittorrent.syncApi;
-      username = "admin";
+      username = "qbittorrent_admin";
       password.secret = config.age.secrets.qbittorrentPassword.path;
     };
   };
@@ -202,6 +202,10 @@ in
           "Downloads\\TempPathEnabled" = true;
           WebUI = {
             LocalHostAuth = false;
+            # The Web UI username is declared here so it survives restarts:
+            # nixpkgs rewrites qBittorrent.conf on every service start, so a
+            # change made in the Web UI would be lost.
+            Username = "qbittorrent_admin";
             # qBittorrent stores the WebUI password in its PBKDF2 config format;
             # automation clients use the age-managed secret above.
             Password_PBKDF2 = "@ByteArray(oaZn1TWvluvmROj2WQSsbg==:ASs3XhI21VWkpP0EGEQRTBe97oJkUEvYkcS1zEiyuZb/+g7eZg3y+Q5LUzYsKwvlumNsj1lVWnHxL0Dosrc86w==)";
@@ -277,7 +281,6 @@ in
     # on this endpoint. Keep nixarr's ordering and credential groups while
     # replacing only the incompatible command.
     bazarr-sync-config.serviceConfig.ExecStart = lib.mkForce "${lib.getExe bazarrSyncArrSettings}";
-
   };
 
   networking.firewall.allowedUDPPorts = [

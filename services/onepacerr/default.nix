@@ -88,7 +88,7 @@ in
 
         TORRENT_CLIENT = "qbittorrent";
         TORRENT_URL = "http://127.0.0.1:${toString ports.qbittorrent.syncApi}";
-        TORRENT_USER = "admin";
+        TORRENT_USER = "qbittorrent_admin";
         TORRENT_CATEGORY = "onepacerr";
         TORRENT_CATEGORY_ONCE_COMPLETED = "completed";
         TORRENT_CHECK_INTERVAL = "60";

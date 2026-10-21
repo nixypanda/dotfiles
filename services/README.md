@@ -67,7 +67,8 @@ Nix currently declares:
 - Homepage dashboard over Tailscale MagicDNS
 - firewall ports
 - service ports
-- qBittorrent download paths and Web UI password (PBKDF2 hash, not plaintext)
+- qBittorrent download paths, Web UI username, and Web UI password (PBKDF2
+  hash, not plaintext)
 - Kavita service settings, token key secret, and library directories
 - Audiobookshelf through the nixarr module
 - Shelfmark through the nixarr module and locked Nixpkgs package
@@ -140,7 +141,7 @@ The following still needs one-time manual setup in the web UI:
 3. Lidarr — open `https://srt-n01-rivendell.taila65e7f.ts.net:9471`, then:
    - add `/srv/media/library/music` as the root folder
    - add qBittorrent as the download client at `localhost:8085`, using username
-     `admin` and the password from
+     `qbittorrent_admin` and the password from
      `sudo cat /run/agenix/qbittorrentPassword`; use the `lidarr` category
    - choose the desired metadata profile and quality profile before adding artists
 4. Navidrome — open `https://srt-n01-rivendell.taila65e7f.ts.net:9472` and create
