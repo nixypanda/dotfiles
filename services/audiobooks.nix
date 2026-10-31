@@ -1,4 +1,9 @@
-{ homelab, paths, ... }:
+{
+  homelab,
+  paths,
+  pkgs,
+  ...
+}:
 
 let
   audiobookLibrary = paths.library.audiobooks;
@@ -15,6 +20,17 @@ in
       port = homelab.services.audiobookshelf.local;
       stateDir = audiobookshelfState;
       openFirewall = false;
+      package = pkgs.audiobookshelf.overrideAttrs (oldAttrs: {
+        # Audiobookshelf hard-codes its socket-connection toasts to the
+        # bottom-center of the screen. Move them to the top-right, matching
+        # the rest of the in-app toasts.
+        postInstall = (oldAttrs.postInstall or "") + ''
+          if [ -d "$out/lib/node_modules/audiobookshelf/client/dist" ]; then
+            find "$out/lib/node_modules/audiobookshelf/client/dist" -type f -name '*.js' -print0 \
+              | xargs -0 sed -i "s/'bottom-center'/'top-right'/g"
+          fi
+        '';
+      });
     };
 
     shelfmark = {
