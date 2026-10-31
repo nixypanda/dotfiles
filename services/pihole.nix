@@ -5,6 +5,14 @@
 }:
 
 let
+  # ABP-style entries (`||domain^`) also block every subdomain, which a plain
+  # hostname list cannot do. Keep this scoped to firmware updates and PSN;
+  # blocking all of playstation.net would also kill game downloads.
+  sonyBlocklistFile = pkgs.writeText "pihole-sony-blocklist.txt" ''
+    ||update.playstation.net^
+    ||sonyentertainmentnetwork.com^
+  '';
+
   blocklists = [
     {
       url = "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts";
@@ -118,6 +126,10 @@ let
     {
       url = "https://lists.cyberhost.uk/malware.txt";
       description = "CyberHost.uk Malware Domains";
+    }
+    {
+      url = "file://${sonyBlocklistFile}";
+      description = "Sony firmware updates and PSN";
     }
   ];
   allowlistFile = pkgs.writeText "pihole-allowlist.txt" ''
