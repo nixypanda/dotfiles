@@ -10,7 +10,7 @@
     [
       # CLI tools / Terminal facification
       dig
-      ouch # unzip, py7zr
+      ouch-rar # unzip, py7zr
       qpdf
 
       # Better alternatives

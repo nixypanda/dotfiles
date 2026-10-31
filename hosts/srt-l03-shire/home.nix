@@ -27,6 +27,7 @@
         "google-chrome"
         "firefox-bin"
         "firefox-bin-unwrapped"
+        "ouch"
       ];
   };
 
