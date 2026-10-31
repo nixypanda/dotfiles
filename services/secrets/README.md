@@ -15,6 +15,8 @@ Rivendell recipient above.
 Current secrets:
 
 - `calco.env.age`: wired as `age.secrets.calcoEnv` for the CalCo service.
+- `calco-opencode-api-key.age`: wired as `age.secrets.calcoOpencodeApiKey`
+  for the CalCo assistant's OpenCode Go API key.
 - `kavita-token-key.age`: wired as `age.secrets.kavitaTokenKey` for Kavita
   token signing. Its plaintext must not include a trailing newline.
 - `onepacerr-jellyfin-password.age`: wired as

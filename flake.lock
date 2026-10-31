@@ -32,11 +32,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1791722881,
-        "narHash": "sha256-/fGe+ZG9rPvGiofUWKe0yD+IGpyX5wrVhJPRk8Za5l8=",
+        "lastModified": 1793455538,
+        "narHash": "sha256-qzYEsl0BUVaZvNw7oZjcECkbwCnjlDlRfD9fy05G3s4=",
         "ref": "refs/heads/main",
-        "rev": "d0b0192db77c960758e1d33398456ed224ed4f8b",
-        "revCount": 533,
+        "rev": "8b7fb3923275bdf03ffbca241918bb226997d9ec",
+        "revCount": 556,
         "type": "git",
         "url": "ssh://git@github.com/nixypanda/calco.git"
       },
@@ -173,11 +173,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792427685,
-        "narHash": "sha256-wV4Q0nZzyHrGYGYy4cDt1QTS4r2rkO5wlbSzZ+2nQ4g=",
+        "lastModified": 1793367094,
+        "narHash": "sha256-a00lwauMN7Uc9rNUVJODlBmw3SYOFeuOmPq4yh+Xy+A=",
         "ref": "refs/heads/main",
-        "rev": "617fbcb13fc84a7f2c1680b906827af0bfebece2",
-        "revCount": 217,
+        "rev": "ce757e504ae3c0f0ab7a76d874c91d37745caf58",
+        "revCount": 230,
         "type": "git",
         "url": "ssh://git@github.com/nixypanda/hedger.git"
       },
