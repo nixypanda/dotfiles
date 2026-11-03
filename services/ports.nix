@@ -98,6 +98,11 @@ in
       local = 8084;
       tailnet = 9467;
     };
+
+    stremioLocalDebrid = {
+      local = 7810;
+      tailnet = 9474;
+    };
   };
 
   finance = {

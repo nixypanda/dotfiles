@@ -41,6 +41,27 @@ Their application ports (`127.0.0.1:8686` and `127.0.0.1:4533`) stay bound to
 localhost and are not opened in the firewall. Amperfy connects to the Navidrome
 HTTPS URL.
 
+## Stremio Local Debrid
+
+`stremio-local-debrid` runs a Stremio addon that downloads Torrentio torrents on
+Rivendell. Downloads continue to completion after the player closes, and later
+plays reuse the on-disk cache. Clients play the cached HTTP stream over the
+tailnet.
+
+- Addon manifest: `https://srt-n01-rivendell.taila65e7f.ts.net:9474/<token>/manifest.json`
+- Status dashboard: `https://srt-n01-rivendell.taila65e7f.ts.net:9474/<token>/`
+- The token and both URLs are generated on first start. Read them with
+  `sudo cat /var/lib/stremio-local-debrid/addon-url.txt`.
+- Cache: `/srv/media/cache/stremio-debrid` (100 GiB budget, 10 GiB free-space
+  reserve).
+- Torrentio defaults to `https://torrentio.strem.fun/manifest.json`. Replace
+  `torrentioManifest` in `services/stremio-local-debrid.nix` with your configured
+  Torrentio URL if you use custom providers, filters, or debrid.
+- Install the addon once in Stremio; the account syncs it to the other devices.
+  Pick a "Local Cache" source to download and stream from Rivendell.
+- The package stubs WebRTC, so browser-only WebRTC peers are not used; ordinary
+  TCP/uTP BitTorrent peers are unaffected.
+
 All three Hedger instances use the existing journals under
 `/srv/hledger/journals`. Caddy terminates Tailscale TLS on ports 9450-9452 and
 proxies to Hedger's module-managed nginx listener on `127.0.0.1:8083`. nginx

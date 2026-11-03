@@ -19,6 +19,10 @@ in
     audiobooks = "${mediaRoot}/downloads/audiobooks";
   };
 
+  cache = {
+    stremioDebrid = "${mediaRoot}/cache/stremio-debrid";
+  };
+
   state = {
     nixarr = "${stateRoot}/nixarr";
     audiobookshelf = "${stateRoot}/audiobookshelf";

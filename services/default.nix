@@ -11,5 +11,6 @@ _: {
     ./pihole.nix
     ./reverse-proxy.nix
     ./secrets.nix
+    ./stremio-local-debrid.nix
   ];
 }

@@ -26,6 +26,7 @@ let
     "shelfmark"
     "sonarr"
     "sonarr-sync-config"
+    "stremio-local-debrid"
   ];
 
   requireMediaMount =
