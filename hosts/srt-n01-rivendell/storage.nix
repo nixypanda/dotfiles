@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   paths,
   pkgs,
@@ -13,10 +14,11 @@ let
     "audiobookshelf"
     "bazarr"
     "bazarr-sync-config"
+    "beets-import"
     "jellyfin"
     "kavita"
     "lidarr"
-    "navidrome"
+    "metube"
     "onepacerr"
     "prowlarr-sync-config"
     "qbittorrent"
@@ -27,7 +29,8 @@ let
     "sonarr"
     "sonarr-sync-config"
     "stremio-local-debrid"
-  ];
+  ]
+  ++ lib.optional config.services.navidrome.enable "navidrome";
 
   requireMediaMount =
     name:

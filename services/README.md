@@ -41,6 +41,118 @@ Their application ports (`127.0.0.1:8686` and `127.0.0.1:4533`) stay bound to
 localhost and are not opened in the firewall. Amperfy connects to the Navidrome
 HTTPS URL.
 
+MeTube is available only through Caddy on the tailnet:
+
+- MeTube: `https://srt-n01-rivendell.taila65e7f.ts.net:9475`
+
+Its application port (`127.0.0.1:8086`) stays bound to localhost. MeTube writes
+video downloads to `/srv/media/downloads/metube` and audio downloads to
+`/srv/media/downloads/metube/audio`; its queue and history live in
+`/srv/.state/metube`. Audio downloads are imported automatically by Beets; see
+[Beets / MeTube import](#beets--metube-import).
+
+## Beets / MeTube import
+
+Beets imports finished audio downloads from MeTube into a separate music
+library that Navidrome also serves. Lidarr keeps owning
+`/srv/media/library/music`; Beets only writes
+`/srv/media/library/music-beets`, and its Lidarr tree is mounted read-only into
+the import service as a defensive measure.
+
+- MeTube audio inbox: `/srv/media/downloads/metube/audio`
+- Review queue for skipped duplicates:
+  `/srv/media/downloads/metube/review/leftover`
+- Failed imports, including corrupt or unconvertible files:
+  `/srv/media/downloads/metube/review/failed`
+- Orphaned artwork preserved from the inbox:
+  `/srv/media/downloads/metube/review/orphan-art/<timestamp>`
+- Beets library: `/srv/media/library/music-beets`
+- Beets state, database, import logs, and run summaries: `/srv/.state/beets`
+
+The `beets-import` service runs from a two-minute timer and is also triggered
+by changes to the audio inbox. It walks the inbox recursively and imports each
+audio file as a singleton once that file has been stable for at least two
+minutes. Per-file imports mean a playlist can be imported while later tracks
+are still downloading: there is no partial-album import, and playlist
+directories are never imported or deleted as a unit.
+
+The `youtube_clean` Beets plugin removes YouTube noise before tagging:
+`- Topic` suffixes, trailing `(Official Video)`, `[Official Music Video]`,
+`(Official Audio)`, `(Lyric Video)`, `(Visualizer)`, `(4K Remaster)`,
+`(Remastered)`, `(HD)`, and `(HQ)` labels, and trailing 11-character video ids
+on titles. It also removes a duplicated `<artist> -` prefix from the title.
+The `fromfilename` plugin is not used. When tags are missing, the plugin
+derives metadata from the filename instead: it strips the extension, an
+`NN -`/`NN.` track prefix, a trailing YouTube id, and YouTube noise. A cleaned
+`Artist - Title` basename supplies a missing artist without treating a numeric
+track prefix as the artist.
+
+When the album tag is empty and the file's parent directory is named like
+`Playlist Name [PL...]` or `[OLAK5uy_...]`, the directory name without the
+bracketed id becomes the album and the albumartist becomes `Various Artists`.
+That keeps mixed-artist playlists in one `Various Artists/<Playlist>/`
+directory instead of splitting them by track artist. For real album tags,
+albumartist falls back to the track artist when empty, or to `Unknown Artist`
+when both are missing. An `NN -` or `NN.` filename prefix supplies a missing
+track number.
+
+WebM and WAV downloads are converted before import: WebM becomes
+`<name>.converted.opus` with libopus at 160k, and WAV becomes
+`<name>.converted.flac`. The original is removed only after a successful
+conversion. Beets imports the converted path, and a failed import keeps the
+converted file in `review/failed`.
+
+Singletons with album tags are stored as `albumartist/album/track title`;
+files without album tags go under `Singles/artist/title`. Downloads that share
+an album therefore land in the same album directory instead of receiving a
+separate disambiguated folder per file. Strong MusicBrainz matches get
+canonical tags; weak or missing matches are imported as-is instead of being
+discarded.
+
+When Beets exits successfully but leaves a file in the inbox, the file is
+checked with `ffprobe`. A valid file is treated as a duplicate/skip (or a
+leftover) and moved to `review/leftover`. Missing or corrupt audio, and any
+nonzero Beets exit, count as failures and move the file to `review/failed`;
+the run then exits nonzero. `review/failed` is created on every run.
+
+MeTube's JPG/PNG sidecars are left alongside their audio. Once the audio has
+left the inbox, an otherwise orphaned image is moved to
+`review/orphan-art/<timestamp>/` instead of being deleted, so artwork is
+preserved even if a file lacked embedded cover art. An image is only moved
+when no non-image file with the same stem remains in the same directory, so
+partial downloads keep their artwork. Only empty directories that have stayed
+empty for 24 hours are removed; directories MeTube may still be using are left
+alone.
+
+Lidarr and Beets remain separate libraries. If the same release exists in both,
+Navidrome shows two albums; Beets duplicate detection only covers its own
+library.
+
+Each run with stable audio writes one `import-*.log`. Logs older than 14 days
+are deleted, and `runs.jsonl` is trimmed to the newest 2000 lines (or 1000
+lines when it grows beyond 1 MB). Runs with no stable audio create neither a
+run log nor a `runs.jsonl` entry.
+
+The timer is authoritative: systemd path units do not watch subdirectories, so
+the path unit is only a low-latency hint for new top-level entries in the inbox.
+
+To inspect or run it manually:
+
+```sh
+systemctl status beets-import.timer
+sudo systemctl start beets-import.service
+journalctl -u beets-import.service
+tail -n 20 /srv/.state/beets/runs.jsonl
+find /srv/media/downloads/metube/review/leftover -type f
+find /srv/media/downloads/metube/review/failed -type f
+find /srv/media/downloads/metube/review/orphan-art -type f
+```
+
+Navidrome library registration is database/UI state, so it is a one-time manual
+step: open Navidrome, go to Settings → Libraries, add a library named `Beets`
+with path `/srv/media/library/music-beets`, and grant it to non-admin users
+alongside the existing Lidarr library.
+
 ## Stremio Local Debrid
 
 `stremio-local-debrid` runs a Stremio addon that downloads Torrentio torrents on
@@ -94,6 +206,8 @@ Nix currently declares:
 - Audiobookshelf through the nixarr module
 - Shelfmark through the nixarr module and locked Nixpkgs package
 - Lidarr through the nixarr module and its registration in Prowlarr
+- MeTube through a native systemd service
+- Beets import of MeTube audio through a native systemd service and timer
 - Navidrome through the native NixOS module
 - Prowlarr app sync (settings-sync)
 - Radarr and Sonarr download client (qBittorrent) via settings-sync
@@ -165,43 +279,53 @@ The following still needs one-time manual setup in the web UI:
      `qbittorrent_admin` and the password from
      `sudo cat /run/agenix/qbittorrentPassword`; use the `lidarr` category
    - choose the desired metadata profile and quality profile before adding artists
-4. Navidrome — open `https://srt-n01-rivendell.taila65e7f.ts.net:9472` and create
-   the initial administrator account, then use the same URL and credentials to
-   add a Subsonic account in Amperfy
-5. Jellyfin — first-run wizard: create an administrator, then add
+4. MeTube — open `https://srt-n01-rivendell.taila65e7f.ts.net:9475` and queue a
+   download. No first-run account or database setup is required. Use the audio
+   mode for music; Beets imports the finished audio automatically.
+5. Beets / MeTube import — no first-run database setup is required. Confirm the
+   timer is active with `systemctl status beets-import.timer`; inspect
+   `/srv/media/downloads/metube/review/leftover`,
+   `/srv/media/downloads/metube/review/failed`, and
+   `/srv/media/downloads/metube/review/orphan-art` after the first imports.
+6. Navidrome — open `https://srt-n01-rivendell.taila65e7f.ts.net:9472` and create
+   the initial administrator account. In Settings → Libraries, add a library
+   named `Beets` at `/srv/media/library/music-beets` and grant it to non-admin
+   users alongside the existing Lidarr library. Then use the same URL and
+   credentials to add a Subsonic account in Amperfy.
+7. Jellyfin — first-run wizard: create an administrator, then add
    `/srv/media/library/movies` as Movies and `/srv/media/library/shows` as TV
    Shows
-6. Seerr — first-run wizard: connect Jellyfin URL, connect Radarr/Sonarr (API keys from `sudo nixarr list-api-keys`)
-7. Kavita — first-run wizard: create admin user, add
+8. Seerr — first-run wizard: connect Jellyfin URL, connect Radarr/Sonarr (API keys from `sudo nixarr list-api-keys`)
+9. Kavita — first-run wizard: create admin user, add
    `/srv/media/library/books` as Books and `/srv/media/library/manga` as Manga
-8. Audiobookshelf — create the administrator, then create an Audiobooks library
-   whose folder is `/srv/media/library/audiobooks`
-9. Shelfmark — create the administrator or enable authentication, then:
-   - keep Universal search enabled and use Open Library for metadata discovery
-   - keep `/srv/media/library/books` as the ebook destination so Kavita scans
-     completed downloads directly
-   - keep `/srv/media/downloads/audiobooks` as the audiobook download directory
-   - restrict supported book formats to `epub,pdf,cbz,cbr`, which Kavita can read
-   - configure file processing to prefer M4B for audiobook results
-   - move reviewed completed audiobook downloads into
-     `/srv/media/library/audiobooks` for Audiobookshelf to scan
-   - configure only download sources whose terms and rights metadata permit
-     the intended use; do not add private trackers or Usenet providers
-   - for Internet Archive or LibriVox material, verify rights in the browser
-     and import the downloaded files manually because Shelfmark does not
-     document a direct Internet Archive/LibriVox source
-10. Prowlarr indexers — add them via the web UI, or declare them under
-   `nixarr.prowlarr.settings-sync.indexers` in `services/media/default.nix`
-11. Bazarr — open `https://srt-n01-rivendell.taila65e7f.ts.net:9470`, then:
-   - add the desired subtitle languages and create default language profiles
-     for movies and series
-   - enable subtitle providers such as OpenSubtitles.com
-   - keep `Use Embedded Subtitles` enabled and enable
-     `Ignore Embedded PGS Subtitles`, so bitmap PGS tracks do not satisfy the
-     profile
-   - leave `Use Original Format` disabled in the language profiles to save
-     downloaded text subtitles as SRT
-12. After Recyclarr's first sync, select `[SQP] SQP-1 WEB (2160p)` as Seerr's
+10. Audiobookshelf — create the administrator, then create an Audiobooks library
+    whose folder is `/srv/media/library/audiobooks`
+11. Shelfmark — create the administrator or enable authentication, then:
+    - keep Universal search enabled and use Open Library for metadata discovery
+    - keep `/srv/media/library/books` as the ebook destination so Kavita scans
+      completed downloads directly
+    - keep `/srv/media/downloads/audiobooks` as the audiobook download directory
+    - restrict supported book formats to `epub,pdf,cbz,cbr`, which Kavita can read
+    - configure file processing to prefer M4B for audiobook results
+    - move reviewed completed audiobook downloads into
+      `/srv/media/library/audiobooks` for Audiobookshelf to scan
+    - configure only download sources whose terms and rights metadata permit
+      the intended use; do not add private trackers or Usenet providers
+    - for Internet Archive or LibriVox material, verify rights in the browser
+      and import the downloaded files manually because Shelfmark does not
+      document a direct Internet Archive/LibriVox source
+12. Prowlarr indexers — add them via the web UI, or declare them under
+    `nixarr.prowlarr.settings-sync.indexers` in `services/media/default.nix`
+13. Bazarr — open `https://srt-n01-rivendell.taila65e7f.ts.net:9470`, then:
+    - add the desired subtitle languages and create default language profiles
+      for movies and series
+    - enable subtitle providers such as OpenSubtitles.com
+    - keep `Use Embedded Subtitles` enabled and enable
+      `Ignore Embedded PGS Subtitles`, so bitmap PGS tracks do not satisfy the
+      profile
+    - leave `Use Original Format` disabled in the language profiles to save
+      downloaded text subtitles as SRT
+14. After Recyclarr's first sync, select `[SQP] SQP-1 WEB (2160p)` as Seerr's
    Radarr quality profile and `WEB-2160p + 1080p fallback` as its Sonarr quality
    profile. Bulk-edit existing movies and series in Radarr and Sonarr to use the
    corresponding profiles; Recyclarr manages profiles but does not assign them

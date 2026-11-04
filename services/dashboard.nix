@@ -182,6 +182,14 @@ in
               siteMonitor = localUrl services.qbittorrent.webui;
             };
           }
+          {
+            MeTube = {
+              icon = "${tailnetUrl services.metube.tailnet}/favicon.ico";
+              href = tailnetUrl services.metube.tailnet;
+              description = "yt-dlp download queue";
+              siteMonitor = localUrl services.metube.local;
+            };
+          }
         ];
       }
       {
