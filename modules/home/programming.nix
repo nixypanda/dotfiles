@@ -91,13 +91,25 @@ in
 
     # AI coding assistants
     opencode
-    # Codex deliberately keeps its default ~/.codex. Its auth is a file
-    # ($CODEX_HOME/auth.json, unlike Claude Code which uses the macOS Keychain)
-    # and it holds seven sqlite databases, so pointing CODEX_HOME elsewhere logs
-    # you out and hides all local state. Upstream has no XDG support to migrate
-    # toward, so programs.codex is skipped entirely and the package is installed
-    # plainly here: the module's only remaining effect would be exporting
-    # that CODEX_HOME.
+    # Keep the package here and let programs.codex manage its settings.
     codex
   ];
+
+  programs.codex = {
+    enable = true;
+    package = null;
+    settings = {
+      sandbox_mode = "workspace-write";
+      approval_policy = "on-request";
+      approvals_reviewer = "auto_review";
+      tui = {
+        notifications = [
+          "agent-turn-complete"
+          "approval-requested"
+        ];
+        notification_method = "bel";
+        notification_condition = "always";
+      };
+    };
+  };
 }
