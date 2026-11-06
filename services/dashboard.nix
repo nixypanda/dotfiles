@@ -19,6 +19,7 @@ in
     package = homepageWithPaisa;
     listenPort = services.homepage.local;
     openFirewall = false;
+    environmentFiles = [ "/var/lib/stremio-local-debrid/homepage.env" ];
     allowedHosts = builtins.concatStringsSep "," [
       "localhost:${toString services.homepage.local}"
       "127.0.0.1:${toString services.homepage.local}"
@@ -158,6 +159,14 @@ in
               siteMonitor = localUrl services.seerr.local;
             };
           }
+          {
+            "Stremio Local Debrid" = {
+              icon = "stremio.png";
+              href = "{{HOMEPAGE_VAR_STREMIO_LOCAL_DEBRID_URL}}";
+              description = "Torrent cache and download dashboard";
+              siteMonitor = "{{HOMEPAGE_VAR_STREMIO_LOCAL_DEBRID_MONITOR}}";
+            };
+          }
         ];
       }
       {
@@ -245,5 +254,12 @@ in
         ];
       }
     ];
+  };
+
+  # The dashboard link comes from a runtime-generated environment file, so
+  # start it after the addon has written the current tokenized URL.
+  systemd.services.homepage-dashboard = {
+    wants = [ "stremio-local-debrid.service" ];
+    after = [ "stremio-local-debrid.service" ];
   };
 }

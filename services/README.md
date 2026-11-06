@@ -164,6 +164,8 @@ tailnet.
 - Status dashboard: `https://srt-n01-rivendell.taila65e7f.ts.net:9474/<token>/`
 - The token and both URLs are generated on first start. Read them with
   `sudo cat /var/lib/stremio-local-debrid/addon-url.txt`.
+- Homepage links to the status dashboard through a runtime-generated
+  environment file, so the token never enters the Nix store or the repo.
 - Cache: `/srv/media/cache/stremio-debrid` (100 GiB budget, 10 GiB free-space
   reserve).
 - Torrentio defaults to `https://torrentio.strem.fun/manifest.json`. Replace

@@ -62,7 +62,15 @@ let
 
     printf '%s\n' "${baseUrl}/$token/manifest.json" > "$state_dir/addon-url.txt"
     printf '%s\n' "${baseUrl}/$token/" > "$state_dir/status-url.txt"
-    chmod 600 "$state_dir/addon-url.txt" "$state_dir/status-url.txt"
+
+    # Homepage reads these through EnvironmentFile. Keeping the token here
+    # avoids putting the private status URL in the Nix store or the repo.
+    {
+      printf 'HOMEPAGE_VAR_STREMIO_LOCAL_DEBRID_URL=%s\n' "${baseUrl}/$token/"
+      printf 'HOMEPAGE_VAR_STREMIO_LOCAL_DEBRID_MONITOR=%s\n' "http://127.0.0.1:${toString ports.stremioLocalDebrid.local}/$token/"
+    } > "$state_dir/homepage.env"
+
+    chmod 600 "$state_dir/addon-url.txt" "$state_dir/status-url.txt" "$state_dir/homepage.env"
 
     export STREMIO_LOCAL_DEBRID_CONFIG="$state_dir/config.json"
     exec ${lib.getExe pkgs.nodejs_24} ${package}/lib/node_modules/stremio-local-debrid/server.mjs
@@ -80,6 +88,7 @@ in
   systemd.tmpfiles.rules = [
     "d ${stateDir} 0700 stremio media - -"
     "d ${cacheDir} 2775 stremio media - -"
+    "f ${stateDir}/homepage.env 0600 stremio media - -"
   ];
 
   systemd.services.stremio-local-debrid = {
