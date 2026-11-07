@@ -34,6 +34,8 @@ in
       headerStyle = "clean";
       statusStyle = "dot";
       target = "_blank";
+      useEqualHeights = true;
+      maxGroupColumns = 3;
     };
 
     widgets = [
@@ -80,11 +82,11 @@ in
             };
           }
           {
-            "Hedger Wife" = {
-              icon = "${tailnetUrl finance.wife.hedgerTailnet}/icon.svg";
-              href = tailnetUrl finance.wife.hedgerTailnet;
-              description = "Wife ledger dashboard";
-              siteMonitor = "${localUrl finance.wife.hedger}/api/v1/health/ready";
+            "Paisa Mine" = {
+              icon = "/icons/paisa.svg";
+              href = tailnetUrl finance.mine.paisaTailnet;
+              description = "Mine finance dashboard";
+              siteMonitor = localUrl finance.mine.paisa;
             };
           }
           {
@@ -96,17 +98,17 @@ in
             };
           }
           {
-            "Paisa Mine" = {
-              icon = "/icons/paisa.svg";
-              href = tailnetUrl finance.mine.paisaTailnet;
-              description = "Mine finance dashboard";
-              siteMonitor = localUrl finance.mine.paisa;
+            "Hedger Wife" = {
+              icon = "${tailnetUrl finance.wife.hedgerTailnet}/icon.svg";
+              href = tailnetUrl finance.wife.hedgerTailnet;
+              description = "Wife ledger dashboard";
+              siteMonitor = "${localUrl finance.wife.hedger}/api/v1/health/ready";
             };
           }
         ];
       }
       {
-        Books = [
+        Library = [
           {
             Kavita = {
               icon = "kavita.png";
@@ -121,14 +123,6 @@ in
               href = tailnetUrl services.audiobookshelf.tailnet;
               description = "Audiobooks and podcasts";
               siteMonitor = localUrl services.audiobookshelf.local;
-            };
-          }
-          {
-            Shelfmark = {
-              icon = "mdi-book-search";
-              href = tailnetUrl services.shelfmark.tailnet;
-              description = "Book and audiobook discovery";
-              siteMonitor = "${localUrl services.shelfmark.local}/api/health";
             };
           }
         ];
@@ -151,6 +145,10 @@ in
               siteMonitor = localUrl services.navidrome.local;
             };
           }
+        ];
+      }
+      {
+        Discover = [
           {
             Seerr = {
               icon = "jellyseerr.png";
@@ -160,23 +158,11 @@ in
             };
           }
           {
-            "Stremio Local Debrid" = {
-              icon = "stremio.png";
-              href = "{{HOMEPAGE_VAR_STREMIO_LOCAL_DEBRID_URL}}";
-              description = "Torrent cache and download dashboard";
-              siteMonitor = "{{HOMEPAGE_VAR_STREMIO_LOCAL_DEBRID_MONITOR}}";
-            };
-          }
-        ];
-      }
-      {
-        Network = [
-          {
-            "Pi-hole" = {
-              icon = "pi-hole.png";
-              href = tailnetUrl services.pihole.tailnet;
-              description = "DNS and ad blocking";
-              siteMonitor = localUrl services.pihole.web;
+            Shelfmark = {
+              icon = "mdi-book-search";
+              href = tailnetUrl services.shelfmark.tailnet;
+              description = "Book and audiobook discovery";
+              siteMonitor = "${localUrl services.shelfmark.local}/api/health";
             };
           }
         ];
@@ -228,14 +214,6 @@ in
             };
           }
           {
-            Bazarr = {
-              icon = "bazarr.png";
-              href = tailnetUrl services.bazarr.tailnet;
-              description = "Subtitle automation";
-              siteMonitor = localUrl services.bazarr.local;
-            };
-          }
-          {
             Prowlarr = {
               icon = "prowlarr.png";
               href = tailnetUrl services.prowlarr.tailnet;
@@ -244,11 +222,39 @@ in
             };
           }
           {
+            Bazarr = {
+              icon = "bazarr.png";
+              href = tailnetUrl services.bazarr.tailnet;
+              description = "Subtitle automation";
+              siteMonitor = localUrl services.bazarr.local;
+            };
+          }
+          {
             OnePacerr = {
               icon = "onepacerr.png";
               href = tailnetUrl services.onepacerr.tailnet;
               description = "One Pace automatic downloader and Jellyfin organizer";
               siteMonitor = "${localUrl services.onepacerr.local}/api/v1/healthz";
+            };
+          }
+          {
+            "Stremio Local Debrid" = {
+              icon = "stremio.png";
+              href = "{{HOMEPAGE_VAR_STREMIO_LOCAL_DEBRID_URL}}";
+              description = "Torrent cache and download dashboard";
+              siteMonitor = "{{HOMEPAGE_VAR_STREMIO_LOCAL_DEBRID_MONITOR}}";
+            };
+          }
+        ];
+      }
+      {
+        Network = [
+          {
+            "Pi-hole" = {
+              icon = "pi-hole.png";
+              href = tailnetUrl services.pihole.tailnet;
+              description = "DNS and ad blocking";
+              siteMonitor = localUrl services.pihole.web;
             };
           }
         ];
