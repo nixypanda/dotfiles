@@ -10,6 +10,7 @@ This file is written for agentic coding tools working in this repo.
 ## Repository entrypoints
 
 - Flake entrypoint: `flake.nix`
+- Command runner: `justfile` (run `just` to list recipes)
 - Home Manager host: `homeConfigurations.srt-l03-shire`
 - nix-darwin host: `darwinConfigurations.srt-l03-shire`
 - NixOS home server: `nixosConfigurations.srt-n01-rivendell`
@@ -49,8 +50,7 @@ colorschemes ┘
 Invariants: `pkgs/` and `colorschemes/` never import a higher layer; `modules/`
 never imports `services/` or `hosts/`; `services/` never imports `hosts/`; hosts
 never import each other. A host imports `modules/` and `services/` directly.
-Enforce with `sh modules/home/system-management/check-layout.sh` (or the installed
-`check-layout` command).
+Enforce with `just check-layout`.
 
 Notes:
 - Avoid editing/committing secrets (agenix `.age` files under `services/secrets/`, tokens, credentials).
@@ -61,22 +61,27 @@ Notes:
 
 ## Build / Apply commands
 
-### Apply user (Home Manager)
+Host names and short aliases come from `hostRegistry` in `flake.nix`; the
+justfile resolves either form. `just apply` is the umbrella action: on macOS it
+applies the system config, then Home Manager.
+
+### Apply everything (macOS)
 Preferred:
-- `home-manager switch --flake "./#srt-l03-shire" -b backup`
+- `just apply` (pass a host alias with `just apply shire`)
+
+### Apply user only (Home Manager)
+Preferred:
+- `just apply-home` (Darwin only; pass a host with `just apply-home shire`)
 
 Readme-compatible:
 - `nix run --no-write-lock-file --inputs-from . home-manager#home-manager -- switch --flake "./#srt-l03-shire"`
 
-Script equivalent:
-- `./modules/home/system-management/apply-user.sh`
-
-### Apply system (nix-darwin)
+### Apply system only (nix-darwin)
 Preferred:
-- `sudo darwin-rebuild switch --flake ~/.dotfiles/.#srt-l03-shire`
+- `just apply-system` (Darwin only; pass a host with `just apply-system shire`)
 
-Script equivalent:
-- `./modules/home/system-management/apply-darwin.sh`
+Direct:
+- `sudo darwin-rebuild switch --flake ~/.dotfiles/.#srt-l03-shire`
 
 ### Apply home server (NixOS)
 Host:
@@ -88,6 +93,11 @@ Host:
 - Current known LAN IP: `192.168.1.76`
 
 Preferred remote switch from the Mac:
+- `just apply rivendell` (or `just apply-system rivendell` for the system only)
+
+The same command on the server switches locally.
+
+Direct:
 - `env NIX_SSHOPTS='-i /Users/nixypanda/.ssh/github-key -o StrictHostKeyChecking=accept-new' nix run nixpkgs#nixos-rebuild -- switch --flake .#srt-n01-rivendell --build-host nixypanda@100.127.3.54 --target-host nixypanda@100.127.3.54 --no-reexec --use-substitutes --ask-sudo-password`
 
 Build only on the server over SSH:
@@ -104,10 +114,10 @@ Server notes:
 
 ### Update flake lockfile
 Preferred:
-- `nix flake update --flake .`
+- `just update-flake`
 
-Script equivalent:
-- `./modules/home/system-management/update-flake.sh`
+Direct:
+- `nix flake update --flake .`
 
 When removing a flake input manually:
 - Remove it from `inputs` in `flake.nix`.
@@ -117,7 +127,7 @@ When removing a flake input manually:
 - Verify with `rg -n -i "<name>|<name variants>" .`.
 
 ### “What will build?” forecast (optional)
-- `./modules/home/system-management/forecast-build.sh`
+- `just forecast-home` (pass a host with `just forecast-home shire`)
 
 This uses `nix-forecast` and writes full output to `/tmp/nix-forecast.txt`.
 

@@ -39,6 +39,7 @@
     ../../modules/home/firefox
     ../../modules/home/git.nix
     ../../modules/home/hledger.nix
+    ../../modules/home/hledger-sync
     ../../modules/home/kitty
     ../../modules/home/kitty/dev.nix
     ../../modules/home/nu
@@ -46,7 +47,6 @@
     ../../modules/home/opencode
     ../../modules/home/programming.nix
     ../../modules/home/rumdl
-    ../../modules/home/system-management
     ../../modules/home/theme.nix
     ../../modules/home/vale
   ];

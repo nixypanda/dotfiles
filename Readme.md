@@ -58,64 +58,72 @@ helpful links that you can visit to know more about it.
 
 These commands assume the repo lives at `~/.dotfiles`.
 
-### Mac user config
+### Repo commands
 
-Requirements:
+Operational commands are defined in the root `justfile`. Run `just` from the
+repo to list them. Recipes follow `<verb>-<object> [host]`; the host argument
+accepts a canonical host name (`srt-l03-shire`) or the short alias from the
+flake's `hostRegistry` (`shire`).
 
-- nix with flake support is available
+Common recipes:
 
-Apply the Home Manager config:
+| Command                     | Purpose                                                   |
+| --------------------------- | --------------------------------------------------------- |
+| `just apply`                | Apply every layer for this machine                        |
+| `just apply shire`          | Apply the Mac: nix-darwin system, then Home Manager       |
+| `just apply rivendell`      | Apply the NixOS server (remote from the Mac, local on it) |
+| `just apply-home [host]`    | Home Manager only (Darwin)                                |
+| `just apply-system [host]`  | OS config only                                            |
+| `just build [host]`         | Build every layer without activating                      |
+| `just forecast-home [host]` | Preview what a Home Manager switch would build            |
+| `just update-flake`         | Update all flake inputs                                   |
+| `just check-layout`         | Check the repo dependency direction                       |
+
+`sync-hledger` is deliberately not a just recipe; Home Manager installs it as a
+normal command so it can be run from anywhere on the Mac.
+
+### Mac config
+
+Apply the nix-darwin system config and Home Manager together:
 
 ```sh
 cd ~/.dotfiles
-home-manager switch --flake "./#srt-l03-shire" -b backup
+just apply
 ```
 
-The Home Manager config also installs an `apply-user` helper that runs the same
-switch from `~/.dotfiles`.
-
-### Mac system config
-
-Apply the nix-darwin config:
-
-```sh
-sudo darwin-rebuild switch --flake ~/.dotfiles/.#srt-l03-shire
-```
-
-The Home Manager config also installs an `apply-darwin` helper for this.
+The recipe uses this machine's hostname by default; pass a host alias to
+override: `just apply shire`. To apply a single layer, use `just apply-system`
+or `just apply-home`.
 
 ### Home server config
 
 The NixOS server flake output is `nixosConfigurations.srt-n01-rivendell`.
 The host config lives under `hosts/srt-n01-rivendell/`.
 
-The normal remote switch from the Mac builds and deploys over Tailscale:
+Apply it from the Mac:
 
 ```sh
-env NIX_SSHOPTS='-i /Users/nixypanda/.ssh/github-key -o StrictHostKeyChecking=accept-new' \
-  nix run nixpkgs#nixos-rebuild -- switch \
-  --flake .#srt-n01-rivendell \
-  --build-host nixypanda@100.127.3.54 \
-  --target-host nixypanda@100.127.3.54 \
-  --no-reexec \
-  --use-substitutes \
-  --ask-sudo-password
+cd ~/.dotfiles
+just apply rivendell
 ```
 
-On the server itself, the equivalent is:
+This evaluates the flake on the Mac, builds on Rivendell over Tailscale, and
+activates the result there. The same command works on the server itself and
+switches locally.
 
-```sh
-sudo nixos-rebuild switch --flake ~/.dotfiles#srt-n01-rivendell
-```
+### Adding a machine
+
+Add an entry to `hostRegistry` in `flake.nix` with `platform`, `system`, `user`,
+and `aliases`, then add `hosts/<host-name>/configuration.nix` (and `home.nix`
+for standalone Home Manager hosts). The flake outputs and just recipes pick the
+new host up automatically.
 
 ### Updating inputs
 
 ```sh
 cd ~/.dotfiles
-nix flake update --flake .
+just update-flake
 ```
-
-The Home Manager config also installs an `update-flake` helper for this.
 
 ### Validation
 

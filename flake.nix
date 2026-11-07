@@ -80,12 +80,40 @@
         vim-plugins.overlay
       ];
 
+      # Single source of truth for every machine this flake manages. The
+      # justfile reads `hosts` and `hostAliases`, so adding a host does not
+      # require a new recipe.
+      hostRegistry = {
+        srt-l03-shire = {
+          platform = "darwin";
+          system = "aarch64-darwin";
+          user = "nixypanda";
+          aliases = [ "shire" ];
+        };
+        srt-n01-rivendell = {
+          platform = "nixos";
+          system = "x86_64-linux";
+          user = "nixypanda";
+          aliases = [ "rivendell" ];
+        };
+      };
+
+      hostsOf = platform: lib.filterAttrs (_: host: host.platform == platform) hostRegistry;
+
+      # Flat alias -> canonical-name map for CLI lookup: `shire` and
+      # `srt-l03-shire` both resolve to `srt-l03-shire`.
+      hostAliases = lib.listToAttrs (
+        lib.concatLists (
+          lib.mapAttrsToList (
+            name: host: map (alias: lib.nameValuePair alias name) ([ name ] ++ host.aliases)
+          ) hostRegistry
+        )
+      );
+
       # Darwin hosts mapped to the system each builds for. Shared config lives
       # in modules/, composed by the workstation profile; a host directory
       # holds only what is genuinely host-specific.
-      darwinHosts = {
-        srt-l03-shire = "aarch64-darwin";
-      };
+      darwinHosts = lib.mapAttrs (_: host: host.system) (hostsOf "darwin");
 
       mkDarwinHome =
         name: system:
@@ -107,33 +135,41 @@
             ./hosts/${name}/configuration.nix
           ];
         };
+
+      mkNixos =
+        name: host:
+        nixpkgs.lib.nixosSystem {
+          inherit (host) system;
+          specialArgs = { inherit onepacerr-ui; };
+          modules = [
+            ./hosts/${name}/configuration.nix
+            agenix.nixosModules.default
+            nixarr.nixosModules.default
+            calco.nixosModules.default
+            hedger.nixosModules.default
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.${host.user} = import ./hosts/${name}/home.nix;
+              };
+            }
+            {
+              nixpkgs.overlays = [ agenixOverlay ];
+            }
+          ];
+        };
     in
     {
+      hosts = hostRegistry;
+
+      inherit hostAliases;
+
       homeConfigurations = lib.mapAttrs mkDarwinHome darwinHosts;
 
       darwinConfigurations = lib.mapAttrs mkDarwinSystem darwinHosts;
 
-      nixosConfigurations."srt-n01-rivendell" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit onepacerr-ui; };
-        modules = [
-          ./hosts/srt-n01-rivendell/configuration.nix
-          agenix.nixosModules.default
-          nixarr.nixosModules.default
-          calco.nixosModules.default
-          hedger.nixosModules.default
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.nixypanda = import ./hosts/srt-n01-rivendell/home.nix;
-            };
-          }
-          {
-            nixpkgs.overlays = [ agenixOverlay ];
-          }
-        ];
-      };
+      nixosConfigurations = lib.mapAttrs mkNixos (hostsOf "nixos");
     };
 }

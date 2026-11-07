@@ -191,8 +191,8 @@ use a Hedger YAML configuration.
 
 Hedger loads each journal into an immutable snapshot at startup. The
 `sync-hledger` command reloads all three `hedger-*` services after synchronizing
-journals or prices. `sync-hledger --all` also copies
-`hedger/hedger-mine.yaml`; bootstrap copies it with the rest of the ledger root.
+journals or prices. It copies the tracked ledger files, including
+`hedger/hedger-mine.yaml`.
 
 ## Declarative State
 
