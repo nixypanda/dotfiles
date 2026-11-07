@@ -9,11 +9,13 @@ buildNpmPackage rec {
   pname = "stremio-local-debrid";
   version = "1.2.0";
 
+  # Tracks nixypanda's feature/configurable-episode-prefetch branch, which adds
+  # configurable next-episode prefetching on top of upstream 1.2.0.
   src = fetchFromGitHub {
-    owner = "origami-ltd";
+    owner = "nixypanda";
     repo = "stremio-local-debrid";
-    rev = "ff23debf087e01bcdd8c7a64f149ef4937347169";
-    hash = "sha256-rqRxy+TJBAkmBHqVSxvx2CSBOQEpPIHdZ/QNVXU0+FI=";
+    rev = "97c3fdf6691bd1a80e58f65131af95100b955bc5";
+    hash = "sha256-emzzjyYWnjbMbpaTj8nU/9WyVkX7ONxDL4QUn3SspDU=";
   };
 
   npmDepsHash = "sha256-uMFR36ifIhxiQ0S7H/sLAMLpzdF6aYAo+dUK1Kilk0g=";
@@ -66,7 +68,9 @@ buildNpmPackage rec {
         fi
   '';
 
-  passthru.updateScript = nix-update-script { };
+  passthru.updateScript = nix-update-script {
+    extraArgs = [ "--version=branch=feature/configurable-episode-prefetch" ];
+  };
 
   meta = {
     description = "Self-hosted Stremio torrent cache addon";

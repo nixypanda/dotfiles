@@ -28,6 +28,8 @@ let
       inherit baseUrl cacheDir stateDir;
       maxCacheBytes = 100 * 1024 * 1024 * 1024;
       minFreeBytes = 10 * 1024 * 1024 * 1024;
+      prefetchEpisodes = 1;
+      metadataSource = "https://v3-cinemeta.strem.io/manifest.json";
       autoDiscoverAddons = false;
       addonRefreshMs = 60000;
       preventSleep = false;
