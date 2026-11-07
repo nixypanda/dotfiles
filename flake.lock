@@ -23,6 +23,23 @@
         "type": "github"
       }
     },
+    "beets-south-asian-retag": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794070053,
+        "narHash": "sha256-IBIMHFPrDbE2w1YLQ9aStM/dm9aYJ7p7rD4vjGMk32g=",
+        "path": "/Users/nixypanda/Documents/media/beets-south-asian-retag",
+        "type": "path"
+      },
+      "original": {
+        "path": "/Users/nixypanda/Documents/media/beets-south-asian-retag",
+        "type": "path"
+      }
+    },
     "calco": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -381,6 +398,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "beets-south-asian-retag": "beets-south-asian-retag",
         "calco": "calco",
         "codect": "codect",
         "darwin": "darwin_2",

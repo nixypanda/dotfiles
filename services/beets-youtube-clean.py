@@ -76,6 +76,23 @@ def _clean(value: Any, *patterns: re.Pattern[str]) -> str:
     return cleaned or original
 
 
+def _record_tag_failure(path: str) -> None:
+    """Append a failed post-import tag write for the import script to report."""
+    state = os.environ.get("BEETS_STATE", "")
+    if not state:
+        return
+    try:
+        os.makedirs(state, exist_ok=True)
+        with open(
+            os.path.join(state, "tag-write-failures.log"),
+            "a",
+            encoding="utf-8",
+        ) as handle:
+            handle.write(f"{path}\n")
+    except OSError:
+        pass
+
+
 def _strip_artist_prefix(title: str, artist: str) -> str:
     if not title or not artist:
         return title
@@ -163,6 +180,46 @@ class YouTubeCleanPlugin(BeetsPlugin):
     def __init__(self) -> None:
         super().__init__()
         self.register_listener("import_task_start", self.clean_task)
+        self.register_listener("import_task_files", self.write_imported_tags)
+
+    def write_imported_tags(self, task: Any, session: Any = None) -> None:
+        """Persist tags for as-is imports.
+
+        Beets only writes media tags in ``manipulate_files`` for APPLY and
+        RETAG decisions. As-is imports update the database but leave the file
+        tags untouched, so Navidrome would keep seeing the old YouTube
+        genre. Write the final tags after the files have been moved.
+        """
+        del session
+        if getattr(task, "apply", False):
+            return
+        if getattr(getattr(task, "choice_flag", None), "name", "") == "RETAG":
+            return
+
+        try:
+            items = list(task.imported_items())
+        except (AttributeError, TypeError):
+            items = list(getattr(task, "items", []))
+
+        for item in items:
+            path = getattr(item, "path", "")
+            try:
+                if item.try_write():
+                    item.store()
+                else:
+                    _record_tag_failure(path)
+                    self._log.error(
+                        "could not write tags after import: {}; "
+                        "run `beet write` to repair it",
+                        path,
+                    )
+            except Exception as exc:  # noqa: BLE001 - never abort the import
+                _record_tag_failure(path)
+                self._log.error(
+                    "failed to finalize tags after import for {}: {}",
+                    path,
+                    exc,
+                )
 
     def clean_task(self, task: Any, session: Any = None) -> None:
         del session

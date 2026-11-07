@@ -153,6 +153,25 @@ step: open Navidrome, go to Settings → Libraries, add a library named `Beets`
 with path `/srv/media/library/music-beets`, and grant it to non-admin users
 alongside the existing Lidarr library.
 
+### South Asian genre cleanup
+
+The one-shot retagging tool lives in its own project at
+`../Documents/media/beets-south-asian-retag`. Dotfiles consumes it as the
+`beets-south-asian-retag` path flake input and enables it on Rivendell with
+`services."beets-south-asian-retag".enable = true;`. See that project's README
+for the preview/apply workflow, marker, import-lock behavior, and the
+`beet update -M` prerequisite.
+
+That project also owns `genres-south-asia.txt`, the curated Last.fm whitelist.
+Dotfiles installs it through `services.beets-import.lastgenreWhitelist`, which
+Rivendell points at the flake's `genres-south-asia` package. New MeTube imports
+are handled by the normal import pipeline: `lastgenre` combines existing tags
+with Last.fm results and filters them through that whitelist (unmatched genres
+become `Unsorted`), and `youtube_clean` writes the final tags for as-is
+imports. If a post-import write fails, its path is recorded in
+`/srv/.state/beets/tag-write-failures.log`, the import run exits nonzero, and
+`beet write` can repair the file.
+
 ## Stremio Local Debrid
 
 `stremio-local-debrid` runs a Stremio addon that downloads Torrentio torrents on

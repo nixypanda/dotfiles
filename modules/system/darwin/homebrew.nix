@@ -17,5 +17,10 @@
       "obsidian"
       "vorssaint"
     ];
+    # Mac App Store-only applications.
+    masApps = {
+      Primuse = 6761675450;
+      Xcode = 497799835;
+    };
   };
 }

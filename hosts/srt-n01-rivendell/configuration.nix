@@ -1,8 +1,14 @@
-{ lib, pkgs, ... }:
+{
+  beets-south-asian-retag,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   homelab = import ../../services/ports.nix;
   allRegisteredPorts = lib.collect builtins.isInt homelab;
+  beetsGenres = beets-south-asian-retag.packages.${pkgs.stdenv.hostPlatform.system}.genres-south-asia;
 in
 {
   _module.args = {
@@ -74,6 +80,13 @@ in
     };
 
     printing.enable = true;
+
+    "beets-south-asian-retag".enable = true;
+
+    beets-import = {
+      extraPlugins = [ "south_asian_retag" ];
+      lastgenreWhitelist = "${beetsGenres}";
+    };
 
     pipewire = {
       enable = true;

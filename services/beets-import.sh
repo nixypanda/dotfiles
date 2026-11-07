@@ -24,6 +24,7 @@ imported=0
 skipped=0
 failures=0
 singles=0
+tag_failures="$state/tag-write-failures.log"
 
 mkdir -p -- "$state" "$review/leftover" "$review/failed" "$review/orphan-art"
 
@@ -237,6 +238,7 @@ if ! flock -n 9; then
   exit 0
 fi
 
+: >"$tag_failures"
 housekeeping
 
 stable_audio=()
@@ -325,6 +327,14 @@ done
 
 move_orphan_images
 remove_old_empty_dirs
+
+if [ -s "$tag_failures" ]; then
+  note "post-import tag write failures:"
+  while IFS= read -r failed_path; do
+    note "  $failed_path"
+  done <"$tag_failures"
+  failures=$((failures + 1))
+fi
 
 if [ "$failures" -gt 0 ]; then
   exit 1
