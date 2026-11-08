@@ -10,10 +10,7 @@ in
       ${builtins.readFile ./config.nu}
       ${builtins.readFile ./aliases.nu}
 
-      # modules
       use ${nu_scripts}/modules/nix/nix.nu *
-
-      # completions
       use ${nu_scripts}/custom-completions/uv/uv-completions.nu *
 
       ${builtins.readFile ./functions.nu}

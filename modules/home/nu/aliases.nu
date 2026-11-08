@@ -1,5 +1,3 @@
-## ALIASES ##
-
 # I don't like the default but my hand just types it
 alias top = btm
 alias htop = btm

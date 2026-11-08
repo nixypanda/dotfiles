@@ -8,7 +8,6 @@
   home.packages =
     with pkgs;
     [
-      # CLI tools / Terminal facification
       dig
       ouch-rar # unzip, py7zr
       qpdf

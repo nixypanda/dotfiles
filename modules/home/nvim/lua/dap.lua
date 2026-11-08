@@ -14,7 +14,6 @@ require("lz.n").load({
 		local dap = require("dap")
 		local widgets = require("dap.ui.widgets")
 
-		-- Setup keymaps
 		vim.keymap.set("n", "<leader>df", dap.close, { desc = "Finish debugging" })
 		vim.keymap.set("n", "<leader>di", widgets.hover, { desc = "Inspect variable under cursor" })
 		vim.keymap.set("n", "<leader>dI", dap.step_into, { desc = "Step into" })

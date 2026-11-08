@@ -1,7 +1,7 @@
 use std
 
 def _create_bar [percentage] {
-    let max_length = 20   # Length of the bar
+    let max_length = 20
     let filled_length = ($max_length * $percentage / 100) | into int
 
     let filled_bar =  "█" | std repeat $filled_length | str join

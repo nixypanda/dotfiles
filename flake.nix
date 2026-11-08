@@ -23,7 +23,6 @@
       url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # my stuff
     kitty-upstream = {
       url = "github:nixypanda/kitty/floating-pane-clean";
       inputs.nixpkgs.follows = "nixpkgs";

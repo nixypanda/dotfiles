@@ -6,10 +6,8 @@ function M.buf_map(bufnr)
 end
 
 function M.lsp_on_attach(client, bufnr)
-	-- inlay hints
 	if client.server_capabilities.inlayHintProvider then vim.lsp.inlay_hint.enable(true, { bufnr = bufnr }) end
 
-	-- Set keymap
 	local map = M.buf_map(bufnr)
 
 	map("gd", vim.lsp.buf.definition, "Goto Definition")
