@@ -60,6 +60,10 @@ in
       tailnet = 9446;
     };
 
+    rex = {
+      tailnet = 7297;
+    };
+
     prowlarr = {
       local = 9696;
       tailnet = 9447;

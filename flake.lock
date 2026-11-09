@@ -395,6 +395,23 @@
         "url": "ssh://git@github.com/nixypanda/onepacerr-ui.git"
       }
     },
+    "rex": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794111130,
+        "narHash": "sha256-ZUIhnzNpmuEheybfzs9fFiLkicGWAqZVbTNSBxvLdZc=",
+        "type": "tarball",
+        "url": "https://pkgs.superlogical.com/rex/nix/snapshot/0.0.1794111130-g9bcf6a.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://pkgs.superlogical.com/rex/nix/snapshot.tar.gz"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -409,6 +426,7 @@
         "nixpkgs": "nixpkgs_2",
         "nur": "nur",
         "onepacerr-ui": "onepacerr-ui",
+        "rex": "rex",
         "vim-plugins": "vim-plugins"
       }
     },

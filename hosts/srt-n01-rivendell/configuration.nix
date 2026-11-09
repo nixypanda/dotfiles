@@ -70,6 +70,11 @@ in
   nixpkgs.config.allowUnfree = true;
 
   services = {
+    rex.loginServer = {
+      accounts.nixypanda.principals = [ "tailscale:sherub.thakur@gmail.com" ];
+      defaults."tailscale:sherub.thakur@gmail.com" = "nixypanda";
+    };
+
     xserver = {
       enable = true;
       displayManager.lightdm.enable = true;

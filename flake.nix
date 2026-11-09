@@ -15,6 +15,10 @@
       url = "github:nix-media-server/nixarr";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    rex = {
+      url = "https://pkgs.superlogical.com/rex/nix/snapshot.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -64,6 +68,7 @@
       darwin,
       kitty-upstream,
       nixarr,
+      rex,
       calco,
       onepacerr-ui,
       hedger,
@@ -151,6 +156,7 @@
             beets-south-asian-retag.nixosModules.default
             agenix.nixosModules.default
             nixarr.nixosModules.default
+            rex.nixosModules.default
             calco.nixosModules.default
             hedger.nixosModules.default
             home-manager.nixosModules.home-manager

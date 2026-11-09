@@ -12,6 +12,7 @@ _: {
     ./onepacerr
     ./pihole.nix
     ./reverse-proxy.nix
+    ./rex.nix
     ./secrets.nix
     ./stremio-local-debrid.nix
   ];
