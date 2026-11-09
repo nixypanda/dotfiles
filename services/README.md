@@ -18,11 +18,9 @@ size arguments, for example `media-unlinked /srv/media/library 100M`.
 Service ports, tailnet-facing aliases, and the tailnet host are defined in
 `ports.nix`. The Homepage dashboard uses that file to publish service links.
 
-Ports 9450-9452 serve Hedger over the tailnet:
+Port 9450 serves Hedger over the tailnet:
 
-- 9450: Hedger Mine
-- 9451: Hedger Wife
-- 9452: Hedger Combined
+- 9450: Hedger (Mine, Wife, and Combined ledgers)
 
 The audiobook services are available only through Caddy on the tailnet:
 
@@ -195,23 +193,20 @@ tailnet.
 - The package stubs WebRTC, so browser-only WebRTC peers are not used; ordinary
   TCP/uTP BitTorrent peers are unaffected.
 
-All three Hedger instances use the existing journals under
-`/srv/hledger/journals`. Caddy terminates Tailscale TLS on ports 9450-9452 and
-proxies to Hedger's module-managed nginx listener on `127.0.0.1:8083`. nginx
-selects the matching ledger by its internal hostname, serves the shared
-frontend, and proxies `/api/*` to the matching localhost-only Hedger backend on
-ports 5001-5003.
+Hedger uses a single server on port 9450. It serves all three journals under
+`/srv/hledger/journals` as separate ledgers (Mine, Wife, Combined) selectable
+in the app. Caddy terminates Tailscale TLS on port 9450 and proxies to Hedger's
+module-managed nginx listener on `127.0.0.1:8083`, which serves the shared
+frontend and proxies `/api/*` to the single localhost-only Hedger backend on
+port 5001.
 
-The Mine instance also reads
-`/srv/hledger/hedger/hedger-mine.yaml`. Journal paths, backend ports, display
-commodity, and fiscal-year settings are supplied as command-line arguments by
-the NixOS module and override matching YAML values. The other instances do not
-use a Hedger YAML configuration.
-
+Journal paths are supplied by the NixOS module. Per-ledger display and
+investment settings live in version-1 settings files under
+`/srv/hledger/hedger/` (`hedger-mine.yaml`, `hedger-wife.yaml`,
+`hedger-combined.yaml`), which are synced from the tracked ledger source.
 Hedger loads each journal into an immutable snapshot at startup. The
-`sync-hledger` command reloads all three `hedger-*` services after synchronizing
-journals or prices. It copies the tracked ledger files, including
-`hedger/hedger-mine.yaml`.
+`sync-hledger` command reloads `hedger-mine` after synchronizing journals or
+prices.
 
 ## Declarative State
 

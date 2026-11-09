@@ -123,15 +123,11 @@ in
     };
 
     wife = {
-      hedger = 5002;
-      hedgerTailnet = 9451;
       paisa = 5102;
       paisaTailnet = 9461;
     };
 
     combined = {
-      hedger = 5003;
-      hedgerTailnet = 9452;
       paisa = 5103;
       paisaTailnet = 9462;
     };

@@ -74,35 +74,19 @@ in
       {
         Finance = [
           {
-            "Hedger Mine" = {
+            "Hedger" = {
               icon = "${tailnetUrl finance.mine.hedgerTailnet}/icon.svg";
               href = tailnetUrl finance.mine.hedgerTailnet;
-              description = "Mine ledger dashboard";
+              description = "Ledger dashboard";
               siteMonitor = "${localUrl finance.mine.hedger}/api/v1/health/ready";
             };
           }
           {
-            "Paisa Mine" = {
+            "Paisa" = {
               icon = "/icons/paisa.svg";
               href = tailnetUrl finance.mine.paisaTailnet;
               description = "Mine finance dashboard";
               siteMonitor = localUrl finance.mine.paisa;
-            };
-          }
-          {
-            "Hedger Combined" = {
-              icon = "${tailnetUrl finance.combined.hedgerTailnet}/icon.svg";
-              href = tailnetUrl finance.combined.hedgerTailnet;
-              description = "Combined ledger dashboard";
-              siteMonitor = "${localUrl finance.combined.hedger}/api/v1/health/ready";
-            };
-          }
-          {
-            "Hedger Wife" = {
-              icon = "${tailnetUrl finance.wife.hedgerTailnet}/icon.svg";
-              href = tailnetUrl finance.wife.hedgerTailnet;
-              description = "Wife ledger dashboard";
-              siteMonitor = "${localUrl finance.wife.hedger}/api/v1/health/ready";
             };
           }
         ];

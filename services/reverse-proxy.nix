@@ -55,24 +55,12 @@ let
       proxy services.stremioLocalDebrid.local;
   };
 
-  financeHosts = builtins.listToAttrs (
-    builtins.concatLists (
-      builtins.attrValues (
-        builtins.mapAttrs (name: instance: [
-          {
-            name = tailnetUrl instance.hedgerTailnet;
-            value.extraConfig = hedgerProxy config.services.hedger.instances.${name}.hostName;
-          }
-        ]) finance
-      )
-    )
-    ++ [
-      {
-        name = tailnetUrl finance.mine.paisaTailnet;
-        value.extraConfig = proxy finance.mine.paisa;
-      }
-    ]
-  );
+  financeHosts = {
+    "${tailnetUrl finance.mine.hedgerTailnet}".extraConfig =
+      hedgerProxy config.services.hedger.instances.mine.hostName;
+
+    "${tailnetUrl finance.mine.paisaTailnet}".extraConfig = proxy finance.mine.paisa;
+  };
 
   calcoHost = {
     "${tailnetUrl services.calco.tailnet}".extraConfig = ''

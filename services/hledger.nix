@@ -14,17 +14,24 @@ let
 
   instances = {
     mine = {
-      configFile = "${hedgerDir}/hedger-mine.yaml";
-      hedgerPort = homelab.finance.mine.hedger;
-      journal = "main-mine.journal";
-    };
-    wife = {
-      hedgerPort = homelab.finance.wife.hedger;
-      journal = "main-wife.journal";
-    };
-    combined = {
-      hedgerPort = homelab.finance.combined.hedger;
-      journal = "main-combined.journal";
+      port = homelab.finance.mine.hedger;
+      ledgers = {
+        mine = {
+          label = "Mine";
+          journal = "main-mine.journal";
+          config = "hedger-mine.yaml";
+        };
+        wife = {
+          label = "Wife";
+          journal = "main-wife.journal";
+          config = "hedger-wife.yaml";
+        };
+        combined = {
+          label = "Combined";
+          journal = "main-combined.journal";
+          config = "hedger-combined.yaml";
+        };
+      };
     };
   };
 
@@ -38,22 +45,21 @@ let
   mkHedgerInstance =
     name:
     {
-      configFile ? null,
-      hedgerPort,
-      journal,
+      port,
+      ledgers,
       ...
     }:
     {
       enable = true;
       hostName = "${name}.hedger.internal";
-      journalPath = "${journalsDir}/${journal}";
-      port = hedgerPort;
-      defaultCommodity = "INR";
-      fiscalYearStartMonth = 4;
+      inherit port;
+      defaultLedger = null;
       supplementaryGroups = [ "hledger" ];
-    }
-    // lib.optionalAttrs (configFile != null) {
-      inherit configFile;
+      ledgers = lib.mapAttrs (_ledgerName: ledgerCfg: {
+        inherit (ledgerCfg) label;
+        journalPath = "${journalsDir}/${ledgerCfg.journal}";
+        configPath = "${hedgerDir}/${ledgerCfg.config}";
+      }) ledgers;
     };
 
   mkPaisaService =
