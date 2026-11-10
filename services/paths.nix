@@ -37,5 +37,6 @@ in
     soulsync = "${stateRoot}/soulsync";
     navidrome = "${stateRoot}/navidrome";
     kavita = "${stateRoot}/kavita";
+    homeAssistant = "${stateRoot}/home-assistant";
   };
 }

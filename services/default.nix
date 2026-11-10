@@ -6,6 +6,7 @@ _: {
     ./dashboard.nix
     ./ebooks.nix
     ./hledger.nix
+    ./home-assistant.nix
     ./media
     ./metube.nix
     ./music.nix

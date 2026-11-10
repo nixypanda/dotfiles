@@ -42,6 +42,7 @@ let
     "${tailnetUrl services.lidarr.tailnet}".extraConfig = proxy services.lidarr.local;
     "${tailnetUrl services.metube.tailnet}".extraConfig = proxy services.metube.local;
     "${tailnetUrl services.soulsync.tailnet}".extraConfig = proxy services.soulsync.local;
+    "${tailnetUrl services.homeAssistant.tailnet}".extraConfig = proxy services.homeAssistant.local;
     "${tailnetUrl services.navidrome.tailnet}".extraConfig = proxy services.navidrome.local;
     "${tailnetUrl services.seerr.tailnet}".extraConfig = proxy services.seerr.local;
     "${tailnetUrl services.qbittorrent.tailnet}".extraConfig = proxy services.qbittorrent.webui;

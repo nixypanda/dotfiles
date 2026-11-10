@@ -23,6 +23,11 @@ in
       local = 8082;
     };
 
+    homeAssistant = {
+      local = 8123;
+      tailnet = 9477;
+    };
+
     jellyfin = {
       local = 8096;
       tailnet = 9443;

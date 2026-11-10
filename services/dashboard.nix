@@ -62,6 +62,14 @@ in
       {
         Health = [
           {
+            "Home Assistant" = {
+              icon = "home-assistant.png";
+              href = tailnetUrl services.homeAssistant.tailnet;
+              description = "Home automation";
+              siteMonitor = localUrl services.homeAssistant.local;
+            };
+          }
+          {
             "CalCo" = {
               icon = "${tailnetUrl services.calco.tailnet}/favicon-32x32.png";
               href = tailnetUrl services.calco.tailnet;
