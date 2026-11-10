@@ -12,6 +12,7 @@ let
   movieLibrary = paths.library.movies;
   tvLibrary = paths.library.shows;
   musicLibrary = paths.library.music;
+  soulsyncMusicLibrary = paths.library.musicSoulSync;
   torrentRoot = paths.downloads.torrents;
   ports = homelab.services;
   qBittorrentDownloadClient = {
@@ -326,6 +327,7 @@ in
     movie_library = movieLibrary;
     tv_library = tvLibrary;
     music_library = musicLibrary;
+    soulsync_music_library = soulsyncMusicLibrary;
     torrent_downloads = torrentRoot;
     torrent_complete = "${torrentRoot}/complete";
     torrent_incomplete = "${torrentRoot}/incomplete";

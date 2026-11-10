@@ -26,6 +26,7 @@ let
     "radarr"
     "radarr-sync-config"
     "shelfmark"
+    "soulsync"
     "sonarr"
     "sonarr-sync-config"
     "stremio-local-debrid"

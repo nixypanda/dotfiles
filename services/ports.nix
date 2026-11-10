@@ -112,6 +112,11 @@ in
       local = 7810;
       tailnet = 9474;
     };
+
+    soulsync = {
+      local = 8008;
+      tailnet = 9476;
+    };
   };
 
   finance = {
