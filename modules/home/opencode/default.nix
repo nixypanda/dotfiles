@@ -1,4 +1,4 @@
-_:
+{ opencode-rex-activity, ... }:
 let
   # Paths outside the active project prompt for approval by default (the
   # `external_directory` base policy asks). Allow /tmp read+write and
@@ -60,6 +60,7 @@ let
   opencodeConfig = {
     "$schema" = "https://opencode.ai/config.json";
     inherit permissions;
+    plugins = [ "./plugins/rex-activity" ];
     agents = {
       build.permissions = permissions;
       plan.permissions = permissions;
@@ -70,4 +71,20 @@ let
 in
 {
   home.file.".config/opencode/opencode.jsonc".text = builtins.toJSON opencodeConfig;
+  home.file.".config/opencode/plugins/rex-activity" = {
+    # Production sources only, from the pinned external input; tests and repo
+    # metadata stay out of the install.
+    source = builtins.path {
+      path = opencode-rex-activity;
+      filter =
+        path: _type:
+        builtins.elem (baseNameOf path) [
+          "index.ts"
+          "runtime.ts"
+          "state.ts"
+          "tui.ts"
+        ];
+    };
+    recursive = true;
+  };
 }
