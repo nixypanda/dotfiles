@@ -162,7 +162,7 @@ in
     initLua = # lua
       ''
         ${builtins.readFile ./lua/base.lua}
-        vim.cmd("colorscheme ${colorscheme.vim-name}")
+        ${import ./theme.nix colorscheme}
 
       '';
   };

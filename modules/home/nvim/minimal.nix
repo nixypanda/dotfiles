@@ -32,6 +32,6 @@
         type = "lua";
       }
     ];
-    extraConfig = "colorscheme ${colorscheme.vim-name}";
+    initLua = import ./theme.nix colorscheme;
   };
 }
