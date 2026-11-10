@@ -245,27 +245,6 @@
         "type": "github"
       }
     },
-    "kitty-upstream": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1790330088,
-        "narHash": "sha256-gRIWOXZK893RiGL2SXo6/PG8GQz6JXBNPeyQge+JNcg=",
-        "owner": "nixypanda",
-        "repo": "kitty",
-        "rev": "2383edaefd8debcd7d82021e7f0c20de2158950d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixypanda",
-        "ref": "floating-pane-clean",
-        "repo": "kitty",
-        "type": "github"
-      }
-    },
     "nixarr": {
       "inputs": {
         "nixpkgs": [
@@ -421,7 +400,6 @@
         "darwin": "darwin_2",
         "hedger": "hedger",
         "home-manager": "home-manager_2",
-        "kitty-upstream": "kitty-upstream",
         "nixarr": "nixarr",
         "nixpkgs": "nixpkgs_2",
         "nur": "nur",
