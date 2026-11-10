@@ -64,6 +64,20 @@ def whatismyip [] {
     curl -s ipinfo.io/what-is-my-ip | from json
 }
 
+# Adjust macOS output volume by 5%, keeping it within 0–100%.
+def vol-up [] {
+    ^osascript -e 'set level to (output volume of (get volume settings)) + 5' -e 'if level > 100 then set level to 100' -e 'set volume output volume level'
+}
+
+def vol-down [] {
+    ^osascript -e 'set level to (output volume of (get volume settings)) - 5' -e 'if level < 0 then set level to 0' -e 'set volume output volume level'
+}
+
+# Toggle macOS output mute.
+def vol-mute [] {
+    ^osascript -e 'set volume output muted not (output muted of (get volume settings))'
+}
+
 def wc-parse [] {
   parse -r '(?P<lines>\d+)\s+(?P<words>\d+)\s+(?P<bytes>\d+)\s+(?P<file>.+)'
   | update lines { into int }

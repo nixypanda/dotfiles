@@ -34,6 +34,9 @@
       pandoc
       msoffcrypto-tool
     ]
+    ++ lib.optionals stdenv.hostPlatform.isDarwin [
+      (pkgs.callPackage ../../pkgs/nowplaying-cli.nix { }) # macOS 15.4+ compatibility
+    ]
     ++ lib.optionals stdenv.hostPlatform.isLinux [
       # USB tooling
       usbutils
