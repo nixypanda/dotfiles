@@ -11,8 +11,7 @@ Nix flake-based dotfiles for my Mac and home server.
 | User config           | [Home Manager](https://nixos.wiki/wiki/Home_Manager)          |
 | macOS system config   | [nix-darwin](https://github.com/LnL7/nix-darwin)              |
 | NixOS server config   | NixOS flake output with Home Manager and nixarr               |
-| Terminal emulator     | [Kitty](https://sw.kovidgoyal.net/kitty/) plus `kitty-dev`    |
-| Shell                 | [Nushell](https://www.nushell.sh/) in Kitty                   |
+| Shell                 | [Nushell](https://www.nushell.sh/)                            |
 | Server login shell    | Bash, with Nushell installed for interactive use              |
 | Font                  | Hack Nerd Font Mono                                           |
 | Editor                | [Neovim](https://neovim.io/)                                  |

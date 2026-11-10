@@ -40,8 +40,6 @@
     ../../modules/home/git.nix
     ../../modules/home/hledger.nix
     ../../modules/home/hledger-sync
-    ../../modules/home/kitty
-    ../../modules/home/kitty/dev.nix
     ../../modules/home/nu
     ../../modules/home/nvim
     ../../modules/home/opencode

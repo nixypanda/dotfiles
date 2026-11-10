@@ -33,8 +33,8 @@ in
         "typescript-lsp@claude-plugins-official" = true;
       };
       effortLevel = "medium";
-      # Ring kitty's bell on completion and permission prompts; kitty turns the
-      # BEL into a tab indicator, dock badge, and banner (modules/home/kitty).
+      # Ring the terminal bell on completion and permission prompts.
+      # The terminal's settings determine how the alert is presented.
       preferredNotifChannel = "terminal_bell";
       tui = "fullscreen";
     };

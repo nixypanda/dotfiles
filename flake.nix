@@ -27,10 +27,6 @@
       url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    kitty-upstream = {
-      url = "github:nixypanda/kitty/floating-pane-clean";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     calco = {
       url = "git+ssh://git@github.com/nixypanda/calco.git";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -66,7 +62,6 @@
       home-manager,
       agenix,
       darwin,
-      kitty-upstream,
       nixarr,
       rex,
       calco,
@@ -78,13 +73,11 @@
     }:
     let
       inherit (nixpkgs) lib;
-      kitty-dev-build-overlay = import ./pkgs/kitty-fork-overlay.nix { inherit kitty-upstream; };
       agenixOverlay = final: _: { agenix = agenix.packages.${final.system}.default; };
 
       # These overlays are scoped to the Home Manager package set. nix-darwin
       # intentionally keeps plain nixpkgs for system configuration.
       darwinOverlays = [
-        kitty-dev-build-overlay
         agenixOverlay
         nur.overlays.default
         vim-plugins.overlay

@@ -8,7 +8,6 @@ vim.filetype.add({
 		tfstate = "json",
 		tsv = "tsv",
 		nomad = "hcl",
-		["kitty-session"] = "conf",
 	},
 	filename = {
 		["flake.lock"] = "json",
