@@ -10,6 +10,7 @@ in
     shows = "${mediaRoot}/library/shows";
     music = "${mediaRoot}/library/music";
     musicBeets = "${mediaRoot}/library/music-beets";
+    musicSoulSync = "${mediaRoot}/library/music-soulsync";
     books = "${mediaRoot}/library/books";
     manga = "${mediaRoot}/library/manga";
     audiobooks = "${mediaRoot}/library/audiobooks";
@@ -20,6 +21,7 @@ in
     audiobooks = "${mediaRoot}/downloads/audiobooks";
     metube = "${mediaRoot}/downloads/metube";
     metubeReview = "${mediaRoot}/downloads/metube/review";
+    soulsync = "${mediaRoot}/downloads/soulsync";
   };
 
   cache = {
@@ -32,6 +34,7 @@ in
     shelfmark = "${stateRoot}/shelfmark";
     metube = "${stateRoot}/metube";
     beets = "${stateRoot}/beets";
+    soulsync = "${stateRoot}/soulsync";
     navidrome = "${stateRoot}/navidrome";
     kavita = "${stateRoot}/kavita";
   };

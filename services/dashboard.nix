@@ -129,6 +129,14 @@ in
               siteMonitor = localUrl services.navidrome.local;
             };
           }
+          {
+            SoulSync = {
+              icon = "${tailnetUrl services.soulsync.tailnet}/static/favicon.png";
+              href = tailnetUrl services.soulsync.tailnet;
+              description = "Music discovery and collection";
+              siteMonitor = localUrl services.soulsync.local;
+            };
+          }
         ];
       }
       {

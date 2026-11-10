@@ -13,6 +13,7 @@ _: {
     ./pihole.nix
     ./reverse-proxy.nix
     ./rex.nix
+    ./soulsync.nix
     ./secrets.nix
     ./stremio-local-debrid.nix
   ];

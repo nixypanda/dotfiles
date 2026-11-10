@@ -176,5 +176,12 @@
       darwinConfigurations = lib.mapAttrs mkDarwinSystem darwinHosts;
 
       nixosConfigurations = lib.mapAttrs mkNixos (hostsOf "nixos");
+
+      # Exposed for build tests. The package itself is defined under pkgs/soulsync.
+      packages = {
+        x86_64-linux = {
+          soulsync = nixpkgs.legacyPackages.x86_64-linux.callPackage ./pkgs/soulsync { };
+        };
+      };
     };
 }

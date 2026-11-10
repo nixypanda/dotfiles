@@ -49,6 +49,64 @@ video downloads to `/srv/media/downloads/metube` and audio downloads to
 `/srv/.state/metube`. Audio downloads are imported automatically by Beets; see
 [Beets / MeTube import](#beets--metube-import).
 
+## SoulSync
+
+SoulSync is available only through Caddy on the tailnet:
+
+- SoulSync: `https://srt-n01-rivendell.taila65e7f.ts.net:9476`
+
+Its application port (`127.0.0.1:8008`) stays bound to localhost. It runs as the
+dedicated `soulsync` system user in the shared `media` group. Its state,
+database, logs, cache, covers, avatars, staging, and other app-private files
+live in `/srv/.state/soulsync`; its raw downloads live in
+`/srv/media/downloads/soulsync`; and its organized music output lives in
+`/srv/media/library/music-soulsync`. These are deliberately separate from
+Lidarr's `/srv/media/library/music` and Beets'
+`/srv/media/library/music-beets` trees, so SoulSync cannot overwrite existing
+libraries.
+
+Navidrome has read-only access to `/srv/media/library/music-soulsync` through
+its existing `BindReadOnlyPaths`. Registering that folder as a Navidrome library
+is a one-time manual step: open Navidrome, go to Settings → Libraries, add a
+library named `SoulSync` with path `/srv/media/library/music-soulsync`, and
+grant it to non-admin users alongside the existing Lidarr and Beets libraries.
+
+When connecting Navidrome in SoulSync, select `All Libraries` instead of the
+default first-library behavior. Selecting only the first library can make the
+existing Beets tracks appear missing even though Navidrome serves them. In the
+connection's `Additional Music Libraries` setting, add
+`/srv/media/library/music` and `/srv/media/library/music-beets`, while keeping
+`/srv/media/library/music-soulsync`; the extra paths let SoulSync resolve the
+existing files locally. SoulSync's systemd sandbox keeps the Lidarr and Beets
+trees read-only, so adding them does not grant write access to those libraries.
+Duplicate-file counts are normal when a track exists in more than one library;
+use unique-track totals when comparing libraries.
+
+SoulSync's own setup wizard can hide podcasts, audiobooks, and video pages for a
+music-focused profile. That is a UI preference only; it does not remove or
+disable SoulSync's video code or database support, and the video backend and
+video database still initialize. Video automation can be toggled through
+SoulSync's own app-managed metadata, but there is no supported config-file key
+for disabling it. Video features remain available if enabled later.
+
+SoulSync's music library, download, and transfer paths are seeded into its
+initial `config.json` by Nix. SoulSync 3.6.4 uses its database as the primary
+configuration store after first boot, so this file is only the initial
+migration/fallback config; changes made through the SoulSync UI can persist in
+the database and are not forcibly reset on restart. For persistent data, the
+systemd sandbox limits SoulSync to `/srv/.state/soulsync`,
+`/srv/media/downloads/soulsync`, and `/srv/media/library/music-soulsync`;
+application paths outside those are not writable by the service.
+
+yt-dlp is provided and updated through the Nix package. SoulSync's in-app
+runtime updater is not compatible with this deployment and should not be used.
+
+Connections and credentials (Spotify, Tidal, Qobuz, Plex/Jellyfin/Navidrome,
+Soulseek/slskd, Prowlarr, Lidarr, torrent/usenet clients, etc.) are configured
+in SoulSync → Settings → Connections after first login. Secrets are stored in
+SoulSync's encrypted state database under `/srv/.state/soulsync`, never in the
+Nix store. Navidrome connection details point at `http://127.0.0.1:4533`.
+
 ## Beets / MeTube import
 
 Beets imports finished audio downloads from MeTube into a separate music

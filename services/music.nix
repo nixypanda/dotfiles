@@ -9,6 +9,7 @@
 let
   musicLibrary = paths.library.music;
   beetsLibrary = paths.library.musicBeets;
+  soulsyncLibrary = paths.library.musicSoulSync;
   navidromeState = paths.state.navidrome;
   ports = homelab.services;
 in
@@ -54,6 +55,9 @@ in
   # The NixOS Navidrome module only binds MusicFolder read-only. Bind the Beets
   # tree as well so Settings -> Libraries can add it to the same instance.
   systemd.services = lib.mkIf config.services.navidrome.enable {
-    navidrome.serviceConfig.BindReadOnlyPaths = lib.mkAfter [ beetsLibrary ];
+    navidrome.serviceConfig.BindReadOnlyPaths = lib.mkAfter [
+      beetsLibrary
+      soulsyncLibrary
+    ];
   };
 }
