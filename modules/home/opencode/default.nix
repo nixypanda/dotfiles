@@ -75,7 +75,10 @@ let
   opencodeConfig = {
     "$schema" = "https://opencode.ai/config.json";
     inherit permissions;
-    plugins = [ "./plugins/rex-activity" ];
+    plugins = [
+      "./plugins/rex-activity"
+      "opencode-cache-hit@1.0.0"
+    ];
     agents = {
       build.permissions = permissions;
       plan.permissions = permissions;
@@ -87,6 +90,11 @@ in
 {
   home.file = {
     ".config/opencode/opencode.jsonc".text = builtins.toJSON opencodeConfig;
+    ".config/opencode/cache-hit.json".text = builtins.toJSON {
+      currency = "USD";
+      costUnit = "USD";
+      display.panelBorder = false;
+    };
     ".config/opencode/sounds/silence.wav".source = silence;
     ".config/opencode/plugins/rex-activity" = {
       # Production sources only, from the pinned external input; tests and repo
