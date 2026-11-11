@@ -38,11 +38,6 @@ in
       tailnet = 9471;
     };
 
-    metube = {
-      local = 8086;
-      tailnet = 9475;
-    };
-
     navidrome = {
       local = 4533;
       tailnet = 9472;

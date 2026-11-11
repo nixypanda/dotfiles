@@ -53,11 +53,6 @@
     vim-plugins = {
       url = "path:/Users/nixypanda/.dotfiles/pkgs/vim-plugins";
     };
-    # Local development path until this project is published as a git repo.
-    beets-south-asian-retag = {
-      url = "path:/Users/nixypanda/Documents/media/beets-south-asian-retag";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
   outputs =
     {
@@ -74,7 +69,6 @@
       hedger,
       codect,
       opencode-rex-activity,
-      beets-south-asian-retag,
       ...
     }:
     let
@@ -149,10 +143,9 @@
         name: host:
         nixpkgs.lib.nixosSystem {
           inherit (host) system;
-          specialArgs = { inherit onepacerr-ui beets-south-asian-retag; };
+          specialArgs = { inherit onepacerr-ui; };
           modules = [
             ./hosts/${name}/configuration.nix
-            beets-south-asian-retag.nixosModules.default
             agenix.nixosModules.default
             nixarr.nixosModules.default
             rex.nixosModules.default

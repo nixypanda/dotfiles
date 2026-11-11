@@ -8,7 +8,6 @@
 
 let
   musicLibrary = paths.library.music;
-  beetsLibrary = paths.library.musicBeets;
   soulsyncLibrary = paths.library.musicSoulSync;
   navidromeState = paths.state.navidrome;
   ports = homelab.services;
@@ -33,9 +32,9 @@ in
       };
     };
 
-    # Navidrome reads two music libraries: Lidarr's tree and the separate Beets
-    # import tree. Both are read-only to Navidrome; its database, playlists,
-    # user accounts, and cache stay outside the media tree.
+    # Navidrome reads Lidarr's music library. Its database, playlists, user
+    # accounts, and cache stay outside the media tree. SoulSync's library is
+    # mounted read-only as well so Settings -> Libraries can add it.
     navidrome = {
       enable = true;
       group = "media";
@@ -52,11 +51,11 @@ in
     };
   };
 
-  # The NixOS Navidrome module only binds MusicFolder read-only. Bind the Beets
-  # tree as well so Settings -> Libraries can add it to the same instance.
+  # The NixOS Navidrome module only binds MusicFolder read-only. Bind the
+  # SoulSync tree as well so Settings -> Libraries can add it to the same
+  # instance.
   systemd.services = lib.mkIf config.services.navidrome.enable {
     navidrome.serviceConfig.BindReadOnlyPaths = lib.mkAfter [
-      beetsLibrary
       soulsyncLibrary
     ];
   };
