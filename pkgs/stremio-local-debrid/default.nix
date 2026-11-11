@@ -9,13 +9,13 @@ buildNpmPackage rec {
   pname = "stremio-local-debrid";
   version = "1.2.0";
 
-  # Tracks nixypanda's feature/configurable-episode-prefetch branch, which adds
-  # configurable next-episode prefetching on top of upstream 1.2.0.
+  # Tracks nixypanda's main branch, which carries configurable next-episode
+  # prefetching and direct completed-cache playback on top of upstream 1.2.0.
   src = fetchFromGitHub {
     owner = "nixypanda";
     repo = "stremio-local-debrid";
-    rev = "97c3fdf6691bd1a80e58f65131af95100b955bc5";
-    hash = "sha256-emzzjyYWnjbMbpaTj8nU/9WyVkX7ONxDL4QUn3SspDU=";
+    rev = "91493290c7eddcbe8671f143a5174fe8c2ce3330";
+    hash = "sha256-7jTwqf+bOPgjKONDeagIJ8R7Wy54WxvNXAL8u3Bkz7U=";
   };
 
   npmDepsHash = "sha256-uMFR36ifIhxiQ0S7H/sLAMLpzdF6aYAo+dUK1Kilk0g=";
@@ -69,7 +69,7 @@ buildNpmPackage rec {
   '';
 
   passthru.updateScript = nix-update-script {
-    extraArgs = [ "--version=branch=feature/configurable-episode-prefetch" ];
+    extraArgs = [ "--version=branch=main" ];
   };
 
   meta = {
