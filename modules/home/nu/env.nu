@@ -17,7 +17,20 @@ $env.CLAUDE_CONFIG_DIR = $"($env.XDG_CONFIG_HOME)/claude"
 # Same hm-session-vars.sh gap. OpenCode reads CLI-only settings from here and
 # merges them over ~/.config/opencode/cli.json; inline settings stay
 # authoritative, unlike that file, which the running OpenCode service rewrites.
-$env.OPENCODE_CLI_CONFIG_CONTENT = '{"attention":{"notifications":true,"sound":true}}'
+# Keep questions and main-agent completion audible; mute the other events.
+let opencode_silence = $"($env.XDG_CONFIG_HOME)/opencode/sounds/silence.wav"
+$env.OPENCODE_CLI_CONFIG_CONTENT = ({
+    attention: {
+        notifications: true
+        sound: true
+        sounds: {
+            default: $opencode_silence
+            permission: $opencode_silence
+            error: $opencode_silence
+            subagent_done: $opencode_silence
+        }
+    }
+} | to json --raw)
 
 # https://github.com/nix-community/home-manager/issues/6507
 # https://github.com/nushell/nushell/issues/8230

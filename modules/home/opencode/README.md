@@ -1,12 +1,14 @@
 # OpenCode Home Manager module
 
-`modules/home/opencode/` manages two things on `srt-l03-shire`:
+`modules/home/opencode/` manages these files on `srt-l03-shire`:
 
 - `~/.config/opencode/opencode.jsonc` — global OpenCode settings: server
   `permissions` (mirrored into each tool-running agent) and the explicit
   `plugins` entry.
 - `~/.config/opencode/plugins/rex-activity` — the installed Rex activity
   plugin (production sources only).
+- `~/.config/opencode/sounds/silence.wav` — a generated silent audio file for
+  selectively muting terminal alerts.
 
 The plugin source lives in a separate repository and is pinned as a non-flake
 input:
@@ -21,6 +23,20 @@ The `plugins` entry stays `./plugins/rex-activity`, so the TUI and background
 service resolve the same directory and activate the plugin once. Global server
 permissions and `~/.config/opencode/cli.json` preferences are intentionally not
 managed here.
+
+## Terminal sounds
+
+`modules/home/nu/env.nu` sets `OPENCODE_CLI_CONFIG_CONTENT`, which overrides
+the corresponding settings in `cli.json`. Questions (`question`) and main-agent
+completion (`done`) retain their configured sounds. Subagent completion,
+permissions, errors, and generic alerts use the silent WAV; system notifications
+remain enabled.
+
+OpenCode accepts file paths rather than per-event mute flags. The WAV must exist
+and be readable, or OpenCode falls back to its built-in sound. These settings
+control the terminal UI only. OpenCode 2.0.14 also emits `done` on interruption
+and can emit it while a background child is running; the sound overrides do not
+change that event behavior.
 
 ## Update
 
