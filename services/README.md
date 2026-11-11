@@ -15,50 +15,34 @@ size arguments, for example `media-unlinked /srv/media/library 100M`.
 
 ## Services
 
-Service ports, tailnet-facing aliases, and the tailnet host are defined in
-`ports.nix`. The Homepage dashboard uses that file to publish service links.
+`ports.nix` defines service ports and the tailnet host. Homepage publishes the
+service links; `reverse-proxy.nix` configures Caddy's tailnet HTTPS access.
+Selected endpoints at `https://srt-n01-rivendell.taila65e7f.ts.net:<port>`:
 
-Port 9450 serves Hedger over the tailnet:
+| Service | HTTPS port | Application listener |
+| --- | --- | --- |
+| Hedger | 9450 | `127.0.0.1:8083` (nginx) |
+| Audiobookshelf | 9466 | `127.0.0.1:8000` |
+| Shelfmark | 9467 | `127.0.0.1:8084` |
+| Lidarr | 9471 | `127.0.0.1:8686` |
+| Navidrome | 9472 | `127.0.0.1:4533` |
+| Stremio Local Debrid | 9474 | `127.0.0.1:7810` |
+| SoulSync | 9476 | `127.0.0.1:8008` |
+| Home Assistant | 9477 | LAN port 8123 |
 
-- 9450: Hedger (Mine, Wife, and Combined ledgers)
-
-The audiobook services are available only through Caddy on the tailnet:
-
-- Audiobookshelf: `https://srt-n01-rivendell.taila65e7f.ts.net:9466`
-- Shelfmark: `https://srt-n01-rivendell.taila65e7f.ts.net:9467`
-
-Their application ports (`127.0.0.1:8000` and `127.0.0.1:8084`) stay bound to
-localhost and are not opened in the firewall.
-
-The music services are also available only through Caddy on the tailnet:
-
-- Lidarr: `https://srt-n01-rivendell.taila65e7f.ts.net:9471`
-- Navidrome: `https://srt-n01-rivendell.taila65e7f.ts.net:9472`
-
-Their application ports (`127.0.0.1:8686` and `127.0.0.1:4533`) stay bound to
-localhost and are not opened in the firewall. Amperfy connects to the Navidrome
-HTTPS URL.
+The localhost listeners are not opened in the firewall. Home Assistant also
+allows direct LAN access for onboarding and device control.
 
 ## SoulSync
 
-SoulSync is available only through Caddy on the tailnet:
+SoulSync runs as `soulsync` in the shared `media` group. Application state lives
+in `/srv/.state/soulsync`, raw downloads in `/srv/media/downloads/soulsync`, and
+organized music in `/srv/media/library/music-soulsync`. Its sandbox permits
+persistent writes only to these directories and keeps Lidarr's
+`/srv/media/library/music` read-only.
 
-- SoulSync: `https://srt-n01-rivendell.taila65e7f.ts.net:9476`
-
-Its application port (`127.0.0.1:8008`) stays bound to localhost. It runs as the
-dedicated `soulsync` system user in the shared `media` group. Its state,
-database, logs, cache, covers, avatars, staging, and other app-private files
-live in `/srv/.state/soulsync`; its raw downloads live in
-`/srv/media/downloads/soulsync`; and its organized music output lives in
-`/srv/media/library/music-soulsync`. These are deliberately separate from Lidarr's
-`/srv/media/library/music` tree, so SoulSync cannot overwrite existing
-libraries.
-
-Navidrome has read-only access to `/srv/media/library/music-soulsync` through
-its existing `BindReadOnlyPaths`. Registering that folder as a Navidrome library
-is a one-time manual step: open Navidrome, go to Settings → Libraries, add a
-library named `SoulSync` with path `/srv/media/library/music-soulsync`, and
-grant it to non-admin users alongside the existing Lidarr library.
+Navidrome has read-only access to the SoulSync library; register it as described
+in [First Setup](#first-setup).
 
 When connecting Navidrome in SoulSync, select `All Libraries` instead of the
 default first-library behavior. Selecting only the first library can make the
@@ -71,30 +55,32 @@ read-only, so adding it does not grant write access to that library.
 Duplicate-file counts are normal when a track exists in more than one library;
 use unique-track totals when comparing libraries.
 
-SoulSync's own setup wizard can hide podcasts, audiobooks, and video pages for a
-music-focused profile. That is a UI preference only; it does not remove or
-disable SoulSync's video code or database support, and the video backend and
-video database still initialize. Video automation can be toggled through
-SoulSync's own app-managed metadata, but there is no supported config-file key
-for disabling it. Video features remain available if enabled later.
+Hiding podcasts, audiobooks, or video in the setup wizard is a UI preference;
+it does not disable their backends.
 
-SoulSync's music library, download, and transfer paths are seeded into its
-initial `config.json` by Nix. SoulSync 3.6.4 uses its database as the primary
-configuration store after first boot, so this file is only the initial
-migration/fallback config; changes made through the SoulSync UI can persist in
-the database and are not forcibly reset on restart. For persistent data, the
-systemd sandbox limits SoulSync to `/srv/.state/soulsync`,
-`/srv/media/downloads/soulsync`, and `/srv/media/library/music-soulsync`;
-application paths outside those are not writable by the service.
+Nix seeds paths into the initial `config.json`. SoulSync 3.6.4 uses its database
+as the primary configuration store after first boot, so UI changes persist and
+are not reset on restart.
 
 yt-dlp is provided and updated through the Nix package. SoulSync's in-app
 runtime updater is not compatible with this deployment and should not be used.
 
-Connections and credentials (Spotify, Tidal, Qobuz, Plex/Jellyfin/Navidrome,
-Soulseek/slskd, Prowlarr, Lidarr, torrent/usenet clients, etc.) are configured
-in SoulSync → Settings → Connections after first login. Secrets are stored in
-SoulSync's encrypted state database under `/srv/.state/soulsync`, never in the
-Nix store. Navidrome connection details point at `http://127.0.0.1:4533`.
+Configure connections and credentials in SoulSync → Settings → Connections.
+Secrets live in its encrypted state database, outside the Nix store. Use
+`http://127.0.0.1:4533` for the Navidrome connection.
+
+## Home Assistant
+
+The native NixOS service is reachable on LAN port 8123 and at
+<https://srt-n01-rivendell.taila65e7f.ts.net:9477> over the tailnet. On first
+setup, create the owner account and pair devices under Settings → Devices & services.
+
+`home-assistant.nix` manages the base configuration and packages Philips CoAP,
+LocalTuya, and SmartIR. HTTP settings are maintained in Settings → System →
+Network, not YAML. Accounts, device registries, dashboards, and UI-managed
+automations, scripts, and scenes persist in `/srv/.state/home-assistant`;
+the writable YAML includes are initialized only when absent. Back up this
+directory to preserve onboarding and device configuration.
 
 ## Stremio Local Debrid
 
@@ -119,6 +105,8 @@ tailnet.
 - The package stubs WebRTC, so browser-only WebRTC peers are not used; ordinary
   TCP/uTP BitTorrent peers are unaffected.
 
+## Hedger
+
 Hedger uses a single server on port 9450. It serves all three journals under
 `/srv/hledger/journals` as separate ledgers (Mine, Wife, Combined) selectable
 in the app. Caddy terminates Tailscale TLS on port 9450 and proxies to Hedger's
@@ -130,45 +118,34 @@ Journal paths are supplied by the NixOS module. Per-ledger display and
 investment settings live in version-1 settings files under
 `/srv/hledger/hedger/` (`hedger-mine.yaml`, `hedger-wife.yaml`,
 `hedger-combined.yaml`), which are synced from the tracked ledger source.
-Hedger loads each journal into an immutable snapshot at startup. The
-`sync-hledger` command reloads `hedger-mine` after synchronizing journals or
-prices.
+Hedger loads each journal into an immutable snapshot at startup. Home Manager
+installs `sync-hledger` as a normal command available anywhere on the Mac; it
+reloads `hedger-mine` after synchronizing journals or prices.
 
 ## Declarative State
 
-Nix currently declares:
+Nix declares the services through [nixarr](https://nixarr.com), native NixOS
+modules, and separate application modules. Deployment handles:
 
-- all services via the [nixarr](https://nixarr.com) module
-- Homepage dashboard over Tailscale MagicDNS
-- firewall ports
-- service ports
-- qBittorrent download paths, Web UI username, and Web UI password (PBKDF2
-  hash, not plaintext)
-- Kavita service settings, token key secret, and library directories
-- Audiobookshelf through the nixarr module
-- Shelfmark through the nixarr module and locked Nixpkgs package
-- Lidarr through the nixarr module and its registration in Prowlarr
-- Navidrome through the native NixOS module
-- Prowlarr app sync (settings-sync)
-- Radarr and Sonarr download client (qBittorrent) via settings-sync
-- Bazarr connections to Radarr and Sonarr via settings-sync
-- Radarr and Sonarr quality profiles, custom formats, quality sizes, and
-  Jellyfin naming via a daily Recyclarr sync
-- Pi-hole upstreams and local DNS records
+- Service/firewall ports, Caddy access, and Homepage links.
+- Media users/groups and state directories.
+- qBittorrent paths, Web UI username, and PBKDF2 password hash.
+- qBittorrent download-client registration in Radarr and Sonarr.
+- Radarr, Sonarr, and Lidarr registration in Prowlarr, plus Bazarr connections
+  to Radarr and Sonarr.
+- Radarr/Sonarr quality profiles, custom formats, quality sizes, and Jellyfin
+  naming through daily Recyclarr sync.
+- Kavita settings, token-key secret, and library directories.
+- Shelfmark search mode, destinations, and supported ebook formats.
+- Pi-hole upstreams and local DNS records.
 
-Nixarr also handles:
-
-- media user/group creation
-- state management under `/srv/.state/nixarr/`
-
-Nix intentionally does not declare first-run database state for Jellyfin,
-Seerr, Radarr, Prowlarr, Audiobookshelf, or Shelfmark. The nixarr apps store
-setup state under `/srv/.state/nixarr/`; Audiobookshelf and Shelfmark use the
-state paths listed above. Back up all three state locations after first setup
-and before application upgrades. The Audiobookshelf and Shelfmark backups
-contain their databases, configuration, and application metadata, but the
-audiobook files under `/srv/media/library/audiobooks` need a separate media
-backup.
+Application accounts, pairing, and first-run database state require the manual
+steps below. Back up state after setup and before upgrades. Media-stack state
+is under `/srv/.state/nixarr/`; Audiobookshelf and Shelfmark use
+`/srv/.state/audiobookshelf` and `/srv/.state/shelfmark`. Other application state
+paths are listed in `paths.nix`, with Hedger paths documented above. State
+backups do not include media libraries such as `/srv/media/library/audiobooks`;
+back up media separately.
 
 ## Secrets
 
@@ -233,19 +210,10 @@ The following still needs one-time manual setup in the web UI:
 8. Audiobookshelf — create the administrator, then create an Audiobooks library
    whose folder is `/srv/media/library/audiobooks`
 9. Shelfmark — create the administrator or enable authentication, then:
-   - keep Universal search enabled and use Open Library for metadata discovery
-   - keep `/srv/media/library/books` as the ebook destination so Kavita scans
-     completed downloads directly
-   - keep `/srv/media/downloads/audiobooks` as the audiobook download directory
-   - restrict supported book formats to `epub,pdf,cbz,cbr`, which Kavita can read
+   - use Open Library for metadata discovery
    - configure file processing to prefer M4B for audiobook results
    - move reviewed completed audiobook downloads into
      `/srv/media/library/audiobooks` for Audiobookshelf to scan
-   - configure only download sources whose terms and rights metadata permit
-     the intended use; do not add private trackers or Usenet providers
-   - for Internet Archive or LibriVox material, verify rights in the browser
-     and import the downloaded files manually because Shelfmark does not
-     document a direct Internet Archive/LibriVox source
 10. Prowlarr indexers — add them via the web UI, or declare them under
     `nixarr.prowlarr.settings-sync.indexers` in `services/media/default.nix`
 11. Bazarr — open `https://srt-n01-rivendell.taila65e7f.ts.net:9470`, then:
@@ -263,21 +231,9 @@ The following still needs one-time manual setup in the web UI:
     corresponding profiles; Recyclarr manages profiles but does not assign them
     to library items.
 
-Internet Archive and LibriVox labels are useful signals, not a universal legal
-determination. Check each item's rights metadata and whether its public-domain
-or open-license status applies in the jurisdiction where it will be used.
-
-Shelfmark has no direct Seerr integration. Book and audiobook requests happen
-through Shelfmark's own UI. Shelfmark also has no direct Kavita integration:
-ebooks are written into Kavita's books library and picked up by Kavita's normal
-library scan.
-
-The following is handled automatically by nixarr on deploy:
-
-- qBittorrent added as Radarr's download client
-- qBittorrent added as Sonarr's download client
-- Radarr and Sonarr synced to Prowlarr as applications
-- Bazarr connected to Radarr and Sonarr
-- Radarr and Sonarr streaming-optimised 2160p-with-1080p-fallback policies
-  synced daily by Recyclarr
-- State directories under `/srv/.state/nixarr/`
+Shelfmark's Nix-managed defaults are Universal search, ebook destination
+`/srv/media/library/books`, audiobook downloads at `/srv/media/downloads/audiobooks`,
+and ebook formats `epub,pdf,cbz,cbr`. Requests use Shelfmark's own UI rather than
+Seerr; Kavita discovers completed ebooks through its normal library scan.
+Internet Archive/LibriVox imports are manual because Shelfmark does not document
+a direct source for them.

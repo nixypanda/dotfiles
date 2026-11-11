@@ -1,362 +1,144 @@
-# AGENTS.md (repo guidance for coding agents)
+# Repository guidance for coding agents
 
-This repository is a Nix flake-based dotfiles setup for macOS using:
-- Home Manager for user configuration
-- nix-darwin for system configuration
-- Neovim config managed via Home Manager (Lua configs stored in-repo)
+Nix flake-based dotfiles for macOS (nix-darwin and Home Manager) and a NixOS
+home server. Commands assume the repository lives at `~/.dotfiles`.
 
-This file is written for agentic coding tools working in this repo.
+## Entrypoints and layout
 
-## Repository entrypoints
+- `flake.nix`: inputs, host registry, and configuration outputs.
+- `justfile`: operational commands; run `just` to list recipes.
+- `Readme.md`: setup overview; `services/README.md`: homelab runbook.
+- `pkgs/`: custom derivations, repacked binaries, and fork overlays.
+- `colorschemes/`: authored data using `builtins` only.
+- `modules/home/`: reusable user/program configuration.
+- `modules/system/{darwin,nixos}/`: reusable system configuration.
+- `services/`: reusable NixOS service modules.
+- `hosts/<host>/`: machine identity, hardware, and host-only overrides.
 
-- Flake entrypoint: `flake.nix`
-- Command runner: `justfile` (run `just` to list recipes)
-- Home Manager host: `homeConfigurations.srt-l03-shire`
-- nix-darwin host: `darwinConfigurations.srt-l03-shire`
-- NixOS home server: `nixosConfigurations.srt-n01-rivendell`
+Imports flow from hosts toward reusable configuration and packages:
 
-Key module roots:
-- Reusable Home Manager modules: `modules/home/*`
-- Reusable system (NixOS/nix-darwin) modules: `modules/system/{darwin,nixos}/`
-- NixOS service modules: `services/*`
-- Per-host overrides: `hosts/<host>/`
-- Neovim Lua configs: `modules/home/nvim/lua/*.lua`
-
-## Repo layout (top-level segregation)
-
-Top-level directories are split by provenance:
-
-- `pkgs/` — packages this repo builds from upstream sources (custom derivations,
-  repacked binaries, fork overlays). Never imports a higher layer.
-- `colorschemes/` — authored data; `builtins` only.
-- `modules/` — reusable, host-agnostic configuration. `modules/home/` is user
-  and program config; `modules/system/{darwin,nixos}/` is machine config.
-- `services/` — NixOS service modules (nixarr, Pi-hole, Caddy, hedger, …).
-  Host-agnostic; imported by the hosts that run them.
-- `hosts/` — machine instances: identity, hardware, and host-only overrides.
-  A host imports the modules and services it needs.
-
-A module's own helpers live beside it in the same folder; a piece with several
-files is a folder with `default.nix`.
-
-Dependency direction (`A → B` means "A may import B"):
-
-```
-pkgs         ┐
-             ├─► modules ──► services ──► hosts
-colorschemes ┘
+```text
+hosts → services → modules → pkgs / colorschemes
 ```
 
-Invariants: `pkgs/` and `colorschemes/` never import a higher layer; `modules/`
-never imports `services/` or `hosts/`; `services/` never imports `hosts/`; hosts
-never import each other. A host imports `modules/` and `services/` directly.
-Enforce with `just check-layout`.
-
-Notes:
-- Avoid editing/committing secrets (agenix `.age` files under `services/secrets/`, tokens, credentials).
-- A `result` path may exist as a Nix build output/symlink; it may be broken/missing.
-- Avoid committing machine-local artifacts (e.g. `.DS_Store`).
-
----
-
-## Build / Apply commands
-
-Host names and short aliases come from `hostRegistry` in `flake.nix`; the
-justfile resolves either form. `just apply` is the umbrella action: on macOS it
-applies the system config, then Home Manager.
-
-### Apply everything (macOS)
-Preferred:
-- `just apply` (pass a host alias with `just apply shire`)
-
-### Apply user only (Home Manager)
-Preferred:
-- `just apply-home` (Darwin only; pass a host with `just apply-home shire`)
-
-Readme-compatible:
-- `nix run --no-write-lock-file --inputs-from . home-manager#home-manager -- switch --flake "./#srt-l03-shire"`
-
-### Apply system only (nix-darwin)
-Preferred:
-- `just apply-system` (Darwin only; pass a host with `just apply-system shire`)
-
-Direct:
-- `sudo darwin-rebuild switch --flake ~/.dotfiles/.#srt-l03-shire`
-
-### Apply home server (NixOS)
-Host:
-- Hostname: `srt-n01-rivendell`
-- Flake output: `nixosConfigurations.srt-n01-rivendell`
-- Host config root: `hosts/srt-n01-rivendell/`
-- Normal remote access: SSH over Tailscale, `ssh nixypanda@srt-n01-rivendell`
-- Current known Tailscale IP: `100.127.3.54`
-- Current known LAN IP: `192.168.1.76`
-
-Preferred remote switch from the Mac:
-- `just apply rivendell` (or `just apply-system rivendell` for the system only)
-
-The same command on the server switches locally.
-
-Direct:
-- `env NIX_SSHOPTS='-i /Users/nixypanda/.ssh/github-key -o StrictHostKeyChecking=accept-new' nix run nixpkgs#nixos-rebuild -- switch --flake .#srt-n01-rivendell --build-host nixypanda@100.127.3.54 --target-host nixypanda@100.127.3.54 --no-reexec --use-substitutes --ask-sudo-password`
-
-Build only on the server over SSH:
-- `env NIX_SSHOPTS='-i /Users/nixypanda/.ssh/github-key -o StrictHostKeyChecking=accept-new' nix run nixpkgs#nixos-rebuild -- build --flake .#srt-n01-rivendell --build-host nixypanda@100.127.3.54 --target-host nixypanda@100.127.3.54 --no-reexec --use-substitutes`
-
-Local on-server equivalent:
-- `sudo nixos-rebuild switch --flake ~/.dotfiles#srt-n01-rivendell`
-
-Server notes:
-- Tailscale is enabled declaratively on both the Mac and NixOS server.
-- The server keeps XFCE/LightDM enabled for local monitor/keyboard recovery.
-- The `nixypanda` login shell on the server should remain Bash. Nushell is installed and configured, but making it the login shell breaks ordinary SSH remote commands such as `ssh host 'echo ---; hostname'`.
-- `usbutils` and `usb-modeswitch` are Linux-only packages in `modules/home/cli.nix`; keep them guarded with `lib.optionals stdenv.hostPlatform.isLinux`.
-
-### Update flake lockfile
-Preferred:
-- `just update-flake`
-
-Direct:
-- `nix flake update --flake .`
-
-When removing a flake input manually:
-- Remove it from `inputs` in `flake.nix`.
-- Remove it from the `outputs` argument pattern and any overlays/modules that reference it.
-- Remove the node from `flake.lock`.
-- Remove the corresponding entry from `nodes.root.inputs` in `flake.lock`.
-- Verify with `rg -n -i "<name>|<name variants>" .`.
-
-### “What will build?” forecast (optional)
-- `just forecast-home` (pass a host with `just forecast-home shire`)
-
-This uses `nix-forecast` and writes full output to `/tmp/nix-forecast.txt`.
-
----
-
-## Tests / Validation (the “single test” equivalents)
-
-This repo doesn’t have conventional unit tests.
-Treat “tests” as:
-- Nix evaluation/build validation
-- Lint/format checks (Nix/Lua/shell/markdown)
-
-### Fastest: evaluate only (preferred for small changes)
-Home Manager activation derivation path:
-- `nix eval --raw .#homeConfigurations.srt-l03-shire.activationPackage.drvPath`
-
-nix-darwin system derivation path:
-- `nix eval --raw .#darwinConfigurations.srt-l03-shire.system.drvPath`
-
-NixOS server system derivation path:
-- `nix eval --raw .#nixosConfigurations.srt-n01-rivendell.config.system.build.toplevel.drvPath`
-
-If evaluation fails, re-run with:
-- `--show-trace`
-
-### Build only what you need
-Build Home Manager activation package:
-- `nix build .#homeConfigurations.srt-l03-shire.activationPackage`
-
-Build nix-darwin system derivation:
-- `nix build .#darwinConfigurations.srt-l03-shire.system`
-
-Build NixOS server system derivation:
-- On the server or with a Linux remote builder:
-  `nix build .#nixosConfigurations.srt-n01-rivendell.config.system.build.toplevel`
-- From the Mac, prefer `nixos-rebuild --build-host nixypanda@100.127.3.54`
-  because local `aarch64-darwin` cannot build Linux-only derivations.
-
-For validation builds, prefer avoiding `result` symlink churn:
-- `nix build --no-link .#homeConfigurations.srt-l03-shire.activationPackage`
-- `nix build --no-link .#darwinConfigurations.srt-l03-shire.system`
-- `nix build --no-link .#nixosConfigurations.srt-n01-rivendell.config.system.build.toplevel`
-
-Sandbox note:
-- `nix eval` / `nix build` may need access to `~/.cache/nix` and the Nix store. If evaluation fails with an SQLite cache error under `~/.cache/nix`, rerun with the appropriate sandbox escalation rather than changing project files.
-
-### Tool timeouts (for agentic CLI runs)
-Many agent CLIs default to a ~2 minute command timeout. That is fine for `nix eval`, but it is often too short for `nix build` (especially after updating flake inputs, when caches may miss and local builds kick in).
-
-Recommended timeouts:
-- `nix eval ...`: 2 minutes (120s)
-- `nix build .#homeConfigurations.srt-l03-shire.activationPackage`: 10 minutes (600s)
-- `nix build .#darwinConfigurations.srt-l03-shire.system`: 10 minutes (600s)
-- `nix build .#nixosConfigurations.srt-n01-rivendell.config.system.build.toplevel`: 10 minutes (600s) when run on Linux or with a Linux build host
-- After `nix flake update` / lockfile updates: consider 20 minutes (1200s) for builds if large deps rebuild
-
-If your tool takes timeouts in milliseconds, use:
-- eval: `timeout=120000`
-- build: `timeout=600000` (or `timeout=1200000` after input bumps)
-
-### “Single file” sanity checks
-- If you changed only Nix formatting/structure: run `nixfmt` + `statix`/`deadnix` on that file.
-- If you changed only Lua: run `stylua` on that file and do a quick Neovim open/load.
-
----
-
-## Lint / Format commands
-
-Tools are generally expected to be available via a Nix-managed environment.
-If a tool is missing, run it ad-hoc via:
-- `nix shell nixpkgs#<tool> -c <tool> ...`
-
-On this machine, Nix tools may already exist in `/nix/store` even when they are not on `PATH`.
-Before falling back to `nix shell`, search for existing binaries and use the newest matching version:
-- `zsh -lc 'for p in /nix/store/*/bin/{nixfmt,statix,deadnix,nixd}(N); do print -- $p; done'`
-- `zsh -lc 'for p in /nix/store/*{nixfmt,statix,deadnix,nixd}*/bin/*(N); do print -- $p; done'`
-
-Known-good examples from this repo:
-- `nixfmt 1.2.0`
-- `statix 0-unstable-2026-05-03`
-- `deadnix 1.3.1`
-- `nixd 2.9.0`
-
-`nixd` is a language server here, not a standalone repository checker. Use `nixd --version` to verify the binary, and use `nix eval` / `nix build` for actual flake validation.
-
-### Nix
-Format:
-- `nixfmt <file-or-dir>`
-- Whole repo: `rg --files -g '*.nix' -0 | xargs -0 nixfmt`
-
-Static analysis:
-- `statix check <file-or-dir>`
-- Whole repo: `statix check .`
-- `deadnix <file-or-dir>`
-- Whole repo with failure on findings: `deadnix --fail .`
-
-Suggested single-target runs:
-- `nixfmt flake.nix`
-- `statix check flake.nix`
-- `deadnix flake.nix`
-
-### Lua (Neovim config)
-Format all plugin configs:
-- `stylua modules/home/nvim/lua`
-
-Format a single file:
-- `stylua modules/home/nvim/lua/which-key.lua`
-
-Stylua config lives at `modules/home/nvim/lua/stylua.toml`.
-
-### Shell
-Lint:
-- `shellcheck <script.sh>`
-
-Format (if desired/available):
-- `shfmt -w <script.sh>`
-
-### Markdown / Prose
-Markdown lint:
-- `rumdl check <file-or-dir>`
-
-Vale:
-- `vale <file-or-dir>`
-
-Repo provides:
-- `modules/home/rumdl/rumdl.toml`
-- `modules/home/vale/vale.ini`
-
-### Git (optional)
-- `committed` (commit message linting)
-
----
-
-## Code style guidelines
-
-### General
-- Prefer small, reviewable diffs; do not reformat unrelated files.
-- Prefer editing existing modules/scripts over adding new tooling.
-- Avoid changing hostnames/paths unless explicitly requested.
-- Avoid editing/committing secrets (agenix `.age` files, tokens, credentials).
-
-### Nix style
-- Format with `nixfmt`.
-- Indentation: 2 spaces.
-- Prefer `let ... in` for local bindings; keep bindings close to usage.
-- Keep attribute sets readable; group related options together.
-- Prefer explicit names over cleverness.
-- Avoid repeated top-level attribute prefixes in the same module when practical. Prefer `home = { activation...; packages = ...; file = ...; };` over separate `home.activation`, `home.packages`, and `home.file` assignments when `statix` flags repeated keys.
-- Prefer `inherit (expr) attr;` when `statix` flags `attr = expr.attr;`.
-- For unused lambda args in overrides, use `_:` instead of naming the argument.
-- For modules that need no arguments, use `_:` instead of `{ ... }:` if `statix` flags an empty pattern.
-- In flake `outputs`, keep `...` in the argument pattern if omitting unused inputs like `self`; flakes still pass `self`, and without `...` evaluation fails with “unexpected argument 'self'”.
-- Be careful running `nixfmt` on shell heredocs embedded in Nix strings. If formatting changes heredoc indentation, verify the generated script still has the same semantics.
-- If moving shell-expanded code into a generated script, do not leave shell variables like `$out` as string literals. Read them explicitly from the environment, e.g. `os.environ["out"]`, when the Nix builder provides them.
-
-**Imports / module structure**
-- Keep `imports = [ ... ]` lists stable and grouped by area.
-- When adding modules under `modules/*`, follow existing patterns (`default.nix` roots, etc.).
-
-**Types / naming**
-- Use consistent option names; follow surrounding module conventions.
-- Prefer `snake_case` for Nix local bindings when the surrounding file does.
-
-**Error handling**
-- Use `builtins.throw` for hard failures (pattern exists in `modules/home/nvim/default.nix`).
-- When guarding optional inputs, prefer clear failure messages.
-
-### Lua style (Neovim)
-- Match existing indentation (many files use tabs).
-- Prefer `require("...")` with double quotes.
-- Use `local` variables; avoid globals except for `vim.*`.
-- Keep each file focused on one plugin/area.
-
-**Keymaps**
-- Use `vim.keymap.set(...)`.
-- Always include `{ desc = "..." }`.
-- Prefer leader mappings under existing group prefixes (`<leader>g`, `<leader>l`, etc.).
-
-**Error handling**
-- Guard optional plugin requires with `pcall(require, "...")` only when necessary.
-
-### Shell scripts
-- Prefer `#!/bin/sh` unless bash features are required.
-- Use strict mode where appropriate:
-  - bash: `set -euo pipefail`
-  - sh: `set -eu` (pipefail not portable)
-- Quote variables and paths.
-- Be careful with destructive operations (`rm -rf`, pruning caches, etc.).
-- Repo scripts assume dotfiles live at `~/.dotfiles`.
-
-### Nushell
-- Files live in `modules/home/nu/` and are concatenated into `programs.nushell.extraConfig`.
-- Keep changes compatible with nushell scripting; avoid adding non-Nix runtime deps.
-
----
-
-## Neovim-specific notes
-
-### Where plugin configs live
-- Plugin list + plugin wiring: `modules/home/nvim/default.nix`
-- Plugin configs (Lua): `modules/home/nvim/lua/*.lua`
-
-Common plugin config patterns:
-- Immediate setup: `require("plugin").setup(...)`
-- Lazy load via `lz.n`: `require("lz.n").load({ ... after = function() ... end })`
-
-When adding a new plugin:
-- Prefer a Lua config file under `modules/home/nvim/lua/`.
-- Reference it from `modules/home/nvim/default.nix` via existing `plug(...)` / `lazy_plug(...)` helpers.
-- Keep plugin list ordering/comments consistent with surrounding entries.
-
-### Linting/formatting inside Neovim
-Neovim config wires these tools:
-- Format on save via `conform.nvim` (`modules/home/nvim/lua/conform.lua`)
-  - lua: `stylua`
-  - nix: `nixfmt`
-  - css/html/javascript/typescript/json: `biome`
-  - markdown: `rumdl`
-  - yaml: `yamlfmt`
-- Linting via `nvim-lint` (`modules/home/nvim/lua/lint.lua`)
-  - markdown: `vale`, `rumdl`
-  - nix: `statix`
-  - sh/bash: `shellcheck`
-  - dockerfile: `hadolint`
-  - yaml: `yamllint`
-
----
-
-## Cursor/Copilot rules
-
-No Cursor rules found (`.cursor/rules/` or `.cursorrules`).
-No GitHub Copilot rules found (`.github/copilot-instructions.md`).
+Hosts may also import modules directly. `pkgs/` and `colorschemes/` never import
+higher layers; modules never import services or hosts; services never import
+hosts; hosts never import each other. Enforce with `just check-layout`.
+Keep a module's helpers beside it; use a folder with `default.nix` for
+multi-file modules.
+
+## Build and apply
+
+Host arguments accept canonical names or aliases from `hostRegistry`:
+`srt-l03-shire` / `shire` (Darwin), `srt-n01-rivendell` / `rivendell` (NixOS).
+Omitting the host uses the current hostname.
+
+| Command | Purpose |
+| --- | --- |
+| `just apply [host]` | Apply every layer; Darwin system first, then Home Manager |
+| `just apply-home [host]` | Standalone Home Manager only (Darwin) |
+| `just apply-system [host]` | OS configuration only |
+| `just build [host]` | Build every layer without activation |
+| `just build-home [host]` | Build the Home Manager activation package (Darwin) |
+| `just build-system [host]` | Build the OS configuration |
+| `just forecast-home [host]` | Preview Home Manager builds; output in `/tmp/nix-forecast.txt` |
+| `just update-flake` | Update flake inputs and lockfile |
+| `just check-layout` | Check dependency boundaries |
+
+`just apply rivendell` and `just build rivendell` build on the server over
+Tailscale when run from the Mac, and operate locally on Rivendell. Local
+`aarch64-darwin` cannot build Linux-only derivations. Remote commands use
+`~/.ssh/github-key`; activation prompts for sudo.
+
+### Server constraints
+
+- SSH: `ssh nixypanda@srt-n01-rivendell` over Tailscale.
+- Keep XFCE/LightDM available for local recovery.
+- Keep the server login shell as Bash. Nushell is installed for interactive use,
+  but using it as the login shell breaks ordinary SSH remote commands.
+- Keep Linux-only `usbutils` and `usb-modeswitch` in `modules/home/cli.nix`
+  guarded with `lib.optionals stdenv.hostPlatform.isLinux`.
+
+### Removing flake inputs
+
+Remove the input, its `outputs` argument, and referencing overlays/modules.
+When editing `flake.lock` manually, remove both its node and the corresponding
+`nodes.root.inputs` entry. Search for remaining references with
+`rg -n -i "<name>|<name variants>" .`.
+
+## Tests / Validation
+
+This repository uses Nix evaluation/builds and targeted linting rather than a
+conventional unit-test suite. For small changes, evaluate the affected output:
+
+```sh
+nix eval --raw .#homeConfigurations.srt-l03-shire.activationPackage.drvPath
+nix eval --raw .#darwinConfigurations.srt-l03-shire.system.drvPath
+nix eval --raw .#nixosConfigurations.srt-n01-rivendell.config.system.build.toplevel.drvPath
+```
+
+Rerun failures with `--show-trace`. Use `just build-home shire`,
+`just build-system shire`, or `just build-system rivendell` when a build is
+needed. For direct validation builds, use `nix build --no-link` to avoid
+changing the `result` symlink.
+
+Allow 120 seconds for evaluation, 600 seconds for builds, or 1200 seconds after
+large input updates. Nix needs access to `~/.cache/nix` and the store; resolve
+sandbox/cache access errors through the harness rather than changing project files.
+
+### Formatting and linting
+
+Run checks on changed files. For Nix-only structure/formatting changes, use
+`nixfmt`, `statix`, and `deadnix`; for Lua changes, use `stylua` and a quick
+Neovim open/load.
+
+| Files | Commands |
+| --- | --- |
+| Nix | `nixfmt <file>`, `statix check <file>`, `deadnix --fail <file>` |
+| Lua | `stylua <file>`; config: `modules/home/nvim/lua/stylua.toml` |
+| Shell | `shellcheck <script.sh>`; optional formatting: `shfmt -w <script.sh>` |
+| Markdown | `rumdl check <file>`, `vale <file>` |
+| Commit messages | `committed` (optional) |
+
+Markdown tool configuration lives in `modules/home/rumdl/rumdl.toml` and
+`modules/home/vale/vale.ini`. `nixd` is a language server, not a repository checker.
+
+If Nix tools are missing from `PATH`, look for existing store binaries before
+using `nix shell nixpkgs#<tool> -c <tool> ...`:
+
+```sh
+zsh -lc 'for p in /nix/store/*/bin/{nixfmt,statix,deadnix,nixd}(N); do print -- $p; done'
+```
+
+## Editing conventions
+
+- Keep diffs focused and follow surrounding module patterns.
+- Avoid editing or committing secrets, including agenix `.age` files under
+  `services/secrets/`, tokens, and credentials.
+- Keep machine-local artifacts such as `.DS_Store` and build outputs out of commits.
+- Nix uses `nixfmt` and two-space indentation. Group repeated attribute prefixes;
+  prefer `inherit (expr) attr;` and `_:` for unused arguments where appropriate.
+- Keep `...` in flake `outputs` patterns when omitting arguments such as `self`;
+  otherwise evaluation can fail with an unexpected-argument error.
+- Check generated shell semantics after formatting Nix strings with heredocs.
+  When moving builder code into another language, read variables such as `$out`
+  from the environment (for example, `os.environ["out"]`).
+- Prefer `#!/bin/sh` with `set -eu`; use Bash with `set -euo pipefail` when needed.
+- Nushell configuration lives in `modules/home/nu/` and is concatenated into
+  `programs.nushell.extraConfig`; avoid non-Nix runtime dependencies.
+
+## Neovim
+
+Plugin declarations and wiring live in `modules/home/nvim/default.nix`; focused
+Lua configs live in `modules/home/nvim/lua/`.
+
+- Add plugin configs through the existing `plug(...)` / `lazy_plug(...)` helpers.
+- Follow immediate `require("plugin").setup(...)` or lazy
+  `require("lz.n").load({ ... after = function() ... end })` patterns nearby.
+- Match Lua indentation (often tabs) and use double-quoted `require` calls.
+- Use `vim.keymap.set` with `desc`; keep leader mappings under existing groups
+  such as `<leader>g` and `<leader>l`.
+- Guard optional plugin imports with `pcall(require, "...")` only when necessary.
+
+Formatter and linter wiring is maintained in `lua/conform.lua` and `lua/lint.lua`
+under the Neovim module.

@@ -16,42 +16,13 @@ Nix flake-based dotfiles for my Mac and home server.
 | Font                  | Hack Nerd Font Mono                                           |
 | Editor                | [Neovim](https://neovim.io/)                                  |
 | Browser               | Firefox via Home Manager, Google Chrome via Mac GUI packages  |
-| Home server services  | Jellyfin, Radarr, Prowlarr, qBittorrent, Seerr, and Pi-hole   |
+| Home server services  | See [homelab service docs](services/README.md)              |
 
 The main flake outputs are:
 
 - `homeConfigurations.srt-l03-shire`
 - `darwinConfigurations.srt-l03-shire`
 - `nixosConfigurations.srt-n01-rivendell`
-
-## Well these look different from normal `dotfiles` mate
-
-Ok so I am one of those people who are all in on the "nix hype train". That is
-why this might look unfamiliar to someone who does not know what nix is.
-
-Nix is a philosophy, a programming language, a package manager and an OS. All
-this culminates in a unique approach to package management and system
-configuration. The end result is **reproducible**, **declarative** and
-**reliable** systems.
-
-Think of it like git but for your system, package management, etc.
-`:mind_blown:`
-
-## Color me interested! Where can I know more?
-
-Now if you are still with me and want to know more about it. Here are a few
-helpful links that you can visit to know more about it.
-
-- Watch first 6 minutes of
-  [this video](https://www.youtube.com/watch?v=oPymb2-IXbg) to get a gist of nix
-  package management and how it's different from standard package management and
-  then building on that what is NixOS)
-- If the previous video peeks your curiosity then I recommend looking at
-  [this](https://www.youtube.com/watch?v=6iVXaqUfHi4) to get a deeper
-  understanding
-- Finally, if you decide that this is something you want for yourself. Then
-  [this brilliant playlist](https://www.youtube.com/watch?v=QKoQ1gKJY5A&list=PL-saUBvIJzOkjAw_vOac75v-x6EzNzZq-)
-  might just be the perfect place to start.
 
 ## Setup
 
@@ -77,9 +48,6 @@ Common recipes:
 | `just forecast-home [host]` | Preview what a Home Manager switch would build            |
 | `just update-flake`         | Update all flake inputs                                   |
 | `just check-layout`         | Check the repo dependency direction                       |
-
-`sync-hledger` is deliberately not a just recipe; Home Manager installs it as a
-normal command so it can be run from anywhere on the Mac.
 
 ### Mac config
 
@@ -113,9 +81,10 @@ switches locally.
 ### Adding a machine
 
 Add an entry to `hostRegistry` in `flake.nix` with `platform`, `system`, `user`,
-and `aliases`, then add `hosts/<host-name>/configuration.nix` (and `home.nix`
-for standalone Home Manager hosts). The flake outputs and just recipes pick the
-new host up automatically.
+and `aliases`, then add `configuration.nix` and `home.nix` under
+`hosts/<host-name>/`. Both Darwin and NixOS constructors require these files;
+NixOS integrates Home Manager into its system configuration. The flake outputs
+and just recipes pick the new host up automatically.
 
 ### Updating inputs
 
@@ -126,7 +95,7 @@ just update-flake
 
 ### Validation
 
-See `AGENTS.md` → "Tests / Validation" for the evaluation and build checks.
+See [Tests / Validation](AGENTS.md#tests--validation) for evaluation and build checks.
 
 ### Caveat
 

@@ -20,9 +20,9 @@ input:
   `tui.ts`. Tests, README, and package metadata are not installed.
 
 The `plugins` entry stays `./plugins/rex-activity`, so the TUI and background
-service resolve the same directory and activate the plugin once. Global server
-permissions and `~/.config/opencode/cli.json` preferences are intentionally not
-managed here.
+service resolve the same directory and activate the plugin once. The
+`~/.config/opencode/cli.json` file is not managed by Home Manager; selected
+terminal preferences are overridden through Nushell as described below.
 
 ## Terminal sounds
 

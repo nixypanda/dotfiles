@@ -25,7 +25,3 @@ Current secrets:
 - `qbittorrent-password.age`: wired as `age.secrets.qbittorrentPassword` and
   readable by the `arr-secrets` group so Radarr and Sonarr settings-sync can
   read it.
-
-Plaintext generation scratch files live outside the repository under
-`/private/tmp/rivendell-homelab-secrets` while this setup is being worked on.
-Delete that directory after recording any credentials you need.
