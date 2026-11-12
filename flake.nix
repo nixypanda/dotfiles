@@ -43,11 +43,6 @@
       url = "git+ssh://git@github.com/nixypanda/codect.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # OpenCode Rex activity plugin; plain source tree, not a flake.
-    opencode-rex-activity = {
-      url = "github:nixypanda/opencode-rex-activity";
-      flake = false;
-    };
     # Applying the configuration happens from the.dotfiles directory so the
     # relative path is defined accordingly. This has potential of causing issues.
     vim-plugins = {
@@ -68,7 +63,6 @@
       onepacerr-ui,
       hedger,
       codect,
-      opencode-rex-activity,
       ...
     }:
     let
@@ -123,7 +117,7 @@
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system}.extend (lib.composeManyExtensions darwinOverlays);
           extraSpecialArgs = {
-            inherit codect opencode-rex-activity;
+            inherit codect;
           };
           modules = [
             ./hosts/${name}/home.nix
