@@ -6,11 +6,32 @@ Linux. Its version follows the nixpkgs input pinned in `flake.lock`.
 `modules/home/opencode/` manages these files on `srt-l03-shire`:
 
 - `~/.config/opencode/opencode.jsonc` — global OpenCode settings: server
-  `permissions` (mirrored into each tool-running agent) and the cache-hit plugin.
+  `permissions` (mirrored into each tool-running agent), the cache-hit plugin,
+  and the Playwright MCP server.
 - `~/.config/opencode/cache-hit.json` — cache-hit display settings.
 
 The `~/.config/opencode/cli.json` file is not managed by Home Manager; selected
 terminal preferences are overridden through Nushell as described below.
+
+## Browser automation
+
+This module installs `playwright-mcp` from nixpkgs and configures it globally
+under `mcp.servers.playwright`. Its version follows `flake.lock`; there is no
+custom npm package, browser automation skill, or OpenCode plugin to maintain.
+
+Ask OpenCode to use Playwright to inspect a site, review a local HTML prototype,
+or test browser interactions. Check the connection after applying Home Manager:
+
+```sh
+opencode mcp list
+```
+
+The server runs headless with an isolated browser profile. On macOS, it uses
+the Nix-managed Chrome executable rather than expecting Chrome in
+`/Applications`. Other platforms use the browsers supplied by the nixpkgs
+package. Code Mode remains enabled by default. Agents sharing one connection
+also share browser state, so coordinate browser actions within a project.
+Keep saved authentication state out of version control.
 
 ## Terminal activity
 
@@ -50,9 +71,6 @@ just build-home shire
 just apply-home shire
 ```
 
-Restart the OpenCode service and reopen the TUI afterward so the package and
-configuration changes take effect:
-
-```sh
-opencode service restart
-```
+OpenCode watches its configuration and reloads MCP servers after changes.
+Use `/reload` to force a full configuration reload, then `/mcps` to check
+the Playwright connection. Reopen the TUI when switching to a new CLI package.

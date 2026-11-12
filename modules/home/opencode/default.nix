@@ -1,4 +1,4 @@
-_:
+{ pkgs, ... }:
 let
   # Paths outside the active project prompt for approval by default (the
   # `external_directory` base policy asks). Allow /tmp read+write and
@@ -63,6 +63,20 @@ let
     plugins = [
       "opencode-cache-hit@1.0.0"
     ];
+    mcp.servers.playwright = {
+      type = "local";
+      command = [
+        (pkgs.lib.getExe pkgs.playwright-mcp)
+        "--headless"
+        "--isolated"
+      ]
+      ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
+        "--browser"
+        "chrome"
+        "--executable-path"
+        "${pkgs.google-chrome}/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+      ];
+    };
     agents = {
       build.permissions = permissions;
       plan.permissions = permissions;
@@ -72,6 +86,8 @@ let
   };
 in
 {
+  home.packages = [ pkgs.playwright-mcp ];
+
   home.file = {
     ".config/opencode/opencode.jsonc".text = builtins.toJSON opencodeConfig;
     ".config/opencode/cache-hit.json".text = builtins.toJSON {
