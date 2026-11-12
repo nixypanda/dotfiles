@@ -1,7 +1,8 @@
 $env.config.show_banner = false
 
 $env.config.completions.algorithm = "fuzzy"
-$env.config.completions.external.completer = {|spans|
+$env.config.completions.external.completer = {|place|
+	let spans = $place.command
 	let carapace_completer = {|spans|
 		carapace $spans.0 nushell ...$spans
 		| from json

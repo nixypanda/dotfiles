@@ -67,7 +67,7 @@
     }:
     let
       inherit (nixpkgs) lib;
-      agenixOverlay = final: _: { agenix = agenix.packages.${final.system}.default; };
+      agenixOverlay = final: _: { agenix = agenix.packages.${final.stdenv.hostPlatform.system}.default; };
 
       # These overlays are scoped to the Home Manager package set. nix-darwin
       # intentionally keeps plain nixpkgs for system configuration.

@@ -15,7 +15,7 @@
       nerd-fonts.hack
       # Personal app, intentionally Mac-only; not expected to build on the
       # Linux hosts.
-      codect.packages.${pkgs.system}.default
+      codect.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
   };
 

@@ -45,11 +45,11 @@
     # `binary` is pinned to the Nix store path because the Desktop app does not
     # inherit the login shell's PATH.
     plugins."@nixypanda/dsh-codect" = {
-      spec = "${codect.packages.${pkgs.system}.codect-dsh}/codect-dsh.tgz";
+      spec = "${codect.packages.${pkgs.stdenv.hostPlatform.system}.codect-dsh}/codect-dsh.tgz";
       id = "codect";
       profiles = [ "desktop" ];
       config = {
-        binary = "${codect.packages.${pkgs.system}.default}/bin/codect";
+        binary = "${codect.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/codect";
       };
     };
   };

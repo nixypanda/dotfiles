@@ -54,7 +54,7 @@ in
           optional = true;
         };
         lazy_plug = name: config: (plug name config) // { optional = true; };
-        codect-nvim = codect.packages.${pkgs.system}.codect-nvim;
+        codect-nvim = codect.packages.${pkgs.stdenv.hostPlatform.system}.codect-nvim;
       in
       with pkgs.vimPlugins;
       [

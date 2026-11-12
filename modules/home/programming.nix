@@ -79,7 +79,7 @@ in
     postgresql
 
     # Git / Build tools
-    committed # gitlint
+    # committed # gitlint
     just
 
     # AI coding assistants

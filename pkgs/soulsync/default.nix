@@ -3,7 +3,7 @@
   stdenv,
   fetchFromGitHub,
   buildNpmPackage,
-  python312,
+  python313,
   makeWrapper,
   nodejs_24,
   ffmpeg,
@@ -24,56 +24,39 @@ let
     hash = "sha256-YMfckb5Fx29B5WHRdeUTg1ZsG1UBdATa92BeofTLMjs=";
   };
 
-  # Pinned nixpkgs (34ca302...) cannot evaluate/build Python 3.11 for this
-  # closure: e.g. `nix-build` of python311Packages.flask fails with
-  #   error: sphinx-9.1.0 not supported for interpreter python3.11
-  # because python-dotenv's native check inputs pull ipython -> ... -> sphinx-hook.
-  # Python 3.12 is the newest interpreter in this nixpkgs that builds cleanly.
-  python =
-    (python312.override {
-      packageOverrides = _: super: {
-        # Observed failure only: inline-snapshot's own test suite fails in this
-        # sandbox/build with:
-        #   Error: one snapshot has incorrect values (--inline-snapshot=fix)
-        #   Error: one snapshot is missing a value (--inline-snapshot=create)
-        # This blocked fastapi/openai (and their dependents) from building.
-        # No other package test suites are disabled.
-        inline-snapshot = super.inline-snapshot.overridePythonAttrs (_: {
-          doCheck = false;
-        });
-      };
-    }).withPackages
-      (ps: [
-        ps.gunicorn
-        ps.flask
-        ps.flask-limiter
-        # SpotipyFree (GPL-3.0) is an optional upstream dependency for full
-        # Spotify link imports. It is intentionally omitted; upstream soft-imports
-        # it and falls back to Spotify's embed scraper (~100 tracks) when absent.
-        ps.spotipy
-        ps.plexapi
-        ps.requests
-        ps.aiohttp
-        ps.cryptography
-        ps.mutagen
-        ps.pillow
-        ps.librosa
-        ps.soundfile
-        ps.onnxruntime
-        ps.unidecode
-        ps.beautifulsoup4
-        ps.psutil
-        ps.tzdata
-        ps.tzlocal
-        ps.yt-dlp
-        ps.ytmusicapi
-        ps.lrclibapi
-        ps.pyacoustid
-        ps.websocket-client
-        ps.tidalapi
-        ps.flask-socketio
-        ps.simple-websocket
-      ]);
+  # Use the cached Python 3.13 package set without test overrides that would
+  # invalidate upstream binary-cache paths for its dependencies.
+  python = python313.withPackages (ps: [
+    ps.gunicorn
+    ps.flask
+    ps.flask-limiter
+    # SpotipyFree (GPL-3.0) is an optional upstream dependency for full
+    # Spotify link imports. It is intentionally omitted; upstream soft-imports
+    # it and falls back to Spotify's embed scraper (~100 tracks) when absent.
+    ps.spotipy
+    ps.plexapi
+    ps.requests
+    ps.aiohttp
+    ps.cryptography
+    ps.mutagen
+    ps.pillow
+    ps.librosa
+    ps.soundfile
+    ps.onnxruntime
+    ps.unidecode
+    ps.beautifulsoup4
+    ps.psutil
+    ps.tzdata
+    ps.tzlocal
+    ps.yt-dlp
+    ps.ytmusicapi
+    ps.lrclibapi
+    ps.pyacoustid
+    ps.websocket-client
+    ps.tidalapi
+    ps.flask-socketio
+    ps.simple-websocket
+  ]);
 
   ui = buildNpmPackage {
     pname = "soulsync-ui";
@@ -98,7 +81,7 @@ stdenv.mkDerivation {
 
   nativeBuildInputs = [ makeWrapper ];
 
-  # The Python environment is the nixpkgs python3.12 interpreter; all
+  # The Python environment is the nixpkgs Python 3.13 interpreter; all
   # requirements are available there (see the build check).
   installPhase = ''
     runHook preInstall

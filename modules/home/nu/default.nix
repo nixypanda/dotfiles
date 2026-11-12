@@ -5,6 +5,7 @@ in
 {
   programs.nushell = {
     enable = true;
+    loadSessionVariables = false;
 
     extraConfig = ''
       ${builtins.readFile ./config.nu}
