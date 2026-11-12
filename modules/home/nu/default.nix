@@ -22,7 +22,7 @@ in
 
       use ${program_status}/mod.nu *
       use ${program_status}/hooks.nu *
-      program-status install-hooks --min-duration 10sec
+      program-status install-hooks --min-duration 0sec
 
     '';
     extraEnv = ''

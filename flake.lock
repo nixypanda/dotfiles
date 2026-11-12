@@ -240,11 +240,11 @@
     "nu-program-status": {
       "flake": false,
       "locked": {
-        "lastModified": 1794506289,
-        "narHash": "sha256-+COM6W2Ar1p/teZk+uvPGGilcllJJWw+xLgO2oJ/1/4=",
+        "lastModified": 1794509379,
+        "narHash": "sha256-2IXSF5E3znlfa28tdfCgmsC0Vyybc6a8oBhtKLsVP8Q=",
         "owner": "nixypanda",
         "repo": "nu-program-status",
-        "rev": "7ab6b398209b490d5bc1a461840e98a777825150",
+        "rev": "08e39de764f8b138c5f3a9fd65400f844bb45288",
         "type": "github"
       },
       "original": {
