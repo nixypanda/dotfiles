@@ -237,6 +237,22 @@
         "type": "github"
       }
     },
+    "nu-program-status": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1794506289,
+        "narHash": "sha256-+COM6W2Ar1p/teZk+uvPGGilcllJJWw+xLgO2oJ/1/4=",
+        "owner": "nixypanda",
+        "repo": "nu-program-status",
+        "rev": "7ab6b398209b490d5bc1a461840e98a777825150",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixypanda",
+        "repo": "nu-program-status",
+        "type": "github"
+      }
+    },
     "nur": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -338,6 +354,7 @@
         "home-manager": "home-manager",
         "nixarr": "nixarr",
         "nixpkgs": "nixpkgs_2",
+        "nu-program-status": "nu-program-status",
         "nur": "nur",
         "onepacerr-ui": "onepacerr-ui",
         "rex": "rex",

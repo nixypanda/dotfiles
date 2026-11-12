@@ -43,6 +43,10 @@
       url = "git+ssh://git@github.com/nixypanda/codect.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nu-program-status = {
+      url = "github:nixypanda/nu-program-status";
+      flake = false;
+    };
     # Applying the configuration happens from the.dotfiles directory so the
     # relative path is defined accordingly. This has potential of causing issues.
     vim-plugins = {
@@ -63,6 +67,7 @@
       onepacerr-ui,
       hedger,
       codect,
+      nu-program-status,
       ...
     }:
     let
@@ -117,7 +122,7 @@
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system}.extend (lib.composeManyExtensions darwinOverlays);
           extraSpecialArgs = {
-            inherit codect;
+            inherit codect nu-program-status;
           };
           modules = [
             ./hosts/${name}/home.nix
