@@ -62,6 +62,7 @@ let
     inherit permissions;
     plugins = [
       "opencode-cache-hit@1.0.0"
+      "${./plugins/no-rate-limit-retries}"
     ];
     mcp.servers.playwright = {
       type = "local";

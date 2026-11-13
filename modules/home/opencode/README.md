@@ -10,6 +10,12 @@ Linux. Its version follows the nixpkgs input pinned in `flake.lock`.
   and the Playwright MCP server.
 - `~/.config/opencode/cache-hit.json` — cache-hit display settings.
 
+The global settings load the local `plugins/no-rate-limit-retries/` server
+plugin directly from its Nix store directory. This keeps its entrypoint beside
+the plugin directory even when Home Manager symlinks the configuration file.
+It disables retries for HTTP 429 rate-limit failures in all sessions, including
+subagents. Other failures retain OpenCode's retry policy.
+
 The `~/.config/opencode/cli.json` file is not managed by Home Manager; selected
 terminal preferences are overridden through Nushell as described below.
 
