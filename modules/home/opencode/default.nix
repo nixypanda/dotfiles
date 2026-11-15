@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, opencode-rex-status, ... }:
 let
   # Paths outside the active project prompt for approval by default (the
   # `external_directory` base policy asks). Allow /tmp read+write and
@@ -96,5 +96,9 @@ in
       costUnit = "USD";
       display.panelBorder = false;
     };
+    # OpenCode discovers TUI plugins as directories under its global config
+    # directory, so this needs no `cli.json` entry. Symlinking the pinned
+    # source tree keeps the entrypoint beside its `package.json` exports.
+    ".config/opencode/plugins/opencode-rex-status".source = opencode-rex-status;
   };
 }

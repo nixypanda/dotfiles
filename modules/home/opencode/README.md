@@ -9,6 +9,8 @@ Linux. Its version follows the nixpkgs input pinned in `flake.lock`.
   `permissions` (mirrored into each tool-running agent), the cache-hit plugin,
   and the Playwright MCP server.
 - `~/.config/opencode/cache-hit.json` — cache-hit display settings.
+- `~/.config/opencode/plugins/opencode-rex-status` — pinned TUI plugin that
+  reports finished and failed sessions to Rex.
 
 The global settings load the local `plugins/no-rate-limit-retries/` server
 plugin directly from its Nix store directory. This keeps its entrypoint beside
@@ -46,9 +48,39 @@ Rex. The native implementation reports working, waiting for permission or an
 answer, and idle states. With session tabs disabled, it follows the current
 session and emits a root summary and a per-session record.
 
-Native reporting replaces the custom Rex activity plugin. It does not report
-`done` or `error` activity states; completed sessions return to idle. Rex controls
-its own sounds and notifications for the reported states.
+The native implementation never reports `done` or `error`, so
+`modules/home/opencode/` also installs the
+[opencode-rex-status](https://github.com/martinmiglio/opencode-rex-status) TUI
+plugin. It fills that gap: a session that finishes or fails in a background tab
+stays flagged until it is focused. The plugin only runs when `REX_SESSION` is
+set, so it is inert outside Rex, and it requires OpenCode 2.2 or later. Rex
+controls its own sounds and notifications for the reported states.
+
+## Rex status plugin
+
+The plugin is pinned as the `opencode-rex-status` flake input in `flake.nix`, so
+its version follows `flake.lock`. Home Manager symlinks that source tree to
+`~/.config/opencode/plugins/opencode-rex-status`. OpenCode discovers TUI plugins
+as directories under `~/.config/opencode/plugins`, so `cli.json` stays
+unmanaged and needs no `plugins` entry. Symlinking the whole tree keeps
+`rex-status.mjs` beside the `package.json` that exports it as `./tui`.
+
+Check that OpenCode loaded it after applying Home Manager, or watch the plugin
+logs at `~/.local/share/opencode/log/opencode.log` for a `rex.status` setup
+entry:
+
+```sh
+opencode --standalone
+```
+
+The upstream unit tests also run against the pinned source:
+
+```sh
+cd ~/.config/opencode/plugins/opencode-rex-status && node --test
+```
+
+Update the plugin with `nix flake update opencode-rex-status`, then rebuild and
+apply Home Manager. Reopen the TUI to load the new copy.
 
 ## Terminal preferences
 

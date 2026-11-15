@@ -47,6 +47,12 @@
       url = "github:nixypanda/nu-program-status";
       flake = false;
     };
+    # OpenCode TUI plugin that reports done and error states to Rex over
+    # OSC 7501. Consumed as a plain source tree by modules/home/opencode.
+    opencode-rex-status = {
+      url = "github:martinmiglio/opencode-rex-status";
+      flake = false;
+    };
     # Applying the configuration happens from the.dotfiles directory so the
     # relative path is defined accordingly. This has potential of causing issues.
     vim-plugins = {
@@ -68,6 +74,7 @@
       hedger,
       codect,
       nu-program-status,
+      opencode-rex-status,
       ...
     }:
     let
@@ -126,6 +133,7 @@
               calco
               codect
               nu-program-status
+              opencode-rex-status
               ;
           };
           modules = [

@@ -327,6 +327,22 @@
         "url": "ssh://git@github.com/nixypanda/onepacerr-ui.git"
       }
     },
+    "opencode-rex-status": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1794251316,
+        "narHash": "sha256-VRKS722gQV+PkE1Cukrm67XqxOqxZZz0P1qAcKqPk5s=",
+        "owner": "martinmiglio",
+        "repo": "opencode-rex-status",
+        "rev": "43f3f37bd621980aadc31ad517b772ec689cc3c1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "martinmiglio",
+        "repo": "opencode-rex-status",
+        "type": "github"
+      }
+    },
     "rex": {
       "inputs": {
         "nixpkgs": [
@@ -357,6 +373,7 @@
         "nu-program-status": "nu-program-status",
         "nur": "nur",
         "onepacerr-ui": "onepacerr-ui",
+        "opencode-rex-status": "opencode-rex-status",
         "rex": "rex",
         "vim-plugins": "vim-plugins"
       }
