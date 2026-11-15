@@ -122,7 +122,11 @@
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system}.extend (lib.composeManyExtensions darwinOverlays);
           extraSpecialArgs = {
-            inherit codect nu-program-status;
+            inherit
+              calco
+              codect
+              nu-program-status
+              ;
           };
           modules = [
             ./hosts/${name}/home.nix

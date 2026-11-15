@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  calco,
   codect,
   ...
 }:
@@ -13,6 +14,8 @@
       bitwarden-desktop
       google-chrome
       nerd-fonts.hack
+      # CalCo CLI from the main-tracking flake input shared with the server.
+      calco.packages.${pkgs.stdenv.hostPlatform.system}.cli
       # Personal app, intentionally Mac-only; not expected to build on the
       # Linux hosts.
       codect.packages.${pkgs.stdenv.hostPlatform.system}.default

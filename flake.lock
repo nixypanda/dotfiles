@@ -29,11 +29,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1794490021,
-        "narHash": "sha256-6CT1eAhZAmPGQ+59n3LifPoIjkhbqAXFFuKS/s6GnGg=",
+        "lastModified": 1794763541,
+        "narHash": "sha256-Rjnf9RFVGxb2JOolD7iOYKZwE4tN4MzT1MFq4aQSY5Y=",
         "ref": "refs/heads/main",
-        "rev": "7c691a99a7d3c2cf92bcb40a0f565f3aba861e4f",
-        "revCount": 560,
+        "rev": "3870bdc07ac9bb94296acf24cee28305d0c60a7b",
+        "revCount": 564,
         "type": "git",
         "url": "ssh://git@github.com/nixypanda/calco.git"
       },
