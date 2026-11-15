@@ -23,6 +23,7 @@ require("lualine").setup({
 		icons_enabled = true,
 		component_separators = "",
 		section_separators = { left = "", right = "" },
+		theme = "tokyonight-merino",
 	},
 	sections = {
 		lualine_a = { nvim_tree_shift, "mode" },

@@ -8,6 +8,10 @@
       url = "github:fabridamicelli/cronex.nvim";
       flake = false;
     };
+    tokyonight-merino-src = {
+      url = "github:LosFarmosCTL/tokyonight-merino.nvim";
+      flake = false;
+    };
 
   };
   outputs =
@@ -23,6 +27,11 @@
           pname = "cronex.nvim";
           version = "custom";
           src = inputs.nvim-cronex-src;
+        };
+        tokyonight-merino-nvim = prev.vimUtils.buildVimPlugin {
+          pname = "tokyonight-merino.nvim";
+          version = "custom";
+          src = inputs.tokyonight-merino-src;
         };
       };
     in

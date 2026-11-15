@@ -159,7 +159,10 @@
               };
             }
             {
-              nixpkgs.overlays = [ agenixOverlay ];
+              nixpkgs.overlays = [
+                agenixOverlay
+                vim-plugins.overlay
+              ];
             }
           ];
         };

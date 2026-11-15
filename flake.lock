@@ -430,6 +430,22 @@
         "type": "github"
       }
     },
+    "tokyonight-merino-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793284777,
+        "narHash": "sha256-DzCbFtaxSNcfu4fqV7hdugz1KjZQ+w9tlVFpG72x+vc=",
+        "owner": "LosFarmosCTL",
+        "repo": "tokyonight-merino.nvim",
+        "rev": "7a9fa40e09c0aeb414af161235407c25f48240c8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "LosFarmosCTL",
+        "repo": "tokyonight-merino.nvim",
+        "type": "github"
+      }
+    },
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
@@ -454,10 +470,12 @@
     "vim-plugins": {
       "inputs": {
         "nvim-cronex-src": "nvim-cronex-src",
-        "nvim-dadbod-ssh": "nvim-dadbod-ssh"
+        "nvim-dadbod-ssh": "nvim-dadbod-ssh",
+        "tokyonight-merino-src": "tokyonight-merino-src"
       },
       "locked": {
-        "narHash": "sha256-eYEpLIfCuGe3fgJaw8GDj4ki7S0PxupuEfK44asPV38=",
+        "lastModified": 1794760604,
+        "narHash": "sha256-L6SfWNYst+Tj1nuE7tU3HS9kmbWslktF0rF1HxKZVf4=",
         "path": "/Users/nixypanda/.dotfiles/pkgs/vim-plugins",
         "type": "path"
       },

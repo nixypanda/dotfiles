@@ -1,0 +1,61 @@
+{
+  "nodes": {
+    "nvim-cronex-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1794445387,
+        "narHash": "sha256-5zbwC6c8F+HrLJladYd8e2krfOly/wZ6JBDCGEWLpMg=",
+        "owner": "fabridamicelli",
+        "repo": "cronex.nvim",
+        "rev": "e8ffabfa0956f91adb6e9a6f76f43ba7cade2161",
+        "type": "github"
+      },
+      "original": {
+        "owner": "fabridamicelli",
+        "repo": "cronex.nvim",
+        "type": "github"
+      }
+    },
+    "nvim-dadbod-ssh": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1716107841,
+        "narHash": "sha256-AU7I/zqeTR0Im0URi35yfMSqjZZL3uQsjmZziUjaGkw=",
+        "owner": "pbogut",
+        "repo": "vim-dadbod-ssh",
+        "rev": "9bce775ee76c3dd6d7508dcd9eb276b36133d710",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pbogut",
+        "repo": "vim-dadbod-ssh",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "nvim-cronex-src": "nvim-cronex-src",
+        "nvim-dadbod-ssh": "nvim-dadbod-ssh",
+        "tokyonight-merino-src": "tokyonight-merino-src"
+      }
+    },
+    "tokyonight-merino-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793284777,
+        "narHash": "sha256-DzCbFtaxSNcfu4fqV7hdugz1KjZQ+w9tlVFpG72x+vc=",
+        "owner": "LosFarmosCTL",
+        "repo": "tokyonight-merino.nvim",
+        "rev": "7a9fa40e09c0aeb414af161235407c25f48240c8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "LosFarmosCTL",
+        "repo": "tokyonight-merino.nvim",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
