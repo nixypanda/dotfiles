@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 let
   inherit (config) xdg;
 in
@@ -19,6 +19,24 @@ in
       atlassian = {
         type = "http";
         url = "https://mcp.atlassian.com/v2/mcp";
+      };
+      figma = {
+        type = "http";
+        url = "https://mcp.figma.com/mcp";
+      };
+      playwright = {
+        type = "stdio";
+        command = pkgs.lib.getExe pkgs.playwright-mcp;
+        args = [
+          "--headless"
+          "--isolated"
+        ]
+        ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
+          "--browser"
+          "chrome"
+          "--executable-path"
+          "${pkgs.google-chrome}/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+        ];
       };
     };
 
