@@ -5,7 +5,7 @@ in
 {
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox-bin;
+    package = null;
     profiles = {
       default = {
         name = "privacy-friendly";
