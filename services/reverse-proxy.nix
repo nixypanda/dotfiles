@@ -13,11 +13,20 @@ let
 
   calcoWebRoot = "${config.services.calco.frontendPackage}/share/calco/web";
   onepacerrWebRoot = "${onepacerr-ui.packages.${system}.frontend}/share/onepacerr-ui";
+  # Hedger's upstream service worker intercepts navigations, which prevents
+  # browsers from showing Caddy's HTTP Basic Auth challenge. Keep registration
+  # working, but do not intercept requests while the app is behind Basic Auth.
+  hedgerServiceWorker = pkgs.writeTextDir "sw.js" ''
+    self.addEventListener("install", () => self.skipWaiting());
+    self.addEventListener("activate", (event) => event.waitUntil(self.clients.claim()));
+  '';
   # Caddy serves this host only on the tailnet. Tailscale owns the certificate
   # lifecycle, so a systemd unit fetches cert files with `tailscale cert`.
   certDir = "/var/lib/caddy/tailscale-certs";
   certFile = "${certDir}/${tailnetHost}.crt";
   keyFile = "${certDir}/${tailnetHost}.key";
+  financeAuthDir = "/var/lib/finance-auth";
+  financeAuthFile = "${financeAuthDir}/caddy";
 
   tlsConfig = ''
     tls ${certFile} ${keyFile}
@@ -30,8 +39,17 @@ let
 
   hedgerProxy = hostName: ''
     ${tlsConfig}
-    reverse_proxy 127.0.0.1:${toString services.hedger.local} {
-      header_up Host ${hostName}
+    import ${financeAuthFile}
+    handle /sw.js {
+      root * ${hedgerServiceWorker}
+      header Content-Type application/javascript
+      header Cache-Control "no-cache"
+      file_server
+    }
+    handle {
+      reverse_proxy 127.0.0.1:${toString services.hedger.local} {
+        header_up Host ${hostName}
+      }
     }
   '';
 
@@ -60,7 +78,11 @@ let
     "${tailnetUrl finance.mine.hedgerTailnet}".extraConfig =
       hedgerProxy config.services.hedger.instances.mine.hostName;
 
-    "${tailnetUrl finance.mine.paisaTailnet}".extraConfig = proxy finance.mine.paisa;
+    "${tailnetUrl finance.mine.paisaTailnet}".extraConfig = ''
+      ${tlsConfig}
+      import ${financeAuthFile}
+      reverse_proxy 127.0.0.1:${toString finance.mine.paisa}
+    '';
   };
 
   calcoHost = {
@@ -133,8 +155,40 @@ in
       caddy = {
         # Caddy reads static cert files, so it must wait until the Tailscale cert
         # fetch has populated /var/lib/caddy/tailscale-certs.
-        after = [ "tailscale-cert-rivendell.service" ];
-        requires = [ "tailscale-cert-rivendell.service" ];
+        after = [
+          "tailscale-cert-rivendell.service"
+          "finance-auth.service"
+        ];
+        requires = [
+          "tailscale-cert-rivendell.service"
+          "finance-auth.service"
+        ];
+      };
+
+      finance-auth = {
+        description = "Generate Caddy login for Hedger and Paisa";
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+          Group = "caddy";
+          StateDirectory = "finance-auth";
+          StateDirectoryMode = "0750";
+          UMask = "0027";
+        };
+        script = ''
+          password_file=${financeAuthDir}/password
+          if [ ! -s "$password_file" ]; then
+            umask 077
+            ${pkgs.openssl}/bin/openssl rand -base64 36 > "$password_file"
+          fi
+          chmod 0600 "$password_file"
+
+          hash=$(${pkgs.caddy}/bin/caddy hash-password --plaintext "$(cat "$password_file")")
+          config_file=$(mktemp ${financeAuthDir}/caddy.XXXXXX)
+          printf 'basic_auth {\n  finance %s\n}\n' "$hash" > "$config_file"
+          chmod 0640 "$config_file"
+          mv -f "$config_file" ${financeAuthFile}
+        '';
       };
 
       tailscale-cert-rivendell = {

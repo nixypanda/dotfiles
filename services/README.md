@@ -114,6 +114,19 @@ module-managed nginx listener on `127.0.0.1:8083`, which serves the shared
 frontend and proxies `/api/*` to the single localhost-only Hedger backend on
 port 5001.
 
+Caddy requires HTTP Basic Auth for both Hedger (9450) and Paisa (9460), including
+their API routes. Both use the `finance` username and the same randomly generated
+password. Retrieve it on Rivendell with `sudo cat /var/lib/finance-auth/password`.
+The password is created on first deployment and retained across rebuilds; only
+its hash is readable by Caddy. The login is in addition to tailnet access. Back
+up `/var/lib/finance-auth/password` if you need to preserve the credential when
+reinstalling the server. To rotate it, replace that file with a new random
+password and restart `finance-auth.service` followed by `caddy.service`.
+Hedger's service worker would otherwise intercept the browser's login challenge,
+so Caddy serves a non-intercepting worker for Hedger. Existing visitors may need
+to clear Hedger's site data once (including its service worker) and reload to
+get the browser login prompt. This disables Hedger's offline app-shell cache.
+
 Journal paths are supplied by the NixOS module. Per-ledger display and
 investment settings live in version-1 settings files under
 `/srv/hledger/hedger/` (`hedger-mine.yaml`, `hedger-wife.yaml`,
