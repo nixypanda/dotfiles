@@ -38,6 +38,23 @@ in
       maxGroupColumns = 3;
     };
 
+    # Homepage remembers the theme in localStorage but does not follow later
+    # changes to the browser's preferred color scheme on its own.
+    customJS = ''
+      const colorScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+      function syncTheme() {
+        const theme = colorScheme.matches ? "dark" : "light";
+        if (localStorage.getItem("theme-mode") !== theme) {
+          localStorage.setItem("theme-mode", theme);
+          window.location.reload();
+        }
+      }
+
+      colorScheme.addEventListener("change", syncTheme);
+      syncTheme();
+    '';
+
     widgets = [
       {
         resources = {
