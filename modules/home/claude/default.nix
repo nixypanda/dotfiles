@@ -55,6 +55,12 @@ in
       # The terminal's settings determine how the alert is presented.
       preferredNotifChannel = "terminal_bell";
       tui = "fullscreen";
+      # The Nix wrapper pins CLAUDE_CODE_CERT_STORE=system, and its macOS
+      # "system" store only surfaces a handful of anchors, so api.anthropic.com
+      # (GTS Root R4 -> GlobalSign) fails to verify when the wrapper does not
+      # inherit NIX_SSL_CERT_FILE. Appending the Nix CA bundle here fixes that
+      # for every launch path, including ones that bypass the shell.
+      env.NODE_EXTRA_CA_CERTS = "/etc/ssl/certs/ca-certificates.crt";
     };
   };
 }
