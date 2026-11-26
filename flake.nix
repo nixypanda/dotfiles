@@ -15,6 +15,10 @@
       url = "github:nix-media-server/nixarr";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stremio-local-debrid = {
+      url = "github:nixypanda/stremio-local-debrid/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     rex = {
       url = "https://pkgs.superlogical.com/rex/nix/snapshot.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -68,6 +72,7 @@
       agenix,
       darwin,
       nixarr,
+      stremio-local-debrid,
       rex,
       calco,
       onepacerr-ui,
@@ -162,6 +167,7 @@
             ./hosts/${name}/configuration.nix
             agenix.nixosModules.default
             nixarr.nixosModules.default
+            stremio-local-debrid.nixosModules.default
             rex.nixosModules.default
             calco.nixosModules.default
             hedger.nixosModules.default

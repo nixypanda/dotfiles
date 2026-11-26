@@ -95,14 +95,22 @@ tailnet.
 - Homepage links to the status dashboard through a runtime-generated
   environment file, so the token never enters the Nix store or the repo.
 - Cache: `/srv/media/cache/stremio-debrid` (100 GiB budget, 10 GiB free-space
-  reserve).
+  reserve). The upstream module keeps the cache private to the `stremio` user
+  (directory mode `0700`); existing downloads stay in place.
 - Torrentio defaults to `https://torrentio.strem.fun/manifest.json`. Replace
-  `torrentioManifest` in `services/stremio-local-debrid.nix` with your configured
-  Torrentio URL if you use custom providers, filters, or debrid.
+  `settings.sources` in `services/stremio-local-debrid.nix` for public provider or
+  filter settings. For credential-bearing URLs, use the upstream module's
+  `configFile` option with a private runtime JSON file, never a Nix store path.
 - Install the addon once in Stremio; the account syncs it to the other devices.
   Pick a "Local Cache" source to download and stream from Rivendell.
-- The package stubs WebRTC, so browser-only WebRTC peers are not used; ordinary
-  TCP/uTP BitTorrent peers are unaffected.
+- The package and hardened NixOS service come from the `stremio-local-debrid`
+  flake input, tracking `main` with a lockfile pin. Local configuration adds the
+  Homepage environment-file adapter and Rivendell's media-mount safeguards.
+- Torrent transfers use TCP; native uTP and WebRTC are intentionally unavailable.
+- Migration reuses `/var/lib/stremio-local-debrid/token`, so addon URLs do not
+  change and clients do not need to reinstall the addon. Back up this token and
+  the state directory before deployment; the previous NixOS generation remains
+  available for rollback.
 
 ## BookOrbit
 

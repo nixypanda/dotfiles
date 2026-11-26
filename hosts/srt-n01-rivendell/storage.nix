@@ -36,7 +36,7 @@ let
       requires = [ mediaDirectoriesUnit ];
       bindsTo = [ mediaMountUnit ];
       unitConfig = {
-        RequiresMountsFor = mediaMount;
+        RequiresMountsFor = [ mediaMount ];
         ConditionPathIsMountPoint = mediaMount;
       };
     };

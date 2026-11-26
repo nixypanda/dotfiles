@@ -375,6 +375,7 @@
         "onepacerr-ui": "onepacerr-ui",
         "opencode-rex-status": "opencode-rex-status",
         "rex": "rex",
+        "stremio-local-debrid": "stremio-local-debrid",
         "vim-plugins": "vim-plugins"
       }
     },
@@ -414,6 +415,27 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "stremio-local-debrid": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1795725685,
+        "narHash": "sha256-ysXwc5T7TUdhUOJsGuMCMGlyOMMdLrbRjk0gyx8JHIk=",
+        "owner": "nixypanda",
+        "repo": "stremio-local-debrid",
+        "rev": "e9646df105ff9f1da52f32af29689a8bb2130055",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixypanda",
+        "ref": "main",
+        "repo": "stremio-local-debrid",
         "type": "github"
       }
     },
