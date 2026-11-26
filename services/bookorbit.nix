@@ -214,6 +214,10 @@ in
     };
 
     tmpfiles.rules = [
+      "d ${paths.library.books} 2775 nixypanda media - -"
+      "d ${paths.library.manga} 2775 nixypanda media - -"
+      "d ${paths.library.audiobooks} 2775 ${appUser} media - -"
+      "d ${paths.downloads.audiobooks} 2775 nixypanda media - -"
       "d ${appState} 0750 ${appUser} ${appGroup} - -"
       "d ${dataDir} 0750 ${appUser} ${appGroup} - -"
       "d /books 0755 root root - -"

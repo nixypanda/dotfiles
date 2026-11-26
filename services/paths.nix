@@ -27,11 +27,8 @@ in
 
   state = {
     nixarr = "${stateRoot}/nixarr";
-    audiobookshelf = "${stateRoot}/audiobookshelf";
-    shelfmark = "${stateRoot}/shelfmark";
     soulsync = "${stateRoot}/soulsync";
     navidrome = "${stateRoot}/navidrome";
-    kavita = "${stateRoot}/kavita";
     homeAssistant = "${stateRoot}/home-assistant";
     bookorbit = "${stateRoot}/bookorbit";
   };

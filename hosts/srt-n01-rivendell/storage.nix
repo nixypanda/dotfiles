@@ -11,12 +11,10 @@ let
   mediaDirectoriesUnit = "media-directories.service";
   mediaMountUnit = "srv-media.mount";
   mediaServices = [
-    "audiobookshelf"
     "bookorbit"
     "bazarr"
     "bazarr-sync-config"
     "jellyfin"
-    "kavita"
     "lidarr"
     "onepacerr"
     "prowlarr-sync-config"
@@ -24,7 +22,6 @@ let
     "qui"
     "radarr"
     "radarr-sync-config"
-    "shelfmark"
     "soulsync"
     "sonarr"
     "sonarr-sync-config"

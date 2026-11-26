@@ -93,24 +93,9 @@ in
       local = 8083;
     };
 
-    kavita = {
-      local = 5000;
-      tailnet = 9465;
-    };
-
-    audiobookshelf = {
-      local = 8000;
-      tailnet = 9466;
-    };
-
     bookorbit = {
       local = 3000;
       tailnet = 9478;
-    };
-
-    shelfmark = {
-      local = 8084;
-      tailnet = 9467;
     };
 
     stremioLocalDebrid = {

@@ -6,8 +6,8 @@ inside each application's state directory.
 ## Paths
 
 The canonical media and state paths are defined in `paths.nix`. Their resolved
-values are also written to `/etc/homelab/media-paths`, `/etc/homelab/ebook-paths`
-and `/etc/homelab/audiobook-paths` on the host.
+values are also written to `/etc/homelab/media-paths` and
+`/etc/homelab/bookorbit-paths` on the host.
 
 Run `media-unlinked` on Rivendell to list files larger than 50 MiB under
 `/srv/media` whose hardlink count is one. It accepts optional root and minimum
@@ -22,13 +22,12 @@ Selected endpoints at `https://srt-n01-rivendell.taila65e7f.ts.net:<port>`:
 | Service | HTTPS port | Application listener |
 | --- | --- | --- |
 | Hedger | 9450 | `127.0.0.1:8083` (nginx) |
-| Audiobookshelf | 9466 | `127.0.0.1:8000` |
-| Shelfmark | 9467 | `127.0.0.1:8084` |
 | Lidarr | 9471 | `127.0.0.1:8686` |
 | Navidrome | 9472 | `127.0.0.1:4533` |
 | Stremio Local Debrid | 9474 | `127.0.0.1:7810` |
 | SoulSync | 9476 | `127.0.0.1:8008` |
 | Home Assistant | 9477 | LAN port 8123 |
+| BookOrbit | 9478 | `127.0.0.1:3000` |
 
 The localhost listeners are not opened in the firewall. Home Assistant also
 allows direct LAN access for onboarding and device control.
@@ -116,6 +115,12 @@ Books and audiobooks are writable at `/books/books` and `/books/audiobooks`
 so downloaded requests can be filed, including audio added to existing ebooks.
 Manga remains read-only at `/books/manga`.
 The Library Dock is `/srv/media/.bookorbit` at `/books/dock`.
+BookOrbit manages creation of the shared books, manga, and audiobook directories.
+The audiobook directory is owned by `bookorbit:media`; books and manga remain
+owned by `nixypanda:media`. The audiobook download directory at
+`/srv/media/downloads/audiobooks` is retained with `nixypanda:media` ownership.
+These directory rules do not recursively change existing file ownership.
+
 Separate bind mounts currently prevent hardlinks from downloads into the Dock,
 so imports fall back to copying and consume additional disk space until the
 common-mount hardlink migration is implemented.
@@ -192,14 +197,13 @@ modules, and separate application modules. Deployment handles:
   to Radarr and Sonarr.
 - Radarr/Sonarr quality profiles, custom formats, quality sizes, and Jellyfin
   naming through daily Recyclarr sync.
-- Kavita settings, token-key secret, and library directories.
-- Shelfmark search mode, destinations, and supported ebook formats.
+- BookOrbit service, runtime secrets, and shared library directories.
 - Pi-hole upstreams and local DNS records.
 
 Application accounts, pairing, and first-run database state require the manual
 steps below. Back up state after setup and before upgrades. Media-stack state
-is under `/srv/.state/nixarr/`; Audiobookshelf and Shelfmark use
-`/srv/.state/audiobookshelf` and `/srv/.state/shelfmark`. Other application state
+is under `/srv/.state/nixarr/`; BookOrbit uses `/srv/.state/bookorbit` plus its
+PostgreSQL database and runtime secrets. Other application state
 paths are listed in `paths.nix`, with Hedger paths documented above. State
 backups do not include media libraries such as `/srv/media/library/audiobooks`;
 back up media separately.
@@ -217,10 +221,6 @@ completed downloads into the Jellyfin shows library. Its dedicated Jellyfin
 account password is decrypted to
 `/run/agenix/onepacerrJellyfinPassword`; neither credential is copied into the
 Nix store.
-
-Kavita's token key is encrypted with agenix and decrypted at runtime to
-`/run/agenix/kavitaTokenKey`. It must remain stable across restarts because
-Kavita uses it for token signing.
 
 The PBKDF2-SHA512 hash in `services/media/default.nix` is what qBittorrent stores — this is a
 one-way hash, not a plaintext secret, and is safe in the Nix store.
@@ -262,35 +262,21 @@ The following still needs one-time manual setup in the web UI:
    `/srv/media/library/movies` as Movies and `/srv/media/library/shows` as TV
    Shows
 6. Seerr — first-run wizard: connect Jellyfin URL, connect Radarr/Sonarr (API keys from `sudo nixarr list-api-keys`)
-7. Kavita — first-run wizard: create admin user, add
-   `/srv/media/library/books` as Books and `/srv/media/library/manga` as Manga
-8. Audiobookshelf — create the administrator, then create an Audiobooks library
-   whose folder is `/srv/media/library/audiobooks`
-9. Shelfmark — create the administrator or enable authentication, then:
-   - use Open Library for metadata discovery
-   - configure file processing to prefer M4B for audiobook results
-   - move reviewed completed audiobook downloads into
-     `/srv/media/library/audiobooks` for Audiobookshelf to scan
-10. Prowlarr indexers — add them via the web UI, or declare them under
-    `nixarr.prowlarr.settings-sync.indexers` in `services/media/default.nix`
-11. Bazarr — open `https://srt-n01-rivendell.taila65e7f.ts.net:9470`, then:
-    - add the desired subtitle languages and create default language profiles
-      for movies and series
-    - enable subtitle providers such as OpenSubtitles.com
-    - keep `Use Embedded Subtitles` enabled and enable
-      `Ignore Embedded PGS Subtitles`, so bitmap PGS tracks do not satisfy the
-      profile
-    - leave `Use Original Format` disabled in the language profiles to save
-      downloaded text subtitles as SRT
-12. After Recyclarr's first sync, select `[SQP] SQP-1 WEB (2160p)` as Seerr's
+7. BookOrbit — follow the bootstrap instructions above and add libraries at
+   `/books/books`, `/books/manga`, and `/books/audiobooks`.
+8. Prowlarr indexers — add them via the web UI, or declare them under
+   `nixarr.prowlarr.settings-sync.indexers` in `services/media/default.nix`
+9. Bazarr — open `https://srt-n01-rivendell.taila65e7f.ts.net:9470`, then:
+   - add the desired subtitle languages and create default language profiles
+     for movies and series
+   - enable subtitle providers such as OpenSubtitles.com
+   - keep `Use Embedded Subtitles` enabled and enable
+     `Ignore Embedded PGS Subtitles`, so bitmap PGS tracks do not satisfy the
+     profile
+   - leave `Use Original Format` disabled in the language profiles to save
+     downloaded text subtitles as SRT
+10. After Recyclarr's first sync, select `[SQP] SQP-1 WEB (2160p)` as Seerr's
     Radarr quality profile and `WEB-2160p + 1080p fallback` as its Sonarr quality
     profile. Bulk-edit existing movies and series in Radarr and Sonarr to use the
     corresponding profiles; Recyclarr manages profiles but does not assign them
     to library items.
-
-Shelfmark's Nix-managed defaults are Universal search, ebook destination
-`/srv/media/library/books`, audiobook downloads at `/srv/media/downloads/audiobooks`,
-and ebook formats `epub,pdf,cbz,cbr`. Requests use Shelfmark's own UI rather than
-Seerr; Kavita discovers completed ebooks through its normal library scan.
-Internet Archive/LibriVox imports are manual because Shelfmark does not document
-a direct source for them.

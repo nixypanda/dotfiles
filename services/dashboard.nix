@@ -119,22 +119,6 @@ in
       {
         Library = [
           {
-            Kavita = {
-              icon = "kavita.png";
-              href = tailnetUrl services.kavita.tailnet;
-              description = "Books and manga";
-              siteMonitor = localUrl services.kavita.local;
-            };
-          }
-          {
-            Audiobookshelf = {
-              icon = "audiobookshelf.png";
-              href = tailnetUrl services.audiobookshelf.tailnet;
-              description = "Audiobooks and podcasts";
-              siteMonitor = localUrl services.audiobookshelf.local;
-            };
-          }
-          {
             BookOrbit = {
               icon = "mdi-book-open-page-variant";
               href = tailnetUrl services.bookorbit.tailnet;
@@ -180,14 +164,6 @@ in
               href = tailnetUrl services.seerr.tailnet;
               description = "Media requests";
               siteMonitor = localUrl services.seerr.local;
-            };
-          }
-          {
-            Shelfmark = {
-              icon = "mdi-book-search";
-              href = tailnetUrl services.shelfmark.tailnet;
-              description = "Book and audiobook discovery";
-              siteMonitor = "${localUrl services.shelfmark.local}/api/health";
             };
           }
         ];
