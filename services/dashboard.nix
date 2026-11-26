@@ -77,15 +77,7 @@ in
 
     services = [
       {
-        Health = [
-          {
-            "Home Assistant" = {
-              icon = "home-assistant.png";
-              href = tailnetUrl services.homeAssistant.tailnet;
-              description = "Home automation";
-              siteMonitor = localUrl services.homeAssistant.local;
-            };
-          }
+        Apps = [
           {
             "CalCo" = {
               icon = "${tailnetUrl services.calco.tailnet}/favicon-32x32.png";
@@ -94,10 +86,6 @@ in
               siteMonitor = "${localUrl services.calco.local}/api/health";
             };
           }
-        ];
-      }
-      {
-        Finance = [
           {
             "Hedger" = {
               icon = "${tailnetUrl finance.mine.hedgerTailnet}/icon.svg";
@@ -117,7 +105,27 @@ in
         ];
       }
       {
-        Library = [
+        Services = [
+          {
+            "Home Assistant" = {
+              icon = "home-assistant.png";
+              href = tailnetUrl services.homeAssistant.tailnet;
+              description = "Home automation";
+              siteMonitor = localUrl services.homeAssistant.local;
+            };
+          }
+          {
+            "Pi-hole" = {
+              icon = "pi-hole.png";
+              href = tailnetUrl services.pihole.tailnet;
+              description = "DNS and ad blocking";
+              siteMonitor = localUrl services.pihole.web;
+            };
+          }
+        ];
+      }
+      {
+        Media = [
           {
             BookOrbit = {
               icon = "mdi-book-open-page-variant";
@@ -126,10 +134,6 @@ in
               siteMonitor = localUrl services.bookorbit.local;
             };
           }
-        ];
-      }
-      {
-        Media = [
           {
             Jellyfin = {
               icon = "jellyfin.png";
@@ -154,28 +158,12 @@ in
               siteMonitor = localUrl services.soulsync.local;
             };
           }
-        ];
-      }
-      {
-        Discover = [
           {
             Seerr = {
               icon = "jellyseerr.png";
               href = tailnetUrl services.seerr.tailnet;
               description = "Media requests";
               siteMonitor = localUrl services.seerr.local;
-            };
-          }
-        ];
-      }
-      {
-        Downloads = [
-          {
-            qBittorrent = {
-              icon = "qbittorrent.png";
-              href = tailnetUrl services.qbittorrent.tailnet;
-              description = "Torrent client";
-              siteMonitor = localUrl services.qbittorrent.webui;
             };
           }
         ];
@@ -231,23 +219,19 @@ in
             };
           }
           {
+            qBittorrent = {
+              icon = "qbittorrent.png";
+              href = tailnetUrl services.qbittorrent.tailnet;
+              description = "Torrent client";
+              siteMonitor = localUrl services.qbittorrent.webui;
+            };
+          }
+          {
             "Stremio Local Debrid" = {
               icon = "stremio.png";
               href = "{{HOMEPAGE_VAR_STREMIO_LOCAL_DEBRID_URL}}";
               description = "Torrent cache and download dashboard";
               siteMonitor = "{{HOMEPAGE_VAR_STREMIO_LOCAL_DEBRID_MONITOR}}";
-            };
-          }
-        ];
-      }
-      {
-        Network = [
-          {
-            "Pi-hole" = {
-              icon = "pi-hole.png";
-              href = tailnetUrl services.pihole.tailnet;
-              description = "DNS and ad blocking";
-              siteMonitor = localUrl services.pihole.web;
             };
           }
         ];
