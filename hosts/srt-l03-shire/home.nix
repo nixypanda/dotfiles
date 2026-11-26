@@ -37,7 +37,6 @@
   imports = [
     ../../modules/home/claude
     ../../modules/home/cli.nix
-    ../../modules/home/dsh
     ../../modules/home/env.nix
     ../../modules/home/firefox
     ../../modules/home/git.nix
