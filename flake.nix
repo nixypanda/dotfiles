@@ -154,7 +154,10 @@
         name: host:
         nixpkgs.lib.nixosSystem {
           inherit (host) system;
-          specialArgs = { inherit onepacerr-ui; };
+          specialArgs = {
+            inherit onepacerr-ui;
+            bookorbit = nixpkgs.legacyPackages.x86_64-linux.callPackage ./pkgs/bookorbit { };
+          };
           modules = [
             ./hosts/${name}/configuration.nix
             agenix.nixosModules.default
@@ -194,6 +197,7 @@
       packages = {
         x86_64-linux = {
           soulsync = nixpkgs.legacyPackages.x86_64-linux.callPackage ./pkgs/soulsync { };
+          bookorbit = nixpkgs.legacyPackages.x86_64-linux.callPackage ./pkgs/bookorbit { };
         };
       };
     };

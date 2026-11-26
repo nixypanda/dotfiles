@@ -1,6 +1,7 @@
 _: {
   imports = [
     ./audiobooks.nix
+    ./bookorbit.nix
     ./calco.nix
     ./dashboard.nix
     ./ebooks.nix

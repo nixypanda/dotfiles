@@ -103,6 +103,11 @@ in
       tailnet = 9466;
     };
 
+    bookorbit = {
+      local = 3000;
+      tailnet = 9478;
+    };
+
     shelfmark = {
       local = 8084;
       tailnet = 9467;

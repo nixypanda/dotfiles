@@ -12,6 +12,7 @@ let
   mediaMountUnit = "srv-media.mount";
   mediaServices = [
     "audiobookshelf"
+    "bookorbit"
     "bazarr"
     "bazarr-sync-config"
     "jellyfin"

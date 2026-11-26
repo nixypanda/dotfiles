@@ -134,6 +134,14 @@ in
               siteMonitor = localUrl services.audiobookshelf.local;
             };
           }
+          {
+            BookOrbit = {
+              icon = "mdi-book-open-page-variant";
+              href = tailnetUrl services.bookorbit.tailnet;
+              description = "Books, comics, and audiobooks";
+              siteMonitor = localUrl services.bookorbit.local;
+            };
+          }
         ];
       }
       {

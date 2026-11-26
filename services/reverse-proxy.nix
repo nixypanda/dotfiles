@@ -69,6 +69,7 @@ let
     "${tailnetUrl services.sonarr.tailnet}".extraConfig = proxy services.sonarr.local;
     "${tailnetUrl services.kavita.tailnet}".extraConfig = proxy services.kavita.local;
     "${tailnetUrl services.audiobookshelf.tailnet}".extraConfig = proxy services.audiobookshelf.local;
+    "${tailnetUrl services.bookorbit.tailnet}".extraConfig = proxy services.bookorbit.local;
     "${tailnetUrl services.shelfmark.tailnet}".extraConfig = proxy services.shelfmark.local;
     "${tailnetUrl services.stremioLocalDebrid.tailnet}".extraConfig =
       proxy services.stremioLocalDebrid.local;

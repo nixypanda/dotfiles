@@ -105,6 +105,50 @@ tailnet.
 - The package stubs WebRTC, so browser-only WebRTC peers are not used; ordinary
   TCP/uTP BitTorrent peers are unaffected.
 
+## BookOrbit
+
+Native NixOS service (no containers). Package is built from pinned upstream
+source `v3.8.0`; state is in `/srv/.state/bookorbit`, PostgreSQL uses the native
+`postgresql_16` service with pgvector. The app listens on `127.0.0.1:3000` and
+is exposed at `https://srt-n01-rivendell.taila65e7f.ts.net:9478`.
+
+Books and audiobooks are writable at `/books/books` and `/books/audiobooks`
+so downloaded requests can be filed, including audio added to existing ebooks.
+Manga remains read-only at `/books/manga`.
+The Library Dock is `/srv/media/.bookorbit` at `/books/dock`.
+Separate bind mounts currently prevent hardlinks from downloads into the Dock,
+so imports fall back to copying and consume additional disk space until the
+common-mount hardlink migration is implemented.
+
+Secrets (`jwt_secret`, `setup_bootstrap_token`) are generated at runtime under
+`/var/lib/bookorbit/secrets` and are not in the Nix store. PostgreSQL uses a
+local peer-authenticated `bookorbit` role/database with pgvector.
+
+First setup: apply with `just apply-system rivendell`, wait for
+`bookorbit.service`, then open the tailnet URL and create the admin account using
+`sudo cat /var/lib/bookorbit/secrets/setup_bootstrap_token`. A previous
+activation attempt stopped at PostgreSQL setup due to the template1 collation
+mismatch; repair/back up first.
+
+Migration/rollback: change the pinned source version/hash and service config,
+then apply. Database migrations run through upstream `entrypoint.sh` before the
+server starts. Downgrades require a pre-upgrade database backup and restore.
+
+Existing PostgreSQL `template1` has a glibc collation version mismatch (2.42 vs
+2.44). BookOrbit does not alter the cluster; its database is provisioned by
+NixOS from `template1` and will fail until `template1` is repaired. Operator repair only, after a backup:
+
+```sh
+sudo -u postgres sh -c 'umask 077; pg_dumpall -f /var/lib/postgresql/pre-collation-repair.sql'
+sudo -u postgres psql -d template1 -c 'REINDEX DATABASE template1;'
+sudo -u postgres psql -d postgres -c 'ALTER DATABASE template1 REFRESH COLLATION VERSION;'
+```
+
+Verify the backup is nonempty and mode `0600` before repairing, and store or
+copy it off-host securely. `REINDEX` cannot run in a transaction. Only refresh
+other databases such as `postgres` or `calco` after reviewing their indexes and
+data; do not run a blanket refresh. No repair command is executed automatically.
+
 ## Hedger
 
 Hedger uses a single server on port 9450. It serves all three journals under

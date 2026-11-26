@@ -33,5 +33,6 @@ in
     navidrome = "${stateRoot}/navidrome";
     kavita = "${stateRoot}/kavita";
     homeAssistant = "${stateRoot}/home-assistant";
+    bookorbit = "${stateRoot}/bookorbit";
   };
 }
