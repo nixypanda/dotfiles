@@ -425,11 +425,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1795793167,
-        "narHash": "sha256-6S9u53aoEc5g2eXh/+Kd6wvonGsb1U2d7JOuW1fc6Tg=",
+        "lastModified": 1795795003,
+        "narHash": "sha256-TogFgkV56ZleeRbnEzh8fYGLPTTN/Y1nUbN3b1yXRrw=",
         "owner": "nixypanda",
         "repo": "stremio-local-debrid",
-        "rev": "50a579bfd44dc474026f3651a97b622830875514",
+        "rev": "304e70d679d1eb74a869cb2589c1e9edc31b55c3",
         "type": "github"
       },
       "original": {
